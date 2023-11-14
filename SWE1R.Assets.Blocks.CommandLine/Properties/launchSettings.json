@@ -2,7 +2,7 @@
   "profiles": {
     "SWE1R.Assets.Blocks.CommandLine": {
       "commandName": "Project",
-      "commandLineArgs": "export-models-textures out_modelblock.bin --texture-block out_textureblock.bin",
+      "commandLineArgs": "--help",
       "workingDirectory": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Star Wars Episode I Racer\\data\\lev01"
     }
   }
