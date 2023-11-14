@@ -1,0 +1,182 @@
+﻿// Copyright 2023 SWE1R.Assets Maintainers
+// Licensed under GPLv2 or any later version
+// Refer to the included LICENSE.txt file.
+
+using ByteSerialization.Attributes;
+using SWE1R.Assets.Blocks.Common.Vectors;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
+using SWE1R.Assets.Blocks.ModelBlock.Nodes;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
+{
+    /// <summary>
+    /// <see href="https://github.com/Olganix/Sw_Racer/blob/master/include/Swr_Model.h#L203">SWR_MODEL_Section3</see>
+    /// </summary>
+    public class Mesh : INode
+    {
+        #region Properties (serialization)
+
+        /// <summary>
+        /// Must have a value.
+        /// </summary>
+        [Order(0), Reference(2)]
+        public Material Material { get; set; } // TODO: xml comment
+        /// <summary>
+        /// Can be <see langword="null"/>.
+        /// </summary>
+        [Order(1), Reference(5)]
+        public Mapping Mapping { get; set; } // TODO: xml comment
+        /// <summary>
+        /// Both <see cref="Bounds0">Bounds0</see> and <see cref="Bounds1">Bounds1</see> can be <c>(0, 0, 0)</c>.
+        /// </summary>
+        [Order(2)]
+        public Vector3Single Bounds0 { get; set; } // TODO: xml comment
+        /// <summary>
+        /// Both <see cref="Bounds0">Bounds0</see> and <see cref="Bounds1">Bounds1</see> can be <c>(0, 0, 0)</c>.
+        /// </summary>
+        [Order(3)]
+        public Vector3Single Bounds1 { get; set; } // TODO: xml comment
+        /// <summary>
+        /// Gets or sets the number of faces. Must be greater than zero.
+        /// <seealso cref="FacesVertexCounts"/>
+        /// </summary>
+        [Order(4)]
+        public short FacesCount { get; set; } // TODO: xml comment
+        /// <summary>
+        /// 
+        /// </summary>
+        [Order(5)]
+        public PrimitiveType PrimitiveType { get; set; } // TODO: xml comment
+        /// <summary>
+        /// Gets or sets the vertex counts of the faces. 
+        /// If not <see langword="null"/>, the list's length is <see cref="FacesCount"/>.
+        /// Has a value if <see cref="PrimitiveType"/> is <see cref="PrimitiveType.Polygons"/>, otherwise is <see langword="null"/>.
+        /// </summary>
+        [Order(6), Reference(0), Length(nameof(FacesCount))]
+        public List<int> FacesVertexCounts { get; set; } // TODO: xml comment
+        /// <summary>
+        /// Gets or sets a referenced <see cref="MeshGroup3064"/> or <see langword="short"/><c>[]</c>. 
+        /// <list type="bullet">
+        ///   <item><description>If <see cref="Unk_Count">Unk_Count</see> is greater than 0 (only in <see cref="ModelType.Scen">Scen</see> or <see cref="ModelType.Pupp">Pupp</see> models), has a <see cref="MeshGroup3064"/> value.</description></item>
+        ///   <item><description>If it is 0, has a <see langword="short"/><c>[]</c> value (only once in <see cref="ModelType.Trak">Trak</see> model 1) or is <see langword="null"/>.</description></item>
+        /// </list>
+        /// </summary>
+        [Order(7)]
+        public MeshGroupOrShorts MeshGroupOrShorts { get; set; } // TODO: xml comment
+        /// <summary>
+        /// Gets or sets the list of collision vertices. 
+        /// The list's length is <see cref="CollisionVerticesCount"/>. Is <see langword="null"/> if that value is 0.
+        /// </summary>
+        [Order(8), Reference(1)]
+        public CollisionVertices CollisionVertices { get; set; }
+        /// <summary>
+        /// Gets or sets the list of index chunks for the visible vertices. 
+        /// Has a value if <see cref="VisibleVerticesCount"/> is greater than 0, otherwise is <see langword="null"/>.
+        /// </summary>
+        [Order(9), Reference(3)]
+        public IndicesChunks VisibleIndicesChunks { get; set; }
+        /// <summary>
+        /// Gets or sets the list of visible vertices. 
+        /// The list's length is <see cref="VisibleVerticesCount"/>. Is <see langword="null"/> if that value is 0.
+        /// </summary>
+        [Order(10), Reference(4)] [Length(nameof(VisibleVerticesCount))]
+        public List<Vertex> VisibleVertices { get; set; }
+        /// <summary>
+        /// Gets or sets the count of <see cref="CollisionVertices"/>. 
+        /// If 0, <see cref="VisibleVerticesCount"/> is greater than 0.
+        /// </summary>
+        [Order(11)]
+        public short CollisionVerticesCount { get; set; }
+        /// <summary>
+        /// Gets or sets the count of <see cref="VisibleVertices"/>. 
+        /// If 0, <see cref="CollisionVerticesCount"/> is greater than 0.
+        /// </summary>
+        [Order(12)]
+        public short VisibleVerticesCount { get; set; }
+        /// <summary>
+        /// Unknown count. 
+        /// <para>
+        ///   If greater than 0, the following applies:
+        ///   <list type="bullet">
+        ///     <item><description><see cref="PrimitiveType"/> = <see cref="PrimitiveType.Triangles"/></description></item>
+        ///     <item><description><see cref="VisibleVerticesCount"/> > 0</description></item>
+        ///     <item><description><see cref="CollisionVerticesCount"/> >= 0</description></item>
+        ///   </list>
+        /// </para>
+        /// </summary>
+        [Order(13), Offset(0x3e)]
+        public short Unk_Count { get; set; } // TODO: xml comment
+
+        #endregion
+
+        #region Properties (helper)
+
+        public Bounds3Single FixedBounds => 
+            new Bounds3Single(Bounds0, Bounds1);
+
+        #endregion
+
+        #region Properties (: INode)
+
+        public List<INode> Children { get; set; } = new List<INode>();
+
+        #endregion
+
+        #region Methods (serialization)
+
+        public void UpdateCounts()
+        {
+            // TODO: implement in BindingComponent
+
+            if (FacesVertexCounts != null)
+                FacesCount = (short)FacesVertexCounts.Count;
+            
+            CollisionVerticesCount = (short)(CollisionVertices?.List.Count ?? 0);
+            VisibleVerticesCount = (short)(VisibleVertices?.Count ?? 0);
+
+            // TODO: throw exception if MeshGroupOrShorts.Shorts.Length is invalid
+        }
+
+        #endregion
+
+        #region Methods (export)
+
+        public List<Triangle> GetCollisionTriangles()
+        {
+            var triangles = new List<Triangle>();
+            if (CollisionVerticesCount > 2)
+            {
+                int verticesIndex = 0;
+                for (int i = 0; i < FacesCount; i++)
+                {
+                    int verticesCount = 0;
+                    switch (PrimitiveType)
+                    {
+                        case PrimitiveType.Triangles:
+                            verticesCount = 3;
+                            var triangle = new Triangle(Enumerable.Range(verticesIndex, verticesCount).ToArray());
+                            triangles.Add(triangle);
+                            break;
+                        case PrimitiveType.Quads:
+                            verticesCount = 4;
+                            var quad = new Quad(Enumerable.Range(verticesIndex, verticesCount).ToArray());
+                            triangles.AddRange(quad.Triangles);
+                            break;
+                        case PrimitiveType.Polygons:
+                            verticesCount = FacesVertexCounts[i];
+                            var triangleStrip = new TriangleStrip(Enumerable.Range(verticesIndex, verticesCount).ToArray());
+                            triangles.AddRange(triangleStrip.Triangles);
+                            break;
+                    }
+                    verticesIndex += verticesCount;
+                }
+            }
+            return triangles;
+        }
+
+        #endregion
+    }
+}

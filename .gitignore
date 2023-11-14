@@ -1,0 +1,9 @@
+# Visual Studio
+# partially extracted from:
+# https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
+
+# User-specific files
+*.user
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/

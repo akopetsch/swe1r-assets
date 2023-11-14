@@ -1,0 +1,56 @@
+﻿// Copyright 2023 SWE1R.Assets Maintainers
+// Licensed under GPLv2 or any later version
+// Refer to the included LICENSE.txt file.
+
+using ByteSerialization.Attributes;
+using ByteSerialization.Components.Values.Customs;
+using ByteSerialization.IO;
+
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
+{
+    public class IndicesChunk03 : IndicesChunk, ICustomSerializable
+    {
+        #region Fields
+
+        private static readonly byte[] padding = new byte[6];
+
+        #endregion
+
+        #region Properties
+
+        [Order(0), Offset(7)] public byte Index { get; set; }
+
+        #endregion
+
+        #region Constructor
+
+        public IndicesChunk03() => 
+            Tag = 3;
+
+        #endregion
+
+        #region Methods (: ICustomSerializable)
+
+        public void Serialize(CustomComponent customComponent)
+        {
+            EndianBinaryWriter w = customComponent.Writer;
+
+            w.Write(Tag);
+            w.Write(padding);
+            w.Write(Index);
+        }
+
+        public void Deserialize(CustomComponent customComponent)
+        {
+            // TODO: not called
+
+            EndianBinaryReader r = customComponent.Reader;
+
+            Tag = r.ReadByte();
+            r.ReadBytes(padding.Length);
+            Index = r.ReadByte();
+        }
+
+        #endregion
+    }
+}

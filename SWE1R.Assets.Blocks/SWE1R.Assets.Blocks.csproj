@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Block.csv" />
+    <None Remove="Resources\BlockItem.csv" />
+    <None Remove="Resources\Model.csv" />
+    <None Remove="Resources\Racer.csv" />
+    <None Remove="Resources\Spline.csv" />
+    <None Remove="Resources\Sprite.csv" />
+    <None Remove="Resources\Texture.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="30.0.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ByteSerialization\ByteSerialization.csproj" />
+    <ProjectReference Include="..\ByteSerialization\ByteSerialization.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+    <_Parameter1>SWE1R.Assets.Blocks.Original.SQLite</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Block.csv" />
+    <EmbeddedResource Include="Resources\BlockItem.csv" />
+    <EmbeddedResource Include="Resources\Model.csv" />
+    <EmbeddedResource Include="Resources\Racer.csv" />
+    <EmbeddedResource Include="Resources\Spline.csv" />
+    <EmbeddedResource Include="Resources\Sprite.csv" />
+    <EmbeddedResource Include="Resources\Texture.csv" />
+  </ItemGroup>
+
+</Project>

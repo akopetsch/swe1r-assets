@@ -1,0 +1,22 @@
+﻿// Copyright 2023 SWE1R.Assets Maintainers
+// Licensed under GPLv2 or any later version
+// Refer to the included LICENSE.txt file.
+
+using ByteSerialization.Attributes;
+
+namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
+{
+    /// <summary>
+    /// <see href="https://github.com/Olganix/Sw_Racer/blob/master/include/Swr_Model.h#L104">SWR_AltN_0x5065</see>
+    /// </summary>
+    public class Group5065 : FlaggedNode
+    {
+        /// <summary>
+        /// Always 0 or -1.
+        /// </summary>
+        [Order(0)] public int Int { get; set; }
+
+        public Group5065() : base() =>
+            Flags = NodeFlags.Group5065;
+    }
+}
