@@ -63,7 +63,11 @@ namespace SWE1R.Assets.Blocks.CommandLine
             public string TextureBlockPath { get; set; }
         }
 
-        [Verb("mod-model-vertex-alpha")]
+        #endregion
+
+        #region mod-*
+
+        [Verb("mod-model-vertex-alpha", HelpText = "Modify a model by changing all vertices' alpha values to 128." )]
         public class ModModelVertexAlphaOptions : FilenameAndIndicesOptions { }
 
         #endregion
