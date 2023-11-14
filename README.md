@@ -122,7 +122,7 @@ A Unity project containing code to import, modify, and re-export assets. Like SW
 
 ## Issues
 
-This project is still heavily WIP (Work in Progress). This is an early preview release, and I welcome your feedback to improve it.
+This project is still heavily WIP. This is an early preview release, and I welcome your feedback or contributions (forks, pull-requests, issues) to improve it.
 
 The following are some major domains to work on:
 
@@ -130,6 +130,10 @@ The following are some major domains to work on:
 * Documentation
 * More Unit-Tests (other than re-serialization)
 * Packaging (NuGet/Unity)
+* Integrate existing findings of the community (where big credit goes):
+  * [OpenSWE1R/swe1r-re](https://github.com/OpenSWE1R/swe1r-re)
+  * [Olganix/Sw_Racer](https://github.com/Olganix/Sw_Racer)
+  * [louriccia/SWE1R-Mods](https://github.com/louriccia/SWE1R-Mods)
 * ...
 
 Feel free to tell me what features you need the most or tell me about any bugs you find.
