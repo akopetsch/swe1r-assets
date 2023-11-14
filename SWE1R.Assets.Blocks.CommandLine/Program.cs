@@ -90,7 +90,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                     (ExportSpritesOptions opts) => RunExportSpritesOptions(opts),
                     (ExportModelTexturesOptions opts) => RunExportModelsTexturesOptions(opts),
                     errs => 1);
-            PromptExit();
+            //PromptExit();
             return result;
         }
 
