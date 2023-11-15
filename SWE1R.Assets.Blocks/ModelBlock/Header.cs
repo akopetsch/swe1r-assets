@@ -50,10 +50,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         #endregion
 
-        #region Methods (assert)
-
-        #endregion
-
         #region Methods (helper)
 
         public abstract bool HasExtraAlignment(FlaggedNode flaggedNode, Graph graph);

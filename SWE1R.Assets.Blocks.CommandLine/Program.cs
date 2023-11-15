@@ -96,7 +96,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                     (ExportModelTexturesOptions opts) => RunExportModelsTexturesOptions(opts),
                     errs => 1);
             if (Debugger.IsAttached)
-                Console.ReadLine();
+                PromptExit();
             return result;
         }
 
