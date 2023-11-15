@@ -7,11 +7,11 @@ using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class MAltFormatTester : FormatTester<MAltHeader>
+    public class MAltFormatTester : HeaderFormatTester<MAltHeader>
     {
-        public MAltFormatTester(MAltHeader header) : 
+        public MAltFormatTester(MAltHeader header) :
             base(header)
         { }
 

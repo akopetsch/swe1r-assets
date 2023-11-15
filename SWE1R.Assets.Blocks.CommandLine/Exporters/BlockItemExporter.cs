@@ -14,12 +14,12 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
         public string ExportFolderPath { get; }
         public int[] Indices { get; }
 
-        public BlockItemExporter(string blockFilename, int[] indices)
+        public BlockItemExporter(string blockPath, int[] indices)
         {
             Block = new Block<TItem>();
-            Block.Load(blockFilename);
+            Block.Load(blockPath);
 
-            ExportFolderPath = GetExportFolderPath(blockFilename);
+            ExportFolderPath = GetExportFolderPath(blockPath);
             Directory.CreateDirectory(ExportFolderPath);
             Indices = GetIndices(indices);
         }
@@ -28,8 +28,8 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
         {
             foreach (int index in Indices)
             {
-                Console.Write($"{GetIndexString(index)} ");
-                Debug.WriteLine(GetIndexString(index));
+                Console.Write($"{BlockItem.GetIndexString(index)} ");
+                Debug.WriteLine(BlockItem.GetIndexString(index));
 
                 TItem item = Block[index];
                 item.Load(out ByteSerializerContext byteSerializerContext);
@@ -58,7 +58,5 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
             else
                 return indices.ToArray();
         }
-
-        protected string GetIndexString(int index) => $"{index:d4}";
     }
 }

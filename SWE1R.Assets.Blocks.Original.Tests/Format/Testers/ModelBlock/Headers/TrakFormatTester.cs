@@ -5,9 +5,9 @@
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class TrakFormatTester : FormatTester<TrakHeader>
+    public class TrakFormatTester : HeaderFormatTester<TrakHeader>
     {
         public TrakFormatTester(TrakHeader header) :
             base(header)

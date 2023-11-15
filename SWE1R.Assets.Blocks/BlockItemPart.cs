@@ -12,7 +12,7 @@ namespace SWE1R.Assets.Blocks
     {
         public event EventHandler Loaded;
 
-        public byte[] Bytes { get; protected set; }
+        public byte[] Bytes { get; set; }
         public int Length => Bytes.Length;
         public byte[] Hash => Bytes.GetSha1();
 

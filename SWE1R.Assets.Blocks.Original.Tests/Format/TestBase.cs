@@ -12,14 +12,15 @@ using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
-using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
+using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers;
+using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.TestUtils;
 using SWE1R.Assets.Blocks.Utils.Graphviz;
 using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format
 {
-    public abstract class Test : BlockItemsTestBase<Model>
+    public abstract class TestBase : BlockItemsTestBase<Model>
     {
         #region Fields
 
@@ -29,7 +30,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
 
         #region Constructor
 
-        public Test(ITestOutputHelper output, string blockIdName) : 
+        public TestBase(ITestOutputHelper output, string blockIdName) : 
             base(new OriginalBlockProvider().LoadBlock<Model>(blockIdName))
         {
             _output = output;
@@ -49,7 +50,10 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
             
             PrintMemoryUsageStats(model, context);
 
-            new FormatTesterFactory().Get(model.Header).Test(context.Graph);
+            var materialTextures = context.Graph.GetValues<MaterialTexture>().ToList();
+            materialTextures.ForEach(x => new MaterialTextureTester(x, context.Graph).Test());
+
+            new HeaderFormatTesterFactory().Get(model.Header).Test(context.Graph);
 
             AssertBounds(context);
 

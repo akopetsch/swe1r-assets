@@ -4,9 +4,9 @@
 
 using ByteSerialization.Nodes;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public interface IFormatTester
+    public interface IHeaderFormatTester
     {
         void Test(Graph byteSerializerGraph);
     }

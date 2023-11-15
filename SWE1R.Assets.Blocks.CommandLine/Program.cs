@@ -52,6 +52,13 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         #endregion
 
+        #region dump-*
+
+        [Verb("dump-textures", HelpText = "List texture block contents.")]
+        public class DumpTexturesOptions : FilenameOptions { }
+
+        #endregion
+
         #region export-*
 
         [Verb("export-sprites", HelpText = "Export sprites as PNG files.")]
@@ -79,7 +86,11 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         public static int Main(string[] args)
         {
+            new TextureImporter();
+            return 0;
+
             int result = Parser.Default.ParseArguments<
+                DumpTexturesOptions,
                 ListModelsOptions, 
                 ListSplinesOptions, 
                 ListSpritesOptions,
@@ -88,6 +99,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 ExportModelTexturesOptions,
                 ModModelVertexAlphaOptions>(args)
                 .MapResult(
+                    (DumpTexturesOptions opts) => RunDumpTexturesOptions(opts),
                     (ListModelsOptions opts) => RunListModelsOptions(opts),
                     (ListSplinesOptions opts) => RunListSplinesOptions(opts),
                     (ListSpritesOptions opts) => RunListSpritesOptions(opts),
@@ -101,6 +113,11 @@ namespace SWE1R.Assets.Blocks.CommandLine
         }
 
         #endregion
+
+        private static int RunDumpTexturesOptions(DumpTexturesOptions options)
+        {
+            throw new NotImplementedException();
+        }
 
         #region Methods (list-*)
 

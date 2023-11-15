@@ -5,9 +5,9 @@
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class ModlFormatTester : FormatTester<ModlHeader>
+    public class ModlFormatTester : HeaderFormatTester<ModlHeader>
     {
         public ModlFormatTester(ModlHeader header) : base(header)
         { }

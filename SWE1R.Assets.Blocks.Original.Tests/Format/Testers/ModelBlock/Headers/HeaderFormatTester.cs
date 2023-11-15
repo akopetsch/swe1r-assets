@@ -5,13 +5,13 @@
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public abstract class FormatTester<THeader> : IFormatTester where THeader : Header
+    public abstract class HeaderFormatTester<THeader> : IHeaderFormatTester where THeader : Header
     {
         public THeader Header { get; }
 
-        public FormatTester(THeader header) =>
+        public HeaderFormatTester(THeader header) =>
             Header = header;
 
         public abstract void Test(Graph byteSerializerGraph);

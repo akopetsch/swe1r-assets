@@ -33,6 +33,15 @@ namespace SWE1R.Assets.Blocks.Common.Colors
             return new ColorArgbF(a, r, g, b);
         }
 
+        public short ToRgba5551()
+        {
+            byte r = (byte)Math.Round(R * 31);
+            byte g = (byte)Math.Round(G * 31);
+            byte b = (byte)Math.Round(B * 31);
+            byte a = (byte)Math.Round(A * 31);
+            return (short)((r << 11) | (g << 6) | (b << 1) | a);
+        }
+
         public static ColorArgbF FromRgb565(short color)
         {
             double r = ((color & (0b11111 << (6 + 5))) >> (6 + 5)) / (Math.Pow(2, 5) - 1);

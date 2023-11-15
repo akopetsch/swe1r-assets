@@ -15,6 +15,8 @@ namespace SWE1R.Assets.Blocks
     [DebuggerDisplay("Index = {Index,nq}")]
     public abstract class BlockItem
     {
+        #region Properties
+
         public BlockItemPart[] Parts { get; }
         public byte[] Bytes => Parts.SelectMany(p => p.Bytes).ToArray();
         public byte[] Hash => Parts.SelectMany(p => p.Hash).ToArray().GetSha1();
@@ -22,7 +24,11 @@ namespace SWE1R.Assets.Blocks
         
         public IBlock Block { get; set; }
         public int? Index => Block?.IndexOf(this);
-        
+
+        #endregion
+
+        #region Constructor
+
         protected BlockItem(BlockItemPart part) : 
             this(new BlockItemPart[] { part }) { }
 
@@ -35,6 +41,11 @@ namespace SWE1R.Assets.Blocks
             foreach (BlockItemPart p in Parts)
                 p.Item = this;
         }
+
+        #endregion
+
+        #region Methods
+
         public void Load() => 
             Load(out ByteSerializerContext _);
 
@@ -48,6 +59,10 @@ namespace SWE1R.Assets.Blocks
         public abstract void Save(out ByteSerializerContext context);
 
         public abstract BlockItem Clone();
+
+        public static string GetIndexString(int index) => $"{index:d4}";
+
+        #endregion
     }
 
     #endregion
@@ -57,15 +72,22 @@ namespace SWE1R.Assets.Blocks
     public abstract class BlockItem<TPart> : BlockItem
         where TPart : BlockItemPart, new()
     {
+        #region Properties
+
         public TPart Part { get; }
+
+        #endregion
+
+        #region Constructor
 
         protected BlockItem() : base(
             new TPart())
         {
             Part = (TPart)Parts[0];
         }
-
         protected BlockItem(BlockItem<TPart> copySource) : base(copySource) { }
+
+        #endregion
     }
 
     public abstract class BlockItem<TPart1, TPart2> : BlockItem
@@ -73,8 +95,14 @@ namespace SWE1R.Assets.Blocks
         where TPart2 : BlockItemPart, new()
 
     {
+        #region Properties
+
         public TPart1 Part1 { get; }
         public TPart2 Part2 { get; }
+
+        #endregion
+
+        #region Constructor
 
         protected BlockItem() : base(
             new TPart1(), 
@@ -85,6 +113,8 @@ namespace SWE1R.Assets.Blocks
         }
 
         protected BlockItem(BlockItem<TPart1, TPart2> copySource) : base(copySource) { }
+
+        #endregion
     }
 
     #endregion

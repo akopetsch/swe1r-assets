@@ -7,7 +7,7 @@ namespace SWE1R.Assets.Blocks.TestUtils
     public class BlockItemsConsoleTestHelper
     {
         public static void PrintItemIndex(int index) =>
-            Console.Write($"{index:d4} ");
+            Console.Write($"{BlockItem.GetIndexString(index)} ");
 
         public static void PrintItemName(string name) =>
             Console.Write($"{name} ");

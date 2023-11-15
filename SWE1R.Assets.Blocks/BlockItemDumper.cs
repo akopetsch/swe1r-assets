@@ -3,8 +3,8 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization;
+using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace SWE1R.Assets.Blocks
 {
@@ -21,13 +21,13 @@ namespace SWE1R.Assets.Blocks
             DumpItemLog(context, i, suffix);
         }
 
-        public void DumpItemPartsBytes(BlockItem model, int i, string suffix)
+        public void DumpItemPartsBytes(BlockItem item, int i, string suffix)
         {
             Directory.CreateDirectory(DumpPath);
-            for (int p = 0; p < model.Parts.Length; p++)
+            for (int p = 0; p < item.Parts.Length; p++)
             {
-                string path = GetPath(i, "bin", suffix, p);
-                byte[] bytes = model.Parts[p].Bytes;
+                string path = GetPath(i, suffix, "bin", p);
+                byte[] bytes = item.Parts[p].Bytes;
                 File.WriteAllBytes(path, bytes);
             }
         }
@@ -35,18 +35,23 @@ namespace SWE1R.Assets.Blocks
         public void DumpItemLog(ByteSerializerContext context, int i, string suffix)
         {
             Directory.CreateDirectory(DumpPath);
-            string path = GetPath(i, "log", suffix);
+            string path = GetPath(i, suffix, "log");
             string log = context.Log.ToString();
             File.WriteAllText(path, log);
         }
 
-        private string GetPath(int i, string fileExtension, string suffix, int? p = null)
+        private string GetPath(int i, string suffix, string fileExtension, int? p = null)
         {
-            var filename = new StringBuilder();
-            filename.Append($"{i:d4}.");
+            var fileNameParts = new List<string> {
+                BlockItem.GetIndexString(i)
+            };
             if (p.HasValue)
-                filename.Append($"part{p}.");
-            filename.Append($"{suffix}.{fileExtension}");
+                fileNameParts.Add($"part{p}");
+            if (suffix != null)
+                fileNameParts.Add(suffix);
+            if (fileExtension != null)
+                fileNameParts.Add(fileExtension);
+            var filename = string.Join('.', fileNameParts);
             return Path.Combine(DumpPath, filename.ToString());
         }
     }

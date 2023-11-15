@@ -31,7 +31,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         private void SetId(int value)
         {
-            if ((IdField & ~mask) != 0)
+            if ((value & ~mask) != 0)
                 throw new ArgumentException(
                     $"The value for {nameof(Id)} must be a three-byte, two's complement integer number.", nameof(value));
             if (value == -1)
@@ -39,5 +39,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             else
                 IdField = signature | value;
         }
+
+        public override string ToString() => 
+            Id.ToString();
     }
 }

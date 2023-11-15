@@ -14,7 +14,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
     /// <summary>
     /// <see href="https://github.com/Olganix/Sw_Racer/blob/master/include/Swr_Model.h#L241">SWR_MODEL_Section5</see>
     /// </summary>
-    [DebuggerDisplay("Id = {Id,nq}")]
+    [DebuggerDisplay("Id = {" + nameof(IdField) + ",nq}")]
     [Sizeof(0x40)]
     public class MaterialTexture
     {
@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         [Order(15)] public TextureId IdField { get; set; }
 
         #endregion
-        
+
         #region Methods (pixels)
 
         public ImageRgba32 ExportImage(Block<Texture> textureBlock)
@@ -57,13 +57,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             Texture texture = textureBlock[textureIndex];
             texture.Load();
 
-            // get bpp
-            int bpp = GetBpp();
-
             // get pixels
             for (int x = 0; x < Width; x++)
                 for (int y = 0; y < Height; y++)
-                    result[x, y] = new ColorRgba32(GetPixel(x, y, bpp, texture));
+                    result[x, y] = new ColorRgba32(GetPixel(x, y, texture));
 
             return result;
         }
@@ -76,54 +73,77 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             return result;
         }
 
-        private int GetBpp()
+        // https://github.com/Olganix/Sw_Racer/issues/9
+        private TextureDataFormat GetTextureDataFormat()
         {
-            byte c = Byte_0c;
-            byte d = Byte_0d;
-            if (c == 0)
+            if (Byte_0c == 0)
             {
-                if (d == 3) return 4;
+                if (Byte_0d == 3)
+                    return TextureDataFormat.RGBA32;
             }
-            if (c == 2 || c == 4)
+            if (Byte_0c == 2)
             {
-                if (d == 0) return 4;
-                if (d == 1) return 8;
+                if (Byte_0d == 0)
+                    return TextureDataFormat.I4_RGBA5551;
+                if (Byte_0d == 1)
+                    return TextureDataFormat.I8_RGBA5551;
             }
-            throw new InvalidOperationException();
+            if (Byte_0c == 4)
+            {
+                if (Byte_0d == 0)
+                    return TextureDataFormat.FourBitGrayscaleAndAlpha;
+                if (Byte_0d == 1)
+                    return TextureDataFormat.EightBitGrayscale;
+            }
+            throw new NotImplementedException();
         }
 
-        private ColorArgbF GetPixel(int x, int y, int bpp, Texture texture)
+        private ColorArgbF GetPixel(int x, int y, Texture texture)
         {
             int i = y * Width + x;
-
-            // get pixel
-            int pixel; // = pixel color or palette color index
-            if (bpp == 4)
-                if (i < texture.PixelsPart.NibblesCount)
-                    pixel = texture.PixelsPart.GetNibble(i);
-                else
-                    return ColorArgbF.Pink;
-            else if (bpp == 8)
-                pixel = texture.PixelsPart.GetByte(i);
-            else if (bpp == 32)
-                pixel = texture.PixelsPart.GetInt32(i);
-            else
-                throw new InvalidOperationException();
-
-            // get color
-            if (texture.PaletteColors.Length > 0)
-                return texture.PaletteColors[pixel];
-            else
+            TextureDataFormat textureDataFormat = GetTextureDataFormat();
+            int pixelData;
+            int bpp = textureDataFormat.GetBpp();
+            if (textureDataFormat.IsIndexFormat())
             {
+                // get pixel data
                 if (bpp == 4)
                 {
-                    float a = pixel * 17f / byte.MaxValue; // alpha (as in ARGB)
-                    float v = pixel * 16f / byte.MaxValue; // value (as in HSV)
+                    if (i < texture.PixelsPart.NibblesCount)
+                        pixelData = texture.PixelsPart.GetNibble(i);
+                    else
+                        return ColorArgbF.Pink;
+                }
+                else if (bpp == 8)
+                    pixelData = texture.PixelsPart.GetByte(i);
+                else
+                    throw new InvalidOperationException();
+
+                // get index palette color
+                return texture.PaletteColors[pixelData];
+            }
+            else
+            {
+                // get pixel data
+                if (bpp == 4)
+                    pixelData = texture.PixelsPart.GetNibble(i);
+                else if (bpp == 8)
+                    pixelData = texture.PixelsPart.GetByte(i);
+                else if (bpp == 32)
+                    pixelData = texture.PixelsPart.GetInt32(i);
+                else
+                    throw new InvalidOperationException();
+
+                // get color
+                if (bpp == 4)
+                {
+                    float a = pixelData * 17f / byte.MaxValue; // alpha (as in ARGB)
+                    float v = pixelData * 16f / byte.MaxValue; // value (as in HSV)
                     return new ColorArgbF(a, v, v, v);
                 }
                 else if (bpp == 8)
                 {
-                    float v = pixel / (float)byte.MaxValue; // value (as in HSV)
+                    float v = pixelData / (float)byte.MaxValue; // value (as in HSV)
                     return new ColorArgbF(v, v, v, v);
 
                 }

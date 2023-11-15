@@ -7,7 +7,7 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format
 {
-    public class N64UsTest : Test
+    public class N64UsTest : TestBase
     {
         public N64UsTest(ITestOutputHelper output) :
             base(output, ModelBlockIdNames.Default)

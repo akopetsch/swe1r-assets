@@ -7,7 +7,7 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format
 {
-    public class WinDemoTest : Test
+    public class WinDemoTest : TestBase
     {
         public WinDemoTest(ITestOutputHelper output) :
             base(output, ModelBlockIdNames.Default)

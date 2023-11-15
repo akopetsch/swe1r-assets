@@ -4,15 +4,30 @@
       "commandName": "WSL2",
       "distributionName": ""
     },
-    "steamapps": {
+    "steam - export-models-textures -i 170": {
+      "commandName": "Project",
+      "commandLineArgs": "export-models-textures out_modelblock.bin -t out_textureblock.bin -i 170",
+      "workingDirectory": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Star Wars Episode I Racer\\data\\lev01"
+    },
+    "steam - list-models": {
       "commandName": "Project",
       "commandLineArgs": "list-models out_modelblock.bin",
       "workingDirectory": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Star Wars Episode I Racer\\data\\lev01"
     },
-    "SWE1R.Assets.Blocks.Original": {
+    "original - list-models _default.bin": {
       "commandName": "Project",
       "commandLineArgs": "--list-models out_modelblock.bin/_default.bin",
       "workingDirectory": "C:\\Users\\akope\\code\\akopetsch\\swe1r-assets-data\\src\\SWE1R.Assets.Blocks.Original"
+    },
+    "steam - export-models-textures": {
+      "commandName": "Project",
+      "commandLineArgs": "export-models-textures out_modelblock.bin -t out_textureblock.bin",
+      "workingDirectory": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Star Wars Episode I Racer\\data\\lev01"
+    },
+    "steam - export-models-textures -i 133": {
+      "commandName": "Project",
+      "commandLineArgs": "export-models-textures out_modelblock.bin -t out_textureblock.bin -i 133",
+      "workingDirectory": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Star Wars Episode I Racer\\data\\lev01"
     }
   }
 }

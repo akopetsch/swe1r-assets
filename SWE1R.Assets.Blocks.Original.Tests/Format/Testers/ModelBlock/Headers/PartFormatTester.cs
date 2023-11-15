@@ -7,9 +7,9 @@ using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class PartFormatTester : FormatTester<PartHeader>
+    public class PartFormatTester : HeaderFormatTester<PartHeader>
     {
         public PartFormatTester(PartHeader header) : base(header)
         { }
@@ -28,7 +28,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
         {
             Assert.True(Header.Nodes.Count == 2 || Header.Nodes.Count == 5);
             Assert.True(Header.Data == null);
-            Assert.True(Header.Animations == null || (Header.Animations.Count >= 1 && Header.Animations.Count <= 10));
+            Assert.True(Header.Animations == null || Header.Animations.Count >= 1 && Header.Animations.Count <= 10);
             Assert.True(Header.AltN == null);
         }
 

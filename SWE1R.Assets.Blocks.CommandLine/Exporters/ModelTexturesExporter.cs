@@ -26,7 +26,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
         protected override void ExportItem(int index, Model item, ByteSerializerContext byteSerializerContext)
         {
             // get modelFolderPath
-            string itemFolderName = GetIndexString(index);
+            string itemFolderName = BlockItem.GetIndexString(index);
             string itemFolderPath = Path.Combine(ExportFolderPath, itemFolderName);
             Directory.CreateDirectory(itemFolderPath);
 
@@ -41,7 +41,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
                 if (image != null)
                 {
                     // save as png
-                    string exportFilename = $"{GetIndexString(textureIndex.Value)}.png";
+                    string exportFilename = $"{BlockItem.GetIndexString(textureIndex.Value)}.png";
                     string exportPath = Path.Combine(itemFolderPath, exportFilename);
                     image.ToImageSharp().SaveAsPng(exportPath);
                 }

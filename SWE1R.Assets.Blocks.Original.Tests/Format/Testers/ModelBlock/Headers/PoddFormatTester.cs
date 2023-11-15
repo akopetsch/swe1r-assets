@@ -8,9 +8,9 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class PoddFormatTester : FormatTester<PoddHeader>
+    public class PoddFormatTester : HeaderFormatTester<PoddHeader>
     {
         public PoddFormatTester(PoddHeader header) : base(header)
         { }
@@ -52,7 +52,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
             Assert.True(count >= 24 && count <= 53);
 
             // types
-            List<Type> types = Header.Nodes
+            var types = Header.Nodes
                 .Where(n => n.FlaggedNode != null)
                 .Select(n => n.FlaggedNode.GetType())
                 .Distinct().ToList();
@@ -164,9 +164,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
 
             // count (null)
             if (Header.AltN.Count == 2)
-            {
                 Assert.True(distinct[0].Children.Where(n => n == null).Count() == 2);
-            }
             if (Header.AltN.Count == 4)
             {
                 Assert.True(distinct[0].Children.Where(n => n == null).Count() == 1);

@@ -26,7 +26,7 @@ namespace SWE1R.Assets.Blocks.TextureBlock
 
         public int GetNibble(int i) => Bytes.GetNibble(i);
         public byte GetByte(int i) => Bytes[i];
-        public int GetInt32(int i) => BitConverter.ToInt32(Bytes, i * sizeof(int)); // TODO: ìs big endian ensured?
+        public int GetInt32(int i) => BitConverter.ToInt32(Bytes, i * sizeof(int)); // TODO: is big endian ensured?
 
         #endregion
 

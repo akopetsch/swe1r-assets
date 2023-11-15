@@ -5,11 +5,11 @@
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class FormatTesterFactory
+    public class HeaderFormatTesterFactory
     {
-        public IFormatTester Get(Header header)
+        public IHeaderFormatTester Get(Header header)
         {
             if (header is MAltHeader mAltHeader)
                 return new MAltFormatTester(mAltHeader);

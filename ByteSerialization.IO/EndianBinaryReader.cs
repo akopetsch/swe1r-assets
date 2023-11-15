@@ -25,7 +25,7 @@ namespace ByteSerialization.IO
         #region Properties
 
         public Stream BaseStream { get; set; }
-        public Endianness Endianness { get; set; }
+        public Endianness Endianness { get; set; } // FIXME: not evaluated
         public ulong Count { get; private set; } = 0;
 
         #endregion
