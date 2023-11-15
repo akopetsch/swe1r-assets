@@ -10,6 +10,7 @@ using SWE1R.Assets.Blocks.SplineBlock;
 using SWE1R.Assets.Blocks.SpriteBlock;
 using SWE1R.Assets.Blocks.TestApp.ItemListers;
 using SWE1R.Assets.Blocks.TextureBlock;
+using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine
 {
@@ -94,7 +95,8 @@ namespace SWE1R.Assets.Blocks.CommandLine
                     (ExportSpritesOptions opts) => RunExportSpritesOptions(opts),
                     (ExportModelTexturesOptions opts) => RunExportModelsTexturesOptions(opts),
                     errs => 1);
-            //PromptExit();
+            if (Debugger.IsAttached)
+                Console.ReadLine();
             return result;
         }
 
