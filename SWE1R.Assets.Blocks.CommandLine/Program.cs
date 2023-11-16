@@ -86,6 +86,8 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         public static int Main(string[] args)
         {
+            new TextureImporter();
+            return 0;
             int result = Parser.Default.ParseArguments<
                 DumpTexturesOptions,
                 ListModelsOptions, 

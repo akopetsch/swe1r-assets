@@ -149,10 +149,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                 }
                 else if (bpp == 32)
                 {
-                    float r = texture.PixelsPart.Bytes[i + 0] / (float)byte.MaxValue;
-                    float g = texture.PixelsPart.Bytes[i + 1] / (float)byte.MaxValue;
-                    float b = texture.PixelsPart.Bytes[i + 2] / (float)byte.MaxValue;
-                    float a = texture.PixelsPart.Bytes[i + 3] / (float)byte.MaxValue;
+                    byte[] bytes = BitConverter.GetBytes(pixelData);
+                    float r = bytes[0] / (float)byte.MaxValue;
+                    float g = bytes[1] / (float)byte.MaxValue;
+                    float b = bytes[2] / (float)byte.MaxValue;
+                    float a = bytes[3] / (float)byte.MaxValue;
                     return new ColorArgbF(a, r, g, b);
                 }
                 else

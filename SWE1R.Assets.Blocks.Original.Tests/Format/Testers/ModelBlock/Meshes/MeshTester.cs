@@ -7,7 +7,6 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes.Tmp;
 using System.Diagnostics;
-using System.Linq;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 {
@@ -70,6 +69,10 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         // MaxIndex
                         Assert.True(chunk01.MaxIndex == range.NextIndicesBase);
 
+                        Assert.True(chunk01.StartVertex.Collection == Value.VisibleVertices);
+
+
+
                         // TODO: Length
                         Assert.True(chunk01.Length != 0);
                         int computedLength1 =
@@ -77,18 +80,51 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         int computedLength2 = 
                             range.Indices.Distinct().Count() * 16 - 
                             range.Chunk01.StartVertex.Index.Value * 16;
+
+                        bool true1 = chunk01.Length == computedLength1;
+                        bool true2 = chunk01.Length == computedLength2;
+
+                        if (true1 & !true2)
+                        {
+                            Assert.True(range.Chunk01.StartVertex.Index.Value != 0);
+
+                            // if there was a 01 range before:
+                            Assert.True(ranges.Count > 1);
+                            Assert.True(i != 0);
+                            Assert.True(ranges.All(r => r.Chunk01 != null)); // chunk03 is null sometimes
+                        }
+                        if (true2 && !true1)
+                        {
+                            Assert.True(range.Chunk01.StartVertex.Index.Value != 0);
+
+                            // if this is a single (01) range:
+                            Assert.True(ranges.Count == 1);
+                            Assert.True(i == 0); // obviously
+                        }
+                        if (true1 && true2)
+                        {
+                            Assert.True(range.Chunk01.StartVertex.Index.Value == 0);
+
+                            // if this is the first (01) range and more follow:
+                            Assert.True(i == 0);
+                        }
                         
                         Assert.True(
                             chunk01.Length == computedLength1 ||
                             chunk01.Length == computedLength2);
+
+
+
 
                         // TODO: StartVertex
                         int startVertexIndex = chunk01.StartVertex.Index.Value;
                         Assert.True(startVertexIndex != -1);
                         if (i != 0)
                         {
+                            Assert.True(ranges.Count > 1);
                             Assert.True(startVertexIndex == 
                                 ranges.Take(i).Select(r => r.NextIndicesBase / 2).Sum());
+                            // Chunk03 can be null
                         }
 
                         if (startVertexIndex == 0)
@@ -110,13 +146,11 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                                 // models: 106...
                                 Assert.True(range.Chunk03 == null);
                                 Assert.True(ranges.Count == 1);
-                                long meshPosition = ByteSerializationGraph.GetValueComponent(Value).Position.Value;
+                                
                             }
                             else
                             {
                                 // 11903
-                                // Chunk03 can be null
-                                Assert.True(ranges.Count > 1);
                             }
                         }
                     }
