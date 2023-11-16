@@ -21,32 +21,37 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         /// <summary>
         /// Must have a value.
+        /// <para>Offset: 0x00</para>
         /// </summary>
         [Order(0), Reference(2)]
         public Material Material { get; set; } // TODO: xml comment
         /// <summary>
         /// Can be <see langword="null"/>.
+        /// <para>Offset: 0x04</para>
         /// </summary>
         [Order(1), Reference(5)]
         public Mapping Mapping { get; set; } // TODO: xml comment
         /// <summary>
         /// Both <see cref="Bounds0">Bounds0</see> and <see cref="Bounds1">Bounds1</see> can be <c>(0, 0, 0)</c>.
+        /// <para>Offset: 0x08</para>
         /// </summary>
         [Order(2)]
         public Vector3Single Bounds0 { get; set; } // TODO: xml comment
         /// <summary>
         /// Both <see cref="Bounds0">Bounds0</see> and <see cref="Bounds1">Bounds1</see> can be <c>(0, 0, 0)</c>.
+        /// <para>Offset: 0x14</para>
         /// </summary>
         [Order(3)]
         public Vector3Single Bounds1 { get; set; } // TODO: xml comment
         /// <summary>
         /// Gets or sets the number of faces. Must be greater than zero.
         /// <seealso cref="FacesVertexCounts"/>
+        /// <para>Offset: 0x20</para>
         /// </summary>
         [Order(4)]
         public short FacesCount { get; set; } // TODO: xml comment
         /// <summary>
-        /// 
+        /// <para>Offset: 0x22</para>
         /// </summary>
         [Order(5)]
         public PrimitiveType PrimitiveType { get; set; } // TODO: xml comment
@@ -54,6 +59,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// Gets or sets the vertex counts of the faces. 
         /// If not <see langword="null"/>, the list's length is <see cref="FacesCount"/>.
         /// Has a value if <see cref="PrimitiveType"/> is <see cref="PrimitiveType.Polygons"/>, otherwise is <see langword="null"/>.
+        /// <para>Offset: 0x24</para>
         /// </summary>
         [Order(6), Reference(0), Length(nameof(FacesCount))]
         public List<int> FacesVertexCounts { get; set; } // TODO: xml comment
@@ -63,36 +69,42 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         ///   <item><description>If <see cref="Unk_Count">Unk_Count</see> is greater than 0 (only in <see cref="ModelType.Scen">Scen</see> or <see cref="ModelType.Pupp">Pupp</see> models), has a <see cref="MeshGroup3064"/> value.</description></item>
         ///   <item><description>If it is 0, has a <see langword="short"/><c>[]</c> value (only once in <see cref="ModelType.Trak">Trak</see> model 1) or is <see langword="null"/>.</description></item>
         /// </list>
+        /// <para>Offset: 0x28</para>
         /// </summary>
         [Order(7)]
         public MeshGroupOrShorts MeshGroupOrShorts { get; set; } // TODO: xml comment
         /// <summary>
         /// Gets or sets the list of collision vertices. 
         /// The list's length is <see cref="CollisionVerticesCount"/>. Is <see langword="null"/> if that value is 0.
+        /// <para>Offset: 0x2C</para>
         /// </summary>
         [Order(8), Reference(1)]
         public CollisionVertices CollisionVertices { get; set; }
         /// <summary>
         /// Gets or sets the list of index chunks for the visible vertices. 
         /// Has a value if <see cref="VisibleVerticesCount"/> is greater than 0, otherwise is <see langword="null"/>.
+        /// <para>Offset: 0x30</para>
         /// </summary>
         [Order(9), Reference(3)]
         public IndicesChunks VisibleIndicesChunks { get; set; }
         /// <summary>
         /// Gets or sets the list of visible vertices. 
         /// The list's length is <see cref="VisibleVerticesCount"/>. Is <see langword="null"/> if that value is 0.
+        /// <para>Offset: 0x34</para>
         /// </summary>
         [Order(10), Reference(4)] [Length(nameof(VisibleVerticesCount))]
         public List<Vertex> VisibleVertices { get; set; }
         /// <summary>
         /// Gets or sets the count of <see cref="CollisionVertices"/>. 
         /// If 0, <see cref="VisibleVerticesCount"/> is greater than 0.
+        /// <para>Offset: 0x38</para>
         /// </summary>
         [Order(11)]
         public short CollisionVerticesCount { get; set; }
         /// <summary>
         /// Gets or sets the count of <see cref="VisibleVertices"/>. 
         /// If 0, <see cref="CollisionVerticesCount"/> is greater than 0.
+        /// <para>Offset: 0x3A</para>
         /// </summary>
         [Order(12)]
         public short VisibleVerticesCount { get; set; }
@@ -106,6 +118,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         ///     <item><description><see cref="CollisionVerticesCount"/> >= 0</description></item>
         ///   </list>
         /// </para>
+        /// <para>Offset: 0x3E</para>
         /// </summary>
         [Order(13), Offset(0x3e)]
         public short Unk_Count { get; set; } // TODO: xml comment
