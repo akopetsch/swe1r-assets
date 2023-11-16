@@ -12,6 +12,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Swe1rIndicesChunks = SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices.IndicesChunks;
+using Swe1rMaterialTexture = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialTexture;
 using Swe1rMaterialTextureChild = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialTextureChild;
 using Swe1rMesh = SWE1R.Assets.Blocks.ModelBlock.Meshes.Mesh;
 using Swe1rModelImporter = SWE1R.Assets.Blocks.Unity.ModelImporter;
@@ -55,12 +56,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Meshes
             // fields
             material = importer.GetMaterialScriptableObject(source.Material);
             if (source.Mapping != null)
-            {
-                gameObject.name += $"[Mp]";
-                if (source.Mapping.Subs.Any(x => x.Child?.FlaggedNode_20 != null))
-                    gameObject.name += $"[MCF]";
                 mapping = importer.GetMappingScriptableObject(source.Mapping);
-            }
             bounds0 = source.Bounds0.ToUnityVector3();
             bounds1 = source.Bounds1.ToUnityVector3();
             facesCount = source.FacesCount;
@@ -69,30 +65,42 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Meshes
                 facesVertexCounts = source.FacesVertexCounts;
             meshGroupOrShorts = new MeshGroupOrShortsObject(source.MeshGroupOrShorts, importer);
             if (source.CollisionVertices != null)
-            {
-                gameObject.name += $"[CVs]";
                 collisionVertices = new CollisionVerticesObject(source.CollisionVertices);
-            }
             if (source.VisibleIndicesChunks != null)
-            {
-                gameObject.name += $"[ICs]";
                 indicesChunks = source.VisibleIndicesChunks.Select(ic => importer.GetIndicesChunkObject(ic)).ToList();
-            }
             if (source.VisibleVertices != null)
-            {
-                gameObject.name += $"[Vs]";
                 vertices = source.VisibleVertices.Select(x => new VertexObject(x)).ToList();
-            }
             unk_Count = source.Unk_Count;
 
-            // labeling
-            gameObject.name += $"[A{source.Material.Properties.AlphaBpp}]";
+            AddLabelsToName(source);
+            UpdateVisualization(source, importer);
+        }
 
-            // visualization
-            Swe1rMaterialTextureChild firstMaterialTextureChild = source.Material.Texture?.Children.FirstOrDefault();
-            gameObject.GetComponent<MeshFilter>().sharedMesh = GetUnityVisibleMesh(source, firstMaterialTextureChild);
-            gameObject.GetComponent<MeshRenderer>().sharedMaterial = GetUnityMaterial(source, firstMaterialTextureChild, importer);
-            gameObject.GetComponent<MeshCollider>().sharedMesh = GetUnityCollisionMesh(source);
+        private void AddLabelsToName(Swe1rMesh source)
+        {
+            var labels = new List<string>();
+
+            Swe1rMaterialTexture texture = source.Material.Texture;
+            if (texture != null)
+            {
+                labels.Add($"{texture.Byte_0c},{texture.Byte_0d}");
+                labels.Add(texture.IdField.Id.ToString());
+            }
+            if (source.Mapping != null)
+            {
+                labels.Add("Mp");
+                if (source.Mapping.Subs.Any(x => x.Child?.FlaggedNode_20 != null))
+                    labels.Add("MpSubFn");
+            }
+            if (source.CollisionVertices != null)
+                labels.Add("Cv");
+            if (source.VisibleIndicesChunks != null)
+                labels.Add("Ic");
+            if (source.VisibleVertices != null)
+                labels.Add("Vv");
+            labels.Add($"A{source.Material.Properties.AlphaBpp}");
+
+            gameObject.name += string.Join(string.Empty, labels.Select(x => $"[{x}]"));
         }
 
         public Swe1rMesh Export(ModelExporter modelExporter)
@@ -126,6 +134,14 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Meshes
         #endregion
 
         #region Methods (visualization)
+
+        private void UpdateVisualization(Swe1rMesh source, Swe1rModelImporter importer)
+        {
+            Swe1rMaterialTextureChild firstMaterialTextureChild = source.Material.Texture?.Children.FirstOrDefault();
+            gameObject.GetComponent<MeshFilter>().sharedMesh = GetUnityVisibleMesh(source, firstMaterialTextureChild);
+            gameObject.GetComponent<MeshRenderer>().sharedMaterial = GetUnityMaterial(source, firstMaterialTextureChild, importer);
+            gameObject.GetComponent<MeshCollider>().sharedMesh = GetUnityCollisionMesh(source);
+        }
 
         private UnityMesh GetUnityVisibleMesh(Swe1rMesh source, Swe1rMaterialTextureChild swe1rMaterialTextureChild)
         {
