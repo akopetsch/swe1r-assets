@@ -77,5 +77,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         }
 
         #endregion
+
+        #region  Methods (: object)
+
+        public override string ToString() =>
+            Index.HasValue ? Index.Value.ToString() : "null";
+
+        #endregion
     }
 }

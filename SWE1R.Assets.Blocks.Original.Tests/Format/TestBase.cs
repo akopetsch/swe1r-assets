@@ -16,29 +16,38 @@ using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.TestUtils;
 using SWE1R.Assets.Blocks.Utils.Graphviz;
+using System.Diagnostics;
 using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format
 {
-    public abstract class TestBase : BlockItemsTestBase<Model>
+    public abstract class TestBase : BlockItemsTestBase<Model>, IClassFixture<AnalyticsFixture>
     {
-        #region Fields
+        #region Properties
 
-        private readonly ITestOutputHelper _output;
+        protected ITestOutputHelper Output { get; }
+        protected AnalyticsFixture AnalyticsFixture { get; }
 
         #endregion
 
         #region Constructor
 
-        public TestBase(ITestOutputHelper output, string blockIdName) : 
+        public TestBase(AnalyticsFixture analyticsFixture, ITestOutputHelper output, string blockIdName) : 
             base(new OriginalBlockProvider().LoadBlock<Model>(blockIdName))
         {
-            _output = output;
+            AnalyticsFixture = analyticsFixture;
+            Output = output;
         }
 
         #endregion
 
         #region Methods (: BlockItemsTestBase)
+
+        private List<TValue> GetValues<TValue>(ByteSerializerContext context) => // TODO: move to Graph.cs
+            context.Graph.GetValueComponents<TValue>()
+                .OrderBy(vc => vc.Position)
+                .Select(vc => (TValue)vc.Value)
+                .ToList();
 
         protected override void CompareItemInternal(int i)
         {
@@ -50,8 +59,11 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
             
             PrintMemoryUsageStats(model, context);
 
-            var materialTextures = context.Graph.GetValues<MaterialTexture>().ToList();
-            materialTextures.ForEach(x => new MaterialTextureTester(x, context.Graph).Test());
+            var materialTextures = GetValues<MaterialTexture>(context);
+            materialTextures.ForEach(x => new MaterialTextureTester(x, context.Graph, AnalyticsFixture).Test());
+
+            var meshes = GetValues<Mesh>(context);
+            meshes.ForEach(x => new MeshTester(x, context.Graph, AnalyticsFixture).Test());
 
             new HeaderFormatTesterFactory().Get(model.Header).Test(context.Graph);
 
@@ -89,12 +101,17 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
                 Assert.True(!model.Header.AltN.Contains(null));
         }
 
-        protected override void PrintItemIndex(int index) { }
+        protected override void PrintItemIndex(int index) =>
+            Debug.WriteLine(BlockItem.GetIndexString(index));
 
         protected override void PrintItemName(string nameString) =>
-            _output.WriteLine(nameString);
+            Output.WriteLine(nameString);
 
-        protected override void PrintItemDone() { }
+        protected override void PrintItemDone()
+        {
+            Debug.WriteLine(string.Empty);
+            Debug.WriteLine(string.Empty);
+        }
 
         #endregion
 

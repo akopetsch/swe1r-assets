@@ -9,8 +9,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
 {
     public class DefaultTest : TestBase
     {
-        public DefaultTest(ITestOutputHelper output) :
-            base(output, ModelBlockIdNames.Default)
+        public DefaultTest(AnalyticsFixture analyticsFixture, ITestOutputHelper output) :
+            base(analyticsFixture,output, ModelBlockIdNames.Default)
         { }
 
         [Fact]

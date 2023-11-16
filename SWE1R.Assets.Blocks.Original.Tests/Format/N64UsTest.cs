@@ -9,8 +9,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
 {
     public class N64UsTest : TestBase
     {
-        public N64UsTest(ITestOutputHelper output) :
-            base(output, ModelBlockIdNames.Default)
+        public N64UsTest(AnalyticsFixture analyticsFixture, ITestOutputHelper output) :
+            base(analyticsFixture, output, ModelBlockIdNames.Default)
         { }
 
         [Fact]

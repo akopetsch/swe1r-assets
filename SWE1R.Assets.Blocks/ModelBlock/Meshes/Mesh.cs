@@ -84,6 +84,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// Gets or sets the list of index chunks for the visible vertices. 
         /// Has a value if <see cref="VisibleVerticesCount"/> is greater than 0, otherwise is <see langword="null"/>.
         /// <para>Offset: 0x30</para>
+        /// <para>Olganix: offset_unk48</para>
         /// </summary>
         [Order(9), Reference(3)]
         public IndicesChunks VisibleIndicesChunks { get; set; }

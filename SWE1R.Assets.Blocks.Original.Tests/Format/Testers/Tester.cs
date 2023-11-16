@@ -10,11 +10,13 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
     {
         public TValue Value { get; }
         public Graph ByteSerializationGraph { get; }
+        public AnalyticsFixture AnalyticsFixture { get; }
 
-        public Tester(TValue value, Graph byteSerializationGraph)
+        public Tester(TValue value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture)
         {
             Value = value;
             ByteSerializationGraph = byteSerializationGraph;
+            AnalyticsFixture = analyticsFixture;
         }
 
         public abstract void Test();

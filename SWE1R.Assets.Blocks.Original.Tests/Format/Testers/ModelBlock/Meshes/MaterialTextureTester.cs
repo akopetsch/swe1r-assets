@@ -9,8 +9,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 {
     public class MaterialTextureTester : Tester<MaterialTexture>
     {
-        public MaterialTextureTester(MaterialTexture value, Graph byteSerializationGraph) : 
-            base(value, byteSerializationGraph)
+        public MaterialTextureTester(
+            MaterialTexture value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture) : 
+            base(value, byteSerializationGraph, analyticsFixture)
         { }
 
         public override void Test()

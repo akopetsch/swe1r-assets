@@ -5,6 +5,8 @@
 using ByteSerialization.Attributes;
 using ByteSerialization.Components.Values.Customs;
 using ByteSerialization.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
@@ -19,6 +21,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Properties
 
         [Order(0), Offset(7)] public byte Index { get; set; }
+
+        #endregion
+
+        #region Properties (abstraction)
+
+        public override IEnumerable<int> Indices => Enumerable.Empty<int>();
 
         #endregion
 
@@ -50,6 +58,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
             r.ReadBytes(padding.Length);
             Index = r.ReadByte();
         }
+
+        #endregion
+
+        #region Methods (: object)
+
+        public override string ToString() =>
+            $"({nameof(Tag)} = {GetByteString(Tag)}, " +
+            $"{nameof(Index)} = {Index})";
 
         #endregion
     }

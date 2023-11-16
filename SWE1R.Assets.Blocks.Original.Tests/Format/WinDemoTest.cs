@@ -9,8 +9,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
 {
     public class WinDemoTest : TestBase
     {
-        public WinDemoTest(ITestOutputHelper output) :
-            base(output, ModelBlockIdNames.Default)
+        public WinDemoTest(AnalyticsFixture analyticsFixture, ITestOutputHelper output) :
+            base(analyticsFixture, output, ModelBlockIdNames.Default)
         { }
 
         [Fact]

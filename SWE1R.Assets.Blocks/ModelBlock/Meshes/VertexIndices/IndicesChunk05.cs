@@ -6,6 +6,7 @@ using ByteSerialization.Attributes;
 using ByteSerialization.Components.Values.Customs;
 using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
+using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
@@ -25,7 +26,17 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #endregion
 
-        #region Properties (helper)
+        #region Properties (abstraction)
+
+        public override IEnumerable<int> Indices
+        {
+            get
+            {
+                yield return Index0;
+                yield return Index1;
+                yield return Index2;
+            }
+        }
 
         public Triangle Triangle => new Triangle(Index0, Index1, Index2);
 
@@ -63,6 +74,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
             Index2 = r.ReadByte();
             r.ReadBytes(padding.Length);
         }
+
+        #endregion
+
+        #region Methods (: object)
+
+        public override string ToString() =>
+            $"({nameof(Tag)} = {GetByteString(Tag)}, " +
+            $"{nameof(Index0)} = {Index0}, " +
+            $"{nameof(Index1)} = {Index1}, " +
+            $"{nameof(Index2)} = {Index2})";
 
         #endregion
     }

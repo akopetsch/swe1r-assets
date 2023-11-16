@@ -3,6 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Attributes;
+using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
@@ -18,7 +19,21 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         [RecordTypeIdentifier((byte)03, typeof(IndicesChunk03))]
         [RecordTypeIdentifier((byte)05, typeof(IndicesChunk05))]
         [RecordTypeIdentifier((byte)06, typeof(IndicesChunk06))]
-        [Order(0)] public byte Tag { get; set; }
+        [Order(0)]
+        public byte Tag { get; set; }
+
+        #endregion
+
+        #region Properties (abstraction)
+
+        public abstract IEnumerable<int> Indices { get; }
+
+        #endregion
+
+        #region Methods (: object)
+
+        protected string GetByteString(byte b) =>
+            b.ToString("d2"); // TODO: extract to other class
 
         #endregion
     }
