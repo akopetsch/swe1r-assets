@@ -10,7 +10,7 @@ using System.Linq;
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 {
     /// <summary>
-    /// <see href="https://github.com/Olganix/Sw_Racer/blob/master/include/Swr_Model.h#L230">SWR_MODEL_Section4</see>
+    /// <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L230">SWR_MODEL_Section4</see>
     /// </summary>
     public class Material
     {
