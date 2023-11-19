@@ -22,7 +22,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
             var c = (IndicesChunk01)node.Value;
 
             Length = c.Length;
-            MaxIndex = c.MaxIndex;
+            MaxIndex = c.NextIndicesBase;
             P_StartVertex = GetValuePosition(node.Graph, c.StartVertex.Value);
         }
 

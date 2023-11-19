@@ -28,7 +28,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
         {
             Assert.True(Header.Nodes.Count == 2 || Header.Nodes.Count == 5);
             Assert.True(Header.Data == null);
-            Assert.True(Header.Animations == null || Header.Animations.Count >= 1 && Header.Animations.Count <= 10);
+            Assert.True(Header.Animations == null || (Header.Animations.Count >= 1 && Header.Animations.Count <= 10));
             Assert.True(Header.AltN == null);
         }
 

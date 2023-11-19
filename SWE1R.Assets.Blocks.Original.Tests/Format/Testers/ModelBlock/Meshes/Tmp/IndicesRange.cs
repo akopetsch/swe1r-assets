@@ -9,51 +9,47 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes.Tm
 {
     public class IndicesRange
     {
+        #region Properties
+
         public IndicesChunk01 Chunk01 { get; set; }
         public IndicesChunk03 Chunk03 { get; set; }
-        public List<IndicesChunk> Chunks { get; } = new List<IndicesChunk>();
+        public List<IndicesChunk> Chunks0506 { get; } = new List<IndicesChunk>();
 
-        public int ComputedLength // FIXME: ComputedLength is wrong
-        {
-            get
-            {
-                int length = 0;
-                if (Chunk01 != null)
-                    length++;
-                if (Chunk03 != null)
-                    length++;
-                length += Chunks.Count;
-                return length * 0x24; // 0x24 = 36
-            }
-        }
+        #endregion
 
-        public int ComputedLength2
-        {
-            get
-            {
-                int length = 0;
-                foreach (var chunk in Chunks)
-                {
-                    if (chunk.Tag == 05)
-                        length += 1;
-                    if (chunk.Tag == 06)
-                        length += 2;
-                }
-                return length;
-            }
-        }
+        #region Properties (helper)
 
         public int NextIndicesBase =>
-            Indices.Max() + 2; // TODO: +2?
+            Indices.Max() + 2; // +2 because ever index is the double of the actual index // TODO: move comment
 
-        public IEnumerable<int> Indices => Chunks.SelectMany(c => c.Indices);
-        public int MinIndex => Indices.Min();
-        public int MaxIndex => Indices.Max();
+        public IEnumerable<int> Indices => 
+            Chunks0506.SelectMany(c => c.Indices);
+
+        public IEnumerable<IndicesChunk> AllChunks
+        {
+            get
+            {
+                if (Chunk01 != null)
+                    yield return Chunk01; 
+                if (Chunk03 != null)
+                    yield return Chunk03;
+                foreach (IndicesChunk chunk0506 in Chunks0506)
+                    yield return chunk0506;
+            }
+        }
+
+        #endregion
+
+        #region Constructor
 
         public IndicesRange()
         {
 
         }
+
+        #endregion
+
+        #region Methods
 
         public override string ToString()
         {
@@ -63,8 +59,10 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes.Tm
             if (Chunk03 != null)
                 sb.Append("3");
             sb.Append(' ');
-            sb.Append(string.Join(string.Empty, Chunks.Select(x => x.Tag)));
+            sb.Append(string.Join(string.Empty, Chunks0506.Select(x => x.Tag)));
             return sb.ToString();
         }
+
+        #endregion
     }
 }

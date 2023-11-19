@@ -5,6 +5,7 @@
 using ByteSerialization.Attributes;
 using ByteSerialization.Components.Values.Customs;
 using ByteSerialization.IO;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,13 +21,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Properties
 
-        [Order(0), Offset(7)] public byte Index { get; set; }
+        [Order(0), Offset(7)]
+        public byte Index { get; set; }
 
         #endregion
 
         #region Properties (abstraction)
 
         public override IEnumerable<int> Indices => Enumerable.Empty<int>();
+
+        public override IEnumerable<Triangle> Triangles => Enumerable.Empty<Triangle>();
 
         #endregion
 

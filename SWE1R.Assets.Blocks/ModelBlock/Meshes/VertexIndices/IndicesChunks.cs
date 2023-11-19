@@ -64,7 +64,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
                 var chunkTriangles = new List<Triangle>();
                 if (chunk is IndicesChunk01 chunk01)
                 {
-                    stepIndex = chunk01.MaxIndex / 2;
+                    stepIndex = chunk01.NextIndicesBase / 2;
                     baseIndex += stepIndex;
                 }
                 else if (chunk is IndicesChunk05 chunk05)

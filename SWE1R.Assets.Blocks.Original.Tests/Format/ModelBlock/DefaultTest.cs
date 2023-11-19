@@ -5,12 +5,12 @@
 using SWE1R.Assets.Blocks.Metadata.IdNames;
 using Xunit.Abstractions;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 {
     public class DefaultTest : TestBase
     {
         public DefaultTest(AnalyticsFixture analyticsFixture, ITestOutputHelper output) :
-            base(analyticsFixture,output, ModelBlockIdNames.Default)
+            base(analyticsFixture, output, ModelBlockIdNames.Default)
         { }
 
         [Fact]

@@ -3,8 +3,6 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization;
-using ByteSerialization.Attributes.Reference;
-using ByteSerialization.Components.Values;
 using ByteSerialization.Extensions;
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.Common.Vectors;
@@ -19,7 +17,7 @@ using SWE1R.Assets.Blocks.Utils.Graphviz;
 using System.Diagnostics;
 using Xunit.Abstractions;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 {
     public abstract class TestBase : BlockItemsTestBase<Model>, IClassFixture<AnalyticsFixture>
     {
@@ -32,7 +30,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
 
         #region Constructor
 
-        public TestBase(AnalyticsFixture analyticsFixture, ITestOutputHelper output, string blockIdName) : 
+        public TestBase(AnalyticsFixture analyticsFixture, ITestOutputHelper output, string blockIdName) :
             base(new OriginalBlockProvider().LoadBlock<Model>(blockIdName))
         {
             AnalyticsFixture = analyticsFixture;
@@ -52,11 +50,11 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
         protected override void CompareItemInternal(int i)
         {
             Model model = DeserializeItem(i, out ByteSerializerContext context);
-            
+
             // analyze
 
             new ModelGraphvizExporterFactory().Get(model, context.Graph, "in").Export();
-            
+
             PrintMemoryUsageStats(model, context);
 
             var materialTextures = GetValues<MaterialTexture>(context);
@@ -119,7 +117,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
 
         private void AssertBounds(ByteSerializerContext context)
         {
-            List<MeshGroup3064> meshGroups = context.Graph.GetValues<MeshGroup3064>().ToList();
+            var meshGroups = context.Graph.GetValues<MeshGroup3064>().ToList();
             foreach (MeshGroup3064 meshGroup in meshGroups)
                 AssertBounds(meshGroup);
         }
@@ -167,31 +165,24 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
 
         private void AssertMeshes(Model model, ByteSerializerContext context)
         {
-            List<Mesh> meshes = context.Graph.GetValues<Mesh>().ToList();
+            var meshes = context.Graph.GetValues<Mesh>().ToList();
             foreach (Mesh mesh in meshes)
-            {
                 // visible mesh
                 if (mesh.VisibleVerticesCount > 0)
-                {
                     foreach (IndicesChunk indicesChunk in mesh.VisibleIndicesChunks)
-                    {
                         //Debug.Write($"{indicesChunk.Tag}");
                         if (indicesChunk is IndicesChunk01 indicesChunk01)
                         {
                             Assert.True(indicesChunk01.StartVertex.Index >= 0);
                             Assert.True(indicesChunk01.StartVertex.Collection == mesh.VisibleVertices);
                         }
-                    }
-                    //Debug.WriteLine(string.Empty);
-                }
-            }
         }
 
         private List<int> GetReferenceCountsToValues<TValue>(Graph graph)
         {
-            List<ReferenceComponent> references = graph.References
+            var references = graph.References
                 .Where(r => r.Type == typeof(TValue)).ToList();
-            List<int> referenceCountsPerValue = references
+            var referenceCountsPerValue = references
                 .GroupBy(r => r.Value).Select(g => g.Count()).Distinct().ToList();
             return referenceCountsPerValue;
         }
@@ -219,7 +210,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
 
         private int GetBytesCount<TValue>(ByteSerializerContext context)
         {
-            List<ValueComponent> valueComponents = context.Graph.GetValueComponents<TValue>().ToList();
+            var valueComponents = context.Graph.GetValueComponents<TValue>().ToList();
             return valueComponents.Select(vc => (int)vc.Node.Size.Value).Sum();
         }
 

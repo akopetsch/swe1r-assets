@@ -3,6 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Attributes;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,15 +13,20 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
     {
         #region Properties (serialized)
 
-        [Order(0)] public short Length { get; set; }
-        [Order(1)] public byte MaxIndex { get; set; }
-        [Order(2)] public ReferenceByIndex<Vertex> StartVertex { get; set; }
+        [Order(0)]
+        public short Length { get; set; }
+        [Order(1)]
+        public byte NextIndicesBase { get; set; }
+        [Order(2)]
+        public ReferenceByIndex<Vertex> StartVertex { get; set; }
 
         #endregion
 
         #region Properties (abstraction)
 
         public override IEnumerable<int> Indices => Enumerable.Empty<int>();
+
+        public override IEnumerable<Triangle> Triangles => Enumerable.Empty<Triangle>();
 
         #endregion
 
@@ -35,7 +41,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         public override string ToString() =>
             $"({nameof(Tag)} = {GetByteString(Tag)}, " +
-            $"{nameof(MaxIndex)} = {MaxIndex}, " +
+            $"{nameof(NextIndicesBase)} = {NextIndicesBase}, " +
             $"{nameof(StartVertex)} = {StartVertex})";
 
         #endregion

@@ -14,14 +14,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
     {
         #region Properties (serialized)
 
-        [Order(0)] public byte Index0 { get; set; }
-        [Order(1)] public byte Index1 { get; set; }
-        [Order(2)] public byte Index2 { get; set; }
-
-        [Offset(5)]
-        [Order(3)] public byte Index3 { get; set; }
-        [Order(4)] public byte Index4 { get; set; }
-        [Order(5)] public byte Index5 { get; set; }
+        [Order(0)] 
+        public byte Index0 { get; set; }
+        [Order(1)]
+        public byte Index1 { get; set; }
+        [Order(2)]
+        public byte Index2 { get; set; }
+        [Order(3), Offset(5)]
+        public byte Index3 { get; set; }
+        [Order(4)]
+        public byte Index4 { get; set; }
+        [Order(5)]
+        public byte Index5 { get; set; }
 
         #endregion
 
@@ -38,6 +42,15 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
                 yield return Index3;
                 yield return Index4;
                 yield return Index5;
+            }
+        }
+
+        public override IEnumerable<Triangle> Triangles
+        {
+            get
+            {
+                yield return Triangle0;
+                yield return Triangle1;
             }
         }
 
@@ -91,13 +104,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({nameof(Tag)} = {GetByteString(Tag)}, " +
-            $"{nameof(Index0)} = {Index0}, " +
-            $"{nameof(Index1)} = {Index1}, " +
-            $"{nameof(Index2)} = {Index2}, " +
-            $"{nameof(Index3)} = {Index3}, " +
-            $"{nameof(Index4)} = {Index4}, " +
-            $"{nameof(Index5)} = {Index5})";
+            $"({Triangle0}, {Triangle1})";
 
         #endregion
     }

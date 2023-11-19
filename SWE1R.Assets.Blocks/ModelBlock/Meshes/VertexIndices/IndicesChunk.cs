@@ -3,6 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Attributes;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
@@ -28,9 +29,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         public abstract IEnumerable<int> Indices { get; }
 
+        public abstract IEnumerable<Triangle> Triangles { get; }
+
         #endregion
 
-        #region Methods (: object)
+        #region Methods (helper)
 
         protected string GetByteString(byte b) =>
             b.ToString("d2"); // TODO: extract to other class

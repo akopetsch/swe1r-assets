@@ -5,7 +5,7 @@
 using SWE1R.Assets.Blocks.Metadata.IdNames;
 using Xunit.Abstractions;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 {
     public class N64UsTest : TestBase
     {
