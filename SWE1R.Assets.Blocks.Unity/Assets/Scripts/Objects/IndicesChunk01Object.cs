@@ -17,7 +17,7 @@ namespace SWE1R.Assets.Blocks.Unity.Objects
     public class IndicesChunk01Object : IndicesChunkObject<Swe1rIndicesChunk01>
     {
         public short length;
-        public byte maxIndex;
+        public byte nextIndicesBase;
         public int startVertexIndex;
 
         public override IEnumerable<int> Indices => Enumerable.Empty<int>();
@@ -25,7 +25,7 @@ namespace SWE1R.Assets.Blocks.Unity.Objects
         public override void Import(Swe1rIndicesChunk01 source, ModelImporter modelImporter)
         {
             length = source.Length;
-            maxIndex = source.MaxIndex;
+            nextIndicesBase = source.NextIndicesBase;
             startVertexIndex = source.StartVertex.Index.Value;
         }
 
@@ -33,7 +33,7 @@ namespace SWE1R.Assets.Blocks.Unity.Objects
         {
             var result = new Swe1rIndicesChunk01() {
                 Length = length,
-                MaxIndex = maxIndex,
+                NextIndicesBase = nextIndicesBase,
             };
             result.StartVertex = new Swe1rReferenceByIndexVertex() {
                 Collection = swe1rMesh.VisibleVertices,
