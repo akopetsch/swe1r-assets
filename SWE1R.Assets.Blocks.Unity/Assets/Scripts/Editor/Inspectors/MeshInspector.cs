@@ -28,6 +28,11 @@ namespace SWE1R.Assets.Blocks.Unity.Editor.Inspectors
             LabeledVertices = GetLabeledVectors(Mesh.vertices.Select(v => (Vector3)v.position).ToList(), Color.red, Color.magenta);
             if (Mesh.collisionVertices != null)
                 LabeledCollision = GetLabeledVectors(Mesh.collisionVertices.shortVectors, Color.cyan, Color.blue);
+
+            if (GUILayout.Button("Load OBJ File"))
+            {
+                // TODO: implement loading obj file
+            }
         }
         private LabeledVectors GetLabeledVectors(List<Vector3> vectors, Color vectorColor, Color labelColor)
         {

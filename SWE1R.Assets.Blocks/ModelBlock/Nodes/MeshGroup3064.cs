@@ -17,14 +17,38 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     [Sizeof(0x3c)]
     public class MeshGroup3064 : FlaggedNode
     {
-        [Order(0)] public Bounds3Single Bounds { get; set; }
+        #region Properties (serialized)
+
+        [Order(0)]
+        public Bounds3Single Bounds { get; set; }
+
+        #endregion
+
+        #region Properties (serialization)
 
         protected override Type ChildType => typeof(Mesh);
+
+        #endregion
+
+        #region Properties (helper)
+
+        public ReadOnlyCollection<Mesh> Meshes => // TODO: use this property
+            Children?.Cast<Mesh>().ToList().AsReadOnly();
+
+        #endregion
+
+        #region Constructor
 
         public MeshGroup3064() : base() =>
             Flags = NodeFlags.MeshGroup3064;
 
-        public ReadOnlyCollection<Mesh> Meshes => // TODO: use this property
-            Children?.Cast<Mesh>().ToList().AsReadOnly();
+        #endregion
+
+        #region Methods (helper)
+
+        public void UpdateBounds() =>
+            Bounds = new Bounds3Single(Meshes.Select(m => m.FixedBounds).ToArray());
+
+        #endregion
     }
 }

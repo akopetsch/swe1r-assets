@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
 
             var c = (IndicesChunk03)node.Value;
 
-            Index = c.Index;
+            Index = c.MaxIndex;
         }
 
         public override bool Equals(DbModelStructure<IndicesChunk03> other)

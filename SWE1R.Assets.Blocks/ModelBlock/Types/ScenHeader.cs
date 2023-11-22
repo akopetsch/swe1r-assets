@@ -10,10 +10,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 {
     public class ScenHeader : Header
     {
+        #region Constructor
+
         public ScenHeader() : base() =>
             Type = ModelType.Scen;
 
+        #endregion
+
+        #region Methods (serialization)
+
         public override bool HasExtraAlignment(FlaggedNode anim, Graph graph) => false;
         public override bool HasExtraAlignment(Animation anim, Graph graph) => false;
+
+        #endregion
     }
 }

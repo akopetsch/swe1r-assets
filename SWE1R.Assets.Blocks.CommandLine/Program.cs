@@ -86,7 +86,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         public static int Main(string[] args)
         {
-            new TextureImporter();
+            new Scratchpad();
             return 0;
             int result = Parser.Default.ParseArguments<
                 DumpTexturesOptions,

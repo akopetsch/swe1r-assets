@@ -4,39 +4,41 @@
 
 namespace SWE1R.Assets.Blocks.Metadata
 {
-    public enum Track
+    public enum Track : int
     {
-        BoontaTrainingCourse,
-        BoontaClassic,
+        // integer value corresponds to values used in EXE // TODO: fix comment
 
-        ScrappersRun,
-        DethrosRevenge,
-        Abyss,
+        TheBoontaTrainingCourse = 0,
+        TheBoontaClassic = 1,
 
-        Vengeance,
-        TheGauntlet,
-        Executioner,
+        BeedosWildRide = 2,
+        HowlerGorge = 3,
+        AndobiMountainRun = 4,
+        AndoPrimeCentrum = 5,
 
-        ZuggaChallenge,
-        SpiceMineRun,
-        Speedway,
+        AquilarisClassic = 6,
+        SunkenCity = 7,
+        BumbysBreakers = 8,
 
-        SebulbasLegacy,
-        Malastare100,
-        DugDerby,
+        ScrappersRun = 9,
+        DethrosRevenge = 10,
+        Abyss = 11,
 
-        Inferno,
-        GrabvineGateway,
-        FireMountainRally,
-        BarooCoast,
+        BarooCoast = 12,
+        GrabvineGateway = 13,
+        FireMountainRally = 14,
+        Inferno = 15,
 
-        BumbysBreakers,
-        SunkenCity,
-        AquilarisClassic,
+        MonGazzaSpeedway = 16,
+        SpiceMineRun = 17,
+        ZuggaChallenge = 18,
 
-        BeedosWildRide,
-        HowlerGorge,
-        AndobiMountainRun,
-        AndoPrimeCentrum,
+        Vengeance = 19,
+        TheGauntlet = 21,
+        Executioner = 20,
+
+        Malastare100 = 22,
+        DugDerby = 23,
+        SebulbasLegacy = 24,
     }
 }

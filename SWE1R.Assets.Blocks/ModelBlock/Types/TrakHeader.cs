@@ -18,6 +18,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         #endregion
 
+        #region Properties (helper)
+
+        public TransformableD065 Skybox => (TransformableD065)Nodes[2].FlaggedNode;
+
+        #endregion
+
         #region Constructor
 
         public TrakHeader() : base() =>
@@ -25,7 +31,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         #endregion
 
-        #region Methods
+        #region Methods (serialization)
 
         public override bool HasExtraAlignment(FlaggedNode anim, Graph graph) => false;
         public override bool HasExtraAlignment(Animation anim, Graph graph) => false;

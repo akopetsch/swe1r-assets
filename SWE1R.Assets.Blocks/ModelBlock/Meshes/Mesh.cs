@@ -57,8 +57,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         public PrimitiveType PrimitiveType { get; set; } // TODO: xml comment
         /// <summary>
         /// Gets or sets the vertex counts of the faces. 
-        /// If not <see langword="null"/>, the list's length is <see cref="FacesCount"/>.
-        /// Has a value if <see cref="PrimitiveType"/> is <see cref="PrimitiveType.Polygons"/>, otherwise is <see langword="null"/>.
+        /// If not <see langword="null"/>, the list's length is <see cref="FacesCount">FacesCount</see>.
+        /// Has a value if <see cref="PrimitiveType">PrimitiveType</see> is <see cref="PrimitiveType.Polygons"/>, otherwise is <see langword="null"/>.
         /// <para>Offset: 0x24</para>
         /// </summary>
         [Order(6), Reference(0), Length(nameof(FacesCount))]
@@ -75,36 +75,35 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         public MeshGroupOrShorts MeshGroupOrShorts { get; set; } // TODO: xml comment
         /// <summary>
         /// Gets or sets the list of collision vertices. 
-        /// The list's length is <see cref="CollisionVerticesCount"/>. Is <see langword="null"/> if that value is 0.
+        /// The list's length is <see cref="CollisionVerticesCount">CollisionVerticesCount</see>. Is <see langword="null"/> if that value is 0.
         /// <para>Offset: 0x2C</para>
         /// </summary>
         [Order(8), Reference(1)]
         public CollisionVertices CollisionVertices { get; set; }
         /// <summary>
         /// Gets or sets the list of index chunks for the visible vertices. 
-        /// Has a value if <see cref="VisibleVerticesCount"/> is greater than 0, otherwise is <see langword="null"/>.
+        /// Has a value if <see cref="VisibleVerticesCount">VisibleVerticesCount</see> is greater than 0, otherwise is <see langword="null"/>.
         /// <para>Offset: 0x30</para>
-        /// <para>Olganix: offset_unk48</para>
         /// </summary>
         [Order(9), Reference(3)]
         public IndicesChunks VisibleIndicesChunks { get; set; }
         /// <summary>
         /// Gets or sets the list of visible vertices. 
-        /// The list's length is <see cref="VisibleVerticesCount"/>. Is <see langword="null"/> if that value is 0.
+        /// The list's length is <see cref="VisibleVerticesCount">VisibleVerticesCount</see>. Is <see langword="null"/> if that value is 0.
         /// <para>Offset: 0x34</para>
         /// </summary>
         [Order(10), Reference(4)] [Length(nameof(VisibleVerticesCount))]
         public List<Vertex> VisibleVertices { get; set; }
         /// <summary>
-        /// Gets or sets the count of <see cref="CollisionVertices"/>. 
-        /// If 0, <see cref="VisibleVerticesCount"/> is greater than 0.
+        /// Gets or sets the count of <see cref="CollisionVertices">CollisionVertices</see>. 
+        /// If 0, <see cref="VisibleVerticesCount">VisibleVerticesCount</see> is greater than 0.
         /// <para>Offset: 0x38</para>
         /// </summary>
         [Order(11)]
         public short CollisionVerticesCount { get; set; }
         /// <summary>
-        /// Gets or sets the count of <see cref="VisibleVertices"/>. 
-        /// If 0, <see cref="CollisionVerticesCount"/> is greater than 0.
+        /// Gets or sets the count of <see cref="VisibleVertices">VisibleVertices</see>. 
+        /// If 0, <see cref="CollisionVerticesCount">CollisionVerticesCount</see> is greater than 0.
         /// <para>Offset: 0x3A</para>
         /// </summary>
         [Order(12)]
@@ -114,9 +113,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// <para>
         ///   If greater than 0, the following applies:
         ///   <list type="bullet">
-        ///     <item><description><see cref="PrimitiveType"/> = <see cref="PrimitiveType.Triangles"/></description></item>
-        ///     <item><description><see cref="VisibleVerticesCount"/> > 0</description></item>
-        ///     <item><description><see cref="CollisionVerticesCount"/> >= 0</description></item>
+        ///     <item><description><see cref="PrimitiveType">PrimitiveType</see> == <see cref="PrimitiveType.Triangles"/></description></item>
+        ///     <item><description><see cref="VisibleVerticesCount">VisibleVerticesCount</see> > 0</description></item>
+        ///     <item><description><see cref="CollisionVerticesCount">CollisionVerticesCount</see> >= 0</description></item>
         ///   </list>
         /// </para>
         /// <para>Offset: 0x3E</para>

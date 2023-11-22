@@ -40,7 +40,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({nameof(Tag)} = {GetByteString(Tag)}, " +
+            $"({Tag} " +
+            $"{nameof(Length)} = {Length}, " +
             $"{nameof(NextIndicesBase)} = {NextIndicesBase}, " +
             $"{nameof(StartVertex)} = {StartVertex})";
 

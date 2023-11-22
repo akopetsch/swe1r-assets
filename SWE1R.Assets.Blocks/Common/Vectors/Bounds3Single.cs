@@ -20,6 +20,8 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
 
         #region Properties (helper)
 
+        public Vector3Single Size => Max - Min;
+
         public Bounds3Single Fixed
         {
             get
@@ -46,11 +48,8 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
             Max = new Vector3Single();
         }
 
-        public Bounds3Single(Vector3Single v0, Vector3Single v1) :
-            this(v0.X, v0.Y, v0.Z, v1.X, v1.Y, v1.Z) { }
-
         public Bounds3Single(
-            float x0, float y0, float z0, 
+            float x0, float y0, float z0,
             float x1, float y1, float z1)
         {
             Min = new Vector3Single() {
@@ -65,6 +64,29 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
                 Z = Math.Max(z0, z1),
             };
         }
+
+        public Bounds3Single(params Vector3Single[] vectors)
+        {
+            var x = vectors.Select(v => v.X).ToArray();
+            var y = vectors.Select(v => v.Y).ToArray();
+            var z = vectors.Select(v => v.Z).ToArray();
+
+            Min = new Vector3Single() {
+                X = x.Min(),
+                Y = y.Min(),
+                Z = z.Min(),
+            };
+
+            Max = new Vector3Single() {
+                X = x.Max(),
+                Y = y.Max(),
+                Z = z.Max(),
+            };
+        }
+
+        public Bounds3Single(Bounds3Single[] bounds) :
+            this(bounds.SelectMany(b => new Vector3Single[] { b.Min, b.Max }).ToArray())
+        { }
 
         #endregion
 
@@ -117,27 +139,6 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
 
         public bool Contains(Bounds3Single other) =>
             Contains(other.Min) && Contains(other.Max);
-
-        public static Bounds3Single Encapsulate(params Vector3Single[] vectors)
-        {
-            Vector3Single v0 = vectors.First();
-            var bounds = new Bounds3Single(v0.X, v0.Y, v0.Z, v0.X, v0.Y, v0.Z); // TODO: use better constructor
-            foreach (Vector3Single vector in vectors.Skip(1))
-            {
-                bounds.Min.X = Math.Min(bounds.Min.X, vector.X);
-                bounds.Min.Y = Math.Min(bounds.Min.Y, vector.Y);
-                bounds.Min.Z = Math.Min(bounds.Min.Z, vector.Z);
-
-                bounds.Max.X = Math.Max(bounds.Max.X, vector.X);
-                bounds.Max.Y = Math.Max(bounds.Max.Y, vector.Y);
-                bounds.Max.Z = Math.Max(bounds.Max.Z, vector.Z);
-            }
-
-            return bounds;
-        }
-
-        public static Bounds3Single Encapsulate(params Bounds3Single[] bounds) =>
-            Encapsulate(bounds.SelectMany(b => new Vector3Single[] { b.Min, b.Max }).ToArray());
 
         public bool Equals(Bounds3Single other)
         {

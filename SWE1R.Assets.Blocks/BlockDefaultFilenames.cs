@@ -11,11 +11,11 @@ using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks
 {
-    public class BlockDefaultFilenames
+    public static class BlockDefaultFilenames
     {
         #region Fields
 
-        private Dictionary<Type, string> filenameByItemType = new Dictionary<Type, string>()
+        private static Dictionary<Type, string> _filenameByItemType = new Dictionary<Type, string>()
         {
             { typeof(Model), "out_modelblock.bin" },
             { typeof(Spline), "out_splineblock.bin" },
@@ -25,13 +25,22 @@ namespace SWE1R.Assets.Blocks
 
         #endregion
 
+        #region Properties
+
+        public static string ModelBlock { get; } = GetDefaultFilename<Model>();
+        public static string SplineBlock { get; } = GetDefaultFilename<Spline>();
+        public static string SpriteBlock { get; } = GetDefaultFilename<Sprite>();
+        public static string TextureBlock { get; } = GetDefaultFilename<Texture>();
+
+        #endregion
+
         #region Methods
 
-        public string GetDefaultFilename<TBlockItem>() where TBlockItem : BlockItem =>
-            filenameByItemType[typeof(TBlockItem)];
+        public static string GetDefaultFilename<TBlockItem>() where TBlockItem : BlockItem =>
+            _filenameByItemType[typeof(TBlockItem)];
 
-        public string GetDefaultFilename(Type itemType) =>
-            filenameByItemType[itemType];
+        public static string GetDefaultFilename(Type itemType) =>
+            _filenameByItemType[itemType];
 
         #endregion
     }

@@ -9,15 +9,18 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
     public class PuppFormatTester : HeaderFormatTester<PuppHeader>
     {
-        public PuppFormatTester(PuppHeader header) : base(header)
+        public PuppFormatTester(PuppHeader value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
+            base(value, byterSerializationGraph, analyticsFixture)
         { }
 
-        public override void Test(Graph byteSerializerGraph)
+        public override void Test()
         {
-            Assert.True(Header.Nodes.Count == 9);
-            Assert.True(Header.Data == null);
-            Assert.True(Header.Animations.Count >= 3 && Header.Animations.Count <= 33);
-            Assert.True(Header.AltN == null);
+            Assert.True(Value.Nodes.Count == 9);
+            Assert.True(Value.Data == null);
+            Assert.True(
+                Value.Animations.Count >= 3 && 
+                Value.Animations.Count <= 33);
+            Assert.True(Value.AltN == null);
         }
     }
 }

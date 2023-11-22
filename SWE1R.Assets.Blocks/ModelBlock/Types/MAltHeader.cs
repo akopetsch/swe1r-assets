@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         #endregion
 
-        #region Methods (alignment)
+        #region Methods (serialization)
 
         public override bool HasExtraAlignment(FlaggedNode fn, Graph g)
         {

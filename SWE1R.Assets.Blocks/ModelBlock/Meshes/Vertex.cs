@@ -20,13 +20,19 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         #endregion
 
-        #region Properties (serialization)
+        #region Properties (serialized)
 
         public Vector3Int16 Position { get; set; }
         public short U { get; set; }
         public short V { get; set; }
         public Vector3SByte Normal { get; set; }
         public byte Alpha { get; set; }
+
+        #endregion
+
+        #region Properties (serialization)
+
+        public static int StructureSize { get; } = 16;
 
         #endregion
 

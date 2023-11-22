@@ -3,19 +3,16 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Nodes;
-using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
-using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes.Tmp;
 using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 {
     public class MeshTester : Tester<Mesh>
     {
-        private MetadataProvider _metadataProvider = new MetadataProvider();
+        // TODO: clean-up
 
         public MeshTester(
             Mesh value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture) : 
@@ -23,6 +20,11 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
         { }
 
         public override void Test()
+        {
+            TestIndices();
+        }
+
+        private void TestIndices()
         {
             TestVisibleIndicesChunks();
 
@@ -60,7 +62,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                 for (int i = 0; i < ranges.Count; i++)
                 {
                     IndicesRange range = ranges[i];
-                    AnalyticsFixture.IncreaseCounter(range.ToString());
+                    //AnalyticsFixture.IncreaseCounter(range.ToString());
 
                     // chunks
                     Assert.True(range.Chunks0506.Count >= 1);
@@ -75,8 +77,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     IndicesChunk03 chunk03 = range.Chunk03;
                     if (chunk03 != null)
                     {
-                        Assert.True(chunk03.Index == range.Indices.Max());
-                        Assert.True(chunk03.Index != 0);
+                        Assert.True(chunk03.MaxIndex == range.Indices.Max());
+                        Assert.True(chunk03.MaxIndex != 0);
 
                         bool isLast = i == ranges.Count - 1;
                         Assert.True(isLast);
@@ -96,18 +98,18 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         if (i > 0)
                             previousNextIndicesBase = ranges[i - 1].NextIndicesBase / 2;
                         int computedLength =
-                            range.Indices.Distinct().Count() * 16 -
-                            (startVertexIndex - previousNextIndicesBase) * 16;
+                            range.Indices.Distinct().Count() * Vertex.StructureSize -
+                            (startVertexIndex - previousNextIndicesBase) * Vertex.StructureSize;
                         //Assert.True(chunk01.Length == computedLength); // sometimes failing
 
 
                         // TODO: Length
                         Assert.True(chunk01.Length != 0);
                         int computedLength1 =
-                            range.Indices.Distinct().Count() * 16;
+                            range.Indices.Distinct().Count() * Vertex.StructureSize;
                         int computedLength2 = 
-                            range.Indices.Distinct().Count() * 16 - 
-                            range.Chunk01.StartVertex.Index.Value * 16;
+                            range.Indices.Distinct().Count() * Vertex.StructureSize - 
+                            range.Chunk01.StartVertex.Index.Value * Vertex.StructureSize;
 
                         bool true1 = chunk01.Length == computedLength1;
                         bool true2 = chunk01.Length == computedLength2;
@@ -243,7 +245,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
                         //Assert.True(range.Chunk01.StartVertex.Index == range.MinIndex);
 
-                        //Assert.True(range.Chunk01.Length == range.Indices.Count() * 16);
+                        //Assert.True(range.Chunk01.Length == range.Indices.Count() * Vertex.StructureSize);
 
                         // length
                         //Assert.Equal(range.ComputedLength, range.Chunk01.Length);

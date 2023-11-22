@@ -187,6 +187,7 @@ namespace SWE1R.Assets.Blocks.Unity.Editor
         #endregion
 
         // TODO: use synchronous nested coroutines to re-use code
+        // https://www.alanzucconi.com/2017/02/15/nested-coroutines-in-unity/
 
         #region Methods (import)
 

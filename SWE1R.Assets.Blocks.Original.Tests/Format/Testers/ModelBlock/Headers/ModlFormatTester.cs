@@ -9,19 +9,20 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
     public class ModlFormatTester : HeaderFormatTester<ModlHeader>
     {
-        public ModlFormatTester(ModlHeader header) : base(header)
+        public ModlFormatTester(ModlHeader value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) : 
+            base(value, byterSerializationGraph, analyticsFixture)
         { }
 
-        public override void Test(Graph byteSerializerGraph)
+        public override void Test()
         {
-            Assert.True(Header.Nodes.Count == 1);
-            Assert.True(Header.Data == null);
+            Assert.True(Value.Nodes.Count == 1);
+            Assert.True(Value.Data == null);
             Assert.True(
-                Header.Animations == null ||
-                Header.Animations.Count == 1 ||
-                Header.Animations.Count == 2 ||
-                Header.Animations.Count == 3);
-            Assert.True(Header.AltN == null);
+                Value.Animations == null ||
+                Value.Animations.Count == 1 ||
+                Value.Animations.Count == 2 ||
+                Value.Animations.Count == 3);
+            Assert.True(Value.AltN == null);
         }
     }
 }

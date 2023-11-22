@@ -32,12 +32,5 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         public abstract IEnumerable<Triangle> Triangles { get; }
 
         #endregion
-
-        #region Methods (helper)
-
-        protected string GetByteString(byte b) =>
-            b.ToString("d2"); // TODO: extract to other class
-
-        #endregion
     }
 }

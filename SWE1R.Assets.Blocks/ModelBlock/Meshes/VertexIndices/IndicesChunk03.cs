@@ -22,7 +22,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Properties
 
         [Order(0), Offset(7)]
-        public byte Index { get; set; }
+        public byte MaxIndex { get; set; }
 
         #endregion
 
@@ -49,7 +49,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
             w.Write(Tag);
             w.Write(padding);
-            w.Write(Index);
+            w.Write(MaxIndex);
         }
 
         public void Deserialize(CustomComponent customComponent)
@@ -60,7 +60,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
             Tag = r.ReadByte();
             r.ReadBytes(padding.Length);
-            Index = r.ReadByte();
+            MaxIndex = r.ReadByte();
         }
 
         #endregion
@@ -68,8 +68,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({nameof(Tag)} = {GetByteString(Tag)}, " +
-            $"{nameof(Index)} = {Index})";
+            $"({Tag} {nameof(MaxIndex)} = {MaxIndex})";
 
         #endregion
     }

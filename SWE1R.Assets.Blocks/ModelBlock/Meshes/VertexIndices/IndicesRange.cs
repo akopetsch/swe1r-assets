@@ -2,10 +2,11 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes.Tmp
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
     public class IndicesRange
     {
@@ -20,7 +21,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes.Tm
         #region Properties (helper)
 
         public int NextIndicesBase =>
-            Indices.Max() + 2; // +2 because ever index is the double of the actual index // TODO: move comment
+            Indices.Max() + 2; // +2 because value is double the actual index // TODO: move comment
 
         public IEnumerable<int> Indices => 
             Chunks0506.SelectMany(c => c.Indices);

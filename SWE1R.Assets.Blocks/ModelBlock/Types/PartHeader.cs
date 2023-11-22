@@ -12,40 +12,55 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 {
     public class PartHeader : Header
     {
+        #region Properties (helper)
+
         public TransformableD065 Node0 => Nodes[0].FlaggedNode as TransformableD065;
         public FlaggedNode Node0_Child => Node0.Children.First() as FlaggedNode;
         public FlaggedNode Node0_D065 => Node0.Children.First() as TransformableD065;
 
-        public PartHeader() : base() =>
-            Type = ModelType.Part;
-
-        public PartKind GetKind()
+        public PartKind Kind
         {
-            if (Nodes.Count == 2)
+            get
             {
-                return PartKind.RacerLod1;
-            }
-            else
-            {
-                if (Node0_D065 != null)
-                    if (Node0_D065.Children.Count == 8)
-                        return PartKind.Unk_D065_Shatter;
-                    else
-                        return PartKind.Unk_D065;
+                if (Nodes.Count == 2)
+                {
+                    return PartKind.RacerLod1;
+                }
                 else
-                    return PartKind.Other;
+                {
+                    if (Node0_D065 != null)
+                        if (Node0_D065.Children.Count == 8)
+                            return PartKind.Unk_D065_Shatter;
+                        else
+                            return PartKind.Unk_D065;
+                    else
+                        return PartKind.Other;
+                }
             }
         }
 
+        #endregion
+
+        #region Constructor
+
+        public PartHeader() : base() =>
+            Type = ModelType.Part;
+
+        #endregion
+
+        #region Methods (serialization)
+
         public override bool HasExtraAlignment(FlaggedNode fn, Graph g)
         {
-            if (GetKind() == PartKind.Unk_D065_Shatter)
+            if (Kind == PartKind.Unk_D065_Shatter)
                 if (Node0_D065.Children.Skip(1).Contains(fn))
                     return true;
             return false;
         }
 
         public override bool HasExtraAlignment(Animation n, Graph g) =>
-            GetKind() == PartKind.Unk_D065_Shatter && n == Animations.First();
+            Kind == PartKind.Unk_D065_Shatter && n == Animations.First();
+
+        #endregion
     }
 }

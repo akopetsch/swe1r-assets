@@ -104,7 +104,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({Triangle0}, {Triangle1})";
+            $"({Tag} {Triangle0}, {Triangle1})";
 
         #endregion
     }

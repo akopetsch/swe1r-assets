@@ -101,6 +101,9 @@ namespace ByteSerialization.Nodes
                 .Where(vc => type.IsAssignableFrom(vc.Type))
                 .SingleOrDefault();
 
+        public ValueComponent GetValueComponent<TValue>(long position) =>
+            GetValueComponent(typeof(TValue), position);
+
         public IEnumerable<ValueComponent> GetValueComponents(long position) =>
             GetNodesByPosition(position)
                 .Select(n => n.Get<ValueComponent>())
@@ -108,6 +111,9 @@ namespace ByteSerialization.Nodes
 
         public TValue GetValue<TValue>() =>
             GetValues<TValue>().FirstOrDefault();
+
+        public TValue GetValue<TValue>(long position) =>
+            (TValue)GetValueComponent<TValue>(position).Value;
 
         public IEnumerable<TValue> GetValues<TValue>() =>
             GetValueComponents<TValue>().Select(vc => (TValue)vc.Value);

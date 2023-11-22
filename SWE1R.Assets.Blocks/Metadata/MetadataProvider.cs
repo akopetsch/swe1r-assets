@@ -34,6 +34,7 @@ namespace SWE1R.Assets.Blocks.Metadata
         public IList<BlockMetadata> Blocks { get; }
         public IList<BlockItemMetadata> BlockItems { get; }
         public IList<RacerMetadata> Racers { get; }
+        public IList<TrackMetadata> Tracks { get; }
 
         #endregion
 
@@ -44,6 +45,7 @@ namespace SWE1R.Assets.Blocks.Metadata
             Blocks = GetRecords<BlockMetadata>();
             BlockItems = GetRecords<BlockItemMetadata>();
             Racers = GetRecords<RacerMetadata>();
+            Tracks = GetRecords<TrackMetadata>();
 
             metadataByItemType = new Dictionary<Type, IList<BlockItemMetadataByValue>>();
             metadataByItemType[typeof(Model)] = GetRecords<BlockItemMetadataByValue>(typeof(Model).Name + csvFileEnding);

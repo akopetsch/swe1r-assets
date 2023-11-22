@@ -57,13 +57,13 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 
             PrintMemoryUsageStats(model, context);
 
-            var materialTextures = GetValues<MaterialTexture>(context);
-            materialTextures.ForEach(x => new MaterialTextureTester(x, context.Graph, AnalyticsFixture).Test());
+            new HeaderFormatTesterFactory().Get(model.Header, context.Graph, AnalyticsFixture).Test();
 
             var meshes = GetValues<Mesh>(context);
             meshes.ForEach(x => new MeshTester(x, context.Graph, AnalyticsFixture).Test());
 
-            new HeaderFormatTesterFactory().Get(model.Header).Test(context.Graph);
+            var materialTextures = GetValues<MaterialTexture>(context);
+            materialTextures.ForEach(x => new MaterialTextureTester(x, context.Graph, AnalyticsFixture).Test());
 
             AssertBounds(context);
 
@@ -132,7 +132,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
             else
             {
                 AssertBounds(meshGroup.Bounds);
-                var computedBounds = Bounds3Single.Encapsulate(meshGroup.Meshes.Select(x => x.FixedBounds).ToArray());
+                var computedBounds = new Bounds3Single(meshGroup.Meshes.Select(x => x.FixedBounds).ToArray());
                 Assert.True(meshGroup.Bounds.Equals(computedBounds));
                 foreach (Mesh mesh in meshGroup.Meshes)
                     AssertBounds(mesh);
@@ -145,7 +145,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
             var collisionVerticesInt16 = mesh.CollisionVertices?.ShortVectors?.Select(x => (Vector3Single)x).ToArray() ?? new Vector3Single[] { };
             var collisionVerticesSingle = mesh.CollisionVertices?.FloatVectors?.ToArray() ?? new Vector3Single[] { };
             var allVectors = visibleVertices.Concat(collisionVerticesSingle).Concat(collisionVerticesInt16).ToArray();
-            var computedBounds = Bounds3Single.Encapsulate(allVectors);
+            var computedBounds = new Bounds3Single(allVectors);
 
             //Assert.True(mesh.FixedBounds.Equals(computedBounds)); // sometimes fails
             //Assert.True(computedBounds.Contains(mesh.FixedBounds)); // sometimes fails

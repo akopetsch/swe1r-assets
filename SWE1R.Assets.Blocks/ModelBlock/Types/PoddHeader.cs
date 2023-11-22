@@ -12,7 +12,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 {
     public class PoddHeader : Header
     {
-        #region Properties
+        #region Properties (helper)
 
         public Group5065 Root => (Group5065)Nodes[0].FlaggedNode;
         public Group5064 MainModel => (Group5064)Root.Children[0];
@@ -41,7 +41,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         #endregion
 
-        #region Methods
+        #region Methods (serialization)
 
         public override bool HasExtraAlignment(FlaggedNode n, Graph g)
         {

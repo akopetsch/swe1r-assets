@@ -3,6 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using SWE1R.Assets.Blocks.Common.Colors;
+using System;
 
 namespace SWE1R.Assets.Blocks.Common.Images
 {
@@ -14,6 +15,8 @@ namespace SWE1R.Assets.Blocks.Common.Images
         public int Height { get; }
 
         public ColorRgba32[][] Pixels { get; }
+
+        public ColorRgba32[] Palette { get; }
 
         #endregion
 
@@ -38,6 +41,13 @@ namespace SWE1R.Assets.Blocks.Common.Images
             get => Pixels[x][y];
             set => Pixels[x][y] = value;
         }
+
+        #endregion
+
+        #region Methods (palette)
+
+        public int GetPaletteIndex(int x, int y) =>
+            Array.IndexOf(Pixels, this[x, y]);
 
         #endregion
 

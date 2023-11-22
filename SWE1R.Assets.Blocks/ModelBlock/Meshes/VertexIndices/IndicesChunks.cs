@@ -12,7 +12,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
     [Alignment(8)]
     public class IndicesChunks : IList<IndicesChunk>
     {
-        #region Properties (serialization)
+        #region Properties (serialized)
 
         [SerializeUntil(0xDF00000000000000)]
         [Order(0)] private List<IndicesChunk> List { get; set; }
@@ -21,7 +21,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Constructor
 
-        public IndicesChunks() { }
+        public IndicesChunks() =>
+            List = new List<IndicesChunk>();
 
         public IndicesChunks(List<IndicesChunk> list) =>
             List = list;
@@ -52,9 +53,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #endregion
 
+        #region Methods (helper)
+
+        public void AddRange(IEnumerable<IndicesChunk> indicesChunks) =>
+            List.AddRange(indicesChunks);
+
+        #endregion
+
         #region Methods (export)
 
-        public List<Triangle> GetTriangles()
+        public List<Triangle> GetTriangles() // TODO: move to IndicesRange
         {
             var triangles = new List<Triangle>();
             int baseIndex = 0;

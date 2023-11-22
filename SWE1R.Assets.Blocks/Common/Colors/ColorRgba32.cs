@@ -2,18 +2,33 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
+using SWE1R.Assets.Blocks.Common.Vectors;
+using System;
+
 namespace SWE1R.Assets.Blocks.Common.Colors
 {
-    public struct ColorRgba32
+    public class ColorRgba32 // TODO: struct
     {
-        #region Properties
+        #region Properties (serialized)
+
+        // TODO: use ByteSerializer
 
         public byte R { get; set; }
         public byte G { get; set; }
         public byte B { get; set; }
         public byte A { get; set; }
 
-        public static readonly ColorRgba32 Pink =
+        #endregion
+
+        #region Properties (helper)
+
+        public byte[] Bytes =>
+            new byte[] { R, G, B, A };
+
+        public static int StructureSize => 
+            4;
+
+        public static ColorRgba32 Pink { get; } =
             new ColorRgba32(byte.MaxValue, byte.MaxValue, 0, byte.MaxValue);
 
         #endregion
@@ -35,6 +50,20 @@ namespace SWE1R.Assets.Blocks.Common.Colors
             B = (byte)(colorArgbF.B * byte.MaxValue);
             A = (byte)(colorArgbF.A * byte.MaxValue);
         }
+
+        #endregion
+
+        #region Methods (operators - conversion)
+
+        public static explicit operator ColorRgba5551(ColorRgba32 c) =>
+            new ColorRgba5551((byte)v.X, (byte)v.Y, (byte)v.Z);
+
+        #endregion
+
+        #region Methods (: object)
+
+        public override int GetHashCode() => 
+            HashCode.Combine(R, G, B, A);
 
         #endregion
     }

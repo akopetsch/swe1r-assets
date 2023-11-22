@@ -3,11 +3,21 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.IO;
+using System.Numerics;
 
 namespace SWE1R.Assets.Blocks.Common.Vectors
 {
     public class Vector3Byte : Vector3<byte>
     {
+        #region Properties (helper)
+
+        public override double Magnitude =>
+            GetMagnitude(X, Y, Z);
+
+        #endregion
+
+        #region Constructor
+
         public Vector3Byte() : 
             base()
         { }
@@ -15,6 +25,10 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
         public Vector3Byte(byte x, byte y, byte z) : 
             base(x, y, z)
         { }
+
+        #endregion
+
+        #region Methods (serialization)
 
         public override void Serialize(EndianBinaryWriter writer)
         {
@@ -29,5 +43,23 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
             Y = reader.ReadByte();
             Z = reader.ReadByte();
         }
+
+        #endregion
+
+        #region Methods (operators - conversion)
+
+        public static explicit operator Vector3Byte(Vector3Single v) =>
+            new Vector3Byte((byte)v.X, (byte)v.Y, (byte)v.Z);
+
+        public static implicit operator Vector3Single(Vector3Byte v) =>
+            new Vector3Single(v.X, v.Y, v.Z);
+
+        public static explicit operator Vector3Byte(Vector3 v) =>
+            new Vector3Byte((byte)v.X, (byte)v.Y, (byte)v.Z);
+
+        public static implicit operator Vector3(Vector3Byte v) =>
+            new Vector3(v.X, v.Y, v.Z);
+
+        #endregion
     }
 }

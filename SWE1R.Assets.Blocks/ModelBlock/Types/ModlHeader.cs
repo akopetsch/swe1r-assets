@@ -11,17 +11,29 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 {
     public class ModlHeader : Header
     {
+        #region Properties (helper)
+
         public TransformableD065 D065 => Nodes[0].FlaggedNode as TransformableD065;
         public Group5065 D065_5065 => D065?.Children[0] as Group5065;
         public Group5064 D065_5065_5064 => D065_5065?.Children.ElementAtOrDefault(1) as Group5064;
 
+        #endregion
+
+        #region Constructor
+
         public ModlHeader() : base() =>
             Type = ModelType.Modl;
+
+        #endregion
+
+        #region Methods (serialization)
 
         public override bool HasExtraAlignment(FlaggedNode fn, Graph g) => 
             D065_5065_5064?.Children.Skip(1).Contains(fn) ?? false;
 
         public override bool HasExtraAlignment(Animation n, Graph g) => 
             n == Animations?.First();
+
+        #endregion
     }
 }
