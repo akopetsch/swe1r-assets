@@ -41,12 +41,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 
         #region Methods (: BlockItemsTestBase)
 
-        private List<TValue> GetValues<TValue>(ByteSerializerContext context) => // TODO: move to Graph.cs
-            context.Graph.GetValueComponents<TValue>()
-                .OrderBy(vc => vc.Position)
-                .Select(vc => (TValue)vc.Value)
-                .ToList();
-
         protected override void CompareItemInternal(int i)
         {
             Model model = DeserializeItem(i, out ByteSerializerContext context);
@@ -59,10 +53,10 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 
             new HeaderFormatTesterFactory().Get(model.Header, context.Graph, AnalyticsFixture).Test();
 
-            var meshes = GetValues<Mesh>(context);
+            var meshes = context.Graph.GetValues<Mesh>().ToList();
             meshes.ForEach(x => new MeshTester(x, context.Graph, AnalyticsFixture).Test());
 
-            var materialTextures = GetValues<MaterialTexture>(context);
+            var materialTextures = context.Graph.GetValues<MaterialTexture>().ToList();
             materialTextures.ForEach(x => new MaterialTextureTester(x, context.Graph, AnalyticsFixture).Test());
 
             AssertBounds(context);

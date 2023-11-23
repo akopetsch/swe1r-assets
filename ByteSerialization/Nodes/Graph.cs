@@ -116,7 +116,7 @@ namespace ByteSerialization.Nodes
             (TValue)GetValueComponent<TValue>(position).Value;
 
         public IEnumerable<TValue> GetValues<TValue>() =>
-            GetValueComponents<TValue>().Select(vc => (TValue)vc.Value);
+            GetValueComponents<TValue>().OrderBy(vc => vc.Position).Select(vc => (TValue)vc.Value);
 
         public RecordComponent GetRecordComponent<TValue>() =>
             GetRecordComponents<TValue>().FirstOrDefault();
