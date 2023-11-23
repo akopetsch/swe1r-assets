@@ -37,7 +37,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
 
         protected override void CompareItemInternal(int index)
         {
-            Model model = DeserializeItem(index, out ByteSerializerContext context);   
+            Model model = DeserializeItem(index, out ByteSerializerContext context);
 
             var deserialized = DbModelStructures.Load(index, context.Graph);
             var fromDatabase = DbModelStructures.Load(index, _assetsDbContextFixture.AssetsDbContext);

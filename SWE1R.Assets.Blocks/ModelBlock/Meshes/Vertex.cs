@@ -4,6 +4,7 @@
 
 using ByteSerialization.Components.Values.Customs;
 using ByteSerialization.IO;
+using SWE1R.Assets.Blocks.Common.Colors;
 using SWE1R.Assets.Blocks.Common.Vectors;
 using System.Numerics;
 
@@ -25,8 +26,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         public Vector3Int16 Position { get; set; }
         public short U { get; set; }
         public short V { get; set; }
-        public Vector3SByte Normal { get; set; }
-        public byte Alpha { get; set; }
+        public ColorRgba32 Color { get; set; }
 
         #endregion
 
@@ -42,16 +42,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         {
             EndianBinaryWriter w = customComponent.Writer;
 
-            w.Write(Position.X);
-            w.Write(Position.Y);
-            w.Write(Position.Z);
+            Position.Serialize(w);
             w.Write(padding);
             w.Write(U);
             w.Write(V);
-            w.Write(Normal.X);
-            w.Write(Normal.Y);
-            w.Write(Normal.Z);
-            w.Write(Alpha);
+            Color.Serialize(w);
         }
 
         public void Deserialize(CustomComponent customComponent)
@@ -63,9 +58,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             r.ReadBytes(padding.Length);
             U = r.ReadInt16();
             V = r.ReadInt16();
-            Normal = new Vector3SByte();
-            Normal.Deserialize(r);
-            Alpha = r.ReadByte();
+            Color = new ColorRgba32();
+            Color.Deserialize(r);
         }
 
         #endregion
@@ -107,8 +101,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             $"({nameof(Position)} = {Position}, " +
             $"{nameof(U)} = {U}, " +
             $"{nameof(V)} = {V}, " +
-            $"{nameof(Normal)} = {Normal}, " +
-            $"{nameof(Alpha)} = {Alpha})";
+            $"{nameof(Color)} = {Color})";
 
         #endregion
     }

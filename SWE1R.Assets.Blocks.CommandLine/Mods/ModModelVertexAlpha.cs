@@ -44,7 +44,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
                 .SelectMany(x => x.Children.Cast<Mesh>()).ToList();
 
             foreach (Mesh mesh in meshes)
-                mesh.VisibleVertices?.ForEach(x => x.Alpha = 128);
+                mesh.VisibleVertices?.ForEach(x => x.Color.A = 128);
         }
     }
 }

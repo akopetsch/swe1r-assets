@@ -3,7 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ObjLoader.Loader.Loaders;
-using SWE1R.Assets.Blocks.CommandLine.MaterialExamples;
+using SWE1R.Assets.Blocks.Common.Colors;
 using SWE1R.Assets.Blocks.Common.Images;
 using SWE1R.Assets.Blocks.Common.Vectors;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
@@ -32,12 +32,16 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         #endregion
 
-        #region Properties
+        #region Properties (input)
 
         public string ObjFilename { get; }
         public Block<Texture> TextureBlock { get; }
         public Func<string, ImageRgba32> ImageLoadFunc { get; }
         public ObjImporterConfiguration Configuration { get; }
+
+        #endregion
+
+        #region Properties (output)
 
         public MeshGroup3064 MeshGroup3064 { get; private set; }
 
@@ -258,9 +262,6 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 texture = Vector2.Zero;
             texture = Vector2.Multiply(texture, 4096);
 
-            // normal
-            Vector3 normal = new Vector3(-1, -1, -1);
-
             return new Vertex() {
                 Position = new Vector3Int16() {
                     X = (short)position.X,
@@ -269,12 +270,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 },
                 U = (short)texture.X,
                 V = (short)texture.Y,
-                Normal = new Vector3SByte() {
-                    X = (sbyte)normal.X,
-                    Y = (sbyte)normal.Y,
-                    Z = (sbyte)normal.Z,
-                },
-                Alpha = byte.MaxValue,
+                Color = ColorRgba32.White,
             };
         }
 
@@ -284,7 +280,8 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         protected byte ValidateAndConvert(int value) // TODO: extract as extension method
         {
-            if (value < byte.MinValue || value > byte.MaxValue)
+            if (value < byte.MinValue || 
+                value > byte.MaxValue)
                 throw new ArgumentOutOfRangeException(nameof(value));
             return (byte)value;
         }

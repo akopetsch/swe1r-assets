@@ -3,8 +3,8 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Components.Values.Customs;
+using ByteSerialization.IO;
 using System;
-using System.Linq;
 
 namespace SWE1R.Assets.Blocks.Common.Colors
 {
@@ -58,6 +58,9 @@ namespace SWE1R.Assets.Blocks.Common.Colors
         public static int StructureSize =>
             4;
 
+        public static ColorRgba32 White { get; } =
+            new ColorRgba32(byte.MaxValue, byte.MaxValue, byte.MaxValue, byte.MaxValue);
+
         public static ColorRgba32 Pink { get; } =
             new ColorRgba32(byte.MaxValue, byte.MaxValue, 0, byte.MaxValue);
 
@@ -71,16 +74,16 @@ namespace SWE1R.Assets.Blocks.Common.Colors
             BytesValue = bytesValue;
 
         public ColorRgba32(byte r, byte g, byte b, byte a)
-        {
+        {  // TODO: do not use this constructor
             R = r;
             G = g;
             B = b;
             A = a;
         }
 
-        public ColorRgba32(byte[] bytes) : 
+        public ColorRgba32(byte[] bytes) :
             this(bytes[0], bytes[1], bytes[2], bytes[3])
-        {
+        { // TODO: do not use this constructor
 
         }
 
@@ -89,10 +92,26 @@ namespace SWE1R.Assets.Blocks.Common.Colors
         #region Methods (serialization)
 
         public void Serialize(CustomComponent customComponent) =>
-            customComponent.Writer.Write(Bytes.Reverse().ToArray());
+            Serialize(customComponent.Writer);
 
         public void Deserialize(CustomComponent customComponent) =>
-            BytesValue = customComponent.Reader.ReadInt32();
+            Deserialize(customComponent.Reader);
+
+        public void Serialize(EndianBinaryWriter writer)
+        {
+            writer.Write(R);
+            writer.Write(G);
+            writer.Write(B);
+            writer.Write(A);
+        }
+
+        public void Deserialize(EndianBinaryReader reader)
+        {
+            R = reader.ReadByte();
+            G = reader.ReadByte();
+            B = reader.ReadByte();
+            A = reader.ReadByte();
+        }
 
         #endregion
 

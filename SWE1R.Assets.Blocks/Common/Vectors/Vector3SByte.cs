@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace SWE1R.Assets.Blocks.Common.Vectors
 {
-    public class Vector3SByte : Vector3<sbyte>
+    public class Vector3SByte : Vector3<sbyte> // TODO: remove unused class
     {
         #region Properties (helper)
 
