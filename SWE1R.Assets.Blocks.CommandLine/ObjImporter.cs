@@ -120,14 +120,20 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         private Material ImportMaterial(ObjMaterial objMaterial)
         {
+            objMaterial ??= _objLoadResult.Materials.FirstOrDefault(); // HACK: workaround for missing 'usemtl'
+
+            // load image
             ImageRgba32 imageRgba32;
             string textureImageFilename = objMaterial?.DiffuseTextureMap; // map_Kd
             if (textureImageFilename != null)
                 imageRgba32 = ImageLoadFunc(textureImageFilename);
             else
                 imageRgba32 = ImageLoadFunc("cube.png"); // TODO: !!! test texture in resources
+
+            // import material/texture
             var importer = new MaterialImporter(imageRgba32, TextureBlock);
             importer.Import();
+
             return importer.Material;
         }
 

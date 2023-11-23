@@ -6,6 +6,7 @@ select
 
   -- # Material # --
   printf('0x%x', Model_Material.Offset) as m_off_x,
+  Model_Material.Int as m_i,
   Model_Material.Width_Unk_Dividend as m_w_ud,
   Model_Material.Height_Unk_Dividend as m_h_ud,
   printf('0x%x', Model_Material.P_Texture) as m_p_t_x,
@@ -25,6 +26,7 @@ select
   Model_MaterialTexture.Width_Unk as mt_w_u,
   Model_MaterialTexture.Height_Unk as mt_h_u,
   Model_MaterialTexture.Flags as mt_f,
+  Model_MaterialTexture.Mask as mt_m,
   printf('0x%x', Model_MaterialTexture.P_Child0) as mt_p_c0,
   printf('0x%x', Model_MaterialTexture.P_Child1) as mt_p_c1,
   printf('0x%x', Model_MaterialTexture.P_Child2) as mt_p_c2,
@@ -36,7 +38,7 @@ select
   -- # Model_MaterialTextureChild # --
   Model_MaterialTextureChild.Byte_1 as mtc0_b1,
   Model_MaterialTextureChild.Byte_2 as mtc0_b2,
-  Model_MaterialTextureChild.Byte_3 as mtc0_b3,
+  printf('0x%x', Model_MaterialTextureChild.Byte_3) as mtc0_dims,
   Model_MaterialTextureChild.Byte_4 as mtc0_b4,
   Model_MaterialTextureChild.Byte_5 as mtc0_b5,
   Model_MaterialTextureChild.Byte_6 as mtc0_b6,
@@ -79,7 +81,7 @@ LEFT JOIN Model_MaterialTexture on
   Model_MaterialTexture.Offset = Model_Material.P_Texture AND 
   Model_MaterialTexture.Model = Model_Material.Model
 LEFT JOIN Model_MaterialTextureChild on 
-  Model_MaterialTextureChild.offset = Model_Material.P_Properties AND 
+  Model_MaterialTextureChild.Offset = Model_MaterialTexture.P_Child0 AND 
   Model_MaterialTextureChild.Model = Model_Material.Model
 LEFT JOIN Model_MaterialProperties on 
   Model_MaterialProperties.offset = Model_Material.P_Properties AND 
