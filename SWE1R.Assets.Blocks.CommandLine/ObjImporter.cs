@@ -3,6 +3,8 @@
 // Refer to the included LICENSE.txt file.
 
 using ObjLoader.Loader.Loaders;
+using SWE1R.Assets.Blocks.CommandLine.MaterialExamples;
+using SWE1R.Assets.Blocks.Common.Images;
 using SWE1R.Assets.Blocks.Common.Vectors;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
@@ -13,12 +15,11 @@ using System.Numerics;
 using ObjFace = ObjLoader.Loader.Data.Elements.Face;
 using ObjFaceVertex = ObjLoader.Loader.Data.Elements.FaceVertex;
 using ObjGroup = ObjLoader.Loader.Data.Elements.Group;
-using ObjMaterial = ObjLoader.Loader.Data.Material;
 using ObjLoadResult = ObjLoader.Loader.Loaders.LoadResult;
+using ObjMaterial = ObjLoader.Loader.Data.Material;
 using ObjNormal = ObjLoader.Loader.Data.VertexData.Normal;
 using ObjTexture = ObjLoader.Loader.Data.VertexData.Texture;
 using ObjVertex = ObjLoader.Loader.Data.VertexData.Vertex;
-using SWE1R.Assets.Blocks.CommandLine.MaterialExamples;
 
 namespace SWE1R.Assets.Blocks.CommandLine
 {
@@ -35,6 +36,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         public string ObjFilename { get; }
         public Block<Texture> TextureBlock { get; }
+        public Func<string, ImageRgba32> ImageLoadFunc { get; }
         public ObjImporterConfiguration Configuration { get; }
 
         public MeshGroup3064 MeshGroup3064 { get; private set; }
@@ -43,10 +45,15 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         #region Constructor
 
-        public ObjImporter(string objFilename, Block<Texture> textureBlock, ObjImporterConfiguration configuration)
+        public ObjImporter(
+            string objFilename, 
+            Block<Texture> textureBlock, 
+            Func<string, ImageRgba32> imageLoadFunc, 
+            ObjImporterConfiguration configuration)
         {
             ObjFilename = objFilename;
             TextureBlock = textureBlock;
+            ImageLoadFunc = imageLoadFunc;
             Configuration = configuration;
         }
 
@@ -106,9 +113,15 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         private Material ImportMaterial(ObjMaterial objMaterial)
         {
-            return Model_170_MaterialExample.CreateMaterial();
-            var material = new Material();
-            return null;
+            ImageRgba32 imageRgba32;
+            string textureImageFilename = objMaterial?.DiffuseTextureMap; // map_Kd
+            if (textureImageFilename != null)
+                imageRgba32 = ImageLoadFunc(textureImageFilename);
+            else
+                imageRgba32 = ImageLoadFunc("cube.png"); // TODO: !!! test texture in resources
+            var importer = new MaterialImporter(imageRgba32, TextureBlock);
+            importer.Import();
+            return importer.Material;
         }
 
         private (List<Vertex> vertices, List<IndicesRange> indicesRanges) GetVerticesAndIndicesRanges(ObjGroup objGroup, Mesh mesh)
@@ -243,18 +256,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             texture = Vector2.Multiply(texture, 4096);
 
             // normal
-            Vector3 normal;
-            if (Configuration.OverrideNormals)
-                normal = new Vector3(-1, -1, -1);
-            else
-            {
-                if (objFaceVertex.TextureIndex > 0)
-                    normal = ToVector(objLoadResult.Normals[objFaceVertex.NormalIndex - 1]);
-                else
-                    normal = Vector3.One;
-                normal = Vector3.Multiply(Vector3.Normalize(normal), sbyte.MaxValue);
-            }
-            // TODO: recalculate normals if not present
+            Vector3 normal = new Vector3(-1, -1, -1);
 
             return new Vertex() {
                 Position = new Vector3Int16() {

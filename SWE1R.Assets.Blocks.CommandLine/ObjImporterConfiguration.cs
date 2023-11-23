@@ -10,8 +10,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
     {
         public float PositionScale { get; set; } = 1;
         public Vector3 PositionOffset { get; set; } = Vector3.Zero;
-        public bool OverrideNormals { get; set; } = false;
-
+        
         public ObjImporterConfiguration() { }
     }
 }

@@ -32,9 +32,9 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             var configuration = new ObjImporterConfiguration() {
                 PositionScale = 40,
                 PositionOffset = new Vector3(1620, 4440, -60),
-                OverrideNormals = true,
             };
-            var importer = new ObjImporter(objFilename, textureBlock, configuration);
+            var importer = new ObjImporter(
+                objFilename, textureBlock, SystemDrawingImageRgba32Loader.LoadImageRgba32, configuration);
             importer.Import();
 
             var parentNode = (Group5064)model.Header.Nodes[0].FlaggedNode;

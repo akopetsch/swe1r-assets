@@ -8,14 +8,16 @@ using SWE1R.Assets.Blocks.Common.Images;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System.Diagnostics;
+using Material = SWE1R.Assets.Blocks.ModelBlock.Meshes.Material;
 
 namespace SWE1R.Assets.Blocks.CommandLine
 {
-    public class TextureImporter
+    public class MaterialImporter
     {
         #region Properties
 
         public ImageRgba32 Image { get; }
+        public Block<Texture> TextureBlock { get; }
 
         public Material Material { get; private set; }
         public Texture Texture { get; private set; }
@@ -24,9 +26,10 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         #region Constructor
 
-        public TextureImporter(ImageRgba32 image)
+        public MaterialImporter(ImageRgba32 image, Block<Texture> textureBlock)
         {
             Image = image;
+            TextureBlock = textureBlock;
         }
 
         #endregion
@@ -38,12 +41,36 @@ namespace SWE1R.Assets.Blocks.CommandLine
             if (Image.Palette?.Length > 0)
             {
                 Texture = GetRgba5551IndexedTexture();
+                Texture.Block = TextureBlock;
+                TextureBlock.Add(Texture);
+
                 Material = Model_142_MaterialExample.CreateMaterial();
+                MaterialTexture mt = Material.Texture;
+                mt.Width = (short)Image.Width;
+                mt.Height = (short)Image.Height;
+                mt.Width4 = (short)(Image.Width * 4);
+                mt.Height4 = (short)(Image.Height * 4);
+                mt.Width_Unk = 32768; // 32768 = 64 * 512
+                mt.Height_Unk = 32768; // 32768 = 64 * 512
+                // TODO: !!! Width_Unk / Height_Unk
+                mt.IdField.Id = Texture.Index.Value;
             }
             else
             {
                 Texture = GetRgba32Texture();
+                Texture.Block = TextureBlock;
+                TextureBlock.Add(Texture);
+
                 Material = Model_130_MaterialExample.CreateMaterial();
+                MaterialTexture mt = Material.Texture;
+                mt.Width = (short)Image.Width;
+                mt.Height = (short)Image.Height;
+                mt.Width4 = (short)(Image.Width * 4);
+                mt.Height4 = (short)(Image.Height * 4);
+                mt.Width_Unk = 32768; // 32768 = 64 * 512
+                mt.Height_Unk = 32768; // 32768 = 64 * 512
+                // TODO: !!! Width_Unk / Height_Unk
+                mt.IdField.Id = Texture.Index.Value;
             }
         }
 

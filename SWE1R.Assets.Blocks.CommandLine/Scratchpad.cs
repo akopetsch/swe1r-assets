@@ -18,16 +18,16 @@ namespace SWE1R.Assets.Blocks.CommandLine
         {
             RestoreBlockFileBackups();
 
-            //Foo2();
+            Foo2();
             //Foo();
-            new TextureImporterX();
+            //new TextureImporterX();
         }
 
         private void Foo2()
         {
-            var mod = new Model_115_ObjImport();
-            //var mod = new Model_170_ObjImport();
-            //mod.Run();
+            //var mod = new Model_115_ObjImport();
+            var mod = new Model_170_ObjImport();
+            mod.Run();
         }
 
         private void Foo()

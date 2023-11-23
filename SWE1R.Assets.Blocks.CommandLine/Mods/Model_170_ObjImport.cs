@@ -20,7 +20,6 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
         {
             string objFilename;
             float positionScale = 1;
-            bool overrideNormals = false;
 
             // v: 1484 f: 1484
             //objFilename = "obj/Upgrade_Plug_3_low.obj"; // FAIL (/2) // FAIL (/4, Tr)
@@ -61,7 +60,6 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             // v: 507 f: 507
             objFilename = "obj/monkey.obj"; // OK (/2) (but degenerate in-game, left-ear, around eyes) // OK (/4, Tr)
             positionScale = 250;
-            overrideNormals = true;
 
             //objFilename = "cube.obj";
             //positionScale = 400;
@@ -74,10 +72,10 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
 
             // import
             var configuration = new ObjImporterConfiguration() {
-                PositionScale = positionScale,
-                OverrideNormals = overrideNormals,
+                PositionScale = positionScale
             };
-            var importer = new ObjImporter(objFilename, textureBlock, configuration);
+            var importer = new ObjImporter(
+                objFilename, textureBlock, SystemDrawingImageRgba32Loader.LoadImageRgba32, configuration);
             importer.Import();
 
             var parentNode = byteSerializerContext.Graph.GetValue<TransformableD065>();
