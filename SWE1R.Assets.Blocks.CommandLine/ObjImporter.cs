@@ -74,8 +74,11 @@ namespace SWE1R.Assets.Blocks.CommandLine
             };
             foreach (ObjGroup objGroup in _objLoadResult.Groups)
             {
-                Mesh mesh = ImportObjGroup(objGroup);
-                MeshGroup3064.Children.Add(mesh);
+                if (objGroup.Faces.Count > 0)
+                {
+                    Mesh mesh = ImportObjGroup(objGroup);
+                    MeshGroup3064.Children.Add(mesh);
+                }
             }
             MeshGroup3064.UpdateChildrenCount();
             MeshGroup3064.UpdateBounds();
