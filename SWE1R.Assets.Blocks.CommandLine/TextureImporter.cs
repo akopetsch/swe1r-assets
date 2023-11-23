@@ -2,12 +2,12 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
+using SWE1R.Assets.Blocks.CommandLine.MaterialExamples;
 using SWE1R.Assets.Blocks.Common.Colors;
 using SWE1R.Assets.Blocks.Common.Images;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System.Diagnostics;
-using System.Drawing;
 
 namespace SWE1R.Assets.Blocks.CommandLine
 {
@@ -16,8 +16,6 @@ namespace SWE1R.Assets.Blocks.CommandLine
         #region Properties
 
         public ImageRgba32 Image { get; }
-        public ColorRgba32[] Palette { get; }
-        public Block<Texture> TextureBlock { get; }
 
         public Material Material { get; private set; }
         public Texture Texture { get; private set; }
@@ -26,9 +24,9 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         #region Constructor
 
-        public TextureImporter(ImageRgba32 image, Block<Texture> textureBlock)
+        public TextureImporter(ImageRgba32 image)
         {
-
+            Image = image;
         }
 
         #endregion
@@ -37,10 +35,16 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         public void Import()
         {
-            if (Palette != null)
+            if (Image.Palette?.Length > 0)
+            {
                 Texture = GetRgba5551IndexedTexture();
+                Material = Model_142_MaterialExample.CreateMaterial();
+            }
             else
+            {
                 Texture = GetRgba32Texture();
+                Material = Model_130_MaterialExample.CreateMaterial();
+            }
         }
 
         private Texture GetRgba32Texture()
@@ -58,7 +62,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 {
                     //int i = x * h + y;
                     int i = y * w + x;
-                    byte[] bytes = Image[x, y].Bytes;
+                    byte[] bytes = Image[x, y].Bytes.Reverse().ToArray(); // TODO: use EndianBinaryWrite
                     Array.Copy(bytes, 0, pixels, i * bytes.Length, bytes.Length);
                 }
             }
@@ -93,13 +97,13 @@ namespace SWE1R.Assets.Blocks.CommandLine
             texture.PixelsPart.Bytes = indices;
 
             // palette
-            //byte[] palette = Image.Palette
-            //    .Select(c => (ColorRgba5551)c)
-            //    .SelectMany(BitConverter.GetBytes)
-            //    .ToArray();
-            //byte[] palette512 = new byte[512];
-            //Array.Copy(palette, palette512, palette.Length);
-            //texture.PalettePart.Bytes = palette512;
+            byte[] palette = Image.Palette
+                .Select(c => (ColorRgba5551)c)
+                .SelectMany(c => c.Bytes.Reverse()) // TODO: use EndianBinaryWrite
+                .ToArray();
+            byte[] palette512 = new byte[512];
+            Array.Copy(palette, palette512, palette.Length);
+            texture.PalettePart.Bytes = palette512;
 
             return texture;
         }

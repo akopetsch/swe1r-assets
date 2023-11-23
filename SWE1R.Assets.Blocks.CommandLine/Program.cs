@@ -80,23 +80,29 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         #endregion
 
+        #region scratchpad
+
+        [Verb("scratchpad")]
+        public class ScratchpadOptions { }
+
+        #endregion
+
         #endregion
 
         #region Methods (main)
 
         public static int Main(string[] args)
         {
-            new Scratchpad();
-            return 0;
             int result = Parser.Default.ParseArguments<
                 DumpTexturesOptions,
-                ListModelsOptions, 
-                ListSplinesOptions, 
+                ListModelsOptions,
+                ListSplinesOptions,
                 ListSpritesOptions,
                 ListTexturesOptions,
                 ExportSpritesOptions,
                 ExportModelTexturesOptions,
-                ModModelVertexAlphaOptions>(args)
+                ModModelVertexAlphaOptions,
+                ScratchpadOptions>(args)
                 .MapResult(
                     (DumpTexturesOptions opts) => RunDumpTexturesOptions(opts),
                     (ListModelsOptions opts) => RunListModelsOptions(opts),
@@ -105,7 +111,9 @@ namespace SWE1R.Assets.Blocks.CommandLine
                     (ListTexturesOptions opts) => RunListTexturesOptions(opts),
                     (ExportSpritesOptions opts) => RunExportSpritesOptions(opts),
                     (ExportModelTexturesOptions opts) => RunExportModelsTexturesOptions(opts),
-                    errs => 1);
+                    (ModModelVertexAlphaOptions opts) => RunModModelVertexAlphaOptions(opts), 
+                    (ScratchpadOptions opts) => RunScratchpadOptions(opts),
+                    errs => 1); ;
             if (Debugger.IsAttached)
                 PromptExit();
             return result;
@@ -143,21 +151,21 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         #region Methods (export-*)
 
-        public static int RunExportSpritesOptions(ExportSpritesOptions options)
+        private static int RunExportSpritesOptions(ExportSpritesOptions options)
         {
             var exporter = new SpriteExporter(options.BlockPath, options.Indices.ToArray());
             exporter.Export();
             return OK;
         }
 
-        public static int RunExportModelsTexturesOptions(ExportModelTexturesOptions options)
+        private static int RunExportModelsTexturesOptions(ExportModelTexturesOptions options)
         {
             var exporter = new ModelTexturesExporter(options.BlockPath, options.TextureBlockPath, options.Indices.ToArray());
             exporter.Export();
             return OK;
         }
 
-        public static int RunModModelVertexAlphaOptions(ModModelVertexAlphaOptions options)
+        private static int RunModModelVertexAlphaOptions(ModModelVertexAlphaOptions options)
         {
             var block = Block.Load<Model>(options.BlockPath);
             int[] indices = GetIndices(options.Indices, block);
@@ -165,6 +173,12 @@ namespace SWE1R.Assets.Blocks.CommandLine
             foreach (int i in indices)
                 new ModModelVertexAlpha(options.BlockPath, i).Run();
 
+            return OK;
+        }
+
+        private static int RunScratchpadOptions(ScratchpadOptions options)
+        {
+            new Scratchpad();
             return OK;
         }
 

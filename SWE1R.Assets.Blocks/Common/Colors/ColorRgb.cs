@@ -7,7 +7,7 @@ using System;
 
 namespace SWE1R.Assets.Blocks.Common.Colors
 {
-    public class ColorRgb<T> where T :
+    public class ColorRgb<T> where T : // TODO: unused
         struct, IComparable, IFormattable, IConvertible, IComparable<T>, IEquatable<T>
     {
         [Order(0)] public T R { get; set; }

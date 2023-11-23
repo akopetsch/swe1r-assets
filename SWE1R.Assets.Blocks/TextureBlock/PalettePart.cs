@@ -13,15 +13,15 @@ namespace SWE1R.Assets.Blocks.TextureBlock
         public PalettePart() : base() { }
         private PalettePart(PalettePart source) : base(source) { }
         
-        public ColorArgbF[] GetColors()
+        public ColorRgba5551[] GetColors()
         {
-            var colors = new ColorArgbF[Length / sizeof(short)];
+            var colors = new ColorRgba5551[Length / sizeof(short)];
             using (var s = new MemoryStream(Bytes))
             using (var r = new EndianBinaryReader(s, Endianness.BigEndian))
             {
                 for (int i = 0; i < colors.Length; i++)
                 {
-                    colors[i] = ColorArgbF.FromRgba5551(r.ReadInt16());
+                    colors[i] = new ColorRgba5551(r.ReadInt16());
                 }
             }
             return colors;

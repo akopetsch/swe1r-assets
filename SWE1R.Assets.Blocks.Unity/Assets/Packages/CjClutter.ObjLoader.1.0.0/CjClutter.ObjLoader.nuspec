@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>CjClutter.ObjLoader</id>
+    <version>1.0.0</version>
+    <title>CjClutter.ObjLoader</title>
+    <authors>Chris Jansson</authors>
+    <owners>Chris Jansson</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/chrisjansson/ObjLoader/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/chrisjansson/ObjLoader</projectUrl>
+    <description>A simple Wavefront .obj and .mtl loader</description>
+    <copyright>Copyright ©  2018</copyright>
+    <tags>obj wavefront 3d</tags>
+    <repository type="git" url="https://github.com/chrisjansson/ObjLoader" />
+    <dependencies>
+      <group targetFramework=".NETStandard1.4">
+        <dependency id="NETStandard.Library" version="1.6.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

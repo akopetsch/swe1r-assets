@@ -60,7 +60,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             // get pixels
             for (int x = 0; x < Width; x++)
                 for (int y = 0; y < Height; y++)
-                    result[x, y] = new ColorRgba32(GetPixel(x, y, texture));
+                    result[x, y] = GetPixel(x, y, texture);
 
             return result;
         }
@@ -98,7 +98,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             throw new NotImplementedException();
         }
 
-        private ColorArgbF GetPixel(int x, int y, Texture texture)
+        private ColorRgba32 GetPixel(int x, int y, Texture texture)
         {
             int i = y * Width + x;
             TextureDataFormat textureDataFormat = GetTextureDataFormat();
@@ -112,7 +112,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                     if (i < texture.PixelsPart.NibblesCount)
                         pixelData = texture.PixelsPart.GetNibble(i);
                     else
-                        return ColorArgbF.Pink;
+                        return ColorRgba32.Pink;
                 }
                 else if (bpp == 8)
                     pixelData = texture.PixelsPart.GetByte(i);
@@ -120,7 +120,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                     throw new InvalidOperationException();
 
                 // get index palette color
-                return texture.PaletteColors[pixelData];
+                return (ColorRgba32)texture.PaletteColors[pixelData];
             }
             else
             {
@@ -137,24 +137,20 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                 // get color
                 if (bpp == 4)
                 {
-                    float a = pixelData * 17f / byte.MaxValue; // alpha (as in ARGB)
-                    float v = pixelData * 16f / byte.MaxValue; // value (as in HSV)
-                    return new ColorArgbF(a, v, v, v);
+                    byte a = (byte)Math.Round(pixelData * 17f); // alpha (as in ARGB)
+                    byte v = (byte)Math.Round(pixelData * 16f); // value (as in HSV)
+                    return new ColorRgba32(v, v, v, a);
                 }
                 else if (bpp == 8)
                 {
-                    float v = pixelData / (float)byte.MaxValue; // value (as in HSV)
-                    return new ColorArgbF(v, v, v, v);
+                    byte v = (byte)pixelData; // value (as in HSV)
+                    return new ColorRgba32(v, v, v, v);
 
                 }
                 else if (bpp == 32)
                 {
                     byte[] bytes = BitConverter.GetBytes(pixelData);
-                    float r = bytes[0] / (float)byte.MaxValue;
-                    float g = bytes[1] / (float)byte.MaxValue;
-                    float b = bytes[2] / (float)byte.MaxValue;
-                    float a = bytes[3] / (float)byte.MaxValue;
-                    return new ColorArgbF(a, r, g, b);
+                    return new ColorRgba32(bytes);
                 }
                 else
                     throw new InvalidOperationException();

@@ -103,12 +103,12 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
                         if (bpp == 4)
                         {
                             int index = Data.GetNibble(pixelIndex);
-                            color = new ColorRgba32(spriteData.Palette[index]);
+                            color = (ColorRgba32)spriteData.Palette.Colors[index];
                         }
                         else if (bpp == 8)
                         {
                             int index = Data[pixelIndex];
-                            color = new ColorRgba32(spriteData.Palette[index]);
+                            color = (ColorRgba32)spriteData.Palette.Colors[index];
                         }
                     }
 

@@ -16,7 +16,7 @@ namespace SWE1R.Assets.Blocks.Common.Images
 
         public ColorRgba32[][] Pixels { get; }
 
-        public ColorRgba32[] Palette { get; }
+        public ColorRgba32[] Palette { get; set; }
 
         #endregion
 
@@ -47,7 +47,7 @@ namespace SWE1R.Assets.Blocks.Common.Images
         #region Methods (palette)
 
         public int GetPaletteIndex(int x, int y) =>
-            Array.IndexOf(Pixels, this[x, y]);
+            Array.IndexOf(Palette, this[x, y]);
 
         #endregion
 

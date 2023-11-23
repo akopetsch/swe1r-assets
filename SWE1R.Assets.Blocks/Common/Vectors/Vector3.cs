@@ -82,7 +82,9 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
         #region Methods (: object)
 
         public override string ToString() => 
-            $"(X={X}, Y={Y}, Z={Z})";
+            $"({nameof(X)}={X}, " +
+            $"{nameof(Y)}={Y}, " +
+            $"{nameof(Z)}={Z})";
 
         #endregion
     }

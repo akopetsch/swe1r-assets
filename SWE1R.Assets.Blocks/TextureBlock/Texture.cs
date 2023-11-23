@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks.TextureBlock
         public PixelsPart PixelsPart => Part1;
         public PalettePart PalettePart => Part2;
 
-        public ColorArgbF[] PaletteColors { get; set; }
+        public ColorRgba5551[] PaletteColors { get; set; }
 
         public Texture() : base() { }
         public Texture(Texture source) : base(source) { }

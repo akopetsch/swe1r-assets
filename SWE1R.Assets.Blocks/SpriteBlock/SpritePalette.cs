@@ -11,16 +11,16 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
 {
     public class SpritePalette
     {
-        #region Properties (serialization)
+        #region Properties (serialized)
 
         [Order(0), Length(typeof(PaletteLengthHelper))]
-        private short[] Data { get; set; }
+        public ColorRgba5551[] Colors { get; set; }
 
         #endregion
 
-        #region Properties
+        #region Properties (serialization)
 
-        public int Length => Data.Length;
+        public int Length => Colors.Length;
 
         #endregion
 
@@ -38,16 +38,6 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
                 else
                     return 0;
             }
-        }
-
-        #endregion
-
-        #region Indexers
-
-        public ColorArgbF this[int index]
-        {
-            get => ColorArgbF.FromRgba5551(Data[index]);
-            //set => Data[index] = value;
         }
 
         #endregion

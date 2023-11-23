@@ -28,13 +28,13 @@ namespace SWE1R.Assets.Blocks.Unity.Editor
 
         #region Fields
 
-        private string blocksPath = @"C:/Program Files (x86)/Steam/steamapps/common/Star Wars Episode I Racer/data/lev01"; // TODO: change blocksPath
+        // private string blocksPath = @"C:/Program Files (x86)/Steam/steamapps/common/Star Wars Episode I Racer/data/lev01"; // TODO: change blocksPath
+        private string blocksPath = @"C:/Program Files (x86)/GOG Galaxy/Games/STAR WARS Racer/data/lev01";
 
-        private static readonly BlockDefaultFilenames blockDefaultFilenames = new BlockDefaultFilenames();
-        private string modelBlockFilename = blockDefaultFilenames.GetDefaultFilename<Swe1rModel>();
-        private string textureBlockFilename = blockDefaultFilenames.GetDefaultFilename<Swe1rTexture>();
-        private string splineBlockFilename = blockDefaultFilenames.GetDefaultFilename<Swe1rSpline>();
-        private string spriteBlockFilename = blockDefaultFilenames.GetDefaultFilename<Swe1rSprite>();
+        private string modelBlockFilename = BlockDefaultFilenames.ModelBlock;
+        private string textureBlockFilename = BlockDefaultFilenames.TextureBlock;
+        private string splineBlockFilename = BlockDefaultFilenames.SplineBlock;
+        private string spriteBlockFilename = BlockDefaultFilenames.SpriteBlock;
 
         private int modelIndex = 0;
 
