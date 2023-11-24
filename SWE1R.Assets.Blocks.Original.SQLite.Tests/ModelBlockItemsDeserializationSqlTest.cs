@@ -5,9 +5,7 @@
 using ByteSerialization;
 using SWE1R.Assets.Blocks.Metadata.IdNames;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
-using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.TestUtils;
 using Xunit.Abstractions;
 
@@ -43,18 +41,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
         protected override void CompareItemInternal(int index)
         {
             Model model = DeserializeItem(index, out ByteSerializerContext context);
-
-            lock (balanceLock)
-            {
-                var vertices = context.Graph.GetValueComponents<Vertex>().OrderBy(vc => vc.Position).ToList();
-                foreach (var vertex in vertices)
-                {
-                    var db = new DbVertex();
-                    db.CopyFrom(vertex.Node);
-                    _assetsDbContextFixture.AssetsDbContext.Vertices.Add(db);
-                }
-                _assetsDbContextFixture.AssetsDbContext.SaveChanges();
-            }
 
             var deserialized = DbModelStructures.Load(index, context.Graph);
             var fromDatabase = DbModelStructures.Load(index, _assetsDbContextFixture.AssetsDbContext);

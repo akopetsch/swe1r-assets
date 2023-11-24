@@ -50,7 +50,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             {
                 foreach (Vertex vertex in mesh.VisibleVertices)
                 {
-                    vertex.Color.A = byte.MaxValue;
+                    vertex.Byte_F = byte.MaxValue;
                 }
             }
         }
