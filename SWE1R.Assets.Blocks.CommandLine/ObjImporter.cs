@@ -265,16 +265,16 @@ namespace SWE1R.Assets.Blocks.CommandLine
         private Vertex GetVertex(ObjFaceVertex objFaceVertex, ObjLoadResult objLoadResult)
         {
             // position
-            Vector3 position = ToVector(objLoadResult.Vertices[objFaceVertex.VertexIndex - 1]);
+            Vector3 position = ToVector(objLoadResult.GetVertex(objFaceVertex.VertexIndex));
             position = Vector3.Multiply(position, Configuration.PositionScale) + Configuration.PositionOffset;
 
             // texture
             Vector2 texture;
             if (objFaceVertex.TextureIndex > 0)
-                texture = ToVector(objLoadResult.Textures[objFaceVertex.TextureIndex - 1]);
+                texture = ToVector(objLoadResult.GetTexture(objFaceVertex.TextureIndex));
             else
                 texture = Vector2.Zero;
-            texture = Vector2.Multiply(texture, 4096); // TODO: constant
+            texture = Vector2.Multiply(texture, Vertex.UvDivisor);
 
             return new Vertex() {
                 Position = new Vector3Int16() {

@@ -21,6 +21,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         #endregion
 
+        #region Constants
+
+        public const int UvDivisor = 4096;
+        public const int DoubleUvDivisor = 2 * UvDivisor;
+
+        #endregion
+
         #region Properties (serialized)
 
         public Vector3Int16 Position { get; set; }
@@ -68,14 +75,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         public Vector2 GetEffectiveUV(MaterialTextureChild materialTextureChild)
         {
-            const int divisor = 4096;
-            const int doubleDivisor = divisor * 2;
-
             float u, v, uMax, vMax;
             if (materialTextureChild != null)
             {
-                uMax = materialTextureChild.HasDoubleWidth ? doubleDivisor : divisor;
-                vMax = materialTextureChild.HasDoubleHeight ? doubleDivisor : divisor;
+                uMax = materialTextureChild.HasDoubleWidth ? DoubleUvDivisor : UvDivisor;
+                vMax = materialTextureChild.HasDoubleHeight ? DoubleUvDivisor : UvDivisor;
                 u = U / uMax;
                 v = V / vMax;
                 if (materialTextureChild.IsFlippedHorizontally) u -= 1;
@@ -84,8 +88,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             }
             else
             {
-                uMax = divisor;
-                vMax = divisor;
+                uMax = UvDivisor;
+                vMax = UvDivisor;
                 u = U / uMax;
                 v = V / vMax;
             }
