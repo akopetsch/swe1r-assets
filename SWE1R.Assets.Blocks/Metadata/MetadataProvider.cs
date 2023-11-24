@@ -50,7 +50,7 @@ namespace SWE1R.Assets.Blocks.Metadata
             metadataByItemType = new Dictionary<Type, IList<BlockItemMetadataByValue>>();
             metadataByItemType[typeof(Model)] = GetRecords<BlockItemMetadataByValue>(typeof(Model).Name + csvFileEnding);
             metadataByItemType[typeof(Spline)] = GetRecords<BlockItemMetadataByValue>(typeof(Spline).Name + csvFileEnding);
-            metadataByItemType[typeof(Sprite)] = GetRecords<BlockItemMetadataByValue>(typeof(Sprite).Name + csvFileEnding);
+            metadataByItemType[typeof(SpriteBlockItem)] = GetRecords<BlockItemMetadataByValue>(typeof(SpriteBlockItem).Name + csvFileEnding);
             metadataByItemType[typeof(TextureBlockItem)] = GetRecords<BlockItemMetadataByValue>(typeof(TextureBlockItem).Name + csvFileEnding);
         }
 

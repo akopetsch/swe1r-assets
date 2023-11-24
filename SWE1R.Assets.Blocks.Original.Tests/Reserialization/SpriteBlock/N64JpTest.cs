@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Reserialization.SpriteBlock
 {
-    public class N64JpTest : BlockItemsReserializationXUnitTest<Sprite>
+    public class N64JpTest : BlockItemsReserializationXUnitTest<SpriteBlockItem>
     {
         public N64JpTest(ITestOutputHelper output) :
             base(output, SpriteBlockIdNames.N64Jp) { }

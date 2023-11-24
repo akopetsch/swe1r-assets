@@ -135,7 +135,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             RunListOptions<Spline>(options);
 
         private static int RunListSpritesOptions(ListSpritesOptions options) =>
-            RunListOptions<Sprite>(options);
+            RunListOptions<SpriteBlockItem>(options);
 
         private static int RunListTexturesOptions(ListTexturesOptions options) =>
             RunListOptions<TextureBlockItem>(options);

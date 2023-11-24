@@ -8,12 +8,22 @@ using System.IO;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock
 {
-    public class Sprite : BlockItem<SpritePart>
+    public class SpriteBlockItem : BlockItem<SpritePart>
     {
+        #region Properties
+
         public SpriteData Data { get; set; }
 
-        public Sprite() : base() { }
-        public Sprite(Sprite source) : base(source) { }
+        #endregion
+
+        #region Constructor
+
+        public SpriteBlockItem() : base() { }
+        public SpriteBlockItem(SpriteBlockItem source) : base(source) { }
+
+        #endregion
+
+        #region Methods
 
         public override void Load(out ByteSerializerContext context)
         {
@@ -30,6 +40,8 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
             Part.Load(ms.ToArray());
         }
 
-        public override BlockItem Clone() => new Sprite(this);
+        public override BlockItem Clone() => new SpriteBlockItem(this);
+
+        #endregion
     }
 }
