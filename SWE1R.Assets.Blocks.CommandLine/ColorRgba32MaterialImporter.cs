@@ -60,7 +60,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             mt.Width_Unk = 32768; // 32768 = 64 * 512
             mt.Height_Unk = 32768; // 32768 = 64 * 512
                                    // TODO: !!! Width_Unk / Height_Unk
-            mt.IdField.Id = Texture.Index.Value;
+            mt.TextureIndex = Texture.Index;
             return material;
         }
 

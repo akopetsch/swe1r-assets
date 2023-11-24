@@ -65,32 +65,41 @@ namespace SWE1R.Assets.Blocks.CommandLine
         {
             var mt = new MaterialTexture();
             mt.Mask_Unk = 1;
-            mt.Width4 = (short)(Image.Width * 4);
-            mt.Height4 = (short)(Image.Height * 4);
+            (mt.Width4, mt.Height4) = GetSize4();
             mt.Byte_0c = 2;
             mt.Byte_0d = 1;
-            mt.Width = (short)(Image.Width);
-            mt.Height = (short)(Image.Height);
-            (mt.Width_Unk, mt.Height_Unk) = CalculateWidthHeightUnk();
+            (mt.Width, mt.Height) = GetSize();
+            (mt.Width_Unk, mt.Height_Unk) = GetSizeUnk();
             mt.Flags = 512; // TODO: or 256?
             mt.Mask = 1023;
-            mt.Children = new MaterialTextureChild[] {
-                    CreateMaterialTextureChild(),
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                };
-            mt.IdField = new TextureId() { Id = Texture.Index.Value };
+            mt.Children[0] = CreateMaterialTextureChild();
+            mt.TextureIndex = Texture.Index;
             return mt;
         }
 
-        private (ushort width_Unk, ushort height_Unk) CalculateWidthHeightUnk()
+        private (short width, short height) GetSize()
         {
-            var vector2 = new Vector2(Image.Width, Image.Height) * 512;
-            vector2 = vector2.ScaleWithinBounds(ushort.MaxValue, ushort.MaxValue);
-            return ((ushort)vector2.X, (ushort)vector2.Y);
+            Vector2 size = Image.Size;
+            Vector2 max = MaterialTexture.MaxSize;
+            if (!max.Contains(size))
+                throw new MaterialImporterException($"{size} exceeds {max}");
+            return ((short)size.X, (short)size.Y);
+        }
+
+        private (short width4, short height4) GetSize4()
+        {
+            Vector2 size = Image.Size * 4;
+            Vector2 max = MaterialTexture.MaxSize4;
+            if (!max.Contains(size))
+                throw new MaterialImporterException($"{size} exceeds {max}");
+            return ((short)size.X, (short)size.Y);
+        }
+
+        private (ushort width_Unk, ushort height_Unk) GetSizeUnk()
+        {
+            Vector2 result = Image.Size * 512;
+            result = result.ScaleWithinBounds(ushort.MaxValue, ushort.MaxValue);
+            return ((ushort)result.X, (ushort)result.Y);
         }
 
         protected virtual MaterialTextureChild CreateMaterialTextureChild() =>

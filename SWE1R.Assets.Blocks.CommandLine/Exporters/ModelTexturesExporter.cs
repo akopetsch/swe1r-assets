@@ -33,15 +33,14 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
             var materials = byteSerializerContext.Graph.GetValues<Material>().ToList();
             foreach (Material material in materials)
             {
-                int? textureIndex = material.Texture?.IdField.Id;
-                Debug.Write($"{textureIndex} ");
+                Debug.Write($"{material.Texture?.TextureIndex} ");
                 Console.Write('.');
 
                 ImageRgba32 image = material.Hack_ExportEffectiveImage(TextureBlock);
                 if (image != null)
                 {
                     // save as png
-                    string exportFilename = $"{BlockItem.GetIndexString(textureIndex.Value)}.png";
+                    string exportFilename = $"{BlockItem.GetIndexString(material.Texture?.TextureIndex)}.png";
                     string exportPath = Path.Combine(itemFolderPath, exportFilename);
                     image.ToImageSharp().SaveAsPng(exportPath);
                 }

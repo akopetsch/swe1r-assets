@@ -35,7 +35,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         #endregion
 
-        #region Properties (export)
+        #region Properties (helper)
 
         public bool HasBackfaceCulling => (Int & 8) > 0; // TODO: confirm this
 
@@ -47,7 +47,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         {
             if (Texture != null)
             {
-                if (Texture.IdField.Id != -1)
+                if (Texture.TextureIndex.Id != -1)
                 {
                     MaterialTextureChild firstMaterialTextureChild = Texture.Children.FirstOrDefault();
                     ImageRgba32 result = Texture.ExportEffectiveImage(textureBlock, firstMaterialTextureChild);

@@ -4,6 +4,7 @@
 
 using SWE1R.Assets.Blocks.Common.Colors;
 using System;
+using System.Numerics;
 
 namespace SWE1R.Assets.Blocks.Common.Images
 {
@@ -17,6 +18,8 @@ namespace SWE1R.Assets.Blocks.Common.Images
         public ColorRgba32[][] Pixels { get; }
 
         public ColorRgba32[] Palette { get; set; }
+
+        public Vector2 Size => new Vector2(Width, Height);
 
         public bool HasPalette => Palette?.Length > 0;
 

@@ -8,16 +8,23 @@ using SWE1R.Assets.Blocks.Common.Images;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System;
 using System.Diagnostics;
+using System.Numerics;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 {
     /// <summary>
     /// <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L241">SWR_MODEL_Section5</see>
     /// </summary>
-    [DebuggerDisplay("Id = {" + nameof(IdField) + ",nq}")]
+    [DebuggerDisplay("Id = {" + nameof(TextureIndex) + ",nq}")]
     [Sizeof(0x40)]
     public class MaterialTexture
     {
+        #region Constants
+
+        public const int ChildrenCount = 6;
+
+        #endregion
+
         #region Properties (serialized)
 
         [Order(0)] public int Mask_Unk { get; set; }
@@ -53,12 +60,27 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         [Order(12)] public short Flags { get; set; }
         [Order(13)] public short Mask { get; set; }
 
-        [Length(6)]
+        [Length(ChildrenCount)]
         [ElementReference]
         [Order(14)] public MaterialTextureChild[] Children { get; set; }
 
         [Offset(0x38)]
-        [Order(15)] public TextureId IdField { get; set; }
+        [Order(15)] public TextureId TextureIndex { get; set; }
+
+        #endregion
+
+        #region Properties (helper)
+
+        public static Vector2 MaxSize { get; } = new Vector2(short.MaxValue, short.MaxValue);
+        public static Vector2 MaxSize4 { get; } = new Vector2(short.MaxValue, short.MaxValue);
+        public static Vector2 MaxSizeUnk { get; } = new Vector2(ushort.MaxValue, ushort.MaxValue);
+
+        #endregion
+
+        #region Constructor
+
+        public MaterialTexture() =>
+            Children = new MaterialTextureChild[ChildrenCount];
 
         #endregion
 
@@ -69,7 +91,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             var result = new ImageRgba32(Width, Height);
 
             // get texture
-            int textureIndex = IdField.Id;
+            int textureIndex = TextureIndex.Id;
             if (textureIndex == -1)
                 return null;
             Texture texture = textureBlock[textureIndex];

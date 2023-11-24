@@ -52,7 +52,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.MaterialExamples
                     null,
                     null,
                 },
-                IdField = new TextureId() { Id = 51 },
+                TextureIndex = 51,
             };
 
         private static MaterialProperties CreateMaterialProperties() =>

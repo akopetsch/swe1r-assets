@@ -76,7 +76,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
             Assert.True(materialTexture.Height == 64);
             Assert.True(materialTexture.Width_Unk == 16384); // 16384 = 32 * 512
             Assert.True(materialTexture.Width_Unk == 16384); // 32768 = 64 * 512
-            Assert.True(materialTexture.IdField.Id != -1);
+            Assert.True(materialTexture.TextureIndex != -1);
             Assert.True(materialTexture.Flags == 512);
             Assert.True(materialTexture.Mask == 1023);
 

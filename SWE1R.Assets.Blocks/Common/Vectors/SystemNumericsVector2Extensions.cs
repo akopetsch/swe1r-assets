@@ -9,6 +9,10 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
 {
     public static class SystemNumericsVector2Extensions
     {
+        public static bool Contains(this Vector2 vector2, Vector2 other) =>
+            vector2.X >= other.X &&
+            vector2.Y >= other.Y;
+
         public static Vector2 ScaleWithinBounds(this Vector2 vector2, Vector2 bounds)
         {
             double xScale = (double)bounds.X / vector2.X;
@@ -21,4 +25,5 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
 
         public static Vector2 ScaleWithinBounds(this Vector2 vector2, float boundsX, float boundsY) =>
             vector2.ScaleWithinBounds(new Vector2(boundsX, boundsY));
+    }
 }

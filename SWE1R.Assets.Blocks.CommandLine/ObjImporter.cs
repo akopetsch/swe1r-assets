@@ -27,8 +27,10 @@ namespace SWE1R.Assets.Blocks.CommandLine
     {
         #region Fields
 
-        private ObjLoadResult _objLoadResult;
         private const int _indicesRangeMaxLength = byte.MaxValue / 4;
+        private ObjLoadResult _objLoadResult;
+        private Dictionary<ObjMaterial, Material> _materials = 
+            new Dictionary<ObjMaterial, Material>();
 
         #endregion
 
@@ -122,19 +124,26 @@ namespace SWE1R.Assets.Blocks.CommandLine
         {
             objMaterial ??= _objLoadResult.Materials.FirstOrDefault(); // HACK: workaround for missing 'usemtl'
 
-            // load image
-            ImageRgba32 imageRgba32;
-            string textureImageFilename = objMaterial?.DiffuseTextureMap; // map_Kd
-            if (textureImageFilename != null)
-                imageRgba32 = ImageLoadFunc(textureImageFilename);
+            if (_materials.TryGetValue(objMaterial, out Material existingMaterial))
+                return existingMaterial;
             else
-                imageRgba32 = ImageLoadFunc("cube.png"); // TODO: !!! test texture in resources
+            {
+                // load image
+                ImageRgba32 imageRgba32;
+                string textureImageFilename = objMaterial?.DiffuseTextureMap; // map_Kd
+                if (textureImageFilename != null)
+                    imageRgba32 = ImageLoadFunc(textureImageFilename);
+                else
+                    imageRgba32 = ImageLoadFunc("cube.png"); // TODO: !!! test texture in resources
 
-            // import material/texture
-            MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, TextureBlock);
-            importer.Import();
+                // import material/texture
+                MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, TextureBlock);
+                importer.Import();
 
-            return importer.Material;
+                Material material = importer.Material;
+                _materials[objMaterial] = material;
+                return material;
+            }
         }
 
         private (List<Vertex> vertices, List<IndicesRange> indicesRanges) GetVerticesAndIndicesRanges(ObjGroup objGroup, Mesh mesh)
