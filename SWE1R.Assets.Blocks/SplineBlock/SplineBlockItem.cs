@@ -8,12 +8,22 @@ using System.IO;
 
 namespace SWE1R.Assets.Blocks.SplineBlock
 {
-    public class Spline : BlockItem<SplinePart>
+    public class SplineBlockItem : BlockItem<SplinePart>
     {
+        #region Properties
+
         public SplineData Data { get; set; }
 
-        public Spline() : base() { }
-        public Spline(Spline source) : base(source) { }
+        #endregion
+
+        #region Constructor
+
+        public SplineBlockItem() : base() { }
+        public SplineBlockItem(SplineBlockItem source) : base(source) { }
+
+        #endregion
+
+        #region Methods
 
         public override void Load(out ByteSerializerContext context)
         {
@@ -30,6 +40,8 @@ namespace SWE1R.Assets.Blocks.SplineBlock
             Part.Load(ms.ToArray());
         }
 
-        public override BlockItem Clone() => new Spline(this);
+        public override BlockItem Clone() => new SplineBlockItem(this);
+
+        #endregion
     }
 }

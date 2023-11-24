@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Reserialization.SplineBlock
 {
-    public class DefaultTest : BlockItemsReserializationXUnitTest<Spline>
+    public class DefaultTest : BlockItemsReserializationXUnitTest<SplineBlockItem>
     {
         public DefaultTest(ITestOutputHelper output) :
             base(output, SplineBlockIdNames.Default) { }

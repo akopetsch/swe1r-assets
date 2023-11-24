@@ -18,7 +18,7 @@ namespace SWE1R.Assets.Blocks
         private static Dictionary<Type, string> _filenameByItemType = new Dictionary<Type, string>()
         {
             { typeof(Model), "out_modelblock.bin" },
-            { typeof(Spline), "out_splineblock.bin" },
+            { typeof(SplineBlockItem), "out_splineblock.bin" },
             { typeof(SpriteBlockItem), "out_spriteblock.bin" },
             { typeof(TextureBlockItem), "out_textureblock.bin" },
         };
@@ -28,7 +28,7 @@ namespace SWE1R.Assets.Blocks
         #region Properties
 
         public static string ModelBlock { get; } = GetDefaultFilename<Model>();
-        public static string SplineBlock { get; } = GetDefaultFilename<Spline>();
+        public static string SplineBlock { get; } = GetDefaultFilename<SplineBlockItem>();
         public static string SpriteBlock { get; } = GetDefaultFilename<SpriteBlockItem>();
         public static string TextureBlock { get; } = GetDefaultFilename<TextureBlockItem>();
 

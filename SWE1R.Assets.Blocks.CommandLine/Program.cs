@@ -132,7 +132,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             RunListOptions<Model>(options);
 
         private static int RunListSplinesOptions(ListSplinesOptions options) =>
-            RunListOptions<Spline>(options);
+            RunListOptions<SplineBlockItem>(options);
 
         private static int RunListSpritesOptions(ListSpritesOptions options) =>
             RunListOptions<SpriteBlockItem>(options);
