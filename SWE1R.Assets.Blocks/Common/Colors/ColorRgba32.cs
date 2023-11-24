@@ -74,7 +74,7 @@ namespace SWE1R.Assets.Blocks.Common.Colors
             BytesValue = bytesValue;
 
         public ColorRgba32(byte r, byte g, byte b, byte a)
-        {  // TODO: do not use this constructor
+        {
             R = r;
             G = g;
             B = b;
@@ -83,7 +83,7 @@ namespace SWE1R.Assets.Blocks.Common.Colors
 
         public ColorRgba32(byte[] bytes) :
             this(bytes[0], bytes[1], bytes[2], bytes[3])
-        { // TODO: do not use this constructor
+        { // TODO: do not use this constructor?
 
         }
 

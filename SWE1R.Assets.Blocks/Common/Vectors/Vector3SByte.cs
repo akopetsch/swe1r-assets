@@ -26,6 +26,10 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
             base(x, y, z)
         { }
 
+        public Vector3SByte(byte x, byte y, byte z) :
+            base((sbyte)x, (sbyte)y, (sbyte)z)
+        { }
+
         #endregion
 
         #region Methods (serialization)

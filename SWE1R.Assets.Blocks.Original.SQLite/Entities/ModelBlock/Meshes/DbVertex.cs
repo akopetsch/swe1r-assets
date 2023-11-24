@@ -18,11 +18,11 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         public short U { get; set; }
         public short V { get; set; }
 
-        public short C_R { get; set; }
-        public short C_G { get; set; }
-        public short C_B { get; set; }
+        public short B_C { get; set; }
+        public short B_D { get; set; }
+        public short B_E { get; set; }
 
-        public byte C_A { get; set; }
+        public byte B_F { get; set; }
 
         public override void CopyFrom(Node node)
         {
@@ -37,10 +37,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             U = v.U;
             V = v.V;
 
-            C_R = v.Color.R;
-            C_G = v.Color.G;
-            C_B = v.Color.B;
-            C_A = v.Color.A;
+            B_C = v.Byte_C;
+            B_D = v.Byte_D;
+            B_E = v.Byte_E;
+            B_F = v.Byte_F;
         }
 
         public override bool Equals(DbModelStructure<Vertex> other)
@@ -57,10 +57,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             if (U != _other.U) return false;
             if (V != _other.V) return false;
 
-            if (C_R != _other.C_R) return false;
-            if (C_G != _other.C_G) return false;
-            if (C_B != _other.C_B) return false;
-            if (C_A != _other.C_A) return false;
+            if (B_C != _other.B_C) return false;
+            if (B_D != _other.B_D) return false;
+            if (B_E != _other.B_E) return false;
+            if (B_F != _other.B_F) return false;
 
             return true;
         }
@@ -77,6 +77,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             HashCode.Combine(base.GetHashCode(), 
                 HashCode.Combine(P_X, P_Y, P_Z), 
                 HashCode.Combine(U, V), 
-                HashCode.Combine(C_R, C_G, C_B, C_A));
+                HashCode.Combine(B_C, B_D, B_E, B_F));
     }
 }

@@ -24,22 +24,72 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         #region Constants
 
         public const int UvDivisor = 4096;
-        public const int DoubleUvDivisor = 2 * UvDivisor;
+        public const int UvDoubleDivisor = 2 * UvDivisor;
 
         #endregion
 
         #region Properties (serialized)
 
         public Vector3Int16 Position { get; set; }
+        /// <summary>
+        /// Offset: 0x08
+        /// </summary>
         public short U { get; set; }
+        /// <summary>
+        /// Offset: 0x0A
+        /// </summary>
         public short V { get; set; }
-        public ColorRgba32 Color { get; set; }
+        internal byte Byte_C { get; set; }
+        internal byte Byte_D { get; set; }
+        internal byte Byte_E { get; set; }
+        /// <summary>
+        /// In the original asset files, if the vertex has a normal and not a color, the value is always 255. 
+        /// But that is just an indicator. A value somewhere else in the binary structures determines whether 
+        /// the game interprets it as a normal or a color, which means that if you change this value to 255 
+        /// that does not automatically make the vertex to have a normal instead of a color in the game. 
+        /// </summary>
+        public byte Byte_F { get; set; }
 
         #endregion
 
         #region Properties (serialization)
 
         public static int StructureSize { get; } = 16;
+
+        #endregion
+
+        #region Properties (C union style access)
+
+        public ColorRgba32 Color
+        {
+            get => new ColorRgba32(
+                Byte_C, 
+                Byte_D, 
+                Byte_E, 
+                Byte_F);
+            set
+            {
+                Byte_C = value.R;
+                Byte_D = value.G;
+                Byte_E = value.B;
+                Byte_F = value.A;
+            }
+        }
+
+        public Vector3SByte Normal
+        {
+            get => new Vector3SByte(
+                Byte_C, 
+                Byte_D, 
+                Byte_E);
+            set
+            {
+                Byte_C = (byte)value.X;
+                Byte_D = (byte)value.X;
+                Byte_E = (byte)value.X;
+                Byte_F = (byte)value.X;
+            }
+        }
 
         #endregion
 
@@ -53,7 +103,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             w.Write(padding);
             w.Write(U);
             w.Write(V);
-            Color.Serialize(w);
+            w.Write(Byte_C);
+            w.Write(Byte_D);
+            w.Write(Byte_E);
+            w.Write(Byte_F);
         }
 
         public void Deserialize(CustomComponent customComponent)
@@ -65,8 +118,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             r.ReadBytes(padding.Length);
             U = r.ReadInt16();
             V = r.ReadInt16();
-            Color = new ColorRgba32();
-            Color.Deserialize(r);
+            Byte_C = r.ReadByte();
+            Byte_D = r.ReadByte();
+            Byte_E = r.ReadByte();
+            Byte_F = r.ReadByte();
         }
 
         #endregion
@@ -78,12 +133,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             float u, v, uMax, vMax;
             if (materialTextureChild != null)
             {
-                uMax = materialTextureChild.HasDoubleWidth ? DoubleUvDivisor : UvDivisor;
-                vMax = materialTextureChild.HasDoubleHeight ? DoubleUvDivisor : UvDivisor;
+                uMax = materialTextureChild.HasDoubleWidth ? UvDoubleDivisor : UvDivisor;
+                vMax = materialTextureChild.HasDoubleHeight ? UvDoubleDivisor : UvDivisor;
                 u = U / uMax;
                 v = V / vMax;
-                if (materialTextureChild.IsFlippedHorizontally) u -= 1;
-                if (materialTextureChild.IsFlippedVertically) v -= 1;
+                if (materialTextureChild.IsFlippedHorizontally)
+                    u -= 1;
+                if (materialTextureChild.IsFlippedVertically)
+                    v -= 1;
                 // TODO: also consider Material.Properties.IsFlipped
             }
             else
@@ -105,7 +162,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             $"({nameof(Position)} = {Position}, " +
             $"{nameof(U)} = {U}, " +
             $"{nameof(V)} = {V}, " +
-            $"{nameof(Color)} = {Color})";
+            $"({Byte_C}, {Byte_D}, {Byte_E}, {Byte_F}))";
 
         #endregion
     }

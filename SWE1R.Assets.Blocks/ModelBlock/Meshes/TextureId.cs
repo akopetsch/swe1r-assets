@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         #region Properties (serialized)
 
         [Order(0)]
-        internal int IdField { get; set; }
+        internal int Value { get; set; }
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         private int GetId()
         {
-            int masked = IdField & _mask;
+            int masked = Value & _mask;
             if (masked == _mask)
                 return -1;
             else
@@ -50,9 +50,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                 throw new ArgumentException(
                     $"The value for {nameof(Id)} must be a three-byte, two's complement integer number.", nameof(value));
             if (value == -1)
-                IdField = _signature | _mask;
+                Value = _signature | _mask;
             else
-                IdField = _signature | value;
+                Value = _signature | value;
         }
 
         #endregion
