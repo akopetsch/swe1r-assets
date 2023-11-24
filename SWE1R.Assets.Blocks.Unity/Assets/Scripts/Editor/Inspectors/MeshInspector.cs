@@ -58,11 +58,11 @@ namespace SWE1R.Assets.Blocks.Unity.Editor.Inspectors
                     Transform t = Mesh.transform;
                     foreach (VertexObject vertex in Mesh.vertices)
                     {
-                        if (vertex.alpha != 255)
+                        if (vertex.byte_F != 255)
                         {
                             Handles.color = Color.green;
                             Vector3 v = t.TransformPoint(vertex.position);
-                            Handles.SphereHandleCap(0, v, Quaternion.identity, HandleUtility.GetHandleSize(v) * 0.0005f * vertex.alpha, EventType.Repaint);
+                            Handles.SphereHandleCap(0, v, Quaternion.identity, HandleUtility.GetHandleSize(v) * 0.0005f * vertex.byte_F, EventType.Repaint);
                         }
                     }
                 }

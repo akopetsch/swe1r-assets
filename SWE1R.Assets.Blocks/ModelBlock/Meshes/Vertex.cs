@@ -39,9 +39,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// Offset: 0x0A
         /// </summary>
         public short V { get; set; }
-        internal byte Byte_C { get; set; }
-        internal byte Byte_D { get; set; }
-        internal byte Byte_E { get; set; }
+        public byte Byte_C { get; set; }
+        public byte Byte_D { get; set; }
+        public byte Byte_E { get; set; }
         /// <summary>
         /// In the original asset files, if the vertex has a normal and not a color, the value is always 255. 
         /// But that is just an indicator. A value somewhere else in the binary structures determines whether 

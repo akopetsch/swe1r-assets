@@ -7,7 +7,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Swe1rMaterialTexture = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialTexture;
-using Swe1rTextureId = SWE1R.Assets.Blocks.ModelBlock.Meshes.TextureId;
 
 namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
 {
@@ -28,7 +27,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
         public short flags;
         public short mask;
         [SerializeReference] public MaterialTextureChildObject[] Children;
-        public int textureId;
+        public int textureIndex;
 
         public override void Import(Swe1rMaterialTexture source, ModelImporter importer)
         {
@@ -47,7 +46,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
             flags = source.Flags;
             mask = source.Mask;
             Children = source.Children.Select(x => x == null ? null : importer.GetMaterialTextureChildObject(x)).ToArray();
-            textureId = source.IdField.Id;
+            textureIndex = source.TextureIndex;
         }
 
         public override Swe1rMaterialTexture Export(ModelExporter exporter)
@@ -68,7 +67,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
             result.Flags = flags;
             result.Mask = mask;
             result.Children = Children.Select(x => x == null ? null : exporter.GetMaterialTextureChild(x)).ToArray();
-            result.IdField = new Swe1rTextureId() { Id = textureId };
+            result.TextureIndex = textureIndex;
             return result;
         }
     }

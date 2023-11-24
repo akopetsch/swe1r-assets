@@ -84,7 +84,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Meshes
             if (texture != null)
             {
                 labels.Add($"{texture.Byte_0c},{texture.Byte_0d}");
-                labels.Add(texture.IdField.Id.ToString());
+                labels.Add(texture.TextureIndex.ToString());
             }
             if (source.Mapping != null)
             {
@@ -156,7 +156,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Meshes
                 unityMesh = new UnityMesh() {
                     vertices = unityVertices.ToArray(),
                     uv = unityUvs.ToArray(),
-                    triangles = triangles.SelectMany(t => t.Indices).ToArray(),
+                    triangles = triangles.SelectMany(t => t.GetIndices()).ToArray(),
                 };
                 unityMesh.RecalculateNormals();
                 unityMesh.RecalculateBounds();
@@ -174,7 +174,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Meshes
             else
                 shader = Shader.Find("Standard");
             var unityMaterial = new UnityMaterial(shader);
-            int? swe1rTextureIndex = source.Material.Texture?.IdField.Id;
+            int? swe1rTextureIndex = source.Material.Texture?.TextureIndex;
             if (swe1rTextureIndex.HasValue)
             {
                 UnityTexture2D unityTexture = null;
@@ -183,7 +183,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Meshes
                 else
                     unityTexture = source.Material.Hack_ExportEffectiveImage(modelImporter.TextureBlock).ToUnityTexture2D();
                 unityMaterial.SetTexture("_MainTex", unityTexture);
-                unityMaterial.SetFloat("_Glossiness", 0); // TODO: necessary for Standard shader but also for Transparent/Diffuse?
+                unityMaterial.SetFloat("_Glossiness", 0); // TODO: necessary for "Standard" shader but also for "Transparent/Diffuse"?
             }
             unityMaterial.name = gameObject.name;
             return unityMaterial;
@@ -203,7 +203,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Meshes
                 }
 
                 List<int> unityIndices =
-                    source.GetCollisionTriangles().SelectMany(t => t.Indices.Reverse()).ToList();
+                    source.GetCollisionTriangles().SelectMany(t => t.GetIndices().Reverse()).ToList();
                 if (unityIndices.Any(i => i >= unityVertices.Count))
                 {
                     Debug.LogWarning("Out-of-bound collision vertex indices.", this);

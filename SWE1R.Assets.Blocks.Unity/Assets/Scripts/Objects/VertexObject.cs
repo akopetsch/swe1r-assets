@@ -15,16 +15,22 @@ namespace SWE1R.Assets.Blocks.Unity.Objects
         public UnityVectorInt position;
         public short u;
         public short v;
-        public UnityVectorInt normal;
-        public byte alpha;
+        public byte byte_C;
+        public byte byte_D;
+        public byte byte_E;
+        public byte byte_F;
+
+        public bool hasNormal;
 
         public VertexObject(Swe1rVertex source)
         {
             position = source.Position.ToUnityVector3Int();
             u = source.U;
             v = source.V;
-            normal = source.Normal.ToUnityVector3Int();
-            alpha = source.Alpha;
+            byte_C = source.Byte_C;
+            byte_D = source.Byte_D;
+            byte_E = source.Byte_E;
+            byte_F = source.Byte_F;
         }
 
         public Swe1rVertex Export()
@@ -33,8 +39,10 @@ namespace SWE1R.Assets.Blocks.Unity.Objects
             result.Position = position.ToSwe1rVector3Int16();
             result.U = u;
             result.V = v;
-            result.Normal = normal.ToSwe1rVector3SByte();
-            result.Alpha = alpha;
+            result.Byte_C = byte_C;
+            result.Byte_D = byte_D;
+            result.Byte_E = byte_E;
+            result.Byte_F = byte_F;
             return result;
         }
     }
