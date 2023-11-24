@@ -27,7 +27,8 @@ namespace SWE1R.Assets.Blocks.CommandLine
     {
         #region Fields
 
-        private const int _indicesRangeMaxLength = byte.MaxValue / 4;
+        private const int _indicesRangeMaxLength = byte.MaxValue / 4; // TODO: indicesRangeMaxLength
+
         private ObjLoadResult _objLoadResult;
         private Dictionary<ObjMaterial, Material> _materials = 
             new Dictionary<ObjMaterial, Material>();
@@ -229,7 +230,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 }
 
                 // indices
-                if (indicesRange.NextIndicesBase >= _indicesRangeMaxLength) // TODO: indicesRangeMaxLength
+                if (indicesRange.NextIndicesBase >= _indicesRangeMaxLength)
                 {
                     // new indices range
                     startVertexIndex += indicesRange.NextIndicesBase / 2;

@@ -5,6 +5,7 @@
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
+using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine.Mods
 {
@@ -21,6 +22,8 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
 
         public void Run()
         {
+            Debug.WriteLine(ModelIndex);
+
             // load
             Block<Model> block = Block.Load<Model>(Filename);
             Model model = block[ModelIndex];
@@ -44,7 +47,12 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
                 .SelectMany(x => x.Children.Cast<Mesh>()).ToList();
 
             foreach (Mesh mesh in meshes)
-                mesh.VisibleVertices?.ForEach(x => x.Color.A = 128);
+            {
+                foreach (Vertex vertex in mesh.VisibleVertices)
+                {
+                    vertex.Color.A = byte.MaxValue;
+                }
+            }
         }
     }
 }

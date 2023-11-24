@@ -169,10 +169,8 @@ namespace SWE1R.Assets.Blocks.CommandLine
         {
             var block = Block.Load<Model>(options.BlockPath);
             int[] indices = GetIndices(options.Indices, block);
-
             foreach (int i in indices)
                 new ModModelVertexAlpha(options.BlockPath, i).Run();
-
             return OK;
         }
 
