@@ -25,21 +25,21 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             Debug.WriteLine(ModelIndex);
 
             // load
-            Block<Model> block = Block.Load<Model>(Filename);
-            Model model = block[ModelIndex];
-            model.Load();
+            Block<ModelBlockItem> block = Block.Load<ModelBlockItem>(Filename);
+            ModelBlockItem modelBlockItem = block[ModelIndex];
+            modelBlockItem.Load();
 
             // mod
-            SetAlphaTo128(model);
+            SetAlphaTo128(modelBlockItem);
 
             // save
-            model.Save();
+            modelBlockItem.Save();
             block.Save(Filename);
         }
 
-        private void SetAlphaTo128(Model model)
+        private void SetAlphaTo128(ModelBlockItem modelBlockItem)
         {
-            List<FlaggedNode> headerFlaggedNodes = model.Header.Nodes
+            List<FlaggedNode> headerFlaggedNodes = modelBlockItem.Header.Nodes
                 .Select(x => x.FlaggedNode).Where(x => x != null).Distinct().ToList();
             List<MeshGroup3064> meshGroups = headerFlaggedNodes // TODO: get leaves from animations or altn
                 .SelectMany(x => x.GetLeaves()).Distinct().OfType<MeshGroup3064>().ToList();

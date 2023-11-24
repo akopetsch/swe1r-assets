@@ -21,14 +21,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 {
     public class ModelMask : BlockItemPart
     {
-        private Model Model => (Model)Item;
+        private ModelBlockItem ModelBlockItem => (ModelBlockItem)Item;
 
         public ModelMask() : base() { }
         private ModelMask(ModelMask source) : base(source) { }
 
         public void GenerateFromData(ByteSerializerContext context)
         {
-            var size = (int)Math.Ceiling(GetBitNumber(Model.Data.Length) / 8f);
+            var size = (int)Math.Ceiling(GetBitNumber(ModelBlockItem.Data.Length) / 8f);
             Bytes = new byte[size.Ceiling(4)];
 
             Mask(context.Graph.References.Where(IsMasked));
@@ -40,7 +40,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
             // mask special altN
             var headerRecordComponent = context.Graph.GetRecordComponent<Header>();
-            if (Model.Header is PoddHeader)
+            if (ModelBlockItem.Header is PoddHeader)
             {
                 // TODO: ugly hack (why ugly?)
                 PropertyComponent altNPropertyComponent = headerRecordComponent.Properties[nameof(Header.AltN)];
@@ -72,7 +72,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         private bool IsSpecialScenReference(ReferenceComponent c)
         {
-            if (Model.Header is ScenHeader && c.Type == typeof(MappingChild))
+            if (ModelBlockItem.Header is ScenHeader && c.Type == typeof(MappingChild))
             {
                 var sub = c.GetAncestorValue<MappingSub>();
                 var list = c.GetAncestorValue<List<MappingSub>>();

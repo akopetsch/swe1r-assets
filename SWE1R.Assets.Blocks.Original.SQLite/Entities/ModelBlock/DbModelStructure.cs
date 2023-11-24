@@ -18,7 +18,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 
         public virtual void CopyFrom(Node node)
         {
-            Model = (node.Root.Value as Header).Model.Index.Value;
+            Model = (node.Root.Value as Header).BlockItem.Index.Value;
             Offset = (int)node.Position;
         }
 

@@ -17,7 +17,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
         public TrakFormatTester(TrakHeader value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
             base(value, byterSerializationGraph, analyticsFixture)
         {
-            TrackMetadata = MetadataProvider.Tracks.First(t => t.Model == Value.Model.Index.Value);
+            TrackMetadata = MetadataProvider.Tracks.First(t => t.Model == Value.BlockItem.Index.Value);
         }
 
         public override void Test()

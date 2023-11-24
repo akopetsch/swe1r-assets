@@ -11,12 +11,12 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
     public class ModelGraphvizExporterFactory
     {
         public ModelGraphvizExporter Get(
-            Model model, ByteSerializationGraph byteSerializationGraph, string suffix)
+            ModelBlockItem modelBlockItem, ByteSerializationGraph byteSerializationGraph, string suffix)
         {
-            if (model.Header is TrakHeader trakHeader)
-                return new TrakModelGraphvizExporter(model, byteSerializationGraph, suffix);
+            if (modelBlockItem.Header is TrakHeader trakHeader)
+                return new TrakModelGraphvizExporter(modelBlockItem, byteSerializationGraph, suffix);
             else
-                return new ModelGraphvizExporter(model, byteSerializationGraph, suffix);
+                return new ModelGraphvizExporter(modelBlockItem, byteSerializationGraph, suffix);
         }
     }
 }

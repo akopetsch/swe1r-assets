@@ -33,7 +33,7 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
 
         #region Properties
 
-        public Model Model { get; }
+        public ModelBlockItem ModelBlockItem { get; }
         public ByteSerializationGraph ByteSerializationGraph { get; }
         public string Suffix { get; }
 
@@ -47,19 +47,19 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
         #region Constructor
 
         public ModelGraphvizExporter(
-            Model model, ByteSerializationGraph byteSerializationGraph, string suffix)
+            ModelBlockItem modelBlockItem, ByteSerializationGraph byteSerializationGraph, string suffix)
         {
-            Model = model;
+            ModelBlockItem = modelBlockItem;
             ByteSerializationGraph = byteSerializationGraph;
             Suffix = suffix;
 
             var metadataProvider = new MetadataProvider();
-            ModelName = metadataProvider.GetNameOrUnknown(model);
+            ModelName = metadataProvider.GetNameOrUnknown(modelBlockItem);
 
             DotFile = new StringBuilder();
             DirectoryInfo dotDirectory = Directory.CreateDirectory("dot");
-            DotFilename = Path.Combine(dotDirectory.Name, $"{Model.Index:000}.{Suffix}.dot");
-            SvgFilename = Path.Combine(dotDirectory.Name, $"{Model.Index:000}.{Suffix}.svg");
+            DotFilename = Path.Combine(dotDirectory.Name, $"{ModelBlockItem.Index:000}.{Suffix}.dot");
+            SvgFilename = Path.Combine(dotDirectory.Name, $"{ModelBlockItem.Index:000}.{Suffix}.svg");
         }
 
         #endregion
@@ -81,7 +81,7 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
 
         protected virtual void WriteDigraph()
         {
-            Header header = Model.Header;
+            Header header = ModelBlockItem.Header;
 
             // get INode RecordComponents
             var nodeRecordComponents = ByteSerializationGraph.GetRecordComponents<INode>()

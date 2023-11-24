@@ -23,10 +23,10 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             float positionScale = 40;
 
             // load
-            var modelBlock = Block.Load<Model>(BlockDefaultFilenames.ModelBlock);
+            var modelBlock = Block.Load<ModelBlockItem>(BlockDefaultFilenames.ModelBlock);
             var textureBlock = Block.Load<TextureBlockItem>(BlockDefaultFilenames.TextureBlock);
-            Model model = modelBlock[115]; // 115 = tatooine training
-            model.Load(out ByteSerializerContext byteSerializerContext);
+            ModelBlockItem modelBlockItem = modelBlock[115]; // 115 = tatooine training
+            modelBlockItem.Load(out ByteSerializerContext byteSerializerContext);
 
             // import
             var configuration = new ObjImporterConfiguration() {
@@ -37,12 +37,12 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
                 objFilename, textureBlock, SystemDrawingImageRgba32Loader.LoadImageRgba32, configuration);
             importer.Import();
 
-            var parentNode = (Group5064)model.Header.Nodes[0].FlaggedNode;
+            var parentNode = (Group5064)modelBlockItem.Header.Nodes[0].FlaggedNode;
             parentNode.Children.Add(importer.MeshGroup3064);
             parentNode.UpdateChildrenCount();
 
             // save
-            model.Save();
+            modelBlockItem.Save();
             modelBlock.Save(BlockDefaultFilenames.ModelBlock);
             textureBlock.Save(BlockDefaultFilenames.TextureBlock);
         }

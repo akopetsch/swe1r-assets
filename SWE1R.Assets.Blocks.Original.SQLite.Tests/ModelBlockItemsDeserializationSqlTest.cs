@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
 {
     [Collection(NonParallelCollectionDefinition.Name)]
     public class ModelBlockItemsDeserializationSqlTest : 
-        BlockItemsTestBase<Model>,  IClassFixture<AssetsDbContextFixture>
+        BlockItemsTestBase<ModelBlockItem>,  IClassFixture<AssetsDbContextFixture>
     {
         #region Fields
 
@@ -26,7 +26,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
 
         public ModelBlockItemsDeserializationSqlTest(
             AssetsDbContextFixture assetsDbContextFixture, ITestOutputHelper output) : 
-            base(new OriginalBlockProvider().LoadBlock<Model>(ModelBlockIdNames.Default))
+            base(new OriginalBlockProvider().LoadBlock<ModelBlockItem>(ModelBlockIdNames.Default))
         {
             _assetsDbContextFixture = assetsDbContextFixture;
             _output = output;
@@ -40,7 +40,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
 
         protected override void CompareItemInternal(int index)
         {
-            Model model = DeserializeItem(index, out ByteSerializerContext context);
+            ModelBlockItem modelBlockItem = DeserializeItem(index, out ByteSerializerContext context);
 
             var deserialized = DbModelStructures.Load(index, context.Graph);
             var fromDatabase = DbModelStructures.Load(index, _assetsDbContextFixture.AssetsDbContext);

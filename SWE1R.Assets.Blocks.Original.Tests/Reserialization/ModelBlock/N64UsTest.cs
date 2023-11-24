@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Reserialization.ModelBlock
 {
-    public class N64UsTest : BlockItemsReserializationXUnitTest<Model>
+    public class N64UsTest : BlockItemsReserializationXUnitTest<ModelBlockItem>
     {
         public N64UsTest(ITestOutputHelper output) : 
             base(output, ModelBlockIdNames.N64Us) { }

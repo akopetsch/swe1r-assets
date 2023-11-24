@@ -64,10 +64,10 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             //positionScale = 400;
 
             // load
-            var modelBlock = Block.Load<Model>(BlockDefaultFilenames.ModelBlock);
+            var modelBlock = Block.Load<ModelBlockItem>(BlockDefaultFilenames.ModelBlock);
             var textureBlock = Block.Load<TextureBlockItem>(BlockDefaultFilenames.TextureBlock);
-            Model model = modelBlock[170]; // 170 = Part_Upgrade_TopSpeed_Plug3ThrustCoil
-            model.Load(out ByteSerializerContext byteSerializerContext);
+            ModelBlockItem modelBlockItem = modelBlock[170]; // 170 = Part_Upgrade_TopSpeed_Plug3ThrustCoil
+            modelBlockItem.Load(out ByteSerializerContext byteSerializerContext);
 
             // import
             var configuration = new ObjImporterConfiguration() {
@@ -83,7 +83,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             parentNode.UpdateChildrenCount();
 
             // save
-            model.Save();
+            modelBlockItem.Save();
             modelBlock.Save(BlockDefaultFilenames.ModelBlock);
             textureBlock.Save(BlockDefaultFilenames.TextureBlock);
         }

@@ -16,7 +16,7 @@ namespace SWE1R.Assets.Blocks.Metadata.IdNames
     {
         private static Dictionary<Type, List<string>> allByItemType =
             new Dictionary<Type, List<string>>() {
-                { typeof(Model), ModelBlockIdNames.All.ToList() },
+                { typeof(ModelBlockItem), ModelBlockIdNames.All.ToList() },
                 { typeof(SplineBlockItem), SplineBlockIdNames.All.ToList() },
                 { typeof(SpriteBlockItem), SpriteBlockIdNames.All.ToList() },
                 { typeof(TextureBlockItem), TextureBlockIdNames.All.ToList() },

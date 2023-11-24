@@ -10,15 +10,15 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
 {
     public class TrakModelGraphvizExporter : ModelGraphvizExporter
     {
-        public TrakModelGraphvizExporter(Model model, Graph byteSerializationGraph, string suffix) : 
-            base(model, byteSerializationGraph, suffix)
+        public TrakModelGraphvizExporter(ModelBlockItem modelBlockItem, Graph byteSerializationGraph, string suffix) : 
+            base(modelBlockItem, byteSerializationGraph, suffix)
         { }
 
         protected override void WriteDigraph()
         {
             base.WriteDigraph();
 
-            var trakHeader = (TrakHeader)Model.Header;
+            var trakHeader = (TrakHeader)ModelBlockItem.Header;
             DotFile.AppendLine($"{tab}{headerNodeName} -> {nodeNodeNamesByNode[trakHeader.Node]};");
         }
     }

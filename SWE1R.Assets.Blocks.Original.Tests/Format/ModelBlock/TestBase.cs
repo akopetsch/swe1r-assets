@@ -19,7 +19,7 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 {
-    public abstract class TestBase : BlockItemsTestBase<Model>, IClassFixture<AnalyticsFixture>
+    public abstract class TestBase : BlockItemsTestBase<ModelBlockItem>, IClassFixture<AnalyticsFixture>
     {
         #region Properties
 
@@ -31,7 +31,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
         #region Constructor
 
         public TestBase(AnalyticsFixture analyticsFixture, ITestOutputHelper output, string blockIdName) :
-            base(new OriginalBlockProvider().LoadBlock<Model>(blockIdName))
+            base(new OriginalBlockProvider().LoadBlock<ModelBlockItem>(blockIdName))
         {
             AnalyticsFixture = analyticsFixture;
             Output = output;
@@ -43,15 +43,15 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 
         protected override void CompareItemInternal(int i)
         {
-            Model model = DeserializeItem(i, out ByteSerializerContext context);
+            ModelBlockItem modelBlockItem = DeserializeItem(i, out ByteSerializerContext context);
 
             // analyze
 
-            new ModelGraphvizExporterFactory().Get(model, context.Graph, "in").Export();
+            new ModelGraphvizExporterFactory().Get(modelBlockItem, context.Graph, "in").Export();
 
-            PrintMemoryUsageStats(model, context);
+            PrintMemoryUsageStats(modelBlockItem, context);
 
-            new HeaderFormatTesterFactory().Get(model.Header, context.Graph, AnalyticsFixture).Test();
+            new HeaderFormatTesterFactory().Get(modelBlockItem.Header, context.Graph, AnalyticsFixture).Test();
 
             var meshes = context.Graph.GetValues<Mesh>().ToList();
             meshes.ForEach(x => new MeshTester(x, context.Graph, AnalyticsFixture).Test());
@@ -77,20 +77,20 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
                 .Contains(null));
 
             // Mesh instances...
-            AssertMeshes(model, context);
+            AssertMeshes(modelBlockItem, context);
 
             // Header...
-            if (model.Header.Animations != null)
+            if (modelBlockItem.Header.Animations != null)
             {
                 // Anims does not contain null
-                Assert.True(!model.Header.Animations.Contains(null));
+                Assert.True(!modelBlockItem.Header.Animations.Contains(null));
 
                 // Anims only contains distinct values
-                Assert.True(model.Header.Animations.AllUnique());
+                Assert.True(modelBlockItem.Header.Animations.AllUnique());
             }
-            if (model.Header.AltN != null)
+            if (modelBlockItem.Header.AltN != null)
                 // AltN does not contain null
-                Assert.True(!model.Header.AltN.Contains(null));
+                Assert.True(!modelBlockItem.Header.AltN.Contains(null));
         }
 
         protected override void PrintItemIndex(int index) =>
@@ -157,7 +157,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 
         #region Methods (assert)
 
-        private void AssertMeshes(Model model, ByteSerializerContext context)
+        private void AssertMeshes(ModelBlockItem modelBlockItem, ByteSerializerContext context)
         {
             var meshes = context.Graph.GetValues<Mesh>().ToList();
             foreach (Mesh mesh in meshes)
@@ -185,9 +185,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 
         #region Methods (memory usage)
 
-        private void PrintMemoryUsageStats(Model model, ByteSerializerContext context)
+        private void PrintMemoryUsageStats(ModelBlockItem modelBlockItem, ByteSerializerContext context)
         {
-            int bytesCount = model.Part2.Length;
+            int bytesCount = modelBlockItem.Part2.Length;
 
             int vertexBytesCount = GetBytesCount<Vertex>(context);
             int indicesChunkBytesCount = GetBytesCount<IndicesChunk>(context);

@@ -30,16 +30,16 @@ namespace SWE1R.Assets.Blocks.CommandLine
             textureBlock.Save(BlockDefaultFilenames.TextureBlock);
 
             // load model
-            var modelBlock = Block.Load<Model>(BlockDefaultFilenames.ModelBlock);
-            Model model = modelBlock[130]; // 130 = BeedosWildRide
-            model.Load(out ByteSerializerContext byteSerializerContext);
+            var modelBlock = Block.Load<ModelBlockItem>(BlockDefaultFilenames.ModelBlock);
+            ModelBlockItem modelBlockItem = modelBlock[130]; // 130 = BeedosWildRide
+            modelBlockItem.Load(out ByteSerializerContext byteSerializerContext);
 
             // modify mesh
             var mesh = byteSerializerContext.Graph.GetValue<Mesh>(0x0603A8);
             mesh.Material = importer.Material;
 
             // save model
-            model.Save();
+            modelBlockItem.Save();
             modelBlock.Save(BlockDefaultFilenames.ModelBlock);
         }
 
@@ -53,18 +53,18 @@ namespace SWE1R.Assets.Blocks.CommandLine
             textureBlock.Save(BlockDefaultFilenames.TextureBlock);
 
             // load model
-            var modelBlock = Block.Load<Model>(BlockDefaultFilenames.ModelBlock);
-            Model model = modelBlock[142]; // 142 = MonGazza_Speedway
-            model.Load();
+            var modelBlock = Block.Load<ModelBlockItem>(BlockDefaultFilenames.ModelBlock);
+            ModelBlockItem modelBlockItem = modelBlock[142]; // 142 = MonGazza_Speedway
+            modelBlockItem.Load();
 
             // modify meshes
-            var header = (TrakHeader)model.Header;
+            var header = (TrakHeader)modelBlockItem.Header;
             List<Mesh> meshes = header.Skybox.GetDescendants().OfType<MeshGroup3064>()
                 .SelectMany(mg => mg.Meshes).ToList();
             meshes.ForEach(m => m.Material = importer.Material);
 
             // save model
-            model.Save();
+            modelBlockItem.Save();
             modelBlock.Save(BlockDefaultFilenames.ModelBlock);
         }
     }

@@ -129,7 +129,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
         #region Methods (list-*)
 
         private static int RunListModelsOptions(ListModelsOptions options) =>
-            RunListOptions<Model>(options);
+            RunListOptions<ModelBlockItem>(options);
 
         private static int RunListSplinesOptions(ListSplinesOptions options) =>
             RunListOptions<SplineBlockItem>(options);
@@ -167,7 +167,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         private static int RunModModelVertexAlphaOptions(ModModelVertexAlphaOptions options)
         {
-            var block = Block.Load<Model>(options.BlockPath);
+            var block = Block.Load<ModelBlockItem>(options.BlockPath);
             int[] indices = GetIndices(options.Indices, block);
             foreach (int i in indices)
                 new ModModelVertexAlpha(options.BlockPath, i).Run();

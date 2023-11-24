@@ -8,20 +8,30 @@ using System.IO;
 
 namespace SWE1R.Assets.Blocks.ModelBlock
 {
-    public class Model : BlockItem<ModelMask, ModelData>
+    public class ModelBlockItem : BlockItem<ModelMask, ModelData>
     {
+        #region Properties
+
         public ModelMask Bitmask => Part1;
         public ModelData Data => Part2;
         public Header Header { get; set; }
-        
-        public Model() : base() { }
-        public Model(Model source) : base(source) { }
-        
+
+        #endregion
+
+        #region Constructor
+
+        public ModelBlockItem() : base() { }
+        public ModelBlockItem(ModelBlockItem source) : base(source) { }
+
+        #endregion
+
+        #region Methods
+
         public override void Load(out ByteSerializerContext context)
         {
             using (var ms = new MemoryStream(Data.Bytes))
                 Header = new ByteSerializer().Deserialize<Header>(ms, Endianness.BigEndian, out context);
-            Header.Model = this;
+            Header.BlockItem = this;
         }
 
         public override void Unload() => Header = null;
@@ -39,6 +49,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             Bitmask.GenerateFromData(context);
         }
 
-        public override BlockItem Clone() => new Model(this);
+        public override BlockItem Clone() => new ModelBlockItem(this);
+
+        #endregion
     }
 }

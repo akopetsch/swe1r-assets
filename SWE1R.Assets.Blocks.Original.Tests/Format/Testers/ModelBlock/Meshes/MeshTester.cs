@@ -173,7 +173,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                             // if this is the first (01) range and more follow:
                             Assert.True(i == 0);
 
-                            var model = header.Model;
+                            var model = header.BlockItem;
                             //string key = $"{model.Index.Value:d3} - {_metadataProvider.GetName(model)}";
                             //AnalyticsFixture.IncreaseCounter("foo");
                         }

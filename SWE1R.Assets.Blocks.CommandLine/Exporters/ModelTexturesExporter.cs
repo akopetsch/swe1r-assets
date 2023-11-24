@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine.Exporters
 {
-    public class ModelTexturesExporter : BlockItemExporter<Model>
+    public class ModelTexturesExporter : BlockItemExporter<ModelBlockItem>
     {
         public Block<TextureBlockItem> TextureBlock { get; }
 
@@ -23,7 +23,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
             TextureBlock.Load(textureBlockPath);
         }
 
-        protected override void ExportItem(int index, Model item, ByteSerializerContext byteSerializerContext)
+        protected override void ExportItem(int index, ModelBlockItem item, ByteSerializerContext byteSerializerContext)
         {
             // get modelFolderPath
             string itemFolderName = BlockItem.GetIndexString(index);

@@ -33,10 +33,10 @@ namespace SWE1R.Assets.Blocks.CommandLine
         private void Foo()
         {
             // load
-            var modelBlock = Block.Load<Model>(BlockDefaultFilenames.ModelBlock);
+            var modelBlock = Block.Load<ModelBlockItem>(BlockDefaultFilenames.ModelBlock);
             var textureBlock = Block.Load<TextureBlockItem>(BlockDefaultFilenames.TextureBlock);
-            Model model = modelBlock[115]; // 115 = tatooine training
-            model.Load(out ByteSerializerContext byteSerializerContext);
+            ModelBlockItem modelBlockItem = modelBlock[115]; // 115 = tatooine training
+            modelBlockItem.Load(out ByteSerializerContext byteSerializerContext);
 
             // modify
             var mesh = (Mesh)byteSerializerContext.Graph.GetValueComponent(typeof(Mesh), 0x017A2C).Value;
@@ -44,7 +44,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             // to test if the example (input by hand) is correct
 
             // save
-            model.Save();
+            modelBlockItem.Save();
             modelBlock.Save(BlockDefaultFilenames.ModelBlock);
             textureBlock.Save(BlockDefaultFilenames.TextureBlock);
         }

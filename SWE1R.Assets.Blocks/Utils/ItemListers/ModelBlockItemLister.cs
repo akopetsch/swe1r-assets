@@ -7,16 +7,16 @@ using System;
 
 namespace SWE1R.Assets.Blocks.TestApp.ItemListers
 {
-    public class ModelBlockItemLister : BlockItemLister<Model>
+    public class ModelBlockItemLister : BlockItemLister<ModelBlockItem>
     {
-        public ModelBlockItemLister(Block<Model> block, Action<string> writeLineAction) :
+        public ModelBlockItemLister(Block<ModelBlockItem> block, Action<string> writeLineAction) :
             base(block, writeLineAction)
         { }
 
         protected override string[] GetHeaderRow() =>
             new string[] { indexColumnName, "C?", metadataIdColumnName, nameColumnName };
 
-        protected override string[] GetRecordRow(Model item) =>
+        protected override string[] GetRecordRow(ModelBlockItem item) =>
             new string[] {
                 GetIndexString(item),
                 GetCompressedString(item),
@@ -24,7 +24,7 @@ namespace SWE1R.Assets.Blocks.TestApp.ItemListers
                 GetNameString(item),
             };
 
-        private string GetCompressedString(Model item)
+        private string GetCompressedString(ModelBlockItem item)
         {
             // compressed?
             string compressed = string.Empty;

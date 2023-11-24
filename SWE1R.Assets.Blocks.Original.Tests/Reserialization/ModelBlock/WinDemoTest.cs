@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Reserialization.ModelBlock
 {
-    public class WinDemoTest : BlockItemsReserializationXUnitTest<Model>
+    public class WinDemoTest : BlockItemsReserializationXUnitTest<ModelBlockItem>
     {
         public WinDemoTest(ITestOutputHelper output) :
             base(output, ModelBlockIdNames.WinDemo) { }

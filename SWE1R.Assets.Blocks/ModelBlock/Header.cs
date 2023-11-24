@@ -46,7 +46,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         #region Properties (logical)
 
-        public Model Model { get; set; }
+        public ModelBlockItem BlockItem { get; set; }
 
         #endregion
 
