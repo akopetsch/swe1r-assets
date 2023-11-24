@@ -9,10 +9,10 @@ using System.Linq;
 using Unity.EditorCoroutines.Editor;
 using UnityEditor;
 using UnityEngine;
-using Swe1rModel = SWE1R.Assets.Blocks.ModelBlock.Model;
-using Swe1rSpline = SWE1R.Assets.Blocks.SplineBlock.Spline;
-using Swe1rSprite = SWE1R.Assets.Blocks.SpriteBlock.Sprite;
-using Swe1rTexture = SWE1R.Assets.Blocks.TextureBlock.Texture;
+using Swe1rModelBlockItem = SWE1R.Assets.Blocks.ModelBlock.ModelBlockItem;
+using Swe1rSplineBlockItem = SWE1R.Assets.Blocks.SplineBlock.SplineBlockItem;
+using Swe1rSpriteBlockItem = SWE1R.Assets.Blocks.SpriteBlock.SpriteBlockItem;
+using Swe1rTextureBlockItem = SWE1R.Assets.Blocks.TextureBlock.TextureBlockItem;
 
 namespace SWE1R.Assets.Blocks.Unity.Editor
 {
@@ -38,10 +38,10 @@ namespace SWE1R.Assets.Blocks.Unity.Editor
 
         private int modelIndex = 0;
 
-        private Block<Swe1rModel> modelBlock;
-        private Block<Swe1rTexture> textureBlock;
-        private Block<Swe1rSpline> splineBlock;
-        private Block<Swe1rSprite> spriteBlock;
+        private Block<Swe1rModelBlockItem> modelBlock;
+        private Block<Swe1rTextureBlockItem> textureBlock;
+        private Block<Swe1rSplineBlockItem> splineBlock;
+        private Block<Swe1rSpriteBlockItem> spriteBlock;
 
         private EditorCoroutine importAllCoroutine;
 
@@ -235,11 +235,11 @@ namespace SWE1R.Assets.Blocks.Unity.Editor
                 exporter.Export();
                 LogExported(modelIndex); yield return null;
 
-                if (exporter.Model != null)
+                if (exporter.ModelBlockItem != null)
                 {
                     LogExportToModelBlock(modelIndex); yield return null;
                     LoadBlocks(); // TODO: only load modelblock
-                    modelBlock[modelIndex] = exporter.Model;
+                    modelBlock[modelIndex] = exporter.ModelBlockItem;
                     SaveBlocks(); // TODO: only save modelblock
                     LogExportedToModelBlock(modelIndex); yield return null;
                 }
@@ -295,9 +295,9 @@ namespace SWE1R.Assets.Blocks.Unity.Editor
                 exporter.Export();
                 LogExported(modelIndex); yield return null;
 
-                if (exporter.Model != null)
+                if (exporter.ModelBlockItem != null)
                 {
-                    successful = Enumerable.SequenceEqual(importer.Model.Bytes, exporter.Model.Bytes);
+                    successful = Enumerable.SequenceEqual(importer.ModelBlockItem.Bytes, exporter.ModelBlockItem.Bytes);
                     if (successful)
                     {
                         importer.AssetsHelper.DeleteAssets();
@@ -369,10 +369,10 @@ namespace SWE1R.Assets.Blocks.Unity.Editor
 
         private void LoadBlocks()
         {
-            modelBlock = LoadBlock<Swe1rModel>(modelBlockFilename);
-            textureBlock = LoadBlock<Swe1rTexture>(textureBlockFilename);
-            splineBlock = LoadBlock<Swe1rSpline>(splineBlockFilename);
-            spriteBlock = LoadBlock<Swe1rSprite>(spriteBlockFilename);
+            modelBlock = LoadBlock<Swe1rModelBlockItem>(modelBlockFilename);
+            textureBlock = LoadBlock<Swe1rTextureBlockItem>(textureBlockFilename);
+            splineBlock = LoadBlock<Swe1rSplineBlockItem>(splineBlockFilename);
+            spriteBlock = LoadBlock<Swe1rSpriteBlockItem>(spriteBlockFilename);
         }
 
         private Block<TBlockItem> LoadBlock<TBlockItem>(string filename) where TBlockItem : BlockItem, new()

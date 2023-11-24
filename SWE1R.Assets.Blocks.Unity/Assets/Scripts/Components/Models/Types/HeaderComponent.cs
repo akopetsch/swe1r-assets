@@ -80,7 +80,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Types
             result.Animations = animationsComponent?.Export(exporter);
             result.AltN = altNComponent?.Export(exporter);
 
-            result.Model = exporter.Model;
+            result.BlockItem = exporter.ModelBlockItem;
 
             return result;
         }

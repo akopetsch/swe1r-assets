@@ -29,8 +29,8 @@ using Swe1rMaterialProperties = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialPr
 using Swe1rMaterialTexture = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialTexture;
 using Swe1rMaterialTextureChild = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialTextureChild;
 using Swe1rMesh = SWE1R.Assets.Blocks.ModelBlock.Meshes.Mesh;
-using Swe1rModel = SWE1R.Assets.Blocks.ModelBlock.Model;
-using Swe1rTexture = SWE1R.Assets.Blocks.TextureBlock.Texture;
+using Swe1rModelBlockItem = SWE1R.Assets.Blocks.ModelBlock.ModelBlockItem;
+using Swe1rTextureBlockItem = SWE1R.Assets.Blocks.TextureBlock.TextureBlockItem;
 using Swe1rVertex = SWE1R.Assets.Blocks.ModelBlock.Meshes.Vertex;
 
 namespace SWE1R.Assets.Blocks.Unity
@@ -71,9 +71,9 @@ namespace SWE1R.Assets.Blocks.Unity
 
         #region Properties (constructor)
 
-        public Block<Swe1rModel> ModelBlock { get; }
+        public Block<Swe1rModelBlockItem> ModelBlock { get; }
         public int ModelIndex { get; }
-        public Block<Swe1rTexture> TextureBlock { get; }
+        public Block<Swe1rTextureBlockItem> TextureBlock { get; }
 
         #endregion
 
@@ -81,7 +81,7 @@ namespace SWE1R.Assets.Blocks.Unity
 
         public string Name { get; private set; }
         public AssetsHelper AssetsHelper { get; private set; }
-        public Swe1rModel Model { get; private set; }
+        public Swe1rModelBlockItem ModelBlockItem { get; private set; }
         
         public GameObject GameObject { get; private set; }
 
@@ -90,9 +90,9 @@ namespace SWE1R.Assets.Blocks.Unity
         #region Constructor
 
         public ModelImporter(
-            Block<Swe1rModel> modelBlock,
+            Block<Swe1rModelBlockItem> modelBlock,
             int modelIndex,
-            Block<Swe1rTexture> textureBlock)
+            Block<Swe1rTextureBlockItem> textureBlock)
         {
             ModelBlock = modelBlock;
             ModelIndex = modelIndex;
@@ -109,24 +109,24 @@ namespace SWE1R.Assets.Blocks.Unity
             AssetsHelper = new AssetsHelper(Name);
 
             // deserialize
-            Model = ModelBlock[ModelIndex];
-            dumper.DumpItemPartsBytes(Model, ModelIndex, dumperSuffix);
-            Model.Load(out bitSerializerContext);
+            ModelBlockItem = ModelBlock[ModelIndex];
+            dumper.DumpItemPartsBytes(ModelBlockItem, ModelIndex, dumperSuffix);
+            ModelBlockItem.Load(out bitSerializerContext);
             dumper.DumpItemLog(bitSerializerContext, ModelIndex, dumperSuffix);
             offsetHexStringLength = GetOffsetHexStringLength();
 
             // import
             GameObject = new GameObject(Name);
-            GameObject.AddComponent<ModelComponent>().Import(Model, this);
+            GameObject.AddComponent<ModelComponent>().Import(ModelBlockItem, this);
             AssetDatabase.SaveAssets();
         }
 
         private string GetName() => // TODO: enumerate instead of using Path.GetRandomFilename()
-            $"{ModelIndex:000} - {new MetadataProvider().GetNameByIndex<Swe1rModel>(ModelIndex)} - {Path.GetRandomFileName()}";
+            $"{ModelIndex:000} - {new MetadataProvider().GetNameByIndex<Swe1rModelBlockItem>(ModelIndex)} - {Path.GetRandomFileName()}";
 
         private int GetOffsetHexStringLength()
         {
-            int length = Model.Data.Length.ToString("x").Length;
+            int length = ModelBlockItem.Data.Length.ToString("x").Length;
             if (length % 2 == 1)
                 length++;
             return length;

@@ -3,7 +3,6 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization;
-using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.Unity.Components.Models;
 using SWE1R.Assets.Blocks.Unity.Components.Models.Meshes;
 using SWE1R.Assets.Blocks.Unity.Components.Models.Nodes;
@@ -24,7 +23,7 @@ using Swe1rMaterialProperties = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialPr
 using Swe1rMaterialTexture = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialTexture;
 using Swe1rMaterialTextureChild = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialTextureChild;
 using Swe1rMesh = SWE1R.Assets.Blocks.ModelBlock.Meshes.Mesh;
-using Swe1rModel = SWE1R.Assets.Blocks.ModelBlock.Model;
+using Swe1rModelBlockItem = SWE1R.Assets.Blocks.ModelBlock.ModelBlockItem;
 using Swe1rTargetOrInteger = SWE1R.Assets.Blocks.ModelBlock.Animations.TargetOrInteger;
 using Swe1rVertex = SWE1R.Assets.Blocks.ModelBlock.Meshes.Vertex;
 
@@ -86,7 +85,7 @@ namespace SWE1R.Assets.Blocks.Unity
 
         #region Properties (export)
 
-        public Swe1rModel Model { get; private set; }
+        public Swe1rModelBlockItem ModelBlockItem { get; private set; }
 
         #endregion
 
@@ -105,11 +104,11 @@ namespace SWE1R.Assets.Blocks.Unity
         public void Export()
         {
             // export
-            Model = ModelComponent.Export(this);
+            ModelBlockItem = ModelComponent.Export(this);
 
             // serialize
-            Model.Save(out bitSerializerContext);
-            dumper.DumpItem(Model, ModelIndex, bitSerializerContext, dumperSuffix);
+            ModelBlockItem.Save(out bitSerializerContext);
+            dumper.DumpItem(ModelBlockItem, ModelIndex, bitSerializerContext, dumperSuffix);
         }
 
         #endregion

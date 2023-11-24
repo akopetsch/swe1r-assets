@@ -5,17 +5,17 @@
 using SWE1R.Assets.Blocks.Unity.Components.Models.Types;
 using System;
 using UnityEngine;
-using Swe1rModel = SWE1R.Assets.Blocks.ModelBlock.Model;
+using Swe1rModelBlockItem = SWE1R.Assets.Blocks.ModelBlock.ModelBlockItem;
 
 namespace SWE1R.Assets.Blocks.Unity.Components.Models
 {
     public class ModelComponent : MonoBehaviour
     {
-        public void Import(Swe1rModel model, ModelImporter importer)
+        public void Import(Swe1rModelBlockItem modelBlockItem, ModelImporter importer)
         {
             // headerComponent
-            Type headerComponentType = HeaderComponentFactory.Instance.GetComponentType(model.Header);
-            ((IHeaderComponent)gameObject.AddComponent(headerComponentType)).Import(model.Header, importer);
+            Type headerComponentType = HeaderComponentFactory.Instance.GetComponentType(modelBlockItem.Header);
+            ((IHeaderComponent)gameObject.AddComponent(headerComponentType)).Import(modelBlockItem.Header, importer);
 
             FixTransform();
         }
@@ -27,9 +27,9 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models
             gameObject.transform.localScale = new Vector3(-scale, scale, scale);
         }
 
-        public Swe1rModel Export(ModelExporter exporter)
+        public Swe1rModelBlockItem Export(ModelExporter exporter)
         {
-            var result = new Swe1rModel();
+            var result = new Swe1rModelBlockItem();
             result.Header = GetComponent<IHeaderComponent>().Export(exporter);
             return result;
         }
