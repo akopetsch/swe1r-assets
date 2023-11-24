@@ -11,6 +11,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.TextureBlock;
+using System.Diagnostics;
 using System.Numerics;
 using ObjFace = ObjLoader.Loader.Data.Elements.Face;
 using ObjFaceVertex = ObjLoader.Loader.Data.Elements.FaceVertex;
@@ -156,7 +157,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                     // indices
                     var triangle = new Triangle(Enumerable.Range(indexBase, 3).ToArray());
                     indexBase += 3;
-                    int[] indices = triangle.Indices.ToArray();
+                    int[] indices = triangle.GetIndices().ToArray();
                     var chunk05 = new IndicesChunk05() {
                         Index0 = ValidateAndConvert(2 * (indices[0] - startVertexIndex)),
                         Index1 = ValidateAndConvert(2 * (indices[1] - startVertexIndex)),
@@ -175,7 +176,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                     // indices
                     var quad = new Quad(Enumerable.Range(indexBase, 4).ToArray());
                     indexBase += 4;
-                    int[] indices = quad.Triangles.SelectMany(t => t.Indices).ToArray();
+                    int[] indices = quad.GetTriangles().SelectMany(t => t.GetIndices()).ToArray();
                     //var chunk06 = new IndicesChunk06() {
                     //    Index0 = ValidateAndConvert(2 * (indices[0] - startVertexIndex)),
                     //    Index1 = ValidateAndConvert(2 * (indices[1] - startVertexIndex)),
@@ -206,15 +207,14 @@ namespace SWE1R.Assets.Blocks.CommandLine
                         GetFaceVertices(face).Select(f => GetVertex(f, _objLoadResult)));
 
                     // indices
-                    var triangleStrip = new TriangleStrip(Enumerable.Range(indexBase, face.Count).ToArray());
+                    var triangleFan = new TriangleFan(Enumerable.Range(indexBase, face.Count).ToArray());
                     indexBase += face.Count;
-                    int[] indices = triangleStrip.Triangles.SelectMany(t => t.Indices).ToArray();
-                    for (int i = 0; i < indices.Length; i += 3)
+                    foreach (Triangle triangle in triangleFan.GetTriangles())
                     {
                         var chunk05 = new IndicesChunk05() {
-                            Index0 = ValidateAndConvert(2 * (indices[i + 0] - startVertexIndex)),
-                            Index1 = ValidateAndConvert(2 * (indices[i + 1] - startVertexIndex)),
-                            Index2 = ValidateAndConvert(2 * (indices[i + 2] - startVertexIndex)),
+                            Index0 = ValidateAndConvert(2 * (triangle.I0 - startVertexIndex)),
+                            Index1 = ValidateAndConvert(2 * (triangle.I1 - startVertexIndex)),
+                            Index2 = ValidateAndConvert(2 * (triangle.I2 - startVertexIndex)),
                         };
                         indicesRange.Chunks0506.Add(chunk05);
                     }
@@ -266,7 +266,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 texture = ToVector(objLoadResult.Textures[objFaceVertex.TextureIndex - 1]);
             else
                 texture = Vector2.Zero;
-            texture = Vector2.Multiply(texture, 4096);
+            texture = Vector2.Multiply(texture, 4096); // TODO: constant
 
             return new Vertex() {
                 Position = new Vector3Int16() {
@@ -296,7 +296,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             new Vector3(-objVertex.X, objVertex.Z, objVertex.Y);
 
         private Vector2 ToVector(ObjTexture objTexture) =>
-            new Vector2(objTexture.X, objTexture.Y);
+            new Vector2(objTexture.X, -objTexture.Y);
 
         private Vector3 ToVector(ObjNormal objNormal) =>
             new Vector3(-objNormal.X, objNormal.Z, objNormal.Y);

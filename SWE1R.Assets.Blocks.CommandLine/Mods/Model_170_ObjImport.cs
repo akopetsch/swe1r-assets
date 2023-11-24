@@ -21,9 +21,8 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             string objFilename;
             float positionScale = 1;
 
-            // v: 1484 f: 1484
-            //objFilename = "obj/Upgrade_Plug_3_low.obj"; // FAIL (/2) // FAIL (/4, Tr)
-            //positionScale = 100;
+            objFilename = "Upgrade_Plug_3_exp.groups.obj"; // FAIL (/2) // FAIL (/4, Tr)
+            positionScale = 100;
 
             // v: 8 f: 8
             //objFilename = "obj/box.obj"; // OK (/2)
@@ -58,8 +57,8 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             //positionScale = 150;
 
             // v: 507 f: 507
-            objFilename = "obj/monkey.obj"; // OK (/2) (but degenerate in-game, left-ear, around eyes) // OK (/4, Tr)
-            positionScale = 250;
+            //objFilename = "obj/monkey.obj"; // OK (/2) (but degenerate in-game, left-ear, around eyes) // OK (/4, Tr)
+            //positionScale = 250;
 
             //objFilename = "cube.obj";
             //positionScale = 400;

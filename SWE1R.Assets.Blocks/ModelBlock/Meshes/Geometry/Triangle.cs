@@ -9,23 +9,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry
     /// <summary>
     /// Represents a triangle defined by the indices of its vertices which are arranged counter-clockwise.
     /// </summary>
-    public class Triangle
+    public class Triangle : Primitive
     {
         #region Properties
 
         public int I0 { get; set; }
         public int I1 { get; set; }
         public int I2 { get; set; }
-
-        public IEnumerable<int> Indices
-        {
-            get
-            {
-                yield return I0;
-                yield return I1;
-                yield return I2;
-            }
-        }
 
         #endregion
 
@@ -49,6 +39,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry
 
         #region Methods
 
+        public override IEnumerable<int> GetIndices()
+        {
+            yield return I0;
+            yield return I1;
+            yield return I2;
+        }
+
+        public override IEnumerable<Triangle> GetTriangles()
+        {
+            yield return this;
+        }
+
         public void AddToIndices(int summand)
         {
             I0 += summand;
@@ -62,13 +64,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry
             I1 /= divisor;
             I2 /= divisor;
         }
-
-        #endregion
-
-        #region Methods (: object)
-
-        public override string ToString() =>
-            $"({I0}, {I1}, {I2})";
 
         #endregion
     }

@@ -45,16 +45,6 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 TextureBlock.Add(Texture);
 
                 Material = CreateRgba5551Material();
-                //Material = Model_115_MaterialExample.CreateMaterial();
-                //MaterialTexture mt = Material.Texture;
-                //mt.Width = (short)Image.Width;
-                //mt.Height = (short)Image.Height;
-                //mt.Width4 = (short)(Image.Width * 4);
-                //mt.Height4 = (short)(Image.Height * 4);
-                //mt.Width_Unk = 32768; // 32768 = 64 * 512
-                //mt.Height_Unk = 32768; // 32768 = 64 * 512
-                // TODO: !!! Width_Unk / Height_Unk
-                //mt.IdField.Id = Texture.Index.Value;
             }
             else
             {
@@ -197,6 +187,9 @@ namespace SWE1R.Assets.Blocks.CommandLine
                     0x11f041f,
                     0x7070704
                 },
+                // bitmasks to make it opaque:
+                Bitmask1 = unchecked((int)0xC8000000),
+                Bitmask2 = 0x0112038, // or e.g. 0x00112078
             };
 
         #endregion

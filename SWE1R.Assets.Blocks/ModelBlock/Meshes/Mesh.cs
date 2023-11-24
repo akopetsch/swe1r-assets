@@ -176,12 +176,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                         case PrimitiveType.Quads:
                             verticesCount = 4;
                             var quad = new Quad(Enumerable.Range(verticesIndex, verticesCount).ToArray());
-                            triangles.AddRange(quad.Triangles);
+                            triangles.AddRange(quad.GetTriangles());
                             break;
                         case PrimitiveType.Polygons:
                             verticesCount = FacesVertexCounts[i];
                             var triangleStrip = new TriangleStrip(Enumerable.Range(verticesIndex, verticesCount).ToArray());
-                            triangles.AddRange(triangleStrip.Triangles);
+                            triangles.AddRange(triangleStrip.GetTriangles());
                             break;
                     }
                     verticesIndex += verticesCount;
