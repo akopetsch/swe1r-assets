@@ -13,6 +13,7 @@ namespace SWE1R.Assets.Blocks.Common.Colors
         #region Fields (constants)
 
         private const int _5BitsMaxValue = 31;
+        private const int _1BitsMaxValue = 1;
         private const int _rShift = 11;
         private const int _gShift = 6;
         private const int _bShift = 1;
@@ -104,7 +105,7 @@ namespace SWE1R.Assets.Blocks.Common.Colors
             byte r = (byte)Math.Round(c.R * _5BitsMaxValue);
             byte g = (byte)Math.Round(c.G * _5BitsMaxValue);
             byte b = (byte)Math.Round(c.B * _5BitsMaxValue);
-            byte a = (byte)Math.Round(c.A * _5BitsMaxValue);
+            byte a = (byte)Math.Round(c.A * _1BitsMaxValue);
             return new ColorRgba5551((short)((r << _rShift) | (g << _gShift) | (b << _bShift) | a));
         }
 
