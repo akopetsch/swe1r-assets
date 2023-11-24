@@ -2,17 +2,16 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.CommandLine.MaterialExamples;
-using SWE1R.Assets.Blocks.Common.Colors;
 using SWE1R.Assets.Blocks.Common.Images;
+using SWE1R.Assets.Blocks.Common.Vectors;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.TextureBlock;
-using System.Diagnostics;
+using System.Numerics;
 using Material = SWE1R.Assets.Blocks.ModelBlock.Meshes.Material;
 
 namespace SWE1R.Assets.Blocks.CommandLine
 {
-    public class MaterialImporter
+    public abstract class MaterialImporter
     {
         #region Properties
 
@@ -38,135 +37,63 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         public void Import()
         {
-            if (Image.Palette?.Length > 0)
-            {
-                Texture = GetRgba5551IndexedTexture();
-                Texture.Block = TextureBlock;
-                TextureBlock.Add(Texture);
+            Texture = CreateTexture();
+            Texture.Block = TextureBlock;
+            TextureBlock.Add(Texture);
 
-                Material = CreateRgba5551Material();
-            }
-            else
-            {
-                Texture = GetRgba32Texture();
-                Texture.Block = TextureBlock;
-                TextureBlock.Add(Texture);
-
-                Material = Model_130_MaterialExample.CreateMaterial();
-                MaterialTexture mt = Material.Texture;
-                mt.Width = (short)Image.Width;
-                mt.Height = (short)Image.Height;
-                mt.Width4 = (short)(Image.Width * 4);
-                mt.Height4 = (short)(Image.Height * 4);
-                mt.Width_Unk = 32768; // 32768 = 64 * 512
-                mt.Height_Unk = 32768; // 32768 = 64 * 512
-                // TODO: !!! Width_Unk / Height_Unk
-                mt.IdField.Id = Texture.Index.Value;
-            }
+            Material = CreateMaterial();
         }
 
         #endregion
 
         #region Methods (Texture)
 
-        private Texture GetRgba32Texture()
-        {
-            var texture = new Texture();
-
-            int w = Image.Width;
-            int h = Image.Height;
-
-            // pixels
-            byte[] pixels = new byte[w * h * ColorRgba32.StructureSize];
-            for (int x = 0; x < w; x++)
-            {
-                for (int y = 0; y < h; y++)
-                {
-                    //int i = x * h + y;
-                    int i = y * w + x;
-                    byte[] bytes = Image[x, y].Bytes.Reverse().ToArray(); // TODO: use EndianBinaryWrite
-                    Array.Copy(bytes, 0, pixels, i * bytes.Length, bytes.Length);
-                }
-            }
-            texture.PixelsPart.Bytes = pixels;
-
-            // palette
-            texture.PalettePart.Bytes = new byte[] { };
-
-            return texture;
-        }
-
-        private Texture GetRgba5551IndexedTexture()
-        {
-            var texture = new Texture();
-
-            int w = Image.Width;
-            int h = Image.Height;
-
-            // indices
-            var indices = new byte[w * h];
-            for (int x = 0; x < w; x++)
-            {
-                for (int y = 0; y < h; y++)
-                {
-                    int index = Image.GetPaletteIndex(x, y);
-                    Debug.Assert(index >= 0);
-                    //int i = x * h + y;
-                    int i = y * w + x;
-                    indices[i] = (byte)index;
-                }
-            }
-            texture.PixelsPart.Bytes = indices;
-
-            // palette
-            byte[] palette = Image.Palette
-                .Select(c => (ColorRgba5551)c)
-                .SelectMany(c => c.Bytes.Reverse()) // TODO: use EndianBinaryWrite
-                .ToArray();
-            byte[] palette512 = new byte[512];
-            Array.Copy(palette, palette512, palette.Length);
-            texture.PalettePart.Bytes = palette512;
-
-            return texture;
-        }
+        protected abstract Texture CreateTexture();
 
         #endregion
 
         #region Methods (Material)
 
-        private Material CreateRgba5551Material() =>
+        protected virtual Material CreateMaterial() =>
             new Material() {
                 Int = 12,
                 Texture = CreateMaterialTexture(),
                 Properties = CreateMaterialProperties(),
             };
 
-        private MaterialTexture CreateMaterialTexture() =>
-            new MaterialTexture() {
-                Mask_Unk = 1,
-                Width4 = (short)(Image.Width * 4),
-                Height4 = (short)(Image.Height * 4),
-                Byte_0c = 2,
-                Byte_0d = 1,
-                Width = (short)(Image.Width),
-                Height = (short)(Image.Height),
-                Width_Unk = 32768, // 32768 = 64 * 512
-                Height_Unk = 32768, // 32768 = 64 * 512
-                // TODO: !!! Width_Unk / Height_Unk
-                Flags = 512, // TODO: or 256?
-                Mask = 1023,
-                Children = new MaterialTextureChild[] {
+        protected virtual MaterialTexture CreateMaterialTexture()
+        {
+            var mt = new MaterialTexture();
+            mt.Mask_Unk = 1;
+            mt.Width4 = (short)(Image.Width * 4);
+            mt.Height4 = (short)(Image.Height * 4);
+            mt.Byte_0c = 2;
+            mt.Byte_0d = 1;
+            mt.Width = (short)(Image.Width);
+            mt.Height = (short)(Image.Height);
+            (mt.Width_Unk, mt.Height_Unk) = CalculateWidthHeightUnk();
+            mt.Flags = 512; // TODO: or 256?
+            mt.Mask = 1023;
+            mt.Children = new MaterialTextureChild[] {
                     CreateMaterialTextureChild(),
                     null,
                     null,
                     null,
                     null,
                     null,
-                },
-                IdField = new TextureId() { Id = Texture.Index.Value }
-            };
+                };
+            mt.IdField = new TextureId() { Id = Texture.Index.Value };
+            return mt;
+        }
 
-        private MaterialTextureChild CreateMaterialTextureChild() =>
+        private (ushort width_Unk, ushort height_Unk) CalculateWidthHeightUnk()
+        {
+            var vector2 = new Vector2(Image.Width, Image.Height) * 512;
+            vector2 = vector2.ScaleWithinBounds(ushort.MaxValue, ushort.MaxValue);
+            return ((ushort)vector2.X, (ushort)vector2.Y);
+        }
+
+        protected virtual MaterialTextureChild CreateMaterialTextureChild() =>
             new MaterialTextureChild() {
                 Byte_2 = 8, // or 4
                 DimensionsBitmask = 0, // or 0x34
@@ -176,7 +103,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 Byte_f = 252, // or 124
             };
 
-        private MaterialProperties CreateMaterialProperties() =>
+        protected virtual MaterialProperties CreateMaterialProperties() =>
             new MaterialProperties() {
                 Word_4 = 1,
                 Ints_6 = new int[] {

@@ -3,7 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.IO;
-using System.Numerics;
+using SystemNumericsVector3 = System.Numerics.Vector3;
 
 namespace SWE1R.Assets.Blocks.Common.Vectors
 {
@@ -72,11 +72,11 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
 
         #region Methods (operators - conversion)
 
-        public static implicit operator Vector3Single(Vector3 v) =>
+        public static implicit operator Vector3Single(SystemNumericsVector3 v) =>
             new Vector3Single(v.X, v.Y, v.Z);
 
-        public static implicit operator Vector3(Vector3Single v) =>
-            new Vector3(v.X, v.Y, v.Z);
+        public static implicit operator SystemNumericsVector3(Vector3Single v) =>
+            new SystemNumericsVector3(v.X, v.Y, v.Z);
 
         #endregion
     }

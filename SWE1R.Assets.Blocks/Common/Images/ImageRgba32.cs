@@ -18,6 +18,8 @@ namespace SWE1R.Assets.Blocks.Common.Images
 
         public ColorRgba32[] Palette { get; set; }
 
+        public bool HasPalette => Palette?.Length > 0;
+
         #endregion
 
         #region Constructor

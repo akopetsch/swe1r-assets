@@ -11,7 +11,6 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.TextureBlock;
-using System.Diagnostics;
 using System.Numerics;
 using ObjFace = ObjLoader.Loader.Data.Elements.Face;
 using ObjFaceVertex = ObjLoader.Loader.Data.Elements.FaceVertex;
@@ -132,7 +131,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 imageRgba32 = ImageLoadFunc("cube.png"); // TODO: !!! test texture in resources
 
             // import material/texture
-            var importer = new MaterialImporter(imageRgba32, TextureBlock);
+            MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, TextureBlock);
             importer.Import();
 
             return importer.Material;

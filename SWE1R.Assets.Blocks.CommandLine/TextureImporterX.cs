@@ -25,7 +25,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             // import material
             var textureBlock = Block.Load<Texture>(BlockDefaultFilenames.TextureBlock);
             ImageRgba32 image = SystemDrawingImageRgba32Loader.LoadImageRgba32("TestTexture_1024x1024.png");
-            var importer = new MaterialImporter(image, textureBlock);
+            MaterialImporter importer = new MaterialImporterFactory().Get(image, textureBlock);
             importer.Import();
             textureBlock.Save(BlockDefaultFilenames.TextureBlock);
 
@@ -48,7 +48,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             // import material
             var textureBlock = Block.Load<Texture>(BlockDefaultFilenames.TextureBlock);
             ImageRgba32 image = SystemDrawingImageRgba32Loader.LoadImageRgba32("TestTexture_2048x2048_I8.png");
-            var importer = new MaterialImporter(image, textureBlock);
+            MaterialImporter importer = new MaterialImporterFactory().Get(image, textureBlock);
             importer.Import();
             textureBlock.Save(BlockDefaultFilenames.TextureBlock);
 

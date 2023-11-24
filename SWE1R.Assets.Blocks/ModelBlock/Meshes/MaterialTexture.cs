@@ -21,16 +21,34 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         #region Properties (serialized)
 
         [Order(0)] public int Mask_Unk { get; set; }
+        /// <summary>
+        /// Always four times <see cref="Width">Width</see>.
+        /// </summary>
         [Order(1)] public short Width4 { get; set; }
+        /// <summary>
+        /// Always four times <see cref="Height">Height</see>.
+        /// </summary>
         [Order(2)] public short Height4 { get; set; }
+        /// <summary>
+        /// Always zero.
+        /// </summary>
         [Order(3)] public short Always0_08 { get; set; }
+        /// <summary>
+        /// Always zero.
+        /// </summary>
         [Order(4)] public short Always0_0a { get; set; }
         [Order(5)] public byte Byte_0c { get; set; }
         [Order(6)] public byte Byte_0d { get; set; }
         [Order(7)] public short Word_0e { get; set; }
         [Order(8)] public short Width { get; set; }
         [Order(9)] public short Height { get; set; }
+        /// <summary>
+        /// Always 128, 256 or 512 times <see cref="Width">Width</see>.
+        /// </summary>
         [Order(10)] public ushort Width_Unk { get; set; }
+        /// <summary>
+        /// Always 128, 256 or 512 times <see cref="Height">Height</see>.
+        /// </summary>
         [Order(11)] public ushort Height_Unk { get; set; }
         [Order(12)] public short Flags { get; set; }
         [Order(13)] public short Mask { get; set; }
