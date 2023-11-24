@@ -86,7 +86,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         #region Methods (pixels)
 
-        public ImageRgba32 ExportImage(Block<Texture> textureBlock)
+        public ImageRgba32 ExportImage(Block<TextureBlockItem> textureBlock)
         {
             var result = new ImageRgba32(Width, Height);
 
@@ -94,18 +94,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             int textureIndex = TextureIndex.Id;
             if (textureIndex == -1)
                 return null;
-            Texture texture = textureBlock[textureIndex];
-            texture.Load();
+            TextureBlockItem textureBlockItem = textureBlock[textureIndex];
+            textureBlockItem.Load();
 
             // get pixels
             for (int x = 0; x < Width; x++)
                 for (int y = 0; y < Height; y++)
-                    result[x, y] = GetPixel(x, y, texture);
+                    result[x, y] = GetPixel(x, y, textureBlockItem);
 
             return result;
         }
 
-        public ImageRgba32 ExportEffectiveImage(Block<Texture> textureBlock, MaterialTextureChild child)
+        public ImageRgba32 ExportEffectiveImage(Block<TextureBlockItem> textureBlock, MaterialTextureChild child)
         {
             ImageRgba32 result = ExportImage(textureBlock);
             if (child != null)
@@ -138,7 +138,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             throw new NotImplementedException();
         }
 
-        private ColorRgba32 GetPixel(int x, int y, Texture texture)
+        private ColorRgba32 GetPixel(int x, int y, TextureBlockItem textureBlockItem)
         {
             int i = y * Width + x;
             TextureDataFormat textureDataFormat = GetTextureDataFormat();
@@ -149,28 +149,28 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                 // get pixel data
                 if (bpp == 4)
                 {
-                    if (i < texture.PixelsPart.NibblesCount)
-                        pixelData = texture.PixelsPart.GetNibble(i);
+                    if (i < textureBlockItem.PixelsPart.NibblesCount)
+                        pixelData = textureBlockItem.PixelsPart.GetNibble(i);
                     else
                         return ColorRgba32.Pink;
                 }
                 else if (bpp == 8)
-                    pixelData = texture.PixelsPart.GetByte(i);
+                    pixelData = textureBlockItem.PixelsPart.GetByte(i);
                 else
                     throw new InvalidOperationException();
 
                 // get index palette color
-                return (ColorRgba32)texture.PaletteColors[pixelData];
+                return (ColorRgba32)textureBlockItem.PaletteColors[pixelData];
             }
             else
             {
                 // get pixel data
                 if (bpp == 4)
-                    pixelData = texture.PixelsPart.GetNibble(i);
+                    pixelData = textureBlockItem.PixelsPart.GetNibble(i);
                 else if (bpp == 8)
-                    pixelData = texture.PixelsPart.GetByte(i);
+                    pixelData = textureBlockItem.PixelsPart.GetByte(i);
                 else if (bpp == 32)
-                    pixelData = texture.PixelsPart.GetInt32(i);
+                    pixelData = textureBlockItem.PixelsPart.GetInt32(i);
                 else
                     throw new InvalidOperationException();
 

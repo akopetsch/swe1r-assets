@@ -38,7 +38,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
         #region Properties (input)
 
         public string ObjFilename { get; }
-        public Block<Texture> TextureBlock { get; }
+        public Block<TextureBlockItem> TextureBlock { get; }
         public Func<string, ImageRgba32> ImageLoadFunc { get; }
         public ObjImporterConfiguration Configuration { get; }
 
@@ -54,7 +54,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         public ObjImporter(
             string objFilename, 
-            Block<Texture> textureBlock, 
+            Block<TextureBlockItem> textureBlock, 
             Func<string, ImageRgba32> imageLoadFunc, 
             ObjImporterConfiguration configuration)
         {

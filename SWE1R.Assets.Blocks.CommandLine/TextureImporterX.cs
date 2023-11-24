@@ -23,7 +23,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
         private void Change_130_IcicleTexture()
         {
             // import material
-            var textureBlock = Block.Load<Texture>(BlockDefaultFilenames.TextureBlock);
+            var textureBlock = Block.Load<TextureBlockItem>(BlockDefaultFilenames.TextureBlock);
             ImageRgba32 image = SystemDrawingImageRgba32Loader.LoadImageRgba32("TestTexture_1024x1024.png");
             MaterialImporter importer = new MaterialImporterFactory().Get(image, textureBlock);
             importer.Import();
@@ -46,7 +46,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
         private void Change_142_ModelSkyboxTexture()
         {
             // import material
-            var textureBlock = Block.Load<Texture>(BlockDefaultFilenames.TextureBlock);
+            var textureBlock = Block.Load<TextureBlockItem>(BlockDefaultFilenames.TextureBlock);
             ImageRgba32 image = SystemDrawingImageRgba32Loader.LoadImageRgba32("TestTexture_2048x2048_I8.png");
             MaterialImporter importer = new MaterialImporterFactory().Get(image, textureBlock);
             importer.Import();

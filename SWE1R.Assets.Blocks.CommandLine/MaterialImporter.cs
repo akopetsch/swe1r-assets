@@ -13,19 +13,23 @@ namespace SWE1R.Assets.Blocks.CommandLine
 {
     public abstract class MaterialImporter
     {
-        #region Properties
+        #region Properties (input)
 
         public ImageRgba32 Image { get; }
-        public Block<Texture> TextureBlock { get; }
+        public Block<TextureBlockItem> TextureBlock { get; }
+
+        #endregion
+
+        #region Properties (output)
 
         public Material Material { get; private set; }
-        public Texture Texture { get; private set; }
+        public TextureBlockItem TextureBlockItem { get; private set; }
 
         #endregion
 
         #region Constructor
 
-        public MaterialImporter(ImageRgba32 image, Block<Texture> textureBlock)
+        public MaterialImporter(ImageRgba32 image, Block<TextureBlockItem> textureBlock)
         {
             Image = image;
             TextureBlock = textureBlock;
@@ -37,14 +41,14 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         public void Import()
         {
-            Texture = CreateTexture();
-            Texture.Block = TextureBlock;
-            TextureBlock.Add(Texture);
+            TextureBlockItem = CreateTextureBlockItem();
+            TextureBlockItem.Block = TextureBlock;
+            TextureBlock.Add(TextureBlockItem);
 
             Material = CreateMaterial();
         }
 
-        protected abstract Texture CreateTexture();
+        protected abstract TextureBlockItem CreateTextureBlockItem();
 
         protected virtual Material CreateMaterial() =>
             new Material() {
@@ -59,7 +63,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             (mt.Width, mt.Height) = GetSize();
             (mt.Width_Unk, mt.Height_Unk) = GetSizeUnk();
             mt.Children[0] = CreateMaterialTextureChild();
-            mt.TextureIndex = Texture.Index;
+            mt.TextureIndex = TextureBlockItem.Index;
             return mt;
         }
 

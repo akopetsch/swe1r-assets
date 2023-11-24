@@ -65,7 +65,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
 
             // load
             var modelBlock = Block.Load<Model>(BlockDefaultFilenames.ModelBlock);
-            var textureBlock = Block.Load<Texture>(BlockDefaultFilenames.TextureBlock);
+            var textureBlock = Block.Load<TextureBlockItem>(BlockDefaultFilenames.TextureBlock);
             Model model = modelBlock[170]; // 170 = Part_Upgrade_TopSpeed_Plug3ThrustCoil
             model.Load(out ByteSerializerContext byteSerializerContext);
 

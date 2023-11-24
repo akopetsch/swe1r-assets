@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.Metadata.IdNames
                 { typeof(Model), ModelBlockIdNames.All.ToList() },
                 { typeof(Spline), SplineBlockIdNames.All.ToList() },
                 { typeof(Sprite), SpriteBlockIdNames.All.ToList() },
-                { typeof(Texture), TextureBlockIdNames.All.ToList() },
+                { typeof(TextureBlockItem), TextureBlockIdNames.All.ToList() },
         };
 
         public static IEnumerable<string> GetAll<TBlockItem>() where TBlockItem : BlockItem =>

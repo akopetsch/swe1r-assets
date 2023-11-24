@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         #region Methods (export)
 
-        public ImageRgba32 Hack_ExportEffectiveImage(Block<Texture> textureBlock) // HACK: ExportEffectiveImage
+        public ImageRgba32 Hack_ExportEffectiveImage(Block<TextureBlockItem> textureBlock) // HACK: ExportEffectiveImage
         {
             if (Texture != null)
             {

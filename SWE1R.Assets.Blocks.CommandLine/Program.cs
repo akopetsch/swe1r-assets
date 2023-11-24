@@ -138,7 +138,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             RunListOptions<Sprite>(options);
 
         private static int RunListTexturesOptions(ListTexturesOptions options) =>
-            RunListOptions<Texture>(options);
+            RunListOptions<TextureBlockItem>(options);
 
         private static int RunListOptions<TItem>(FilenameOptions options) where TItem : BlockItem, new()
         {

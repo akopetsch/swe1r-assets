@@ -9,7 +9,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
 {
     public class MaterialImporterFactory
     {
-        public MaterialImporter Get(ImageRgba32 imageRgba32, Block<Texture> textureBlock) =>
+        public MaterialImporter Get(ImageRgba32 imageRgba32, Block<TextureBlockItem> textureBlock) =>
             imageRgba32.HasPalette ?
                 new ColorRgba5551MaterialImporter(imageRgba32, textureBlock) :
                 new ColorRgba32MaterialImporter(imageRgba32, textureBlock);

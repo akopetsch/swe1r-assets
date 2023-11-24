@@ -12,7 +12,7 @@
     <None Remove="Resources\Racer.csv" />
     <None Remove="Resources\Spline.csv" />
     <None Remove="Resources\Sprite.csv" />
-    <None Remove="Resources\Texture.csv" />
+    <None Remove="Resources\TextureBlockItem.csv" />
     <None Remove="Resources\Track.csv" />
   </ItemGroup>
 
@@ -40,7 +40,7 @@
     <EmbeddedResource Include="Resources\Racer.csv" />
     <EmbeddedResource Include="Resources\Spline.csv" />
     <EmbeddedResource Include="Resources\Sprite.csv" />
-    <EmbeddedResource Include="Resources\Texture.csv" />
+    <EmbeddedResource Include="Resources\TextureBlockItem.csv" />
     <EmbeddedResource Include="Resources\Track.csv" />
   </ItemGroup>
 

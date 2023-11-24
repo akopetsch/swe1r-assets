@@ -8,16 +8,26 @@ using System;
 
 namespace SWE1R.Assets.Blocks.TextureBlock
 {
-    public class Texture : BlockItem<PixelsPart, PalettePart>
+    public class TextureBlockItem : BlockItem<PixelsPart, PalettePart>
     {
+        #region Properties
+
         public PixelsPart PixelsPart => Part1;
         public PalettePart PalettePart => Part2;
 
         public ColorRgba5551[] PaletteColors { get; set; }
 
-        public Texture() : base() { }
-        public Texture(Texture source) : base(source) { }
-        
+        #endregion
+
+        #region Constructor
+
+        public TextureBlockItem() : base() { }
+        public TextureBlockItem(TextureBlockItem source) : base(source) { }
+
+        #endregion
+
+        #region Methods
+
         public override void Load(out ByteSerializerContext context)
         {
             context = null;
@@ -29,6 +39,8 @@ namespace SWE1R.Assets.Blocks.TextureBlock
         public override void Save(out ByteSerializerContext context) => 
             throw new NotImplementedException();
 
-        public override BlockItem Clone() => new Texture(this);
+        public override BlockItem Clone() => new TextureBlockItem(this);
+
+        #endregion
     }
 }

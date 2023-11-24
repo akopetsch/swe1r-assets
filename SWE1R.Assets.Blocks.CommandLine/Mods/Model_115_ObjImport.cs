@@ -24,7 +24,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
 
             // load
             var modelBlock = Block.Load<Model>(BlockDefaultFilenames.ModelBlock);
-            var textureBlock = Block.Load<Texture>(BlockDefaultFilenames.TextureBlock);
+            var textureBlock = Block.Load<TextureBlockItem>(BlockDefaultFilenames.TextureBlock);
             Model model = modelBlock[115]; // 115 = tatooine training
             model.Load(out ByteSerializerContext byteSerializerContext);
 

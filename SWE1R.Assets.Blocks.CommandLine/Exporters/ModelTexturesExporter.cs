@@ -14,12 +14,12 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
 {
     public class ModelTexturesExporter : BlockItemExporter<Model>
     {
-        public Block<Texture> TextureBlock { get; }
+        public Block<TextureBlockItem> TextureBlock { get; }
 
         public ModelTexturesExporter(string blockPath, string textureBlockPath, int[] indices) : 
             base(blockPath, indices)
         {
-            TextureBlock = new Block<Texture>();
+            TextureBlock = new Block<TextureBlockItem>();
             TextureBlock.Load(textureBlockPath);
         }
 

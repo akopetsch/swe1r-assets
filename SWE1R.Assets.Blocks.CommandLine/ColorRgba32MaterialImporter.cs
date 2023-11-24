@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
     {
         #region Constructor
 
-        public ColorRgba32MaterialImporter(ImageRgba32 image, Block<Texture> textureBlock) : 
+        public ColorRgba32MaterialImporter(ImageRgba32 image, Block<TextureBlockItem> textureBlock) : 
             base(image, textureBlock)
         { }
 
@@ -21,9 +21,9 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         #region Methods
 
-        protected override Texture CreateTexture()
+        protected override TextureBlockItem CreateTextureBlockItem()
         {
-            var texture = new Texture();
+            var textureBlockItem = new TextureBlockItem();
 
             int w = Image.Width;
             int h = Image.Height;
@@ -40,12 +40,12 @@ namespace SWE1R.Assets.Blocks.CommandLine
                     Array.Copy(bytes, 0, pixels, i * bytes.Length, bytes.Length);
                 }
             }
-            texture.PixelsPart.Bytes = pixels;
+            textureBlockItem.PixelsPart.Bytes = pixels;
 
             // palette
-            texture.PalettePart.Bytes = new byte[] { };
+            textureBlockItem.PalettePart.Bytes = new byte[] { };
 
-            return texture;
+            return textureBlockItem;
         }
 
         // mt_w: 16, 32, 64

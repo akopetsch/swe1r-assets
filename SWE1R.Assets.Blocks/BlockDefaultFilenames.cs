@@ -20,7 +20,7 @@ namespace SWE1R.Assets.Blocks
             { typeof(Model), "out_modelblock.bin" },
             { typeof(Spline), "out_splineblock.bin" },
             { typeof(Sprite), "out_spriteblock.bin" },
-            { typeof(Texture), "out_textureblock.bin" },
+            { typeof(TextureBlockItem), "out_textureblock.bin" },
         };
 
         #endregion
@@ -30,7 +30,7 @@ namespace SWE1R.Assets.Blocks
         public static string ModelBlock { get; } = GetDefaultFilename<Model>();
         public static string SplineBlock { get; } = GetDefaultFilename<Spline>();
         public static string SpriteBlock { get; } = GetDefaultFilename<Sprite>();
-        public static string TextureBlock { get; } = GetDefaultFilename<Texture>();
+        public static string TextureBlock { get; } = GetDefaultFilename<TextureBlockItem>();
 
         #endregion
 
