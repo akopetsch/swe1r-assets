@@ -42,8 +42,11 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
         {
             ModelBlockItem modelBlockItem = DeserializeItem(index, out ByteSerializerContext context);
 
-            var deserialized = DbModelStructures.Load(index, context.Graph);
-            var fromDatabase = DbModelStructures.Load(index, _assetsDbContextFixture.AssetsDbContext);
+            var deserialized = new DbModelStructures(index);
+            deserialized.Load(context.Graph);
+
+            var fromDatabase = new DbModelStructures(index);
+            fromDatabase.Load(_assetsDbContextFixture.AssetsDbContext);
 
             Assert.Equal(fromDatabase, deserialized);
         }

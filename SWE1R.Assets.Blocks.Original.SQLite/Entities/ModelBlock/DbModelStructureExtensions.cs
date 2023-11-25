@@ -6,9 +6,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
     public static class DbModelStructureExtensions
     {
-        public static IEnumerable<T> OfModel<T>(this IEnumerable<T> source, int model) 
+        public static IEnumerable<T> OfBlockItem<T>(this IEnumerable<T> source, int blockItemIndex) 
             where T : DbBlockItemStructure =>
-            source.Where(x => x.BlockItem == model);
+            source.Where(x => x.BlockItem == blockItemIndex);
 
         public static IEnumerable<T> OrderByOffset<T>(this IEnumerable<T> source)
             where T : DbBlockItemStructure =>

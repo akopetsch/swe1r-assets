@@ -15,14 +15,8 @@ using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
-    public class DbModelStructures : IEquatable<DbModelStructures>
+    public class DbModelStructures : DbBlockItemStructures, IEquatable<DbModelStructures>
     {
-        #region Properties
-
-        public int Model { get; }
-
-        #endregion
-
         #region Properties (entities)
 
         public List<DbAnimation> Anims { get; set; }
@@ -61,111 +55,83 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 
         #region Constructor
 
-        private DbModelStructures(int model) =>
-            Model = model;
+        public DbModelStructures(int blockItemIndex) : 
+            base(blockItemIndex)
+        { }
 
         #endregion
 
-        #region Methods (load)
+        #region Methods
 
-        public static DbModelStructures Load(int model, AssetsDbContext context)
+        public override void Load(AssetsDbContext context)
         {
-            var dbModelStructures = new DbModelStructures(model);
+            Anims = GetStructures(context.Anims);
+            DoubleMaterials = GetStructures(context.DoubleMaterials);
 
-            // use DbSet.AsNoTracking() to improve performance:
-            // https://stackoverflow.com/a/18169894
+            IndicesChunks01 = GetStructures(context.IndicesChunks01);
+            IndicesChunks03 = GetStructures(context.IndicesChunks03);
+            IndicesChunks05 = GetStructures(context.IndicesChunks05);
+            IndicesChunks06 = GetStructures(context.IndicesChunks06);
 
-            dbModelStructures.Anims = context.Anims.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.DoubleMaterials = context.DoubleMaterials.AsNoTracking().OfModel(model).OrderByOffset().ToList();
+            Mappings = GetStructures(context.Mappings);
+            MappingChildren = GetStructures(context.MappingChildren);
+            MappingSubs = GetStructures(context.MappingSubs);
+            Materials = GetStructures(context.Materials);
+            MaterialProperties = GetStructures(context.MaterialProperties);
+            MaterialTextures = GetStructures(context.MaterialTextures);
+            MaterialTextureChilds = GetStructures(context.MaterialTextureChilds);
+            Meshes = GetStructures(context.Meshes);
+            Vertices = GetStructures(context.Vertices);
 
-            dbModelStructures.IndicesChunks01 = context.IndicesChunks01.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.IndicesChunks03 = context.IndicesChunks03.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.IndicesChunks05 = context.IndicesChunks05.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.IndicesChunks06 = context.IndicesChunks06.AsNoTracking().OfModel(model).OrderByOffset().ToList();
+            Nodes3064 = GetStructures(context.Nodes3064);
+            Nodes5064 = GetStructures(context.Nodes5064);
+            Nodes5065 = GetStructures(context.Nodes5065);
+            Nodes5066 = GetStructures(context.Nodes5066);
+            NodesD064 = GetStructures(context.NodesD064);
+            NodesD065 = GetStructures(context.NodesD065);
+            NodesD066 = GetStructures(context.NodesD066);
 
-            dbModelStructures.Mappings = context.Mappings.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.MappingChildren = context.MappingChildren.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.MappingSubs = context.MappingSubs.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.Materials = context.Materials.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.MaterialProperties = context.MaterialProperties.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.MaterialTextures = context.MaterialTextures.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.MaterialTextureChilds = context.MaterialTextureChilds.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.Meshes = context.Meshes.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.Vertices = context.Vertices.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-
-            dbModelStructures.Nodes3064 = context.Nodes3064.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.Nodes5064 = context.Nodes5064.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.Nodes5065 = context.Nodes5065.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.Nodes5066 = context.Nodes5066.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.NodesD064 = context.NodesD064.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.NodesD065 = context.NodesD065.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.NodesD066 = context.NodesD066.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-
-            dbModelStructures.Models = context.Headers.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.HeaderNodes = context.HeaderNodes.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.HeaderAltN = context.HeaderAltN.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.Data_LStr = context.Data_LStr.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-            dbModelStructures.Data_Int = context.Data_Int.AsNoTracking().OfModel(model).OrderByOffset().ToList();
-
-            return dbModelStructures;
+            Models = GetStructures(context.Headers);
+            HeaderNodes = GetStructures(context.HeaderNodes);
+            HeaderAltN = GetStructures(context.HeaderAltN);
+            Data_LStr = GetStructures(context.Data_LStr);
+            Data_Int = GetStructures(context.Data_Int);
         }
 
-        public static DbModelStructures Load(int model, Graph g)
+        public override void Load(Graph g)
         {
-            var dbModelStructures = new DbModelStructures(model);
+            Anims = GetStructures<Animation, DbAnimation>(g);
+            DoubleMaterials = GetStructures<DoubleMaterial, DbDoubleMaterial>(g);
 
-            dbModelStructures.Anims = Get<Animation, DbAnimation>(g).OrderByOffset().ToList();
-            dbModelStructures.DoubleMaterials = Get<DoubleMaterial, DbDoubleMaterial>(g).OrderByOffset().ToList();
+            IndicesChunks01 = GetStructures<IndicesChunk01, DbIndicesChunk01>(g);
+            IndicesChunks03 = GetStructures<IndicesChunk03, DbIndicesChunk03>(g);
+            IndicesChunks05 = GetStructures<IndicesChunk05, DbIndicesChunk05>(g);
+            IndicesChunks06 = GetStructures<IndicesChunk06, DbIndicesChunk06>(g);
 
-            dbModelStructures.IndicesChunks01 = Get<IndicesChunk01, DbIndicesChunk01>(g).OrderByOffset().ToList();
-            dbModelStructures.IndicesChunks03 = Get<IndicesChunk03, DbIndicesChunk03>(g).OrderByOffset().ToList();
-            dbModelStructures.IndicesChunks05 = Get<IndicesChunk05, DbIndicesChunk05>(g).OrderByOffset().ToList();
-            dbModelStructures.IndicesChunks06 = Get<IndicesChunk06, DbIndicesChunk06>(g).OrderByOffset().ToList();
+            Mappings = GetStructures<Mapping, DbMapping>(g);
+            MappingChildren = GetStructures<MappingChild, DbMappingChild>(g);
+            MappingSubs = GetStructures<MappingSub, DbMappingSub>(g);
+            Materials = GetStructures<Material, DbMaterial>(g);
+            MaterialProperties = GetStructures<MaterialProperties, DbMaterialProperties>(g);
+            MaterialTextures = GetStructures<MaterialTexture, DbMaterialTexture>(g);
+            MaterialTextureChilds = GetStructures<MaterialTextureChild, DbMaterialTextureChild>(g);
+            Meshes = GetStructures<Mesh, DbMesh>(g);
+            Vertices = GetStructures<Vertex, DbVertex>(g);
 
-            dbModelStructures.Mappings = Get<Mapping, DbMapping>(g).OrderByOffset().ToList();
-            dbModelStructures.MappingChildren = Get<MappingChild, DbMappingChild>(g).OrderByOffset().ToList();
-            dbModelStructures.MappingSubs = Get<MappingSub, DbMappingSub>(g).OrderByOffset().ToList();
-            dbModelStructures.Materials = Get<Material, DbMaterial>(g).OrderByOffset().ToList();
-            dbModelStructures.MaterialProperties = Get<MaterialProperties, DbMaterialProperties>(g).OrderByOffset().ToList();
-            dbModelStructures.MaterialTextures = Get<MaterialTexture, DbMaterialTexture>(g).OrderByOffset().ToList();
-            dbModelStructures.MaterialTextureChilds = Get<MaterialTextureChild, DbMaterialTextureChild>(g).OrderByOffset().ToList();
-            dbModelStructures.Meshes = Get<Mesh, DbMesh>(g).OrderByOffset().ToList();
-            dbModelStructures.Vertices = Get<Vertex, DbVertex>(g).OrderByOffset().ToList();
+            Nodes3064 = GetStructures<MeshGroup3064, DbNode3064>(g);
+            Nodes5064 = GetStructures<Group5064, DbNode5064>(g);
+            Nodes5065 = GetStructures<Group5065, DbNode5065>(g);
+            Nodes5066 = GetStructures<Group5066, DbNode5066>(g);
+            NodesD064 = GetStructures<TransformableD064, DbNodeD064>(g);
+            NodesD065 = GetStructures<TransformableD065, DbNodeD065>(g);
+            NodesD066 = GetStructures<UnknownD066, DbNodeD066>(g);
 
-            dbModelStructures.Nodes3064 = Get<MeshGroup3064, DbNode3064>(g).OrderByOffset().ToList();
-            dbModelStructures.Nodes5064 = Get<Group5064, DbNode5064>(g).OrderByOffset().ToList();
-            dbModelStructures.Nodes5065 = Get<Group5065, DbNode5065>(g).OrderByOffset().ToList();
-            dbModelStructures.Nodes5066 = Get<Group5066, DbNode5066>(g).OrderByOffset().ToList();
-            dbModelStructures.NodesD064 = Get<TransformableD064, DbNodeD064>(g).OrderByOffset().ToList();
-            dbModelStructures.NodesD065 = Get<TransformableD065, DbNodeD065>(g).OrderByOffset().ToList();
-            dbModelStructures.NodesD066 = Get<UnknownD066, DbNodeD066>(g).OrderByOffset().ToList();
-
-            dbModelStructures.Models = Get<Model, DbModelHeader>(g).OrderByOffset().ToList();
-            dbModelStructures.HeaderNodes = Get<FlaggedNodeOrInteger, DbModelHeaderNode>(g).OrderByOffset().ToList();
-            dbModelStructures.HeaderAltN = Get<FlaggedNodeOrGroup5066ChildReference, DbModelHeaderAltN> (g).OrderByOffset().ToList();
-            dbModelStructures.Data_LStr = Get<LightStreakOrInteger, DbDataLStr>(g, x => x.LightStreak != null).OrderByOffset().ToList();
-            dbModelStructures.Data_Int = Get<LightStreakOrInteger, DbDataInt>(g, x => x.Integer.HasValue).OrderByOffset().ToList();
-
-            return dbModelStructures;
+            Models = GetStructures<Model, DbModelHeader>(g);
+            HeaderNodes = GetStructures<FlaggedNodeOrInteger, DbModelHeaderNode>(g);
+            HeaderAltN = GetStructures<FlaggedNodeOrGroup5066ChildReference, DbModelHeaderAltN>(g);
+            Data_LStr = GetStructures<LightStreakOrInteger, DbDataLStr>(g, x => x.LightStreak != null);
+            Data_Int = GetStructures<LightStreakOrInteger, DbDataInt>(g, x => x.Integer.HasValue);
         }
-
-        private static IEnumerable<TDatabase> Get<TSource, TDatabase>(Graph graph, Func<TSource, bool> filter = null) 
-            where TDatabase : DbBlockItemStructure<TSource>, new()
-        {
-            var valueComponents = graph.GetValueComponents<TSource>();
-            if (filter != null)
-                valueComponents = valueComponents.Where(x => filter.Invoke((TSource)x.Value));
-            foreach (var c in valueComponents)
-            {
-                var s = new TDatabase();
-                s.CopyFrom(c.Node);
-                yield return s;
-            }
-        }
-
-        #endregion
-
-        #region Methods (: IEquatable<DbModelStructures>)
 
         public bool Equals(DbModelStructures other)
         {

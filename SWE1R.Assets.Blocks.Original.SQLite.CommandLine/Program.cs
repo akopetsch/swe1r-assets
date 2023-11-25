@@ -28,14 +28,13 @@ public class Program
 
         var spriteBlock = new OriginalBlockProvider().LoadBlock<SpriteBlockItem>(SpriteBlockIdNames.Default);
 
-        // DbSprite
         foreach (SpriteBlockItem spriteBlockItem in spriteBlock)
         {
+            Console.WriteLine(spriteBlockItem.Index);
             spriteBlockItem.Load(out ByteSerializerContext byteSerializerContext);
-            Sprite sprite = spriteBlockItem.Sprite;
-            var dbSprite = new DbSprite();
-            dbSprite.CopyFrom(byteSerializerContext.Graph.GetValueComponent(sprite).Node);
-            assetsDbContext.Sprites.Add(dbSprite);
+            var dbSpriteStructures = new DbSpriteStructures(spriteBlockItem.Index.Value);
+            dbSpriteStructures.Load(byteSerializerContext.Graph);
+            assetsDbContext.AddSpriteStructures(dbSpriteStructures);
         }
         assetsDbContext.SaveChanges();
 

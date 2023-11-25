@@ -64,6 +64,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         #region Properties (Sprite)
 
         public DbSet<DbSprite> Sprites { get; set; }
+        public DbSet<DbSpritePage> SpritePages { get; set; }
 
         #endregion
 
@@ -117,6 +118,12 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
             HeaderAltN.AddRange(dbModelStructures.HeaderAltN);
             Data_LStr.AddRange(dbModelStructures.Data_LStr);
             Data_Int.AddRange(dbModelStructures.Data_Int);
+        }
+
+        public void AddSpriteStructures(DbSpriteStructures dbSpriteStructures)
+        {
+            Sprites.AddRange(dbSpriteStructures.Sprites);
+            SpritePages.AddRange(dbSpriteStructures.SpritePages);
         }
 
         #endregion

@@ -3,7 +3,6 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Nodes;
-using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
 using SWE1R.Assets.Blocks.SpriteBlock;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,6 +19,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
         public byte PageWidthAlignment { get; set; }
         public short Int16_6 { get; set; }
         public int P_Palette { get; set; }
+        public int? Palette_Length { get; set; }
         public short PagesCount { get; set; }
         public short Int16_E { get; set; }
         public int P_Pages { get; set; }
@@ -32,12 +32,13 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
 
             var sprite = (Sprite)node.Value;
 
-            Width = (short)sprite.Width;
-            Height = (short)sprite.Height;
-            Format = (byte)sprite.Format;
+            Width = sprite.Width;
+            Height = sprite.Height;
+            Format = sprite.Format;
             PageWidthAlignment = sprite.PageWidthAlignment;
             Int16_6 = sprite.Word_6;
             P_Palette = GetPropertyPointer(node, nameof(Sprite.Palette));
+            Palette_Length = sprite.Palette?.Length;
             PagesCount = sprite.PagesCount;
             Int16_E = sprite.Word_E;
             P_Pages = GetPropertyPointer(node, nameof(Sprite.Pages));
@@ -56,6 +57,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
             if (PageWidthAlignment != _other.PageWidthAlignment) return false;
             if (Int16_6 != _other.Int16_6) return false;
             if (P_Palette != _other.P_Palette) return false;
+            if (Palette_Length != _other.Palette_Length) return false;
             if (PagesCount != _other.PagesCount) return false;
             if (Int16_E != _other.Int16_E) return false;
             if (P_Pages != _other.P_Pages) return false;
@@ -65,15 +67,15 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
 
         public override bool Equals(object obj)
         {
-            if (obj is DbModelHeader)
-                return this.Equals((DbModelHeader)obj);
+            if (obj is DbSprite)
+                return this.Equals((DbSprite)obj);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
             HashCode.Combine(base.GetHashCode(),
-                HashCode.Combine(Width, Height, Format, PageWidthAlignment, Int16_6, P_Palette, PagesCount, Int16_E),
-                HashCode.Combine(P_Pages));
+                HashCode.Combine(Width, Height, Format, PageWidthAlignment, Int16_6, P_Palette, Palette_Length, PagesCount),
+                HashCode.Combine(Int16_E, P_Pages));
     }
 }
