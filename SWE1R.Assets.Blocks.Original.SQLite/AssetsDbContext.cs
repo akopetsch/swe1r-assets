@@ -8,6 +8,7 @@ using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes;
+using SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SQLite;
@@ -21,6 +22,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         public DbSet<BlockMetadata> Blocks { get; set; }
         public DbSet<BlockItemMetadata> BlockItems { get; set; }
         public DbSet<BlockItemMetadataByValue> BlockItemValues { get; set; }
+
+        #endregion
+
+        #region Properties (Model)
 
         public DbSet<DbAnimation> Anims { get; set; }
         public DbSet<DbDoubleMaterial> DoubleMaterials { get; set; }
@@ -53,6 +58,12 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         public DbSet<DbModelHeaderAltN> HeaderAltN { get; set; }
         public DbSet<DbDataLStr> Data_LStr { get; set; }
         public DbSet<DbDataInt> Data_Int { get; set; }
+
+        #endregion
+
+        #region Properties (Sprite)
+
+        public DbSet<DbSprite> Sprites { get; set; }
 
         #endregion
 

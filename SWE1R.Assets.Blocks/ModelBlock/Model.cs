@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock
 {
-    public abstract class Model
+    public abstract class Model : BlockItemValue
     {
         #region Properties (serialized)
 
@@ -41,12 +41,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         [Length(4)]
         [Order(5)] private char[] HEnd { get; set; } = "HEnd".ToCharArray();
-
-        #endregion
-
-        #region Properties (logical)
-
-        public ModelBlockItem BlockItem { get; set; }
 
         #endregion
 

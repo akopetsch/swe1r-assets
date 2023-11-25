@@ -44,7 +44,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             Matrix_34 = n.Matrix[2, 3];
         }
 
-        public override bool Equals(DbModelStructure<TransformableD064> other)
+        public override bool Equals(DbBlockItemStructure<TransformableD064> other)
         {
             var _other = (DbNodeD064)other;
 

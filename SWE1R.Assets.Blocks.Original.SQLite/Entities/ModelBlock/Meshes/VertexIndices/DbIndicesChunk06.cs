@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexIndices
 {
     [Table("Model_IndicesChunk06")]
-    public class DbIndicesChunk06 : DbModelStructure<IndicesChunk06>
+    public class DbIndicesChunk06 : DbBlockItemStructure<IndicesChunk06>
     {
         public byte Index0 { get; set; }
         public byte Index1 { get; set; }
@@ -32,7 +32,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
             Index5 = c.Index5;
         }
 
-        public override bool Equals(DbModelStructure<IndicesChunk06> other)
+        public override bool Equals(DbBlockItemStructure<IndicesChunk06> other)
         {
             var _other = (DbIndicesChunk06)other;
 

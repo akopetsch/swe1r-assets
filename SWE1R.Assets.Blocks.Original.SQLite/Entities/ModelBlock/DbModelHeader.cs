@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
     [Table("Model_Header")]
-    public class DbModelHeader : DbModelStructure<Model>
+    public class DbModelHeader : DbBlockItemStructure<Model>
     {
         public string Type { get; set; }
         public int? Nodes_Count { get; set; }
@@ -30,7 +30,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             AltN_Count = model.AltN?.Count;
         }
 
-        public override bool Equals(DbModelStructure<Model> other)
+        public override bool Equals(DbBlockItemStructure<Model> other)
         {
             var _other = (DbModelHeader)other;
 

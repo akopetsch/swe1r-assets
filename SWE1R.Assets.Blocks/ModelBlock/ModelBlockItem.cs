@@ -29,8 +29,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         public override void Load(out ByteSerializerContext context)
         {
-            using (var ms = new MemoryStream(Data.Bytes))
-                Model = new ByteSerializer().Deserialize<Model>(ms, Endianness.BigEndian, out context);
+            using var ms = new MemoryStream(Data.Bytes);
+            Model = new ByteSerializer().Deserialize<Model>(ms, Endianness.BigEndian, out context);
             Model.BlockItem = this;
         }
 

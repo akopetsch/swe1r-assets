@@ -12,7 +12,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
     /// <summary>
     /// <see href="https://github.com/OpenSWE1R/swe1r-re/blob/master/swep1rcr.exe/Sprites.md">SpriteTexture</see>
     /// </summary>
-    public class Sprite
+    public class Sprite : BlockItemValue
     {
         #region Properties (serialization)
 

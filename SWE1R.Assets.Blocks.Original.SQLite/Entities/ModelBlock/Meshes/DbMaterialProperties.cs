@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
     [Table("Model_MaterialProperties")]
-    public class DbMaterialProperties : DbModelStructure<MaterialProperties>
+    public class DbMaterialProperties : DbBlockItemStructure<MaterialProperties>
     {
         public int AlphaBpp { get; set; }
         public short Word_4 { get; set; }
@@ -50,7 +50,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             Byte_31 = mp.Byte_31;
         }
 
-        public override bool Equals(DbModelStructure<MaterialProperties> other)
+        public override bool Equals(DbBlockItemStructure<MaterialProperties> other)
         {
             var _other = (DbMaterialProperties)other;
 

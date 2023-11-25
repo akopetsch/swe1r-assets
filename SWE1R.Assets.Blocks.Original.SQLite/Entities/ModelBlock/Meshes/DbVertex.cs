@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
     [Table("Model_Vertex")]
-    public class DbVertex : DbModelStructure<Vertex>
+    public class DbVertex : DbBlockItemStructure<Vertex>
     {
         public short P_X { get; set; }
         public short P_Y { get; set; }
@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             B_F = v.Byte_F;
         }
 
-        public override bool Equals(DbModelStructure<Vertex> other)
+        public override bool Equals(DbBlockItemStructure<Vertex> other)
         {
             var _other = (DbVertex)other;
 

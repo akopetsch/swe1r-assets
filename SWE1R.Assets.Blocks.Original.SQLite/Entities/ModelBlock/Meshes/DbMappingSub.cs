@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
     [Table("Model_MappingSub")]
-    public class DbMappingSub : DbModelStructure<MappingSub>
+    public class DbMappingSub : DbBlockItemStructure<MappingSub>
     {
         public int Int_0 { get; set; }
         public int Int_1 { get; set; }
@@ -26,7 +26,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             P_Child = GetPropertyPointer(node, nameof(m.Child));
         }
 
-        public override bool Equals(DbModelStructure<MappingSub> other)
+        public override bool Equals(DbBlockItemStructure<MappingSub> other)
         {
             var _other = (DbMappingSub)other;
 

@@ -7,7 +7,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    public abstract class DbNode<TSource> : DbModelStructure<TSource> 
+    public abstract class DbNode<TSource> : DbBlockItemStructure<TSource> 
         where TSource : FlaggedNode
     {
         public int Bitfield1 { get; set; }
@@ -33,7 +33,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             P_Children = GetPropertyPointer(node, nameof(n.Children));
         }
 
-        public override bool Equals(DbModelStructure<TSource> other)
+        public override bool Equals(DbBlockItemStructure<TSource> other)
         {
             var _other = (DbNode<TSource>)other;
 

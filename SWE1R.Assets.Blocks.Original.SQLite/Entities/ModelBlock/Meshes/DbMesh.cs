@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
     [Table("Model_Mesh")]
-    public class DbMesh : DbModelStructure<Mesh>
+    public class DbMesh : DbBlockItemStructure<Mesh>
     {
         public int P_Material { get; set; }
         public int P_Mapping { get; set; }
@@ -65,7 +65,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             Unk_Count = m.Unk_Count;
         }
 
-        public override bool Equals(DbModelStructure<Mesh> other)
+        public override bool Equals(DbBlockItemStructure<Mesh> other)
         {
             var _other = (DbMesh)other;
 

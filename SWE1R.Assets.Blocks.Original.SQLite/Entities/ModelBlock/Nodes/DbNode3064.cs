@@ -34,7 +34,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             Bounds_Max_Z = n.Bounds.Max.Z;
         }
 
-        public override bool Equals(DbModelStructure<MeshGroup3064> other)
+        public override bool Equals(DbBlockItemStructure<MeshGroup3064> other)
         {
             var _other = (DbNode3064)other;
 

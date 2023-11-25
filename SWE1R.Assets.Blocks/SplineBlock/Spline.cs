@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.SplineBlock
 {
-    public class Spline
+    public class Spline : BlockItemValue
     {
         [Order(0)] public SplineSegmentHeader Header { get; set; }
         

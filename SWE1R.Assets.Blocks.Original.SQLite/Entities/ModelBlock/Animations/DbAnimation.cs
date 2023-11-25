@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 {
     [Table("Model_Anim")]
-    public class DbAnimation : DbModelStructure<Animation>
+    public class DbAnimation : DbBlockItemStructure<Animation>
     {
         public float Float_0f4 { get; set; }
         public float Float_0f8 { get; set; }
@@ -62,7 +62,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
                 GetValuePosition(node.Graph, animation.TargetOrInteger.Target.Value);
         }
 
-        public override bool Equals(DbModelStructure<Animation> other)
+        public override bool Equals(DbBlockItemStructure<Animation> other)
         {
             var _other = (DbAnimation)other;
 

@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
     [Table("Model_MaterialTextureChild")]
-    public class DbMaterialTextureChild : DbModelStructure<MaterialTextureChild>
+    public class DbMaterialTextureChild : DbBlockItemStructure<MaterialTextureChild>
     {
         public byte Byte_1 { get; set; }
         public byte Byte_2 { get; set; }
@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             Byte_f = c.Byte_f;
         }
 
-        public override bool Equals(DbModelStructure<MaterialTextureChild> other)
+        public override bool Equals(DbBlockItemStructure<MaterialTextureChild> other)
         {
             var _other = (DbMaterialTextureChild)other;
 

@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
     [Table("Model_Mapping")]
-    public class DbMapping : DbModelStructure<Mapping>
+    public class DbMapping : DbBlockItemStructure<Mapping>
     {
         public short Word_00 { get; set; }
 
@@ -78,7 +78,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             Word_32 = m.Word_32;
         }
 
-        public override bool Equals(DbModelStructure<Mapping> other)
+        public override bool Equals(DbBlockItemStructure<Mapping> other)
         {
             var _other = (DbMapping)other;
 

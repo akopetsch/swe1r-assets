@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 {
     [Table("Model_DoubleMaterial")]
-    public class DbDoubleMaterial : DbModelStructure<DoubleMaterial>
+    public class DbDoubleMaterial : DbBlockItemStructure<DoubleMaterial>
     {
         public int P_Foo1 { get; set; }
         public int P_Foo2 { get; set; }
@@ -24,7 +24,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
             P_Foo2 = GetPropertyPointer(node, nameof(dm.Foo2));
         }
 
-        public override bool Equals(DbModelStructure<DoubleMaterial> other)
+        public override bool Equals(DbBlockItemStructure<DoubleMaterial> other)
         {
             var _other = (DbDoubleMaterial)other;
 

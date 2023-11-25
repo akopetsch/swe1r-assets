@@ -11,7 +11,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
     [DebuggerDisplay("{IdField,nq}")]
     [Table("Model_MaterialTexture")]
-    public class DbMaterialTexture : DbModelStructure<MaterialTexture>, IEquatable<DbMaterialTexture>
+    public class DbMaterialTexture : DbBlockItemStructure<MaterialTexture>, IEquatable<DbMaterialTexture>
     {
         public int Mask_Unk { get; set; }
         public short Width4 { get; set; }

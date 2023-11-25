@@ -29,6 +29,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         {
             using var ms = new MemoryStream(Bytes);
             Sprite = new ByteSerializer().Deserialize<Sprite>(ms, Endianness.BigEndian, out context);
+            Sprite.BlockItem = this;
         }
 
         public override void Unload() => Sprite = null;

@@ -150,7 +150,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         }
 
         private static IEnumerable<TDatabase> Get<TSource, TDatabase>(Graph graph, Func<TSource, bool> filter = null) 
-            where TDatabase : DbModelStructure<TSource>, new()
+            where TDatabase : DbBlockItemStructure<TSource>, new()
         {
             var valueComponents = graph.GetValueComponents<TSource>();
             if (filter != null)

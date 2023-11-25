@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
     [Table("Model_Material")]
-    public class DbMaterial : DbModelStructure<Material>
+    public class DbMaterial : DbBlockItemStructure<Material>
     {
         public int Int { get; set; }
         public short Width_Unk_Dividend { get; set; }
@@ -30,7 +30,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             P_Properties = GetPropertyPointer(node, nameof(m.Properties));
         }
 
-        public override bool Equals(DbModelStructure<Material> other)
+        public override bool Equals(DbBlockItemStructure<Material> other)
         {
             var _other = (DbMaterial)other;
 

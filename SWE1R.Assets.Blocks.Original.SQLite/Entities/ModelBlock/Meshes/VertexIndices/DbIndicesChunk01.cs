@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexIndices
 {
     [Table("Model_IndicesChunk01")]
-    public class DbIndicesChunk01 : DbModelStructure<IndicesChunk01>
+    public class DbIndicesChunk01 : DbBlockItemStructure<IndicesChunk01>
     {
         public short Length { get; set; }
         public int MaxIndex { get; set; }
@@ -26,7 +26,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
             P_StartVertex = GetValuePosition(node.Graph, c.StartVertex.Value);
         }
 
-        public override bool Equals(DbModelStructure<IndicesChunk01> other)
+        public override bool Equals(DbBlockItemStructure<IndicesChunk01> other)
         {
             var _other = (DbIndicesChunk01)other;
 

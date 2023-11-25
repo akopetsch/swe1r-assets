@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
     [Table("Model_Data_Int")]
-    public class DbDataInt : DbModelStructure<LightStreakOrInteger>
+    public class DbDataInt : DbBlockItemStructure<LightStreakOrInteger>
     {
         public int Value { get; set; }
 
@@ -22,7 +22,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Value = lightStreakOrInteger.Integer.Value;
         }
 
-        public override bool Equals(DbModelStructure<LightStreakOrInteger> other)
+        public override bool Equals(DbBlockItemStructure<LightStreakOrInteger> other)
         {
             var _other = (DbDataInt)other;
 

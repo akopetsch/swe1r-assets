@@ -50,7 +50,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             Vector_Z = n.Vector.Z;
         }
 
-        public override bool Equals(DbModelStructure<TransformableD065> other)
+        public override bool Equals(DbBlockItemStructure<TransformableD065> other)
         {
             var _other = (DbNodeD065)other;
 

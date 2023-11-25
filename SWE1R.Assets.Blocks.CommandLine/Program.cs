@@ -10,18 +10,13 @@ using SWE1R.Assets.Blocks.SplineBlock;
 using SWE1R.Assets.Blocks.SpriteBlock;
 using SWE1R.Assets.Blocks.TestApp.ItemListers;
 using SWE1R.Assets.Blocks.TextureBlock;
+using SWE1R.Assets.Blocks.Utils;
 using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine
 {
     public class Program
     {
-        #region Constants
-
-        private const int OK = 0;
-
-        #endregion
-
         #region Clases (options)
 
         #region list-*
@@ -115,7 +110,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                     (ScratchpadOptions opts) => RunScratchpadOptions(opts),
                     errs => 1); ;
             if (Debugger.IsAttached)
-                PromptExit();
+                ConsoleUtils.PromptExit();
             return result;
         }
 
@@ -144,7 +139,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
         {
             var block = Block.Load<TItem>(options.BlockPath);
             BlockItemListerFactory.Get(block, Console.WriteLine).Run();
-            return OK;
+            return ExitCodes.Success;
         }
 
         #endregion
@@ -155,14 +150,14 @@ namespace SWE1R.Assets.Blocks.CommandLine
         {
             var exporter = new SpriteExporter(options.BlockPath, options.Indices.ToArray());
             exporter.Export();
-            return OK;
+            return ExitCodes.Success;
         }
 
         private static int RunExportModelsTexturesOptions(ExportModelTexturesOptions options)
         {
             var exporter = new ModelTexturesExporter(options.BlockPath, options.TextureBlockPath, options.Indices.ToArray());
             exporter.Export();
-            return OK;
+            return ExitCodes.Success;
         }
 
         private static int RunModModelVertexAlphaOptions(ModModelVertexAlphaOptions options)
@@ -171,13 +166,13 @@ namespace SWE1R.Assets.Blocks.CommandLine
             int[] indices = GetIndices(options.Indices, block);
             foreach (int i in indices)
                 new ModModelVertexAlpha(options.BlockPath, i).Run();
-            return OK;
+            return ExitCodes.Success;
         }
 
         private static int RunScratchpadOptions(ScratchpadOptions options)
         {
             new Scratchpad();
-            return OK;
+            return ExitCodes.Success;
         }
 
         #endregion
@@ -197,13 +192,6 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 return Enumerable.Range(0, block.Count).ToArray();
             else
                 return indices.ToArray();
-        }
-
-        private static void PromptExit()
-        {
-            Console.Write("Press enter to exit.");
-            while (Console.ReadKey().Key != ConsoleKey.Enter) ;
-            Console.WriteLine();
         }
 
         #endregion

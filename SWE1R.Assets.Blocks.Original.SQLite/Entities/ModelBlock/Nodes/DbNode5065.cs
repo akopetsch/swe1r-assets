@@ -22,7 +22,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             Int = n.Int;
         }
 
-        public override bool Equals(DbModelStructure<Group5065> other)
+        public override bool Equals(DbBlockItemStructure<Group5065> other)
         {
             var _other = (DbNode5065)other;
 

@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
     [Table("Model_HeaderNode")]
-    public class DbModelHeaderNode : DbModelStructure<FlaggedNodeOrInteger>
+    public class DbModelHeaderNode : DbBlockItemStructure<FlaggedNodeOrInteger>
     {
         public int Value { get; set; }
 
@@ -22,7 +22,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
                 GetValuePosition(node.Graph, flaggedNodeOrInteger.FlaggedNode);
         }
 
-        public override bool Equals(DbModelStructure<FlaggedNodeOrInteger> other)
+        public override bool Equals(DbBlockItemStructure<FlaggedNodeOrInteger> other)
         {
             var _other = (DbModelHeaderNode)other;
 
