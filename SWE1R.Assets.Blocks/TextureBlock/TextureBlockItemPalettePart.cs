@@ -8,10 +8,10 @@ using System.IO;
 
 namespace SWE1R.Assets.Blocks.TextureBlock
 {
-    public class PalettePart : BlockItemPart
+    public class TextureBlockItemPalettePart : BlockItemPart
     {
-        public PalettePart() : base() { }
-        private PalettePart(PalettePart source) : base(source) { }
+        public TextureBlockItemPalettePart() : base() { }
+        private TextureBlockItemPalettePart(TextureBlockItemPalettePart source) : base(source) { }
         
         public ColorRgba5551[] GetColors()
         {
@@ -27,6 +27,6 @@ namespace SWE1R.Assets.Blocks.TextureBlock
             return colors;
         }
 
-        public override BlockItemPart Clone() => new PalettePart(this);
+        public override BlockItemPart Clone() => new TextureBlockItemPalettePart(this);
     }
 }

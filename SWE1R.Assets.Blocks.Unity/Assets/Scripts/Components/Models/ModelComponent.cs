@@ -13,9 +13,9 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models
     {
         public void Import(Swe1rModelBlockItem modelBlockItem, ModelImporter importer)
         {
-            // headerComponent
-            Type headerComponentType = HeaderComponentFactory.Instance.GetComponentType(modelBlockItem.Header);
-            ((IHeaderComponent)gameObject.AddComponent(headerComponentType)).Import(modelBlockItem.Header, importer);
+            // modelComponent
+            Type modelComponentType = ModelComponentFactory.Instance.GetComponentType(modelBlockItem.Model);
+            ((IModelComponent)gameObject.AddComponent(modelComponentType)).Import(modelBlockItem.Model, importer);
 
             FixTransform();
         }
@@ -30,7 +30,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models
         public Swe1rModelBlockItem Export(ModelExporter exporter)
         {
             var result = new Swe1rModelBlockItem();
-            result.Header = GetComponent<IHeaderComponent>().Export(exporter);
+            result.Model = GetComponent<IModelComponent>().Export(exporter);
             return result;
         }
     }

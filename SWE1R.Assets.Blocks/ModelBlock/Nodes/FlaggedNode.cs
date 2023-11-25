@@ -89,8 +89,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         {
             public int GetAlignment(RecordComponent r)
             {
-                var header = r.Root.Value as Header;
-                return header.HasExtraAlignment(r.Value as FlaggedNode, r.Context.Graph) ? 8 : 0;
+                var model = r.Root.Value as Model;
+                return model.HasExtraAlignment(r.Value as FlaggedNode, r.Context.Graph) ? 8 : 0;
             }
         }
 

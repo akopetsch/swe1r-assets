@@ -51,7 +51,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 
             PrintMemoryUsageStats(modelBlockItem, context);
 
-            new HeaderFormatTesterFactory().Get(modelBlockItem.Header, context.Graph, AnalyticsFixture).Test();
+            new HeaderFormatTesterFactory().Get(modelBlockItem.Model, context.Graph, AnalyticsFixture).Test();
 
             var meshes = context.Graph.GetValues<Mesh>().ToList();
             meshes.ForEach(x => new MeshTester(x, context.Graph, AnalyticsFixture).Test());
@@ -80,17 +80,17 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
             AssertMeshes(modelBlockItem, context);
 
             // Header...
-            if (modelBlockItem.Header.Animations != null)
+            if (modelBlockItem.Model.Animations != null)
             {
                 // Anims does not contain null
-                Assert.True(!modelBlockItem.Header.Animations.Contains(null));
+                Assert.True(!modelBlockItem.Model.Animations.Contains(null));
 
                 // Anims only contains distinct values
-                Assert.True(modelBlockItem.Header.Animations.AllUnique());
+                Assert.True(modelBlockItem.Model.Animations.AllUnique());
             }
-            if (modelBlockItem.Header.AltN != null)
+            if (modelBlockItem.Model.AltN != null)
                 // AltN does not contain null
-                Assert.True(!modelBlockItem.Header.AltN.Contains(null));
+                Assert.True(!modelBlockItem.Model.AltN.Contains(null));
         }
 
         protected override void PrintItemIndex(int index) =>

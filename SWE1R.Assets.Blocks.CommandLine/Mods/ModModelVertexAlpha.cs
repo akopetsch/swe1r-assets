@@ -39,7 +39,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
 
         private void SetAlphaTo128(ModelBlockItem modelBlockItem)
         {
-            List<FlaggedNode> headerFlaggedNodes = modelBlockItem.Header.Nodes
+            List<FlaggedNode> headerFlaggedNodes = modelBlockItem.Model.Nodes
                 .Select(x => x.FlaggedNode).Where(x => x != null).Distinct().ToList();
             List<MeshGroup3064> meshGroups = headerFlaggedNodes // TODO: get leaves from animations or altn
                 .SelectMany(x => x.GetLeaves()).Distinct().OfType<MeshGroup3064>().ToList();

@@ -9,20 +9,20 @@ using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.SplineBlock
 {
-    public class SplineData
+    public class Spline
     {
         [Order(0)] public SplineSegmentHeader Header { get; set; }
         
         [Length(typeof(LengthHelper))]
-        [Order(1)] public List<SplineSegment> Data { get; set; }
+        [Order(1)] public List<SplineSegment> Segments { get; set; }
 
         private class LengthHelper : IBindingHelper
         {
             public int GetValue(PropertyComponent property) =>
-                property.GetAncestorValue<SplineData>().Header.ElementsCount;
+                property.GetAncestorValue<Spline>().Header.ElementsCount;
         }
 
-        public void UpdateElementsCount() => // TODO: implement in BindingComponent
-            Header.ElementsCount = Data.Count;
+        public void UpdateSegmentsCount() => // TODO: implement in BindingComponent
+            Header.ElementsCount = Segments.Count;
     }
 }

@@ -22,7 +22,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         [Order(1)] 
         public short Height { get; set; }
         [Order(2), Reference(ReferenceHandling.Postpone), Length(typeof(LengthHelper))] 
-        public byte[] Data { get; set; } // TODO: type
+        public byte[] Pixels { get; set; } // TODO: type
 
         #endregion
 
@@ -48,16 +48,16 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
             }
 
             private int GetDataPointer(RecordComponent recordComponent) =>
-                recordComponent.Properties[nameof(Data)].Get<ReferenceComponent>().Pointer.Value;
+                recordComponent.Properties[nameof(Pixels)].Get<ReferenceComponent>().Pointer.Value;
         }
 
         #endregion
 
         #region Methods (export)
 
-        public ImageRgba32 ExportImage(SpriteData spriteData)
+        public ImageRgba32 ExportImage(Sprite sprite)
         {
-            int bpp = spriteData.GetBitsPerPixel();
+            int bpp = sprite.GetBitsPerPixel();
 
             float bytesPerPixel = (float)bpp / 8;
             int bytesPerLine = (int)(Width * bytesPerPixel);
@@ -74,27 +74,27 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
                     // get color
                     ColorRgba32 color = ColorRgba32.Pink; // test color
                     int pixelIndex = y * virtualWidth + x;
-                    if (spriteData.Palette == null)
+                    if (sprite.Palette == null)
                     {
                         if (bpp == 4)
                         {
-                            byte nibble = Data.GetNibble(pixelIndex);
+                            byte nibble = Pixels.GetNibble(pixelIndex);
                             byte grayscale = (byte)(nibble * 16);
                             byte alpha = (byte)(nibble * 17);
                             color = new ColorRgba32(grayscale, grayscale, grayscale, alpha);
                         }
                         else if (bpp == 8)
                         {
-                            byte grayscale = Data[pixelIndex];
+                            byte grayscale = Pixels[pixelIndex];
                             color = new ColorRgba32(grayscale, grayscale, grayscale, grayscale);
                         }
                         else if (bpp == 32)
                         {
                             int offset = pixelIndex * 4;
-                            byte r = Data[offset];
-                            byte g = Data[offset + 1];
-                            byte b = Data[offset + 2];
-                            byte a = Data[offset + 3];
+                            byte r = Pixels[offset];
+                            byte g = Pixels[offset + 1];
+                            byte b = Pixels[offset + 2];
+                            byte a = Pixels[offset + 3];
                             color = new ColorRgba32(r, g, b, a);
                         }
                     }
@@ -102,13 +102,13 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
                     {
                         if (bpp == 4)
                         {
-                            int index = Data.GetNibble(pixelIndex);
-                            color = (ColorRgba32)spriteData.Palette.Colors[index];
+                            int index = Pixels.GetNibble(pixelIndex);
+                            color = (ColorRgba32)sprite.Palette.Colors[index];
                         }
                         else if (bpp == 8)
                         {
-                            int index = Data[pixelIndex];
-                            color = (ColorRgba32)spriteData.Palette.Colors[index];
+                            int index = Pixels[pixelIndex];
+                            color = (ColorRgba32)sprite.Palette.Colors[index];
                         }
                     }
 

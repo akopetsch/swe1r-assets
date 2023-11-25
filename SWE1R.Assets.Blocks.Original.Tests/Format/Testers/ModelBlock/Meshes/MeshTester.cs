@@ -28,7 +28,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
         {
             TestVisibleIndicesChunks();
 
-            var header = (Header)ByteSerializationGraph.Root.Value;
+            var header = (Model)ByteSerializationGraph.Root.Value;
 
             IndicesChunks chunks = Value.VisibleIndicesChunks;
             if (chunks != null)

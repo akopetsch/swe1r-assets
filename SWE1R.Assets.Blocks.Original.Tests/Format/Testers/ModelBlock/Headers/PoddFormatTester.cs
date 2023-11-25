@@ -10,9 +10,9 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class PoddFormatTester : HeaderFormatTester<PoddHeader>
+    public class PoddFormatTester : HeaderFormatTester<PoddModel>
     {
-        public PoddFormatTester(PoddHeader value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
+        public PoddFormatTester(PoddModel value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
             base(value, byterSerializationGraph, analyticsFixture)
         { }
 

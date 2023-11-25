@@ -5,13 +5,13 @@
 using SWE1R.Assets.Blocks.Unity.Extensions;
 using SWE1R.Assets.Blocks.Unity.ScriptableObjects;
 using UnityEngine;
-using Swe1rHeader = SWE1R.Assets.Blocks.ModelBlock.Header;
 using Swe1rMappingChild = SWE1R.Assets.Blocks.ModelBlock.Meshes.MappingChild;
+using Swe1rModel = SWE1R.Assets.Blocks.ModelBlock.Model;
 
 namespace SWE1R.Assets.Blocks.Unity.Components.Models.Types
 {
-    public abstract class HeaderComponent<T> : 
-        MonoBehaviour, IHeaderComponent where T : Swe1rHeader, new()
+    public abstract class ModelComponent<T> : 
+        MonoBehaviour, IModelComponent where T : Swe1rModel, new()
     {
         #region Fields
 
@@ -24,8 +24,8 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Types
 
         #region Methods (import)
 
-        public void Import(Swe1rHeader header, ModelImporter importer) =>
-            Import((T)header, importer);
+        public void Import(Swe1rModel model, ModelImporter importer) =>
+            Import((T)model, importer);
 
         public virtual void Import(T source, ModelImporter importer)
         {
@@ -71,7 +71,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Types
 
         #region Methods (export)
 
-        public virtual Swe1rHeader Export(ModelExporter exporter)
+        public virtual Swe1rModel Export(ModelExporter exporter)
         {
             var result = new T();
 

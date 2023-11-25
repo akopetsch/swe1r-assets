@@ -5,7 +5,7 @@
 using SWE1R.Assets.Blocks.Unity.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
-using Swe1rHeader = SWE1R.Assets.Blocks.ModelBlock.Header;
+using Swe1rModel = SWE1R.Assets.Blocks.ModelBlock.Model;
 using Swe1rHeaderData = SWE1R.Assets.Blocks.ModelBlock.HeaderData;
 using Swe1rLightStreakOrInteger = SWE1R.Assets.Blocks.ModelBlock.LightStreakOrInteger;
 
@@ -15,7 +15,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models
     {
         public void Import(Swe1rHeaderData source, ModelImporter importer)
         {
-            gameObject.name = nameof(Swe1rHeader.Data);
+            gameObject.name = nameof(Swe1rModel.Data);
 
             foreach (Swe1rLightStreakOrInteger lightStreakOrInteger in source.List)
                 gameObject.AddChild().AddComponent<LightStreakOrIntegerComponent>().Import(lightStreakOrInteger, importer);

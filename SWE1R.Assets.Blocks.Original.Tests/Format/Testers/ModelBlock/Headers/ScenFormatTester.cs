@@ -7,9 +7,9 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class ScenFormatTester : HeaderFormatTester<ScenHeader>
+    public class ScenFormatTester : HeaderFormatTester<ScenModel>
     {
-        public ScenFormatTester(ScenHeader value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
+        public ScenFormatTester(ScenModel value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
             base(value, byterSerializationGraph, analyticsFixture)
         { }
 

@@ -7,7 +7,7 @@ using System;
 
 namespace SWE1R.Assets.Blocks.TextureBlock
 {
-    public class PixelsPart : BlockItemPart
+    public class TextureBlockItemPixelsPart : BlockItemPart
     {
         #region Properties (helper)
 
@@ -17,8 +17,8 @@ namespace SWE1R.Assets.Blocks.TextureBlock
 
         #region Constructor
 
-        public PixelsPart() : base() { }
-        private PixelsPart(PixelsPart source) : base(source) { }
+        public TextureBlockItemPixelsPart() : base() { }
+        private TextureBlockItemPixelsPart(TextureBlockItemPixelsPart source) : base(source) { }
 
         #endregion
 
@@ -32,7 +32,7 @@ namespace SWE1R.Assets.Blocks.TextureBlock
 
         #region Methods (: BlockItemPart
 
-        public override BlockItemPart Clone() => new PixelsPart(this);
+        public override BlockItemPart Clone() => new TextureBlockItemPixelsPart(this);
 
         #endregion
     }

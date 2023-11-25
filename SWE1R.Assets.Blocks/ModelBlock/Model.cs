@@ -11,17 +11,17 @@ using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock
 {
-    public abstract class Header
+    public abstract class Model
     {
         #region Properties (serialized)
 
-        [RecordTypeIdentifier(ModelType.MAlt, typeof(MAltHeader))]
-        [RecordTypeIdentifier(ModelType.Modl, typeof(ModlHeader))]
-        [RecordTypeIdentifier(ModelType.Part, typeof(PartHeader))]
-        [RecordTypeIdentifier(ModelType.Podd, typeof(PoddHeader))]
-        [RecordTypeIdentifier(ModelType.Pupp, typeof(PuppHeader))]
-        [RecordTypeIdentifier(ModelType.Scen, typeof(ScenHeader))]
-        [RecordTypeIdentifier(ModelType.Trak, typeof(TrakHeader))]
+        [RecordTypeIdentifier(ModelType.MAlt, typeof(MAltModel))]
+        [RecordTypeIdentifier(ModelType.Modl, typeof(ModlModel))]
+        [RecordTypeIdentifier(ModelType.Part, typeof(PartModel))]
+        [RecordTypeIdentifier(ModelType.Podd, typeof(PoddModel))]
+        [RecordTypeIdentifier(ModelType.Pupp, typeof(PuppModel))]
+        [RecordTypeIdentifier(ModelType.Scen, typeof(ScenModel))]
+        [RecordTypeIdentifier(ModelType.Trak, typeof(TrakModel))]
         [Order(0)] public ModelType Type { get; protected set; }
         
         [SerializeUntil(-1)]

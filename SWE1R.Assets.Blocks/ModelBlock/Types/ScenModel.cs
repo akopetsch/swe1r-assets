@@ -8,11 +8,11 @@ using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Types
 {
-    public class ScenHeader : Header
+    public class ScenModel : Model
     {
         #region Constructor
 
-        public ScenHeader() : base() =>
+        public ScenModel() : base() =>
             Type = ModelType.Scen;
 
         #endregion

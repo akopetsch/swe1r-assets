@@ -7,9 +7,9 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class PuppFormatTester : HeaderFormatTester<PuppHeader>
+    public class PuppFormatTester : HeaderFormatTester<PuppModel>
     {
-        public PuppFormatTester(PuppHeader value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
+        public PuppFormatTester(PuppModel value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
             base(value, byterSerializationGraph, analyticsFixture)
         { }
 

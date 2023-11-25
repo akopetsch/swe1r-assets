@@ -101,7 +101,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
             NodesD065.AddRange(dbModelStructures.NodesD065);
             NodesD066.AddRange(dbModelStructures.NodesD066);
 
-            Headers.AddRange(dbModelStructures.Headers);
+            Headers.AddRange(dbModelStructures.Models);
             HeaderNodes.AddRange(dbModelStructures.HeaderNodes);
             HeaderAltN.AddRange(dbModelStructures.HeaderAltN);
             Data_LStr.AddRange(dbModelStructures.Data_LStr);

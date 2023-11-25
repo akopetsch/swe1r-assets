@@ -24,7 +24,7 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
 
         protected static readonly string tab = new string(' ', 4);
 
-        protected string headerNodeName;
+        protected string modelNodeName;
         protected Dictionary<INode, string> nodeNodeNamesByNode = 
             new Dictionary<INode, string>();
         // TODO: FIXME: use classes to pair/encapsulate data
@@ -81,7 +81,7 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
 
         protected virtual void WriteDigraph()
         {
-            Header header = ModelBlockItem.Header;
+            Model model = ModelBlockItem.Model;
 
             // get INode RecordComponents
             var nodeRecordComponents = ByteSerializationGraph.GetRecordComponents<INode>()
@@ -125,7 +125,7 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
                 // fillcolor
                 string color = null;
                 var flaggedNode = node as FlaggedNode;
-                if (flaggedNode != null && header.HasExtraAlignment(flaggedNode, ByteSerializationGraph))
+                if (flaggedNode != null && model.HasExtraAlignment(flaggedNode, ByteSerializationGraph))
                     color = "green";
                 color = color ?? GetNodeColor(node.GetType());
                 attributes.Add("fillcolor", color);
@@ -159,29 +159,29 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
             }
 
             // Header.Nodes
-            headerNodeName = header.Type.ToString();
-            DotFile.AppendLine($"{tab}{headerNodeName}[style=filled,fillcolor=red]");
+            modelNodeName = model.Type.ToString();
+            DotFile.AppendLine($"{tab}{modelNodeName}[style=filled,fillcolor=red]");
 
             DotFile.AppendLine($"{tab}Nodes[style=filled,fillcolor=pink];");
-            DotFile.AppendLine($"{tab}{headerNodeName} -> Nodes;");
-            for (int i = 0; i < header.Nodes.Count; i++)
+            DotFile.AppendLine($"{tab}{modelNodeName} -> Nodes;");
+            for (int i = 0; i < model.Nodes.Count; i++)
             {
-                FlaggedNode flaggedNode = header.Nodes[i].FlaggedNode;
+                FlaggedNode flaggedNode = model.Nodes[i].FlaggedNode;
                 if (flaggedNode != null)
                     DotFile.AppendLine($"{tab}Nodes -> \"[{i}]\" -> {nodeNodeNamesByNode[flaggedNode]};");
             }
 
             // Header.AltN
-            if (header.AltN != null)
+            if (model.AltN != null)
             {
                 DotFile.AppendLine($"{tab}AltN[style=filled,fillcolor=cyan];");
-                DotFile.AppendLine($"{tab}{headerNodeName} -> {nameof(Header.AltN)}");
+                DotFile.AppendLine($"{tab}{modelNodeName} -> {nameof(Model.AltN)}");
 
-                for (int i = 0; i < header.AltN.Count; i++)
+                for (int i = 0; i < model.AltN.Count; i++)
                 {
-                    FlaggedNodeOrGroup5066ChildReference alt = header.AltN[i];
+                    FlaggedNodeOrGroup5066ChildReference alt = model.AltN[i];
                     FlaggedNode flaggedNode = alt.Group5066ChildReference?.Group5066 ?? alt.FlaggedNode;
-                    DotFile.AppendLine($"{tab}{nameof(Header.AltN)} -> \"{nameof(Header.AltN)}[{i}]\" -> {nodeNodeNamesByNode[flaggedNode]};");
+                    DotFile.AppendLine($"{tab}{nameof(Model.AltN)} -> \"{nameof(Model.AltN)}[{i}]\" -> {nodeNodeNamesByNode[flaggedNode]};");
                 }
             }
         }

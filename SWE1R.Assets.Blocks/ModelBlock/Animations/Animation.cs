@@ -52,7 +52,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
         private class AlignmentHelper : IAlignmentHelper
         {
             public int GetAlignment(RecordComponent r) =>
-                (r.Root.Value as Header).HasExtraAlignment((Animation)r.Value, r.Context.Graph) ? 8 : 4;
+                (r.Root.Value as Model).HasExtraAlignment((Animation)r.Value, r.Context.Graph) ? 8 : 4;
         }
 
         #endregion

@@ -10,11 +10,11 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class TrakFormatTester : HeaderFormatTester<TrakHeader>
+    public class TrakFormatTester : HeaderFormatTester<TrakModel>
     {
         private TrackMetadata TrackMetadata { get; }
 
-        public TrakFormatTester(TrakHeader value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
+        public TrakFormatTester(TrakModel value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
             base(value, byterSerializationGraph, analyticsFixture)
         {
             TrackMetadata = MetadataProvider.Tracks.First(t => t.Model == Value.BlockItem.Index.Value);

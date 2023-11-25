@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Types
 {
-    public class ModlHeader : Header
+    public class ModlModel : Model
     {
         #region Properties (helper)
 
@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         #region Constructor
 
-        public ModlHeader() : base() =>
+        public ModlModel() : base() =>
             Type = ModelType.Modl;
 
         #endregion

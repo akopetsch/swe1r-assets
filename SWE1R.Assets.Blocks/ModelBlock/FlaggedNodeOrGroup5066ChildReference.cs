@@ -40,7 +40,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         private class TypeHelper : ITypeHelper
         {
             public Type GetPropertyType(RecordComponent recordNode) => 
-                recordNode.Root.Value is PoddHeader ?
+                recordNode.Root.Value is PoddModel ?
                     typeof(Group5066ChildReference) : typeof(FlaggedNode);
         }
 

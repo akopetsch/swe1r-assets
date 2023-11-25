@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Types
 {
-    public class PoddHeader : Header
+    public class PoddModel : Model
     {
         #region Properties (helper)
 
@@ -36,7 +36,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         #region Constructor
 
-        public PoddHeader() : base() =>
+        public PoddModel() : base() =>
             Type = ModelType.Podd;
 
         #endregion

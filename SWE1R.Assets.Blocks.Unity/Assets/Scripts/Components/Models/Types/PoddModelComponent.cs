@@ -2,11 +2,11 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using Swe1rPoddHeader = SWE1R.Assets.Blocks.ModelBlock.Types.PoddHeader;
+using Swe1rPoddModel = SWE1R.Assets.Blocks.ModelBlock.Types.PoddModel;
 
 namespace SWE1R.Assets.Blocks.Unity.Components.Models.Types
 {
-    public class PoddHeaderComponent : HeaderComponent<Swe1rPoddHeader>
+    public class PoddModelComponent : ModelComponent<Swe1rPoddModel>
     {
 
     }

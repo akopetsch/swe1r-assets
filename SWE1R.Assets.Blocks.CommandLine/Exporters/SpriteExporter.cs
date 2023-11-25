@@ -16,7 +16,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
 
         protected override void ExportItem(int index, SpriteBlockItem item, ByteSerializerContext byteSerializerContext)
         {
-            using Image<Rgba32> image = item.Data.ExportImage().ToImageSharp();
+            using Image<Rgba32> image = item.Sprite.ExportImage().ToImageSharp();
             string exportFilename = Path.Combine(ExportFolderPath, $"{BlockItem.GetIndexString(index)}.png");
             image.SaveAsPng(exportFilename);
         }

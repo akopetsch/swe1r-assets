@@ -2,11 +2,11 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using Swe1rModlHeader = SWE1R.Assets.Blocks.ModelBlock.Types.ModlHeader;
+using Swe1rScenModel = SWE1R.Assets.Blocks.ModelBlock.Types.ScenModel;
 
 namespace SWE1R.Assets.Blocks.Unity.Components.Models.Types
 {
-    public class ModlHeaderComponent : HeaderComponent<Swe1rModlHeader>
+    public class ScenModelComponent : ModelComponent<Swe1rScenModel>
     {
 
     }

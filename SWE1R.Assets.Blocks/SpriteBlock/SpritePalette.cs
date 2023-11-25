@@ -30,10 +30,10 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         {
             public int GetValue(PropertyComponent p)
             {
-                var spriteData = p.GetAncestorValue<SpriteData>();
-                if (spriteData.Format == 2 && spriteData.PageWidthAlignment == 0)
+                var sprite = p.GetAncestorValue<Sprite>();
+                if (sprite.Format == 2 && sprite.PageWidthAlignment == 0)
                     return 16;
-                else if (spriteData.Format == 2 && spriteData.PageWidthAlignment == 1)
+                else if (sprite.Format == 2 && sprite.PageWidthAlignment == 1)
                     return 256;
                 else
                     return 0;

@@ -37,7 +37,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
                 objFilename, textureBlock, SystemDrawingImageRgba32Loader.LoadImageRgba32, configuration);
             importer.Import();
 
-            var parentNode = (Group5064)modelBlockItem.Header.Nodes[0].FlaggedNode;
+            var parentNode = (Group5064)modelBlockItem.Model.Nodes[0].FlaggedNode;
             parentNode.Children.Add(importer.MeshGroup3064);
             parentNode.UpdateChildrenCount();
 

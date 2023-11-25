@@ -53,7 +53,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         private class SubLengthHelper : IBindingHelper
         {
             public int GetValue(PropertyComponent p) => 
-                p.Root.Value is ScenHeader ? 2 : 1;
+                p.Root.Value is ScenModel ? 2 : 1;
         }
         
         #endregion

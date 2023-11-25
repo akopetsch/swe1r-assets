@@ -6,7 +6,7 @@ using SWE1R.Assets.Blocks.Unity.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 using Swe1rFlaggedNodeOrInteger = SWE1R.Assets.Blocks.ModelBlock.FlaggedNodeOrInteger;
-using Swe1rHeader = SWE1R.Assets.Blocks.ModelBlock.Header;
+using Swe1rModel = SWE1R.Assets.Blocks.ModelBlock.Model;
 using Swer1rFlaggedNode = SWE1R.Assets.Blocks.ModelBlock.Nodes.FlaggedNode;
 
 namespace SWE1R.Assets.Blocks.Unity.Components.Models
@@ -15,7 +15,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models
     {
         public void Import(List<Swe1rFlaggedNodeOrInteger> source, ModelImporter importer)
         {
-            gameObject.name = nameof(Swe1rHeader.Nodes);
+            gameObject.name = nameof(Swe1rModel.Nodes);
 
             for (int i = 0; i < source.Count; i++)
             {

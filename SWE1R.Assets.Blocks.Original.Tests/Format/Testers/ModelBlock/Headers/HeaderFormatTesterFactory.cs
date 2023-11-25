@@ -10,21 +10,21 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
     public class HeaderFormatTesterFactory
     {
-        public ITester Get(Header value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture)
+        public ITester Get(Model value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture)
         {
-            if (value is MAltHeader mAltHeader)
+            if (value is MAltModel mAltHeader)
                 return new MAltFormatTester(mAltHeader, byteSerializationGraph, analyticsFixture);
-            if (value is ModlHeader modlHeader)
+            if (value is ModlModel modlHeader)
                 return new ModlFormatTester(modlHeader, byteSerializationGraph, analyticsFixture);
-            if (value is PartHeader partHeader)
+            if (value is PartModel partHeader)
                 return new PartFormatTester(partHeader, byteSerializationGraph, analyticsFixture);
-            if (value is PoddHeader poddHeader)
+            if (value is PoddModel poddHeader)
                 return new PoddFormatTester(poddHeader, byteSerializationGraph, analyticsFixture);
-            if (value is PuppHeader puppHeader)
+            if (value is PuppModel puppHeader)
                 return new PuppFormatTester(puppHeader, byteSerializationGraph, analyticsFixture);
-            if (value is ScenHeader scenHeader)
+            if (value is ScenModel scenHeader)
                 return new ScenFormatTester(scenHeader, byteSerializationGraph, analyticsFixture);
-            if (value is TrakHeader trakHeader)
+            if (value is TrakModel trakHeader)
                 return new TrakFormatTester(trakHeader, byteSerializationGraph, analyticsFixture);
             return null;
         }

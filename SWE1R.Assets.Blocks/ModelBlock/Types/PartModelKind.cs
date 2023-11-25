@@ -4,7 +4,7 @@
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Types
 {
-    public enum PartKind
+    public enum PartModelKind
     {
         RacerLod1,
         RacerLod2,

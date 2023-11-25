@@ -58,7 +58,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             modelBlockItem.Load();
 
             // modify meshes
-            var header = (TrakHeader)modelBlockItem.Header;
+            var header = (TrakModel)modelBlockItem.Model;
             List<Mesh> meshes = header.Skybox.GetDescendants().OfType<MeshGroup3064>()
                 .SelectMany(mg => mg.Meshes).ToList();
             meshes.ForEach(m => m.Material = importer.Material);

@@ -10,11 +10,11 @@ using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Types
 {
-    public class MAltHeader : Header
+    public class MAltModel : Model
     {
         #region Constructor
 
-        public MAltHeader() : base() =>
+        public MAltModel() : base() =>
             Type = ModelType.MAlt;
 
         #endregion

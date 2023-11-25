@@ -19,12 +19,12 @@ using SerializerNode = ByteSerialization.Nodes.Node;
 
 namespace SWE1R.Assets.Blocks.ModelBlock
 {
-    public class ModelMask : BlockItemPart
+    public class ModelBlockItemMaskPart : BlockItemPart
     {
         private ModelBlockItem ModelBlockItem => (ModelBlockItem)Item;
 
-        public ModelMask() : base() { }
-        private ModelMask(ModelMask source) : base(source) { }
+        public ModelBlockItemMaskPart() : base() { }
+        private ModelBlockItemMaskPart(ModelBlockItemMaskPart source) : base(source) { }
 
         public void GenerateFromData(ByteSerializerContext context)
         {
@@ -39,16 +39,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             Mask(startVertexProperties.Where(pc => ((ReferenceByIndex<Vertex>)pc.Value).Value != null));
 
             // mask special altN
-            var headerRecordComponent = context.Graph.GetRecordComponent<Header>();
-            if (ModelBlockItem.Header is PoddHeader)
+            var modelRecordComponent = context.Graph.GetRecordComponent<Model>();
+            if (ModelBlockItem.Model is PoddModel)
             {
                 // TODO: ugly hack (why ugly?)
-                PropertyComponent altNPropertyComponent = headerRecordComponent.Properties[nameof(Header.AltN)];
+                PropertyComponent altNPropertyComponent = modelRecordComponent.Properties[nameof(Model.AltN)];
                 Mask(altNPropertyComponent.Children);
             }
             // mask null-pointers that mark the end of collections
-            MaskNext(headerRecordComponent.Properties[nameof(Header.Animations)]);
-            MaskNext(headerRecordComponent.Properties[nameof(Header.AltN)]);
+            MaskNext(modelRecordComponent.Properties[nameof(Model.Animations)]);
+            MaskNext(modelRecordComponent.Properties[nameof(Model.AltN)]);
             // TODO: instead of using 'MaskNext', a feature should be implemented in 'ByteSerializer'
         }
 
@@ -72,7 +72,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         private bool IsSpecialScenReference(ReferenceComponent c)
         {
-            if (ModelBlockItem.Header is ScenHeader && c.Type == typeof(MappingChild))
+            if (ModelBlockItem.Model is ScenModel && c.Type == typeof(MappingChild))
             {
                 var sub = c.GetAncestorValue<MappingSub>();
                 var list = c.GetAncestorValue<List<MappingSub>>();
@@ -116,6 +116,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         private int GetBitNumber(int position) => position / sizeof(int);
         private int GetByteNumber(int position) => GetBitNumber(position) / 8;
 
-        public override BlockItemPart Clone() => new ModelMask(this);
+        public override BlockItemPart Clone() => new ModelBlockItemMaskPart(this);
     }
 }

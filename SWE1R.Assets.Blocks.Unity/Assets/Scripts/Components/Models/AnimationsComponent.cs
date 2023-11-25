@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Swe1rAnimation = SWE1R.Assets.Blocks.ModelBlock.Animations.Animation;
-using Swe1rHeader = SWE1R.Assets.Blocks.ModelBlock.Header;
+using Swe1rModel = SWE1R.Assets.Blocks.ModelBlock.Model;
 
 namespace SWE1R.Assets.Blocks.Unity.Components.Models
 {
@@ -16,7 +16,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models
     {
         public void Import(List<Swe1rAnimation> source, ModelImporter importer)
         {
-            gameObject.name = nameof(Swe1rHeader.Animations);
+            gameObject.name = nameof(Swe1rModel.Animations);
 
             foreach (Swe1rAnimation animation in source)
                 gameObject.AddChild().AddComponent<AnimationComponent>().Import(animation, importer);

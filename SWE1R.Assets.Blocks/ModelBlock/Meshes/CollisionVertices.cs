@@ -70,7 +70,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                     typeof(TransformableD065),
                     typeof(Group5064),
                     typeof(FlaggedNodeOrInteger),
-                    typeof(ModlHeader),
+                    typeof(ModlModel),
                 }))
                     // 114, 151
                     // TODO: move this comment

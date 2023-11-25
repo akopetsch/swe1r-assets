@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Types
 {
-    public class PartHeader : Header
+    public class PartModel : Model
     {
         #region Properties (helper)
 
@@ -18,23 +18,23 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
         public FlaggedNode Node0_Child => Node0.Children.First() as FlaggedNode;
         public FlaggedNode Node0_D065 => Node0.Children.First() as TransformableD065;
 
-        public PartKind Kind
+        public PartModelKind Kind
         {
             get
             {
                 if (Nodes.Count == 2)
                 {
-                    return PartKind.RacerLod1;
+                    return PartModelKind.RacerLod1;
                 }
                 else
                 {
                     if (Node0_D065 != null)
                         if (Node0_D065.Children.Count == 8)
-                            return PartKind.Unk_D065_Shatter;
+                            return PartModelKind.Unk_D065_Shatter;
                         else
-                            return PartKind.Unk_D065;
+                            return PartModelKind.Unk_D065;
                     else
-                        return PartKind.Other;
+                        return PartModelKind.Other;
                 }
             }
         }
@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         #region Constructor
 
-        public PartHeader() : base() =>
+        public PartModel() : base() =>
             Type = ModelType.Part;
 
         #endregion
@@ -52,14 +52,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         public override bool HasExtraAlignment(FlaggedNode fn, Graph g)
         {
-            if (Kind == PartKind.Unk_D065_Shatter)
+            if (Kind == PartModelKind.Unk_D065_Shatter)
                 if (Node0_D065.Children.Skip(1).Contains(fn))
                     return true;
             return false;
         }
 
         public override bool HasExtraAlignment(Animation n, Graph g) =>
-            Kind == PartKind.Unk_D065_Shatter && n == Animations.First();
+            Kind == PartModelKind.Unk_D065_Shatter && n == Animations.First();
 
         #endregion
     }

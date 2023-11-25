@@ -9,15 +9,15 @@ using System.IO;
 
 namespace SWE1R.Assets.Blocks.ModelBlock
 {
-    public class ModelData : BlockItemPart
+    public class ModelBlockItemDataPart : BlockItemPart
     {
         private static string CompressionSignature { get; } = "CompWolf";
         private static Compressor Compressor => Compressor.Instance;
 
         public bool WasCompressed { get; private set; }
 
-        public ModelData() => Loaded += (s, a) => Decompress();
-        private ModelData(ModelData source) : base(source) { }
+        public ModelBlockItemDataPart() => Loaded += (s, a) => Decompress();
+        private ModelBlockItemDataPart(ModelBlockItemDataPart source) : base(source) { }
         
         public void Compress()
         {
@@ -63,6 +63,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock
                 return new string(r.ReadChars(comp.Length)).Equals(comp);
         }
 
-        public override BlockItemPart Clone() => new ModelData(this);
+        public override BlockItemPart Clone() => new ModelBlockItemDataPart(this);
     }
 }

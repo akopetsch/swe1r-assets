@@ -8,13 +8,13 @@ using System.IO;
 
 namespace SWE1R.Assets.Blocks.ModelBlock
 {
-    public class ModelBlockItem : BlockItem<ModelMask, ModelData>
+    public class ModelBlockItem : BlockItem<ModelBlockItemMaskPart, ModelBlockItemDataPart>
     {
         #region Properties
 
-        public ModelMask Bitmask => Part1;
-        public ModelData Data => Part2;
-        public Header Header { get; set; }
+        public ModelBlockItemMaskPart Bitmask => Part1;
+        public ModelBlockItemDataPart Data => Part2;
+        public Model Model { get; set; }
 
         #endregion
 
@@ -30,18 +30,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         public override void Load(out ByteSerializerContext context)
         {
             using (var ms = new MemoryStream(Data.Bytes))
-                Header = new ByteSerializer().Deserialize<Header>(ms, Endianness.BigEndian, out context);
-            Header.BlockItem = this;
+                Model = new ByteSerializer().Deserialize<Model>(ms, Endianness.BigEndian, out context);
+            Model.BlockItem = this;
         }
 
-        public override void Unload() => Header = null;
+        public override void Unload() => Model = null;
 
         public override void Save(out ByteSerializerContext context)
         {
             // Data
             using (var ms = new MemoryStream())
             {
-                new ByteSerializer().Serialize(ms, Header, Endianness.BigEndian, out context);
+                new ByteSerializer().Serialize(ms, Model, Endianness.BigEndian, out context);
                 Data.Load(ms.ToArray());
             }
 

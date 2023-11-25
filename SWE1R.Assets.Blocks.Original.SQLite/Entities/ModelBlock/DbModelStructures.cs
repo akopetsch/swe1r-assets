@@ -51,7 +51,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         public List<DbNodeD065> NodesD065 { get; set; }
         public List<DbNodeD066> NodesD066 { get; set; }
 
-        public List<DbModelHeader> Headers { get; set; }
+        public List<DbModelHeader> Models { get; set; }
         public List<DbModelHeaderNode> HeaderNodes { get; set; }
         public List<DbModelHeaderAltN> HeaderAltN { get; set; }
         public List<DbDataLStr> Data_LStr { get; set; }
@@ -101,7 +101,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             dbModelStructures.NodesD065 = context.NodesD065.AsNoTracking().OfModel(model).OrderByOffset().ToList();
             dbModelStructures.NodesD066 = context.NodesD066.AsNoTracking().OfModel(model).OrderByOffset().ToList();
 
-            dbModelStructures.Headers = context.Headers.AsNoTracking().OfModel(model).OrderByOffset().ToList();
+            dbModelStructures.Models = context.Headers.AsNoTracking().OfModel(model).OrderByOffset().ToList();
             dbModelStructures.HeaderNodes = context.HeaderNodes.AsNoTracking().OfModel(model).OrderByOffset().ToList();
             dbModelStructures.HeaderAltN = context.HeaderAltN.AsNoTracking().OfModel(model).OrderByOffset().ToList();
             dbModelStructures.Data_LStr = context.Data_LStr.AsNoTracking().OfModel(model).OrderByOffset().ToList();
@@ -140,7 +140,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             dbModelStructures.NodesD065 = Get<TransformableD065, DbNodeD065>(g).OrderByOffset().ToList();
             dbModelStructures.NodesD066 = Get<UnknownD066, DbNodeD066>(g).OrderByOffset().ToList();
 
-            dbModelStructures.Headers = Get<Header, DbModelHeader>(g).OrderByOffset().ToList();
+            dbModelStructures.Models = Get<Model, DbModelHeader>(g).OrderByOffset().ToList();
             dbModelStructures.HeaderNodes = Get<FlaggedNodeOrInteger, DbModelHeaderNode>(g).OrderByOffset().ToList();
             dbModelStructures.HeaderAltN = Get<FlaggedNodeOrGroup5066ChildReference, DbModelHeaderAltN> (g).OrderByOffset().ToList();
             dbModelStructures.Data_LStr = Get<LightStreakOrInteger, DbDataLStr>(g, x => x.LightStreak != null).OrderByOffset().ToList();
@@ -195,7 +195,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             if (!NodesD065.SequenceEqual(other.NodesD065)) return false;
             if (!NodesD066.SequenceEqual(other.NodesD066)) return false;
 
-            if (!Headers.SequenceEqual(other.Headers)) return false;
+            if (!Models.SequenceEqual(other.Models)) return false;
             if (!HeaderNodes.SequenceEqual(other.HeaderNodes)) return false;
             if (!HeaderAltN.SequenceEqual(other.HeaderAltN)) return false;
             if (!Data_LStr.SequenceEqual(other.Data_LStr)) return false;

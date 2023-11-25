@@ -59,10 +59,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                 long unkCountPosition = meshValueComponent.Position.Value + 0x3e;
                 short unkCount = meshValueComponent.Reader.AtPosition(unkCountPosition, r => r.ReadInt16());
 
-                // Header
-                var header = (Header)record.Root.Value;
+                // model
+                var model = (Model)record.Root.Value;
 
-                if (unkCount != 0 && (header is ScenHeader || header is PuppHeader))
+                if (unkCount != 0 && (model is ScenModel || model is PuppModel))
                     return typeof(MeshGroup3064);
                 else
                     return typeof(short[]);

@@ -40,7 +40,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         public void OnSerializing(RecordComponent record)
         {
-            
             record.Root.AfterSerializing += () => {
                 long pointerPropertyPosition = record.Properties[nameof(Pointer)].Position.Value;
                 var collectionComponent = (CollectionComponent)record.Graph.GetValueComponent(Group5066.Children);

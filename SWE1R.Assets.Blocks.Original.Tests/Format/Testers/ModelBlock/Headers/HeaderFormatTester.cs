@@ -7,7 +7,7 @@ using SWE1R.Assets.Blocks.ModelBlock;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public abstract class HeaderFormatTester<THeader> : Tester<THeader> where THeader : Header
+    public abstract class HeaderFormatTester<THeader> : Tester<THeader> where THeader : Model
     {
         public HeaderFormatTester(THeader value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture) : 
             base(value, byteSerializationGraph, analyticsFixture)

@@ -9,9 +9,9 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class PartFormatTester : HeaderFormatTester<PartHeader>
+    public class PartFormatTester : HeaderFormatTester<PartModel>
     {
-        public PartFormatTester(PartHeader value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
+        public PartFormatTester(PartModel value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
             base(value, byterSerializationGraph, analyticsFixture)
         { }
 
@@ -37,7 +37,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
         {
             switch (Value.Kind)
             {
-                case PartKind.RacerLod1:
+                case PartModelKind.RacerLod1:
                     Assert.True(Value.Nodes.Count == 2);
                     Assert.True(Value.Nodes[1].FlaggedNode is Group5065);
                     Assert.True(Value.Node0_Child is Group5065);

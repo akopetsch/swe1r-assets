@@ -9,9 +9,9 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class MAltFormatTester : HeaderFormatTester<MAltHeader>
+    public class MAltFormatTester : HeaderFormatTester<MAltModel>
     {
-        public MAltFormatTester(MAltHeader value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture) :
+        public MAltFormatTester(MAltModel value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture) :
             base(value, byteSerializationGraph, analyticsFixture)
         { }
 

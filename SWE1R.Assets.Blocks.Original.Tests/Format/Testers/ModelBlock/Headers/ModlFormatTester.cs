@@ -7,9 +7,9 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
 {
-    public class ModlFormatTester : HeaderFormatTester<ModlHeader>
+    public class ModlFormatTester : HeaderFormatTester<ModlModel>
     {
-        public ModlFormatTester(ModlHeader value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) : 
+        public ModlFormatTester(ModlModel value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) : 
             base(value, byterSerializationGraph, analyticsFixture)
         { }
 

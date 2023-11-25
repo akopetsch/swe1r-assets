@@ -8,11 +8,11 @@ using System.IO;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock
 {
-    public class SpriteBlockItem : BlockItem<SpritePart>
+    public class SpriteBlockItem : BlockItem<SpriteBlockItemPart>
     {
         #region Properties
 
-        public SpriteData Data { get; set; }
+        public Sprite Sprite { get; set; }
 
         #endregion
 
@@ -28,15 +28,15 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         public override void Load(out ByteSerializerContext context)
         {
             using var ms = new MemoryStream(Bytes);
-            Data = new ByteSerializer().Deserialize<SpriteData>(ms, Endianness.BigEndian, out context);
+            Sprite = new ByteSerializer().Deserialize<Sprite>(ms, Endianness.BigEndian, out context);
         }
 
-        public override void Unload() => Data = null;
+        public override void Unload() => Sprite = null;
 
         public override void Save(out ByteSerializerContext context)
         {
             using var ms = new MemoryStream();
-            new ByteSerializer().Serialize(ms, Data, Endianness.BigEndian, out context);
+            new ByteSerializer().Serialize(ms, Sprite, Endianness.BigEndian, out context);
             Part.Load(ms.ToArray());
         }
 

@@ -8,12 +8,12 @@ using System;
 
 namespace SWE1R.Assets.Blocks.TextureBlock
 {
-    public class TextureBlockItem : BlockItem<PixelsPart, PalettePart>
+    public class TextureBlockItem : BlockItem<TextureBlockItemPixelsPart, TextureBlockItemPalettePart>
     {
         #region Properties
 
-        public PixelsPart PixelsPart => Part1;
-        public PalettePart PalettePart => Part2;
+        public TextureBlockItemPixelsPart PixelsPart => Part1;
+        public TextureBlockItemPalettePart PalettePart => Part2;
 
         public ColorRgba5551[] PaletteColors { get; set; }
 

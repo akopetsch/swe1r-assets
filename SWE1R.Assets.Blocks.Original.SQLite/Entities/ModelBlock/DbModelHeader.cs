@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
     [Table("Model_Header")]
-    public class DbModelHeader : DbModelStructure<Header>
+    public class DbModelHeader : DbModelStructure<Model>
     {
         public string Type { get; set; }
         public int? Nodes_Count { get; set; }
@@ -21,16 +21,16 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         {
             base.CopyFrom(node);
 
-            var h = (Header)node.Value;
+            var model = (Model)node.Value;
 
-            Type = Enum.GetName(typeof(ModelType), h.Type);
-            Nodes_Count = h.Nodes.Count;
-            Data_Size = h.Data?.Size;
-            Anims_Count = h.Animations?.Count;
-            AltN_Count = h.AltN?.Count;
+            Type = Enum.GetName(typeof(ModelType), model.Type);
+            Nodes_Count = model.Nodes.Count;
+            Data_Size = model.Data?.Size;
+            Anims_Count = model.Animations?.Count;
+            AltN_Count = model.AltN?.Count;
         }
 
-        public override bool Equals(DbModelStructure<Header> other)
+        public override bool Equals(DbModelStructure<Model> other)
         {
             var _other = (DbModelHeader)other;
 

@@ -18,8 +18,8 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
         {
             base.WriteDigraph();
 
-            var trakHeader = (TrakHeader)ModelBlockItem.Header;
-            DotFile.AppendLine($"{tab}{headerNodeName} -> {nodeNodeNamesByNode[trakHeader.Node]};");
+            var trakHeader = (TrakModel)ModelBlockItem.Model;
+            DotFile.AppendLine($"{tab}{modelNodeName} -> {nodeNodeNamesByNode[trakHeader.Node]};");
         }
     }
 }

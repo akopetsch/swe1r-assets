@@ -2,11 +2,11 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using Swe1rMAltHeader = SWE1R.Assets.Blocks.ModelBlock.Types.MAltHeader;
+using Swe1rPuppModel = SWE1R.Assets.Blocks.ModelBlock.Types.PuppModel;
 
 namespace SWE1R.Assets.Blocks.Unity.Components.Models.Types
 {
-    public class MAltHeaderComponent : HeaderComponent<Swe1rMAltHeader>
+    public class PuppModelComponent : ModelComponent<Swe1rPuppModel>
     {
 
     }

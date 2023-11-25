@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
         public ModelGraphvizExporter Get(
             ModelBlockItem modelBlockItem, ByteSerializationGraph byteSerializationGraph, string suffix)
         {
-            if (modelBlockItem.Header is TrakHeader trakHeader)
+            if (modelBlockItem.Model is TrakModel trakHeader)
                 return new TrakModelGraphvizExporter(modelBlockItem, byteSerializationGraph, suffix);
             else
                 return new ModelGraphvizExporter(modelBlockItem, byteSerializationGraph, suffix);
