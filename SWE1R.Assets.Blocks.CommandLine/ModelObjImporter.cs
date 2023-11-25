@@ -23,7 +23,7 @@ using ObjVertex = ObjLoader.Loader.Data.VertexData.Vertex;
 
 namespace SWE1R.Assets.Blocks.CommandLine
 {
-    public class ObjImporter
+    public class ModelObjImporter
     {
         #region Fields
 
@@ -40,7 +40,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
         public string ObjFilename { get; }
         public Block<TextureBlockItem> TextureBlock { get; }
         public Func<string, ImageRgba32> ImageLoadFunc { get; }
-        public ObjImporterConfiguration Configuration { get; }
+        public ModelObjImporterConfiguration Configuration { get; }
 
         #endregion
 
@@ -52,11 +52,11 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         #region Constructor
 
-        public ObjImporter(
+        public ModelObjImporter(
             string objFilename, 
             Block<TextureBlockItem> textureBlock, 
             Func<string, ImageRgba32> imageLoadFunc, 
-            ObjImporterConfiguration configuration)
+            ModelObjImporterConfiguration configuration)
         {
             ObjFilename = objFilename;
             TextureBlock = textureBlock;

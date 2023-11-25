@@ -6,11 +6,11 @@ using System.Numerics;
 
 namespace SWE1R.Assets.Blocks.CommandLine
 {
-    public class ObjImporterConfiguration
+    public class ModelObjImporterConfiguration
     {
         public float PositionScale { get; set; } = 1;
         public Vector3 PositionOffset { get; set; } = Vector3.Zero;
         
-        public ObjImporterConfiguration() { }
+        public ModelObjImporterConfiguration() { }
     }
 }

@@ -70,10 +70,10 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             modelBlockItem.Load(out ByteSerializerContext byteSerializerContext);
 
             // import
-            var configuration = new ObjImporterConfiguration() {
+            var configuration = new ModelObjImporterConfiguration() {
                 PositionScale = positionScale
             };
-            var importer = new ObjImporter(
+            var importer = new ModelObjImporter(
                 objFilename, textureBlock, SystemDrawingImageRgba32Loader.LoadImageRgba32, configuration);
             importer.Import();
 
