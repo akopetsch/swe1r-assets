@@ -7,7 +7,7 @@ using SWE1R.Assets.Blocks.Common.Images;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System.Linq;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 {
     /// <summary>
     /// <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L230">SWR_MODEL_Section4</see>
@@ -46,7 +46,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         public ImageRgba32 Hack_ExportEffectiveImage(Block<TextureBlockItem> textureBlock) // HACK: ExportEffectiveImage
         {
             if (Texture != null)
-            {
                 if (Texture.TextureIndex.Id != -1)
                 {
                     MaterialTextureChild firstMaterialTextureChild = Texture.Children.FirstOrDefault();
@@ -55,7 +54,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                         result.SetAlpha(byte.MaxValue);
                     return result;
                 }
-            }
             return null;
         }
 

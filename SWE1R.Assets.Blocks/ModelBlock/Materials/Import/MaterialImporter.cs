@@ -4,12 +4,11 @@
 
 using SWE1R.Assets.Blocks.Common.Images;
 using SWE1R.Assets.Blocks.Common.Vectors;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.TextureBlock;
+using System;
 using System.Numerics;
-using Material = SWE1R.Assets.Blocks.ModelBlock.Meshes.Material;
 
-namespace SWE1R.Assets.Blocks.CommandLine
+namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 {
     public abstract class MaterialImporter
     {

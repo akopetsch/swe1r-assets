@@ -4,11 +4,12 @@
 
 using SWE1R.Assets.Blocks.Common.Colors;
 using SWE1R.Assets.Blocks.Common.Images;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.TextureBlock;
+using System;
 using System.Diagnostics;
+using System.Linq;
 
-namespace SWE1R.Assets.Blocks.CommandLine
+namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 {
     public class ColorRgba5551MaterialImporter : MaterialImporter
     {
@@ -101,7 +102,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 // bitmasks to make it opaque:
                 Bitmask1 = unchecked((int)0xC8000000), // 0
                 Bitmask2 = 0x0112038, // 0
-                // Bitmask = 0x00112078
+                // Bitmask2 = 0x00112078
             };
 
         #endregion

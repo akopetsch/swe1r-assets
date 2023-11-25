@@ -9,6 +9,7 @@ using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
 using ByteSerialization.Extensions;
 using ByteSerialization.IO.Extensions;
+using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
@@ -32,7 +33,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             Bytes = new byte[size.Ceiling(4)];
 
             Mask(context.Graph.References.Where(IsMasked));
-            Mask(context.Graph.GetValueComponents<TextureId>());
+            Mask(context.Graph.GetValueComponents<TextureIndex>());
 
             List<PropertyComponent> startVertexProperties = context.Graph.GetRecordComponents<IndicesChunk01>()
                 .Select(rc => rc.Properties[nameof(IndicesChunk01.StartVertex)]).ToList();

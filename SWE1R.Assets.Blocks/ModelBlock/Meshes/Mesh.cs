@@ -4,6 +4,7 @@
 
 using ByteSerialization.Attributes;
 using SWE1R.Assets.Blocks.Common.Vectors;
+using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;

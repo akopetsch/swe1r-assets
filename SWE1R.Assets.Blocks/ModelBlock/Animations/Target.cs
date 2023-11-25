@@ -6,7 +6,7 @@ using ByteSerialization.Attributes;
 using ByteSerialization.Attributes.Helpers;
 using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Records;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
+using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using System;
 

@@ -2,6 +2,7 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
+using System.Collections.Generic;
 using ObjGroup = ObjLoader.Loader.Data.Elements.Group;
 using ObjLoadResult = ObjLoader.Loader.Loaders.LoadResult;
 using ObjMaterial = ObjLoader.Loader.Data.Material;
@@ -9,7 +10,7 @@ using ObjNormal = ObjLoader.Loader.Data.VertexData.Normal;
 using ObjTexture = ObjLoader.Loader.Data.VertexData.Texture;
 using ObjVertex = ObjLoader.Loader.Data.VertexData.Vertex;
 
-namespace SWE1R.Assets.Blocks.CommandLine
+namespace SWE1R.Assets.Blocks.ModelBlock.Import
 {
     public static class ObjLoadResultExtensions
     {

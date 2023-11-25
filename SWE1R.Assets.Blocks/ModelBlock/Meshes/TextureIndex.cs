@@ -7,7 +7,7 @@ using System;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 {
-    public class TextureId
+    public class TextureIndex
     {
         #region Constants
 
@@ -59,11 +59,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         #region Methods (operators - conversion)
 
-        public static implicit operator int(TextureId value) =>
+        public static implicit operator int(TextureIndex value) =>
             value.Id;
 
-        public static implicit operator TextureId(int value) =>
-            new TextureId() { Id = value };
+        public static implicit operator TextureIndex(int value) =>
+            new TextureIndex() { Id = value };
 
         #endregion
 

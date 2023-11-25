@@ -6,7 +6,7 @@ using ByteSerialization;
 using SWE1R.Assets.Blocks.CommandLine.Extensions;
 using SWE1R.Assets.Blocks.Common.Images;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
+using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System.Diagnostics;
 

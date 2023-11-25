@@ -5,12 +5,13 @@
 using ByteSerialization.Attributes;
 using SWE1R.Assets.Blocks.Common.Colors;
 using SWE1R.Assets.Blocks.Common.Images;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System;
 using System.Diagnostics;
 using System.Numerics;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 {
     /// <summary>
     /// <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L241">SWR_MODEL_Section5</see>
@@ -65,7 +66,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         [Order(14)] public MaterialTextureChild[] Children { get; set; }
 
         [Offset(0x38)]
-        [Order(15)] public TextureId TextureIndex { get; set; }
+        [Order(15)] public TextureIndex TextureIndex { get; set; }
 
         #endregion
 
@@ -117,10 +118,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         private TextureDataFormat GetTextureDataFormat()
         {
             if (Byte_0c == 0)
-            {
                 if (Byte_0d == 3)
                     return TextureDataFormat.RGBA32;
-            }
             if (Byte_0c == 2)
             {
                 if (Byte_0d == 0)
@@ -148,12 +147,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             {
                 // get pixel data
                 if (bpp == 4)
-                {
                     if (i < textureBlockItem.PixelsPart.NibblesCount)
                         pixelData = textureBlockItem.PixelsPart.GetNibble(i);
                     else
                         return ColorRgba32.Pink;
-                }
                 else if (bpp == 8)
                     pixelData = textureBlockItem.PixelsPart.GetByte(i);
                 else
@@ -196,7 +193,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                     throw new InvalidOperationException();
             }
         }
-        
+
         #endregion
     }
 }

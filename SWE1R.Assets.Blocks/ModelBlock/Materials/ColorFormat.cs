@@ -4,7 +4,7 @@
 
 using System;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 {
     public enum ColorFormat
     {

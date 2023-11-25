@@ -8,7 +8,7 @@ using ByteSerialization.Components.Attributes.Reference;
 using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
+using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using System;
 using System.Collections.Generic;
 

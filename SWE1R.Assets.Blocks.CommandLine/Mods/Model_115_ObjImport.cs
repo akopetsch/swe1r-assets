@@ -4,6 +4,7 @@
 
 using ByteSerialization;
 using SWE1R.Assets.Blocks.ModelBlock;
+using SWE1R.Assets.Blocks.ModelBlock.Import;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System.Numerics;

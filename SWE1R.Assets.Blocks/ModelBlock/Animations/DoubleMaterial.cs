@@ -3,7 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Attributes;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
+using SWE1R.Assets.Blocks.ModelBlock.Materials;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 {

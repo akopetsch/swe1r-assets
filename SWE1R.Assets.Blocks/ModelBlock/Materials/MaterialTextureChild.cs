@@ -4,8 +4,9 @@
 
 using ByteSerialization.Components.Values.Customs;
 using ByteSerialization.IO;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 {
     /// <summary>
     /// <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L266">SWR_MODEL_Section5_b</see>
@@ -39,8 +40,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         public bool HasDoubleHeight =>
             DimensionsBitmask.HasFlag(DimensionsBitmask.DoubleHeight);
-        
-        public bool HasDoubleWidth => 
+
+        public bool HasDoubleWidth =>
             DimensionsBitmask.HasFlag(DimensionsBitmask.DoubleWidth);
 
         public bool IsFlippedVertically =>

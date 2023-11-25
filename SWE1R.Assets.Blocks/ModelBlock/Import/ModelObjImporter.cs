@@ -6,11 +6,17 @@ using ObjLoader.Loader.Loaders;
 using SWE1R.Assets.Blocks.Common.Colors;
 using SWE1R.Assets.Blocks.Common.Images;
 using SWE1R.Assets.Blocks.Common.Vectors;
+using SWE1R.Assets.Blocks.ModelBlock.Materials;
+using SWE1R.Assets.Blocks.ModelBlock.Materials.Import;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.TextureBlock;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Numerics;
 using ObjFace = ObjLoader.Loader.Data.Elements.Face;
 using ObjFaceVertex = ObjLoader.Loader.Data.Elements.FaceVertex;
@@ -21,7 +27,7 @@ using ObjNormal = ObjLoader.Loader.Data.VertexData.Normal;
 using ObjTexture = ObjLoader.Loader.Data.VertexData.Texture;
 using ObjVertex = ObjLoader.Loader.Data.VertexData.Vertex;
 
-namespace SWE1R.Assets.Blocks.CommandLine
+namespace SWE1R.Assets.Blocks.ModelBlock.Import
 {
     public class ModelObjImporter
     {

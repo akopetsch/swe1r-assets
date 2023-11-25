@@ -5,7 +5,7 @@
 using ByteSerialization.Components.Values.Customs;
 using ByteSerialization.IO;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 {
     /// <summary>
     /// <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L368">SWR_MODEL_Section6</see>
@@ -19,11 +19,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// </summary>
         public int AlphaBpp { get; set; }
         public short Word_4 { get; set; }
-        
+
         public int[] Ints_6 { get; set; }
-        
+
         public int[] Ints_e { get; set; }
-        
+
         public short Unk_16 { get; set; } // TODO: win-demo
 
         public int Bitmask1 { get; set; }
@@ -52,10 +52,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         #region Methods (helper)
 
-        public int CombinedBitmask => 
+        public int CombinedBitmask =>
             Bitmask1 | Bitmask2;
 
-        public bool IsFlipped => 
+        public bool IsFlipped =>
             CombinedBitmask == 0xF0A2008; // TODO: confirm this
 
         #endregion
@@ -65,16 +65,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         public void Serialize(CustomComponent customComponent)
         {
             EndianBinaryWriter w = customComponent.Writer;
-            
+
             w.Write(AlphaBpp);
             w.Write(Word_4);
-            
+
             w.Write(Ints_6[0]);
             w.Write(Ints_6[1]);
 
             w.Write(Ints_e[0]);
             w.Write(Ints_e[1]);
-            
+
             w.Write(Unk_16);
 
             w.Write(Bitmask1);
@@ -103,12 +103,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         public void Deserialize(CustomComponent customComponent)
         {
             EndianBinaryReader r = customComponent.Reader;
-            
+
             AlphaBpp = r.ReadInt32();
             Word_4 = r.ReadInt16();
-            
+
             Ints_6 = new int[] {
-                r.ReadInt32(), 
+                r.ReadInt32(),
                 r.ReadInt32(),
             };
 
@@ -118,12 +118,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             };
 
             Unk_16 = r.ReadInt16();
-            
+
             Bitmask1 = r.ReadInt32();
             Bitmask2 = r.ReadInt32();
-            
+
             Unk_20 = r.ReadInt16();
-            
+
             Byte_22 = r.ReadByte();
             Byte_23 = r.ReadByte();
             Byte_24 = r.ReadByte();

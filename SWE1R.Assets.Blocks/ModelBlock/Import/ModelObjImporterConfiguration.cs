@@ -4,7 +4,7 @@
 
 using System.Numerics;
 
-namespace SWE1R.Assets.Blocks.CommandLine
+namespace SWE1R.Assets.Blocks.ModelBlock.Import
 {
     public class ModelObjImporterConfiguration
     {
