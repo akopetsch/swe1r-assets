@@ -156,80 +156,32 @@ namespace SWE1R.Assets.Blocks.CommandLine
             var indicesRanges = new List<IndicesRange>() { indicesRange };
             foreach (ObjFace face in objGroup.Faces)
             {
-                if (face.Count == 3) // triangle
-                {
-                    // vertices
-                    vertices.Add(GetVertex(face[0], _objLoadResult));
-                    vertices.Add(GetVertex(face[1], _objLoadResult));
-                    vertices.Add(GetVertex(face[2], _objLoadResult));
+                // vertices
+                vertices.AddRange(
+                    GetFaceVertices(face).Select(f => GetVertex(f, _objLoadResult)));
 
-                    // indices
-                    var triangle = new Triangle(Enumerable.Range(indexBase, 3).ToArray());
-                    indexBase += 3;
-                    int[] indices = triangle.GetIndices().ToArray();
+                // indices
+                int[] primitiveIndices = Enumerable.Range(indexBase, face.Count).ToArray();
+                indexBase += face.Count;
+                var primitives = new List<Primitive>();
+                if (face.Count == 3)
+                    primitives.Add(new Triangle(primitiveIndices));
+                else if (face.Count == 4)
+                    primitives.Add(new Quad(primitiveIndices));
+                else if (face.Count > 4)
+                    primitives.Add(new TriangleFan(primitiveIndices));
+                else
+                    throw new InvalidOperationException();
+                var triangles = primitives.SelectMany(p => p.GetTriangles()).ToList();
+                foreach (Triangle triangle in triangles)
+                {
                     var chunk05 = new IndicesChunk05() {
-                        Index0 = ValidateAndConvert(2 * (indices[0] - startVertexIndex)),
-                        Index1 = ValidateAndConvert(2 * (indices[1] - startVertexIndex)),
-                        Index2 = ValidateAndConvert(2 * (indices[2] - startVertexIndex)),
+                        Index0 = ValidateAndConvert(2 * (triangle.I0 - startVertexIndex)),
+                        Index1 = ValidateAndConvert(2 * (triangle.I1 - startVertexIndex)),
+                        Index2 = ValidateAndConvert(2 * (triangle.I2 - startVertexIndex)),
                     };
                     indicesRange.Chunks0506.Add(chunk05);
                 }
-                else if (face.Count == 4) // quad
-                {
-                    // vertices
-                    vertices.Add(GetVertex(face[0], _objLoadResult));
-                    vertices.Add(GetVertex(face[1], _objLoadResult));
-                    vertices.Add(GetVertex(face[2], _objLoadResult));
-                    vertices.Add(GetVertex(face[3], _objLoadResult));
-
-                    // indices
-                    var quad = new Quad(Enumerable.Range(indexBase, 4).ToArray());
-                    indexBase += 4;
-                    int[] indices = quad.GetTriangles().SelectMany(t => t.GetIndices()).ToArray();
-                    //var chunk06 = new IndicesChunk06() {
-                    //    Index0 = ValidateAndConvert(2 * (indices[0] - startVertexIndex)),
-                    //    Index1 = ValidateAndConvert(2 * (indices[1] - startVertexIndex)),
-                    //    Index2 = ValidateAndConvert(2 * (indices[2] - startVertexIndex)),
-
-                    //    Index3 = ValidateAndConvert(2 * (indices[3] - startVertexIndex)),
-                    //    Index4 = ValidateAndConvert(2 * (indices[4] - startVertexIndex)),
-                    //    Index5 = ValidateAndConvert(2 * (indices[5] - startVertexIndex)),
-                    //};
-                    //indicesRange.Chunks0506.Add(chunk06);
-                    var chunk05_1 = new IndicesChunk05() {
-                        Index0 = ValidateAndConvert(2 * (indices[0] - startVertexIndex)),
-                        Index1 = ValidateAndConvert(2 * (indices[1] - startVertexIndex)),
-                        Index2 = ValidateAndConvert(2 * (indices[2] - startVertexIndex)),
-                    };
-                    var chunk05_2 = new IndicesChunk05() {
-                        Index0 = ValidateAndConvert(2 * (indices[3] - startVertexIndex)),
-                        Index1 = ValidateAndConvert(2 * (indices[4] - startVertexIndex)),
-                        Index2 = ValidateAndConvert(2 * (indices[5] - startVertexIndex)),
-                    };
-                    indicesRange.Chunks0506.Add(chunk05_1);
-                    indicesRange.Chunks0506.Add(chunk05_2);
-                }
-                else // polygon
-                {
-                    // vertices
-                    vertices.AddRange(
-                        GetFaceVertices(face).Select(f => GetVertex(f, _objLoadResult)));
-
-                    // indices
-                    var triangleFan = new TriangleFan(Enumerable.Range(indexBase, face.Count).ToArray());
-                    indexBase += face.Count;
-                    foreach (Triangle triangle in triangleFan.GetTriangles())
-                    {
-                        var chunk05 = new IndicesChunk05() {
-                            Index0 = ValidateAndConvert(2 * (triangle.I0 - startVertexIndex)),
-                            Index1 = ValidateAndConvert(2 * (triangle.I1 - startVertexIndex)),
-                            Index2 = ValidateAndConvert(2 * (triangle.I2 - startVertexIndex)),
-                        };
-                        indicesRange.Chunks0506.Add(chunk05);
-                    }
-                }
-
-                // indices
                 if (indicesRange.NextIndicesBase >= _indicesRangeMaxLength)
                 {
                     // new indices range
