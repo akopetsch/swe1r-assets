@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWE1R.Assets.Blocks.Command
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWE1R.Assets.Blocks.Original.SQLite.CommandLine", "SWE1R.Assets.Blocks.Original.SQLite.CommandLine\SWE1R.Assets.Blocks.Original.SQLite.CommandLine.csproj", "{BE162FC0-D45C-422D-ABA2-EF52B1825E7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiddleApp", "FiddleApp\FiddleApp.csproj", "{FA03D397-3BD2-48F2-9302-615E68409273}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{BE162FC0-D45C-422D-ABA2-EF52B1825E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE162FC0-D45C-422D-ABA2-EF52B1825E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE162FC0-D45C-422D-ABA2-EF52B1825E7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA03D397-3BD2-48F2-9302-615E68409273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA03D397-3BD2-48F2-9302-615E68409273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA03D397-3BD2-48F2-9302-615E68409273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA03D397-3BD2-48F2-9302-615E68409273}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
