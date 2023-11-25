@@ -21,46 +21,44 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             string objFilename;
             float positionScale = 1;
 
-            //objFilename = "Upgrade_Plug_3_exp.groups.obj";
-            //positionScale = 100;
+            objFilename = "Upgrade_Plug_3_exp.groups.obj"; // OK
+            positionScale = 100;
 
-            // v: 8 f: 8
-            //objFilename = "obj/box.obj"; // OK (/2)
+            // v: 8
+            //objFilename = "obj/box.obj"; // OK
             //positionScale = 400;
 
-            // v: 1598 f: 1598
-            //objFilename = "obj/teddy.obj"; // FAIL (/2) // FAIL (/4, Tr)
+            // v: 1598
+            //objFilename = "obj/teddy.obj"; // CRASH
             //positionScale = 15;
 
-            // v: 64 f: 64
-            //objFilename = "obj/humanoid_quad.obj"; // OK (/2) // OK (/4, Tr)
+            // v: 64
+            //objFilename = "obj/humanoid_quad.obj"; // OK
             //positionScale = 100;
 
-            // v: 806 f: 806
-            //objFilename = "obj/magnolia.obj"; // FAIL (/2) // OK (/4, Tr)
+            // v: 806
+            //objFilename = "obj/magnolia.obj"; // OK
             //positionScale = 7;
 
-            // v: 310 f: 310
-            objFilename = "obj/shuttle.obj"; // OK (/2) (but degenerate in-game) // OK (/4, Tr)
-            positionScale = 75;
-
-            // v: 5252 f: 5252
-            //objFilename = "obj/capsule.obj"; // FAIL (/2) // FAIL (/4, Tr)
+            // v: 310
+            //objFilename = "obj/shuttle.obj"; // OK
             //positionScale = 75;
 
-            // v: 1080 f: 1080
-            //objFilename = "obj/violin_case.obj"; // FAIL (/2) // FAIL (/4, Tr)
+            //objFilename = "capsule.obj"; // CRASH
+            //positionScale = 75;
+
+            //objFilename = "obj/violin_case.obj"; // OK
             //positionScale = 150;
 
-            // v: 326 f: 326
-            //objFilename = "obj/gourd.obj"; // OK (/2) (but degenerate in-game)  // OK (/4, Tr)
+            // v: 326
+            //objFilename = "obj/gourd.obj"; // OK
             //positionScale = 150;
 
-            // v: 507 f: 507
-            //objFilename = "obj/monkey.obj"; // OK (/2) (but degenerate in-game, left-ear, around eyes) // OK (/4, Tr)
+            // v: 507
+            //objFilename = "obj/monkey.obj"; // OK
             //positionScale = 250;
 
-            //objFilename = "cube.obj";
+            //objFilename = "cube.obj"; // OK
             //positionScale = 400;
 
             // load
