@@ -175,9 +175,11 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 vertices.AddRange(
                     GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)));
 
-                // indices
+                // primitives indices
                 int[] primitiveIndices = Enumerable.Range(indexBase, face.Count).ToArray();
                 indexBase += face.Count;
+
+                // primitives
                 var primitives = new List<Primitive>();
                 if (face.Count == 3)
                     primitives.Add(new Triangle(primitiveIndices));
@@ -187,6 +189,8 @@ namespace SWE1R.Assets.Blocks.CommandLine
                     primitives.Add(new TriangleFan(primitiveIndices));
                 else
                     throw new InvalidOperationException();
+
+                // triangles -> indicesRange
                 var triangles = primitives.SelectMany(p => p.GetTriangles()).ToList();
                 foreach (Triangle triangle in triangles)
                 {
@@ -200,6 +204,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 }
                 if (indicesRange.NextIndicesBase >= _indicesRangeMaxLength)
                 {
+                    // HACK: this should happen in the foreach before
                     // new indices range
                     startVertexIndex += indicesRange.NextIndicesBase / 2;
                     indicesRange = new IndicesRange();
@@ -216,7 +221,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             foreach (IndicesRange range in indicesRanges)
             {
                 if (range.Chunks0506.Count == 0)
-                    break;
+                    break; // HACK: remove this
                 range.Chunk01 = new IndicesChunk01() {
                     Length = (byte)(range.Indices.Distinct().Count() * Vertex.StructureSize),
                     NextIndicesBase = (byte)range.NextIndicesBase,
