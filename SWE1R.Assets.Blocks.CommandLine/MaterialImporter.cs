@@ -71,23 +71,13 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         protected abstract MaterialProperties CreateMaterialProperties();
 
-        private (short width, short height) GetSize()
-        {
-            Vector2 size = Image.Size;
-            Vector2 max = MaterialTexture.MaxSize;
-            if (!max.Contains(size))
-                throw new MaterialImporterException($"{size} exceeds {max}");
-            return ((short)size.X, (short)size.Y);
-        }
+        private (short width, short height) GetSize() =>
+            (Convert.ToInt16(Image.Width), 
+            Convert.ToInt16(Image.Height));
 
-        private (short width4, short height4) GetSize4()
-        {
-            Vector2 size = Image.Size * 4;
-            Vector2 max = MaterialTexture.MaxSize4;
-            if (!max.Contains(size))
-                throw new MaterialImporterException($"{size} exceeds {max}");
-            return ((short)size.X, (short)size.Y);
-        }
+        private (short width4, short height4) GetSize4() =>
+            (Convert.ToInt16(Image.Width * 4), 
+            Convert.ToInt16(Image.Height * 4));
 
         private (ushort width_Unk, ushort height_Unk) GetSizeUnk()
         {

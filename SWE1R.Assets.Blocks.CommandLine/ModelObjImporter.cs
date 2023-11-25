@@ -195,9 +195,9 @@ namespace SWE1R.Assets.Blocks.CommandLine
                 foreach (Triangle triangle in triangles)
                 {
                     var chunk05 = new IndicesChunk05() {
-                        Index0 = ValidateAndConvert(2 * (triangle.I0 - startVertexIndex)),
-                        Index1 = ValidateAndConvert(2 * (triangle.I1 - startVertexIndex)),
-                        Index2 = ValidateAndConvert(2 * (triangle.I2 - startVertexIndex)),
+                        Index0 = Convert.ToByte(2 * (triangle.I0 - startVertexIndex)),
+                        Index1 = Convert.ToByte(2 * (triangle.I1 - startVertexIndex)),
+                        Index2 = Convert.ToByte(2 * (triangle.I2 - startVertexIndex)),
                     };
                     // TODO: use IndicesChunk06 (e.g. for Quad) for smaller file size
                     indicesRange.Chunks0506.Add(chunk05);
@@ -265,14 +265,6 @@ namespace SWE1R.Assets.Blocks.CommandLine
         #endregion
 
         #region Methods (helper)
-
-        private byte ValidateAndConvert(int value) // TODO: extract as extension method
-        {
-            if (value < byte.MinValue || 
-                value > byte.MaxValue)
-                throw new ArgumentOutOfRangeException(nameof(value));
-            return (byte)value;
-        }
 
         private Vector3 ImportObjVertex(ObjVertex objVertex) =>
             new Vector3(-objVertex.X, objVertex.Z, objVertex.Y);
