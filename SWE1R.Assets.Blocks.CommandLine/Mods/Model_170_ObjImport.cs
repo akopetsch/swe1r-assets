@@ -21,8 +21,8 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             string objFilename;
             float positionScale = 1;
 
-            objFilename = "Upgrade_Plug_3_exp.groups.obj"; // FAIL (/2) // FAIL (/4, Tr)
-            positionScale = 100;
+            //objFilename = "Upgrade_Plug_3_exp.groups.obj";
+            //positionScale = 100;
 
             // v: 8 f: 8
             //objFilename = "obj/box.obj"; // OK (/2)
@@ -41,8 +41,8 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             //positionScale = 7;
 
             // v: 310 f: 310
-            //objFilename = "obj/shuttle.obj"; // OK (/2) (but degenerate in-game) // OK (/4, Tr)
-            //positionScale = 75;
+            objFilename = "obj/shuttle.obj"; // OK (/2) (but degenerate in-game) // OK (/4, Tr)
+            positionScale = 75;
 
             // v: 5252 f: 5252
             //objFilename = "obj/capsule.obj"; // FAIL (/2) // FAIL (/4, Tr)

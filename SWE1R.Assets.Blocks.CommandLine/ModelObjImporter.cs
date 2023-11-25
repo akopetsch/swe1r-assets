@@ -27,7 +27,10 @@ namespace SWE1R.Assets.Blocks.CommandLine
     {
         #region Fields
 
-        private const int _indicesRangeMaxLength = byte.MaxValue / 4; // TODO: indicesRangeMaxLength
+        private const int _indicesRangeMaxLength = byte.MaxValue / 4; // TODO: _indicesRangeMaxLength
+        private const string _testImageFilename = "cube.png"; // TODO: _testImageFilename, test texture in resources
+
+        private Material _testMaterial;
 
         private ObjLoadResult _objLoadResult;
         private Dictionary<ObjMaterial, Material> _materials = 
@@ -70,6 +73,8 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         public void Import()
         {
+            _testMaterial = ImportTestMaterial();
+
             IObjLoader objLoader = new ObjLoaderFactory().Create();
             using var fileStream = File.OpenRead(ObjFilename);
             _objLoadResult = objLoader.Load(fileStream);
@@ -91,11 +96,19 @@ namespace SWE1R.Assets.Blocks.CommandLine
             MeshGroup3064.UpdateBounds();
         }
 
+        private Material ImportTestMaterial()
+        {
+            ImageRgba32 imageRgba32 = ImageLoadFunc(_testImageFilename);
+            MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, TextureBlock);
+            importer.Import();
+            return importer.Material;
+        }
+
         private Mesh ImportObjGroup(ObjGroup objGroup)
         {
             var mesh = new Mesh();
 
-            mesh.Material = ImportMaterial(objGroup.Material);
+            mesh.Material = ImportObjMaterial(objGroup.Material);
 
             mesh.MeshGroupOrShorts = new MeshGroupOrShorts();
 
@@ -121,29 +134,31 @@ namespace SWE1R.Assets.Blocks.CommandLine
             return mesh;
         }
 
-        private Material ImportMaterial(ObjMaterial objMaterial)
+        private Material ImportObjMaterial(ObjMaterial objMaterial)
         {
             objMaterial ??= _objLoadResult.Materials.FirstOrDefault(); // HACK: workaround for missing 'usemtl'
-
-            if (_materials.TryGetValue(objMaterial, out Material existingMaterial))
-                return existingMaterial;
+            if (objMaterial == null)
+                return _testMaterial;
             else
             {
-                // load image
-                ImageRgba32 imageRgba32;
-                string textureImageFilename = objMaterial?.DiffuseTextureMap; // map_Kd
-                if (textureImageFilename != null)
-                    imageRgba32 = ImageLoadFunc(textureImageFilename);
+                if (_materials.TryGetValue(objMaterial, out Material existingMaterial))
+                    return existingMaterial;
                 else
-                    imageRgba32 = ImageLoadFunc("cube.png"); // TODO: !!! test texture in resources
+                {
+                    string textureImageFilename = objMaterial.DiffuseTextureMap; // map_Kd
+                    if (textureImageFilename == null)
+                        return _testMaterial;
+                    else
+                    {
+                        ImageRgba32 imageRgba32 = ImageLoadFunc(textureImageFilename);
+                        MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, TextureBlock);
+                        importer.Import();
 
-                // import material/texture
-                MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, TextureBlock);
-                importer.Import();
-
-                Material material = importer.Material;
-                _materials[objMaterial] = material;
-                return material;
+                        Material material = importer.Material;
+                        _materials[objMaterial] = material;
+                        return material;
+                    }
+                }
             }
         }
 
@@ -158,7 +173,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
             {
                 // vertices
                 vertices.AddRange(
-                    GetFaceVertices(face).Select(f => GetVertex(f, _objLoadResult)));
+                    GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)));
 
                 // indices
                 int[] primitiveIndices = Enumerable.Range(indexBase, face.Count).ToArray();
@@ -180,6 +195,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                         Index1 = ValidateAndConvert(2 * (triangle.I1 - startVertexIndex)),
                         Index2 = ValidateAndConvert(2 * (triangle.I2 - startVertexIndex)),
                     };
+                    // TODO: use IndicesChunk06 (e.g. for Quad) for smaller file size
                     indicesRange.Chunks0506.Add(chunk05);
                 }
                 if (indicesRange.NextIndicesBase >= _indicesRangeMaxLength)
@@ -215,16 +231,16 @@ namespace SWE1R.Assets.Blocks.CommandLine
             return indicesChunks;
         }
 
-        private Vertex GetVertex(ObjFaceVertex objFaceVertex, ObjLoadResult objLoadResult)
+        private Vertex ImportObjFaceVertex(ObjFaceVertex objFaceVertex, ObjLoadResult objLoadResult)
         {
             // position
-            Vector3 position = ToVector(objLoadResult.GetVertex(objFaceVertex.VertexIndex));
+            Vector3 position = ImportObjVertex(objLoadResult.GetVertex(objFaceVertex.VertexIndex));
             position = Vector3.Multiply(position, Configuration.PositionScale) + Configuration.PositionOffset;
 
             // texture
             Vector2 texture;
             if (objFaceVertex.TextureIndex > 0)
-                texture = ToVector(objLoadResult.GetTexture(objFaceVertex.TextureIndex));
+                texture = ImportObjTexture(objLoadResult.GetTexture(objFaceVertex.TextureIndex));
             else
                 texture = Vector2.Zero;
             texture = Vector2.Multiply(texture, Vertex.UvDivisor);
@@ -245,7 +261,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         #region Methods (helper)
 
-        protected byte ValidateAndConvert(int value) // TODO: extract as extension method
+        private byte ValidateAndConvert(int value) // TODO: extract as extension method
         {
             if (value < byte.MinValue || 
                 value > byte.MaxValue)
@@ -253,16 +269,16 @@ namespace SWE1R.Assets.Blocks.CommandLine
             return (byte)value;
         }
 
-        private Vector3 ToVector(ObjVertex objVertex) =>
+        private Vector3 ImportObjVertex(ObjVertex objVertex) =>
             new Vector3(-objVertex.X, objVertex.Z, objVertex.Y);
 
-        private Vector2 ToVector(ObjTexture objTexture) =>
+        private Vector2 ImportObjTexture(ObjTexture objTexture) =>
             new Vector2(objTexture.X, -objTexture.Y);
 
-        private Vector3 ToVector(ObjNormal objNormal) =>
+        private Vector3 ImportObjNormal(ObjNormal objNormal) =>
             new Vector3(-objNormal.X, objNormal.Z, objNormal.Y);
 
-        private IEnumerable<ObjFaceVertex> GetFaceVertices(ObjFace face)
+        private IEnumerable<ObjFaceVertex> GetObjFaceVertices(ObjFace face)
         {
             for (int i = 0; i < face.Count; i++)
                 yield return face[i];
