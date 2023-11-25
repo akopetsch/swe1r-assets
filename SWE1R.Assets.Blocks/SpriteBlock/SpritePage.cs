@@ -17,10 +17,19 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
     {
         #region Properties (serialization)
 
+        /// <summary>
+        /// Always a value from 2 to 64.
+        /// </summary>
         [Order(0)] 
         public short Width { get; set; }
+        /// <summary>
+        /// Always a value from 1 to 32.
+        /// </summary>
         [Order(1)] 
         public short Height { get; set; }
+        /// <summary>
+        /// Never null. Always has a length from 16 to 4096.
+        /// </summary>
         [Order(2), Reference(ReferenceHandling.Postpone), Length(typeof(LengthHelper))] 
         public byte[] Pixels { get; set; } // TODO: type
 

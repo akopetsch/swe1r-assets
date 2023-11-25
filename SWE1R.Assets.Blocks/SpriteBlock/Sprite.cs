@@ -16,25 +16,49 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
     {
         #region Properties (serialization)
 
+        /// <summary>
+        /// Always has a value from 1 to 640.
+        /// </summary>
         [Order(0)]
         public short Width { get; set; }
+        /// <summary>
+        /// Always has a value from 1 to 256.
+        /// </summary>
         [Order(1)]
         public short Height { get; set; }
+        /// <summary>
+        /// Always 0, 2 or 4.
+        /// </summary>
         [Order(2)]
         public byte Format { get; set; }
+        /// <summary>
+        /// Always 0, 1, or 3.
+        /// </summary>
         [Order(3)]
         public byte PageWidthAlignment { get; set; }
+        /// <summary>
+        /// Always 0.
+        /// </summary>
         [Order(4)]
-        public short Word_6 { get; set; }
+        public short Word_6 { get; set; } = 0;
+        /// <summary>
+        /// Can be null.
+        /// </summary>
         [Order(5), Reference(1)]
         public SpritePalette Palette { get; set; }
+        /// <summary>
+        /// Always a value from 0 to 80.
+        /// </summary>
         [Order(6)]
         public short PagesCount { get; set; }
         /// <summary>
         /// Always 32.
         /// </summary>
         [Order(7)]
-        public short Word_E { get; private set; }
+        public short Word_E { get; private set; } = 32;
+        /// <summary>
+        /// Never null.
+        /// </summary>
         [Order(8), Reference(0), Length(nameof(PagesCount))] 
         public List<SpritePage> Pages { get; private set; }
 
@@ -67,7 +91,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
                     }
                 }
             }
-            return image; // TODO: using?
+            return image;
             // TODO: usage of Word_E not confirmed, consider hardcoding 32
         }
 
