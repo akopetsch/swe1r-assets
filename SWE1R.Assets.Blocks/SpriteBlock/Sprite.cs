@@ -50,7 +50,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         /// Always a value from 0 to 80.
         /// </summary>
         [Order(6)]
-        public short PagesCount { get; set; }
+        public short TilesCount { get; set; }
         /// <summary>
         /// Always 32.
         /// </summary>
@@ -59,15 +59,15 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         /// <summary>
         /// Never null.
         /// </summary>
-        [Order(8), Reference(0), Length(nameof(PagesCount))] 
-        public List<SpritePage> Pages { get; private set; }
+        [Order(8), Reference(0), Length(nameof(TilesCount))] 
+        public List<SpriteTile> Tiles { get; private set; }
 
         #endregion
 
         #region Methods (serialization)
 
         public void UpdatePagesCount() => // TODO: implement in BindingComponent
-            PagesCount = (short)Pages.Count;
+            TilesCount = (short)Tiles.Count;
 
         #endregion
 
@@ -82,12 +82,12 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
             {
                 for (int x = 0; x < widthCount; x++)
                 {
-                    int index = y * widthCount + x;
-                    if (index < Pages.Count)
+                    int tileIndex = y * widthCount + x;
+                    if (tileIndex < Tiles.Count)
                     {
-                        SpritePage page = Pages[index];
-                        ImageRgba32 pageImage = page.ExportImage(this);
-                        image.Insert(pageImage.FlipY(), x * 64, y * Word_E);
+                        SpriteTile tile = Tiles[tileIndex];
+                        ImageRgba32 tileImage = tile.ExportImage(this);
+                        image.Insert(tileImage.FlipY(), x * 64, y * Word_E);
                     }
                 }
             }

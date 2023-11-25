@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
 {
     [Table("SpritePage")]
-    public class DbSpritePage : DbBlockItemStructure<SpritePage>
+    public class DbSpritePage : DbBlockItemStructure<SpriteTile>
     {
         #region Properties
 
@@ -24,15 +24,15 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
         {
             base.CopyFrom(node);
 
-            var spritePage = (SpritePage)node.Value;
+            var spritePage = (SpriteTile)node.Value;
 
             Width = spritePage.Width;
             Height = spritePage.Height;
-            P_Pixels = GetPropertyPointer(node, nameof(SpritePage.Pixels));
+            P_Pixels = GetPropertyPointer(node, nameof(SpriteTile.Pixels));
             Pixels_Length = spritePage.Pixels.Length;
         }
 
-        public override bool Equals(DbBlockItemStructure<SpritePage> other)
+        public override bool Equals(DbBlockItemStructure<SpriteTile> other)
         {
             var _other = (DbSpritePage)other;
 

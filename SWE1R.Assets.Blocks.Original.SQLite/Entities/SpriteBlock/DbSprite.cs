@@ -39,9 +39,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
             Int16_6 = sprite.Word_6;
             P_Palette = GetPropertyPointer(node, nameof(Sprite.Palette));
             Palette_Length = sprite.Palette?.Length;
-            PagesCount = sprite.PagesCount;
+            PagesCount = sprite.TilesCount;
             Int16_E = sprite.Word_E;
-            P_Pages = GetPropertyPointer(node, nameof(Sprite.Pages));
+            P_Pages = GetPropertyPointer(node, nameof(Sprite.Tiles));
         }
 
         public override bool Equals(DbBlockItemStructure<Sprite> other)

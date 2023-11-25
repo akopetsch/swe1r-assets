@@ -13,7 +13,7 @@ using SWE1R.Assets.Blocks.Common.Images;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock
 {
-    public class SpritePage
+    public class SpriteTile
     {
         #region Properties (serialization)
 
@@ -41,7 +41,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         {
             public int GetValue(PropertyComponent property)
             {
-                var recordComponent = (RecordComponent)property.GetAncestorValueComponent<SpritePage>();
+                var recordComponent = (RecordComponent)property.GetAncestorValueComponent<SpriteTile>();
 
                 int startPosition = GetDataPointer(recordComponent);
 

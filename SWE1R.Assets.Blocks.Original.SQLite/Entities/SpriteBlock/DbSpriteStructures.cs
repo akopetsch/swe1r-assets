@@ -35,7 +35,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
         public override void Load(Graph g)
         {
             Sprites = GetStructures<Sprite, DbSprite>(g);
-            SpritePages = GetStructures<SpritePage, DbSpritePage>(g);
+            SpritePages = GetStructures<SpriteTile, DbSpritePage>(g);
         }
 
         public bool Equals(DbSpriteStructures other)
