@@ -9,6 +9,7 @@ using SWE1R.Assets.Blocks.SpriteBlock;
 using SWE1R.Assets.Blocks.Textures;
 using SWE1R.Assets.Blocks.Utils;
 using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
 using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
@@ -50,11 +51,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
             {
                 for (int tileX = 0; tileX < sprite.TilesGridWidth; tileX++)
                 {
-                    int tileIndex = sprite.GetTileIndex(tileX, tileY);
-                    if (tileIndex < sprite.Tiles.Count)
+                    SpriteTile tile = sprite.GetTile(tileX, tileY);
+                    if (tile != null)
                     {
-                        SpriteTile tile = sprite.Tiles[tileIndex];
-
                         if (hasSpecialTiles)
                             Debug.WriteLine($"{tileX}-{tileY}: {tile.Width}x{tile.Height}");
 
@@ -66,7 +65,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
                         // Pixels.Length
                         int minimumLength = GetMinimumPixelsLength(sprite, tile);
                         int guessedLength = GetGuessedPixelsLength(sprite, tile);
-                        int actualLength = tile.Pixels.Length;
+                        int actualLength = tile.PixelsBytes.Length;
                         Assert.True(minimumLength % 2 == 0);
                     }
                     else

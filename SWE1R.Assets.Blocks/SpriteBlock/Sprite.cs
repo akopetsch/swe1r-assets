@@ -56,28 +56,43 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         /// Never null.
         /// </summary>
         [Order(7), Reference(0), Length(nameof(TilesCount))] 
-        public List<SpriteTile> Tiles { get; private set; } // TODO: consider two-dimensional array
+        public SpriteTile[] Tiles { get; set; } // TODO: consider two-dimensional array
 
         #endregion
 
         #region Properties (helper)
 
         public int TilesGridWidth =>
-            (int)Math.Ceiling(Width / 64f); // TODO: do not hardcode 64
+            (int)Math.Ceiling(Width / (double)SpriteTile.MaxWidth);
 
         public int TilesGridHeight =>
-            (int)Math.Ceiling(Height / 32f); // TODO: do not hardcode 32 (is it actually Word_E?)
+            (int)Math.Ceiling(Height / (double)SpriteTile.MaxHeight); // TODO: is it actually Word_E?
 
         #endregion
 
         #region Methods (serialization)
 
-        public void UpdatePagesCount() => // TODO: implement in BindingComponent
-            TilesCount = (short)Tiles.Count;
+        public void UpdateTilesCount() => // TODO: implement in BindingComponent
+            TilesCount = (short)Tiles.Length;
 
         #endregion
 
-        #region Methods (export)
+        #region Methods (helper)
+
+        public int GetTileIndex(int tileX, int tileY) =>
+            tileY * TilesGridWidth + tileX;
+
+        public (int x, int y) GetTilePosition(int tileX, int tileY) =>
+            (tileX * SpriteTile.MaxWidth, tileY * SpriteTile.MaxHeight);
+
+        public SpriteTile GetTile(int tileX, int tileY)
+        {
+            int tileIndex = GetTileIndex(tileX, tileY);
+            if (tileIndex < Tiles.Length) // TODO: that check should be unnecessary
+                return Tiles[tileIndex];
+            else
+                return null;
+        }
 
         public IEnumerable<SpriteTile> GetTilesRow(int tileY)
         {
@@ -85,17 +100,9 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
                 yield return GetTile(tileX, tileY);
         }
 
-        public SpriteTile GetTile(int tileX, int tileY)
-        {
-            int tileIndex = GetTileIndex(tileX, tileY);
-            if (tileIndex < Tiles.Count) // TODO: that check should be unnecessary
-                return Tiles[tileIndex];
-            else
-                return null;
-        }
+        #endregion
 
-        public int GetTileIndex(int tileX, int tileY) =>
-            tileY * TilesGridWidth + tileX;
+        #region Methods (export)
 
         public ImageRgba32 ExportImage()
         {
@@ -104,14 +111,12 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
             {
                 for (int tileX = 0; tileX < TilesGridWidth; tileX++)
                 {
-                    int tileIndex = GetTileIndex(tileX, tileY);
-                    if (tileIndex < Tiles.Count)
+                    SpriteTile tile = GetTile(tileX, tileY);
+                    if (tile != null)
                     {
-                        SpriteTile tile = GetTile(tileX, tileY);
                         ImageRgba32 tileImage = tile.ExportImage(this);
-                        image.Insert(tileImage.FlipY(), tileX * 64, tileY * 32);
-                        // TODO: do not hardcode 64
-                        // TODO: do not hardcode 32 (is it actually Word_E?)
+                        (int spriteX, int spriteY) = GetTilePosition(tileX, tileY);
+                        image.Insert(tileImage.FlipY(), spriteX, spriteY);
                     }
                 }
             }

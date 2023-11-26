@@ -33,7 +33,7 @@ namespace SWE1R.Assets.Blocks.Textures.Import
                 {
                     //int i = x * h + y;
                     int i = y * w + x;
-                    byte[] bytes = Image[x, y].Bytes.Reverse().ToArray(); // TODO: use EndianBinaryWrite
+                    byte[] bytes = Image[x, y].Bytes.Reverse().ToArray(); // TODO: use EndianBinaryWriter
                     Array.Copy(bytes, 0, PixelsBytes, i * bytes.Length, bytes.Length);
                 }
             }

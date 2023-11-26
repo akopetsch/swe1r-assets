@@ -17,6 +17,13 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
 {
     public class SpriteTile
     {
+        #region Constants
+
+        public const int MaxWidth = 64;
+        public const int MaxHeight = 32;
+
+        #endregion
+
         #region Properties (serialization)
 
         /// <summary>
@@ -33,7 +40,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         /// Never null. Always has a length from 16 to 4096.
         /// </summary>
         [Order(2), Reference(ReferenceHandling.Postpone), Length(typeof(LengthHelper))] 
-        public byte[] Pixels { get; set; } // TODO: type
+        public byte[] PixelsBytes { get; set; } // TODO: type
 
         #endregion
 
@@ -45,7 +52,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
             {
                 var recordComponent = (RecordComponent)property.GetAncestorValueComponent<SpriteTile>();
 
-                int startPosition = GetPixelsPointer(recordComponent);
+                int startPosition = GetPixelsBytesPointer(recordComponent);
 
                 int endPosition;
                 var elementComponent = recordComponent.Get<CollectionElementComponent>();
@@ -56,7 +63,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
                 }
                 else
                 {
-                    endPosition = GetPixelsPointer(elementComponent.NextElement.Get<RecordComponent>());
+                    endPosition = GetPixelsBytesPointer(elementComponent.NextElement.Get<RecordComponent>());
                 }
 
                 int length = endPosition - startPosition;
@@ -64,8 +71,8 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
                 return length;
             }
 
-            private int GetPixelsPointer(RecordComponent recordComponent) =>
-                recordComponent.Properties[nameof(Pixels)].Get<ReferenceComponent>().Pointer.Value;
+            private int GetPixelsBytesPointer(RecordComponent recordComponent) =>
+                recordComponent.Properties[nameof(PixelsBytes)].Get<ReferenceComponent>().Pointer.Value;
         }
 
         #endregion
@@ -95,23 +102,23 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
                     {
                         if (bpp == 4)
                         {
-                            byte nibble = Pixels.GetNibble(pixelIndex);
+                            byte nibble = PixelsBytes.GetNibble(pixelIndex);
                             byte grayscale = (byte)(nibble * 16);
                             byte alpha = (byte)(nibble * 17);
                             color = new ColorRgba32(grayscale, grayscale, grayscale, alpha);
                         }
                         else if (bpp == 8)
                         {
-                            byte grayscale = Pixels[pixelIndex];
+                            byte grayscale = PixelsBytes[pixelIndex];
                             color = new ColorRgba32(grayscale, grayscale, grayscale, grayscale);
                         }
                         else if (bpp == 32)
                         {
                             int offset = pixelIndex * 4;
-                            byte r = Pixels[offset];
-                            byte g = Pixels[offset + 1];
-                            byte b = Pixels[offset + 2];
-                            byte a = Pixels[offset + 3];
+                            byte r = PixelsBytes[offset];
+                            byte g = PixelsBytes[offset + 1];
+                            byte b = PixelsBytes[offset + 2];
+                            byte a = PixelsBytes[offset + 3];
                             color = new ColorRgba32(r, g, b, a);
                         }
                     }
@@ -119,12 +126,12 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
                     {
                         if (bpp == 4)
                         {
-                            int index = Pixels.GetNibble(pixelIndex);
+                            int index = PixelsBytes.GetNibble(pixelIndex);
                             color = (ColorRgba32)sprite.Palette.Colors[index];
                         }
                         else if (bpp == 8)
                         {
-                            int index = Pixels[pixelIndex];
+                            int index = PixelsBytes[pixelIndex];
                             color = (ColorRgba32)sprite.Palette.Colors[index];
                         }
                     }

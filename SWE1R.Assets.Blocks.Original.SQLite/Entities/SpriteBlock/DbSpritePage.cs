@@ -28,8 +28,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
 
             Width = spritePage.Width;
             Height = spritePage.Height;
-            P_Pixels = GetPropertyPointer(node, nameof(SpriteTile.Pixels));
-            Pixels_Length = spritePage.Pixels.Length;
+            P_Pixels = GetPropertyPointer(node, nameof(SpriteTile.PixelsBytes));
+            Pixels_Length = spritePage.PixelsBytes.Length;
         }
 
         public override bool Equals(DbBlockItemStructure<SpriteTile> other)

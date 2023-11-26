@@ -60,7 +60,7 @@ namespace SWE1R.Assets.Blocks.Images
 
         #endregion
 
-        #region Methods (mirror, flip, append, insert)
+        #region Methods (mirror, flip, append, insert, crop)
 
         public ImageRgba32 Mirror(bool right, bool bottom)
         {
@@ -139,6 +139,15 @@ namespace SWE1R.Assets.Blocks.Images
                     this[x0, y0] = other[x1, y1];
                 }
             }
+        }
+
+        public ImageRgba32 Crop(int x0, int y0, int w, int h)
+        {
+            var cropped = new ImageRgba32(w, h);
+            for (int y = 0; y < h; y++)
+                for (int x = 0; x < w; x++)
+                    cropped[x, y] = this[x0 + x, y0 +y];
+            return cropped;
         }
 
         #endregion
