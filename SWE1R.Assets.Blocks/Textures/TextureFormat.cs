@@ -26,10 +26,10 @@ namespace SWE1R.Assets.Blocks.Textures
         /// <summary>
         /// 4 bits indexing a
         /// </summary>
-        I4_RGBA5551 = 0x0200, // TODO: xml comment
+        RGBA5551_I4 = 0x0200, // TODO: xml comment
         /// <summary>
         /// 8 bits indexing a
         /// </summary>
-        I8_RGBA5551 = 0x0201, // TODO: xml comment
+        RGBA5551_I8 = 0x0201, // TODO: xml comment
     }
 }

@@ -39,7 +39,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Import
             Sprite = new Sprite() {
                 Width = Convert.ToInt16(Image.Width),
                 Height = Convert.ToInt16(Image.Height),
-                TextureFormat = TextureFormat.I8_RGBA5551,
+                TextureFormat = TextureFormat.RGBA5551_I8,
             };
             Sprite.UpdatePagesCount();
         }

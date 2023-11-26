@@ -2,53 +2,23 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.Colors;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.TextureBlock;
 using SWE1R.Assets.Blocks.Textures;
-using System;
-using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 {
-    public class ColorRgba32MaterialImporter : MaterialImporter
+    public class RGBA32_MaterialImporter : MaterialImporter
     {
         #region Constructor
 
-        public ColorRgba32MaterialImporter(ImageRgba32 image, Block<TextureBlockItem> textureBlock) : 
-            base(image, textureBlock)
+        public RGBA32_MaterialImporter(ImageRgba32 image, Block<TextureBlockItem> textureBlock) : 
+            base(image, TextureFormat.RGBA32, textureBlock)
         { }
 
         #endregion
 
         #region Methods
-
-        protected override TextureBlockItem CreateTextureBlockItem()
-        {
-            var textureBlockItem = new TextureBlockItem();
-
-            int w = Image.Width;
-            int h = Image.Height;
-
-            // pixels
-            byte[] pixels = new byte[w * h * ColorRgba32.StructureSize];
-            for (int x = 0; x < w; x++)
-            {
-                for (int y = 0; y < h; y++)
-                {
-                    //int i = x * h + y;
-                    int i = y * w + x;
-                    byte[] bytes = Image[x, y].Bytes.Reverse().ToArray(); // TODO: use EndianBinaryWrite
-                    Array.Copy(bytes, 0, pixels, i * bytes.Length, bytes.Length);
-                }
-            }
-            textureBlockItem.PixelsPart.Bytes = pixels;
-
-            // palette
-            textureBlockItem.PalettePart.Bytes = new byte[] { };
-
-            return textureBlockItem;
-        }
 
         // mt_w: 16, 32, 64
         // mt_h: 16, 32

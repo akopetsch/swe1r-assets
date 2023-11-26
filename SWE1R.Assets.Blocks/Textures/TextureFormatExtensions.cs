@@ -21,22 +21,22 @@ namespace SWE1R.Assets.Blocks.Textures
                 case TextureFormat.RGBA32: return 32;
                 case TextureFormat.FourBitGrayscaleAndAlpha: return 4;
                 case TextureFormat.EightBitGrayscale: return 8;
-                case TextureFormat.I4_RGBA5551: return 4;
-                case TextureFormat.I8_RGBA5551: return 8;
+                case TextureFormat.RGBA5551_I4: return 4;
+                case TextureFormat.RGBA5551_I8: return 8;
                 default: throw new InvalidOperationException();
             }
         }
 
         public static bool HasPalette(this TextureFormat textureFormat) =>
-            textureFormat == TextureFormat.I4_RGBA5551 ||
-            textureFormat == TextureFormat.I8_RGBA5551;
+            textureFormat == TextureFormat.RGBA5551_I4 ||
+            textureFormat == TextureFormat.RGBA5551_I8;
 
         public static int GetPaletteSize(this TextureFormat textureFormat)
         {
             switch (textureFormat)
             {
-                case TextureFormat.I4_RGBA5551: return 1 << 4;
-                case TextureFormat.I8_RGBA5551: return 1 << 8;
+                case TextureFormat.RGBA5551_I4: return 1 << 4;
+                case TextureFormat.RGBA5551_I8: return 1 << 8;
                 default: return 0;
             }
         }

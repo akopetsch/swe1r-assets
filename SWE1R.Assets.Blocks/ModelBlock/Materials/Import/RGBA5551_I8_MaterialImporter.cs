@@ -2,61 +2,23 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.Colors;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.TextureBlock;
 using SWE1R.Assets.Blocks.Textures;
-using System;
-using System.Diagnostics;
-using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 {
-    public class ColorRgba5551MaterialImporter : MaterialImporter
+    public class RGBA5551_I8_MaterialImporter : MaterialImporter
     {
         #region Constructor
 
-        public ColorRgba5551MaterialImporter(ImageRgba32 image, Block<TextureBlockItem> textureBlock) :
-            base(image, textureBlock)
+        public RGBA5551_I8_MaterialImporter(ImageRgba32 image, Block<TextureBlockItem> textureBlock) :
+            base(image, TextureFormat.RGBA5551_I8, textureBlock)
         { }
 
         #endregion
 
         #region Methods
-
-        protected override TextureBlockItem CreateTextureBlockItem()
-        {
-            var textureBlockItem = new TextureBlockItem();
-
-            int w = Image.Width;
-            int h = Image.Height;
-
-            // indices
-            var indices = new byte[w * h];
-            for (int x = 0; x < w; x++)
-            {
-                for (int y = 0; y < h; y++)
-                {
-                    int index = Image.GetPaletteIndex(x, y);
-                    Debug.Assert(index >= 0);
-                    //int i = x * h + y;
-                    int i = y * w + x;
-                    indices[i] = (byte)index;
-                }
-            }
-            textureBlockItem.PixelsPart.Bytes = indices;
-
-            // palette
-            byte[] palette = Image.Palette
-                .Select(c => (ColorRgba5551)c)
-                .SelectMany(c => c.Bytes.Reverse()) // TODO: use EndianBinaryWrite
-                .ToArray();
-            byte[] palette512 = new byte[512];
-            Array.Copy(palette, palette512, palette.Length);
-            textureBlockItem.PalettePart.Bytes = palette512;
-
-            return textureBlockItem;
-        }
 
         // mt_w: 4, 16, 32, 64
         // mt_h: 4, 16, 32, 64
@@ -72,7 +34,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         {
             var mt = base.CreateMaterialTexture();
             mt.Mask_Unk = 1; // 1
-            mt.TextureFormat = TextureFormat.I8_RGBA5551;
+            mt.TextureFormat = TextureFormat.RGBA5551_I8;
             mt.Flags = 512; // 256, 512, 1024, 2048
             mt.Mask = 1023; // 7, 127, 1023
             return mt;

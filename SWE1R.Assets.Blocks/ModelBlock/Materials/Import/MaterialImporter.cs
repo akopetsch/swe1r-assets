@@ -4,6 +4,8 @@
 
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.TextureBlock;
+using SWE1R.Assets.Blocks.Textures;
+using SWE1R.Assets.Blocks.Textures.Import;
 using SWE1R.Assets.Blocks.Vectors;
 using System;
 using System.Numerics;
@@ -15,6 +17,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         #region Properties (input)
 
         public ImageRgba32 Image { get; }
+        public TextureFormat TextureFormat { get; set; }
         public Block<TextureBlockItem> TextureBlock { get; }
 
         #endregion
@@ -28,9 +31,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 
         #region Constructor
 
-        public MaterialImporter(ImageRgba32 image, Block<TextureBlockItem> textureBlock)
+        public MaterialImporter(ImageRgba32 image, TextureFormat textureFormat, Block<TextureBlockItem> textureBlock)
         {
             Image = image;
+            TextureFormat = textureFormat;
             TextureBlock = textureBlock;
         }
 
@@ -41,13 +45,20 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         public void Import()
         {
             TextureBlockItem = CreateTextureBlockItem();
-            TextureBlockItem.Block = TextureBlock;
-            TextureBlock.Add(TextureBlockItem);
-
             Material = CreateMaterial();
         }
 
-        protected abstract TextureBlockItem CreateTextureBlockItem();
+        private TextureBlockItem CreateTextureBlockItem()
+        {
+            var blockItem = new TextureBlockItem();
+            var importer = new TextureImporterFactory().Get(Image, TextureFormat);
+            importer.Import();
+            blockItem.PixelsPart.Bytes = importer.PixelsBytes;
+            blockItem.PalettePart.Bytes = importer.PaletteBytes ?? new byte[] { };
+            blockItem.Block = TextureBlock;
+            TextureBlock.Add(blockItem);
+            return blockItem;
+        }
 
         protected virtual Material CreateMaterial() =>
             new Material() {

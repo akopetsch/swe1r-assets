@@ -71,7 +71,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
             Assert.True(materialTexture.Height4 == 256);
             Assert.True(materialTexture.Always0_08 == 0);
             Assert.True(materialTexture.Always0_0a == 0);
-            Assert.True(materialTexture.TextureFormat == TextureFormat.I8_RGBA5551);
+            Assert.True(materialTexture.TextureFormat == TextureFormat.RGBA5551_I8);
             Assert.True(materialTexture.Word_0e == 0);
             Assert.True(materialTexture.Width == 32);
             Assert.True(materialTexture.Height == 64);
