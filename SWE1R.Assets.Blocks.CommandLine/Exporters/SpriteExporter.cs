@@ -3,7 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization;
-using SWE1R.Assets.Blocks.CommandLine.Extensions;
+using SWE1R.Assets.Blocks.Images.ImageSharp;
 using SWE1R.Assets.Blocks.SpriteBlock;
 
 namespace SWE1R.Assets.Blocks.CommandLine.Exporters

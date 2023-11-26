@@ -3,12 +3,12 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Nodes;
-using SWE1R.Assets.Blocks.Common.Textures;
 using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
+using SWE1R.Assets.Blocks.Textures;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {

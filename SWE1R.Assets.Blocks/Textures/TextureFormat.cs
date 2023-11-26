@@ -4,7 +4,7 @@
 
 using System;
 
-namespace SWE1R.Assets.Blocks.Common.Textures
+namespace SWE1R.Assets.Blocks.Textures
 {
     /// <summary>
     /// <see href="// https://github.com/Olganix/Sw_Racer/issues/9">Olganix/Sw_Racer - 'Known texture formats #9'</see>

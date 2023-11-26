@@ -3,8 +3,8 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Attributes;
-using SWE1R.Assets.Blocks.Common.Images;
-using SWE1R.Assets.Blocks.Common.Textures;
+using SWE1R.Assets.Blocks.Images;
+using SWE1R.Assets.Blocks.Textures;
 using System;
 using System.Collections.Generic;
 
@@ -15,7 +15,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
     /// </summary>
     public class Sprite : BlockItemValue
     {
-        #region Properties (serialization)
+        #region Properties (serialized)
 
         /// <summary>
         /// Always has a value from 1 to 640.
@@ -56,7 +56,17 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         /// Never null.
         /// </summary>
         [Order(7), Reference(0), Length(nameof(TilesCount))] 
-        public List<SpriteTile> Tiles { get; private set; }
+        public List<SpriteTile> Tiles { get; private set; } // TODO: consider two-dimensional array
+
+        #endregion
+
+        #region Properties (helper)
+
+        public int TilesGridWidth =>
+            (int)Math.Ceiling(Width / 64f); // TODO: do not hardcode 64
+
+        public int TilesGridHeight =>
+            (int)Math.Ceiling(Height / 32f); // TODO: do not hardcode 32 (is it actually Word_E?)
 
         #endregion
 
@@ -69,27 +79,51 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
 
         #region Methods (export)
 
+        public IEnumerable<SpriteTile> GetTilesRow(int tileY)
+        {
+            for (int tileX = 0; tileX < TilesGridWidth; tileX++)
+                yield return GetTile(tileX, tileY);
+        }
+
+        public SpriteTile GetTile(int tileX, int tileY)
+        {
+            int tileIndex = GetTileIndex(tileX, tileY);
+            if (tileIndex < Tiles.Count) // TODO: that check should be unnecessary
+                return Tiles[tileIndex];
+            else
+                return null;
+        }
+
+        public int GetTileIndex(int tileX, int tileY) =>
+            tileY * TilesGridWidth + tileX;
+
         public ImageRgba32 ExportImage()
         {
-            int widthCount = (int)Math.Ceiling(Width / 64f);
-            int heightCount = (int)Math.Ceiling(Height / (float)Word_E);
             ImageRgba32 image = new ImageRgba32(Width, Height);
-            for (int y = 0; y < heightCount; y++)
+            for (int tileY = 0; tileY < TilesGridHeight; tileY++)
             {
-                for (int x = 0; x < widthCount; x++)
+                for (int tileX = 0; tileX < TilesGridWidth; tileX++)
                 {
-                    int tileIndex = y * widthCount + x;
+                    int tileIndex = GetTileIndex(tileX, tileY);
                     if (tileIndex < Tiles.Count)
                     {
-                        SpriteTile tile = Tiles[tileIndex];
+                        SpriteTile tile = GetTile(tileX, tileY);
                         ImageRgba32 tileImage = tile.ExportImage(this);
-                        image.Insert(tileImage.FlipY(), x * 64, y * Word_E);
+                        image.Insert(tileImage.FlipY(), tileX * 64, tileY * 32);
+                        // TODO: do not hardcode 64
+                        // TODO: do not hardcode 32 (is it actually Word_E?)
                     }
                 }
             }
             return image;
-            // TODO: usage of Word_E not confirmed, consider hardcoding 32
         }
+
+        #endregion
+
+        #region Methods (: object)
+
+        public override string ToString() =>
+            $"({nameof(Width)}={Width}, {nameof(Height)}={Height})";
 
         #endregion
     }

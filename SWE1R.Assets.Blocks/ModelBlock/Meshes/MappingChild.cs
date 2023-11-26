@@ -3,8 +3,8 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Attributes;
-using SWE1R.Assets.Blocks.Common.Vectors;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
+using SWE1R.Assets.Blocks.Vectors;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 {

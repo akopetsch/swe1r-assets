@@ -3,9 +3,8 @@
 // Refer to the included LICENSE.txt file.
 
 using ObjLoader.Loader.Loaders;
-using SWE1R.Assets.Blocks.Common.Colors;
-using SWE1R.Assets.Blocks.Common.Images;
-using SWE1R.Assets.Blocks.Common.Vectors;
+using SWE1R.Assets.Blocks.Colors;
+using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Materials.Import;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
@@ -13,6 +12,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.TextureBlock;
+using SWE1R.Assets.Blocks.Vectors;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -5,7 +5,7 @@
 using System;
 using System.Numerics;
 
-namespace SWE1R.Assets.Blocks.Common.Vectors
+namespace SWE1R.Assets.Blocks.Vectors
 {
     public static class SystemNumericsVector2Extensions
     {

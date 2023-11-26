@@ -32,6 +32,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWE1R.Assets.Blocks.Origina
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiddleApp", "FiddleApp\FiddleApp.csproj", "{FA03D397-3BD2-48F2-9302-615E68409273}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWE1R.Assets.Blocks.Images.ImageSharp", "SWE1R.Assets.Blocks.Images.ImageSharp\SWE1R.Assets.Blocks.Images.ImageSharp.csproj", "{BB109424-8B3B-4121-9B9A-025209A48466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWE1R.Assets.Blocks.Images.SystemDrawing", "SWE1R.Assets.Blocks.Images.SystemDrawing\SWE1R.Assets.Blocks.Images.SystemDrawing.csproj", "{0503A08F-2A4E-42FF-98E2-5CCCEDF599F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +90,14 @@ Global
 		{FA03D397-3BD2-48F2-9302-615E68409273}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA03D397-3BD2-48F2-9302-615E68409273}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA03D397-3BD2-48F2-9302-615E68409273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB109424-8B3B-4121-9B9A-025209A48466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB109424-8B3B-4121-9B9A-025209A48466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB109424-8B3B-4121-9B9A-025209A48466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB109424-8B3B-4121-9B9A-025209A48466}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0503A08F-2A4E-42FF-98E2-5CCCEDF599F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0503A08F-2A4E-42FF-98E2-5CCCEDF599F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0503A08F-2A4E-42FF-98E2-5CCCEDF599F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0503A08F-2A4E-42FF-98E2-5CCCEDF599F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

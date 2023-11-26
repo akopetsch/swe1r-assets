@@ -4,7 +4,7 @@
 
 using System;
 
-namespace SWE1R.Assets.Blocks.Common.Colors
+namespace SWE1R.Assets.Blocks.Colors
 {
     public struct ColorArgbF // TODO: remove ColorArgbF
     {
@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.Common.Colors
 
         #region Properties (helper)
 
-        public static readonly ColorArgbF Pink = 
+        public static readonly ColorArgbF Pink =
             new ColorArgbF(a: 1, r: 1, g: 0, b: 1);
 
         #endregion

@@ -2,11 +2,11 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.Common.Colors;
+using SWE1R.Assets.Blocks.Colors;
 using System;
 using System.Numerics;
 
-namespace SWE1R.Assets.Blocks.Common.Images
+namespace SWE1R.Assets.Blocks.Images
 {
     public class ImageRgba32
     {
@@ -33,8 +33,12 @@ namespace SWE1R.Assets.Blocks.Common.Images
             Height = height;
 
             Pixels = new ColorRgba32[Width][];
-            for (int x = 0; x < Pixels.Length; x++)
+            for (int x = 0; x < Width; x++)
+            {
                 Pixels[x] = new ColorRgba32[Height];
+                for (int y = 0; y < Height; y++)
+                    Pixels[x][y] = new ColorRgba32();
+            }
         }
 
         #endregion

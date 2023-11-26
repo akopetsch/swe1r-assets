@@ -6,7 +6,7 @@ using ByteSerialization.Components.Values.Customs;
 using System;
 using System.Linq;
 
-namespace SWE1R.Assets.Blocks.Common.Colors
+namespace SWE1R.Assets.Blocks.Colors
 {
     public class ColorRgba5551 : ICustomSerializable // TODO: struct
     {
@@ -106,7 +106,7 @@ namespace SWE1R.Assets.Blocks.Common.Colors
             byte g = (byte)Math.Round(c.G * _5BitsMaxValue);
             byte b = (byte)Math.Round(c.B * _5BitsMaxValue);
             byte a = (byte)Math.Round(c.A * _1BitsMaxValue);
-            return new ColorRgba5551((short)((r << _rShift) | (g << _gShift) | (b << _bShift) | a));
+            return new ColorRgba5551((short)(r << _rShift | g << _gShift | b << _bShift | a));
         }
 
         #endregion

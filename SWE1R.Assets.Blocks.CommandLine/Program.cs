@@ -110,7 +110,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
                     (ScratchpadOptions opts) => RunScratchpadOptions(opts),
                     errs => 1); ;
             if (Debugger.IsAttached)
-                ConsoleUtils.PromptExit();
+                ConsoleUtil.PromptExit();
             return result;
         }
 

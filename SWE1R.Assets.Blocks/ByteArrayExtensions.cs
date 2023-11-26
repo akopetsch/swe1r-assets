@@ -4,7 +4,7 @@
 
 using System.Security.Cryptography;
 
-namespace SWE1R.Assets.Blocks.Common
+namespace SWE1R.Assets.Blocks
 {
     public static class ByteArrayExtensions
     {
@@ -26,20 +26,12 @@ namespace SWE1R.Assets.Blocks.Common
             {
                 // scan for first byte only. compiler-friendly.
                 if (bytes[start] == firstByte)
-                {
                     // scan for rest of sequence
                     for (int offset = 1; offset < sequence.Length; ++offset)
-                    {
                         if (bytes[start + offset] != sequence[offset])
-                        {
                             break; // mismatch? continue scanning with next byte
-                        }
                         else if (offset == sequence.Length - 1)
-                        {
                             return start; // all bytes matched!
-                        }
-                    }
-                }
                 ++start;
             }
 

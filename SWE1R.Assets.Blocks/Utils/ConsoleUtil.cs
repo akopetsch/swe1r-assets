@@ -6,7 +6,7 @@ using System;
 
 namespace SWE1R.Assets.Blocks.Utils
 {
-    public static class ConsoleUtils
+    public static class ConsoleUtil
     {
         public static void PromptExit()
         {

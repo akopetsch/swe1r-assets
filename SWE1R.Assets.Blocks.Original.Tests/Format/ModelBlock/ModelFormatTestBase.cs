@@ -5,7 +5,6 @@
 using ByteSerialization;
 using ByteSerialization.Extensions;
 using ByteSerialization.Nodes;
-using SWE1R.Assets.Blocks.Common.Vectors;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
@@ -14,6 +13,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers;
 using SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes;
 using SWE1R.Assets.Blocks.Utils.Graphviz;
+using SWE1R.Assets.Blocks.Vectors;
 using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock

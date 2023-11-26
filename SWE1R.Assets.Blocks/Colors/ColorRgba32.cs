@@ -6,7 +6,7 @@ using ByteSerialization.Components.Values.Customs;
 using ByteSerialization.IO;
 using System;
 
-namespace SWE1R.Assets.Blocks.Common.Colors
+namespace SWE1R.Assets.Blocks.Colors
 {
     public class ColorRgba32 : ICustomSerializable // TODO: struct
     {
@@ -156,7 +156,7 @@ namespace SWE1R.Assets.Blocks.Common.Colors
             return false;
         }
 
-        public override int GetHashCode() => 
+        public override int GetHashCode() =>
             HashCode.Combine(R, G, B, A);
 
         public override string ToString() =>

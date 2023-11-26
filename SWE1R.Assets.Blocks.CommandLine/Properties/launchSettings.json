@@ -48,6 +48,11 @@
       "commandName": "Project",
       "commandLineArgs": "mod-model-vertex-alpha out_modelblock.bin -i 279",
       "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
+    },
+    "gog - export-sprites": {
+      "commandName": "Project",
+      "commandLineArgs": "export-sprites out_spriteblock.bin",
+      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
     }
   }
 }

@@ -4,7 +4,6 @@
 
 using ByteSerialization;
 using ByteSerialization.IO.Extensions;
-using SWE1R.Assets.Blocks.Common;
 using System.Diagnostics;
 using System.Linq;
 

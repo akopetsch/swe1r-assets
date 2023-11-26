@@ -4,12 +4,12 @@
 
 using System;
 
-namespace SWE1R.Assets.Blocks.Common.Textures
+namespace SWE1R.Assets.Blocks.Textures
 {
     public static class TextureFormatExtensions
     {
         public static byte GetByte1(this TextureFormat textureFormat) =>
-            (byte)(((short)textureFormat) >> 8);
+            (byte)((short)textureFormat >> 8);
 
         public static byte GetByte2(this TextureFormat textureFormat) =>
             (byte)(short)textureFormat;
@@ -35,8 +35,8 @@ namespace SWE1R.Assets.Blocks.Common.Textures
         {
             switch (textureFormat)
             {
-                case TextureFormat.I4_RGBA5551: return 0b1111; // = 16
-                case TextureFormat.I8_RGBA5551: return 0b11111111; // = 256
+                case TextureFormat.I4_RGBA5551: return 1 << 4;
+                case TextureFormat.I8_RGBA5551: return 1 << 8;
                 default: return 0;
             }
         }

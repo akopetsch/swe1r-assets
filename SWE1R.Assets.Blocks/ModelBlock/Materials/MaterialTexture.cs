@@ -3,11 +3,11 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Attributes;
-using SWE1R.Assets.Blocks.Common.Colors;
-using SWE1R.Assets.Blocks.Common.Images;
-using SWE1R.Assets.Blocks.Common.Textures;
+using SWE1R.Assets.Blocks.Colors;
+using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.TextureBlock;
+using SWE1R.Assets.Blocks.Textures;
 using System;
 using System.Diagnostics;
 using System.Numerics;

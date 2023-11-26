@@ -2,9 +2,9 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.Common.Images;
-using SWE1R.Assets.Blocks.Common.Vectors;
+using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.TextureBlock;
+using SWE1R.Assets.Blocks.Vectors;
 using System;
 using System.Numerics;
 

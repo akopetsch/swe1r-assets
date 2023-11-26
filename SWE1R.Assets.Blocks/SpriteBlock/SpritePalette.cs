@@ -5,8 +5,8 @@
 using ByteSerialization.Attributes;
 using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Records;
-using SWE1R.Assets.Blocks.Common.Colors;
-using SWE1R.Assets.Blocks.Common.Textures;
+using SWE1R.Assets.Blocks.Colors;
+using SWE1R.Assets.Blocks.Textures;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock
 {

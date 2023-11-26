@@ -7,7 +7,7 @@ using ByteSerialization.IO;
 using System;
 using System.Runtime.InteropServices;
 
-namespace SWE1R.Assets.Blocks.Common.Vectors
+namespace SWE1R.Assets.Blocks.Vectors
 {
     public abstract class Vector3<T> : ICustomSerializable
         where T : struct, IComparable, IFormattable, IConvertible, IComparable<T>, IEquatable<T>
@@ -81,7 +81,7 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
 
         #region Methods (: object)
 
-        public override string ToString() => 
+        public override string ToString() =>
             $"({nameof(X)}={X}, " +
             $"{nameof(Y)}={Y}, " +
             $"{nameof(Z)}={Z})";

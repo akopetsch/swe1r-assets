@@ -14,7 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SWE1R.Assets.Blocks\SWE1R.Assets.Blocks.csproj" />
+    <ProjectReference Include="..\SWE1R.Assets.Blocks.Images.ImageSharp\SWE1R.Assets.Blocks.Images.ImageSharp.csproj" />
+    <ProjectReference Include="..\SWE1R.Assets.Blocks.Images.SystemDrawing\SWE1R.Assets.Blocks.Images.SystemDrawing.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,9 +8,10 @@ using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
 using ByteSerialization.IO.Extensions;
-using SWE1R.Assets.Blocks.Common.Colors;
-using SWE1R.Assets.Blocks.Common.Images;
-using SWE1R.Assets.Blocks.Common.Textures;
+using SWE1R.Assets.Blocks.Colors;
+using SWE1R.Assets.Blocks.Images;
+using SWE1R.Assets.Blocks.Textures;
+using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock
 {
@@ -44,20 +45,26 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
             {
                 var recordComponent = (RecordComponent)property.GetAncestorValueComponent<SpriteTile>();
 
-                int startPosition = GetDataPointer(recordComponent);
+                int startPosition = GetPixelsPointer(recordComponent);
 
                 int endPosition;
                 var elementComponent = recordComponent.Get<CollectionElementComponent>();
                 if (elementComponent.IsLastElement)
+                {
                     // TODO: HACK: stream could be longer than the SpriteData's data bytes
                     endPosition = (int)property.Context.Stream.Length;
+                }
                 else
-                    endPosition = GetDataPointer(elementComponent.NextElement.Get<RecordComponent>());
+                {
+                    endPosition = GetPixelsPointer(elementComponent.NextElement.Get<RecordComponent>());
+                }
 
-                return endPosition - startPosition;
+                int length = endPosition - startPosition;
+                Debug.Assert(endPosition % 4 == 0);
+                return length;
             }
 
-            private int GetDataPointer(RecordComponent recordComponent) =>
+            private int GetPixelsPointer(RecordComponent recordComponent) =>
                 recordComponent.Properties[nameof(Pixels)].Get<ReferenceComponent>().Pointer.Value;
         }
 
@@ -127,6 +134,13 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
             }
             return image;
         }
+
+        #endregion
+
+        #region Methods (: object)
+
+        public override string ToString() =>
+            $"({nameof(Width)}={Width}, {nameof(Height)}={Height})";
 
         #endregion
     }

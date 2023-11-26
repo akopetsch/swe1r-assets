@@ -6,7 +6,7 @@ using ByteSerialization.Components.Values.Customs;
 using ByteSerialization.IO;
 using System.Linq;
 
-namespace SWE1R.Assets.Blocks.Common.Vectors
+namespace SWE1R.Assets.Blocks.Vectors
 {
     public class Matrix3x4Single : ICustomSerializable
     {
@@ -59,7 +59,7 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
         {
             if (other == null)
                 return false;
-            return Enumerable.SequenceEqual(Elements, other.Elements);
+            return Elements.SequenceEqual(other.Elements);
         }
 
         public override string ToString() =>

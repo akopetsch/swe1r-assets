@@ -5,7 +5,7 @@
 using ByteSerialization.IO;
 using SystemNumericsVector3 = System.Numerics.Vector3;
 
-namespace SWE1R.Assets.Blocks.Common.Vectors
+namespace SWE1R.Assets.Blocks.Vectors
 {
     public class Vector3Int16 : Vector3<short>
     {

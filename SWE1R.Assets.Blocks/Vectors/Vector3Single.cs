@@ -5,7 +5,7 @@
 using ByteSerialization.IO;
 using SystemNumericsVector3 = System.Numerics.Vector3;
 
-namespace SWE1R.Assets.Blocks.Common.Vectors
+namespace SWE1R.Assets.Blocks.Vectors
 {
     public class Vector3Single : Vector3<float>
     {
@@ -58,8 +58,8 @@ namespace SWE1R.Assets.Blocks.Common.Vectors
 
         public static Vector3Single operator -(Vector3Single a, Vector3Single b) =>
             new Vector3Single(
-                a.X - b.X, 
-                a.Y - b.Y, 
+                a.X - b.X,
+                a.Y - b.Y,
                 a.Z - b.Z);
 
         public static Vector3Single operator /(Vector3Single a, Vector3Single b) =>

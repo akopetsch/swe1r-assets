@@ -4,8 +4,8 @@
 
 using ByteSerialization.Attributes;
 using ByteSerialization.Components.Values.Composites.Records;
-using SWE1R.Assets.Blocks.Common.Vectors;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
+using SWE1R.Assets.Blocks.Vectors;
 using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes

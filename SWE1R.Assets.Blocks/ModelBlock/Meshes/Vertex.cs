@@ -4,9 +4,9 @@
 
 using ByteSerialization.Components.Values.Customs;
 using ByteSerialization.IO;
-using SWE1R.Assets.Blocks.Common.Colors;
-using SWE1R.Assets.Blocks.Common.Vectors;
+using SWE1R.Assets.Blocks.Colors;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
+using SWE1R.Assets.Blocks.Vectors;
 using System.Numerics;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes

@@ -7,7 +7,7 @@ using ByteSerialization.IO;
 using System;
 using System.Linq;
 
-namespace SWE1R.Assets.Blocks.Common.Vectors
+namespace SWE1R.Assets.Blocks.Vectors
 {
     public class Bounds3Single : ICustomSerializable // TODO: use struct
     {

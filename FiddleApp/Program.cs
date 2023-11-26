@@ -14,7 +14,7 @@ namespace FiddleApp
         {
             int result = Fiddle();
             if (Debugger.IsAttached)
-                ConsoleUtils.PromptExit();
+                ConsoleUtil.PromptExit();
             return result;
 
         }

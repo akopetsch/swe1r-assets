@@ -17,7 +17,7 @@ public class Program
     {
         int result = ImportSprites();
         if (Debugger.IsAttached)
-            ConsoleUtils.PromptExit();
+            ConsoleUtil.PromptExit();
         return result;
 
     }

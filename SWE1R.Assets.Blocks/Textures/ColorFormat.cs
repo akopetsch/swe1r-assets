@@ -2,7 +2,7 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-namespace SWE1R.Assets.Blocks.Common.Textures
+namespace SWE1R.Assets.Blocks.Textures
 {
     public enum ColorFormat
     {

@@ -2,8 +2,8 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.CommandLine.Extensions;
-using SWE1R.Assets.Blocks.Common.Images;
+using SWE1R.Assets.Blocks.Images;
+using SWE1R.Assets.Blocks.Images.SystemDrawing;
 using SystemDrawingBitmap = System.Drawing.Bitmap;
 using SystemDrawingImage = System.Drawing.Image;
 

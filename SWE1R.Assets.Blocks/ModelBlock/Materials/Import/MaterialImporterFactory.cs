@@ -2,7 +2,7 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.Common.Images;
+using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.TextureBlock;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import

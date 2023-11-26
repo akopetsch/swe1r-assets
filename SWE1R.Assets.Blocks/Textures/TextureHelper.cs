@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SWE1R.Assets.Blocks.Common.Textures
+namespace SWE1R.Assets.Blocks.Textures
 {
     public class TextureHelper
     {

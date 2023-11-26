@@ -3,7 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.IO;
-using SWE1R.Assets.Blocks.Common.Colors;
+using SWE1R.Assets.Blocks.Colors;
 using System.IO;
 
 namespace SWE1R.Assets.Blocks.TextureBlock
