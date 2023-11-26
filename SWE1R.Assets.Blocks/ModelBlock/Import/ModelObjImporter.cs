@@ -48,7 +48,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
         public string ObjFilename { get; }
         public Block<TextureBlockItem> TextureBlock { get; }
-        public Func<string, ImageRgba32> ImageLoadFunc { get; }
+        public IImageRgba32Loader ImageLoader { get; }
         public ModelObjImporterConfiguration Configuration { get; }
 
         #endregion
@@ -64,12 +64,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
         public ModelObjImporter(
             string objFilename, 
             Block<TextureBlockItem> textureBlock, 
-            Func<string, ImageRgba32> imageLoadFunc, 
+            IImageRgba32Loader imageLoader, 
             ModelObjImporterConfiguration configuration)
         {
             ObjFilename = objFilename;
             TextureBlock = textureBlock;
-            ImageLoadFunc = imageLoadFunc;
+            ImageLoader = imageLoader;
             Configuration = configuration;
         }
 
@@ -104,7 +104,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
         private Material ImportTestMaterial()
         {
-            ImageRgba32 imageRgba32 = ImageLoadFunc(_testImageFilename);
+            ImageRgba32 imageRgba32 = ImageLoader.Load(_testImageFilename);
             MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, TextureBlock);
             importer.Import();
             return importer.Material;
@@ -156,7 +156,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                         return _testMaterial;
                     else
                     {
-                        ImageRgba32 imageRgba32 = ImageLoadFunc(textureImageFilename);
+                        ImageRgba32 imageRgba32 = ImageLoader.Load(textureImageFilename);
                         MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, TextureBlock);
                         importer.Import();
 

@@ -3,6 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization;
+using SWE1R.Assets.Blocks.Images.SystemDrawing;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Import;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
@@ -73,7 +74,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
                 PositionScale = positionScale
             };
             var importer = new ModelObjImporter(
-                objFilename, textureBlock, SystemDrawingImageRgba32Loader.LoadImageRgba32, configuration);
+                objFilename, textureBlock, new SystemDrawingImageRgba32Loader(), configuration);
             importer.Import();
 
             var parentNode = byteSerializerContext.Graph.GetValue<TransformableD065>();

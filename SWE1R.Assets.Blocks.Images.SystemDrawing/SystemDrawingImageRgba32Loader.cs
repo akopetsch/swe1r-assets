@@ -2,16 +2,14 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.Images;
-using SWE1R.Assets.Blocks.Images.SystemDrawing;
 using SystemDrawingBitmap = System.Drawing.Bitmap;
 using SystemDrawingImage = System.Drawing.Image;
 
-namespace SWE1R.Assets.Blocks.CommandLine
+namespace SWE1R.Assets.Blocks.Images.SystemDrawing
 {
-    public static class SystemDrawingImageRgba32Loader
+    public class SystemDrawingImageRgba32Loader : IImageRgba32Loader
     {
-        public static ImageRgba32 LoadImageRgba32(string imageFilename)
+        public ImageRgba32 Load(string imageFilename)
         {
             using var systemDrawingBitmap =
                 (SystemDrawingBitmap)SystemDrawingImage.FromFile(imageFilename);

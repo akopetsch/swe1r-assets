@@ -3,6 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization;
+using SWE1R.Assets.Blocks.Images.SystemDrawing;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Import;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
@@ -35,7 +36,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
                 PositionOffset = new Vector3(1620, 4440, -60),
             };
             var importer = new ModelObjImporter(
-                objFilename, textureBlock, SystemDrawingImageRgba32Loader.LoadImageRgba32, configuration);
+                objFilename, textureBlock, new SystemDrawingImageRgba32Loader(), configuration);
             importer.Import();
 
             var parentNode = (Group5064)modelBlockItem.Model.Nodes[0].FlaggedNode;

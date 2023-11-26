@@ -55,8 +55,8 @@ namespace SWE1R.Assets.Blocks.Images
 
         #region Methods (palette)
 
-        public int GetPaletteIndex(int x, int y) =>
-            Array.IndexOf(Palette, this[x, y]);
+        public int GetPaletteIndex(int x, int y, ColorRgba32[] palette = null) =>
+            Array.IndexOf(palette ?? Palette, this[x, y]);
 
         #endregion
 

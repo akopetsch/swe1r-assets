@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Import
 
         #region Properties (output)
 
-        public Sprite Sprite { get; private set; }
+        public SpriteBlockItem SpriteBlockItem { get; private set; }
 
         #endregion
 
@@ -36,28 +36,42 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Import
 
         public void Import()
         {
-            Sprite = new Sprite() {
+            SpriteBlockItem = new SpriteBlockItem();
+            SpriteBlockItem.Sprite = new Sprite() {
                 Width = Convert.ToInt16(Image.Width),
                 Height = Convert.ToInt16(Image.Height),
                 TextureFormat = TextureFormat.RGBA5551_I8,
+                Palette = ImportPalette(),
             };
-            Sprite.Tiles = ImportTiles();
-            Sprite.UpdateTilesCount();
+            SpriteBlockItem.Sprite.Tiles = ImportTiles();
+            SpriteBlockItem.Sprite.UpdateTilesCount();
+            SpriteBlockItem.Save();
+        }
+
+        private SpritePalette ImportPalette()
+        {
+            var paletteImporter = new RGBA5551_PaletteImporter(Image.Palette);
+            paletteImporter.Import();
+            var palette = new SpritePalette() {
+                Colors = paletteImporter.OutputPalette,
+            };
+            return palette;
         }
 
         private SpriteTile[] ImportTiles()
         {
-            int tilesCount = 
-                Sprite.TilesGridWidth * 
-                Sprite.TilesGridHeight;
+            var sprite = SpriteBlockItem.Sprite;
+            int tilesCount =
+                sprite.TilesGridWidth *
+                sprite.TilesGridHeight;
             var tiles = new SpriteTile[tilesCount];
-            for (int tileY = 0; tileY < Sprite.TilesGridHeight; tileY++)
+            for (int tileY = 0; tileY < sprite.TilesGridHeight; tileY++)
             {
-                for (int tileX = 0; tileX < Sprite.TilesGridWidth; tileX++)
+                for (int tileX = 0; tileX < sprite.TilesGridWidth; tileX++)
                 {
-                    (int spriteX, int spriteY) = Sprite.GetTilePosition(tileX, tileY);
+                    (int spriteX, int spriteY) = sprite.GetTilePosition(tileX, tileY);
                     ImageRgba32 tileImage = Image.Crop(
-                        spriteX, spriteY, SpriteTile.MaxWidth, SpriteTile.MaxHeight);
+                        spriteX, spriteY, SpriteTile.MaxWidth, SpriteTile.MaxHeight).FlipY();
                     var tile = new SpriteTile() {
                         Width = (short)tileImage.Width,
                         Height = (short)tileImage.Height,
@@ -65,6 +79,8 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Import
                     var importer = new RGBA5551_I8_TextureImporter(tileImage, Image.Palette);
                     importer.Import();
                     tile.PixelsBytes = importer.PixelsBytes;
+                    int tileIndex = sprite.GetTileIndex(tileX, tileY);
+                    tiles[tileIndex] = tile;
                 }
             }
             return tiles;

@@ -4,9 +4,7 @@
 
 using SWE1R.Assets.Blocks.Colors;
 using SWE1R.Assets.Blocks.Images;
-using System;
 using System.Diagnostics;
-using System.Linq;
 
 namespace SWE1R.Assets.Blocks.Textures.Import
 {
@@ -39,7 +37,7 @@ namespace SWE1R.Assets.Blocks.Textures.Import
             {
                 for (int y = 0; y < h; y++)
                 {
-                    int index = Image.GetPaletteIndex(x, y);
+                    int index = Image.GetPaletteIndex(x, y, Palette);
                     Debug.Assert(index >= 0);
                     //int i = x * h + y;
                     int i = y * w + x;
@@ -48,12 +46,9 @@ namespace SWE1R.Assets.Blocks.Textures.Import
             }
 
             // palette
-            byte[] palette = (Palette ?? Image.Palette)
-                .Select(c => (ColorRgba5551)c)
-                .SelectMany(c => c.Bytes.Reverse()) // TODO: use EndianBinaryWriter
-                .ToArray();
-            PaletteBytes = new byte[512];
-            Array.Copy(palette, PaletteBytes, palette.Length);
+            var paletteImporter = new RGBA5551_PaletteImporter(Image.Palette ?? Palette);
+            paletteImporter.Import();
+            PaletteBytes = paletteImporter.OutputBytes;
         }
 
         #endregion

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FiddleApp": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
+    }
+  }
+}

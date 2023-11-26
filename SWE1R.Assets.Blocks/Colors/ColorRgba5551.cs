@@ -3,6 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Components.Values.Customs;
+using ByteSerialization.IO;
 using System;
 using System.Linq;
 
@@ -76,10 +77,16 @@ namespace SWE1R.Assets.Blocks.Colors
         #region Methods (serialization)
 
         public void Serialize(CustomComponent customComponent) =>
-            customComponent.Writer.Write(Bytes.Reverse().ToArray());
+            Serialize(customComponent.Writer);
 
         public void Deserialize(CustomComponent customComponent) =>
-            BytesValue = customComponent.Reader.ReadInt16();
+            Deserialize(customComponent.Reader);
+
+        public void Serialize(EndianBinaryWriter writer) =>
+            writer.Write(Bytes.Reverse().ToArray());
+
+        public void Deserialize(EndianBinaryReader reader) =>
+            BytesValue = reader.ReadInt16();
 
         #endregion
 
