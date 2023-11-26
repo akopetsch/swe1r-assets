@@ -3,18 +3,13 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Extensions;
-using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
     public class PartFormatTester : HeaderFormatTester<PartModel>
     {
-        public PartFormatTester(PartModel value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
-            base(value, byterSerializationGraph, analyticsFixture)
-        { }
-
         public override void Test()
         {
             AssertHeader();
@@ -29,7 +24,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
         {
             Assert.True(Value.Nodes.Count == 2 || Value.Nodes.Count == 5);
             Assert.True(Value.Data == null);
-            Assert.True(Value.Animations == null || (Value.Animations.Count >= 1 && Value.Animations.Count <= 10));
+            Assert.True(Value.Animations == null || Value.Animations.Count >= 1 && Value.Animations.Count <= 10);
             Assert.True(Value.AltN == null);
         }
 

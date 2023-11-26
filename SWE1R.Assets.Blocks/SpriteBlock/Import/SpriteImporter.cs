@@ -3,6 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using SWE1R.Assets.Blocks.Common.Images;
+using SWE1R.Assets.Blocks.Common.Textures;
 using System;
 using System.Collections.Generic;
 
@@ -38,9 +39,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Import
             Sprite = new Sprite() {
                 Width = Convert.ToInt16(Image.Width),
                 Height = Convert.ToInt16(Image.Height),
-                Format = 2,
-                PageWidthAlignment = 1,
-
+                TextureFormat = TextureFormat.I8_RGBA5551,
             };
             Sprite.UpdatePagesCount();
         }

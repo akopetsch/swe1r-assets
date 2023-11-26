@@ -27,9 +27,4 @@
     <ProjectReference Include="..\SWE1R.Assets.Blocks.TestUtils\SWE1R.Assets.Blocks.TestUtils.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Format\SpriteBlock\" />
-    <Folder Include="Format\Testers\SpriteBlock\" />
-  </ItemGroup>
-
 </Project>

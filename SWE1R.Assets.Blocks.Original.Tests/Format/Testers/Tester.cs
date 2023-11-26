@@ -9,23 +9,35 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
 {
     public abstract class Tester<TValue> : ITester
     {
-        public TValue Value { get; }
-        public Graph ByteSerializationGraph { get; }
-        public AnalyticsFixture AnalyticsFixture { get; }
+        #region Properties
 
-        public long ValuePosition { get; }
-        protected MetadataProvider MetadataProvider { get; }
+        public TValue Value { get; set; }
+        public Graph ByteSerializerGraph { get; set; }
+        public AnalyticsFixture AnalyticsFixture { get; set; }
 
-        public Tester(TValue value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture)
+        public long ValuePosition { get; private set; }
+        protected MetadataProvider MetadataProvider { get; private set; }
+
+        #endregion
+
+        #region Constructor
+
+        public virtual void Init(TValue value, Graph byteSerializerGraph, AnalyticsFixture analyticsFixture)
         {
             Value = value;
-            ByteSerializationGraph = byteSerializationGraph;
+            ByteSerializerGraph = byteSerializerGraph;
             AnalyticsFixture = analyticsFixture;
 
-            ValuePosition = ByteSerializationGraph.GetValueComponent(Value).Position.Value;
+            ValuePosition = ByteSerializerGraph.GetValueComponent(Value).Position.Value;
             MetadataProvider = new MetadataProvider();
         }
 
+        #endregion
+
+        #region Methods
+
         public abstract void Test();
+
+        #endregion
     }
 }

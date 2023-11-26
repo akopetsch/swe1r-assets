@@ -5,6 +5,7 @@
 using ByteSerialization.Attributes;
 using SWE1R.Assets.Blocks.Common.Colors;
 using SWE1R.Assets.Blocks.Common.Images;
+using SWE1R.Assets.Blocks.Common.Textures;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System;
@@ -40,33 +41,32 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         /// <summary>
         /// Always zero.
         /// </summary>
-        [Order(3)] public short Always0_08 { get; set; }
+        [Order(3)] public short Always0_08 { get; set; } = 0;
         /// <summary>
         /// Always zero.
         /// </summary>
-        [Order(4)] public short Always0_0a { get; set; }
-        [Order(5)] public byte Byte_0c { get; set; }
-        [Order(6)] public byte Byte_0d { get; set; }
-        [Order(7)] public short Word_0e { get; set; }
-        [Order(8)] public short Width { get; set; }
-        [Order(9)] public short Height { get; set; }
+        [Order(4)] public short Always0_0a { get; set; } = 0;
+        [Order(5)] public TextureFormat TextureFormat { get; set; }
+        [Order(6)] public short Word_0e { get; set; }
+        [Order(7)] public short Width { get; set; }
+        [Order(8)] public short Height { get; set; }
         /// <summary>
         /// Always 128, 256 or 512 times <see cref="Width">Width</see>.
         /// </summary>
-        [Order(10)] public ushort Width_Unk { get; set; }
+        [Order(9)] public ushort Width_Unk { get; set; }
         /// <summary>
         /// Always 128, 256 or 512 times <see cref="Height">Height</see>.
         /// </summary>
-        [Order(11)] public ushort Height_Unk { get; set; }
-        [Order(12)] public short Flags { get; set; }
-        [Order(13)] public short Mask { get; set; }
+        [Order(10)] public ushort Height_Unk { get; set; }
+        [Order(11)] public short Flags { get; set; }
+        [Order(12)] public short Mask { get; set; }
 
         [Length(ChildrenCount)]
         [ElementReference]
-        [Order(14)] public MaterialTextureChild[] Children { get; set; }
+        [Order(13)] public MaterialTextureChild[] Children { get; set; }
 
         [Offset(0x38)]
-        [Order(15)] public TextureIndex TextureIndex { get; set; }
+        [Order(14)] public TextureIndex TextureIndex { get; set; }
 
         #endregion
 
@@ -114,36 +114,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
             return result;
         }
 
-        // https://github.com/Olganix/Sw_Racer/issues/9
-        private TextureDataFormat GetTextureDataFormat()
-        {
-            if (Byte_0c == 0)
-                if (Byte_0d == 3)
-                    return TextureDataFormat.RGBA32;
-            if (Byte_0c == 2)
-            {
-                if (Byte_0d == 0)
-                    return TextureDataFormat.I4_RGBA5551;
-                if (Byte_0d == 1)
-                    return TextureDataFormat.I8_RGBA5551;
-            }
-            if (Byte_0c == 4)
-            {
-                if (Byte_0d == 0)
-                    return TextureDataFormat.FourBitGrayscaleAndAlpha;
-                if (Byte_0d == 1)
-                    return TextureDataFormat.EightBitGrayscale;
-            }
-            throw new NotImplementedException();
-        }
-
         private ColorRgba32 GetPixel(int x, int y, TextureBlockItem textureBlockItem)
         {
             int i = y * Width + x;
-            TextureDataFormat textureDataFormat = GetTextureDataFormat();
             int pixelData;
-            int bpp = textureDataFormat.GetBpp();
-            if (textureDataFormat.IsIndexFormat())
+            int bpp = TextureFormat.GetBpp();
+            if (TextureFormat.HasPalette())
             {
                 // get pixel data
                 if (bpp == 4)

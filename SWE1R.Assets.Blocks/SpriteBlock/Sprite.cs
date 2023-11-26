@@ -4,6 +4,7 @@
 
 using ByteSerialization.Attributes;
 using SWE1R.Assets.Blocks.Common.Images;
+using SWE1R.Assets.Blocks.Common.Textures;
 using System;
 using System.Collections.Generic;
 
@@ -30,36 +31,31 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         /// Always 0, 2 or 4.
         /// </summary>
         [Order(2)]
-        public byte Format { get; set; }
-        /// <summary>
-        /// Always 0, 1, or 3.
-        /// </summary>
-        [Order(3)]
-        public byte PageWidthAlignment { get; set; }
+        public TextureFormat TextureFormat { get; set; }
         /// <summary>
         /// Always 0.
         /// </summary>
-        [Order(4)]
+        [Order(3)]
         public short Word_6 { get; set; } = 0;
         /// <summary>
         /// Can be null.
         /// </summary>
-        [Order(5), Reference(1)]
+        [Order(4), Reference(1)]
         public SpritePalette Palette { get; set; }
         /// <summary>
         /// Always a value from 0 to 80.
         /// </summary>
-        [Order(6)]
+        [Order(5)]
         public short TilesCount { get; set; }
         /// <summary>
         /// Always 32.
         /// </summary>
-        [Order(7)]
+        [Order(6)]
         public short Word_E { get; private set; } = 32;
         /// <summary>
         /// Never null.
         /// </summary>
-        [Order(8), Reference(0), Length(nameof(TilesCount))] 
+        [Order(7), Reference(0), Length(nameof(TilesCount))] 
         public List<SpriteTile> Tiles { get; private set; }
 
         #endregion
@@ -93,21 +89,6 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
             }
             return image;
             // TODO: usage of Word_E not confirmed, consider hardcoding 32
-        }
-
-        public int GetBitsPerPixel()
-        {
-            if (Format == 0 && PageWidthAlignment == 3)
-                return 32;
-            else if (Format == 2 || Format == 4)
-            {
-                switch (PageWidthAlignment)
-                {
-                    case 0: return 4;
-                    case 1: return 8;
-                }
-            }
-            throw new InvalidOperationException();
         }
 
         #endregion

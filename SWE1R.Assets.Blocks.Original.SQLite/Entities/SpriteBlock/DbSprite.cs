@@ -15,8 +15,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
 
         public short Width { get; set; }
         public short Height { get; set; }
-        public byte Format { get; set; }
-        public byte PageWidthAlignment { get; set; }
+        public short TextureFormat { get; set; }
         public short Int16_6 { get; set; }
         public int P_Palette { get; set; }
         public int? Palette_Length { get; set; }
@@ -34,8 +33,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
 
             Width = sprite.Width;
             Height = sprite.Height;
-            Format = sprite.Format;
-            PageWidthAlignment = sprite.PageWidthAlignment;
+            TextureFormat = (byte)sprite.TextureFormat;
             Int16_6 = sprite.Word_6;
             P_Palette = GetPropertyPointer(node, nameof(Sprite.Palette));
             Palette_Length = sprite.Palette?.Length;
@@ -53,8 +51,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
 
             if (Width != _other.Width) return false;
             if (Height != _other.Height) return false;
-            if (Format != _other.Format) return false;
-            if (PageWidthAlignment != _other.PageWidthAlignment) return false;
+            if (TextureFormat != _other.TextureFormat) return false;
             if (Int16_6 != _other.Int16_6) return false;
             if (P_Palette != _other.P_Palette) return false;
             if (Palette_Length != _other.Palette_Length) return false;
@@ -75,7 +72,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
 
         public override int GetHashCode() =>
             HashCode.Combine(base.GetHashCode(),
-                HashCode.Combine(Width, Height, Format, PageWidthAlignment, Int16_6, P_Palette, Palette_Length, PagesCount),
-                HashCode.Combine(Int16_E, P_Pages));
+                HashCode.Combine(Width, Height, TextureFormat, Int16_6, P_Palette, Palette_Length, PagesCount, Int16_E),
+                HashCode.Combine(P_Pages));
     }
 }

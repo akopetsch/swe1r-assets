@@ -2,18 +2,13 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
+using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
 {
     public class MaterialTextureTester : Tester<MaterialTexture>
     {
-        public MaterialTextureTester(
-            MaterialTexture value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture) : 
-            base(value, byteSerializationGraph, analyticsFixture)
-        { }
-
         public override void Test()
         {
             // TODO: Mask_Unk

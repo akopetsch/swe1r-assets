@@ -10,6 +10,7 @@ using ByteSerialization.Components.Values.Composites.Records;
 using ByteSerialization.IO.Extensions;
 using SWE1R.Assets.Blocks.Common.Colors;
 using SWE1R.Assets.Blocks.Common.Images;
+using SWE1R.Assets.Blocks.Common.Textures;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock
 {
@@ -66,7 +67,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
 
         public ImageRgba32 ExportImage(Sprite sprite)
         {
-            int bpp = sprite.GetBitsPerPixel();
+            int bpp = sprite.TextureFormat.GetBpp();
 
             float bytesPerPixel = (float)bpp / 8;
             int bytesPerLine = (int)(Width * bytesPerPixel);

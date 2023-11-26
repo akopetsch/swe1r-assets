@@ -2,17 +2,12 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
     public class ModlFormatTester : HeaderFormatTester<ModlModel>
     {
-        public ModlFormatTester(ModlModel value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) : 
-            base(value, byterSerializationGraph, analyticsFixture)
-        { }
-
         public override void Test()
         {
             Assert.True(Value.Nodes.Count == 1);

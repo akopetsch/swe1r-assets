@@ -6,11 +6,11 @@ using ByteSerialization.Nodes;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
 {
-    public interface ITester
+    public interface ITester // TODO: is this interface necessary?
     {
         #region Properties
 
-        public Graph ByteSerializationGraph { get; }
+        public Graph ByteSerializerGraph { get; }
         public AnalyticsFixture AnalyticsFixture { get; }
 
         public long ValuePosition { get; }

@@ -3,18 +3,13 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Extensions;
-using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
     public class MAltFormatTester : HeaderFormatTester<MAltModel>
     {
-        public MAltFormatTester(MAltModel value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture) :
-            base(value, byteSerializationGraph, analyticsFixture)
-        { }
-
         public override void Test()
         {
             Assert.True(Value.Nodes.Count == 75);

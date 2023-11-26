@@ -6,6 +6,7 @@ using ByteSerialization.Attributes;
 using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Records;
 using SWE1R.Assets.Blocks.Common.Colors;
+using SWE1R.Assets.Blocks.Common.Textures;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock
 {
@@ -28,16 +29,8 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
 
         private class PaletteLengthHelper : IBindingHelper
         {
-            public int GetValue(PropertyComponent p)
-            {
-                var sprite = p.GetAncestorValue<Sprite>();
-                if (sprite.Format == 2 && sprite.PageWidthAlignment == 0)
-                    return 16;
-                else if (sprite.Format == 2 && sprite.PageWidthAlignment == 1)
-                    return 256;
-                else
-                    return 0;
-            }
+            public int GetValue(PropertyComponent p) =>
+                p.GetAncestorValue<Sprite>().TextureFormat.GetPaletteSize();
         }
 
         #endregion

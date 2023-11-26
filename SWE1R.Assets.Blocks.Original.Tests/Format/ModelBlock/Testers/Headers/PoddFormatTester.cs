@@ -3,19 +3,14 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Extensions;
-using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
     public class PoddFormatTester : HeaderFormatTester<PoddModel>
     {
-        public PoddFormatTester(PoddModel value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
-            base(value, byterSerializationGraph, analyticsFixture)
-        { }
-
         public override void Test()
         {
             AssertHeader();

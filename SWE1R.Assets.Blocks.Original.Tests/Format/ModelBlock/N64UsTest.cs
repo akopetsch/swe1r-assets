@@ -7,7 +7,7 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 {
-    public class N64UsTest : TestBase
+    public class N64UsTest : ModelFormatTestBase
     {
         public N64UsTest(AnalyticsFixture analyticsFixture, ITestOutputHelper output) :
             base(analyticsFixture, output, ModelBlockIdNames.Default)

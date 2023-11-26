@@ -4,6 +4,7 @@
 
 using SWE1R.Assets.Blocks.Common.Colors;
 using SWE1R.Assets.Blocks.Common.Images;
+using SWE1R.Assets.Blocks.Common.Textures;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System;
 using System.Diagnostics;
@@ -71,8 +72,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         {
             var mt = base.CreateMaterialTexture();
             mt.Mask_Unk = 1; // 1
-            mt.Byte_0c = 2;
-            mt.Byte_0d = 1;
+            mt.TextureFormat = TextureFormat.I8_RGBA5551;
             mt.Flags = 512; // 256, 512, 1024, 2048
             mt.Mask = 1023; // 7, 127, 1023
             return mt;

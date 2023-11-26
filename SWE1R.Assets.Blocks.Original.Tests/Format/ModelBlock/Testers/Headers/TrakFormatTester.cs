@@ -3,29 +3,30 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.Common.Textures;
 using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
     public class TrakFormatTester : HeaderFormatTester<TrakModel>
     {
-        private TrackMetadata TrackMetadata { get; }
+        private TrackMetadata _trackMetadata;
 
-        public TrakFormatTester(TrakModel value, Graph byterSerializationGraph, AnalyticsFixture analyticsFixture) :
-            base(value, byterSerializationGraph, analyticsFixture)
+        public virtual void Init(TrakModel value, Graph byteSerializerGraph, AnalyticsFixture analyticsFixture)
         {
-            TrackMetadata = MetadataProvider.Tracks.First(t => t.Model == Value.BlockItem.Index.Value);
+            base.Init(value, byteSerializerGraph, analyticsFixture);
+            _trackMetadata = MetadataProvider.Tracks.First(t => t.Model == Value.BlockItem.Index.Value);
         }
 
         public override void Test()
         {
             AssertHeader();
 
-            if (TrackMetadata.Planet == Planet.MonGazza)
+            if (_trackMetadata.Planet == Planet.MonGazza)
                 AssertSkybox();
         }
 
@@ -53,7 +54,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
             Assert.True(material.Width_Unk_Dividend == 0);
             Assert.True(material.Height_Unk_Dividend == 0);
 
-            if (TrackMetadata.Planet == Planet.MonGazza)
+            if (_trackMetadata.Planet == Planet.MonGazza)
             {
                 Assert.NotNull(material.Texture);
                 AssertSkyboxMaterialTexture(material.Texture);
@@ -70,8 +71,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
             Assert.True(materialTexture.Height4 == 256);
             Assert.True(materialTexture.Always0_08 == 0);
             Assert.True(materialTexture.Always0_0a == 0);
-            Assert.True(materialTexture.Byte_0c == 2);
-            Assert.True(materialTexture.Byte_0d == 1);
+            Assert.True(materialTexture.TextureFormat == TextureFormat.I8_RGBA5551);
             Assert.True(materialTexture.Word_0e == 0);
             Assert.True(materialTexture.Width == 32);
             Assert.True(materialTexture.Height == 64);
@@ -97,7 +97,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
             Assert.True(materialTextureChild.Byte_2 == 4);
             Assert.True(
                 materialTextureChild.DimensionsBitmask == 0 ||
-                materialTextureChild.DimensionsBitmask == 
+                materialTextureChild.DimensionsBitmask ==
                     (DimensionsBitmask.FlippedVertically | DimensionsBitmask.FlippedHorizontally));
             Assert.True(materialTextureChild.Byte_4 == 5);
             Assert.True(materialTextureChild.Byte_5 == 6);

@@ -5,12 +5,13 @@
 using SWE1R.Assets.Blocks.Metadata.IdNames;
 using Xunit.Abstractions;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
 {
-    public class DefaultTest : ModelFormatTestBase
+    public class DefaultTest : SpriteFormatTestBase
     {
-        public DefaultTest(AnalyticsFixture analyticsFixture, ITestOutputHelper output) :
-            base(analyticsFixture, output, ModelBlockIdNames.Default)
+        public DefaultTest(
+            AnalyticsFixture analyticsFixture, ITestOutputHelper output) : 
+            base(analyticsFixture, output, SpriteBlockIdNames.Default)
         { }
 
         [Fact]

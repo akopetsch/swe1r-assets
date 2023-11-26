@@ -4,7 +4,7 @@
 
 using ByteSerialization.Nodes;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
     public interface IHeaderFormatTester
     {

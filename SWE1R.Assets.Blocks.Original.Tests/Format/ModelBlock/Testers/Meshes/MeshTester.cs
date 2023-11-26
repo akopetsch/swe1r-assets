@@ -2,22 +2,17 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
+using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 using System.Diagnostics;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
 {
     public class MeshTester : Tester<Mesh>
     {
         // TODO: clean-up
-
-        public MeshTester(
-            Mesh value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture) : 
-            base(value, byteSerializationGraph, analyticsFixture)
-        { }
 
         public override void Test()
         {
@@ -28,7 +23,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
         {
             TestVisibleIndicesChunks();
 
-            var header = (Model)ByteSerializationGraph.Root.Value;
+            var header = (Model)ByteSerializerGraph.Root.Value;
 
             IndicesChunks chunks = Value.VisibleIndicesChunks;
             if (chunks != null)
@@ -107,8 +102,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         Assert.True(chunk01.Length != 0);
                         int computedLength1 =
                             range.Indices.Distinct().Count() * Vertex.StructureSize;
-                        int computedLength2 = 
-                            range.Indices.Distinct().Count() * Vertex.StructureSize - 
+                        int computedLength2 =
+                            range.Indices.Distinct().Count() * Vertex.StructureSize -
                             range.Chunk01.StartVertex.Index.Value * Vertex.StructureSize;
 
                         bool true1 = chunk01.Length == computedLength1;
@@ -135,7 +130,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
                             Assert.True(header.Animations != null);
 
-                            
+
                             // 086 - Pupp_Racer_Teemto_Pagalies | 7
                             // 087 - Pupp_Racer_Anakin_Skywalker | 1
                             // 089 - Pupp_Racer_Mawhonic | 21
@@ -177,7 +172,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                             //string key = $"{model.Index.Value:d3} - {_metadataProvider.GetName(model)}";
                             //AnalyticsFixture.IncreaseCounter("foo");
                         }
-                        
+
                         Assert.True(
                             chunk01.Length == computedLength1 ||
                             chunk01.Length == computedLength2);
@@ -188,11 +183,11 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         // TODO: StartVertex
                         Assert.True(chunk01.StartVertex.Collection == Value.VisibleVertices);
                         Assert.True(chunk01.StartVertex.Index.Value != -1);
-                        
+
                         if (i != 0)
                         {
                             Assert.True(ranges.Count > 1);
-                            Assert.True(startVertexIndex == 
+                            Assert.True(startVertexIndex ==
                                 ranges.Take(i).Select(r => r.NextIndicesBase / 2).Sum());
                             // Chunk03 can be null
                         }
@@ -203,7 +198,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         }
 
                         if (startVertexIndex == 0)
-                        {
                             if (i == 0)
                             {
                                 // 17025
@@ -212,48 +206,32 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                             {
                                 // 0
                             }
-                        }
                         else
-                        {
                             if (i == 0)
                             {
                                 // 435
                                 // models: 106...
                                 Assert.True(range.Chunk03 == null);
                                 Assert.True(ranges.Count == 1);
-                                
+
                             }
                             else
                             {
                                 // 11903
                             }
-                        }
                     }
-                    
+
                     if (i > 0)
                     {
 
                     }
 
                     if (range.Chunk01 != null)
-                    {
                         if (i == 0)
                         {
                             // only true 397/433 models:
                             // Assert.True(range.Chunk01.StartVertex.Index == 0);
                         }
-
-                        //Assert.True(range.Chunk01.StartVertex.Index == range.MinIndex);
-
-                        //Assert.True(range.Chunk01.Length == range.Indices.Count() * Vertex.StructureSize);
-
-                        // length
-                        //Assert.Equal(range.ComputedLength, range.Chunk01.Length);
-                        //Debug.WriteLine(
-                        //    $"{i:d3} | " +
-                        //    $"{range.Chunk01.Length:d4} | " +
-                        //    $"{range}");
-                    }
                 }
             }
         }
@@ -295,11 +273,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
                 IndicesChunk chunk0 = chunks[0];
                 if (n == 1)
-                {
                     Assert.True(chunk0.Tag == 05 || chunk0.Tag == 06);
-                }
                 else
-                {
                     if (chunk0.Tag == 06)
                     {
                         Assert.Equal(6, n);
@@ -317,7 +292,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                             Assert.True(chunk1.Tag == 05 || chunk1.Tag == 06);
                         }
                         else
-                        {
                             for (int i = 0; i < n; i++)
                             {
                                 IndicesChunk chunk = chunks[i];
@@ -327,12 +301,10 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                                     Assert.True(chunkBefore.Tag == 01);
                                 }
                             }
-                        }
                     }
-                }
             }
         }
-        
+
         private void WriteChunksString() =>
             Debug.WriteLine(GetChunksString());
 
