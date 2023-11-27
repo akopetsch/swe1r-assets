@@ -10,49 +10,65 @@ namespace SWE1R.Assets.Blocks
 {
     public class BlockItemDumper
     {
+        #region Properties
+
         public string DumpPath { get; }
+        public string Suffix { get; }
 
-        public BlockItemDumper(string dumpPath) =>
-            DumpPath = dumpPath;
+        #endregion
 
-        public void DumpItem(BlockItem item, int i, ByteSerializerContext context, string suffix)
+        #region Constructor
+
+        public BlockItemDumper(string dumpPath, string suffix)
         {
-            DumpItemPartsBytes(item, i, suffix);
-            DumpItemLog(context, i, suffix);
+            DumpPath = dumpPath;
+            Suffix = suffix;
         }
 
-        public void DumpItemPartsBytes(BlockItem item, int i, string suffix)
+        #endregion
+
+        #region Methods (
+
+        public void DumpItem(BlockItem item, int i, ByteSerializerContext context)
+        {
+            DumpItemPartsBytes(item, i);
+            DumpItemLog(context, i);
+        }
+
+        public void DumpItemPartsBytes(BlockItem item, int i)
         {
             Directory.CreateDirectory(DumpPath);
             for (int p = 0; p < item.Parts.Length; p++)
             {
-                string path = GetPath(i, suffix, "bin", p);
+                string path = GetPath(i, "bin", p);
                 byte[] bytes = item.Parts[p].Bytes;
                 File.WriteAllBytes(path, bytes);
             }
         }
 
-        public void DumpItemLog(ByteSerializerContext context, int i, string suffix)
+        public void DumpItemLog(ByteSerializerContext context, int i)
         {
             Directory.CreateDirectory(DumpPath);
-            string path = GetPath(i, suffix, "log");
+            string path = GetPath(i, "log");
             string log = context.Log.ToString();
             File.WriteAllText(path, log);
         }
 
-        private string GetPath(int i, string suffix, string fileExtension, int? p = null)
+        private string GetPath(int i, string fileExtension, int? p = null)
         {
             var fileNameParts = new List<string> {
                 BlockItem.GetIndexString(i)
             };
             if (p.HasValue)
                 fileNameParts.Add($"part{p}");
-            if (suffix != null)
-                fileNameParts.Add(suffix);
+            if (Suffix != null)
+                fileNameParts.Add(Suffix);
             if (fileExtension != null)
                 fileNameParts.Add(fileExtension);
             var filename = string.Join('.', fileNameParts);
             return Path.Combine(DumpPath, filename.ToString());
         }
+
+        #endregion
     }
 }

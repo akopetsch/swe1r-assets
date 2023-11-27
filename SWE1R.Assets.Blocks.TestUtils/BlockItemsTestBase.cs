@@ -11,11 +11,8 @@ namespace SWE1R.Assets.Blocks.TestUtils
     {
         #region Fields
 
-        private const string dumpInputSuffix = "in";
-        private const string dumpOutputSuffix = "out";
-        private const string dumpFolderName = "dump";
-
-        private readonly BlockItemDumper itemDumper;
+        private readonly BlockItemDumper inputItemDumper;
+        private readonly BlockItemDumper outputItemDumper;
         protected readonly MetadataProvider metadataProvider;
 
         #endregion
@@ -32,7 +29,9 @@ namespace SWE1R.Assets.Blocks.TestUtils
         {
             Block = block;
 
-            itemDumper = new BlockItemDumper(Path.Combine(dumpFolderName, typeof(TItem).Name));
+            string dumpPath = Path.Combine("dump", GetType().FullName);
+            inputItemDumper = new BlockItemDumper(dumpPath, "in");
+            outputItemDumper = new BlockItemDumper(dumpPath, "out");
             metadataProvider = new MetadataProvider();
         }
 
@@ -67,14 +66,14 @@ namespace SWE1R.Assets.Blocks.TestUtils
         {
             // dump/print
             TItem item = Block[i];
-            itemDumper.DumpItemPartsBytes(item, i, dumpInputSuffix);
+            inputItemDumper.DumpItemPartsBytes(item, i);
             PrintItemName($"name {metadataProvider.GetNameByValue(item)}");
 
             // load
             item.Load(out context);
 
             // dump
-            itemDumper.DumpItemLog(context, i, dumpInputSuffix);
+            inputItemDumper.DumpItemLog(context, i);
 
             return item;
         }
@@ -85,8 +84,8 @@ namespace SWE1R.Assets.Blocks.TestUtils
             item.Save(out context);
 
             // dump
-            itemDumper.DumpItemPartsBytes(item, i, dumpOutputSuffix);
-            itemDumper.DumpItemLog(context, i, dumpOutputSuffix);
+            outputItemDumper.DumpItemPartsBytes(item, i);
+            outputItemDumper.DumpItemLog(context, i);
         }
 
         protected abstract void PrintItemIndex(int index);

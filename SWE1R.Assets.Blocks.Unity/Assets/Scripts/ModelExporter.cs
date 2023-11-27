@@ -33,8 +33,7 @@ namespace SWE1R.Assets.Blocks.Unity
     {
         #region Fields
 
-        private readonly BlockItemDumper dumper = new UnityBlockItemDumper();
-        private const string dumperSuffix = "out";
+        private readonly BlockItemDumper dumper = new UnityBlockItemDumper("out");
         private ByteSerializerContext bitSerializerContext;
 
         #endregion
@@ -108,7 +107,7 @@ namespace SWE1R.Assets.Blocks.Unity
 
             // serialize
             ModelBlockItem.Save(out bitSerializerContext);
-            dumper.DumpItem(ModelBlockItem, ModelIndex, bitSerializerContext, dumperSuffix);
+            dumper.DumpItem(ModelBlockItem, ModelIndex, bitSerializerContext);
         }
 
         #endregion
