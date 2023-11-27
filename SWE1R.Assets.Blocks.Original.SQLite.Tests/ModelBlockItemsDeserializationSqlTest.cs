@@ -36,8 +36,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
 
         #region Methods (: BlockItemsTestBase)
 
-        private readonly object balanceLock = new object();
-
         protected override void CompareItemInternal(int index)
         {
             ModelBlockItem modelBlockItem = DeserializeItem(index, out ByteSerializerContext context);

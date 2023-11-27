@@ -65,6 +65,13 @@ namespace SWE1R.Assets.Blocks
             return block;
         }
 
+        public static Block<TItem> Load<TItem>(Stream stream) where TItem : BlockItem, new()
+        {
+            var block = new Block<TItem>();
+            block.Load(stream);
+            return block;
+        }
+
         #endregion
     }
 

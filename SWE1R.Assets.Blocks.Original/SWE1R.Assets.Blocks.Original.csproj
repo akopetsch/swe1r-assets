@@ -9,70 +9,37 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="checksums.sha1" />
-    <None Remove="checksums.sha256" />
-    <None Remove="out_modelblock.bin\n64_eu-jp.bin" />
-    <None Remove="out_modelblock.bin\n64_us.bin" />
-    <None Remove="out_modelblock.bin\win-demo.bin" />
-    <None Remove="out_modelblock.bin\_default.bin" />
-    <None Remove="out_splineblock.bin\n64.bin" />
-    <None Remove="out_splineblock.bin\_default.bin" />
-    <None Remove="out_spriteblock.bin\n64_jp.bin" />
-    <None Remove="out_spriteblock.bin\n64_us.bin" />
-    <None Remove="out_spriteblock.bin\win-demo.bin" />
-    <None Remove="out_spriteblock.bin\win_de__mac__dc.bin" />
-    <None Remove="out_spriteblock.bin\_default.bin" />
-    <None Remove="out_textureblock.bin\n64.bin" />
-    <None Remove="out_textureblock.bin\win-demo.bin" />
-    <None Remove="out_textureblock.bin\_default.bin" />
+    <None Remove="Resources\out_modelblock.bin\n64_eu-jp.bin" />
+    <None Remove="Resources\out_modelblock.bin\n64_us.bin" />
+    <None Remove="Resources\out_modelblock.bin\win-demo.bin" />
+    <None Remove="Resources\out_modelblock.bin\_default.bin" />
+    <None Remove="Resources\out_splineblock.bin\n64.bin" />
+    <None Remove="Resources\out_splineblock.bin\_default.bin" />
+    <None Remove="Resources\out_spriteblock.bin\n64_jp.bin" />
+    <None Remove="Resources\out_spriteblock.bin\n64_us.bin" />
+    <None Remove="Resources\out_spriteblock.bin\win-demo.bin" />
+    <None Remove="Resources\out_spriteblock.bin\win_de__mac__dc.bin" />
+    <None Remove="Resources\out_spriteblock.bin\_default.bin" />
+    <None Remove="Resources\out_textureblock.bin\n64.bin" />
+    <None Remove="Resources\out_textureblock.bin\win-demo.bin" />
+    <None Remove="Resources\out_textureblock.bin\_default.bin" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="checksums.sha1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_modelblock.bin\n64_eu-jp.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_modelblock.bin\n64_us.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_modelblock.bin\win-demo.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_modelblock.bin\_default.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_splineblock.bin\n64.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_splineblock.bin\_default.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_spriteblock.bin\n64_jp.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_spriteblock.bin\n64_us.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_spriteblock.bin\win-demo.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_spriteblock.bin\win_de__mac__dc.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_spriteblock.bin\_default.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_textureblock.bin\n64.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_textureblock.bin\win-demo.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="out_textureblock.bin\_default.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="Resources\out_modelblock.bin\n64_eu-jp.bin" />
+    <EmbeddedResource Include="Resources\out_modelblock.bin\n64_us.bin" />
+    <EmbeddedResource Include="Resources\out_modelblock.bin\win-demo.bin" />
+    <EmbeddedResource Include="Resources\out_modelblock.bin\_default.bin" />
+    <EmbeddedResource Include="Resources\out_splineblock.bin\n64.bin" />
+    <EmbeddedResource Include="Resources\out_splineblock.bin\_default.bin" />
+    <EmbeddedResource Include="Resources\out_spriteblock.bin\n64_jp.bin" />
+    <EmbeddedResource Include="Resources\out_spriteblock.bin\n64_us.bin" />
+    <EmbeddedResource Include="Resources\out_spriteblock.bin\win-demo.bin" />
+    <EmbeddedResource Include="Resources\out_spriteblock.bin\win_de__mac__dc.bin" />
+    <EmbeddedResource Include="Resources\out_spriteblock.bin\_default.bin" />
+    <EmbeddedResource Include="Resources\out_textureblock.bin\n64.bin" />
+    <EmbeddedResource Include="Resources\out_textureblock.bin\win-demo.bin" />
+    <EmbeddedResource Include="Resources\out_textureblock.bin\_default.bin" />
   </ItemGroup>
 
   <ItemGroup>
