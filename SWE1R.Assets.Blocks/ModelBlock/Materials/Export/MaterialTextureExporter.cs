@@ -43,10 +43,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Export
 
         public void Export()
         {
-            Image = new ImageRgba32(
-                MaterialTexture.Width,
-                MaterialTexture.Height);
-
             // get texture
             int textureIndex = MaterialTexture.TextureIndex;
             if (textureIndex == -1)
@@ -54,7 +50,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Export
             TextureBlockItem textureBlockItem = TextureBlock[textureIndex];
             textureBlockItem.Load();
 
-            // get pixels
+            // image
             var textureExporter = new TextureExporter(
                 textureBlockItem.PixelsPart.Bytes,
                 MaterialTexture.TextureFormat,
@@ -62,7 +58,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Export
                 MaterialTexture.Height,
                 textureBlockItem.PaletteColors);
             textureExporter.Export();
+            Image = textureExporter.Image;
 
+            // effective image
+            EffectiveImage = Image;
             if (MaterialTextureChild != null)
                 EffectiveImage = Image.Mirror(
                     MaterialTextureChild.HasDoubleWidth,

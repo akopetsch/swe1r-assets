@@ -158,7 +158,7 @@ namespace SWE1R.Assets.Blocks.Images
         {
             for (int x = 0; x < Width; x++)
                 for (int y = 0; y < Height; y++)
-                    Pixels[x][y].A = alpha;
+                    Pixels[x][y].A = alpha; // TODO: !!! this won't work anymore when C# struct is used for e.g. ColorRGBA32
         }
 
         #endregion

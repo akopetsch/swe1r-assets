@@ -3,7 +3,6 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Attributes;
-using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.Textures;
 using System;
 using System.Collections.Generic;
