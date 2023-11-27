@@ -102,29 +102,6 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
 
         #endregion
 
-        #region Methods (export)
-
-        public ImageRgba32 ExportImage()
-        {
-            ImageRgba32 image = new ImageRgba32(Width, Height);
-            for (int tileY = 0; tileY < TilesGridHeight; tileY++)
-            {
-                for (int tileX = 0; tileX < TilesGridWidth; tileX++)
-                {
-                    SpriteTile tile = GetTile(tileX, tileY);
-                    if (tile != null)
-                    {
-                        ImageRgba32 tileImage = tile.ExportImage(this);
-                        (int spriteX, int spriteY) = GetTilePosition(tileX, tileY);
-                        image.Insert(tileImage.FlipY(), spriteX, spriteY);
-                    }
-                }
-            }
-            return image;
-        }
-
-        #endregion
-
         #region Methods (: object)
 
         public override string ToString() =>

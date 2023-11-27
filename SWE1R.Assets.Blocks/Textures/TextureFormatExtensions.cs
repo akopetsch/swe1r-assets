@@ -27,7 +27,7 @@ namespace SWE1R.Assets.Blocks.Textures
             }
         }
 
-        public static bool HasPalette(this TextureFormat textureFormat) =>
+        public static bool IsPaletteFormat(this TextureFormat textureFormat) =>
             textureFormat == TextureFormat.RGBA5551_I4 ||
             textureFormat == TextureFormat.RGBA5551_I8;
 

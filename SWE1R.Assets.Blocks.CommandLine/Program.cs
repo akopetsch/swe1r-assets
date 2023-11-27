@@ -148,14 +148,14 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         private static int RunExportSpritesOptions(ExportSpritesOptions options)
         {
-            var exporter = new SpriteExporter(options.BlockPath, options.Indices.ToArray());
+            var exporter = new SpriteBlockExporter(options.BlockPath, options.Indices.ToArray());
             exporter.Export();
             return ExitCodes.Success;
         }
 
         private static int RunExportModelsTexturesOptions(ExportModelTexturesOptions options)
         {
-            var exporter = new ModelTexturesExporter(options.BlockPath, options.TextureBlockPath, options.Indices.ToArray());
+            var exporter = new ModelTexturesBlockExporter(options.BlockPath, options.TextureBlockPath, options.Indices.ToArray());
             exporter.Export();
             return ExitCodes.Success;
         }

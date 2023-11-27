@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 
         #endregion
 
-        #region Properties (serialization)
+        #region Properties (serialized)
 
         public byte Byte_0 { get; set; } // TODO: N64 only
         public byte Byte_1 { get; set; }

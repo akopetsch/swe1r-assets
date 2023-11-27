@@ -7,16 +7,17 @@ using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.Images.ImageSharp;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
+using SWE1R.Assets.Blocks.ModelBlock.Materials.Export;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine.Exporters
 {
-    public class ModelTexturesExporter : BlockItemExporter<ModelBlockItem>
+    public class ModelTexturesBlockExporter : BlockExporter<ModelBlockItem>
     {
         public Block<TextureBlockItem> TextureBlock { get; }
 
-        public ModelTexturesExporter(string blockPath, string textureBlockPath, int[] indices) : 
+        public ModelTexturesBlockExporter(string blockPath, string textureBlockPath, int[] indices) : 
             base(blockPath, indices)
         {
             TextureBlock = new Block<TextureBlockItem>();
@@ -36,7 +37,9 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
                 Debug.Write($"{material.Texture?.TextureIndex} ");
                 Console.Write('.');
 
-                ImageRgba32 image = material.Hack_ExportEffectiveImage(TextureBlock);
+                var materialExporter = new MaterialExporter(material, TextureBlock);
+                materialExporter.Export();
+                ImageRgba32 image = materialExporter.EffectiveImage;
                 if (image != null)
                 {
                     // save as png

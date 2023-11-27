@@ -22,7 +22,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         #endregion
 
-        #region Properties
+        #region Properties (serialization)
 
         public static int StructureSize { get; } = 
             identifierString.Length + Vector3Single.StructureSize;

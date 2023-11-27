@@ -6,10 +6,10 @@ using ByteSerialization;
 using SixLabors.ImageSharp;
 using SWE1R.Assets.Blocks.Images.ImageSharp;
 using SWE1R.Assets.Blocks.SpriteBlock;
+using SWE1R.Assets.Blocks.SpriteBlock.Export;
 using SWE1R.Assets.Blocks.Textures;
 using SWE1R.Assets.Blocks.Utils;
 using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
 using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
@@ -37,7 +37,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
             // save sprite
             string folderPath = Path.Combine("dump", BlockDefaultFilenames.SpriteBlock, BlockItem.GetIndexString(index));
             Directory.CreateDirectory(folderPath);
-            sprite.ExportImage().ToImageSharp()
+            var spriteExporter = new SpriteExporter(sprite);
+            spriteExporter.Export();
+            spriteExporter.Image.ToImageSharp()
                 .SaveAsPng(Path.Combine(folderPath, "overall.png"));
 
             bool hasSpecialTiles = sprite.Tiles.Any(HasSpecialDimensions);
@@ -59,7 +61,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
 
                         // save tile
                         string tilePath = Path.Combine(folderPath, $"{tileX}-{tileY}.png");
-                        tile.ExportImage(sprite).ToImageSharp()
+                        var tileExporter = new SpriteTileExporter(tile, sprite);
+                        tileExporter.Export();
+                        tileExporter.Image.ToImageSharp()
                             .SaveAsPng(tilePath);
 
                         // Pixels.Length

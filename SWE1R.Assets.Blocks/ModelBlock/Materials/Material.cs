@@ -40,23 +40,5 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         public bool HasBackfaceCulling => (Int & 8) > 0; // TODO: confirm this
 
         #endregion
-
-        #region Methods (export)
-
-        public ImageRgba32 Hack_ExportEffectiveImage(Block<TextureBlockItem> textureBlock) // HACK: ExportEffectiveImage
-        {
-            if (Texture != null)
-                if (Texture.TextureIndex.Id != -1)
-                {
-                    MaterialTextureChild firstMaterialTextureChild = Texture.Children.FirstOrDefault();
-                    ImageRgba32 result = Texture.ExportEffectiveImage(textureBlock, firstMaterialTextureChild);
-                    if (Properties.AlphaBpp == 0)
-                        result.SetAlpha(byte.MaxValue);
-                    return result;
-                }
-            return null;
-        }
-
-        #endregion
     }
 }

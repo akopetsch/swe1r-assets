@@ -16,5 +16,8 @@ namespace ByteSerialization.IO.Extensions
             i % 2 == 0 ?
                 bytes[i / 2].GetHighNibble() :
                 bytes[i / 2].GetLowNibble();
+
+        public static int GetNibblesCount(this byte[] bytes) =>
+            bytes.Length * 2;
     }
 }

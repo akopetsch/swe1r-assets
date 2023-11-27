@@ -5,18 +5,21 @@
 using ByteSerialization;
 using SWE1R.Assets.Blocks.Images.ImageSharp;
 using SWE1R.Assets.Blocks.SpriteBlock;
+using SWE1R.Assets.Blocks.SpriteBlock.Export;
 
 namespace SWE1R.Assets.Blocks.CommandLine.Exporters
 {
-    public class SpriteExporter : BlockItemExporter<SpriteBlockItem>
+    public class SpriteBlockExporter : BlockExporter<SpriteBlockItem>
     {
-        public SpriteExporter(string blockFilename, int[] indices) : 
+        public SpriteBlockExporter(string blockFilename, int[] indices) : 
             base(blockFilename, indices)
         { }
 
         protected override void ExportItem(int index, SpriteBlockItem item, ByteSerializerContext byteSerializerContext)
         {
-            using Image<Rgba32> image = item.Sprite.ExportImage().ToImageSharp();
+            var spriteExporter = new SpriteExporter(item.Sprite);
+            spriteExporter.Export();
+            using Image<Rgba32> image = spriteExporter.Image.ToImageSharp();
             string exportFilename = Path.Combine(ExportFolderPath, $"{BlockItem.GetIndexString(index)}.png");
             image.SaveAsPng(exportFilename);
         }

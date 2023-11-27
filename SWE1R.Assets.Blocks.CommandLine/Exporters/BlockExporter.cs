@@ -7,14 +7,14 @@ using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine.Exporters
 {
-    public abstract class BlockItemExporter<TItem> where TItem : BlockItem, new()
+    public abstract class BlockExporter<TItem> where TItem : BlockItem, new()
     {
         public Block<TItem> Block { get; }
 
         public string ExportFolderPath { get; }
         public int[] Indices { get; }
 
-        public BlockItemExporter(string blockPath, int[] indices)
+        public BlockExporter(string blockPath, int[] indices)
         {
             Block = new Block<TItem>();
             Block.Load(blockPath);
