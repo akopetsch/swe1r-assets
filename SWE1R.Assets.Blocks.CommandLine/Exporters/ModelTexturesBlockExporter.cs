@@ -44,7 +44,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
                 if (image != null)
                 {
                     // save as png
-                    string exportFilename = $"{BlockItem.GetIndexString(material.Texture?.TextureIndex)}.png";
+                    string exportFilename = $"{BlockItem.GetIndexString(material.Texture.TextureIndex.Value)}.png";
                     string exportPath = Path.Combine(itemFolderPath, exportFilename);
                     image.ToImageSharp().SaveAsPng(exportPath);
                 }

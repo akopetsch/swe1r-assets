@@ -20,7 +20,6 @@ namespace FiddleApp
             if (Debugger.IsAttached)
                 ConsoleUtil.PromptExit();
             return result;
-
         }
 
         private static int Fiddle()

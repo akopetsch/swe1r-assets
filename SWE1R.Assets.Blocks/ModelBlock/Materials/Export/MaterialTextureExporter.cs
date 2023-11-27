@@ -44,7 +44,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Export
         public void Export()
         {
             // get texture
-            int textureIndex = MaterialTexture.TextureIndex;
+            int textureIndex = MaterialTexture.TextureIndex.Value;
             if (textureIndex == -1)
                 return;
             TextureBlockItem textureBlockItem = TextureBlock[textureIndex];

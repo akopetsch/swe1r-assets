@@ -8,8 +8,8 @@ namespace SWE1R.Assets.Blocks.Unity
 {
     public class UnityBlockItemDumper : BlockItemDumper
     {
-        public UnityBlockItemDumper() : 
-            base(Path.Combine("Temp", "dump"))
+        public UnityBlockItemDumper(string suffix) : 
+            base(Path.Combine("Temp", "dump"), suffix)
         { }
     }
 }

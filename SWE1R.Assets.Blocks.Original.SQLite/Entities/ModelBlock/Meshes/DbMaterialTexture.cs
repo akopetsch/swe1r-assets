@@ -60,7 +60,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             P_Child2 = (int)(node.Context.Graph.GetValueComponent(mt.Children[2])?.Position ?? 0);
             P_Child3 = (int)(node.Context.Graph.GetValueComponent(mt.Children[3])?.Position ?? 0);
             P_Child4 = (int)(node.Context.Graph.GetValueComponent(mt.Children[4])?.Position ?? 0);
-            IdField = mt.TextureIndex.Value;
+            IdField = mt.TextureIndex.SerializedValue;
         }
 
         public bool Equals(DbMaterialTexture other)

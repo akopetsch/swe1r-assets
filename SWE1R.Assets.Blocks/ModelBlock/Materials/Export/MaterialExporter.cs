@@ -41,7 +41,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Export
         {
             if (Material.Texture != null)
             {
-                if (Material.Texture.TextureIndex.Id != -1)
+                if (Material.Texture.TextureIndex != -1)
                 {
                     MaterialTextureChild firstMaterialTextureChild = Material.Texture.Children.FirstOrDefault(); // HACK: use first child as default
                     var texturerExporter = new MaterialTextureExporter(Material.Texture, firstMaterialTextureChild, TextureBlock);

@@ -47,7 +47,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
             flags = source.Flags;
             mask = source.Mask;
             Children = source.Children.Select(x => x == null ? null : importer.GetMaterialTextureChildObject(x)).ToArray();
-            textureIndex = source.TextureIndex;
+            textureIndex = source.TextureIndex.Value;
         }
 
         public override Swe1rMaterialTexture Export(ModelExporter exporter)

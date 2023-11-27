@@ -39,8 +39,7 @@ namespace SWE1R.Assets.Blocks.Unity
     {
         #region Fields
 
-        private readonly BlockItemDumper dumper = new UnityBlockItemDumper();
-        private const string dumperSuffix = "in";
+        private readonly BlockItemDumper dumper = new UnityBlockItemDumper("in");
         private ByteSerializerContext bitSerializerContext;
         private int offsetHexStringLength;
 
@@ -110,9 +109,9 @@ namespace SWE1R.Assets.Blocks.Unity
 
             // deserialize
             ModelBlockItem = ModelBlock[ModelIndex];
-            dumper.DumpItemPartsBytes(ModelBlockItem, ModelIndex, dumperSuffix);
+            dumper.DumpItemPartsBytes(ModelBlockItem, ModelIndex);
             ModelBlockItem.Load(out bitSerializerContext);
-            dumper.DumpItemLog(bitSerializerContext, ModelIndex, dumperSuffix);
+            dumper.DumpItemLog(bitSerializerContext, ModelIndex);
             offsetHexStringLength = GetOffsetHexStringLength();
 
             // import
