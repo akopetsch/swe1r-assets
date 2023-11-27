@@ -24,9 +24,10 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Export
                 sprite.TextureFormat, 
                 spriteTile.Width, 
                 spriteTile.Height, 
-                sprite.Palette.Colors)
+                sprite.Palette?.Colors)
         {
             SpriteTile = spriteTile;
+            Sprite = sprite;
         }
 
         #endregion
@@ -37,6 +38,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Export
         {
             int bpp = Sprite.TextureFormat.GetBpp();
 
+            // TODO: simplify:
             float bytesPerPixel = (float)bpp / 8;
             int bytesPerLine = (int)(Width * bytesPerPixel);
             int virtualBytesPerLine = bytesPerLine & 0xfff8; // round down by 8 (padding)

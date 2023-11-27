@@ -94,7 +94,7 @@ namespace SWE1R.Assets.Blocks.Textures.Export
         }
 
         private int GetPixelIndex(int x, int y) =>
-            y * Width + x;
+            y * GetVirtualWidth() + x;
 
         protected virtual int GetVirtualWidth() => // TODO: consider different name than 'VirtualWidth'
             Width;
