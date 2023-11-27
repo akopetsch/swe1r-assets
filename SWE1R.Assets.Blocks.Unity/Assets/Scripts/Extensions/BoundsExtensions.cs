@@ -2,7 +2,7 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using Swe1rBoundsSingle = SWE1R.Assets.Blocks.Common.Vectors.Bounds3Single;
+using Swe1rBoundsSingle = SWE1R.Assets.Blocks.Vectors.Bounds3Single;
 using UnityBounds = UnityEngine.Bounds;
 using UnityVector3 = UnityEngine.Vector3;
 

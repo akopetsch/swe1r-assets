@@ -2,9 +2,9 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using Swe1rVector3Byte = SWE1R.Assets.Blocks.Common.Vectors.Vector3Byte;
-using Swe1rVector3SByte = SWE1R.Assets.Blocks.Common.Vectors.Vector3SByte;
-using Swe1rVector3Int16 = SWE1R.Assets.Blocks.Common.Vectors.Vector3Int16;
+using Swe1rVector3Byte = SWE1R.Assets.Blocks.Vectors.Vector3Byte;
+using Swe1rVector3SByte = SWE1R.Assets.Blocks.Vectors.Vector3SByte;
+using Swe1rVector3Int16 = SWE1R.Assets.Blocks.Vectors.Vector3Int16;
 using UnityVector3Int = UnityEngine.Vector3Int;
 
 namespace SWE1R.Assets.Blocks.Unity.Extensions

@@ -3,7 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using UnityEngine;
-using Swe1rMatrix3x4Single = SWE1R.Assets.Blocks.Common.Vectors.Matrix3x4Single;
+using Swe1rMatrix3x4Single = SWE1R.Assets.Blocks.Vectors.Matrix3x4Single;
 using UnityMatrix4x4 = UnityEngine.Matrix4x4;
 
 namespace SWE1R.Assets.Blocks.Unity.Extensions

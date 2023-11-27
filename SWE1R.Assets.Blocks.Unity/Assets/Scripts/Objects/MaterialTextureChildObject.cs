@@ -4,7 +4,7 @@
 
 using System;
 using Swe1rDimensionsBitmask = SWE1R.Assets.Blocks.ModelBlock.Meshes.DimensionsBitmask;
-using Swe1rMaterialTextureChild = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialTextureChild;
+using Swe1rMaterialTextureChild = SWE1R.Assets.Blocks.ModelBlock.Materials.MaterialTextureChild;
 
 namespace SWE1R.Assets.Blocks.Unity.Objects
 {

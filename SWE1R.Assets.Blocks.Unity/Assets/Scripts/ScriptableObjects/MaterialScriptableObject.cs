@@ -4,7 +4,7 @@
 
 using SWE1R.Assets.Blocks.Unity.Objects;
 using UnityEngine;
-using Swe1rMaterial = SWE1R.Assets.Blocks.ModelBlock.Meshes.Material;
+using Swe1rMaterial = SWE1R.Assets.Blocks.ModelBlock.Materials.Material;
 
 namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
 {

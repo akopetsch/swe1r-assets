@@ -3,7 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using System;
-using Swe1rMaterialProperties = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialProperties;
+using Swe1rMaterialProperties = SWE1R.Assets.Blocks.ModelBlock.Materials.MaterialProperties;
 
 namespace SWE1R.Assets.Blocks.Unity.Objects
 {

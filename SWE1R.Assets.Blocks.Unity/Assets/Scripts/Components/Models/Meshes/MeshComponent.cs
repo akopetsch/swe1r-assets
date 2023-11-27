@@ -12,8 +12,9 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Swe1rIndicesChunks = SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices.IndicesChunks;
-using Swe1rMaterialTexture = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialTexture;
-using Swe1rMaterialTextureChild = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialTextureChild;
+using Swe1rMaterialExporter = SWE1R.Assets.Blocks.ModelBlock.Materials.Export.MaterialExporter;
+using Swe1rMaterialTexture = SWE1R.Assets.Blocks.ModelBlock.Materials.MaterialTexture;
+using Swe1rMaterialTextureChild = SWE1R.Assets.Blocks.ModelBlock.Materials.MaterialTextureChild;
 using Swe1rMesh = SWE1R.Assets.Blocks.ModelBlock.Meshes.Mesh;
 using Swe1rModelImporter = SWE1R.Assets.Blocks.Unity.ModelImporter;
 using Swe1rPrimitiveType = SWE1R.Assets.Blocks.ModelBlock.Meshes.PrimitiveType;
@@ -83,7 +84,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Meshes
             Swe1rMaterialTexture texture = source.Material.Texture;
             if (texture != null)
             {
-                labels.Add($"{texture.Byte_0c},{texture.Byte_0d}");
+                labels.Add(((short)texture.TextureFormat).ToString("x4"));
                 labels.Add(texture.TextureIndex.ToString());
             }
             if (source.Mapping != null)
@@ -181,7 +182,11 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Meshes
                 if (swe1rTextureIndex == -1)
                     unityTexture = new TestTextureHelper().LoadTexture();
                 else
-                    unityTexture = source.Material.Hack_ExportEffectiveImage(modelImporter.TextureBlock).ToUnityTexture2D();
+                {
+                    var sourceMaterialExporter = new Swe1rMaterialExporter(source.Material, modelImporter.TextureBlock);
+                    sourceMaterialExporter.Export();
+                    unityTexture = sourceMaterialExporter.EffectiveImage.ToUnityTexture2D();
+                }
                 unityMaterial.SetTexture("_MainTex", unityTexture);
                 unityMaterial.SetFloat("_Glossiness", 0); // TODO: necessary for "Standard" shader but also for "Transparent/Diffuse"?
             }

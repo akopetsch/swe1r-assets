@@ -6,7 +6,8 @@ using SWE1R.Assets.Blocks.Unity.Objects;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using Swe1rMaterialTexture = SWE1R.Assets.Blocks.ModelBlock.Meshes.MaterialTexture;
+using Swe1rMaterialTexture = SWE1R.Assets.Blocks.ModelBlock.Materials.MaterialTexture;
+using Swe1rTextureFormat = SWE1R.Assets.Blocks.Textures.TextureFormat;
 
 namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
 {
@@ -17,6 +18,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
         public short height4;
         public short always0_08;
         public short always0_0a;
+        public Swe1rTextureFormat textureFormat;
         public byte byte_0c;
         public byte byte_0d;
         public short word_0e;
@@ -36,8 +38,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
             height4 = source.Height4;
             always0_08 = source.Always0_08;
             always0_0a = source.Always0_0a;
-            byte_0c = source.Byte_0c;
-            byte_0d = source.Byte_0d;
+            textureFormat = source.TextureFormat;
             word_0e = source.Word_0e;
             width = source.Width;
             height = source.Height;
@@ -57,8 +58,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
             result.Height4 = height4;
             result.Always0_08 = always0_08;
             result.Always0_0a = always0_0a;
-            result.Byte_0c = byte_0c;
-            result.Byte_0d = byte_0d;
+            result.TextureFormat = textureFormat;
             result.Word_0e = word_0e;
             result.Width = width;
             result.Height = height;

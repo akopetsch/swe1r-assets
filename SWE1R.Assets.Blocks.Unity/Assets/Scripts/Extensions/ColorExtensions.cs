@@ -3,7 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using System;
-using Swe1rColorRgba32 = SWE1R.Assets.Blocks.Common.Colors.ColorRgba32;
+using Swe1rColorRgba32 = SWE1R.Assets.Blocks.Colors.ColorRgba32;
 using UnityColor = UnityEngine.Color;
 using UnityColor32 = UnityEngine.Color32;
 

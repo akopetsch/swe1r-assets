@@ -3,7 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using SWE1R.Assets.Blocks.Unity.Extensions;
-using Swe1rBounds3Single = SWE1R.Assets.Blocks.Common.Vectors.Bounds3Single;
+using Swe1rBounds3Single = SWE1R.Assets.Blocks.Vectors.Bounds3Single;
 using Swe1rFlaggedNode = SWE1R.Assets.Blocks.ModelBlock.Nodes.FlaggedNode;
 using Swe1rMeshGroup3064 = SWE1R.Assets.Blocks.ModelBlock.Nodes.MeshGroup3064;
 using UnityVector3 = UnityEngine.Vector3;

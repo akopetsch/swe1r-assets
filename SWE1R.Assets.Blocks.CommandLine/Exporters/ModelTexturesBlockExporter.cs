@@ -3,6 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization;
+using SixLabors.ImageSharp;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.Images.ImageSharp;
 using SWE1R.Assets.Blocks.ModelBlock;

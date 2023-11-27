@@ -3,7 +3,7 @@
 // Refer to the included LICENSE.txt file.
 
 using UnityEngine;
-using Swe1rImageRgba32 = SWE1R.Assets.Blocks.Common.Images.ImageRgba32;
+using Swe1rImageRgba32 = SWE1R.Assets.Blocks.Images.ImageRgba32;
 using UnityColor = UnityEngine.Color;
 
 namespace SWE1R.Assets.Blocks.Unity.Extensions
