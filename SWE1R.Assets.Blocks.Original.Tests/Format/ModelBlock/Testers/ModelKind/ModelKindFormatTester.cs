@@ -2,12 +2,13 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
+using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
-    public interface IHeaderFormatTester
+    public abstract class ModelKindFormatTester<TModel> : Tester<TModel> where TModel : Model
     {
-        void Test(Graph byteSerializerGraph);
+
     }
 }

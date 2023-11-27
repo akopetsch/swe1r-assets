@@ -6,7 +6,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
-    public class ModlFormatTester : HeaderFormatTester<ModlModel>
+    public class ModlFormatTester : ModelKindFormatTester<ModlModel>
     {
         public override void Test()
         {

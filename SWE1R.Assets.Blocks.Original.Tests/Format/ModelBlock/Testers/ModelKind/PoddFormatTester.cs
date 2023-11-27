@@ -9,7 +9,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
-    public class PoddFormatTester : HeaderFormatTester<PoddModel>
+    public class PoddFormatTester : ModelKindFormatTester<PoddModel>
     {
         public override void Test()
         {

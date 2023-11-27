@@ -12,7 +12,7 @@ using SWE1R.Assets.Blocks.Textures;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
-    public class TrakFormatTester : HeaderFormatTester<TrakModel>
+    public class TrakFormatTester : ModelKindFormatTester<TrakModel>
     {
         private TrackMetadata _trackMetadata;
 

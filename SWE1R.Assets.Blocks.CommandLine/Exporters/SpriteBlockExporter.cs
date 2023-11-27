@@ -3,6 +3,8 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 using SWE1R.Assets.Blocks.Images.ImageSharp;
 using SWE1R.Assets.Blocks.SpriteBlock;
 using SWE1R.Assets.Blocks.SpriteBlock.Export;

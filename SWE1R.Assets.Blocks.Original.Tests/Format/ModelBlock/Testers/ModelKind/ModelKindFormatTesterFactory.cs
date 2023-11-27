@@ -9,7 +9,7 @@ using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
-    public class HeaderFormatTesterFactory
+    public class ModelKindFormatTesterFactory
     {
         public ITester Get(Model value, Graph byteSerializationGraph, AnalyticsFixture analyticsFixture)
         {

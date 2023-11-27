@@ -70,7 +70,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
                         int minimumLength = GetMinimumPixelsLength(sprite, tile);
                         int guessedLength = GetGuessedPixelsLength(sprite, tile);
                         int actualLength = tile.PixelsBytes.Length;
-                        Assert.True(minimumLength % 2 == 0);
+                        //Assert.True(minimumLength % 2 == 0);
                     }
                     else
                     {

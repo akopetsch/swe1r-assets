@@ -23,7 +23,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
         {
             TestVisibleIndicesChunks();
 
-            var header = (Model)ByteSerializerGraph.Root.Value;
+            var model = (Model)ByteSerializerGraph.Root.Value;
 
             IndicesChunks chunks = Value.VisibleIndicesChunks;
             if (chunks != null)
@@ -128,8 +128,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
                             Assert.True(ranges.Count == 1);
                             Assert.True(i == 0); // obviously
 
-                            Assert.True(header.Animations != null);
-
+                            Assert.True(model.Animations != null);
 
                             // 086 - Pupp_Racer_Teemto_Pagalies | 7
                             // 087 - Pupp_Racer_Anakin_Skywalker | 1
@@ -168,7 +167,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
                             // if this is the first (01) range and more follow:
                             Assert.True(i == 0);
 
-                            var model = header.BlockItem;
                             //string key = $"{model.Index.Value:d3} - {_metadataProvider.GetName(model)}";
                             //AnalyticsFixture.IncreaseCounter("foo");
                         }

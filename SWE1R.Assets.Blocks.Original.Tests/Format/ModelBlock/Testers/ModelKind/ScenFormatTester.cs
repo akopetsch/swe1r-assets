@@ -6,7 +6,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
-    public class ScenFormatTester : HeaderFormatTester<ScenModel>
+    public class ScenFormatTester : ModelKindFormatTester<ScenModel>
     {
         public override void Test()
         {

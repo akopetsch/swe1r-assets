@@ -40,7 +40,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 
             PrintMemoryUsageStats(modelBlockItem, context);
 
-            new HeaderFormatTesterFactory().Get(modelBlockItem.Model, context.Graph, AnalyticsFixture).Test();
+            new ModelKindFormatTesterFactory().Get(modelBlockItem.Model, context.Graph, AnalyticsFixture).Test();
             RunTesters<Mesh, MeshTester>(context);
             RunTesters<MaterialTexture, MaterialTextureTester>(context);
 

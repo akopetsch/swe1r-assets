@@ -8,7 +8,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
-    public class MAltFormatTester : HeaderFormatTester<MAltModel>
+    public class MAltFormatTester : ModelKindFormatTester<MAltModel>
     {
         public override void Test()
         {

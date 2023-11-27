@@ -6,7 +6,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 {
-    public class PuppFormatTester : HeaderFormatTester<PuppModel>
+    public class PuppFormatTester : ModelKindFormatTester<PuppModel>
     {
         public override void Test()
         {

@@ -11,7 +11,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
     {
         public N64JpTest(
             AnalyticsFixture analyticsFixture, ITestOutputHelper output) :
-            base(analyticsFixture, output, ModelBlockIdNames.N64EuJp)
+            base(analyticsFixture, output, SpriteBlockIdNames.N64Jp)
         { }
 
         [Fact]
