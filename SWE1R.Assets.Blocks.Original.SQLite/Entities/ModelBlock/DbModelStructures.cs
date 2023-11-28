@@ -99,7 +99,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Data_Int = GetStructures(context.Data_Int);
         }
 
-        public override void Load(Graph g)
+        public override void Load(ByteSerializerGraph g)
         {
             Anims = GetStructures<Animation, DbAnimation>(g);
             DoubleMaterials = GetStructures<DoubleMaterial, DbDoubleMaterial>(g);

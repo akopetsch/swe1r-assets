@@ -6,17 +6,16 @@ using ByteSerialization.Extensions;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
 {
-    public class PartFormatTester : ModelKindFormatTester<PartModel>
+    public class PartModelFormatTester : ModelFormatTester<PartModel>
     {
         public override void Test()
         {
+            base.Test();
+
             AssertHeader();
-
-            Assert.True(Value.Node0 != null);
-            Assert.True(Value.Node0.Children.Count == 1);
-
+            AssertNode0();
             AssertKind();
         }
 
@@ -26,6 +25,12 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
             Assert.True(Value.Data == null);
             Assert.True(Value.Animations == null || Value.Animations.Count >= 1 && Value.Animations.Count <= 10);
             Assert.True(Value.AltN == null);
+        }
+
+        private void AssertNode0()
+        {
+            Assert.True(Value.Node0 != null);
+            Assert.True(Value.Node0.Children.Count == 1);
         }
 
         private void AssertKind()

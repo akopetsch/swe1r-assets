@@ -12,7 +12,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
         #region Properties
 
         public TValue Value { get; set; }
-        public Graph ByteSerializerGraph { get; set; }
+        public ByteSerializerGraph ByteSerializerGraph { get; set; }
         public AnalyticsFixture AnalyticsFixture { get; set; }
 
         public long ValuePosition { get; private set; }
@@ -22,7 +22,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
 
         #region Constructor
 
-        public virtual void Init(TValue value, Graph byteSerializerGraph, AnalyticsFixture analyticsFixture)
+        public virtual void Init(TValue value, ByteSerializerGraph byteSerializerGraph, AnalyticsFixture analyticsFixture)
         {
             Value = value;
             ByteSerializerGraph = byteSerializerGraph;

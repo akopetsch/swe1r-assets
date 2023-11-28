@@ -22,6 +22,11 @@ namespace SWE1R.Assets.Blocks.Vectors
 
         public Vector3Single Size => Max - Min;
 
+        public bool IsValid =>
+            Min.X <= Max.X &&
+            Min.Y <= Max.Y &&
+            Min.Z <= Max.Z;
+
         public Bounds3Single Fixed
         {
             get

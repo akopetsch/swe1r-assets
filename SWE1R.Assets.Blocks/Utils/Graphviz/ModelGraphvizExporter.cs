@@ -14,7 +14,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using ByteSerializationGraph = ByteSerialization.Nodes.Graph;
+using ByteSerializationGraph = ByteSerialization.Nodes.ByteSerializerGraph;
 
 namespace SWE1R.Assets.Blocks.Utils.Graphviz
 {

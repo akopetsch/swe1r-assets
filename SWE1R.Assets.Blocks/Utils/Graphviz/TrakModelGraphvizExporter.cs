@@ -10,7 +10,7 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
 {
     public class TrakModelGraphvizExporter : ModelGraphvizExporter
     {
-        public TrakModelGraphvizExporter(ModelBlockItem modelBlockItem, Graph byteSerializationGraph, string suffix) : 
+        public TrakModelGraphvizExporter(ModelBlockItem modelBlockItem, ByteSerializerGraph byteSerializationGraph, string suffix) : 
             base(modelBlockItem, byteSerializationGraph, suffix)
         { }
 

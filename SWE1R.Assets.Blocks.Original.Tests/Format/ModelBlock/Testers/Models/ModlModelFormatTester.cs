@@ -4,12 +4,14 @@
 
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
 {
-    public class ModlFormatTester : ModelKindFormatTester<ModlModel>
+    public class ModlModelFormatTester : ModelFormatTester<ModlModel>
     {
         public override void Test()
         {
+            base.Test();
+
             Assert.True(Value.Nodes.Count == 1);
             Assert.True(Value.Data == null);
             Assert.True(

@@ -12,8 +12,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 {
     public class KeyframesOrInteger
     {
+        #region Properties (serialized)
+
         [TypeHelper(typeof(TypeHelper))]
         [Order(0)] public object Value { get; private set; }
+
+        #endregion
+
+        #region Properties (C union style access)
 
         public Keyframes Keyframes
         {
@@ -27,6 +33,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             set => Value = value;
         }
 
+        #endregion
+
+        #region Classes (serialization)
+
         private class TypeHelper : ITypeHelper
         {
             public Type GetPropertyType(RecordComponent c)
@@ -39,5 +49,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
                     return typeof(Keyframes);
             }
         }
+
+        #endregion
     }
 }

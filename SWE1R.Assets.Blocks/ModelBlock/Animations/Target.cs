@@ -14,9 +14,15 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 {
     public class Target
     {
+        #region Properties (serialized)
+
         [TypeHelper(typeof(TypeHelper))]
         [Reference(ReferenceHandling.HighPriority)]
         [Order(0)] internal object Value { get; set; }
+
+        #endregion
+
+        #region Properties (C union style access)
 
         public DoubleMaterial DoubleMaterial
         {
@@ -33,6 +39,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             get => Value as TransformableD065;
             set => Value = value;
         }
+
+        #endregion
+
+        #region Classes (serialization)
 
         private class TypeHelper : ITypeHelper
         {
@@ -55,5 +65,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
                 throw new InvalidOperationException($"Unknown '{nameof(Animation.BitmaskNibble)}'.");
             }
         }
+
+        #endregion
     }
 }

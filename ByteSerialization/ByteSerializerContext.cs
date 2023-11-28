@@ -31,7 +31,7 @@ namespace ByteSerialization
             get => Stream.Position;
             set => Stream.Position = value;
         }
-        public Graph Graph { get; }
+        public ByteSerializerGraph Graph { get; }
         public StringBuilder Log { get; }
 
         #endregion
@@ -46,7 +46,7 @@ namespace ByteSerialization
             Reader = reader;
             Writer = writer;
             Mode = mode;
-            Graph = new Graph();
+            Graph = new ByteSerializerGraph();
             Log = new StringBuilder();
         }
 

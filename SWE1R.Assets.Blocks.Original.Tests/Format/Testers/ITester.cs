@@ -10,7 +10,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
     {
         #region Properties
 
-        public Graph ByteSerializerGraph { get; }
+        public ByteSerializerGraph ByteSerializerGraph { get; }
         public AnalyticsFixture AnalyticsFixture { get; }
 
         public long ValuePosition { get; }

@@ -16,11 +16,17 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 {
     public class Keyframes
     {
+        #region Properties (serialized)
+
         [Reference]
         [TypeHelper(typeof(TypeHelper))]
         [Length(typeof(LengthHelper))]
         [ElementReferenceHelper(typeof(ElementReferenceHelper))]
         [Order(0)] internal object Value { get; set; }
+
+        #endregion
+
+        #region Properties (C union style access)
 
         public List<MaterialTexture> MaterialTextures
         {
@@ -32,6 +38,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             get => Value as List<float>;
             set => Value = value;
         }
+
+        #endregion
+
+        #region Classes (serialization)
 
         private class TypeHelper : ITypeHelper
         {
@@ -92,5 +102,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
                     return null;
             }
         }
+
+        #endregion
     }
 }

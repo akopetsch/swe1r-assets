@@ -27,14 +27,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
 
         public abstract void Load(AssetsDbContext context);
 
-        public abstract void Load(Graph g);
+        public abstract void Load(ByteSerializerGraph g);
 
         protected List<T> GetStructures<T>(DbSet<T> dbSet) where T : DbBlockItemStructure =>
             dbSet.AsNoTracking().OfBlockItem(BlockItemIndex).OrderByOffset().ToList();
         // use DbSet.AsNoTracking() to improve performance:
         // https://stackoverflow.com/a/18169894
 
-        protected List<TEntity> GetStructures<TSource, TEntity>(Graph graph, Func<TSource, bool> filter = null)
+        protected List<TEntity> GetStructures<TSource, TEntity>(ByteSerializerGraph graph, Func<TSource, bool> filter = null)
             where TEntity : DbBlockItemStructure<TSource>, new()
         {
             var valueComponents = graph.GetValueComponents<TSource>().ToList();

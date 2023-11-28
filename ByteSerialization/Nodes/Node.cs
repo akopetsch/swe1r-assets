@@ -148,7 +148,7 @@ namespace ByteSerialization.Nodes
 
         #region Properties (dynamic)
 
-        [DoNotNotify] public Graph Graph =>
+        [DoNotNotify] public ByteSerializerGraph Graph =>
             Context.Graph;
 
         [DoNotNotify] public bool IsRoot => 

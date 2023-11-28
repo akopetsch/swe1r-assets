@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace ByteSerialization.Nodes
 {
-    public class Graph
+    public class ByteSerializerGraph
     {
         #region Fields
 

@@ -5,7 +5,7 @@
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Materials
 {
     public class MaterialTextureTester : Tester<MaterialTexture>
     {

@@ -19,8 +19,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         #region Methods (serialization)
 
-        public override bool HasExtraAlignment(FlaggedNode anim, Graph graph) => false;
-        public override bool HasExtraAlignment(Animation anim, Graph graph) => false;
+        public override bool HasExtraAlignment(FlaggedNode anim, ByteSerializerGraph graph) => false;
+        public override bool HasExtraAlignment(Animation anim, ByteSerializerGraph graph) => false;
 
         #endregion
     }

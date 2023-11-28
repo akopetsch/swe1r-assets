@@ -4,12 +4,14 @@
 
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
 {
-    public class PuppFormatTester : ModelKindFormatTester<PuppModel>
+    public class PuppModelFormatTester : ModelFormatTester<PuppModel>
     {
         public override void Test()
         {
+            base.Test();
+
             Assert.True(Value.Nodes.Count == 9);
             Assert.True(Value.Data == null);
             Assert.True(

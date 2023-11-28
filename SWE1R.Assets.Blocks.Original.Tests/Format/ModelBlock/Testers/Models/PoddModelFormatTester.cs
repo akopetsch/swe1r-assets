@@ -7,12 +7,14 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
 {
-    public class PoddFormatTester : ModelKindFormatTester<PoddModel>
+    public class PoddModelFormatTester : ModelFormatTester<PoddModel>
     {
         public override void Test()
         {
+            base.Test();
+
             AssertHeader();
             AssertHeaderNodes();
 
@@ -85,7 +87,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
             Assert.True(Value.LowPolyModel == Value.Node74);
 
             // no collision
-            var meshes = Value.LowPolyModel.GetLeaves().OfType<Mesh>().ToList(); // TODO: always empty, because FlaggedNode instead of INode
+            var meshes = Value.LowPolyModel.GetLeaves().OfType<Mesh>().ToList();
             Assert.True(!meshes.Exists(m => m.CollisionVertices.ShortVectors.Count > 0));
         }
 

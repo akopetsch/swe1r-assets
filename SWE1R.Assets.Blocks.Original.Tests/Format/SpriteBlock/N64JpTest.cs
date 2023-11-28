@@ -7,7 +7,7 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
 {
-    public class N64JpTest : SpriteFormatTestBase
+    public class N64JpTest : SpriteBlockItemFormatTestBase
     {
         public N64JpTest(
             AnalyticsFixture analyticsFixture, ITestOutputHelper output) :

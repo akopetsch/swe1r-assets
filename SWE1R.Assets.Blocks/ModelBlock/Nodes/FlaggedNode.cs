@@ -62,22 +62,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
 
         #region Methods (helper)
 
-        public IEnumerable<FlaggedNode> GetDescendants()
-        {
-            var d = Enumerable.Empty<FlaggedNode>();
-
-            // breadth-first
-            var c = Children?.OfType<FlaggedNode>().Distinct() ?? Enumerable.Empty<FlaggedNode>();
-            d = d.Concat(c);
-            foreach (FlaggedNode child in c)
-                d = d.Concat(child.GetDescendants());
-
-            return d.Distinct();
-        }
-
-        public IEnumerable<FlaggedNode> GetLeaves() =>
-            GetDescendants().Where(n => n.Children?.Count > 0);
-        
         public void UpdateChildrenCount() => // TODO: implement in BindingComponent
             ChildrenCount = Children?.Count() ?? 0;
 

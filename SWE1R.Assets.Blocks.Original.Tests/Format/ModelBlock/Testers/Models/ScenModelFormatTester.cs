@@ -4,12 +4,14 @@
 
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
 {
-    public class ScenFormatTester : ModelKindFormatTester<ScenModel>
+    public class ScenModelFormatTester : ModelFormatTester<ScenModel>
     {
         public override void Test()
         {
+            base.Test();
+
             Assert.True(Value.Nodes.Count == 83 || Value.Nodes.Count == 89);
             Assert.True(Value.Nodes.Count == 83 ?
                     Value.Data.List.Select(d => d.Integer.Value).Count() == 6 :

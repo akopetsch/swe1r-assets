@@ -8,6 +8,8 @@ using SWE1R.Assets.Blocks.ModelBlock.Animations;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock
 {
@@ -44,11 +46,37 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         #endregion
 
-        #region Methods (helper)
+        #region Methods (serialization)
 
-        public abstract bool HasExtraAlignment(FlaggedNode flaggedNode, Graph graph);
-        public abstract bool HasExtraAlignment(Animation anim, Graph graph);
-        
+        public abstract bool HasExtraAlignment(FlaggedNode flaggedNode, ByteSerializerGraph graph);
+        public abstract bool HasExtraAlignment(Animation anim, ByteSerializerGraph graph);
+
+        #endregion
+
+        #region Methods (helper - INode)
+
+        public ReadOnlyCollection<FlaggedNode> GetHeaderFlaggedNodes() =>
+            (Nodes.Select(x => x.FlaggedNode)
+            .Where(x => x != null).Distinct().ToList() ?? new List<FlaggedNode>()).AsReadOnly();
+
+        public ReadOnlyCollection<TransformableD065> GetAnimationsTransformableD065s() =>
+            (Animations?.Select(x => x.TargetOrInteger.Target?.TransformableD065)
+            .Where(x => x != null).Distinct().ToList() ?? new List<TransformableD065>()).AsReadOnly();
+
+        public ReadOnlyCollection<FlaggedNode> GetAltNFlaggedNodes() =>
+            (AltN?.Select(x => x.FlaggedNode)
+            .Where(x => x != null).Distinct().ToList() ?? new List<FlaggedNode>()).AsReadOnly();
+
+        public ReadOnlyCollection<INode> GetAllNodes()
+        {
+            var rootNodes = new List<FlaggedNode>();
+            rootNodes.AddRange(GetHeaderFlaggedNodes());
+            rootNodes.AddRange(GetAnimationsTransformableD065s());
+            rootNodes.AddRange(GetAltNFlaggedNodes());
+            List<INode> allNodes = rootNodes.SelectMany(x => x.GetSelfAndDescendants()).ToList();
+            return allNodes.AsReadOnly();
+        }
+
         #endregion
     }
 }

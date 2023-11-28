@@ -50,7 +50,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         #region Methods (serialization)
 
-        public override bool HasExtraAlignment(FlaggedNode fn, Graph g)
+        public override bool HasExtraAlignment(FlaggedNode fn, ByteSerializerGraph g)
         {
             if (Kind == PartModelKind.Unk_D065_Shatter)
                 if (Node0_D065.Children.Skip(1).Contains(fn))
@@ -58,7 +58,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
             return false;
         }
 
-        public override bool HasExtraAlignment(Animation n, Graph g) =>
+        public override bool HasExtraAlignment(Animation n, ByteSerializerGraph g) =>
             Kind == PartModelKind.Unk_D065_Shatter && n == Animations.First();
 
         #endregion

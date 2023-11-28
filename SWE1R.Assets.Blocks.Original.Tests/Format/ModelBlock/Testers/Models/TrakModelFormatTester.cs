@@ -10,15 +10,16 @@ using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 using SWE1R.Assets.Blocks.Textures;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
 {
-    public class TrakFormatTester : ModelKindFormatTester<TrakModel>
+    public class TrakModelFormatTester : ModelFormatTester<TrakModel>
     {
         private TrackMetadata _trackMetadata;
 
-        public virtual void Init(TrakModel value, Graph byteSerializerGraph, AnalyticsFixture analyticsFixture)
+        public virtual void Init(TrakModel value, ByteSerializerGraph byteSerializerGraph, AnalyticsFixture analyticsFixture)
         {
             base.Init(value, byteSerializerGraph, analyticsFixture);
+            base.Test();
             _trackMetadata = MetadataProvider.Tracks.First(t => t.Model == Value.BlockItem.Index.Value);
         }
 
@@ -41,8 +42,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Headers
 
         private void AssertSkybox()
         {
-            var materials = Value.Skybox.GetDescendants().OfType<MeshGroup3064>()
-                .SelectMany(mg => mg.Meshes)
+            var materials = Value.Skybox.GetDescendants().OfType<Mesh>()
                 .Select(m => m.Material).ToList();
             foreach (Material material in materials)
                 AssertSkyboxMaterial(material);

@@ -4,7 +4,6 @@
 
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine.Mods
@@ -39,13 +38,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
 
         private void SetAlphaTo128(ModelBlockItem modelBlockItem)
         {
-            List<FlaggedNode> headerFlaggedNodes = modelBlockItem.Model.Nodes
-                .Select(x => x.FlaggedNode).Where(x => x != null).Distinct().ToList();
-            List<MeshGroup3064> meshGroups = headerFlaggedNodes // TODO: get leaves from animations or altn
-                .SelectMany(x => x.GetLeaves()).Distinct().OfType<MeshGroup3064>().ToList();
-            List<Mesh> meshes = meshGroups
-                .SelectMany(x => x.Children.Cast<Mesh>()).ToList();
-
+            List<Mesh> meshes = modelBlockItem.Model.GetAllNodes().OfType<Mesh>().ToList();
             foreach (Mesh mesh in meshes)
             {
                 foreach (Vertex vertex in mesh.VisibleVertices)

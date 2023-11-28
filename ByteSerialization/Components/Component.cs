@@ -54,7 +54,7 @@ namespace ByteSerialization
         public Reader Reader => Context.Reader;
         public Writer Writer => Context.Writer;
         public Mode Mode => Context.Mode;
-        public Graph Graph => Context.Graph;
+        public ByteSerializerGraph Graph => Context.Graph;
 
         public long? Position => Node.Position;
         

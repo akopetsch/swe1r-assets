@@ -6,6 +6,7 @@ using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
+using SWE1R.Assets.Blocks.Vectors;
 using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
@@ -16,8 +17,29 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
 
         public override void Test()
         {
+            AssertBounds();
             TestIndices();
         }
+
+        #region Methods (bounds)
+
+        private void AssertBounds()
+        {
+            var visibleVertices = Value.VisibleVertices?.Select(x => (Vector3Single)x.Position).ToArray() ?? new Vector3Single[] { };
+            var collisionVerticesInt16 = Value.CollisionVertices?.ShortVectors?.Select(x => (Vector3Single)x).ToArray() ?? new Vector3Single[] { };
+            var collisionVerticesSingle = Value.CollisionVertices?.FloatVectors?.ToArray() ?? new Vector3Single[] { };
+            var allVectors = visibleVertices.Concat(collisionVerticesSingle).Concat(collisionVerticesInt16).ToArray();
+            var computedBounds = new Bounds3Single(allVectors);
+
+            //Assert.True(new Bounds3Single(Value.Bounds0, Value.Bounds1).IsValid); // sometimes fails
+            //Assert.True(Value.FixedBounds.Equals(computedBounds)); // sometimes fails
+            //Assert.True(computedBounds.Contains(Value.FixedBounds)); // sometimes fails
+            //Assert.True(Value.FixedBounds.Contains(computedBounds)); // sometimes fails
+        }
+
+        #endregion
+
+        #region Methods (indices)
 
         private void TestIndices()
         {
@@ -308,5 +330,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
 
         private string GetChunksString() =>
             string.Join(' ', Value.VisibleIndicesChunks.Select(x => x.Tag.ToString("d2")));
+
+        #endregion
     }
 }

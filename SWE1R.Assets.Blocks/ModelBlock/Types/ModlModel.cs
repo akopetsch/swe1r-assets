@@ -28,10 +28,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         #region Methods (serialization)
 
-        public override bool HasExtraAlignment(FlaggedNode fn, Graph g) => 
+        public override bool HasExtraAlignment(FlaggedNode fn, ByteSerializerGraph g) => 
             D065_5065_5064?.Children.Skip(1).Contains(fn) ?? false;
 
-        public override bool HasExtraAlignment(Animation n, Graph g) => 
+        public override bool HasExtraAlignment(Animation n, ByteSerializerGraph g) => 
             n == Animations?.First();
 
         #endregion

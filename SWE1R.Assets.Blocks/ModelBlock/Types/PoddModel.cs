@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         #region Methods (serialization)
 
-        public override bool HasExtraAlignment(FlaggedNode n, Graph g)
+        public override bool HasExtraAlignment(FlaggedNode n, ByteSerializerGraph g)
         {
             if (
                 // Node02
@@ -90,7 +90,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
             return false;
         }
 
-        public override bool HasExtraAlignment(Animation anim, Graph graph) => false;
+        public override bool HasExtraAlignment(Animation anim, ByteSerializerGraph graph) => false;
 
         #endregion
     }

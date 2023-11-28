@@ -32,7 +32,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
             SpritePages = GetStructures(context.SpritePages);
         }
 
-        public override void Load(Graph g)
+        public override void Load(ByteSerializerGraph g)
         {
             Sprites = GetStructures<Sprite, DbSprite>(g);
             SpritePages = GetStructures<SpriteTile, DbSpritePage>(g);

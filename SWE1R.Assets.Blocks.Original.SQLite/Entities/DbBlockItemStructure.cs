@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
             Offset = (int)node.Position;
         }
 
-        protected static int GetValuePosition(Graph graph, object value) =>
+        protected static int GetValuePosition(ByteSerializerGraph graph, object value) =>
             (int)(graph.GetValueComponent(value)?.Position.Value ?? 0);
 
         protected static int GetPropertyPointer(Node node, string propertyName)

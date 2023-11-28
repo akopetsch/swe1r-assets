@@ -14,11 +14,11 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
 {
-    public class SpriteFormatTestBase : BlockItemsFormatTestBase<SpriteBlockItem>
+    public class SpriteBlockItemFormatTestBase : BlockItemsFormatTestBase<SpriteBlockItem>
     {
         #region Constructor
 
-        public SpriteFormatTestBase(AnalyticsFixture analyticsFixture, ITestOutputHelper output, string blockIdName) :
+        public SpriteBlockItemFormatTestBase(AnalyticsFixture analyticsFixture, ITestOutputHelper output, string blockIdName) :
             base(analyticsFixture, output, blockIdName)
         { }
 

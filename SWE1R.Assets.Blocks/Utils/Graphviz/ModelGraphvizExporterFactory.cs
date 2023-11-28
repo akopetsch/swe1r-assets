@@ -4,7 +4,7 @@
 
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
-using ByteSerializationGraph = ByteSerialization.Nodes.Graph;
+using ByteSerializationGraph = ByteSerialization.Nodes.ByteSerializerGraph;
 
 namespace SWE1R.Assets.Blocks.Utils.Graphviz
 {
