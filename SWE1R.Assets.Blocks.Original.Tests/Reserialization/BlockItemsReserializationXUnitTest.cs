@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 namespace SWE1R.Assets.Blocks.Original.Tests.Reserialization
 {
     public abstract class BlockItemsReserializationXUnitTest<TItem> : 
-        BlockItemsReserializationTestBase<TItem> where TItem : BlockItem, new()
+        BlockItemsReserializationTestBase<TItem> where TItem : BlockItem, new() // TODO: !!! merge with base class (or not because of Unity)
     {
         #region Fields
 

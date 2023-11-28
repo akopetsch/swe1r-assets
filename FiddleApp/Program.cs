@@ -7,8 +7,10 @@ using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.Images.SystemDrawing;
 using SWE1R.Assets.Blocks.SpriteBlock;
 using SWE1R.Assets.Blocks.SpriteBlock.Import;
+using SWE1R.Assets.Blocks.TextureBlock;
 using SWE1R.Assets.Blocks.Utils;
 using System.Diagnostics;
+using System.Text;
 
 namespace FiddleApp
 {
@@ -24,18 +26,22 @@ namespace FiddleApp
 
         private static int Fiddle()
         {
-            var a = ;
-            var x = (short)-10353;
-            bool c = a == x;
+            var textureBlock = Block.Load<TextureBlockItem>(BlockDefaultFilenames.TextureBlock);
+            var spriteBlock = Block.Load<SpriteBlockItem>(BlockDefaultFilenames.SpriteBlock);
 
+            var sb = new StringBuilder();
+            int[] indices = Enumerable.Range(0, textureBlock.Count).ToArray();
+            foreach (int index in indices)
+                sb.AppendLine($"        [Fact]\r\n        public void Test_{index:d4}() => CompareItem({index});");
+            var s = sb.ToString();
+
+            // import sprite
             ImageRgba32 image = new SystemDrawingImageRgba32Loader().Load("sprite-133_256x128_I8.png");
             var spriteImporter = new SpriteImporter(image);
             spriteImporter.Import();
-            //sprite.ExportImage().ToImageSharp().SaveAsPng("sprite-133_I8_out.png");
-
-            var spriteBlock = Block.Load<SpriteBlockItem>(BlockDefaultFilenames.SpriteBlock);
             spriteImporter.SpriteBlockItem.Block = spriteBlock;
             spriteBlock[133] = spriteImporter.SpriteBlockItem;
+
             spriteBlock.Save(BlockDefaultFilenames.SpriteBlock);
 
             //new RoslynCodeGenerationExample();
