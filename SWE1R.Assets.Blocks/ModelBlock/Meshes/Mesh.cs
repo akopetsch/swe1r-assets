@@ -46,7 +46,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         public Vector3Single Bounds1 { get; set; } // TODO: xml comment
         /// <summary>
         /// Gets or sets the number of faces. Must be greater than zero.
-        /// <seealso cref="FacesVertexCounts"/>
+        /// <para>See also: <seealso cref="FacesVertexCounts">FacesVertexCounts</seealso></para>
         /// <para>Offset: 0x20</para>
         /// </summary>
         [Order(4)]

@@ -2,8 +2,6 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using System;
-
 namespace SWE1R.Assets.Blocks.Textures
 {
     /// <summary>

@@ -24,6 +24,10 @@ namespace FiddleApp
 
         private static int Fiddle()
         {
+            var a = ;
+            var x = (short)-10353;
+            bool c = a == x;
+
             ImageRgba32 image = new SystemDrawingImageRgba32Loader().Load("sprite-133_256x128_I8.png");
             var spriteImporter = new SpriteImporter(image);
             spriteImporter.Import();

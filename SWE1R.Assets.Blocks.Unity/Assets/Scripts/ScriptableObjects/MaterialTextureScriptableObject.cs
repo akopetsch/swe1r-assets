@@ -28,7 +28,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
         public ushort height_unk;
         public short flags;
         public short mask;
-        [SerializeReference] public MaterialTextureChildObject[] Children;
+        [SerializeReference] public MaterialTextureChildObject[] children;
         public int textureIndex;
 
         public override void Import(Swe1rMaterialTexture source, ModelImporter importer)
@@ -46,7 +46,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
             height_unk = source.Height_Unk;
             flags = source.Flags;
             mask = source.Mask;
-            Children = source.Children.Select(x => x == null ? null : importer.GetMaterialTextureChildObject(x)).ToArray();
+            children = source.Children.Select(x => x == null ? null : importer.GetMaterialTextureChildObject(x)).ToArray();
             textureIndex = source.TextureIndex.Value;
         }
 
@@ -66,7 +66,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
             result.Height_Unk = height_unk;
             result.Flags = flags;
             result.Mask = mask;
-            result.Children = Children.Select(x => x == null ? null : exporter.GetMaterialTextureChild(x)).ToArray();
+            result.Children = children.Select(x => x == null ? null : exporter.GetMaterialTextureChild(x)).ToArray();
             result.TextureIndex = textureIndex;
             return result;
         }

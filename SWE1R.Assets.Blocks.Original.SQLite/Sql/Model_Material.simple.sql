@@ -23,3 +23,19 @@ order by m;
 select P_Material, count(*) from Model_Mesh
 where Model = 115
 group by P_Material
+
+SELECT count(*) as cnt,
+    ((CASE WHEN P_Child0 != 0 THEN 1 ELSE 0 END) +
+     (CASE WHEN P_Child1 != 0 THEN 1 ELSE 0 END) +
+	   (CASE WHEN P_Child2 != 0 THEN 1 ELSE 0 END) +
+     (CASE WHEN P_Child3 != 0 THEN 1 ELSE 0 END) +
+     (CASE WHEN P_Child4 != 0 THEN 1 ELSE 0 END)) AS childrenNonNullCount
+FROM Model_MaterialTexture
+group by childrenNonNullCount
+order by childrenNonNullCount
+-- 17	  0
+-- 4488	1
+-- 4	  2
+-- 26	  5
+
+----------------------------------------------------------------------------------------------------
