@@ -8,13 +8,23 @@ using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.Metadata
 {
-    [DebuggerDisplay("{Name}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     [Table("Track")]
     public class TrackMetadata
     {
+        #region Properties (helper)
+
+        private string DebuggerDisplay => Name;
+
+        #endregion
+
+        #region Properties (serialized)
+
         [Key] public Track Id { get; set; }
         public string Name { get; set; }
         public Planet Planet { get; set; }
         public int Model { get; set; }
+
+        #endregion
     }
 }

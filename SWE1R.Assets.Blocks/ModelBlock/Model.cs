@@ -5,6 +5,8 @@
 using ByteSerialization.Attributes;
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Animations;
+using SWE1R.Assets.Blocks.ModelBlock.Materials;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 using System.Collections.Generic;
@@ -55,26 +57,57 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         #region Methods (helper - INode)
 
-        public ReadOnlyCollection<FlaggedNode> GetHeaderFlaggedNodes() =>
-            (Nodes.Select(x => x.FlaggedNode)
-            .Where(x => x != null).Distinct().ToList() ?? new List<FlaggedNode>()).AsReadOnly();
+        public IEnumerable<INode> GetHeaderFlaggedNodes() =>
+            Nodes.Select(x => x.FlaggedNode)
+            .Where(x => x != null).Distinct().Cast<INode>().ToList() ?? Enumerable.Empty<INode>();
 
-        public ReadOnlyCollection<TransformableD065> GetAnimationsTransformableD065s() =>
-            (Animations?.Select(x => x.TargetOrInteger.Target?.TransformableD065)
-            .Where(x => x != null).Distinct().ToList() ?? new List<TransformableD065>()).AsReadOnly();
+        public IEnumerable<TransformableD065> GetAnimationsTransformableD065s() =>
+            Animations?.Select(x => x.TargetOrInteger.Target?.TransformableD065)
+            .Where(x => x != null).Distinct().ToList() ?? Enumerable.Empty<TransformableD065>();
 
-        public ReadOnlyCollection<FlaggedNode> GetAltNFlaggedNodes() =>
-            (AltN?.Select(x => x.FlaggedNode)
-            .Where(x => x != null).Distinct().ToList() ?? new List<FlaggedNode>()).AsReadOnly();
+        public IEnumerable<FlaggedNode> GetAltNFlaggedNodes() =>
+            AltN?.Select(x => x.FlaggedNode)
+            .Where(x => x != null).Distinct().ToList() ?? Enumerable.Empty<FlaggedNode>();
 
         public ReadOnlyCollection<INode> GetAllNodes()
         {
-            var rootNodes = new List<FlaggedNode>();
+            var rootNodes = new List<INode>();
             rootNodes.AddRange(GetHeaderFlaggedNodes());
-            rootNodes.AddRange(GetAnimationsTransformableD065s());
+            //rootNodes.AddRange(GetAnimationsTransformableD065s()); // is contained in GetHeaderFlaggedNodes anyways
             rootNodes.AddRange(GetAltNFlaggedNodes());
             List<INode> allNodes = rootNodes.SelectMany(x => x.GetSelfAndDescendants()).ToList();
             return allNodes.AsReadOnly();
+        }
+
+        #endregion
+
+        #region Methods (helper - Material/MaterialTexture)
+
+        public ReadOnlyCollection<Material> GetMaterials() =>
+            GetAllNodes().OfType<Mesh>().Select(x => x.Material).Distinct().ToList().AsReadOnly();
+
+        public ReadOnlyCollection<MaterialTexture> GetMaterialTextures()
+        {
+            var materialTextures = new List<MaterialTexture>();
+
+            // Model.Nodes
+            materialTextures.AddRange(
+                GetMaterials().Select(x => x.Texture)
+                .Where(x => x != null));
+
+            // Model.Animations
+            if (Animations != null)
+            {
+                foreach (var animation in Animations)
+                {
+                    List<MaterialTexture> animationMaterialTextures = 
+                        animation.KeyframesOrInteger.Keyframes?.MaterialTextures;
+                    if (animationMaterialTextures != null)
+                        materialTextures.AddRange(animationMaterialTextures);
+                }
+            }
+            
+            return materialTextures.AsReadOnly();
         }
 
         #endregion

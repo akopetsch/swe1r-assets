@@ -39,8 +39,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
             //Assert.True(Value.GetAltNFlaggedNodes().All(x => headerNodesGraph.Contains(x))); // sometimes fails
 
             // Material, MaterialTexture (which are also indirectly referenced from Animation)
-            var headerNodesGraphMaterials = headerNodesGraph.OfType<Mesh>().Select(x => x.Material).ToList();
-            var headerNodesGraphMaterialTextures = headerNodesGraphMaterials.Select(x => x.Texture).Where(x => x != null).ToList();
+            var headerFlaggedNodesGraphMaterials = headerNodesGraph.OfType<Mesh>().Select(x => x.Material).ToList();
+            var headerFlaggedNodesGraphMaterialTextures = headerFlaggedNodesGraphMaterials.Select(x => x.Texture).Where(x => x != null).ToList();
             if (Value.Animations != null)
             {
                 foreach (Animation animation in Value.Animations)
@@ -54,7 +54,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
                             materials.Add(target.Material);
                         if (target.DoubleMaterial != null)
                             materials.AddRange(target.DoubleMaterial.GetMaterials().Where(x => x != null));
-                        Assert.True(materials.All(x => headerNodesGraphMaterials.Contains(x)));
+                        Assert.True(materials.All(x => headerFlaggedNodesGraphMaterials.Contains(x)));
                     }
 
                     // Keyframes property (MaterialTexture)

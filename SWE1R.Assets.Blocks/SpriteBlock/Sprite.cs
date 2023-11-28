@@ -30,7 +30,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         /// Always 0, 2 or 4.
         /// </summary>
         [Order(2)]
-        public TextureFormat TextureFormat { get; set; }
+        public TextureFormat Format { get; set; }
         /// <summary>
         /// Always 0.
         /// </summary>

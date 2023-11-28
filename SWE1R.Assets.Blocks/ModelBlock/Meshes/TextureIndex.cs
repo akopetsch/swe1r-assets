@@ -48,11 +48,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         private void SetValue(int value)
         {
-            if ((value & ~_mask) != 0)
-                throw new ArgumentException(
-                    $"The value for {nameof(Value)} must be a three-byte, two's complement integer number.", nameof(value));
             if (value == -1)
                 SerializedValue = _signature | _mask;
+            else if ((value & ~_mask) != 0)
+                throw new ArgumentException(
+                    $"The value for {nameof(Value)} must be a three-byte, two's complement integer number.", nameof(value));
             else
                 SerializedValue = _signature | value;
         }

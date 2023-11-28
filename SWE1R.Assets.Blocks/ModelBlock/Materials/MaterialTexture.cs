@@ -12,13 +12,20 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
     /// <summary>
     /// <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L241">SWR_MODEL_Section5</see>
     /// </summary>
-    [DebuggerDisplay("Id = {" + nameof(TextureIndex) + ",nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     [Sizeof(0x40)]
     public class MaterialTexture
     {
         #region Constants
 
         public const int ChildrenCount = 6;
+
+        #endregion
+
+        #region Properties (helper)
+
+        public string DebuggerDisplay =>
+            $"({nameof(Width)}={Width}, {nameof(Height)}={Height}, {nameof(TextureIndex)}={TextureIndex})";
 
         #endregion
 
@@ -47,7 +54,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         /// Always zero.
         /// </summary>
         [Order(4)] public short Always0_0a { get; set; } = 0;
-        [Order(5)] public TextureFormat TextureFormat { get; set; }
+        [Order(5)] public TextureFormat Format { get; set; }
         /// <summary>
         /// Most of the time 0 (6383 times). Sometimes 4 (28 times). 
         /// Strong positive correlation with <see cref="Mask_Unk">Mask_Unk</see>. 
@@ -91,7 +98,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         /// <summary>
         /// The original values of <see cref="Flags">Flags</see>.
         /// </summary>
-        public short[] OriginalFlagsValues = new short[] {
+        public static readonly short[] OriginalFlagsValues = new short[] {
             0,    // 28 times
             64,   // 29 times
             128,  // 270 times
@@ -105,7 +112,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         /// <summary>
         /// The original values of <see cref="Mask">Mask</see>.
         /// </summary>
-        public short[] OriginalMaskValues = new short[] {
+        public static readonly short[] OriginalMaskValues = new short[] {
             0x0007, // 1 time
             0x000f, // 10 time (does not predict special 10 textures)
             0x001f, // 6 times

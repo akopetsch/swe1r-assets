@@ -4,6 +4,7 @@
 
 using ByteSerialization.IO;
 using ByteSerialization.IO.Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -75,10 +76,13 @@ namespace SWE1R.Assets.Blocks
         #endregion
     }
 
-    [DebuggerDisplay("Count = {Count,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Block<T> : IBlock, IList<T> where T : BlockItem, new()
     {
         #region Properties
+
+        private string DebuggerDisplay =>
+            $"{nameof(Count)}={Count}";
 
         public byte[] Bytes { get; private set; }
         private List<T> Items { get; } = new List<T>();

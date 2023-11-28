@@ -11,10 +11,13 @@ namespace SWE1R.Assets.Blocks
 {
     #region Class (base)
 
-    [DebuggerDisplay("Index = {Index,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public abstract class BlockItem
     {
         #region Properties
+
+        private string DebuggerDisplay =>
+            $"{nameof(Index)}={Index}";
 
         public BlockItemPart[] Parts { get; }
         public byte[] Bytes => Parts.SelectMany(p => p.Bytes).ToArray();

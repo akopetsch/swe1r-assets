@@ -30,7 +30,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         private class PaletteLengthHelper : IBindingHelper
         {
             public int GetValue(PropertyComponent p) =>
-                p.GetAncestorValue<Sprite>().TextureFormat.GetPaletteSize();
+                p.GetAncestorValue<Sprite>().Format.GetPaletteSize();
         }
 
         #endregion

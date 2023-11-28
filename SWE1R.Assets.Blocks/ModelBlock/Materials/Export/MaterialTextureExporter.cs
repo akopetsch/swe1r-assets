@@ -53,7 +53,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Export
             // image
             var textureExporter = new TextureExporter(
                 textureBlockItem.PixelsPart.Bytes,
-                MaterialTexture.TextureFormat,
+                MaterialTexture.Format,
                 MaterialTexture.Width,
                 MaterialTexture.Height,
                 textureBlockItem.PaletteColors);

@@ -40,7 +40,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Import
             SpriteBlockItem.Sprite = new Sprite() {
                 Width = Convert.ToInt16(Image.Width),
                 Height = Convert.ToInt16(Image.Height),
-                TextureFormat = TextureFormat.RGBA5551_I8,
+                Format = TextureFormat.RGBA5551_I8,
                 Palette = ImportPalette(),
             };
             SpriteBlockItem.Sprite.Tiles = ImportTiles();

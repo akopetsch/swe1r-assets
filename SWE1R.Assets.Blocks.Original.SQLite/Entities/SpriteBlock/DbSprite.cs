@@ -33,7 +33,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
 
             Width = sprite.Width;
             Height = sprite.Height;
-            TextureFormat = (byte)sprite.TextureFormat;
+            TextureFormat = (byte)sprite.Format;
             Int16_6 = sprite.Word_6;
             P_Palette = GetPropertyPointer(node, nameof(Sprite.Palette));
             Palette_Length = sprite.Palette?.Length;

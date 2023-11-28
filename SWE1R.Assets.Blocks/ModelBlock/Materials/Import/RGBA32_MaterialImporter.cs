@@ -34,7 +34,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         {
             var mt = base.CreateMaterialTexture();
             mt.Mask_Unk = 0; // 0
-            mt.TextureFormat = TextureFormat.RGBA32;
+            mt.Format = TextureFormat.RGBA32;
             mt.Flags = 256; // 64, 128, 256 // TODO: 512?
             mt.Mask = 1023; // 511, 1023
             return mt;

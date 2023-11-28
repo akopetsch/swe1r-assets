@@ -82,7 +82,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
 
         private int GetMinimumPixelsLength(Sprite sprite, SpriteTile tile)
         {
-            int bpp = sprite.TextureFormat.GetBpp();
+            int bpp = sprite.Format.GetBpp();
             int length = (tile.Width * tile.Height * bpp) / 8;
             return length;
         }

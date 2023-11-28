@@ -6,11 +6,9 @@ using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.Textures;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
-    [DebuggerDisplay("{IdField,nq}")]
     [Table("Model_MaterialTexture")]
     public class DbMaterialTexture : DbBlockItemStructure<MaterialTexture>, IEquatable<DbMaterialTexture>
     {
@@ -46,8 +44,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             Height4 = mt.Height4;
             Always0_08 = mt.Always0_08;
             Always0_0a = mt.Always0_0a;
-            Byte_0c = mt.TextureFormat.GetByte1();
-            Byte_0d = mt.TextureFormat.GetByte2();
+            Byte_0c = mt.Format.GetByte1();
+            Byte_0d = mt.Format.GetByte2();
             Word_0e = mt.Word_0e;
             Width = mt.Width;
             Height = mt.Height;

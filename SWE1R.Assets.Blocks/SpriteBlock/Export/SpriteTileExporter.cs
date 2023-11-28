@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Export
         public SpriteTileExporter(SpriteTile spriteTile, Sprite sprite) : 
             base(
                 spriteTile.PixelsBytes, 
-                sprite.TextureFormat, 
+                sprite.Format, 
                 spriteTile.Width, 
                 spriteTile.Height, 
                 sprite.Palette?.Colors)
@@ -36,7 +36,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Export
 
         protected override int GetVirtualWidth()
         {
-            int bpp = Sprite.TextureFormat.GetBpp();
+            int bpp = Sprite.Format.GetBpp();
 
             // TODO: simplify:
             float bytesPerPixel = (float)bpp / 8;

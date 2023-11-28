@@ -37,10 +37,10 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
             //ExportGraphviz(modelBlockItem, context);
 
             new ModelFormatTesterFactory().Get(modelBlockItem.Model, context.Graph, AnalyticsFixture).Test();
-            //RunTesters<Mesh, MeshTester>(context);
-            //RunTesters<MaterialTexture, MaterialTextureTester>(context);
-            //RunTesters<MeshGroup3064, MeshGroup3064Tester>(context);
-            //AssertReferenceCounts(context);
+            RunTesters<Mesh, MeshTester>(context);
+            RunTesters<MaterialTexture, MaterialTextureTester>(context);
+            RunTesters<MeshGroup3064, MeshGroup3064Tester>(context);
+            AssertReferenceCounts(context);
         }
 
         #endregion

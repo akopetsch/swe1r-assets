@@ -2,13 +2,13 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.Original.Tests.ModelBlockFixtures;
+using SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock.ModelBlockFixtures;
 using SWE1R.Assets.Blocks.TextureBlock;
 using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock
 {
-    public class TestBase<TModelBlockFixture> where TModelBlockFixture : ModelBlockFixtureBase
+    public class TestBase<TModelBlockFixture> where TModelBlockFixture : ModelBlockTexturesFixtureBase
     {
         #region Fields
 
@@ -40,9 +40,18 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock
         {
             var textureBlock = new OriginalBlockProvider().LoadBlock<TextureBlockItem>(_blockIdName);
 
+            var materials = ModelBlockFixture.Catalog.GetMaterials(index).Select(x => x.Material).ToList();
+            var materialTextures = ModelBlockFixture.Catalog.GetMaterialTextures(index).Select(x => x.MaterialTexture).ToList();
 
-
-            Assert.True(true);
+            if (materialTextures.Count > 0)
+            {
+                var format = materialTextures.Select(x => x.Format).Distinct().Single();
+                if (index != 294 && index != 382) // TODO: hardcoded index
+                {
+                    short width = materialTextures.Select(x => x.Width).Distinct().Single();
+                    short height = materialTextures.Select(x => x.Height).Distinct().Single();
+                }
+            }
         }
 
         #endregion
