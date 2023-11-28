@@ -2,12 +2,13 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
+using SWE1R.Assets.Blocks.Original.Tests.ModelBlockFixtures;
 using SWE1R.Assets.Blocks.TextureBlock;
 using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock
 {
-    public class TestBase
+    public class TestBase<TModelBlockFixture> where TModelBlockFixture : ModelBlockFixtureBase
     {
         #region Fields
 
@@ -16,11 +17,18 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock
 
         #endregion
 
+        #region Properties
+
+        protected TModelBlockFixture ModelBlockFixture { get; }
+
+        #endregion
+
         #region Constructor
 
-        protected TestBase(ITestOutputHelper output, string blockIdName)
+        protected TestBase(TModelBlockFixture modelBlockFixture, ITestOutputHelper output, string blockIdName)
         {
             _output = output;
+            ModelBlockFixture = modelBlockFixture;
             _blockIdName = blockIdName;
         }
 

@@ -3,14 +3,15 @@
 // Refer to the included LICENSE.txt file.
 
 using SWE1R.Assets.Blocks.Metadata.IdNames;
+using SWE1R.Assets.Blocks.Original.Tests.ModelBlockFixtures;
 using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock
 {
-    public class DefaultTest : TestBase
+    public class DefaultTest : TestBase<DefaultModelBlockFixture>, IClassFixture<DefaultModelBlockFixture>
     {
-        public DefaultTest(ITestOutputHelper output) : 
-            base(output, TextureBlockIdNames.Default) { }
+        public DefaultTest(DefaultModelBlockFixture modelBlockFixture, ITestOutputHelper output) : 
+            base(modelBlockFixture, output, TextureBlockIdNames.Default) { }
 
         [Fact]
         public void Test_0000() => CompareItem(0);
