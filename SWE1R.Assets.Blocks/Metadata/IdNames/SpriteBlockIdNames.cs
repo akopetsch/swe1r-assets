@@ -10,7 +10,7 @@ namespace SWE1R.Assets.Blocks.Metadata.IdNames
     {
         public static string Default { get; } = "_default";
         public static string WinDemo { get; } = "win-demo";
-        public static string WinDe_Mac_Dc { get; } = "win_de__mac__dco";
+        public static string WinDe_Mac_Dc { get; } = "win_de__mac__dc";
         public static string N64Us { get; } = "n64_us";
         public static string N64Jp { get; } = "n64_jp";
 

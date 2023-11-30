@@ -26,6 +26,9 @@ namespace FiddleApp
 
         private static int Fiddle()
         {
+            var metadataFoo = new MetadataFoo();
+            metadataFoo.Run();
+
             var textureBlock = Block.Load<TextureBlockItem>(BlockDefaultFilenames.TextureBlock);
             var spriteBlock = Block.Load<SpriteBlockItem>(BlockDefaultFilenames.SpriteBlock);
 
