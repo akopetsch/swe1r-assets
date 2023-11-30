@@ -4,7 +4,6 @@
 
 using ByteSerialization.IO;
 using ByteSerialization.IO.Extensions;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,52 +12,8 @@ using System.Linq;
 
 namespace SWE1R.Assets.Blocks
 {
-    public interface IBlock : IEnumerable
+    public static class Block
     {
-        byte[] Bytes { get; }
-        int Count { get; }
-        byte[] Hash { get; }
-        string HashString { get; }
-        
-        void Load(string filename);
-        void Load(Stream s);
-
-        void Save(string filename);
-        void Save();
-        
-        int IndexOf(BlockItem item);
-        int PartsCount { get; }
-    }
-
-    public abstract class Block : IBlock
-    {
-        #region Properties (: IBlock)
-
-        public abstract byte[] Bytes { get; }
-
-        public abstract int Count { get; }
-
-        public abstract byte[] Hash { get; }
-
-        public abstract string HashString { get; }
-
-        public abstract int PartsCount { get; }
-
-        #endregion
-
-        #region Methods (: IBlock)
-
-        public abstract IEnumerator GetEnumerator();
-        public abstract int IndexOf(BlockItem item);
-        public abstract void Load(string filename);
-        public abstract void Load(Stream s);
-        public abstract void Save(string filename);
-        public abstract void Save();
-
-        #endregion
-
-        #region Methods (helper)
-
         public static Block<TItem> Load<TItem>(string filename) where TItem : BlockItem, new()
         {
             var block = new Block<TItem>();
@@ -72,8 +27,6 @@ namespace SWE1R.Assets.Blocks
             block.Load(stream);
             return block;
         }
-
-        #endregion
     }
 
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
@@ -99,9 +52,12 @@ namespace SWE1R.Assets.Blocks
             /* count   */ sizeof(int) + 
             /* offsets */ sizeof(int) * Count * PartsCount + 
             /* size    */ sizeof(int);
-        
+
+        public BlockItemType BlockItemType =>
+            BlockItemTypeAttributeHelper.GetBlockItemClassType(typeof(T));
+
         #endregion
-        
+
         #region Methods (load)
 
         public void Load(string filename) => 

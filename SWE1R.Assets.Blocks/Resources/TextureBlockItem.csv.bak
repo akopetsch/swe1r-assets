@@ -1,4 +1,4 @@
-BlockItemType,Id,Hash,Size1,Size2,Name
+BlockType,Id,Hash,Size1,Size2,Name
 TextureBlockItem,00000,34425221ce18c2dc9c4fad973884fa06dbb3e2e6,002048,000032,
 TextureBlockItem,00001,94b4819ed3145c4f4f5374b758fcdf2305b6d3da,002048,000032,
 TextureBlockItem,00002,65cc4b66a10b0278717da98000ba811e2f145ad0,002048,000032,

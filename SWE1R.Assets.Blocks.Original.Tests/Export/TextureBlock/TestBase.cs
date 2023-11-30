@@ -2,7 +2,6 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock.ModelBlockTexturesFixtures;
 using SWE1R.Assets.Blocks.TextureBlock;
 using Xunit.Abstractions;
@@ -42,17 +41,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock
             Block<TextureBlockItem> textureBlock = new OriginalBlockProvider().LoadBlock<TextureBlockItem>(_blockIdName);
             TextureBlockItem textureBlockItem = textureBlock[index];
 
-            MetadataProvider metadataProvider = ModelBlockFixture.MetadataProvider;
-            var metadata = metadataProvider.GetBlockItemValueByHash(textureBlockItem);
-            if (metadata == null)
-            {
-                metadata = new BlockItemMetadataByValue(textureBlockItem);
-                metadata.Id += 10000;
-                IList<BlockItemMetadataByValue> list = metadataProvider.GetBlockItemValues<TextureBlockItem>();
-                list.Add(metadata);
-                metadataProvider.Save(list); // TODO: becomes unordered due to unordered test execution
-            }
-            
             var materials = ModelBlockFixture.Catalog.GetMaterials(index).Select(x => x.Material).ToList();
             var materialTextures = ModelBlockFixture.Catalog.GetMaterialTextures(index).Select(x => x.MaterialTexture).ToList();
 

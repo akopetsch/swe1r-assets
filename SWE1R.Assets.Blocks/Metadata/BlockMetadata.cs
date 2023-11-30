@@ -10,8 +10,8 @@ namespace SWE1R.Assets.Blocks.Metadata
     [Table("Block")]
     public class BlockMetadata
     {
-        public int BlockType { get; set; }
-        [Key] public int Id { get; set; }
+        [Key, Column(Order = 0)] public BlockItemType BlockItemType { get; set; }
+        [Key, Column(Order = 1)] public int Id { get; set; }
         public string Hash { get; set; }
         public int Size { get; set; }
         public string Name { get; set; }
@@ -19,8 +19,8 @@ namespace SWE1R.Assets.Blocks.Metadata
         public BlockMetadata() { }
         public BlockMetadata(IBlock block)
         {
+            BlockItemType = block.BlockItemType;
             // Id = ?
-            //BlockType = block.Type.Value;
             Hash = block.HashString;
             Size = block.Bytes.Length;
             // Name = ?

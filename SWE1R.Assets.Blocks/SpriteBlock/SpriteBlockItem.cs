@@ -4,11 +4,11 @@
 
 using ByteSerialization;
 using ByteSerialization.IO;
-using SWE1R.Assets.Blocks.Metadata;
 using System.IO;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock
 {
+    [BlockItemType(BlockItemType.SpriteBlockItem)]
     public class SpriteBlockItem : BlockItem<SpriteBlockItemPart>
     {
         #region Properties

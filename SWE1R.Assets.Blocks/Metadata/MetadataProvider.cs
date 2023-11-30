@@ -23,7 +23,6 @@ namespace SWE1R.Assets.Blocks.Metadata
     {
         #region Fields
 
-        private const string csvFileEnding = ".csv";
         private readonly Dictionary<Type, List<BlockItemMetadataByValue>> _metadataByItemType;
 
         #endregion
@@ -108,7 +107,7 @@ namespace SWE1R.Assets.Blocks.Metadata
         {
             filenameWithoutExtension ??= GetFilenameWithoutExtension<TRecord>();
             string filename = GetFilename(filenameWithoutExtension);
-            write ??= (csv, record) => csv.WriteRecord(record);
+            write ??= WriteRecord;
             using (var writer = new StreamWriter(filename))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
@@ -120,11 +119,17 @@ namespace SWE1R.Assets.Blocks.Metadata
         }
 
         public void Save(IEnumerable<BlockItemMetadataByValue> records, string filename = null) =>
-            Save(records, filename, Write);
+            Save(records, filename, WriteRecord);
 
-        private void Write(CsvWriter csv, BlockItemMetadataByValue iv)
+        private void WriteRecord<TRecord>(CsvWriter csv, TRecord record)
         {
-            csv.WriteField(iv.BlockType);
+            csv.WriteRecord(record);
+            csv.NextRecord();
+        }
+
+        private void WriteRecord(CsvWriter csv, BlockItemMetadataByValue iv)
+        {
+            csv.WriteField(iv.BlockItemType);
             csv.WriteField($"{iv.Id:00000}");
             csv.WriteField(iv.Hash);
             csv.WriteField($"{iv.Size1:000000}");

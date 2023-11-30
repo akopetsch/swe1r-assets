@@ -4,11 +4,11 @@
 
 using ByteSerialization;
 using ByteSerialization.IO;
-using SWE1R.Assets.Blocks.Metadata;
 using System.IO;
 
 namespace SWE1R.Assets.Blocks.SplineBlock
 {
+    [BlockItemType(BlockItemType.SplineBlockItem)]
     public class SplineBlockItem : BlockItem<SplineBlockItemPart>
     {
         #region Properties

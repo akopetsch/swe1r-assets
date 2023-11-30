@@ -1,4 +1,4 @@
-BlockItemType,Id,Hash,Size1,Size2,Name
+BlockType,Id,Hash,Size1,Size2,Name
 SpriteBlockItem,00000,d5bb6c17bb514ccb87c99c0b7275f30381e66965,004644,,Avatar_Aldar_Beedo
 SpriteBlockItem,00001,5f996dc67e40d3c4d09f253491574f27663593a8,004644,,Avatar_Ben_Quadinaros
 SpriteBlockItem,00002,ff656e9d485957c09ebe7d156a4bef02ff7ba47d,004644,,Avatar_Boles_Roor

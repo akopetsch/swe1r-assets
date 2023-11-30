@@ -1,4 +1,4 @@
-BlockItemType,Id,Hash,Size1,Size2,Name
+BlockType,Id,Hash,Size1,Size2,Name
 SplineBlockItem,00000,3513af68b207fb624dfffd881222f2e20e2296f6,008668,,Trak_Baroonda_Baroo_Coast_1
 SplineBlockItem,00001,2f1e083f82be3d7a5a83106ccf29ce2c008e167c,009592,,Trak_Baroonda_Grabvine_Gateway_1
 SplineBlockItem,00002,74f3c03bcb77f84a9341bdb8329b8f749da5f085,001024,,Trak_Mon_Gaza_Speedway_1

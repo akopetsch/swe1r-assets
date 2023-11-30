@@ -1,4 +1,4 @@
-BlockItemType,Id,Hash,Size1,Size2,Name
+BlockType,Id,Hash,Size1,Size2,Name
 ModelBlockItem,00000,6789ce5574ea9a5758b07eed745027a0c35eadeb,000764,024344,MAlt_Anakin_Skywalker
 ModelBlockItem,00001,3fb276d0eaa89e97931ff3b957823bacdc8c8b68,023284,745012,Trak_Tatooine_BoontaClassic
 ModelBlockItem,00002,c8dadd4c7f5c741a8cf660157ae2bdd26275b37e,001920,061376,Podd_Anakin_Skywalker

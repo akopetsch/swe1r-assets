@@ -15,7 +15,7 @@ namespace SWE1R.Assets.Blocks.Original
             return Block.Load<TItem>(resourceStream);
         }
 
-        public string GetBlockResourcePath<TItem>(string blockIdName) where TItem : BlockItem, new()
+        private string GetBlockResourcePath<TItem>(string blockIdName) where TItem : BlockItem
         {
             string blockDefaultFilename = BlockDefaultFilenames.GetDefaultFilename<TItem>();
             string blockIdFilename = $"{blockIdName}.bin";

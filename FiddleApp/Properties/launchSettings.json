@@ -2,7 +2,7 @@
   "profiles": {
     "FiddleApp": {
       "commandName": "Project",
-      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
+      "workingDirectory": "C:\\Users\\akope\\code\\akopetsch\\swe1r-assets\\SWE1R.Assets.Blocks\\Resources"
     }
   }
 }

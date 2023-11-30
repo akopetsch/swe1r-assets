@@ -39,9 +39,6 @@ namespace SWE1R.Assets.Blocks
         public static string GetDefaultFilename<TBlockItem>() where TBlockItem : BlockItem =>
             _filenameByItemType[typeof(TBlockItem)];
 
-        public static string GetDefaultFilename(Type itemType) =>
-            _filenameByItemType[itemType];
-
         #endregion
     }
 }

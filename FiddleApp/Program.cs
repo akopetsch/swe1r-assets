@@ -18,17 +18,21 @@ namespace FiddleApp
     {
         public static int Main(string[] args)
         {
-            int result = Fiddle();
+            int result = Fiddle2();
             if (Debugger.IsAttached)
                 ConsoleUtil.PromptExit();
             return result;
         }
 
-        private static int Fiddle()
+        private static int Fiddle2()
         {
             var metadataFoo = new MetadataFoo();
             metadataFoo.Run();
+            return ExitCodes.Success;
+        }
 
+        private static int Fiddle()
+        {
             var textureBlock = Block.Load<TextureBlockItem>(BlockDefaultFilenames.TextureBlock);
             var spriteBlock = Block.Load<SpriteBlockItem>(BlockDefaultFilenames.SpriteBlock);
 

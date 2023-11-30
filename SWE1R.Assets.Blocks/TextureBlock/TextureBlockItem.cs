@@ -4,11 +4,11 @@
 
 using ByteSerialization;
 using SWE1R.Assets.Blocks.Colors;
-using SWE1R.Assets.Blocks.Metadata;
 using System;
 
 namespace SWE1R.Assets.Blocks.TextureBlock
 {
+    [BlockItemType(BlockItemType.TextureBlockItem)]
     public class TextureBlockItem : BlockItem<TextureBlockItemPixelsPart, TextureBlockItemPalettePart>
     {
         #region Properties
