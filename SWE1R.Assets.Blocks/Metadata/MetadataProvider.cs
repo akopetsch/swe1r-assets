@@ -11,7 +11,6 @@ using SWE1R.Assets.Blocks.SpriteBlock;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using System.IO;
@@ -72,7 +71,7 @@ namespace SWE1R.Assets.Blocks.Metadata
         public BlockItemMetadataByValue GetBlockItemValue<TItem>(int id) where TItem : BlockItem =>
             metadataByItemType[typeof(TItem)].FirstOrDefault(iv => iv.Id == id);
 
-        public BlockItemMetadataByValue GetBlockItemValueByValue<TItem>(TItem item) where TItem : BlockItem =>
+        public BlockItemMetadataByValue GetBlockItemValueByHash<TItem>(TItem item) where TItem : BlockItem =>
             metadataByItemType[typeof(TItem)].FirstOrDefault(iv => iv.Hash.Equals(item.HashString));
 
         public string GetNameByIndex<TItem>(TItem item) where TItem : BlockItem =>
@@ -82,7 +81,7 @@ namespace SWE1R.Assets.Blocks.Metadata
             GetBlockItemValue<TItem>(index)?.Name;
 
         public string GetNameByValue<TItem>(TItem item) where TItem : BlockItem =>
-            GetBlockItemValueByValue(item)?.Name;
+            GetBlockItemValueByHash(item)?.Name;
 
         public string GetName<TItem>(TItem item) where TItem : BlockItem =>
             GetNameByValue(item) ?? GetNameByIndex(item);
@@ -90,7 +89,7 @@ namespace SWE1R.Assets.Blocks.Metadata
         public string GetNameOrUnknown<TItem>(TItem item) where TItem : BlockItem =>
             GetName(item) ?? $"Unknown";
 
-        private ReadOnlyCollection<TRecord> GetRecords<TRecord>(string filename = null)
+        private IList<TRecord> GetRecords<TRecord>(string filename = null)
         {
             filename ??= GetFilename<TRecord>();
             var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture) {
@@ -98,24 +97,24 @@ namespace SWE1R.Assets.Blocks.Metadata
             };
             using (var reader = new StreamReader(new BlocksResourceHelper().ReadEmbeddedResource(filename)))
             using (var csv = new CsvReader(reader, csvConfig))
-                return csv.GetRecords<TRecord>().ToList().AsReadOnly();
+                return csv.GetRecords<TRecord>().ToList();//.AsReadOnly();
         }
 
-        private void Save<TRecord>(IEnumerable<TRecord> records, Action<CsvWriter, TRecord> write = null)
+        public void Save<TRecord>(IEnumerable<TRecord> records, Action<CsvWriter, TRecord> write = null)
         {
             string filename = GetFilename<TRecord>();
-            write ??= (c, t) => c.WriteRecord(t);
+            write ??= (csv, record) => csv.WriteRecord(record);
             using (var writer = new StreamWriter(filename))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
                 csv.WriteHeader<TRecord>();
                 csv.NextRecord();
-                foreach (var r in records)
-                    write.Invoke(csv, r);
+                foreach (TRecord record in records)
+                    write.Invoke(csv, record);
             }
         }
 
-        private void Save(IEnumerable<BlockItemMetadataByValue> records) =>
+        public void Save(IEnumerable<BlockItemMetadataByValue> records) =>
             Save(records, Write);
 
         private void Write(CsvWriter csv, BlockItemMetadataByValue iv)

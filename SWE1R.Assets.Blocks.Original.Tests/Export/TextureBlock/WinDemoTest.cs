@@ -8,10 +8,11 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock
 {
-    public class DefaultTest : TestBase<DefaultModelBlockTexturesFixture>, IClassFixture<DefaultModelBlockTexturesFixture>
+    public class WinDemoTest : TestBase<WinDemoModelBlockTexturesFixture>, IClassFixture<WinDemoModelBlockTexturesFixture>
     {
-        public DefaultTest(DefaultModelBlockTexturesFixture modelBlockFixture, ITestOutputHelper output) : 
-            base(modelBlockFixture, output, TextureBlockIdNames.Default) { }
+        public WinDemoTest(WinDemoModelBlockTexturesFixture modelBlockFixture, ITestOutputHelper output) :
+            base(modelBlockFixture, output, TextureBlockIdNames.WinDemo)
+        { }
 
         [Fact]
         public void Test_0000() => CompareItem(0);

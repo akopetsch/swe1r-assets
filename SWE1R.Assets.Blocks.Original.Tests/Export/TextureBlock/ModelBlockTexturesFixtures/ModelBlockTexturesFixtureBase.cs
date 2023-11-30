@@ -2,15 +2,15 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock.ModelBlockTexturesFixtures;
+using SWE1R.Assets.Blocks.Metadata;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock.ModelBlockFixtures
+namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock.ModelBlockTexturesFixtures
 {
     public abstract class ModelBlockTexturesFixtureBase : IDisposable
     {
         #region Properties
 
+        public MetadataProvider MetadataProvider { get; }
         public ModelBlockMaterialsAndMaterialTextures Catalog { get; }
 
         #endregion
@@ -19,8 +19,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock.ModelBlockFixtu
 
         public ModelBlockTexturesFixtureBase(string blockIdName)
         {
-            Block<ModelBlockItem> modelBlock = new OriginalBlockProvider().LoadBlock<ModelBlockItem>(blockIdName);
-
+            MetadataProvider = new MetadataProvider();
             Catalog = ModelBlockMaterialsAndMaterialTextures.LoadJson(blockIdName) ??
                 ModelBlockMaterialsAndMaterialTextures.Load(blockIdName);
         }
@@ -30,12 +29,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock.ModelBlockFixtu
         #region Methods (: IDisposable)
 
         public void Dispose() { }
-
-        #endregion
-
-        #region Methods
-
-        
 
         #endregion
     }

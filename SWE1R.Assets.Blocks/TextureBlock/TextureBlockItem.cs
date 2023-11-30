@@ -4,6 +4,7 @@
 
 using ByteSerialization;
 using SWE1R.Assets.Blocks.Colors;
+using SWE1R.Assets.Blocks.Metadata;
 using System;
 
 namespace SWE1R.Assets.Blocks.TextureBlock
@@ -16,6 +17,9 @@ namespace SWE1R.Assets.Blocks.TextureBlock
         public TextureBlockItemPalettePart PalettePart => Part2;
 
         public ColorRgba5551[] PaletteColors { get; set; }
+
+        public override BlockItemType BlockItemType =>
+            BlockItemType.TextureBlockItem;
 
         #endregion
 

@@ -6,10 +6,10 @@ using SWE1R.Assets.Blocks.Metadata.IdNames;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock.ModelBlockTexturesFixtures
 {
-    public class DefaultModelBlockTexturesFixture : ModelBlockTexturesFixtureBase
+    public class N64ModelBlockTexturesFixture : ModelBlockTexturesFixtureBase
     {
-        public DefaultModelBlockTexturesFixture() : 
-            base(ModelBlockIdNames.Default)
+        public N64ModelBlockTexturesFixture() : 
+            base(ModelBlockIdNames.N64Us)
         { }
     }
 }

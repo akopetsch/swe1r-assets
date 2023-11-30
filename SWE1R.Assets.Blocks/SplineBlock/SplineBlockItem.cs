@@ -4,6 +4,7 @@
 
 using ByteSerialization;
 using ByteSerialization.IO;
+using SWE1R.Assets.Blocks.Metadata;
 using System.IO;
 
 namespace SWE1R.Assets.Blocks.SplineBlock
@@ -13,6 +14,9 @@ namespace SWE1R.Assets.Blocks.SplineBlock
         #region Properties
 
         public Spline Spline { get; set; }
+
+        public override BlockItemType BlockItemType =>
+            BlockItemType.SplineBlockItem;
 
         #endregion
 

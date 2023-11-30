@@ -4,6 +4,7 @@
 
 using ByteSerialization;
 using ByteSerialization.IO.Extensions;
+using SWE1R.Assets.Blocks.Metadata;
 using System.Diagnostics;
 using System.Linq;
 
@@ -26,6 +27,8 @@ namespace SWE1R.Assets.Blocks
         
         public IBlock Block { get; set; }
         public int? Index => Block?.IndexOf(this);
+
+        public abstract BlockItemType BlockItemType { get; }
 
         #endregion
 

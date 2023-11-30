@@ -4,6 +4,7 @@
 
 using ByteSerialization;
 using ByteSerialization.IO;
+using SWE1R.Assets.Blocks.Metadata;
 using System.IO;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock
@@ -13,6 +14,9 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         #region Properties
 
         public Sprite Sprite { get; set; }
+
+        public override BlockItemType BlockItemType =>
+            BlockItemType.SpriteBlockItem;
 
         #endregion
 

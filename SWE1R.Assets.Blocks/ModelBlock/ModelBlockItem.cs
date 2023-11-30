@@ -4,6 +4,7 @@
 
 using ByteSerialization;
 using ByteSerialization.IO;
+using SWE1R.Assets.Blocks.Metadata;
 using System.IO;
 
 namespace SWE1R.Assets.Blocks.ModelBlock
@@ -15,6 +16,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         public ModelBlockItemMaskPart Bitmask => Part1;
         public ModelBlockItemDataPart Data => Part2;
         public Model Model { get; set; }
+
+        public override BlockItemType BlockItemType =>
+            BlockItemType.ModelBlockItem;
 
         #endregion
 

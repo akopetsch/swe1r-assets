@@ -2,7 +2,8 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock.ModelBlockFixtures;
+using SWE1R.Assets.Blocks.Metadata;
+using SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock.ModelBlockTexturesFixtures;
 using SWE1R.Assets.Blocks.TextureBlock;
 using Xunit.Abstractions;
 
@@ -27,8 +28,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock
 
         protected TestBase(TModelBlockFixture modelBlockFixture, ITestOutputHelper output, string blockIdName)
         {
-            _output = output;
             ModelBlockFixture = modelBlockFixture;
+            _output = output;
             _blockIdName = blockIdName;
         }
 
@@ -38,12 +39,24 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock
 
         protected void CompareItem(int index)
         {
-            var textureBlock = new OriginalBlockProvider().LoadBlock<TextureBlockItem>(_blockIdName);
+            Block<TextureBlockItem> textureBlock = new OriginalBlockProvider().LoadBlock<TextureBlockItem>(_blockIdName);
+            TextureBlockItem textureBlockItem = textureBlock[index];
 
+            MetadataProvider metadataProvider = ModelBlockFixture.MetadataProvider;
+            var metadata = metadataProvider.GetBlockItemValueByHash(textureBlockItem);
+            if (metadata == null)
+            {
+                metadata = new BlockItemMetadataByValue(textureBlockItem);
+                metadata.Id += 10000;
+                IList<BlockItemMetadataByValue> list = metadataProvider.GetBlockItemValues<TextureBlockItem>();
+                list.Add(metadata);
+                metadataProvider.Save(list); // TODO: becomes unordered due to unordered test execution
+            }
+            
             var materials = ModelBlockFixture.Catalog.GetMaterials(index).Select(x => x.Material).ToList();
             var materialTextures = ModelBlockFixture.Catalog.GetMaterialTextures(index).Select(x => x.MaterialTexture).ToList();
 
-            if (materialTextures.Count > 0)
+            if (materialTextures.Count > 0) // false 14 times
             {
                 var format = materialTextures.Select(x => x.Format).Distinct().Single();
                 if (index != 294 && index != 382) // TODO: hardcoded index
