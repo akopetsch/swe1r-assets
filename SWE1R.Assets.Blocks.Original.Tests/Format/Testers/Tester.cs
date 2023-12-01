@@ -16,8 +16,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
         public AnalyticsFixture AnalyticsFixture { get; set; }
 
         public long ValuePosition { get; private set; }
-        protected MetadataProvider MetadataProvider { get; private set; }
-
+        
         #endregion
 
         #region Constructor
@@ -29,7 +28,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
             AnalyticsFixture = analyticsFixture;
 
             ValuePosition = ByteSerializerGraph.GetValueComponent(Value).Position.Value;
-            MetadataProvider = new MetadataProvider();
         }
 
         #endregion

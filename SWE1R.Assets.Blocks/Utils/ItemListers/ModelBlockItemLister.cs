@@ -14,7 +14,7 @@ namespace SWE1R.Assets.Blocks.TestApp.ItemListers
         { }
 
         protected override string[] GetHeaderRow() =>
-            new string[] { indexColumnName, "C?", metadataIdColumnName, nameColumnName };
+            new string[] { _indexColumnName, "C?", _metadataIdColumnName, _nameColumnName };
 
         protected override string[] GetRecordRow(ModelBlockItem item) =>
             new string[] {

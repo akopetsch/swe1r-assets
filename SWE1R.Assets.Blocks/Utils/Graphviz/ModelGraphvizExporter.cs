@@ -24,8 +24,8 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
 
         protected static readonly string tab = new string(' ', 4);
 
-        protected string modelNodeName;
-        protected Dictionary<INode, string> nodeNodeNamesByNode = 
+        protected string _modelNodeName;
+        protected Dictionary<INode, string> _nodeNodeNamesByNode = 
             new Dictionary<INode, string>();
         // TODO: FIXME: use classes to pair/encapsulate data
 
@@ -53,8 +53,7 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
             ByteSerializationGraph = byteSerializationGraph;
             Suffix = suffix;
 
-            var metadataProvider = new MetadataProvider();
-            ModelName = metadataProvider.GetNameOrUnknown(modelBlockItem);
+            ModelName = new MetadataProvider().GetBlockItemValueByHash(modelBlockItem)?.Name;
 
             DotFile = new StringBuilder();
             DirectoryInfo dotDirectory = Directory.CreateDirectory("dot");
@@ -98,7 +97,7 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
                 string prefix = (node as FlaggedNode)?.Flags.ToHexString() ?? nameof(Mesh);
                 string name = $"\"{prefix}_{position}\"";
                 
-                nodeNodeNamesByNode.Add(node, name);
+                _nodeNodeNamesByNode.Add(node, name);
             }
 
             var firstFlaggedNode = ByteSerializationGraph.GetRecordComponents<FlaggedNode>()
@@ -137,7 +136,7 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
                     attributes.Add("shape", "septagon");
 
                 string attributesString = string.Join(",", attributes.Select(kvp => $"{kvp.Key}={kvp.Value}"));
-                DotFile.AppendLine($"{tab}{nodeNodeNamesByNode[node]}[{attributesString}];");
+                DotFile.AppendLine($"{tab}{_nodeNodeNamesByNode[node]}[{attributesString}];");
             }
 
             #endregion
@@ -155,33 +154,33 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
             {
                 List<INode> childNodes = flaggedNode.Children?.Where(c => c != null).ToList();
                 for (int i = 0; i < childNodes?.Count; i++)
-                    DotFile.AppendLine($"{tab}{nodeNodeNamesByNode[flaggedNode]} -> {nodeNodeNamesByNode[childNodes[i]]} [label={i}];");
+                    DotFile.AppendLine($"{tab}{_nodeNodeNamesByNode[flaggedNode]} -> {_nodeNodeNamesByNode[childNodes[i]]} [label={i}];");
             }
 
             // Header.Nodes
-            modelNodeName = model.Type.ToString();
-            DotFile.AppendLine($"{tab}{modelNodeName}[style=filled,fillcolor=red]");
+            _modelNodeName = model.Type.ToString();
+            DotFile.AppendLine($"{tab}{_modelNodeName}[style=filled,fillcolor=red]");
 
             DotFile.AppendLine($"{tab}Nodes[style=filled,fillcolor=pink];");
-            DotFile.AppendLine($"{tab}{modelNodeName} -> Nodes;");
+            DotFile.AppendLine($"{tab}{_modelNodeName} -> Nodes;");
             for (int i = 0; i < model.Nodes.Count; i++)
             {
                 FlaggedNode flaggedNode = model.Nodes[i].FlaggedNode;
                 if (flaggedNode != null)
-                    DotFile.AppendLine($"{tab}Nodes -> \"[{i}]\" -> {nodeNodeNamesByNode[flaggedNode]};");
+                    DotFile.AppendLine($"{tab}Nodes -> \"[{i}]\" -> {_nodeNodeNamesByNode[flaggedNode]};");
             }
 
             // Header.AltN
             if (model.AltN != null)
             {
                 DotFile.AppendLine($"{tab}AltN[style=filled,fillcolor=cyan];");
-                DotFile.AppendLine($"{tab}{modelNodeName} -> {nameof(Model.AltN)}");
+                DotFile.AppendLine($"{tab}{_modelNodeName} -> {nameof(Model.AltN)}");
 
                 for (int i = 0; i < model.AltN.Count; i++)
                 {
                     FlaggedNodeOrGroup5066ChildReference alt = model.AltN[i];
                     FlaggedNode flaggedNode = alt.Group5066ChildReference?.Group5066 ?? alt.FlaggedNode;
-                    DotFile.AppendLine($"{tab}{nameof(Model.AltN)} -> \"{nameof(Model.AltN)}[{i}]\" -> {nodeNodeNamesByNode[flaggedNode]};");
+                    DotFile.AppendLine($"{tab}{nameof(Model.AltN)} -> \"{nameof(Model.AltN)}[{i}]\" -> {_nodeNodeNamesByNode[flaggedNode]};");
                 }
             }
         }

@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
 
         public DbSet<BlockMetadata> Blocks { get; set; }
         public DbSet<BlockItemMetadata> BlockItems { get; set; }
-        public DbSet<BlockItemMetadataByValue> BlockItemValues { get; set; }
+        public DbSet<BlockItemValueMetadata> BlockItemValues { get; set; }
 
         #endregion
 

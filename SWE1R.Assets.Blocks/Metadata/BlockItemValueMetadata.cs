@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Metadata
 {
     [Table("BlockItemValue")]
-    public class BlockItemMetadataByValue
+    public class BlockItemValueMetadata
     {
         [Key, Column(Order = 0)] public BlockItemType BlockItemType { get; set; }
         [Key, Column(Order = 1)] public int Id { get; set; }
@@ -17,8 +17,8 @@ namespace SWE1R.Assets.Blocks.Metadata
         public int? Size2 { get; set; }
         public string Name { get; set; }
 
-        public BlockItemMetadataByValue() { }
-        public BlockItemMetadataByValue(BlockItem item)
+        public BlockItemValueMetadata() { }
+        public BlockItemValueMetadata(BlockItem item)
         {
             BlockItemType = item.BlockItemType;
             Id = item.Index.Value;

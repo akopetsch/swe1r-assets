@@ -9,8 +9,8 @@ using System.Diagnostics;
 namespace SWE1R.Assets.Blocks.Metadata
 {
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
-    [Table("Track")]
-    public class TrackMetadata
+    [Table("Release")]
+    public class ReleaseMetadata
     {
         #region Properties (helper)
 
@@ -18,13 +18,11 @@ namespace SWE1R.Assets.Blocks.Metadata
 
         #endregion
 
-        #region Properties
-
-        [Key] public Track Id { get; set; }
+        [Key] public int Id { get; set; }
         public string Name { get; set; }
-        public Planet Planet { get; set; }
-        public int Model { get; set; }
-
-        #endregion
+        public int ModelBlockId { get; set; }
+        public int SplineBlockId { get; set; }
+        public int SpriteBlockId { get; set; }
+        public int TextureBlockId { get; set; }
     }
 }

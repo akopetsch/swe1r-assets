@@ -23,7 +23,7 @@ namespace SWE1R.Assets.Blocks.Metadata
     {
         #region Fields
 
-        private readonly Dictionary<Type, List<BlockItemMetadataByValue>> _metadataByItemType;
+        private readonly Dictionary<Type, List<BlockItemValueMetadata>> _metadataByItemType;
 
         #endregion
 
@@ -45,47 +45,32 @@ namespace SWE1R.Assets.Blocks.Metadata
             Racers = Load<RacerMetadata>();
             Tracks = Load<TrackMetadata>();
 
-            _metadataByItemType = new Dictionary<Type, List<BlockItemMetadataByValue>>();
-            _metadataByItemType[typeof(ModelBlockItem)] = Load<BlockItemMetadataByValue>(typeof(ModelBlockItem).Name);
-            _metadataByItemType[typeof(SplineBlockItem)] = Load<BlockItemMetadataByValue>(typeof(SplineBlockItem).Name);
-            _metadataByItemType[typeof(SpriteBlockItem)] = Load<BlockItemMetadataByValue>(typeof(SpriteBlockItem).Name);
-            _metadataByItemType[typeof(TextureBlockItem)] = Load<BlockItemMetadataByValue>(typeof(TextureBlockItem).Name);
+            _metadataByItemType = new Dictionary<Type, List<BlockItemValueMetadata>>();
+            _metadataByItemType[typeof(ModelBlockItem)] = Load<BlockItemValueMetadata>(typeof(ModelBlockItem).Name);
+            _metadataByItemType[typeof(SplineBlockItem)] = Load<BlockItemValueMetadata>(typeof(SplineBlockItem).Name);
+            _metadataByItemType[typeof(SpriteBlockItem)] = Load<BlockItemValueMetadata>(typeof(SpriteBlockItem).Name);
+            _metadataByItemType[typeof(TextureBlockItem)] = Load<BlockItemValueMetadata>(typeof(TextureBlockItem).Name);
         }
 
         #endregion
 
         #region Methods
 
-        public BlockItemMetadata GetBlockItem(int blockId, int id) =>
-            BlockItems.FirstOrDefault(i => i.Block == blockId && i.Index == id);
+        public BlockMetadata GetBlockByHash(IBlock block) =>
+            Blocks.Single(x => x.Hash.Equals(block.HashString));
 
-        public List<BlockItemMetadataByValue> GetBlockItemValues<TItem>() where TItem : BlockItem =>
-            _metadataByItemType[typeof(TItem)];
+        public List<BlockItemValueMetadata> GetBlockItemValues<TItem>() where TItem : BlockItem =>
+            GetBlockItemValues(typeof(TItem));
 
-        public BlockItemMetadataByValue GetBlockItemValue<TItem>(int id) where TItem : BlockItem =>
-            _metadataByItemType[typeof(TItem)].FirstOrDefault(iv => iv.Id == id);
+        public List<BlockItemValueMetadata> GetBlockItemValues(Type itemType) =>
+            _metadataByItemType[itemType];
 
-        public BlockItemMetadataByValue GetBlockItemValueByHash<TItem>(TItem item) where TItem : BlockItem =>
-            _metadataByItemType[typeof(TItem)].FirstOrDefault(iv => iv.Hash.Equals(item.HashString));
+        public BlockItemValueMetadata GetBlockItemValueByHash(BlockItem blockItem) =>
+            GetBlockItemValueByHash(blockItem.GetType(), blockItem.HashString);
 
-        #endregion
-
-        #region Methods (name)
-
-        public string GetNameByIndex<TItem>(TItem item) where TItem : BlockItem =>
-            GetBlockItemValue<TItem>(item.Index.Value)?.Name;
-
-        public string GetNameByIndex<TItem>(int index) where TItem : BlockItem =>
-            GetBlockItemValue<TItem>(index)?.Name;
-
-        public string GetNameByValue<TItem>(TItem item) where TItem : BlockItem =>
-            GetBlockItemValueByHash(item)?.Name;
-
-        public string GetName<TItem>(TItem item) where TItem : BlockItem =>
-            GetNameByValue(item) ?? GetNameByIndex(item);
-
-        public string GetNameOrUnknown<TItem>(TItem item) where TItem : BlockItem =>
-            GetName(item) ?? $"Unknown";
+        private BlockItemValueMetadata GetBlockItemValueByHash(Type blockItemType, string hashString) =>
+            GetBlockItemValues(blockItemType)
+                .SingleOrDefault(x => x.Hash.Equals(hashString));
 
         #endregion
 
@@ -118,7 +103,7 @@ namespace SWE1R.Assets.Blocks.Metadata
             }
         }
 
-        public void Save(IEnumerable<BlockItemMetadataByValue> records, string filename = null) =>
+        public void Save(IEnumerable<BlockItemValueMetadata> records, string filename = null) =>
             Save(records, filename, WriteRecord);
 
         private void WriteRecord<TRecord>(CsvWriter csv, TRecord record)
@@ -127,7 +112,7 @@ namespace SWE1R.Assets.Blocks.Metadata
             csv.NextRecord();
         }
 
-        private void WriteRecord(CsvWriter csv, BlockItemMetadataByValue iv)
+        private void WriteRecord(CsvWriter csv, BlockItemValueMetadata iv)
         {
             csv.WriteField(iv.BlockItemType);
             csv.WriteField($"{iv.Id:00000}");

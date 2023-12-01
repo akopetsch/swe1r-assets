@@ -26,7 +26,7 @@ namespace FiddleApp
 
         private static int Fiddle2()
         {
-            var metadataFoo = new MetadataFoo();
+            var metadataFoo = new MetadataCsvBuilder();
             metadataFoo.Run();
             return ExitCodes.Success;
         }

@@ -13,17 +13,19 @@ namespace SWE1R.Assets.Blocks.Metadata
         [Key, Column(Order = 0)] public BlockItemType BlockItemType { get; set; }
         [Key, Column(Order = 1)] public int Id { get; set; }
         public string Hash { get; set; }
+        public int Count { get; set; }
         public int Size { get; set; }
         public string Name { get; set; }
 
         public BlockMetadata() { }
-        public BlockMetadata(IBlock block)
+        public BlockMetadata(IBlock block, int id, string name)
         {
             BlockItemType = block.BlockItemType;
-            // Id = ?
+            Id = id;
             Hash = block.HashString;
+            Count = block.Count;
             Size = block.Bytes.Length;
-            // Name = ?
+            Name = name;
         }
     }
 }

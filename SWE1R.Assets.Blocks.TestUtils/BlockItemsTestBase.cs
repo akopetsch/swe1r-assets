@@ -11,9 +11,9 @@ namespace SWE1R.Assets.Blocks.TestUtils
     {
         #region Fields
 
-        private readonly BlockItemDumper inputItemDumper;
-        private readonly BlockItemDumper outputItemDumper;
-        protected readonly MetadataProvider metadataProvider;
+        private readonly BlockItemDumper _inputItemDumper;
+        private readonly BlockItemDumper _outputItemDumper;
+        private readonly MetadataProvider _metadataProvider;
 
         #endregion
 
@@ -30,9 +30,9 @@ namespace SWE1R.Assets.Blocks.TestUtils
             Block = block;
 
             string dumpPath = Path.Combine("dump", GetType().FullName);
-            inputItemDumper = new BlockItemDumper(dumpPath, "in");
-            outputItemDumper = new BlockItemDumper(dumpPath, "out");
-            metadataProvider = new MetadataProvider();
+            _inputItemDumper = new BlockItemDumper(dumpPath, "in");
+            _outputItemDumper = new BlockItemDumper(dumpPath, "out");
+            _metadataProvider = new MetadataProvider();
         }
 
         #endregion
@@ -66,14 +66,14 @@ namespace SWE1R.Assets.Blocks.TestUtils
         {
             // dump/print
             TItem item = Block[i];
-            inputItemDumper.DumpItemPartsBytes(item, i);
-            PrintItemName($"name {metadataProvider.GetNameByValue(item)}");
+            _inputItemDumper.DumpItemPartsBytes(item, i);
+            PrintItemName($"name {_metadataProvider.GetBlockItemValueByHash(item).Name}");
 
             // load
             item.Load(out context);
 
             // dump
-            inputItemDumper.DumpItemLog(context, i);
+            _inputItemDumper.DumpItemLog(context, i);
 
             return item;
         }
@@ -84,8 +84,8 @@ namespace SWE1R.Assets.Blocks.TestUtils
             item.Save(out context);
 
             // dump
-            outputItemDumper.DumpItemPartsBytes(item, i);
-            outputItemDumper.DumpItemLog(context, i);
+            _outputItemDumper.DumpItemPartsBytes(item, i);
+            _outputItemDumper.DumpItemLog(context, i);
         }
 
         protected abstract void PrintItemIndex(int index);

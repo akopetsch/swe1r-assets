@@ -20,7 +20,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
         {
             base.Init(value, byteSerializerGraph, analyticsFixture);
             base.Test();
-            _trackMetadata = MetadataProvider.Tracks.First(t => t.Model == Value.BlockItem.Index.Value);
+            _trackMetadata = new MetadataProvider().Tracks.First(t => t.Model == Value.BlockItem.Index.Value);
         }
 
         public override void Test()
