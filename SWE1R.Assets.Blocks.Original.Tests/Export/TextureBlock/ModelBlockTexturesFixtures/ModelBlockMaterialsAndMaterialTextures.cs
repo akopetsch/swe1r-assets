@@ -68,7 +68,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock.ModelBlockTextu
         {
             var result = new ModelBlockMaterialsAndMaterialTextures();
 
-            Block<ModelBlockItem> modelBlock = new OriginalBlocksProvider().LoadBlock<ModelBlockItem>(blockIdName);
+            Block<ModelBlockItem> modelBlock = new OriginalBlocksProvider().GetBlock<ModelBlockItem>(blockIdName);
 
             // load Material, MaterialTexture
             foreach (ModelBlockItem modelBlockItem in modelBlock)

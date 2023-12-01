@@ -3,7 +3,6 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization;
-using SWE1R.Assets.Blocks.Metadata.IdNames;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
 using SWE1R.Assets.Blocks.Original.TestUtils;
@@ -32,7 +31,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
             AssetsDbContextFixture assetsDbContextFixture, 
             OriginalBlocksProviderFixture originalBlocksProviderFixture, 
             ITestOutputHelper output) : 
-            base(originalBlocksProviderFixture.OriginalBlocksProvider.GetBlock<ModelBlockItem>(ModelBlockIdNames.Default))
+            base()
         {
             _assetsDbContextFixture = assetsDbContextFixture;
             _originalBlocksProviderFixture = originalBlocksProviderFixture;
@@ -42,6 +41,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
         #endregion
 
         #region Methods (: BlockItemsTestBase)
+
+        protected override ModelBlockItem GetItem(int valueId) =>
+            _originalBlocksProviderFixture.OriginalBlocksProvider.GetBlockItem<ModelBlockItem>(valueId);
 
         protected override void CompareItemInternal(int index)
         {
@@ -56,7 +58,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
             Assert.Equal(fromDatabase, deserialized);
         }
 
-        protected override void PrintItemIndex(int index) { }
+        protected override void PrintItemValueId(int index) { }
 
         protected override void PrintItemName(string nameString) => 
             _output.WriteLine(nameString);

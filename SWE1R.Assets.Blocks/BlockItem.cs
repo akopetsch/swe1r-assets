@@ -64,7 +64,7 @@ namespace SWE1R.Assets.Blocks
 
         public abstract BlockItem Clone();
 
-        public static string GetIndexString(int index) => $"{index:d4}";
+        public static string GetIndexString(int index) => $"{index:d5}";
 
         #endregion
     }

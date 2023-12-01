@@ -4,6 +4,7 @@
 
 using ByteSerialization;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
+using SWE1R.Assets.Blocks.Original.TestUtils;
 using SWE1R.Assets.Blocks.TestUtils;
 using System.Diagnostics;
 using Xunit.Abstractions;
@@ -11,22 +12,29 @@ using Xunit.Abstractions;
 namespace SWE1R.Assets.Blocks.Original.Tests.Format
 {
     public abstract class BlockItemsFormatTestBase<TBlockItem> : 
-        BlockItemsTestBase<TBlockItem>, IClassFixture<AnalyticsFixture>
+        BlockItemsTestBase<TBlockItem>, 
+        IClassFixture<AnalyticsFixture>,
+        IClassFixture<OriginalBlocksProviderFixture>
         where TBlockItem : BlockItem, new()
     {
         #region Properties
 
         protected AnalyticsFixture AnalyticsFixture { get; }
+        protected OriginalBlocksProviderFixture OriginalBlocksProviderFixture { get; }
         protected ITestOutputHelper Output { get; }
 
         #endregion
 
         #region Constructor
 
-        public BlockItemsFormatTestBase(AnalyticsFixture analyticsFixture, ITestOutputHelper output, string blockIdName) :
-            base(new OriginalBlocksProvider().LoadBlock<TBlockItem>(blockIdName))
+        public BlockItemsFormatTestBase(
+            AnalyticsFixture analyticsFixture, 
+            OriginalBlocksProviderFixture originalBlocksProviderFixture, 
+            ITestOutputHelper output) :
+            base()
         {
             AnalyticsFixture = analyticsFixture;
+            OriginalBlocksProviderFixture = originalBlocksProviderFixture;
             Output = output;
         }
 
@@ -34,7 +42,10 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
 
         #region Methods (: BlockItemsTestBase)
 
-        protected override void PrintItemIndex(int index) =>
+        protected override TBlockItem GetItem(int valueId) =>
+            OriginalBlocksProviderFixture.OriginalBlocksProvider.GetBlockItem<TBlockItem>(valueId);
+
+        protected override void PrintItemValueId(int index) =>
             Debug.WriteLine(BlockItem.GetIndexString(index));
 
         protected override void PrintItemName(string nameString) =>

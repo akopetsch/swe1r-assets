@@ -5,6 +5,7 @@
 using ByteSerialization;
 using SixLabors.ImageSharp;
 using SWE1R.Assets.Blocks.Images.ImageSharp;
+using SWE1R.Assets.Blocks.Original.TestUtils;
 using SWE1R.Assets.Blocks.SpriteBlock;
 using SWE1R.Assets.Blocks.SpriteBlock.Export;
 using SWE1R.Assets.Blocks.Textures;
@@ -14,12 +15,18 @@ using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
 {
-    public class SpriteBlockItemFormatTestBase : BlockItemsFormatTestBase<SpriteBlockItem>
+    public class SpriteBlockItemFormatTest : BlockItemsFormatTestBase<SpriteBlockItem>
     {
         #region Constructor
 
-        public SpriteBlockItemFormatTestBase(AnalyticsFixture analyticsFixture, ITestOutputHelper output, string blockIdName) :
-            base(analyticsFixture, output, blockIdName)
+        public SpriteBlockItemFormatTest(
+            AnalyticsFixture analyticsFixture,
+            OriginalBlocksProviderFixture originalBlocksProviderFixture,
+            ITestOutputHelper output) :
+            base(
+                analyticsFixture, 
+                originalBlocksProviderFixture, 
+                output)
         { }
 
         #endregion
@@ -96,7 +103,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
         private bool HasSpecialDimensions(SpriteTile tile) =>
             !MathUtil.IsPowerOfTwo(tile.Width) ||
             !MathUtil.IsPowerOfTwo(tile.Height);
-
+        
         #endregion
     }
 }

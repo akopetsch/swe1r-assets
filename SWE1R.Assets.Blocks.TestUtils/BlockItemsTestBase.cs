@@ -17,18 +17,10 @@ namespace SWE1R.Assets.Blocks.TestUtils
 
         #endregion
 
-        #region Properties
-
-        public Block<TItem> Block { get; }
-
-        #endregion
-
         #region Constructor
 
-        protected BlockItemsTestBase(Block<TItem> block)
+        protected BlockItemsTestBase()
         {
-            Block = block;
-
             string dumpPath = Path.Combine("dump", GetType().FullName);
             _inputItemDumper = new BlockItemDumper(dumpPath, "in");
             _outputItemDumper = new BlockItemDumper(dumpPath, "out");
@@ -39,56 +31,49 @@ namespace SWE1R.Assets.Blocks.TestUtils
 
         #region Methods
 
-        public void CompareItems(params int[] indices)
-        {
-            if (indices.Length == 0)
-                indices = Enumerable.Range(0, Block.Count).ToArray();
+        protected abstract TItem GetItem(int valueId);
 
-            foreach (int index in indices)
-                CompareItem(index);
-        }
-
-        protected void CompareItem(int index)
+        protected void CompareItem(int valueId)
         {
             // print
-            PrintItemIndex(index);
+            PrintItemValueId(valueId);
 
             // compare
-            CompareItemInternal(index);
+            CompareItemInternal(valueId);
 
             // print
             PrintItemDone();
         }
 
-        protected abstract void CompareItemInternal(int index);
+        protected abstract void CompareItemInternal(int valueId);
 
-        protected TItem DeserializeItem(int i, out ByteSerializerContext context)
+        protected TItem DeserializeItem(int valueId, out ByteSerializerContext context)
         {
             // dump/print
-            TItem item = Block[i];
-            _inputItemDumper.DumpItemPartsBytes(item, i);
+            TItem item = GetItem(valueId);
+            _inputItemDumper.DumpItemPartsBytes(item, valueId);
             PrintItemName($"name {_metadataProvider.GetBlockItemValueByHash(item).Name}");
 
             // load
             item.Load(out context);
 
             // dump
-            _inputItemDumper.DumpItemLog(context, i);
+            _inputItemDumper.DumpItemLog(context, valueId);
 
             return item;
         }
 
-        protected void SerializeItem(TItem item, int i, out ByteSerializerContext context)
+        protected void SerializeItem(TItem item, int valueId, out ByteSerializerContext context)
         {
             // save
             item.Save(out context);
 
             // dump
-            _outputItemDumper.DumpItemPartsBytes(item, i);
-            _outputItemDumper.DumpItemLog(context, i);
+            _outputItemDumper.DumpItemPartsBytes(item, valueId);
+            _outputItemDumper.DumpItemLog(context, valueId);
         }
 
-        protected abstract void PrintItemIndex(int index);
+        protected abstract void PrintItemValueId(int valueId);
         protected abstract void PrintItemName(string nameString);
         protected abstract void PrintItemDone();
 

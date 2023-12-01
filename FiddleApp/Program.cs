@@ -5,12 +5,11 @@
 using SWE1R.Assets.Blocks;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.Images.SystemDrawing;
+using SWE1R.Assets.Blocks.Metadata.IdNames;
 using SWE1R.Assets.Blocks.SpriteBlock;
 using SWE1R.Assets.Blocks.SpriteBlock.Import;
-using SWE1R.Assets.Blocks.TextureBlock;
 using SWE1R.Assets.Blocks.Utils;
 using System.Diagnostics;
-using System.Text;
 
 namespace FiddleApp
 {
@@ -40,14 +39,7 @@ namespace FiddleApp
 
         private static int Fiddle()
         {
-            var textureBlock = Block.Load<TextureBlockItem>(BlockDefaultFilenames.TextureBlock);
-            var spriteBlock = Block.Load<SpriteBlockItem>(BlockDefaultFilenames.SpriteBlock);
-
-            var sb = new StringBuilder();
-            int[] indices = Enumerable.Range(0, textureBlock.Count).ToArray();
-            foreach (int index in indices)
-                sb.AppendLine($"        [Fact]\r\n        public void Test_{index:d5}() => CompareItem({index});");
-            var s = sb.ToString();
+            var spriteBlock = Block.Load<SpriteBlockItem>(SpriteBlockIdNames.Default);
 
             // import sprite
             ImageRgba32 image = new SystemDrawingImageRgba32Loader().Load("sprite-133_256x128_I8.png");

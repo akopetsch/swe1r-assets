@@ -9,20 +9,20 @@ namespace SWE1R.Assets.Blocks.TestUtils
     public abstract class BlockItemsReserializationTestBase<TItem> :
         BlockItemsTestBase<TItem> where TItem : BlockItem, new()
     {
-        protected BlockItemsReserializationTestBase(Block<TItem> block) : base(block) { }
+        protected BlockItemsReserializationTestBase() : base() { }
 
         protected override void CompareItemInternal(int i)
         {
             // deserialize
-            TItem model = DeserializeItem(i, out ByteSerializerContext inContext);
-            byte[][] inputPartsBytes = model.Parts.Select(p => p.Bytes.ToArray()).ToArray();
+            TItem item = DeserializeItem(i, out ByteSerializerContext inContext);
+            byte[][] inputPartsBytes = item.Parts.Select(p => p.Bytes.ToArray()).ToArray();
 
             // re-serialize
-            SerializeItem(model, i, out ByteSerializerContext outContext);
-            byte[][] outputPartsBytes = model.Parts.Select(p => p.Bytes.ToArray()).ToArray();
+            SerializeItem(item, i, out ByteSerializerContext outContext);
+            byte[][] outputPartsBytes = item.Parts.Select(p => p.Bytes.ToArray()).ToArray();
 
             // compare
-            for (int p = 0; p < model.Parts.Length; p++)
+            for (int p = 0; p < item.Parts.Length; p++)
             {
                 byte[] inputBytes = inputPartsBytes[p];
                 byte[] outputBytes = outputPartsBytes[p];

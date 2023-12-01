@@ -8,22 +8,29 @@ using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
-using SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models;
 using SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Materials;
 using SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes;
+using SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models;
 using SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Nodes;
+using SWE1R.Assets.Blocks.Original.TestUtils;
 using SWE1R.Assets.Blocks.Utils.Graphviz;
 using SWE1R.Assets.Blocks.Vectors;
 using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock
 {
-    public abstract class ModelBlockItemFormatTestBase : BlockItemsFormatTestBase<ModelBlockItem>
+    public abstract class ModelBlockItemFormatTest : BlockItemsFormatTestBase<ModelBlockItem>
     {
         #region Constructor
 
-        public ModelBlockItemFormatTestBase(AnalyticsFixture analyticsFixture, ITestOutputHelper output, string blockIdName) :
-            base(analyticsFixture, output, blockIdName)
+        public ModelBlockItemFormatTest(
+            AnalyticsFixture analyticsFixture, 
+            OriginalBlocksProviderFixture originalBlocksProviderFixture, 
+            ITestOutputHelper output) :
+            base(
+                analyticsFixture, 
+                originalBlocksProviderFixture, 
+                output)
         { }
 
         #endregion

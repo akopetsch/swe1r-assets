@@ -10,6 +10,7 @@ namespace SWE1R.Assets.Blocks.Original
 {
     public class OriginalBlocksProvider
     {
+        private readonly MetadataProvider _metadataProvider = new ();
         private readonly Dictionary<(BlockItemType, string), IBlock> _blocks = new();
 
         public void Init()
@@ -25,9 +26,8 @@ namespace SWE1R.Assets.Blocks.Original
 
         public TItem GetBlockItem<TItem>(int valueId) where TItem : BlockItem, new()
         {
-            var metadataProvider = new MetadataProvider();
-            BlockItemMetadata blockItemMetadata = metadataProvider.GetBlockItem<TItem>(valueId);
-            BlockMetadata blockMetadata = metadataProvider.GetBlock(blockItemMetadata);
+            BlockItemMetadata blockItemMetadata = _metadataProvider.GetBlockItem<TItem>(valueId);
+            BlockMetadata blockMetadata = _metadataProvider.GetBlock(blockItemMetadata);
             Block<TItem> block = GetBlock<TItem>(blockMetadata.Name);
             return block[blockItemMetadata.Index];
         }
