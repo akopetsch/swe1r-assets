@@ -29,6 +29,7 @@ namespace SWE1R.Assets.Blocks.Metadata
 
         #region Properties
 
+        public List<ReleaseMetadata> Releases { get; }
         public List<BlockMetadata> Blocks { get; }
         public List<BlockItemMetadata> BlockItems { get; }
         public List<RacerMetadata> Racers { get; }
@@ -40,10 +41,12 @@ namespace SWE1R.Assets.Blocks.Metadata
 
         public MetadataProvider()
         {
-            Blocks = Load<BlockMetadata>();
-            BlockItems = Load<BlockItemMetadata>();
+            Releases = Load<ReleaseMetadata>();
             Racers = Load<RacerMetadata>();
             Tracks = Load<TrackMetadata>();
+
+            Blocks = Load<BlockMetadata>();
+            BlockItems = Load<BlockItemMetadata>();
 
             _metadataByItemType = new Dictionary<Type, List<BlockItemValueMetadata>>();
             _metadataByItemType[typeof(ModelBlockItem)] = Load<BlockItemValueMetadata>(typeof(ModelBlockItem).Name);
@@ -54,10 +57,33 @@ namespace SWE1R.Assets.Blocks.Metadata
 
         #endregion
 
-        #region Methods
+        #region Methods (BlockMetadata)
 
         public BlockMetadata GetBlockByHash(IBlock block) =>
             Blocks.Single(x => x.Hash.Equals(block.HashString));
+
+        public BlockMetadata GetBlock(BlockItemMetadata blockItemMetadata) =>
+            Blocks.SingleOrDefault(x =>
+                x.BlockItemType == blockItemMetadata.BlockItemType &&
+                x.Id == blockItemMetadata.BlockId);
+
+        #endregion
+
+        #region Methods (BlockItemMetadata)
+
+        public IEnumerable<BlockItemMetadata> GetBlockItems<TItem>() where TItem : BlockItem
+        {
+            BlockItemType blockItemType =
+                BlockItemTypeAttributeHelper.GetBlockItemType(typeof(TItem));
+            return BlockItems.Where(x => x.BlockItemType == blockItemType);
+        }
+
+        public BlockItemMetadata GetBlockItem<TItem>(int valueId) where TItem : BlockItem =>
+            GetBlockItems<TItem>().FirstOrDefault(x => x.ValueId == valueId);
+
+        #endregion
+
+        #region Methods (BlockItemValueMetadata)
 
         public List<BlockItemValueMetadata> GetBlockItemValues<TItem>() where TItem : BlockItem =>
             GetBlockItemValues(typeof(TItem));

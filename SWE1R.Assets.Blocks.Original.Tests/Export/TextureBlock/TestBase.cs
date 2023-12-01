@@ -38,7 +38,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Export.TextureBlock
 
         protected void CompareItem(int index)
         {
-            Block<TextureBlockItem> textureBlock = new OriginalBlockProvider().LoadBlock<TextureBlockItem>(_blockIdName);
+            Block<TextureBlockItem> textureBlock = new OriginalBlocksProvider().LoadBlock<TextureBlockItem>(_blockIdName);
             TextureBlockItem textureBlockItem = textureBlock[index];
 
             var materials = ModelBlockFixture.Catalog.GetMaterials(index).Select(x => x.Material).ToList();

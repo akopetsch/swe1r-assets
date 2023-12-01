@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SWE1R.Assets.Blocks.Original.SQLite\SWE1R.Assets.Blocks.Original.SQLite.csproj" />
+    <ProjectReference Include="..\SWE1R.Assets.Blocks.Original.TestUtils\SWE1R.Assets.Blocks.Original.TestUtils.csproj" />
     <ProjectReference Include="..\SWE1R.Assets.Blocks.TestUtils\SWE1R.Assets.Blocks.TestUtils.csproj" />
   </ItemGroup>
 

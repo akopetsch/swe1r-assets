@@ -2,11 +2,6 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.SplineBlock;
-using SWE1R.Assets.Blocks.SpriteBlock;
-using SWE1R.Assets.Blocks.TextureBlock;
-using System;
 using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks
@@ -15,29 +10,29 @@ namespace SWE1R.Assets.Blocks
     {
         #region Fields
 
-        private static Dictionary<Type, string> _filenameByItemType = new Dictionary<Type, string>()
+        private static Dictionary<BlockItemType, string> _filenameByItemType = new Dictionary<BlockItemType, string>()
         {
-            { typeof(ModelBlockItem), "out_modelblock.bin" },
-            { typeof(SplineBlockItem), "out_splineblock.bin" },
-            { typeof(SpriteBlockItem), "out_spriteblock.bin" },
-            { typeof(TextureBlockItem), "out_textureblock.bin" },
+            { BlockItemType.ModelBlockItem, "out_modelblock.bin" },
+            { BlockItemType.SplineBlockItem, "out_splineblock.bin" },
+            { BlockItemType.SpriteBlockItem, "out_spriteblock.bin" },
+            { BlockItemType.TextureBlockItem, "out_textureblock.bin" },
         };
 
         #endregion
 
         #region Properties
 
-        public static string ModelBlock { get; } = GetDefaultFilename<ModelBlockItem>();
-        public static string SplineBlock { get; } = GetDefaultFilename<SplineBlockItem>();
-        public static string SpriteBlock { get; } = GetDefaultFilename<SpriteBlockItem>();
-        public static string TextureBlock { get; } = GetDefaultFilename<TextureBlockItem>();
+        public static string ModelBlock { get; } = GetDefaultFilename(BlockItemType.ModelBlockItem);
+        public static string SplineBlock { get; } = GetDefaultFilename(BlockItemType.SplineBlockItem);
+        public static string SpriteBlock { get; } = GetDefaultFilename(BlockItemType.SpriteBlockItem);
+        public static string TextureBlock { get; } = GetDefaultFilename(BlockItemType.TextureBlockItem);
 
         #endregion
 
         #region Methods
 
-        public static string GetDefaultFilename<TBlockItem>() where TBlockItem : BlockItem =>
-            _filenameByItemType[typeof(TBlockItem)];
+        public static string GetDefaultFilename(BlockItemType blockItemType) =>
+            _filenameByItemType[blockItemType];
 
         #endregion
     }

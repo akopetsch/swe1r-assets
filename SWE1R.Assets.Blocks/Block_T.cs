@@ -37,7 +37,7 @@ namespace SWE1R.Assets.Blocks
             /* size    */ sizeof(int);
 
         public BlockItemType BlockItemType =>
-            BlockItemTypeAttributeHelper.GetBlockItemClassType(typeof(T));
+            BlockItemTypeAttributeHelper.GetBlockItemType(typeof(T));
 
         #endregion
 

@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks
         private static readonly ConcurrentDictionary<Type, BlockItemType> _dictionary =
             new ConcurrentDictionary<Type, BlockItemType>();
 
-        public static BlockItemType GetBlockItemClassType(Type blockItemClassType) =>
+        public static BlockItemType GetBlockItemType(Type blockItemClassType) =>
             _dictionary.GetOrAdd(blockItemClassType, 
                 x => blockItemClassType.GetCustomAttribute<BlockItemTypeAttribute>().BlockItemType);
     }

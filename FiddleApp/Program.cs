@@ -18,16 +18,23 @@ namespace FiddleApp
     {
         public static int Main(string[] args)
         {
-            int result = Fiddle2();
+            int result = Fiddle3();
             if (Debugger.IsAttached)
                 ConsoleUtil.PromptExit();
             return result;
         }
 
+        private static int Fiddle3()
+        {
+            var testClassGenerator = new TestClassGenerator();
+            testClassGenerator.Generate();
+            return ExitCodes.Success;
+        }
+
         private static int Fiddle2()
         {
-            var metadataFoo = new MetadataCsvBuilder();
-            metadataFoo.Run();
+            var metadataFoo = new MetadataGenerator();
+            metadataFoo.Generate();
             return ExitCodes.Success;
         }
 
@@ -39,7 +46,7 @@ namespace FiddleApp
             var sb = new StringBuilder();
             int[] indices = Enumerable.Range(0, textureBlock.Count).ToArray();
             foreach (int index in indices)
-                sb.AppendLine($"        [Fact]\r\n        public void Test_{index:d4}() => CompareItem({index});");
+                sb.AppendLine($"        [Fact]\r\n        public void Test_{index:d5}() => CompareItem({index});");
             var s = sb.ToString();
 
             // import sprite

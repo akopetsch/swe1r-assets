@@ -24,7 +24,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
         #region Constructor
 
         public BlockItemsFormatTestBase(AnalyticsFixture analyticsFixture, ITestOutputHelper output, string blockIdName) :
-            base(new OriginalBlockProvider().LoadBlock<TBlockItem>(blockIdName))
+            base(new OriginalBlocksProvider().LoadBlock<TBlockItem>(blockIdName))
         {
             AnalyticsFixture = analyticsFixture;
             Output = output;

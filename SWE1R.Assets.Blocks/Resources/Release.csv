@@ -1,0 +1,9 @@
+Id,Name,ModelBlockId,SplineBlockId,SpriteBlockId,TextureBlockId
+0,Default,0,0,0,0
+1,Windows (International),0,0,3,0
+2,Windows (Demo),3,0,4,2
+3,Nintendo 64 (USA),2,1,2,1
+4,Nintendo 64 (Europe),1,1,0,1
+5,Nintendo 64 (Japan),1,1,1,1
+6,Mac,0,0,3,0
+7,Dreamcast,0,0,3,0

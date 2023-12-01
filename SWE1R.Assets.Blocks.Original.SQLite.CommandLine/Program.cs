@@ -26,7 +26,10 @@ public class Program
     {
         using AssetsDbContext assetsDbContext = new();
 
-        var spriteBlock = new OriginalBlockProvider().LoadBlock<SpriteBlockItem>(SpriteBlockIdNames.Default);
+        var originalBlockProvider = new OriginalBlocksProvider();
+        originalBlockProvider.Init();
+
+        var spriteBlock = originalBlockProvider.GetBlock<SpriteBlockItem>(SpriteBlockIdNames.Default);
 
         foreach (SpriteBlockItem spriteBlockItem in spriteBlock)
         {

@@ -18,7 +18,7 @@ namespace SWE1R.Assets.Blocks.Metadata
         public BlockItemMetadata() { }
         public BlockItemMetadata(BlockItem item, MetadataProvider metadataProvider)
         {
-            BlockItemType = BlockItemTypeAttributeHelper.GetBlockItemClassType(item.GetType());
+            BlockItemType = BlockItemTypeAttributeHelper.GetBlockItemType(item.GetType());
             BlockId = metadataProvider.GetBlockByHash(item.Block).Id;
             Index = item.Index.Value;
             ValueId = metadataProvider.GetBlockItemValueByHash(item).Id;

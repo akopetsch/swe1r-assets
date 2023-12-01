@@ -2,6 +2,11 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
+using SWE1R.Assets.Blocks.ModelBlock;
+using SWE1R.Assets.Blocks.SplineBlock;
+using SWE1R.Assets.Blocks.SpriteBlock;
+using SWE1R.Assets.Blocks.TextureBlock;
+using System;
 using System.IO;
 
 namespace SWE1R.Assets.Blocks
@@ -15,11 +20,35 @@ namespace SWE1R.Assets.Blocks
             return block;
         }
 
+        public static IBlock Load(BlockItemType blockItemType, string filename)
+        {
+            switch (blockItemType)
+            {
+                case BlockItemType.ModelBlockItem: return Load<ModelBlockItem>(filename);
+                case BlockItemType.SplineBlockItem: return Load<SplineBlockItem>(filename);
+                case BlockItemType.SpriteBlockItem: return Load<SpriteBlockItem>(filename);
+                case BlockItemType.TextureBlockItem: return Load<TextureBlockItem>(filename);
+                default: throw new InvalidOperationException();
+            }
+        }
+
         public static Block<TItem> Load<TItem>(Stream stream) where TItem : BlockItem, new()
         {
             var block = new Block<TItem>();
             block.Load(stream);
             return block;
+        }
+
+        public static IBlock Load(BlockItemType blockItemType,Stream stream)
+        {
+            switch (blockItemType)
+            {
+                case BlockItemType.ModelBlockItem: return Load<ModelBlockItem>(stream);
+                case BlockItemType.SplineBlockItem: return Load<SplineBlockItem>(stream);
+                case BlockItemType.SpriteBlockItem: return Load<SpriteBlockItem>(stream);
+                case BlockItemType.TextureBlockItem: return Load<TextureBlockItem>(stream);
+                default: throw new InvalidOperationException();
+            }
         }
     }
 }

@@ -14,23 +14,33 @@ using System.Diagnostics;
 
 namespace FiddleApp
 {
-    public class MetadataCsvBuilder
+    public class MetadataGenerator
     {
-        private MetadataProvider _metadataProvider = new();
-        private OriginalBlockProvider _originalBlockProvider = new OriginalBlockProvider();
+        #region Fields
 
-        public void Run()
+        private MetadataProvider _metadataProvider = new();
+        private readonly OriginalBlocksProvider _originalBlockProvider = new();
+
+        #endregion
+
+        #region Methods
+
+        public void Generate()
         {
-            SaveBlockCsv();
-            SaveBlockItemValueCsv();
-            SaveBlockItemCsv();
+            _originalBlockProvider.Init();
+
+            GenerateBlocks();
+            GenerateBlockItemValues();
+            GenerateBlockItems();
         }
+
+        #endregion
 
         #region Methods (BlockMetadata)
 
-        private void SaveBlockCsv()
+        private void GenerateBlocks()
         {
-            Console.WriteLine($"{nameof(SaveBlockCsv)}");
+            Console.WriteLine($"{nameof(GenerateBlocks)}");
             List<BlockMetadata> metadataList = _metadataProvider.Blocks;
             metadataList.Clear();
             metadataList.AddRange(GetBlockMetadata<ModelBlockItem>());
@@ -49,7 +59,7 @@ namespace FiddleApp
             foreach (string blockIdName in BlockIdNames.GetAll<TBlockItem>())
             {
                 ConsoleWriteBlockIdName(blockIdName);
-                Block<TBlockItem> block = _originalBlockProvider.LoadBlock<TBlockItem>(blockIdName);
+                Block<TBlockItem> block = _originalBlockProvider.GetBlock<TBlockItem>(blockIdName);
                 var metadata = new BlockMetadata(block, i++, blockIdName);
                 metadataList.Add(metadata);
             }
@@ -60,7 +70,7 @@ namespace FiddleApp
 
         #region Methods (BlockItemMetadataByValue)
 
-        private void SaveBlockItemValueCsv()
+        private void GenerateBlockItemValues()
         {
             Console.WriteLine($"{nameof(SaveBlockItemMetadataByValueCsv)}");
             SaveBlockItemMetadataByValueCsv<ModelBlockItem>(idBaseStep: 1000);
@@ -79,7 +89,7 @@ namespace FiddleApp
             foreach (string blockIdName in BlockIdNames.GetAll<TBlockItem>())
             {
                 ConsoleWriteBlockIdName(blockIdName);
-                Block<TBlockItem> block = _originalBlockProvider.LoadBlock<TBlockItem>(blockIdName);
+                Block<TBlockItem> block = _originalBlockProvider.GetBlock<TBlockItem>(blockIdName);
                 Debug.Assert(idBaseStep > block.Count);
                 foreach (TBlockItem blockItem in block)
                 {
@@ -111,9 +121,9 @@ namespace FiddleApp
 
         #region Methods (BlockItemMetadata)
 
-        private void SaveBlockItemCsv()
+        private void GenerateBlockItems()
         {
-            Console.WriteLine(nameof(SaveBlockItemCsv));
+            Console.WriteLine(nameof(GenerateBlockItems));
             var metadataList = _metadataProvider.BlockItems;
             metadataList.Clear();
             metadataList.AddRange(GetBlockItemMetadata<ModelBlockItem>());
@@ -131,7 +141,7 @@ namespace FiddleApp
             foreach (string blockIdName in BlockIdNames.GetAll<TBlockItem>())
             {
                 ConsoleWriteBlockIdName(blockIdName);
-                Block<TBlockItem> block = _originalBlockProvider.LoadBlock<TBlockItem>(blockIdName);
+                Block<TBlockItem> block = _originalBlockProvider.GetBlock<TBlockItem>(blockIdName);
                 string blockHashString = block.HashString;
                 for (int i = 0; i < block.Count; i++)
                 {

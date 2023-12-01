@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Reserialization
         #region Constructor
 
         protected BlockItemsReserializationXUnitTest(ITestOutputHelper output, string blockIdName) : 
-            base(new OriginalBlockProvider().LoadBlock<TItem>(blockIdName))
+            base(new OriginalBlocksProvider().LoadBlock<TItem>(blockIdName))
         {
             _output = output;
         }

@@ -6,6 +6,7 @@ using ByteSerialization;
 using SWE1R.Assets.Blocks.Metadata.IdNames;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
+using SWE1R.Assets.Blocks.Original.TestUtils;
 using SWE1R.Assets.Blocks.TestUtils;
 using Xunit.Abstractions;
 
@@ -13,11 +14,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
 {
     [Collection(NonParallelCollectionDefinition.Name)]
     public class ModelBlockItemsDeserializationSqlTest : 
-        BlockItemsTestBase<ModelBlockItem>,  IClassFixture<AssetsDbContextFixture>
+        BlockItemsTestBase<ModelBlockItem>,  
+        IClassFixture<AssetsDbContextFixture>, 
+        IClassFixture<OriginalBlocksProviderFixture>
     {
         #region Fields
 
         private readonly AssetsDbContextFixture _assetsDbContextFixture;
+        private readonly OriginalBlocksProviderFixture _originalBlocksProviderFixture;
         private readonly ITestOutputHelper _output;
 
         #endregion
@@ -25,10 +29,13 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
         #region Constructor
 
         public ModelBlockItemsDeserializationSqlTest(
-            AssetsDbContextFixture assetsDbContextFixture, ITestOutputHelper output) : 
-            base(new OriginalBlockProvider().LoadBlock<ModelBlockItem>(ModelBlockIdNames.Default))
+            AssetsDbContextFixture assetsDbContextFixture, 
+            OriginalBlocksProviderFixture originalBlocksProviderFixture, 
+            ITestOutputHelper output) : 
+            base(originalBlocksProviderFixture.OriginalBlocksProvider.GetBlock<ModelBlockItem>(ModelBlockIdNames.Default))
         {
             _assetsDbContextFixture = assetsDbContextFixture;
+            _originalBlocksProviderFixture = originalBlocksProviderFixture;
             _output = output;
         }
 

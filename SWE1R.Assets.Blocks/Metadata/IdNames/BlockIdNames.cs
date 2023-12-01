@@ -18,7 +18,7 @@ namespace SWE1R.Assets.Blocks.Metadata.IdNames
         };
 
         public static IEnumerable<string> GetAll<TBlockItem>() where TBlockItem : BlockItem =>
-            GetAll(BlockItemTypeAttributeHelper.GetBlockItemClassType(typeof(TBlockItem)));
+            GetAll(BlockItemTypeAttributeHelper.GetBlockItemType(typeof(TBlockItem)));
 
         public static IEnumerable<string> GetAll(BlockItemType blockItemType) =>
             _allByItemType[blockItemType].OrderBy(x => x);
