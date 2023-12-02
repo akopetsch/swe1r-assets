@@ -4,7 +4,7 @@
 
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 {
     public class ScenModelFormatTester : ModelFormatTester<ScenModel>
     {

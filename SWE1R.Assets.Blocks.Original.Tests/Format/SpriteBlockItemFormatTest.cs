@@ -13,9 +13,9 @@ using SWE1R.Assets.Blocks.Utils;
 using System.Diagnostics;
 using Xunit.Abstractions;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
+namespace SWE1R.Assets.Blocks.Original.Tests.Format
 {
-    public class SpriteBlockItemFormatTest : BlockItemsFormatTestBase<SpriteBlockItem>
+    public partial class SpriteBlockItemFormatTest : BlockItemsFormatTestBase<SpriteBlockItem>
     {
         #region Constructor
 
@@ -103,7 +103,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.SpriteBlock
         private bool HasSpecialDimensions(SpriteTile tile) =>
             !MathUtil.IsPowerOfTwo(tile.Width) ||
             !MathUtil.IsPowerOfTwo(tile.Height);
-        
+
         #endregion
     }
 }

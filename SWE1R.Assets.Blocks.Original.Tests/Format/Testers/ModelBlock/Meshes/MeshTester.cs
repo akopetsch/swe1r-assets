@@ -9,7 +9,7 @@ using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 using SWE1R.Assets.Blocks.Vectors;
 using System.Diagnostics;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 {
     public class MeshTester : Tester<Mesh>
     {
@@ -228,17 +228,17 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
                             }
                         else
                             if (i == 0)
-                            {
-                                // 435
-                                // models: 106...
-                                Assert.True(range.Chunk03 == null);
-                                Assert.True(ranges.Count == 1);
+                        {
+                            // 435
+                            // models: 106...
+                            Assert.True(range.Chunk03 == null);
+                            Assert.True(ranges.Count == 1);
 
-                            }
-                            else
-                            {
-                                // 11903
-                            }
+                        }
+                        else
+                        {
+                            // 11903
+                        }
                     }
 
                     if (i > 0)
@@ -296,32 +296,32 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Meshes
                     Assert.True(chunk0.Tag == 05 || chunk0.Tag == 06);
                 else
                     if (chunk0.Tag == 06)
+                {
+                    Assert.Equal(6, n);
+                    Assert.True(chunks.All(x => x.Tag == 06));
+                }
+                else
+                {
+                    // n != 1
+                    // most of the time (in 429 of 433 models)
+
+                    Assert.True(chunk0.Tag == 01);
+                    if (n == 2)
                     {
-                        Assert.Equal(6, n);
-                        Assert.True(chunks.All(x => x.Tag == 06));
+                        IndicesChunk chunk1 = chunks[1];
+                        Assert.True(chunk1.Tag == 05 || chunk1.Tag == 06);
                     }
                     else
-                    {
-                        // n != 1
-                        // most of the time (in 429 of 433 models)
-
-                        Assert.True(chunk0.Tag == 01);
-                        if (n == 2)
+                        for (int i = 0; i < n; i++)
                         {
-                            IndicesChunk chunk1 = chunks[1];
-                            Assert.True(chunk1.Tag == 05 || chunk1.Tag == 06);
-                        }
-                        else
-                            for (int i = 0; i < n; i++)
+                            IndicesChunk chunk = chunks[i];
+                            if (chunk.Tag == 03)
                             {
-                                IndicesChunk chunk = chunks[i];
-                                if (chunk.Tag == 03)
-                                {
-                                    IndicesChunk chunkBefore = chunks[i - 1];
-                                    Assert.True(chunkBefore.Tag == 01);
-                                }
+                                IndicesChunk chunkBefore = chunks[i - 1];
+                                Assert.True(chunkBefore.Tag == 01);
                             }
-                    }
+                        }
+                }
             }
         }
 

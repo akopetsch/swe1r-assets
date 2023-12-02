@@ -6,7 +6,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 using SWE1R.Assets.Blocks.Vectors;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Nodes
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Nodes
 {
     public class MeshGroup3064Tester : Tester<MeshGroup3064>
     {

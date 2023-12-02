@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\LightningPirate.zip" />
     <None Remove="Resources\out_modelblock.bin\n64_eu-jp.bin" />
     <None Remove="Resources\out_modelblock.bin\n64_us.bin" />
     <None Remove="Resources\out_modelblock.bin\win-demo.bin" />
@@ -26,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\LightningPirate.zip" />
     <EmbeddedResource Include="Resources\out_modelblock.bin\n64_eu-jp.bin" />
     <EmbeddedResource Include="Resources\out_modelblock.bin\n64_us.bin" />
     <EmbeddedResource Include="Resources\out_modelblock.bin\win-demo.bin" />
@@ -43,6 +45,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SWE1R.Assets.Blocks.Images.ImageSharp\SWE1R.Assets.Blocks.Images.ImageSharp.csproj" />
+    <ProjectReference Include="..\SWE1R.Assets.Blocks.Images.SystemDrawing\SWE1R.Assets.Blocks.Images.SystemDrawing.csproj" />
     <ProjectReference Include="..\SWE1R.Assets.Blocks\SWE1R.Assets.Blocks.csproj" />
   </ItemGroup>
 

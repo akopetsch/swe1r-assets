@@ -42,7 +42,7 @@ namespace SWE1R.Assets.Blocks.Original
         private IBlock LoadBlock(BlockItemType blockItemType, string blockIdName)
         {
             string resourcePath = GetBlockResourcePath(blockItemType, blockIdName);
-            Stream resourceStream = new OriginalBlocksResourceHelper().ReadEmbeddedResource(resourcePath);
+            using Stream resourceStream = new OriginalBlocksResourceHelper().ReadEmbeddedResource(resourcePath);
             return Block.Load(blockItemType, resourceStream);
         }
 

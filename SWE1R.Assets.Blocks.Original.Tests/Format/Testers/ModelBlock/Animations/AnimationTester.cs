@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Animations
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Animations
 {
     public class AnimationTester : Tester<Animation>
     {

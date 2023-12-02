@@ -10,7 +10,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 using SWE1R.Assets.Blocks.Textures;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 {
     public class TrakModelFormatTester : ModelFormatTester<TrakModel>
     {

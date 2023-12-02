@@ -10,7 +10,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 {
     public abstract class ModelFormatTester<TModel> : Tester<TModel> where TModel : Model
     {
@@ -33,7 +33,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
 
         private void AssertGraphContainment()
         {
-            List<INode> headerNodesGraph = Value.GetHeaderFlaggedNodes().SelectMany(x => x.GetSelfAndDescendants()).ToList();
+            var headerNodesGraph = Value.GetHeaderFlaggedNodes().SelectMany(x => x.GetSelfAndDescendants()).ToList();
 
             Assert.True(Value.GetAnimationsTransformableD065s().All(x => headerNodesGraph.Contains(x)));
             //Assert.True(Value.GetAltNFlaggedNodes().All(x => headerNodesGraph.Contains(x))); // sometimes fails
@@ -42,7 +42,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
             var headerFlaggedNodesGraphMaterials = headerNodesGraph.OfType<Mesh>().Select(x => x.Material).ToList();
             var headerFlaggedNodesGraphMaterialTextures = headerFlaggedNodesGraphMaterials.Select(x => x.Texture).Where(x => x != null).ToList();
             if (Value.Animations != null)
-            {
                 foreach (Animation animation in Value.Animations)
                 {
                     // Target property (Material)
@@ -61,7 +60,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
                     List<MaterialTexture> keyframesMaterialTextures = animation.KeyframesOrInteger.Keyframes?.MaterialTextures ?? new List<MaterialTexture>();
                     //Assert.True(keyframesMaterialTextures.All(x => headerNodesGraphMaterialTextures.Contains(x))); // sometimes fails (and not because AltN graph is excluded)
                 }
-            }
         }
     }
 }

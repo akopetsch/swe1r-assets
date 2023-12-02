@@ -5,9 +5,8 @@
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
-using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 
-namespace SWE1R.Assets.Blocks.Original.Tests.Format.ModelBlock.Testers.Models
+namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 {
     public class ModelFormatTesterFactory
     {

@@ -17,10 +17,27 @@ namespace FiddleApp
     {
         public static int Main(string[] args)
         {
-            int result = Fiddle3();
+            int result = Fiddle4();
             if (Debugger.IsAttached)
                 ConsoleUtil.PromptExit();
             return result;
+        }
+
+        private static int Fiddle4()
+        {
+            var paths = Directory.GetFiles("LightningPirate");
+            foreach (string oldPath in paths)
+            {
+                var dirName = Path.GetDirectoryName(oldPath);
+                var oldFilename = Path.GetFileName(oldPath);
+                if (oldFilename != ".gitignore")
+                {
+                    int index = int.Parse(Path.GetFileNameWithoutExtension(oldFilename));
+                    string newPath = Path.Combine(dirName, $"{index:d4}.png");
+                    File.Move(oldPath, newPath);
+                }
+            }
+            return ExitCodes.Success;
         }
 
         private static int Fiddle3()

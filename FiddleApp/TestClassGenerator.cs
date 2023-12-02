@@ -34,7 +34,9 @@ namespace FiddleApp
             {
                 int id = blockItemValueMetadata.Id;
                 string tabs = new string(' ', 4 * 2);
-                sb.AppendLine($"{tabs}[Fact]\r\n{tabs}public void Test_{id:d5}() => CompareItem({id});");
+                string methodNamePrefix = "Test";
+                string baseMethodName = "CompareItem";
+                sb.AppendLine($"{tabs}[Fact]\r\n{tabs}public void {methodNamePrefix}_{id:d5}() => {baseMethodName}({id});");
             }
             return sb.ToString();
         }
