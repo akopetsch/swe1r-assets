@@ -5,6 +5,7 @@
 using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.Metadata.IdNames;
 using SWE1R.Assets.Blocks.Original.Resources;
+using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.Original
 {
@@ -13,10 +14,8 @@ namespace SWE1R.Assets.Blocks.Original
         private readonly MetadataProvider _metadataProvider = new ();
         private readonly Dictionary<(BlockItemType, string), IBlock> _blocks = new();
 
-        public void Init()
-        {
+        public void Load() =>
             LoadBlocks();
-        }
 
         public Block<TItem> GetBlock<TItem>(string blockIdName) where TItem : BlockItem, new()
         {
@@ -24,7 +23,7 @@ namespace SWE1R.Assets.Blocks.Original
             return (Block<TItem>)_blocks[(blockItemType, blockIdName)];
         }
 
-        public TItem GetBlockItem<TItem>(int valueId) where TItem : BlockItem, new()
+        public TItem GetFirstBlockItemByValueId<TItem>(int valueId) where TItem : BlockItem, new()
         {
             BlockItemMetadata blockItemMetadata = _metadataProvider.GetBlockItem<TItem>(valueId);
             BlockMetadata blockMetadata = _metadataProvider.GetBlock(blockItemMetadata);
@@ -34,6 +33,7 @@ namespace SWE1R.Assets.Blocks.Original
 
         private void LoadBlocks()
         {
+            Debug.WriteLine($"{nameof(OriginalBlocksProvider)}.{nameof(LoadBlocks)}()");
             foreach (BlockItemType blockItemType in Enum.GetValues<BlockItemType>())
                 foreach (string blockIdName in BlockIdNames.GetAll(blockItemType))
                     _blocks[(blockItemType, blockIdName)] = LoadBlock(blockItemType, blockIdName);

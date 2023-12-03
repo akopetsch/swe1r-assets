@@ -2,16 +2,14 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-namespace SWE1R.Assets.Blocks.Original.TestUtils
+namespace SWE1R.Assets.Blocks.Original
 {
     public class OriginalBlocksProviderFixture : IDisposable
     {
-        public OriginalBlocksProvider OriginalBlocksProvider { get; } = new();
+        public OriginalBlocksProvider Provider { get; } = new();
 
-        public OriginalBlocksProviderFixture()
-        {
-            OriginalBlocksProvider.Init();
-        }
+        public OriginalBlocksProviderFixture() =>
+            Provider.Load();
 
         public void Dispose() { }
     }

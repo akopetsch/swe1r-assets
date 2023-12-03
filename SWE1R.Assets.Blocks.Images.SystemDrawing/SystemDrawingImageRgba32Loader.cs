@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks.Images.SystemDrawing
         {
             using var systemDrawingBitmap =
                 (SystemDrawingBitmap)SystemDrawingImage.FromFile(imageFilename);
-            return systemDrawingBitmap.ToImageRgba32();
+            return systemDrawingBitmap.ToImageRgba32().FlipY();
         }
     }
 }

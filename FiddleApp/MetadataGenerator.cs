@@ -27,7 +27,7 @@ namespace FiddleApp
 
         public void Generate()
         {
-            _originalBlockProvider.Init();
+            _originalBlockProvider.Load();
 
             GenerateBlocks();
             GenerateBlockItemValues();

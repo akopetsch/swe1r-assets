@@ -33,44 +33,44 @@ namespace SWE1R.Assets.Blocks.Unity
     {
         #region Fields
 
-        private readonly BlockItemDumper dumper = new UnityBlockItemDumper("out");
-        private ByteSerializerContext bitSerializerContext;
+        private readonly BlockItemDumper _dumper = new UnityBlockItemDumper("out");
+        private ByteSerializerContext _bitSerializerContext;
 
         #endregion
 
         #region Fields (mapping)
 
-        private Dictionary<GameObject, Swe1rFlaggedNode> flaggedNodeByPrefab =
+        private Dictionary<GameObject, Swe1rFlaggedNode> _flaggedNodeByPrefab =
             new Dictionary<GameObject, Swe1rFlaggedNode>();
 
-        private Dictionary<MaterialScriptableObject, Swe1rMaterial> materials =
+        private Dictionary<MaterialScriptableObject, Swe1rMaterial> _materials =
             new Dictionary<MaterialScriptableObject, Swe1rMaterial>();
 
-        private Dictionary<MaterialTextureScriptableObject, Swe1rMaterialTexture> materialTextures =
+        private Dictionary<MaterialTextureScriptableObject, Swe1rMaterialTexture> _materialTextures =
             new Dictionary<MaterialTextureScriptableObject, Swe1rMaterialTexture>();
 
-        private Dictionary<MaterialTextureChildObject, Swe1rMaterialTextureChild> materialTextureChildren =
+        private Dictionary<MaterialTextureChildObject, Swe1rMaterialTextureChild> _materialTextureChildren =
             new Dictionary<MaterialTextureChildObject, Swe1rMaterialTextureChild>();
 
-        private Dictionary<MaterialPropertiesObject, Swe1rMaterialProperties> materialProperties =
+        private Dictionary<MaterialPropertiesObject, Swe1rMaterialProperties> _materialProperties =
             new Dictionary<MaterialPropertiesObject, Swe1rMaterialProperties>();
 
-        private Dictionary<MappingScriptableObject, Swe1rMapping> mappings =
+        private Dictionary<MappingScriptableObject, Swe1rMapping> _mappings =
             new Dictionary<MappingScriptableObject, Swe1rMapping>();
 
-        private Dictionary<MappingChildScriptableObject, Swe1rMappingChild> mappingChildren =
+        private Dictionary<MappingChildScriptableObject, Swe1rMappingChild> _mappingChildren =
             new Dictionary<MappingChildScriptableObject, Swe1rMappingChild>();
 
-        private Dictionary<VertexObject, Swe1rVertex> vertices =
+        private Dictionary<VertexObject, Swe1rVertex> _vertices =
             new Dictionary<VertexObject, Swe1rVertex>();
 
-        private Dictionary<DoubleMaterialObject, Swe1rDoubleMaterial> doubleMaterials =
+        private Dictionary<DoubleMaterialObject, Swe1rDoubleMaterial> _doubleMaterials =
             new Dictionary<DoubleMaterialObject, Swe1rDoubleMaterial>();
 
-        private Dictionary<KeyframesOrIntegerObject, Swe1rKeyframesOrInteger> keyframesOrIntegers =
+        private Dictionary<KeyframesOrIntegerObject, Swe1rKeyframesOrInteger> _keyframesOrIntegers =
             new Dictionary<KeyframesOrIntegerObject, Swe1rKeyframesOrInteger>();
 
-        private Dictionary<TargetOrIntegerObject, Swe1rTargetOrInteger> targetOrIntegers =
+        private Dictionary<TargetOrIntegerObject, Swe1rTargetOrInteger> _targetOrIntegers =
             new Dictionary<TargetOrIntegerObject, Swe1rTargetOrInteger>();
 
         #endregion
@@ -106,8 +106,8 @@ namespace SWE1R.Assets.Blocks.Unity
             ModelBlockItem = ModelComponent.Export(this);
 
             // serialize
-            ModelBlockItem.Save(out bitSerializerContext);
-            dumper.DumpItem(ModelBlockItem, ModelIndex, bitSerializerContext);
+            ModelBlockItem.Save(out _bitSerializerContext);
+            _dumper.DumpItem(ModelBlockItem, ModelIndex, _bitSerializerContext);
         }
 
         #endregion
@@ -119,38 +119,38 @@ namespace SWE1R.Assets.Blocks.Unity
             GameObject prefab = PrefabUtility.GetCorrespondingObjectFromOriginalSource(gameObject);
             if (prefab == null)
                 return null; // TODO: ever called?
-            else if (flaggedNodeByPrefab.TryGetValue(prefab, out Swe1rFlaggedNode swe1rFlaggedNode))
+            else if (_flaggedNodeByPrefab.TryGetValue(prefab, out Swe1rFlaggedNode swe1rFlaggedNode))
                 return swe1rFlaggedNode;
             else
                 return CreateFlaggedNode(prefab);
         }
 
         public Swe1rMaterial GetMaterial(MaterialScriptableObject materialObject) =>
-            materialObject == null ? null : materials.GetOrCreate(materialObject, x => x.Export(this));
+            materialObject == null ? null : _materials.GetOrCreate(materialObject, x => x.Export(this));
 
         public Swe1rMaterialTexture GetMaterialTexture(MaterialTextureScriptableObject materialTexureObject) =>
-            materialTextures.GetOrCreate(materialTexureObject, x => x.Export(this));
+            _materialTextures.GetOrCreate(materialTexureObject, x => x.Export(this));
 
         public Swe1rMaterialTextureChild GetMaterialTextureChild(MaterialTextureChildObject materialTexureChildObject) =>
-            materialTextureChildren.GetOrCreate(materialTexureChildObject, x => x.Export());
+            _materialTextureChildren.GetOrCreate(materialTexureChildObject, x => x.Export());
 
         public Swe1rMaterialProperties GetMaterialProperties(MaterialPropertiesObject materialPropertiesObject) =>
-            materialProperties.GetOrCreate(materialPropertiesObject, x => x.Export());
+            _materialProperties.GetOrCreate(materialPropertiesObject, x => x.Export());
 
         public Swe1rMapping GetMapping(MappingScriptableObject mappingObject) =>
-            mappings.GetOrCreate(mappingObject, x => x.Export(this));
+            _mappings.GetOrCreate(mappingObject, x => x.Export(this));
 
         public Swe1rMappingChild GetMappingChild(MappingChildScriptableObject mappingChildObject) =>
-            mappingChildren.GetOrCreate(mappingChildObject, x => x.Export(this));
+            _mappingChildren.GetOrCreate(mappingChildObject, x => x.Export(this));
 
         public Swe1rVertex GetVertex(VertexObject vertexObject) =>
-            vertices.GetOrCreate(vertexObject, x => x.Export());
+            _vertices.GetOrCreate(vertexObject, x => x.Export());
 
         public Swe1rDoubleMaterial GetDoubleMaterial(DoubleMaterialObject doubleMaterialObject) =>
-            doubleMaterials.GetOrCreate(doubleMaterialObject, x => x.Export(this));
+            _doubleMaterials.GetOrCreate(doubleMaterialObject, x => x.Export(this));
 
         public Swe1rTargetOrInteger GetTargetOrInteger(TargetOrIntegerObject targetOrInteger) =>
-            targetOrIntegers.GetOrCreate(targetOrInteger, x => x.Export(this));
+            _targetOrIntegers.GetOrCreate(targetOrInteger, x => x.Export(this));
 
         #endregion
 
@@ -162,7 +162,7 @@ namespace SWE1R.Assets.Blocks.Unity
             if (flaggedNodeComponent == null)
                 return null;
             Swe1rFlaggedNode swe1rFlaggedNode = flaggedNodeComponent.Export(this);
-            flaggedNodeByPrefab[prefab] = swe1rFlaggedNode;
+            _flaggedNodeByPrefab[prefab] = swe1rFlaggedNode;
 
             List<GameObject> childGameObjects = prefab.GetChildren();
             if (childGameObjects.Count > 0)

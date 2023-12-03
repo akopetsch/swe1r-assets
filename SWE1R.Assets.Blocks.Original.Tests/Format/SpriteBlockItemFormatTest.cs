@@ -5,7 +5,6 @@
 using ByteSerialization;
 using SixLabors.ImageSharp;
 using SWE1R.Assets.Blocks.Images.ImageSharp;
-using SWE1R.Assets.Blocks.Original.TestUtils;
 using SWE1R.Assets.Blocks.SpriteBlock;
 using SWE1R.Assets.Blocks.SpriteBlock.Export;
 using SWE1R.Assets.Blocks.Textures;

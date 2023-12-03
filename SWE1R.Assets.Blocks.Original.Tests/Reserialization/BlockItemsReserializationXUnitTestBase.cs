@@ -2,7 +2,6 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using SWE1R.Assets.Blocks.Original.TestUtils;
 using SWE1R.Assets.Blocks.TestUtils;
 using Xunit.Abstractions;
 
@@ -36,7 +35,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Reserialization
         #region Methods
 
         protected override TItem GetItem(int valueId) =>
-            OriginalBlocksProviderFixture.OriginalBlocksProvider.GetBlockItem<TItem>(valueId);
+            OriginalBlocksProviderFixture.Provider.GetFirstBlockItemByValueId<TItem>(valueId);
 
         protected override void PrintItemValueId(int valueId) { }
 

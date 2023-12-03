@@ -72,7 +72,7 @@ namespace SWE1R.Assets.Blocks.Textures.Export
             else if (TextureFormat == TextureFormat.FourBitGrayscaleAndAlpha)
             {
                 byte pixelData = PixelsBytes.GetNibble(pixelIndex);
-                byte v = (byte)Math.Round(pixelData * 16f); // value (as in HSV)
+                byte v = (byte)Math.Round(pixelData * 17f); // value (as in HSV)
                 byte a = (byte)Math.Round(pixelData * 17f); // alpha (as in ARGB)
                 return new ColorRgba32(v, v, v, a);
             }

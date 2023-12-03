@@ -5,7 +5,6 @@
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
-using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 using SWE1R.Assets.Blocks.Vectors;
 using System.Diagnostics;
 

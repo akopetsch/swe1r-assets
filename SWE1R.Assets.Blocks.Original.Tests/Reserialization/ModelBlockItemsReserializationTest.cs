@@ -3,7 +3,6 @@
 // Refer to the included LICENSE.txt file.
 
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.Original.TestUtils;
 using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Reserialization

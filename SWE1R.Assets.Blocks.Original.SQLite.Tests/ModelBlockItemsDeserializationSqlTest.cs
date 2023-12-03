@@ -5,7 +5,6 @@
 using ByteSerialization;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
-using SWE1R.Assets.Blocks.Original.TestUtils;
 using SWE1R.Assets.Blocks.TestUtils;
 using Xunit.Abstractions;
 
@@ -43,7 +42,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Tests
         #region Methods (: BlockItemsTestBase)
 
         protected override ModelBlockItem GetItem(int valueId) =>
-            _originalBlocksProviderFixture.OriginalBlocksProvider.GetBlockItem<ModelBlockItem>(valueId);
+            _originalBlocksProviderFixture.Provider.GetFirstBlockItemByValueId<ModelBlockItem>(valueId);
 
         protected override void CompareItemInternal(int index)
         {

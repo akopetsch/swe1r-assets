@@ -84,7 +84,7 @@ namespace SWE1R.Assets.Blocks.Unity.Components.Models.Meshes
             Swe1rMaterialTexture texture = source.Material.Texture;
             if (texture != null)
             {
-                labels.Add($"fmt:{((short)texture.TextureFormat)}");
+                labels.Add($"fmt:{((short)texture.Format):x4}");
                 labels.Add($"i:{texture.TextureIndex}");
             }
             if (source.Mapping != null)

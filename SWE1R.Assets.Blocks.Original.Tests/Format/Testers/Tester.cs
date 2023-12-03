@@ -3,7 +3,6 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Nodes;
-using SWE1R.Assets.Blocks.Metadata;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
 {

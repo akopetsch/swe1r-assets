@@ -4,7 +4,6 @@
 
 using ByteSerialization;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
-using SWE1R.Assets.Blocks.Original.TestUtils;
 using SWE1R.Assets.Blocks.TestUtils;
 using System.Diagnostics;
 using Xunit.Abstractions;
@@ -43,7 +42,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
         #region Methods (: BlockItemsTestBase)
 
         protected override TBlockItem GetItem(int valueId) =>
-            OriginalBlocksProviderFixture.OriginalBlocksProvider.GetBlockItem<TBlockItem>(valueId);
+            OriginalBlocksProviderFixture.Provider.GetFirstBlockItemByValueId<TBlockItem>(valueId);
 
         protected override void PrintItemValueId(int index) =>
             Debug.WriteLine(BlockItem.GetIndexString(index));

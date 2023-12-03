@@ -17,7 +17,7 @@ namespace FiddleApp
     {
         public static int Main(string[] args)
         {
-            int result = Fiddle4();
+            int result = Fiddle3();
             if (Debugger.IsAttached)
                 ConsoleUtil.PromptExit();
             return result;

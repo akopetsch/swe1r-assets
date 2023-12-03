@@ -25,7 +25,7 @@ namespace SWE1R.Assets.Blocks.Images.SystemDrawing
             imageRgba32.Palette = 
                 systemDrawingBitmap.Palette.Entries.Select(x => x.ToColorRgba32()).ToArray();
 
-            return imageRgba32;
+            return imageRgba32.FlipY();
         }
     }
 }

@@ -3,7 +3,6 @@
 // Refer to the included LICENSE.txt file.
 
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
-using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Materials
 {

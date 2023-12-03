@@ -2,28 +2,28 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
+using SWE1R.Assets.Blocks.Original.MaterialTexturesCatalog;
 using SWE1R.Assets.Blocks.Utils;
 using System.Diagnostics;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
+namespace SWE1R.Assets.Blocks.Original.CommandLine
 {
     public class Program
     {
         public static int Main(string[] args)
         {
-            int result = ImportSprites();
+            int result = GenerateOriginalMaterialTexturesCatalog();
             if (Debugger.IsAttached)
                 ConsoleUtil.PromptExit();
             return result;
+
         }
 
-        private static int ImportSprites()
+        private static int GenerateOriginalMaterialTexturesCatalog()
         {
-            using AssetsDbContext assetsDbContext = new();
-            var generator = new AssetsDbGenerator(assetsDbContext);
+            var generator = new OriginalMaterialTexturesCatalogGenerator();
             generator.Generate();
             return ExitCodes.Success;
         }
     }
-
 }

@@ -20,7 +20,7 @@ namespace FiddleApp
 
         public void Generate()
         {
-            _originalBlockProvider.Init();
+            _originalBlockProvider.Load();
             string modelsSnippet = GenerateFoo<ModelBlockItem>();
             string spritesSnippet = GenerateFoo<SpriteBlockItem>();
             string splinesSnippet = GenerateFoo<SplineBlockItem>();
@@ -35,7 +35,7 @@ namespace FiddleApp
                 int id = blockItemValueMetadata.Id;
                 string tabs = new string(' ', 4 * 2);
                 string methodNamePrefix = "Test";
-                string baseMethodName = "CompareItem";
+                string baseMethodName = "Test";
                 sb.AppendLine($"{tabs}[Fact]\r\n{tabs}public void {methodNamePrefix}_{id:d5}() => {baseMethodName}({id});");
             }
             return sb.ToString();

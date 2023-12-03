@@ -60,26 +60,61 @@ namespace SWE1R.Assets.Blocks.Metadata
         #region Methods (BlockMetadata)
 
         public BlockMetadata GetBlockByHash(IBlock block) =>
-            Blocks.Single(x => x.Hash.Equals(block.HashString));
+            Blocks.Single(x => 
+                x.Hash.Equals(block.HashString));
 
         public BlockMetadata GetBlock(BlockItemMetadata blockItemMetadata) =>
             Blocks.SingleOrDefault(x =>
                 x.BlockItemType == blockItemMetadata.BlockItemType &&
                 x.Id == blockItemMetadata.BlockId);
 
+        public BlockMetadata GetBlock<TItem>(ReleaseMetadata releaseMetadata) where TItem : BlockItem =>
+            GetBlock<TItem>(releaseMetadata.GetBlockId<TItem>());
+
+        public BlockMetadata GetBlock<TItem>(int blockId) where TItem : BlockItem
+        {
+            BlockItemType blockItemType =
+                BlockItemTypeAttributeHelper.GetBlockItemType(typeof(TItem));
+            return Blocks.Single(x =>
+                x.BlockItemType == blockItemType &&
+                x.Id == blockId);
+        }
+
         #endregion
 
         #region Methods (BlockItemMetadata)
 
-        public IEnumerable<BlockItemMetadata> GetBlockItems<TItem>() where TItem : BlockItem
+        public IEnumerable<BlockItemMetadata> GetBlockItems<TItem>() where TItem : BlockItem =>
+            GetBlockItems(typeof(TItem));
+
+        public IEnumerable<BlockItemMetadata> GetBlockItems(Type blockItemClassType)
         {
             BlockItemType blockItemType =
-                BlockItemTypeAttributeHelper.GetBlockItemType(typeof(TItem));
-            return BlockItems.Where(x => x.BlockItemType == blockItemType);
+                BlockItemTypeAttributeHelper.GetBlockItemType(blockItemClassType);
+            return BlockItems.Where(x => 
+                x.BlockItemType == blockItemType);
         }
 
+        public IEnumerable<BlockItemMetadata> GetBlockItems(BlockMetadata blockMetadata) =>
+            BlockItems.Where(x => 
+                x.BlockItemType == blockMetadata.BlockItemType && 
+                x.BlockId == blockMetadata.Id);
+
         public BlockItemMetadata GetBlockItem<TItem>(int valueId) where TItem : BlockItem =>
-            GetBlockItems<TItem>().FirstOrDefault(x => x.ValueId == valueId);
+            GetBlockItems<TItem>().FirstOrDefault(x => 
+                x.ValueId == valueId);
+
+        public BlockItemMetadata GetBlockItem(BlockItem blockItem, BlockMetadata blockMetadata) =>
+            GetBlockItem(
+                BlockItemTypeAttributeHelper.GetBlockItemType(blockItem.GetType()),
+                blockMetadata.Id,
+                blockItem.Index.Value);
+
+        public BlockItemMetadata GetBlockItem(BlockItemType blockItemType, int blockId, int index) =>
+            BlockItems.Single(x =>
+                x.BlockItemType == blockItemType &&
+                x.BlockId == blockId &&
+                x.Index == index);
 
         #endregion
 
@@ -97,6 +132,14 @@ namespace SWE1R.Assets.Blocks.Metadata
         private BlockItemValueMetadata GetBlockItemValueByHash(Type blockItemType, string hashString) =>
             GetBlockItemValues(blockItemType)
                 .SingleOrDefault(x => x.Hash.Equals(hashString));
+
+        public string GetBlockItemValueName<TItem>(int index, ReleaseMetadata releaseMetadata) where TItem : BlockItem
+        {
+            BlockMetadata blockMetadata = GetBlock<TItem>(releaseMetadata);
+            BlockItemMetadata blockItemMetadata = GetBlockItem(blockMetadata.BlockItemType, blockMetadata.Id, index);
+            BlockItemValueMetadata blockItemValueMetadata = GetBlockItemValues<TItem>().Single(x => x.Id == blockItemMetadata.ValueId);
+            return blockItemValueMetadata.Name;
+        }
 
         #endregion
 

@@ -10,6 +10,9 @@ namespace SWE1R.Assets.Blocks.Original
 {
     public class LightningPirateTexturePngProvider
     {
+        public static int[] ScrambledTextureIds =>
+            new int[] { 49, 58, 99, 924, 966, 972, 991, 992, 1000, 1048, 1064 };
+
         public ImageSharpImage LoadTexturePng(int index)
         {
             string resourcePath = "LightningPirate.zip";

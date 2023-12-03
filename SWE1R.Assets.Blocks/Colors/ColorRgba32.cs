@@ -62,7 +62,7 @@ namespace SWE1R.Assets.Blocks.Colors
             new ColorRgba32(byte.MaxValue, byte.MaxValue, byte.MaxValue, byte.MaxValue);
 
         public static ColorRgba32 Pink { get; } =
-            new ColorRgba32(byte.MaxValue, byte.MaxValue, 0, byte.MaxValue);
+            new ColorRgba32(byte.MaxValue, 0, byte.MaxValue, byte.MaxValue);
 
         #endregion
 

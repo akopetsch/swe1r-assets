@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Resources\LightningPirate.zip" />
+    <None Remove="Resources\OriginalMaterialTexturesCatalog.json" />
     <None Remove="Resources\out_modelblock.bin\n64_eu-jp.bin" />
     <None Remove="Resources\out_modelblock.bin\n64_us.bin" />
     <None Remove="Resources\out_modelblock.bin\win-demo.bin" />
@@ -28,6 +29,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\LightningPirate.zip" />
+    <EmbeddedResource Include="Resources\OriginalMaterialTexturesCatalog.json" />
     <EmbeddedResource Include="Resources\out_modelblock.bin\n64_eu-jp.bin" />
     <EmbeddedResource Include="Resources\out_modelblock.bin\n64_us.bin" />
     <EmbeddedResource Include="Resources\out_modelblock.bin\win-demo.bin" />
@@ -42,6 +44,10 @@
     <EmbeddedResource Include="Resources\out_textureblock.bin\n64.bin" />
     <EmbeddedResource Include="Resources\out_textureblock.bin\win-demo.bin" />
     <EmbeddedResource Include="Resources\out_textureblock.bin\_default.bin" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>

@@ -38,7 +38,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
             height4 = source.Height4;
             always0_08 = source.Always0_08;
             always0_0a = source.Always0_0a;
-            textureFormat = source.TextureFormat;
+            textureFormat = source.Format;
             word_0e = source.Word_0e;
             width = source.Width;
             height = source.Height;
@@ -58,7 +58,7 @@ namespace SWE1R.Assets.Blocks.Unity.ScriptableObjects
             result.Height4 = height4;
             result.Always0_08 = always0_08;
             result.Always0_0a = always0_0a;
-            result.TextureFormat = textureFormat;
+            result.Format = textureFormat;
             result.Word_0e = word_0e;
             result.Width = width;
             result.Height = height;

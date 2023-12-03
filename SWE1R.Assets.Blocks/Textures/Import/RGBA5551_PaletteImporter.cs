@@ -5,7 +5,6 @@
 using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Colors;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 

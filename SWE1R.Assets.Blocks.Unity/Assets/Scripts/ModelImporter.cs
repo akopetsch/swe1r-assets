@@ -39,9 +39,11 @@ namespace SWE1R.Assets.Blocks.Unity
     {
         #region Fields
 
-        private readonly BlockItemDumper dumper = new UnityBlockItemDumper("in");
-        private ByteSerializerContext bitSerializerContext;
-        private int offsetHexStringLength;
+        private readonly MetadataProvider _metadataProvider;
+        private readonly ReleaseMetadata _releaseMetadata;
+        private readonly BlockItemDumper _dumper = new UnityBlockItemDumper("in");
+        private ByteSerializerContext _bitSerializerContext;
+        private int _offsetHexStringLength;
 
         #endregion
 
@@ -96,6 +98,9 @@ namespace SWE1R.Assets.Blocks.Unity
             ModelBlock = modelBlock;
             ModelIndex = modelIndex;
             TextureBlock = textureBlock;
+
+            _metadataProvider = new();
+            _releaseMetadata = _metadataProvider.Releases.First(x => x.Id == 0); // TODO: !!! _releaseMetadata
         }
 
         #endregion
@@ -109,10 +114,10 @@ namespace SWE1R.Assets.Blocks.Unity
 
             // deserialize
             ModelBlockItem = ModelBlock[ModelIndex];
-            dumper.DumpItemPartsBytes(ModelBlockItem, ModelIndex);
-            ModelBlockItem.Load(out bitSerializerContext);
-            dumper.DumpItemLog(bitSerializerContext, ModelIndex);
-            offsetHexStringLength = GetOffsetHexStringLength();
+            _dumper.DumpItemPartsBytes(ModelBlockItem, ModelIndex);
+            ModelBlockItem.Load(out _bitSerializerContext);
+            _dumper.DumpItemLog(_bitSerializerContext, ModelIndex);
+            _offsetHexStringLength = GetOffsetHexStringLength();
 
             // import
             GameObject = new GameObject(Name);
@@ -120,8 +125,11 @@ namespace SWE1R.Assets.Blocks.Unity
             AssetDatabase.SaveAssets();
         }
 
-        private string GetName() => // TODO: enumerate instead of using Path.GetRandomFilename()
-            $"{ModelIndex:000} - {new MetadataProvider().GetNameByIndex<Swe1rModelBlockItem>(ModelIndex)} - {Path.GetRandomFileName()}";
+        private string GetName() // TODO: enumerate instead of using Path.GetRandomFilename()
+        {
+            string name = _metadataProvider.GetBlockItemValueName<Swe1rModelBlockItem>(ModelIndex, _releaseMetadata);
+            return $"{ModelIndex:000} - {name} - {Path.GetRandomFileName()}";
+        }
 
         private int GetOffsetHexStringLength()
         {
@@ -266,8 +274,8 @@ namespace SWE1R.Assets.Blocks.Unity
         }
 
         private string GetValueOffsetHexString(object value) =>
-            bitSerializerContext.Graph.GetValueComponent(value)
-                .Position.Value.ToString($"X{offsetHexStringLength}");
+            _bitSerializerContext.Graph.GetValueComponent(value)
+                .Position.Value.ToString($"X{_offsetHexStringLength}");
 
         #endregion
     }

@@ -3,7 +3,6 @@
 // Refer to the included LICENSE.txt file.
 
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
-using SWE1R.Assets.Blocks.Original.Tests.Format.Testers;
 using SWE1R.Assets.Blocks.Vectors;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Nodes

@@ -12,7 +12,6 @@ using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Nodes;
-using SWE1R.Assets.Blocks.Original.TestUtils;
 using SWE1R.Assets.Blocks.Utils.Graphviz;
 using SWE1R.Assets.Blocks.Vectors;
 using Xunit.Abstractions;
