@@ -3,7 +3,10 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization;
-using SWE1R.Assets.Blocks.Metadata.IdNames;
+using Microsoft.EntityFrameworkCore;
+using SWE1R.Assets.Blocks.Metadata;
+using SWE1R.Assets.Blocks.ModelBlock;
+using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock;
 using SWE1R.Assets.Blocks.SpriteBlock;
 
@@ -13,27 +16,53 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
     {
         public AssetsDbContext AssetsDbContext { get; }
         public OriginalBlocksProvider OriginalBlocksProvider { get; }
+        public MetadataProvider MetadataProvider { get; }
 
         public AssetsDbGenerator(AssetsDbContext assetsDbContext)
         {
             AssetsDbContext = assetsDbContext;
+            OriginalBlocksProvider = new();
+            MetadataProvider = new();
         }
 
         public void Generate()
         {
             OriginalBlocksProvider.Load();
 
-            var spriteBlock = OriginalBlocksProvider.GetBlock<SpriteBlockItem>(SpriteBlockIdNames.Default);
+            AssetsDbContext.Database.Migrate();
+            ImportModels();
+            //ImportSprites();
+            AssetsDbContext.SaveChanges();
+        }
 
-            foreach (SpriteBlockItem spriteBlockItem in spriteBlock)
+        private void ImportModels()
+        {
+            Console.WriteLine($"{nameof(ImportModels)}()");
+            foreach ((int valueId, ModelBlockItem modelBlockItem) in GetBlockItemsByValueId<ModelBlockItem>())
             {
-                Console.WriteLine(spriteBlockItem.Index);
+                Console.WriteLine(valueId);
+                modelBlockItem.Load(out ByteSerializerContext byteSerializerContext);
+                var dbModelStructures = new DbModelStructures(valueId);
+                dbModelStructures.Load(byteSerializerContext.Graph);
+                AssetsDbContext.AddModelStructures(dbModelStructures);
+            }
+        }
+
+        private void ImportSprites()
+        {
+            Console.WriteLine($"{nameof(ImportSprites)}()");
+            foreach ((int valueId, SpriteBlockItem spriteBlockItem) in GetBlockItemsByValueId<SpriteBlockItem>())
+            {
+                Console.WriteLine(valueId);
                 spriteBlockItem.Load(out ByteSerializerContext byteSerializerContext);
-                var dbSpriteStructures = new DbSpriteStructures(spriteBlockItem.Index.Value);
+                var dbSpriteStructures = new DbSpriteStructures(valueId);
                 dbSpriteStructures.Load(byteSerializerContext.Graph);
                 AssetsDbContext.AddSpriteStructures(dbSpriteStructures);
             }
-            AssetsDbContext.SaveChanges();
         }
+
+        private IEnumerable<(int valueId, TItem blockItem)> GetBlockItemsByValueId<TItem>() where TItem : BlockItem, new() =>
+            MetadataProvider.GetBlockItemValues<TItem>()
+            .Select(x => (x.Id, OriginalBlocksProvider.GetFirstBlockItemByValueId<TItem>(x.Id)));
     }
 }

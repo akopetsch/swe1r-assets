@@ -3,8 +3,8 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Nodes;
+using Microsoft.EntityFrameworkCore;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
-using System.Data.Entity;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
 {
@@ -12,14 +12,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
     {
         #region Properties
 
-        public int BlockItemIndex { get; set; }
+        public int BlockItemValueId { get; set; }
 
         #endregion
 
         #region Constructor
 
-        public DbBlockItemStructures(int blockItemIndex) =>
-            BlockItemIndex = blockItemIndex;
+        public DbBlockItemStructures(int blockItemValueId) =>
+            BlockItemValueId = blockItemValueId;
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
         public abstract void Load(ByteSerializerGraph g);
 
         protected List<T> GetStructures<T>(DbSet<T> dbSet) where T : DbBlockItemStructure =>
-            dbSet.AsNoTracking().OfBlockItem(BlockItemIndex).OrderByOffset().ToList();
+            dbSet.AsNoTracking().OfBlockItem(BlockItemValueId).OrderByOffset().ToList();
         // use DbSet.AsNoTracking() to improve performance:
         // https://stackoverflow.com/a/18169894
 
@@ -43,7 +43,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
             var entities = new List<TEntity>(valueComponents.Count);
             foreach (var c in valueComponents)
             {
-                var entity = new TEntity();
+                var entity = new TEntity() {
+                    BlockItemValueId = BlockItemValueId
+                };
                 entity.CopyFrom(c.Node);
                 entities.Add(entity);
             }

@@ -5,21 +5,20 @@
 using ByteSerialization.Attributes.Reference;
 using ByteSerialization.Components.Values.Composites.Records;
 using ByteSerialization.Nodes;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
 {
+    [PrimaryKey(nameof(BlockItemValueId), nameof(Offset))]
     public abstract class DbBlockItemStructure
     {
-        [Key, Column(Order = 0)] public int BlockItem { get; set; }
+        [Key, Column(Order = 0)] public int BlockItemValueId { get; set; }
         [Key, Column(Order = 1)] public int Offset { get; set; }
 
-        public virtual void CopyFrom(Node node)
-        {
-            BlockItem = (node.Root.Value as BlockItemValue).BlockItem.Index.Value;
+        public virtual void CopyFrom(Node node) =>
             Offset = (int)node.Position;
-        }
 
         protected static int GetValuePosition(ByteSerializerGraph graph, object value) =>
             (int)(graph.GetValueComponent(value)?.Position.Value ?? 0);
@@ -33,14 +32,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(BlockItem, Offset);
+            HashCode.Combine(BlockItemValueId, Offset);
     }
 
     public abstract class DbBlockItemStructure<TSource> : DbBlockItemStructure, IEquatable<DbBlockItemStructure<TSource>>
     {
         public virtual bool Equals(DbBlockItemStructure<TSource> other)
         {
-            if (BlockItem != other.BlockItem) return false;
+            if (BlockItemValueId != other.BlockItemValueId) return false;
             if (Offset != other.Offset) return false;
 
             return true;

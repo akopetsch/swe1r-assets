@@ -18,8 +18,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
 
         #region Constructor
 
-        public DbSpriteStructures(int blockItemIndex) : 
-            base(blockItemIndex)
+        public DbSpriteStructures(int blockItemValueId) : 
+            base(blockItemValueId)
         { }
 
         #endregion

@@ -2,7 +2,6 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Metadata
@@ -10,8 +9,8 @@ namespace SWE1R.Assets.Blocks.Metadata
     [Table("BlockItemValue")]
     public class BlockItemValueMetadata
     {
-        [Key, Column(Order = 0)] public BlockItemType BlockItemType { get; set; }
-        [Key, Column(Order = 1)] public int Id { get; set; }
+        /* [Key, Column(Order = 0)] */ public BlockItemType BlockItemType { get; set; }
+        /* [Key, Column(Order = 1)] */ public int Id { get; set; }
         public string Hash { get; set; }
         public int? Size1 { get; set; }
         public int? Size2 { get; set; }

@@ -2,6 +2,7 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
+using Microsoft.EntityFrameworkCore;
 using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims;
@@ -9,9 +10,6 @@ using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Data.SQLite;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite
 {
@@ -68,21 +66,25 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
 
         #endregion
 
-        #region Constructor
+        #region Methods (: DbContext)
 
-        public AssetsDbContext() :
-            base(new SQLiteConnection("data source=AssetsDb/AssetsDb.sqlite"), true)
-        { }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseSqlite("Data Source=AssetsDb/AssetsDb.sqlite");
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // composite primary keys:
+            modelBuilder.Entity<BlockMetadata>()
+                .HasKey(x => new { x.BlockItemType, x.Id });
+            modelBuilder.Entity<BlockItemMetadata>()
+                .HasKey(x => new { x.BlockItemType, x.BlockId, x.Index });
+            modelBuilder.Entity<BlockItemValueMetadata>()
+                .HasKey(x => new { x.BlockItemType, x.Id });
+        }
 
         #endregion
-        
-        #region Methods
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            base.OnModelCreating(modelBuilder);
-        }
+        #region Methods
 
         public void AddModelStructures(DbModelStructures dbModelStructures)
         {
