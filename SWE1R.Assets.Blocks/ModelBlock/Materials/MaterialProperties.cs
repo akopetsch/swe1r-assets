@@ -19,34 +19,46 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         /// </summary>
         public int AlphaBpp { get; set; }
         public short Word_4 { get; set; }
-
         public int[] Ints_6 { get; set; }
-
         public int[] Ints_e { get; set; }
-
+        /// <summary>
+        /// Always 0, except in model 3001. Seems like float16.
+        /// </summary>
         public short Unk_16 { get; set; } // TODO: win-demo
-
         public int Bitmask1 { get; set; }
         public int Bitmask2 { get; set; }
-
+        /// <summary>
+        /// Always 0, except in model 3001. Seems like float16.
+        /// </summary>
         public short Unk_20 { get; set; } // TODO: win-demo
-
         public byte Byte_22 { get; set; }
         public byte Byte_23 { get; set; }
         public byte Byte_24 { get; set; }
         public byte Byte_25 { get; set; }
-
+        /// <summary>
+        /// Always 0, except in model 3001. Seems like float16.
+        /// </summary>
         public short Unk_26 { get; set; } // TODO: win-demo
+        /// <summary>
+        /// Always 0, except in model 3001. Seems like float16.
+        /// </summary>
         public short Unk_28 { get; set; } // TODO: win-demo
+        /// <summary>
+        /// Always 0, except in model 3001. Seems like float16.
+        /// </summary>
         public short Unk_2a { get; set; } // TODO: win-demo
+        /// <summary>
+        /// Always 0, except in model 3001. Seems like float16.
+        /// </summary>
         public short Unk_2c { get; set; } // TODO: win-demo
-
         public byte Byte_2e { get; set; }
         public byte Byte_2f { get; set; }
         public byte Byte_30 { get; set; }
         public byte Byte_31 { get; set; }
-
-        public short Unk_32 { get; set; } // TODO: win-demo
+        /// <summary>
+        /// Always 0, except in model 3001. Seems like float16.
+        /// </summary>
+        public short Unk_32 { get; set; }
 
         #endregion
 

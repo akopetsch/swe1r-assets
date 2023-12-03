@@ -15,7 +15,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
     /// </summary>
     public class Mapping
     {
-        #region Properties
+        #region Properties (serialized)
 
         [Order(0)] public short Word_00 { get; set; }
 

@@ -13,6 +13,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
     /// </summary>
     public class MappingChild
     {
+        #region Properties (serialized)
+
         /// <summary>
         /// Seems to be a position vector.
         /// </summary>
@@ -56,5 +58,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// </summary>
         [Reference]
         [Order(11)] public MappingChild Next { get; set; }
+
+        #endregion
     }
 }

@@ -31,7 +31,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
 
             AssetsDbContext.Database.Migrate();
             ImportModels();
-            //ImportSprites();
+            ImportSprites();
             AssetsDbContext.SaveChanges();
         }
 

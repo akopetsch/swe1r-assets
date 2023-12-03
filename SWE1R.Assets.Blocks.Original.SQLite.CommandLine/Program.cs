@@ -25,5 +25,4 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
             return ExitCodes.Success;
         }
     }
-
 }
