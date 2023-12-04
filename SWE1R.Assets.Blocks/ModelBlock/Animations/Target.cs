@@ -24,9 +24,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 
         #region Properties (C union style access)
 
-        public DoubleMaterial DoubleMaterial
+        public MaterialReference MaterialReference
         {
-            get => Value as DoubleMaterial;
+            get => Value as MaterialReference;
             set => Value = value;
         }
         public Material Material
@@ -51,7 +51,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
                 Animation anim = c.GetAncestorValue<Animation>();
 
                 if (anim.BitmaskNibble == Animation.MaterialBitmaskNibble)
-                    return typeof(DoubleMaterial);
+                    return typeof(MaterialReference);
 
                 if (anim.BitmaskNibble == 0b1011 || // 0x0b
                     anim.BitmaskNibble == 0b1100)   // 0x0c

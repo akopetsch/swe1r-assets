@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         #region Properties (entities)
 
         public List<DbAnimation> Anims { get; set; }
-        public List<DbDoubleMaterial> DoubleMaterials { get; set; }
+        public List<DbMaterialReference> DoubleMaterials { get; set; }
 
         public List<DbIndicesChunk01> IndicesChunks01 { get; set; }
         public List<DbIndicesChunk03> IndicesChunks03 { get; set; }
@@ -102,7 +102,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         public override void Load(ByteSerializerGraph g)
         {
             Anims = GetStructures<Animation, DbAnimation>(g);
-            DoubleMaterials = GetStructures<DoubleMaterial, DbDoubleMaterial>(g);
+            DoubleMaterials = GetStructures<MaterialReference, DbMaterialReference>(g);
 
             IndicesChunks01 = GetStructures<IndicesChunk01, DbIndicesChunk01>(g);
             IndicesChunks03 = GetStructures<IndicesChunk03, DbIndicesChunk03>(g);

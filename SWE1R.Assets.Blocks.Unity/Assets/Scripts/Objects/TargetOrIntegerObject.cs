@@ -15,7 +15,7 @@ namespace SWE1R.Assets.Blocks.Unity.Objects
     [Serializable]
     public class TargetOrIntegerObject
     {
-        [SerializeReference] public DoubleMaterialObject doubleMaterial;
+        [SerializeReference] public MaterialReferenceObject doubleMaterial;
         [SerializeReference] public MaterialScriptableObject material;
         [SerializeReference] public TransformableD065Component transformableD065;
         public int? integer;
@@ -26,9 +26,9 @@ namespace SWE1R.Assets.Blocks.Unity.Objects
                 integer = source.Integer.Value;
             else if (source.Target != null)
             {
-                if (source.Target.DoubleMaterial != null)
-                    doubleMaterial = modelImporter.GetDoubleMaterialObject(
-                        source.Target.DoubleMaterial);
+                if (source.Target.MaterialReference != null)
+                    doubleMaterial = modelImporter.GetMaterialReferenceObject(
+                        source.Target.MaterialReference);
                 else if (source.Target.Material != null)
                     material = modelImporter.GetMaterialScriptableObject(
                         source.Target.Material);
@@ -47,7 +47,7 @@ namespace SWE1R.Assets.Blocks.Unity.Objects
             {
                 var target = swe1rTargetOrInteger.Target = new Swe1rTarget();
                 if (doubleMaterial != null)
-                    target.DoubleMaterial = modelExporter.GetDoubleMaterial(doubleMaterial);
+                    target.MaterialReference = modelExporter.GetMaterialReference(doubleMaterial);
                 else if (material != null)
                     target.Material = modelExporter.GetMaterial(material);
                 else if (transformableD065 != null)

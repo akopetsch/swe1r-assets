@@ -26,7 +26,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         #region Properties (Model)
 
         public DbSet<DbAnimation> Anims { get; set; }
-        public DbSet<DbDoubleMaterial> DoubleMaterials { get; set; }
+        public DbSet<DbMaterialReference> DoubleMaterials { get; set; }
 
         public DbSet<DbIndicesChunk01> IndicesChunks01 { get; set; }
         public DbSet<DbIndicesChunk03> IndicesChunks03 { get; set; }

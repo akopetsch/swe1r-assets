@@ -12,7 +12,6 @@ using SWE1R.Assets.Blocks.Unity.ScriptableObjects;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using Swe1rDoubleMaterial = SWE1R.Assets.Blocks.ModelBlock.Animations.DoubleMaterial;
 using Swe1rFlaggedNode = SWE1R.Assets.Blocks.ModelBlock.Nodes.FlaggedNode;
 using Swe1rINode = SWE1R.Assets.Blocks.ModelBlock.Nodes.INode; // TODO: alias name should start with 'I'?
 using Swe1rKeyframesOrInteger = SWE1R.Assets.Blocks.ModelBlock.Animations.KeyframesOrInteger;
@@ -20,6 +19,7 @@ using Swe1rMapping = SWE1R.Assets.Blocks.ModelBlock.Meshes.Mapping;
 using Swe1rMappingChild = SWE1R.Assets.Blocks.ModelBlock.Meshes.MappingChild;
 using Swe1rMaterial = SWE1R.Assets.Blocks.ModelBlock.Materials.Material;
 using Swe1rMaterialProperties = SWE1R.Assets.Blocks.ModelBlock.Materials.MaterialProperties;
+using Swe1rMaterialReference = SWE1R.Assets.Blocks.ModelBlock.Animations.MaterialReference;
 using Swe1rMaterialTexture = SWE1R.Assets.Blocks.ModelBlock.Materials.MaterialTexture;
 using Swe1rMaterialTextureChild = SWE1R.Assets.Blocks.ModelBlock.Materials.MaterialTextureChild;
 using Swe1rMesh = SWE1R.Assets.Blocks.ModelBlock.Meshes.Mesh;
@@ -64,8 +64,8 @@ namespace SWE1R.Assets.Blocks.Unity
         private Dictionary<VertexObject, Swe1rVertex> _vertices =
             new Dictionary<VertexObject, Swe1rVertex>();
 
-        private Dictionary<DoubleMaterialObject, Swe1rDoubleMaterial> _doubleMaterials =
-            new Dictionary<DoubleMaterialObject, Swe1rDoubleMaterial>();
+        private Dictionary<MaterialReferenceObject, Swe1rMaterialReference> _materialReferences =
+            new Dictionary<MaterialReferenceObject, Swe1rMaterialReference>();
 
         private Dictionary<KeyframesOrIntegerObject, Swe1rKeyframesOrInteger> _keyframesOrIntegers =
             new Dictionary<KeyframesOrIntegerObject, Swe1rKeyframesOrInteger>();
@@ -146,8 +146,8 @@ namespace SWE1R.Assets.Blocks.Unity
         public Swe1rVertex GetVertex(VertexObject vertexObject) =>
             _vertices.GetOrCreate(vertexObject, x => x.Export());
 
-        public Swe1rDoubleMaterial GetDoubleMaterial(DoubleMaterialObject doubleMaterialObject) =>
-            _doubleMaterials.GetOrCreate(doubleMaterialObject, x => x.Export(this));
+        public Swe1rMaterialReference GetMaterialReference(MaterialReferenceObject materialReferenceObject) =>
+            _materialReferences.GetOrCreate(materialReferenceObject, x => x.Export(this));
 
         public Swe1rTargetOrInteger GetTargetOrInteger(TargetOrIntegerObject targetOrInteger) =>
             _targetOrIntegers.GetOrCreate(targetOrInteger, x => x.Export(this));

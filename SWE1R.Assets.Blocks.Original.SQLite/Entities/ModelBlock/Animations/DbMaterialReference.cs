@@ -8,44 +8,41 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 {
-    [Table("Model_DoubleMaterial")]
-    public class DbDoubleMaterial : DbBlockItemStructure<DoubleMaterial>
+    [Table("Model_MaterialReference")]
+    public class DbMaterialReference : DbBlockItemStructure<MaterialReference>
     {
-        public int P_Foo1 { get; set; }
-        public int P_Foo2 { get; set; }
+        public int P_Material { get; set; }
 
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
 
-            var dm = (DoubleMaterial)node.Value;
+            var dm = (MaterialReference)node.Value;
 
-            P_Foo1 = GetPropertyPointer(node, nameof(dm.Foo1));
-            P_Foo2 = GetPropertyPointer(node, nameof(dm.Foo2));
+            P_Material = GetPropertyPointer(node, nameof(dm.Material));
         }
 
-        public override bool Equals(DbBlockItemStructure<DoubleMaterial> other)
+        public override bool Equals(DbBlockItemStructure<MaterialReference> other)
         {
-            var _other = (DbDoubleMaterial)other;
+            var _other = (DbMaterialReference)other;
 
             if (!base.Equals(_other))
                 return false;
 
-            if (P_Foo1 != _other.P_Foo1) return false;
-            if (P_Foo2 != _other.P_Foo2) return false;
+            if (P_Material != _other.P_Material) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbDoubleMaterial)
-                return this.Equals((DbDoubleMaterial)obj);
+            if (obj is DbMaterialReference)
+                return this.Equals((DbMaterialReference)obj);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), P_Foo1, P_Foo2);
+            HashCode.Combine(base.GetHashCode(), P_Material);
     }
 }

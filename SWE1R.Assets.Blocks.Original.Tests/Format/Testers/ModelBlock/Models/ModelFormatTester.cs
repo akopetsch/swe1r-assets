@@ -50,8 +50,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
                         var materials = new List<Material>();
                         if (target.Material != null)
                             materials.Add(target.Material);
-                        if (target.DoubleMaterial != null)
-                            materials.AddRange(target.DoubleMaterial.GetMaterials().Where(x => x != null));
+                        if (target.MaterialReference != null)
+                            materials.Add(target.MaterialReference.Material);
                         Assert.True(materials.All(x => headerFlaggedNodesGraphMaterials.Contains(x)));
                     }
 

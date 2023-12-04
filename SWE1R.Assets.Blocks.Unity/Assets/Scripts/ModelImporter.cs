@@ -18,7 +18,6 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using Swe1rDoubleMaterial = SWE1R.Assets.Blocks.ModelBlock.Animations.DoubleMaterial;
 using Swe1rFlaggedNode = SWE1R.Assets.Blocks.ModelBlock.Nodes.FlaggedNode;
 using Swe1rIndicesChunk = SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices.IndicesChunk;
 using Swe1rMapping = SWE1R.Assets.Blocks.ModelBlock.Meshes.Mapping;
@@ -26,6 +25,7 @@ using Swe1rMappingChild = SWE1R.Assets.Blocks.ModelBlock.Meshes.MappingChild;
 using Swe1rMappingSub = SWE1R.Assets.Blocks.ModelBlock.Meshes.MappingSub;
 using Swe1rMaterial = SWE1R.Assets.Blocks.ModelBlock.Materials.Material;
 using Swe1rMaterialProperties = SWE1R.Assets.Blocks.ModelBlock.Materials.MaterialProperties;
+using Swe1rMaterialReference = SWE1R.Assets.Blocks.ModelBlock.Animations.MaterialReference;
 using Swe1rMaterialTexture = SWE1R.Assets.Blocks.ModelBlock.Materials.MaterialTexture;
 using Swe1rMaterialTextureChild = SWE1R.Assets.Blocks.ModelBlock.Materials.MaterialTextureChild;
 using Swe1rMesh = SWE1R.Assets.Blocks.ModelBlock.Meshes.Mesh;
@@ -65,8 +65,8 @@ namespace SWE1R.Assets.Blocks.Unity
         private Dictionary<Swe1rIndicesChunk, IndicesChunkObject> indicesChunkObjects = 
             new Dictionary<Swe1rIndicesChunk, IndicesChunkObject>();
 
-        private Dictionary<Swe1rDoubleMaterial, DoubleMaterialObject> doubleMaterialObjects =
-            new Dictionary<Swe1rDoubleMaterial, DoubleMaterialObject>();
+        private Dictionary<Swe1rMaterialReference, MaterialReferenceObject> materialReferenceObjects =
+            new Dictionary<Swe1rMaterialReference, MaterialReferenceObject>();
 
         #endregion
 
@@ -210,8 +210,8 @@ namespace SWE1R.Assets.Blocks.Unity
         public VertexObject GetVertexObject(Swe1rVertex source) =>
             vertexObjects.GetOrCreate(source, x => new VertexObject(source));
 
-        public DoubleMaterialObject GetDoubleMaterialObject(Swe1rDoubleMaterial source) =>
-            doubleMaterialObjects.GetOrCreate(source, x => new DoubleMaterialObject(x, this));
+        public MaterialReferenceObject GetMaterialReferenceObject(Swe1rMaterialReference source) =>
+            materialReferenceObjects.GetOrCreate(source, x => new MaterialReferenceObject(x, this));
 
         #endregion
 
