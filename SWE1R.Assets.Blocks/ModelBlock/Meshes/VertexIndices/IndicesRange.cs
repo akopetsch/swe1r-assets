@@ -21,7 +21,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Properties (helper)
 
         public int NextIndicesBase =>
-            Indices.Max() + 2; // +2 because value is double the actual index // TODO: move comment
+            Indices.Any() ? (Indices.Max() + 2) : 2;
+            // (+)2 because value is double the actual index 
+            // TODO: move comment, do not hardcode number 2
 
         public IEnumerable<int> Indices => 
             Chunks0506.SelectMany(c => c.Indices);

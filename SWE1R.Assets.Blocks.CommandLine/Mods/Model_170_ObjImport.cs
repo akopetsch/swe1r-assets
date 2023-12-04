@@ -6,6 +6,7 @@ using ByteSerialization;
 using SWE1R.Assets.Blocks.Images.SystemDrawing;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Import;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.TextureBlock;
 
@@ -76,6 +77,10 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             var importer = new ModelObjImporter(
                 objFilename, textureBlock, new SystemDrawingImageRgba32Loader(), configuration);
             importer.Import();
+            PrintModelImporterDetails(importer);
+            // [0] vertices: 2992, chunks: 1565
+            // [1] vertices: 816, chunks: 452
+            // [2] vertices: 1632, chunks: 819
 
             var parentNode = byteSerializerContext.Graph.GetValue<TransformableD065>();
             parentNode.Children.Clear();
@@ -86,6 +91,16 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             modelBlockItem.Save();
             modelBlock.Save(BlockDefaultFilenames.ModelBlock);
             textureBlock.Save(BlockDefaultFilenames.TextureBlock);
+        }
+
+        private void PrintModelImporterDetails(ModelObjImporter modelObjImporter)
+        {
+            MeshGroup3064 meshGroup3064 = modelObjImporter.MeshGroup3064;
+            for (int i = 0; i < meshGroup3064.Meshes.Count; i++)
+            {
+                Mesh mesh = meshGroup3064.Meshes[i];
+                Console.WriteLine($"[{i}] vertices: {mesh.VisibleVertices.Count}, chunks: {mesh.VisibleIndicesChunks.Count}");
+            }
         }
     }
 }

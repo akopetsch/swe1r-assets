@@ -10,7 +10,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
     {
         public float PositionScale { get; set; } = 1;
         public Vector3 PositionOffset { get; set; } = Vector3.Zero;
-        
+        public int? MaxVertexCountPerMesh { get; set; } = null;
+
         public ModelObjImporterConfiguration() { }
     }
 }

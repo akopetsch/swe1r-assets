@@ -121,7 +121,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             mesh.PrimitiveType = PrimitiveType.Triangles;
 
             List<IndicesRange> indicesRanges;
-            (mesh.VisibleVertices, indicesRanges) = GetVerticesAndIndicesRanges(objGroup, mesh);
+            (mesh.VisibleVertices, indicesRanges) = GetVerticesAndIndicesRanges(objGroup);
             mesh.VisibleIndicesChunks = GetIndicesChunks(indicesRanges, mesh);
 
             // counts
@@ -168,7 +168,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             }
         }
 
-        private (List<Vertex> vertices, List<IndicesRange> indicesRanges) GetVerticesAndIndicesRanges(ObjGroup objGroup, Mesh mesh)
+        private (List<Vertex> vertices, List<IndicesRange> indicesRanges) GetVerticesAndIndicesRanges(ObjGroup objGroup)
         {
             int startVertexIndex = 0;
             int indexBase = 0;
@@ -177,6 +177,15 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             var indicesRanges = new List<IndicesRange>() { indicesRange };
             foreach (ObjFace face in objGroup.Faces)
             {
+                if (indicesRange.NextIndicesBase >= _indicesRangeMaxLength)
+                {
+                    // HACK: this should happen in the foreach below
+                    // new indices range
+                    startVertexIndex += indicesRange.NextIndicesBase / 2;
+                    indicesRange = new IndicesRange();
+                    indicesRanges.Add(indicesRange);
+                }
+
                 // vertices
                 vertices.AddRange(
                     GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)));
@@ -208,14 +217,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     // TODO: use IndicesChunk06 (e.g. for Quad) for smaller file size
                     indicesRange.Chunks0506.Add(chunk05);
                 }
-                if (indicesRange.NextIndicesBase >= _indicesRangeMaxLength)
-                {
-                    // HACK: this should happen in the foreach before
-                    // new indices range
-                    startVertexIndex += indicesRange.NextIndicesBase / 2;
-                    indicesRange = new IndicesRange();
-                    indicesRanges.Add(indicesRange);
-                }
             }
             return (vertices, indicesRanges);
         }
@@ -226,8 +227,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             var indicesChunks = new IndicesChunks();
             foreach (IndicesRange range in indicesRanges)
             {
-                if (range.Chunks0506.Count == 0)
-                    break; // HACK: remove this
                 range.Chunk01 = new IndicesChunk01() {
                     Length = Convert.ToInt16(range.Indices.Distinct().Count() * Vertex.StructureSize),
                     NextIndicesBase = Convert.ToByte(range.NextIndicesBase),
