@@ -188,16 +188,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 }
 
                 // vertices
-                vertices.AddRange(
-                    GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)));
-
-                AddIndicesToRange(indexBase, face.Count, startVertexIndex, indicesRange);
+                List<Vertex> newVertices = GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)).ToList();
+                List<IndicesChunk> newIndicesChunks = GetIndicesChunks(indexBase, face.Count, startVertexIndex).ToList();
+                vertices.AddRange(newVertices);
+                indicesRange.Chunks0506.AddRange(newIndicesChunks);
                 indexBase += face.Count;
             }
             return (vertices, indicesRanges);
         }
 
-        private void AddIndicesToRange(int indexBase, int faceCount, int startVertexIndex, IndicesRange indicesRange)
+        private IEnumerable<IndicesChunk> GetIndicesChunks(int indexBase, int faceCount, int startVertexIndex)
         {
             // primitives indices
             int[] primitiveIndices = Enumerable.Range(indexBase, faceCount).ToArray();
@@ -217,13 +217,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             var triangles = primitives.SelectMany(p => p.GetTriangles()).ToList();
             foreach (Triangle triangle in triangles)
             {
-                var chunk05 = new IndicesChunk05() {
+                yield return new IndicesChunk05() {
                     Index0 = Convert.ToByte(2 * (triangle.I0 - startVertexIndex)),
                     Index1 = Convert.ToByte(2 * (triangle.I1 - startVertexIndex)),
                     Index2 = Convert.ToByte(2 * (triangle.I2 - startVertexIndex)),
                 };
                 // TODO: use IndicesChunk06 (e.g. for Quad) for smaller file size
-                indicesRange.Chunks0506.Add(chunk05);
             }
         }
 
