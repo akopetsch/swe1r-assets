@@ -5,6 +5,7 @@
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.TextureBlock;
 using SWE1R.Assets.Blocks.Textures;
+using System;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 {
@@ -25,18 +26,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 
         protected override Material CreateMaterial()
         {
-            var material = base.CreateMaterial();
-            material.Bitmask = 12;
-            return material;
+            Material m = base.CreateMaterial();
+            m.Bitmask = 12;
+            return m;
         }
 
         protected override MaterialTexture CreateMaterialTexture()
         {
-            var mt = base.CreateMaterialTexture();
+            MaterialTexture mt = base.CreateMaterialTexture();
             mt.Mask_Unk = 1; // 1
             mt.Format = TextureFormat.RGBA5551_I8;
             mt.Flags = 512; // 256, 512, 1024, 2048
-            mt.Mask = 1023; // 7, 127, 1023
+            mt.Mask = 0x03ff; // 0x0007, 0x007f, 0x03ff
             return mt;
         }
 
@@ -50,22 +51,20 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
                 Byte_f = 252, // 12, 60, 124, 252
             };
 
-        protected override MaterialProperties CreateMaterialProperties() =>
-            new MaterialProperties() {
-                Word_4 = 1, // 1
-                Ints_6 = new int[] {
-                    0x11f041f, // 0x011f041f
-                    0x7070704, // 0x07070704
-                },
-                Ints_e = new int[] {
-                    0x11f041f, // 0x011f041f
-                    0x7070704, // 0x07070704
-                },
-                // bitmasks to make it opaque:
-                Bitmask1 = unchecked((int)0xC8000000), // 0
-                Bitmask2 = 0x0112038, // 0
-                // Bitmask2 = 0x00112078
+        protected override MaterialProperties CreateMaterialProperties()
+        {
+            MaterialProperties mp = base.CreateMaterialProperties();
+            mp.Word_4 = 1; // 1
+            mp.Ints_6 = new int[] {
+                0x11f041f, // 0x011f041f
+                0x7070704, // 0x07070704
             };
+            mp.Ints_e = new int[] {
+                0x11f041f, // 0x011f041f
+                0x7070704, // 0x07070704
+            };
+            return mp;
+        }
 
         #endregion
     }

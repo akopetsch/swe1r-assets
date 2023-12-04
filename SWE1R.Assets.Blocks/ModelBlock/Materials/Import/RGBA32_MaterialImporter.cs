@@ -5,6 +5,7 @@
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.TextureBlock;
 using SWE1R.Assets.Blocks.Textures;
+using System;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 {
@@ -25,18 +26,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 
         protected override Material CreateMaterial()
         {
-            var material = base.CreateMaterial();
-            material.Bitmask = 12; // 4, 6, 12, 14
-            return material;
+            Material m = base.CreateMaterial();
+            m.Bitmask = 12; // 4, 6, c, e
+            return m;
         }
 
         protected override MaterialTexture CreateMaterialTexture()
         {
-            var mt = base.CreateMaterialTexture();
+            MaterialTexture mt = base.CreateMaterialTexture();
             mt.Mask_Unk = 0; // 0
             mt.Format = TextureFormat.RGBA32;
             mt.Flags = 256; // 64, 128, 256 // TODO: 512?
-            mt.Mask = 1023; // 511, 1023
+            mt.Mask = 0x03ff; // 0x01ff, 0x03ff
             return mt;
         }
 
@@ -50,30 +51,28 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
                 Byte_f = 252, // 60, 124
             };
 
-        protected override MaterialProperties CreateMaterialProperties() =>
-            new MaterialProperties() {
-                Word_4 = 2, // 2
-                Ints_6 = new int[] {
-                    0x011f041f, // 0x011f031f, 0x011f041f, 0x1f1f1f01, 0x1f1f1f03, 0x031f011f
-                    0x07070701, // 0x01070307, 0x03070107, 0x07070701
-                },
-                Ints_e = new int[] {
-                    0x1f1f1f00, // 0x1f1f1f00
-                    0x07070700, // 0x00070407, 0x07070700
-                },
-                // bitmasks to make it opaque:
-                Bitmask1 = unchecked((int)0xC8000000), // 0
-                Bitmask2 = 0x0112038, // 0
-                // Bitmask2 = 0x00112078
-                Byte_22 = 0, // 0, 255
-                Byte_23 = 0, // 0, 255
-                Byte_24 = 0, // 0, 255
-                Byte_25 = 0, // 0, 64, 255
-                Byte_2e = 0, // 0, 128
-                Byte_2f = 0, // 0, 128
-                Byte_30 = 0, // 0, 128
-                Byte_31 = 0, // 0, 16
+        protected override MaterialProperties CreateMaterialProperties()
+        {
+            MaterialProperties mp = base.CreateMaterialProperties();
+            mp.Word_4 = 2; // 2
+            mp.Ints_6 = new int[] {
+                0x011f041f, // 0x011f031f, 0x011f041f, 0x1f1f1f01, 0x1f1f1f03, 0x031f011f
+                0x07070701, // 0x01070307, 0x03070107, 0x07070701
             };
+            mp.Ints_e = new int[] {
+                0x1f1f1f00, // 0x1f1f1f00
+                0x07070700, // 0x00070407, 0x07070700
+            };
+            mp.Byte_22 = 0; // 0, 255
+            mp.Byte_23 = 0; // 0, 255
+            mp.Byte_24 = 0; // 0, 255
+            mp.Byte_25 = 0; // 0, 64, 255
+            mp.Byte_2e = 0; // 0, 128
+            mp.Byte_2f = 0; // 0, 128
+            mp.Byte_30 = 0; // 0, 128
+            mp.Byte_31 = 0; // 0, 16
+            return mp;
+        }
 
         #endregion
     }

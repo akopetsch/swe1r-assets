@@ -79,7 +79,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 
         protected abstract MaterialTextureChild CreateMaterialTextureChild();
 
-        protected abstract MaterialProperties CreateMaterialProperties();
+        protected virtual MaterialProperties CreateMaterialProperties() =>
+            new MaterialProperties() {
+                // bitmasks to make it opaque:
+                Bitmask1 = unchecked((int)0xC8000000),
+                Bitmask2 = 0x0112038,
+                // Bitmask2 = 0x00112078
+            };
 
         private (short width, short height) GetSize() =>
             (Convert.ToInt16(Image.Width), 
