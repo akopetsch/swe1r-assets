@@ -2,6 +2,7 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
+using ObjLoader.Loader.Data.Elements;
 using ObjLoader.Loader.Loaders;
 using SWE1R.Assets.Blocks.Colors;
 using SWE1R.Assets.Blocks.Images;
@@ -190,35 +191,40 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 vertices.AddRange(
                     GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)));
 
-                // primitives indices
-                int[] primitiveIndices = Enumerable.Range(indexBase, face.Count).ToArray();
+                AddIndicesToRange(indexBase, face.Count, startVertexIndex, indicesRange);
                 indexBase += face.Count;
-
-                // primitives
-                var primitives = new List<Primitive>();
-                if (face.Count == 3)
-                    primitives.Add(new Triangle(primitiveIndices));
-                else if (face.Count == 4)
-                    primitives.Add(new Quad(primitiveIndices));
-                else if (face.Count > 4)
-                    primitives.Add(new TriangleFan(primitiveIndices));
-                else
-                    throw new InvalidOperationException();
-
-                // triangles -> indicesRange
-                var triangles = primitives.SelectMany(p => p.GetTriangles()).ToList();
-                foreach (Triangle triangle in triangles)
-                {
-                    var chunk05 = new IndicesChunk05() {
-                        Index0 = Convert.ToByte(2 * (triangle.I0 - startVertexIndex)),
-                        Index1 = Convert.ToByte(2 * (triangle.I1 - startVertexIndex)),
-                        Index2 = Convert.ToByte(2 * (triangle.I2 - startVertexIndex)),
-                    };
-                    // TODO: use IndicesChunk06 (e.g. for Quad) for smaller file size
-                    indicesRange.Chunks0506.Add(chunk05);
-                }
             }
             return (vertices, indicesRanges);
+        }
+
+        private void AddIndicesToRange(int indexBase, int faceCount, int startVertexIndex, IndicesRange indicesRange)
+        {
+            // primitives indices
+            int[] primitiveIndices = Enumerable.Range(indexBase, faceCount).ToArray();
+            
+            // primitives
+            var primitives = new List<Primitive>();
+            if (faceCount == 3)
+                primitives.Add(new Triangle(primitiveIndices));
+            else if (faceCount == 4)
+                primitives.Add(new Quad(primitiveIndices));
+            else if (faceCount > 4)
+                primitives.Add(new TriangleFan(primitiveIndices));
+            else
+                throw new InvalidOperationException();
+
+            // triangles -> indicesRange
+            var triangles = primitives.SelectMany(p => p.GetTriangles()).ToList();
+            foreach (Triangle triangle in triangles)
+            {
+                var chunk05 = new IndicesChunk05() {
+                    Index0 = Convert.ToByte(2 * (triangle.I0 - startVertexIndex)),
+                    Index1 = Convert.ToByte(2 * (triangle.I1 - startVertexIndex)),
+                    Index2 = Convert.ToByte(2 * (triangle.I2 - startVertexIndex)),
+                };
+                // TODO: use IndicesChunk06 (e.g. for Quad) for smaller file size
+                indicesRange.Chunks0506.Add(chunk05);
+            }
         }
 
         private IndicesChunks GetIndicesChunks(List<IndicesRange> indicesRanges, Mesh mesh)
