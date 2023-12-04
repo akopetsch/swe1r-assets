@@ -11,10 +11,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
     /// </summary>
     public class Material
     {
-        #region Properties (serialization)
+        #region Properties (serialized)
 
         [Order(0)]
-        public int Int { get; set; }
+        public int Bitmask { get; set; }
         [Order(1)]
         public short Width_Unk_Dividend { get; set; }
         [Order(2)]
@@ -32,9 +32,30 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 
         #endregion
 
+        #region Properties (original values)
+
+        /// <summary>
+        /// The original values of <see cref="Bitmask">Bitmask</see>.
+        /// </summary>
+        public static readonly short[] OriginalBitmaskValues = new short[] {
+            0x04, // 276 times
+            0x06, // 720 times
+            0x07, // 523 times
+            0x0c, // 741 times
+            0x0e, // 5074 times
+            0x0f, // 4684 times
+            0x17, // 13 times
+            0x1f, // 69 times
+            0x46, // 26 times
+            0x47, // 500 times
+            0x57, // 4 times
+        };
+
+        #endregion
+
         #region Properties (helper)
 
-        public bool HasBackfaceCulling => (Int & 8) > 0; // TODO: confirm this
+        public bool HasBackfaceCulling => (Bitmask & 8) > 0; // TODO: confirm this
 
         #endregion
     }

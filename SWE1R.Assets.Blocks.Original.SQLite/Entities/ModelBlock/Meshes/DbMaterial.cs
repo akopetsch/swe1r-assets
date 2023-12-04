@@ -11,7 +11,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
     [Table("Model_Material")]
     public class DbMaterial : DbBlockItemStructure<Material>
     {
-        public int Int { get; set; }
+        public int Bitmask { get; set; }
         public short Width_Unk_Dividend { get; set; }
         public short Height_Unk_Dividend { get; set; }
         public int P_Texture { get; set; }
@@ -23,7 +23,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
             var m = (Material)node.Value;
 
-            Int = m.Int;
+            Bitmask = m.Bitmask;
             Width_Unk_Dividend = m.Width_Unk_Dividend;
             Height_Unk_Dividend = m.Height_Unk_Dividend;
             P_Texture = GetPropertyPointer(node, nameof(m.Texture));
@@ -37,7 +37,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             if (!base.Equals(_other))
                 return false;
 
-            if (Int != _other.Int) return false;
+            if (Bitmask != _other.Bitmask) return false;
             if (Width_Unk_Dividend != _other.Width_Unk_Dividend) return false;
             if (Height_Unk_Dividend != _other.Height_Unk_Dividend) return false;
             if (P_Texture != _other.P_Texture) return false;
@@ -55,7 +55,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), Int, 
+            HashCode.Combine(base.GetHashCode(), Bitmask, 
                 Width_Unk_Dividend, Height_Unk_Dividend, 
                 P_Texture, P_Properties);
     }

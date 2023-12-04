@@ -50,7 +50,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 
         private void AssertSkyboxMaterial(Material material)
         {
-            Assert.True(material.Int == 12);
+            Assert.True(material.Bitmask == 12);
             Assert.True(material.Width_Unk_Dividend == 0);
             Assert.True(material.Height_Unk_Dividend == 0);
 

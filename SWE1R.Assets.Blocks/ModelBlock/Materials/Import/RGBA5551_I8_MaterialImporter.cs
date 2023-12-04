@@ -26,7 +26,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         protected override Material CreateMaterial()
         {
             var material = base.CreateMaterial();
-            material.Int = 12;
+            material.Bitmask = 12;
             return material;
         }
 
