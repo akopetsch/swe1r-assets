@@ -133,8 +133,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             mesh.Bounds1 = bounds.Max;
 
             // TODO: FacesCount
-            //Mesh.FacesCount = (short)Mesh.VisibleIndicesChunks.SelectMany(x => x.Triangles).Count();
-            mesh.FacesCount = (short)indicesRanges.SelectMany(r => r.Chunks0506).Count();
+            //Mesh.FacesCount = Convert.ToInt16(Mesh.VisibleIndicesChunks.SelectMany(x => x.Triangles).Count());
+            mesh.FacesCount = Convert.ToInt16(indicesRanges.SelectMany(r => r.Chunks0506).Count());
             mesh.FacesVertexCounts = indicesRanges.SelectMany(r => r.Chunks0506).Select(x => x.Indices.Count()).ToList();
             
             return mesh;
@@ -229,8 +229,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 if (range.Chunks0506.Count == 0)
                     break; // HACK: remove this
                 range.Chunk01 = new IndicesChunk01() {
-                    Length = (byte)(range.Indices.Distinct().Count() * Vertex.StructureSize),
-                    NextIndicesBase = (byte)range.NextIndicesBase,
+                    Length = Convert.ToInt16(range.Indices.Distinct().Count() * Vertex.StructureSize),
+                    NextIndicesBase = Convert.ToByte(range.NextIndicesBase),
                     StartVertex = new ReferenceByIndex<Vertex>() {
                         Collection = mesh.VisibleVertices,
                         Index = startVertexIndex,
@@ -258,13 +258,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
             return new Vertex() {
                 Position = new Vector3Int16() {
-                    X = (short)position.X,
-                    Y = (short)position.Y,
-                    Z = (short)position.Z,
+                    X = Convert.ToInt16(position.X),
+                    Y = Convert.ToInt16(position.Y),
+                    Z = Convert.ToInt16(position.Z),
                 },
-                U = (short)texture.X,
-                V = (short)texture.Y,
-                Color = ColorRgba32.White,
+                U = Convert.ToInt16(texture.X),
+                V = Convert.ToInt16(texture.Y),
+                Byte_C = byte.MaxValue,
+                Byte_D = byte.MaxValue,
+                Byte_E = byte.MaxValue,
+                Byte_F = byte.MaxValue,
             };
         }
 

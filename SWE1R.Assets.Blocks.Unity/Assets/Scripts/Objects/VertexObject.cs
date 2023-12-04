@@ -6,6 +6,7 @@ using SWE1R.Assets.Blocks.Unity.Extensions;
 using System;
 using Swe1rVertex = SWE1R.Assets.Blocks.ModelBlock.Meshes.Vertex;
 using UnityVectorInt = UnityEngine.Vector3Int;
+using UnityColor32 = UnityEngine.Color32;
 
 namespace SWE1R.Assets.Blocks.Unity.Objects
 {
@@ -20,7 +21,7 @@ namespace SWE1R.Assets.Blocks.Unity.Objects
         public byte byte_E;
         public byte byte_F;
 
-        public bool hasNormal;
+        public UnityColor32 color;
 
         public VertexObject(Swe1rVertex source)
         {
@@ -31,6 +32,8 @@ namespace SWE1R.Assets.Blocks.Unity.Objects
             byte_D = source.Byte_D;
             byte_E = source.Byte_E;
             byte_F = source.Byte_F;
+
+            color = source.Color.ToUnityColor32();
         }
 
         public Swe1rVertex Export()
