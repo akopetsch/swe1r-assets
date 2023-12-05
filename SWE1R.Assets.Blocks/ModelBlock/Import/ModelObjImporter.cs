@@ -2,9 +2,7 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-using ObjLoader.Loader.Data.Elements;
 using ObjLoader.Loader.Loaders;
-using SWE1R.Assets.Blocks.Colors;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Materials.Import;
@@ -95,8 +93,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             {
                 if (objGroup.Faces.Count > 0)
                 {
-                    Mesh mesh = ImportObjGroup(objGroup);
-                    MeshGroup3064.Children.Add(mesh);
+                    List<Mesh> meshes = ImportObjGroup(objGroup);
+                    MeshGroup3064.Children.AddRange(meshes);
                 }
             }
             MeshGroup3064.UpdateChildrenCount();
@@ -111,21 +109,24 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             return importer.Material;
         }
 
-        private Mesh ImportObjGroup(ObjGroup objGroup)
+        private List<Mesh> ImportObjGroup(ObjGroup objGroup)
         {
+            var meshes = new List<Mesh>();
+
             var mesh = new Mesh();
+            meshes.Add(mesh);
 
             mesh.Material = ImportObjMaterial(objGroup.Material);
 
-            List<IndicesRange> indicesRanges;
-            (mesh.VisibleVertices, indicesRanges) = GetVerticesAndIndicesRanges(objGroup);
-            mesh.VisibleIndicesChunks = GetIndicesChunks(indicesRanges, mesh);
+            VerticesAndIndicesRanges verticesAndIndicesRanges = GetVerticesAndIndicesRanges(objGroup);
+            mesh.VisibleVertices = verticesAndIndicesRanges.Vertices;
+            mesh.VisibleIndicesChunks = GetIndicesChunks(verticesAndIndicesRanges.IndicesRanges, mesh);
 
             mesh.UpdateCounts();
             mesh.UpdateFacesCountByVisibleIndicesChunks();
             mesh.UpdateBounds();
 
-            return mesh;
+            return meshes;
         }
 
         private Material ImportObjMaterial(ObjMaterial objMaterial)
@@ -156,7 +157,26 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             }
         }
 
-        private (List<Vertex> vertices, List<IndicesRange> indicesRanges) GetVerticesAndIndicesRanges(ObjGroup objGroup)
+        private class VerticesAndIndicesRanges
+        {
+            public List<Vertex> Vertices { get; }
+            public List<IndicesRange> IndicesRanges { get; }
+
+            public VerticesAndIndicesRanges()
+            {
+                Vertices = new List<Vertex>();
+                IndicesRanges = new List<IndicesRange>();
+            }
+
+            public VerticesAndIndicesRanges(
+                List<Vertex> vertices, List<IndicesRange> indicesRanges)
+            {
+                Vertices = vertices;
+                IndicesRanges = indicesRanges;
+            }
+        }
+
+        private VerticesAndIndicesRanges GetVerticesAndIndicesRanges(ObjGroup objGroup)
         {
             int startVertexIndex = 0;
             int indexBase = 0;
@@ -191,7 +211,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 vertices.AddRange(newVertices);
                 indicesRange.Chunks0506.AddRange(newIndicesChunks);
             }
-            return (vertices, indicesRanges);
+            return new VerticesAndIndicesRanges(vertices, indicesRanges);
         }
 
         private IEnumerable<IndicesChunk> GetIndicesChunks(int indexBase, int faceCount, int startVertexIndex)
