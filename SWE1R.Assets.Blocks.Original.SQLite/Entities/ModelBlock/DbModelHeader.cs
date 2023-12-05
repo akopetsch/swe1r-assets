@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
-    [Table("Model_Header")]
+    [Table(nameof(Model))]
     public class DbModelHeader : DbBlockItemStructure<Model>
     {
         public string Type { get; set; }

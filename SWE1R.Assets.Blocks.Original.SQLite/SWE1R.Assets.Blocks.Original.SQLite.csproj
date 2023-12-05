@@ -41,4 +41,10 @@
     <ProjectReference Include="..\SWE1R.Assets.Blocks.Original\SWE1R.Assets.Blocks.Original.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="AssetsDb\AssetsDb.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

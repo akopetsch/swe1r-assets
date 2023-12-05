@@ -71,8 +71,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(),
-                HashCode.Combine(Width, Height, TextureFormat, Int16_6, P_Palette, Palette_Length, PagesCount, Int16_E),
-                HashCode.Combine(P_Pages));
+            CombineHashCodes(base.GetHashCode(), Width, Height, TextureFormat, Int16_6, P_Palette, Palette_Length, PagesCount, Int16_E, P_Pages);
     }
 }

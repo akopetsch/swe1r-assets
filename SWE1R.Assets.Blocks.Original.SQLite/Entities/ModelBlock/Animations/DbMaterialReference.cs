@@ -3,12 +3,13 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Animations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 {
-    [Table("Model_MaterialReference")]
+    [Table($"{nameof(Model)}_{nameof(MaterialReference)}")]
     public class DbMaterialReference : DbBlockItemStructure<MaterialReference>
     {
         public int P_Material { get; set; }

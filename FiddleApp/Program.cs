@@ -17,7 +17,7 @@ namespace FiddleApp
     {
         public static int Main(string[] args)
         {
-            int result = Fiddle3();
+            int result = Fiddle0();
             if (Debugger.IsAttached)
                 ConsoleUtil.PromptExit();
             return result;
@@ -54,7 +54,7 @@ namespace FiddleApp
             return ExitCodes.Success;
         }
 
-        private static int Fiddle()
+        private static int Fiddle1()
         {
             var spriteBlock = Block.Load<SpriteBlockItem>(SpriteBlockIdNames.Default);
 
@@ -67,9 +67,14 @@ namespace FiddleApp
 
             spriteBlock.Save(BlockDefaultFilenames.SpriteBlock);
 
-            //new RoslynCodeGenerationExample();
-            //new ByteSerializerSqlFiddle(typeof(Sprite));
+            return ExitCodes.Success;
+        }
 
+        private static int Fiddle0()
+        {
+            var generator = new DbEntityClassGenerator(typeof(Sprite));
+            generator.Generate();
+            Console.WriteLine(generator.Code);
             return ExitCodes.Success;
         }
     }

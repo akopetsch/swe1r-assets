@@ -1,0 +1,215 @@
+﻿// Copyright 2023 SWE1R.Assets Maintainers
+// Licensed under GPLv2 or any later version
+// Refer to the included LICENSE.txt file.
+
+using ByteSerialization.Components.Values.Composites.Records;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Formatting;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Reflection;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+using ArgumentSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax;
+using AttributeListSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.AttributeListSyntax;
+using AttributeSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.AttributeSyntax;
+using CompilationUnitSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.CompilationUnitSyntax;
+using InvocationExpressionSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax;
+using ReturnStatementSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.ReturnStatementSyntax;
+
+namespace FiddleApp
+{
+    public class DbEntityClassGenerator
+    {
+        #region Fields
+
+        private Dictionary<Type, Type> _typeMapping = 
+            new Dictionary<Type, Type>() {
+                { typeof(byte), typeof(byte) },
+        };
+
+        private const string _namespaceName = "SWE1R.Assets.Blocks.SQLite";
+
+        private CompilationUnitSyntax _compilationUnit;
+
+        private Dictionary<string, UsingDirectiveSyntax> _usingDirectives =
+            new Dictionary<string, UsingDirectiveSyntax>();
+
+        private List<PropertyHelper> _propertyHelpers;
+
+        #endregion
+
+        #region Properties
+
+        public Type Type { get; }
+
+        public string Code { get; private set; }
+
+        #endregion
+
+        #region Constructor
+
+        public DbEntityClassGenerator(Type type) =>
+            Type = type;
+
+        #endregion
+
+        #region Methods (public)
+
+        public void Generate()
+        {
+            _propertyHelpers = GetPropertyHelpers();
+
+            CompilationUnitSyntax compilationUnit = CompilationUnit()
+                .AddMembers(GetNamespaceDeclaration())
+                .AddUsings(GetUsingDirectives())
+                .NormalizeWhitespace();
+
+            Code = compilationUnit.ToFullString();
+        }
+
+        #endregion
+
+        #region Methods (usings)
+
+        private UsingDirectiveSyntax[] GetUsingDirectives() =>
+            _usingDirectives.OrderBy(kvp => kvp.Key).Select(kvp => kvp.Value).ToArray();
+
+        private UsingDirectiveSyntax AddUsingDirective(string name)
+        {
+            if (_usingDirectives.TryGetValue(name, out UsingDirectiveSyntax existingUsingDirective))
+                return existingUsingDirective;
+            else
+                return _usingDirectives[name] = UsingDirective(ParseName(name));
+        }
+
+        #endregion
+
+        #region Methods (namespace)
+
+        private NamespaceDeclarationSyntax GetNamespaceDeclaration() =>
+            NamespaceDeclaration(IdentifierName(_namespaceName))
+            .AddMembers(GetClassDeclaration());
+
+        #endregion
+
+        #region Methods (class)
+
+        private ClassDeclarationSyntax GetClassDeclaration() =>
+            ClassDeclaration($"Db{Type.Name}")
+                .AddAttributeLists(GetAttribute<TableAttribute>(argument: Type.Name))
+                .AddModifiers(Token(SyntaxKind.PublicKeyword))
+                .AddMembers(GetProperties().ToArray())
+                .AddMembers(GetMethods().ToArray());
+
+        #endregion
+
+        #region Methods (class attributes)
+
+        private AttributeListSyntax GetAttribute<TAttribute>(object argument) where TAttribute : System.Attribute
+        {
+            Type attributeType = typeof(TAttribute);
+            string attributeName = attributeType.Name.TrimEnd(nameof(System.Attribute)); // TODO: use Roslyn
+            AddUsingDirective(attributeType.Namespace);
+
+            AttributeArgumentSyntax attributeArgument = AttributeArgument(
+            LiteralExpression(SyntaxKind.StringLiteralExpression, Literal(argument.ToString())));
+            AttributeSyntax attribute = SyntaxFactory.Attribute(ParseName(attributeName))
+                .WithArgumentList(AttributeArgumentList(SingletonSeparatedList(attributeArgument)));
+            return AttributeList(SingletonSeparatedList(attribute));
+        }
+
+        #endregion
+
+        #region Methods (methods)
+
+        private IEnumerable<MethodDeclarationSyntax> GetMethods()
+        {
+            yield return GetGetHashCodeMethod();
+        }
+
+        #endregion
+
+        #region Methods (methods - GetHashCode)
+
+        private MethodDeclarationSyntax GetGetHashCodeMethod() =>
+            MethodDeclaration(
+                    returnType: PredefinedType(Token(SyntaxKind.IntKeyword)),
+                    identifier: nameof(GetHashCode))
+                .WithModifiers(TokenList(Token(SyntaxKind.PublicKeyword), Token(SyntaxKind.OverrideKeyword)))
+                .WithExpressionBody(
+                ArrowExpressionClause(
+                    GetHashCodeCombineInvocationExpression()))
+            .WithSemicolonToken(Token(SyntaxKind.SemicolonToken));
+
+        private InvocationExpressionSyntax GetHashCodeCombineInvocationExpression()
+        {
+            var arguments = new List<ArgumentSyntax> {
+                Argument(GetBaseGetHashCodeInvocationExpression())
+            };
+            arguments.AddRange(GetHashCodeCombineInvocationExpressions().Select(Argument));
+            return GetHashCodeCombineInvocationExpression(arguments.ToArray());
+        }
+
+        private InvocationExpressionSyntax GetBaseGetHashCodeInvocationExpression() =>
+            InvocationExpression(
+                MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
+                    IdentifierName("base"),
+                    IdentifierName(nameof(GetHashCode))));
+
+        private IEnumerable<InvocationExpressionSyntax> GetHashCodeCombineInvocationExpressions()
+        {
+            foreach (PropertyHelper[] chunkedPropertyHelpers in _propertyHelpers.Chunk(GetHashCodeCombineMaxArgumentsCount()))
+            {
+                yield return GetHashCodeCombineInvocationExpression(
+                    chunkedPropertyHelpers.Select(x => Argument(IdentifierName(x.PropertyName))).ToArray());
+            }
+        }
+
+        private int GetHashCodeCombineMaxArgumentsCount() => 8;
+        // HashCode.Combine(value1, value2, value3, value4, value5, value6, value7, value8)
+
+        private InvocationExpressionSyntax GetHashCodeCombineInvocationExpression(ArgumentSyntax[] arguments)
+        {
+            if (arguments.Length > GetHashCodeCombineMaxArgumentsCount())
+                throw new InvalidOperationException(); // TODO: support any argument count using chunking
+            return InvocationExpression(
+                MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
+                    IdentifierName(nameof(HashCode)),
+                    IdentifierName(nameof(HashCode.Combine))))
+                .AddArgumentListArguments(arguments);
+        }
+
+        #endregion
+
+        #region Methods (properties)
+
+        private List<PropertyHelper> GetPropertyHelpers() =>
+            Type.GetOrderedPropertyInfos().Select(x => new PropertyHelper(x)).ToList();
+
+        private IEnumerable<PropertyDeclarationSyntax> GetProperties()
+        {
+            foreach (PropertyHelper propertyHelper in _propertyHelpers)
+            {
+                if (!propertyHelper.Type.IsPrimitive && propertyHelper.IsReference)
+                    AddUsingDirective(propertyHelper.Type.Namespace);
+                PropertyDeclarationSyntax propertyDeclaration =
+                    PropertyDeclaration(
+                        IdentifierName(propertyHelper.TypeName), 
+                        Identifier(propertyHelper.PropertyName))
+                    .AddModifiers(Token(SyntaxKind.PublicKeyword))
+                    .AddAccessorListAccessors(
+                        AccessorDeclaration(SyntaxKind.GetAccessorDeclaration)
+                            .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)),
+                        AccessorDeclaration(SyntaxKind.SetAccessorDeclaration)
+                            .WithSemicolonToken(Token(SyntaxKind.SemicolonToken)));
+                yield return propertyDeclaration;
+            }
+        }
+
+        #endregion
+    }
+}

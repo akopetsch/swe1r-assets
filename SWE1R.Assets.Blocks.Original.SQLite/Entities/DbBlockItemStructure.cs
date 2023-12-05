@@ -33,6 +33,16 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
 
         public override int GetHashCode() =>
             HashCode.Combine(BlockItemValueId, Offset);
+
+        protected static int CombineHashCodes(params object[] objects)
+        {
+            var hashCode = new HashCode();
+            foreach (var obj in objects)
+            {
+                hashCode.Add(obj);
+            }
+            return hashCode.ToHashCode();
+        }
     }
 
     public abstract class DbBlockItemStructure<TSource> : DbBlockItemStructure, IEquatable<DbBlockItemStructure<TSource>>
