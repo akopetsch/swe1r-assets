@@ -8,10 +8,13 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SWE1R.Assets.Blocks.Original.SQLite.Entities;
+using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
+using System.Security.AccessControl;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 using ArgumentSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax;
 using AttributeListSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.AttributeListSyntax;
@@ -19,6 +22,7 @@ using AttributeSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.AttributeSyntax;
 using CompilationUnitSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.CompilationUnitSyntax;
 using InvocationExpressionSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax;
 using ReturnStatementSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.ReturnStatementSyntax;
+using TypeSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.TypeSyntax;
 
 namespace FiddleApp
 {
@@ -31,6 +35,7 @@ namespace FiddleApp
                 { typeof(byte), typeof(byte) },
         };
 
+        private const string _baseKeyword = "base";
         private const string _namespaceName = "SWE1R.Assets.Blocks.SQLite";
 
         private CompilationUnitSyntax _compilationUnit;
@@ -61,6 +66,8 @@ namespace FiddleApp
 
         public void Generate()
         {
+            AddUsingDirective(Type.Namespace);
+
             _propertyHelpers = GetPropertyHelpers();
 
             CompilationUnitSyntax compilationUnit = CompilationUnit()
@@ -102,8 +109,18 @@ namespace FiddleApp
             ClassDeclaration($"Db{Type.Name}")
                 .AddAttributeLists(GetAttribute<TableAttribute>(argument: Type.Name))
                 .AddModifiers(Token(SyntaxKind.PublicKeyword))
+                .WithBaseList(BaseList(SingletonSeparatedList<BaseTypeSyntax>(GetBaseType())))
                 .AddMembers(GetProperties().ToArray())
                 .AddMembers(GetMethods().ToArray());
+
+        private SimpleBaseTypeSyntax GetBaseType() =>
+            SimpleBaseType(GenericName(
+                Identifier(typeof(DbBlockItemStructure).Name),
+                TypeArgumentList(
+                    SeparatedList<TypeSyntax>(
+                        new SyntaxNodeOrToken[] {
+                            IdentifierName(Type.Name)
+                        }))));
 
         #endregion
 
@@ -117,7 +134,7 @@ namespace FiddleApp
 
             AttributeArgumentSyntax attributeArgument = AttributeArgument(
             LiteralExpression(SyntaxKind.StringLiteralExpression, Literal(argument.ToString())));
-            AttributeSyntax attribute = SyntaxFactory.Attribute(ParseName(attributeName))
+            AttributeSyntax attribute = Attribute(ParseName(attributeName))
                 .WithArgumentList(AttributeArgumentList(SingletonSeparatedList(attributeArgument)));
             return AttributeList(SingletonSeparatedList(attribute));
         }
@@ -145,42 +162,27 @@ namespace FiddleApp
                     GetHashCodeCombineInvocationExpression()))
             .WithSemicolonToken(Token(SyntaxKind.SemicolonToken));
 
-        private InvocationExpressionSyntax GetHashCodeCombineInvocationExpression()
-        {
-            var arguments = new List<ArgumentSyntax> {
-                Argument(GetBaseGetHashCodeInvocationExpression())
-            };
-            arguments.AddRange(GetHashCodeCombineInvocationExpressions().Select(Argument));
-            return GetHashCodeCombineInvocationExpression(arguments.ToArray());
-        }
+        private InvocationExpressionSyntax GetHashCodeCombineInvocationExpression() =>
+            InvocationExpression(
+                MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
+                    IdentifierName(_baseKeyword),
+                    IdentifierName(nameof(DbBlockItemStructure.CombineHashCodes))))
+                .AddArgumentListArguments(
+                GetCombineHashCodesArguments().ToArray());
 
         private InvocationExpressionSyntax GetBaseGetHashCodeInvocationExpression() =>
             InvocationExpression(
                 MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                    IdentifierName("base"),
+                    IdentifierName(_baseKeyword),
                     IdentifierName(nameof(GetHashCode))));
 
-        private IEnumerable<InvocationExpressionSyntax> GetHashCodeCombineInvocationExpressions()
+        private IEnumerable<ArgumentSyntax> GetCombineHashCodesArguments()
         {
-            foreach (PropertyHelper[] chunkedPropertyHelpers in _propertyHelpers.Chunk(GetHashCodeCombineMaxArgumentsCount()))
+            yield return Argument(GetBaseGetHashCodeInvocationExpression());
+            foreach (PropertyHelper propertyHelpers in _propertyHelpers)
             {
-                yield return GetHashCodeCombineInvocationExpression(
-                    chunkedPropertyHelpers.Select(x => Argument(IdentifierName(x.PropertyName))).ToArray());
+                yield return Argument(IdentifierName(propertyHelpers.PropertyName));
             }
-        }
-
-        private int GetHashCodeCombineMaxArgumentsCount() => 8;
-        // HashCode.Combine(value1, value2, value3, value4, value5, value6, value7, value8)
-
-        private InvocationExpressionSyntax GetHashCodeCombineInvocationExpression(ArgumentSyntax[] arguments)
-        {
-            if (arguments.Length > GetHashCodeCombineMaxArgumentsCount())
-                throw new InvalidOperationException(); // TODO: support any argument count using chunking
-            return InvocationExpression(
-                MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
-                    IdentifierName(nameof(HashCode)),
-                    IdentifierName(nameof(HashCode.Combine))))
-                .AddArgumentListArguments(arguments);
         }
 
         #endregion

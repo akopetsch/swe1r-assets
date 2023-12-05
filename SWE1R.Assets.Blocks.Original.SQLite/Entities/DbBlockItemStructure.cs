@@ -34,7 +34,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
         public override int GetHashCode() =>
             HashCode.Combine(BlockItemValueId, Offset);
 
-        protected static int CombineHashCodes(params object[] objects)
+        public static int CombineHashCodes(params object[] objects) // TODO: protected
         {
             var hashCode = new HashCode();
             foreach (var obj in objects)
