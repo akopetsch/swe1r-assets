@@ -158,40 +158,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             }
         }
 
-        private class MeshHelper
-        {
-            public List<FaceHelper> FaceHelpers { get; } = 
-                new List<FaceHelper>();
-
-            public List<IndicesRange> IndicesRanges { get; } = 
-                new List<IndicesRange>();
-
-            public IEnumerable<Vertex> Vertices => 
-                FaceHelpers.SelectMany(x => x.Vertices);
-
-            public IEnumerable<Triangle> Triangles =>
-                FaceHelpers.SelectMany(x => x.Triangles);
-        }
-
-        private class FaceHelper
-        {
-            public ObjFace ObjFace { get; }
-            public List<Vertex> Vertices { get; }
-            public List<Triangle> Triangles { get; }
-
-            public FaceHelper(ObjFace objFace)
-            {
-                ObjFace = objFace;
-                Vertices = new List<Vertex>();
-                Triangles = new List<Triangle>();
-            }
-
-            public override string ToString() =>
-                $"{nameof(ObjFace)}.{nameof(ObjFace.Count)}={ObjFace.Count}, " +
-                $"{nameof(Vertices)}.{nameof(Vertices.Count)}={Vertices.Count}, " +
-                $"{nameof(Triangles)}.{nameof(Triangles.Count)}={Triangles.Count}";
-        }
-
         private bool WouldExceedMax(MeshHelper meshHelper, int newVerticesCount)
         {
             int? maxVertexCount = Configuration.MaxVertexCountPerMesh;
@@ -211,26 +177,29 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             var currentMeshHelper = new MeshHelper();
             meshHelpers.Add(currentMeshHelper);
             int indexBase = 0;
+            FaceHelper currentFaceHelper = null;
             foreach (ObjFace face in objGroup.Faces)
             {
-                var newVerticesAndTriangles = new FaceHelper(face);
-                
-                newVerticesAndTriangles.Vertices.AddRange(
-                    GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)));
-                newVerticesAndTriangles.Triangles.AddRange(
-                    GetTriangles(face, indexBase));
-                indexBase += face.Count;
-
                 // if exceeds vertices count
-                if (WouldExceedMax(currentMeshHelper, newVerticesAndTriangles.Vertices.Count))
+                if (currentFaceHelper != null && WouldExceedMax(currentMeshHelper, currentFaceHelper.Vertices.Count))
                 {
                     // new MeshHelper
                     currentMeshHelper = new MeshHelper();
                     meshHelpers.Add(currentMeshHelper);
 
-                    indexBase = 0; // TODO: zero-center newTriangles
+                    indexBase = 0;
+                    // TODO: zero-center newTriangles
                 }
-                currentMeshHelper.FaceHelpers.Add(newVerticesAndTriangles);
+
+                currentFaceHelper = new FaceHelper(face);
+
+                currentFaceHelper.Vertices.AddRange(
+                    GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)));
+                currentFaceHelper.Triangles.AddRange(
+                    GetTriangles(face, indexBase));
+                indexBase += face.Count;
+
+                currentMeshHelper.FaceHelpers.Add(currentFaceHelper);
             }
 
             foreach (MeshHelper meshHelper in meshHelpers)

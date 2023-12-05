@@ -72,7 +72,8 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
 
             // import
             var configuration = new ModelObjImporterConfiguration() {
-                PositionScale = positionScale
+                PositionScale = positionScale,
+                MaxVertexCountPerMesh = 1000,
             };
             var importer = new ModelObjImporter(
                 objFilename, textureBlock, new SystemDrawingImageRgba32Loader(), configuration);
