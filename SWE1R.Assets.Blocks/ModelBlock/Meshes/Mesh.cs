@@ -8,6 +8,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Vectors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +19,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
     /// </summary>
     public class Mesh : INode
     {
-        #region Properties (serialization)
+        #region Properties (serialized)
 
         /// <summary>
         /// Must have a value.
@@ -55,7 +56,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// <para>Offset: 0x22</para>
         /// </summary>
         [Order(5)]
-        public PrimitiveType PrimitiveType { get; set; } // TODO: xml comment
+        public PrimitiveType PrimitiveType { get; set; } = PrimitiveType.Triangles; // TODO: xml comment
         /// <summary>
         /// Gets or sets the vertex counts of the faces. 
         /// If not <see langword="null"/>, the list's length is <see cref="FacesCount">FacesCount</see>.
@@ -73,7 +74,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// <para>Offset: 0x28</para>
         /// </summary>
         [Order(7)]
-        public MeshGroupOrShorts MeshGroupOrShorts { get; set; } // TODO: xml comment
+        public MeshGroupOrShorts MeshGroupOrShorts { get; set; } = new MeshGroupOrShorts(); // TODO: xml comment
         /// <summary>
         /// Gets or sets the list of collision vertices. 
         /// The list's length is <see cref="CollisionVerticesCount">CollisionVerticesCount</see>. Is <see langword="null"/> if that value is 0.
@@ -146,12 +147,23 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             // TODO: implement in BindingComponent
 
             if (FacesVertexCounts != null)
-                FacesCount = (short)FacesVertexCounts.Count;
+                FacesCount = Convert.ToInt16(FacesVertexCounts.Count);
             
-            CollisionVerticesCount = (short)(CollisionVertices?.List.Count ?? 0);
-            VisibleVerticesCount = (short)(VisibleVertices?.Count ?? 0);
+            CollisionVerticesCount = Convert.ToInt16(CollisionVertices?.List.Count ?? 0);
+            VisibleVerticesCount = Convert.ToInt16(VisibleVertices?.Count ?? 0);
 
             // TODO: throw exception if MeshGroupOrShorts.Shorts.Length is invalid
+        }
+
+        public void UpdateFacesCountByVisibleIndicesChunks() =>
+            FacesCount = Convert.ToInt16(VisibleIndicesChunks.SelectMany(x => x.Triangles).Count());
+
+        public void UpdateBounds()
+        {
+            var bounds = new Bounds3Single(
+                VisibleVertices.Select(v => (Vector3Single)v.Position).ToArray());
+            Bounds0 = bounds.Min;
+            Bounds1 = bounds.Max;
         }
 
         #endregion

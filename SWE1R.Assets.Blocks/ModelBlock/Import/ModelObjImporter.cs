@@ -117,27 +117,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
             mesh.Material = ImportObjMaterial(objGroup.Material);
 
-            mesh.MeshGroupOrShorts = new MeshGroupOrShorts();
-
-            mesh.PrimitiveType = PrimitiveType.Triangles;
-
             List<IndicesRange> indicesRanges;
             (mesh.VisibleVertices, indicesRanges) = GetVerticesAndIndicesRanges(objGroup);
             mesh.VisibleIndicesChunks = GetIndicesChunks(indicesRanges, mesh);
 
-            // counts
             mesh.UpdateCounts();
+            mesh.UpdateFacesCountByVisibleIndicesChunks();
+            mesh.UpdateBounds();
 
-            // bounds
-            var bounds = new Bounds3Single(mesh.VisibleVertices.Select(v => (Vector3Single)v.Position).ToArray());
-            mesh.Bounds0 = bounds.Min;
-            mesh.Bounds1 = bounds.Max;
-
-            // TODO: FacesCount
-            //Mesh.FacesCount = Convert.ToInt16(Mesh.VisibleIndicesChunks.SelectMany(x => x.Triangles).Count());
-            mesh.FacesCount = Convert.ToInt16(indicesRanges.SelectMany(r => r.Chunks0506).Count());
-            mesh.FacesVertexCounts = indicesRanges.SelectMany(r => r.Chunks0506).Select(x => x.Indices.Count()).ToList();
-            
             return mesh;
         }
 
@@ -190,9 +177,19 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 // vertices
                 List<Vertex> newVertices = GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)).ToList();
                 List<IndicesChunk> newIndicesChunks = GetIndicesChunks(indexBase, face.Count, startVertexIndex).ToList();
+                indexBase += face.Count;
+                int? maxVertexCount = Configuration.MaxVertexCountPerMesh;
+                if (maxVertexCount.HasValue)
+                {
+                    if (newVertices.Count > maxVertexCount)
+                        throw new InvalidOperationException();
+                    if (newVertices.Count + vertices.Count > maxVertexCount)
+                    {
+                        // TODO: new mesh
+                    }
+                }
                 vertices.AddRange(newVertices);
                 indicesRange.Chunks0506.AddRange(newIndicesChunks);
-                indexBase += face.Count;
             }
             return (vertices, indicesRanges);
         }
