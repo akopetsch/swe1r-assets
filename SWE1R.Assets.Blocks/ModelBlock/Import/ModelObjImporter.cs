@@ -112,20 +112,21 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
         private List<Mesh> ImportObjGroup(ObjGroup objGroup)
         {
             var meshes = new List<Mesh>();
+            List<MeshHelper> meshHelpers = GetMeshHelpers(objGroup);
+            foreach (MeshHelper meshHelper in meshHelpers)
+            {
+                var mesh = new Mesh();
+                meshes.Add(mesh);
 
-            var mesh = new Mesh();
-            meshes.Add(mesh);
+                mesh.Material = ImportObjMaterial(objGroup.Material);
 
-            mesh.Material = ImportObjMaterial(objGroup.Material);
+                mesh.VisibleVertices = meshHelper.Vertices.ToList();
+                mesh.VisibleIndicesChunks = GetIndicesChunks(meshHelper.IndicesRanges, mesh);
 
-            VerticesAndIndicesRanges verticesAndIndicesRanges = GetVerticesAndIndicesRanges(objGroup);
-            mesh.VisibleVertices = verticesAndIndicesRanges.Vertices;
-            mesh.VisibleIndicesChunks = GetIndicesChunks(verticesAndIndicesRanges.IndicesRanges, mesh);
-
-            mesh.UpdateCounts();
-            mesh.UpdateFacesCountByVisibleIndicesChunks();
-            mesh.UpdateBounds();
-
+                mesh.UpdateCounts();
+                mesh.UpdateFacesCountByVisibleIndicesChunks();
+                mesh.UpdateBounds();
+            }
             return meshes;
         }
 
@@ -157,90 +158,131 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             }
         }
 
-        private class VerticesAndIndicesRanges
+        private class MeshHelper
         {
-            public List<Vertex> Vertices { get; }
-            public List<IndicesRange> IndicesRanges { get; }
+            public List<FaceHelper> FaceHelpers { get; } = 
+                new List<FaceHelper>();
 
-            public VerticesAndIndicesRanges()
-            {
-                Vertices = new List<Vertex>();
-                IndicesRanges = new List<IndicesRange>();
-            }
+            public List<IndicesRange> IndicesRanges { get; } = 
+                new List<IndicesRange>();
 
-            public VerticesAndIndicesRanges(
-                List<Vertex> vertices, List<IndicesRange> indicesRanges)
-            {
-                Vertices = vertices;
-                IndicesRanges = indicesRanges;
-            }
+            public IEnumerable<Vertex> Vertices => 
+                FaceHelpers.SelectMany(x => x.Vertices);
+
+            public IEnumerable<Triangle> Triangles =>
+                FaceHelpers.SelectMany(x => x.Triangles);
         }
 
-        private VerticesAndIndicesRanges GetVerticesAndIndicesRanges(ObjGroup objGroup)
+        private class FaceHelper
         {
-            int startVertexIndex = 0;
+            public ObjFace ObjFace { get; }
+            public List<Vertex> Vertices { get; }
+            public List<Triangle> Triangles { get; }
+
+            public FaceHelper(ObjFace objFace)
+            {
+                ObjFace = objFace;
+                Vertices = new List<Vertex>();
+                Triangles = new List<Triangle>();
+            }
+
+            public override string ToString() =>
+                $"{nameof(ObjFace)}.{nameof(ObjFace.Count)}={ObjFace.Count}, " +
+                $"{nameof(Vertices)}.{nameof(Vertices.Count)}={Vertices.Count}, " +
+                $"{nameof(Triangles)}.{nameof(Triangles.Count)}={Triangles.Count}";
+        }
+
+        private bool WouldExceedMax(MeshHelper meshHelper, int newVerticesCount)
+        {
+            int? maxVertexCount = Configuration.MaxVertexCountPerMesh;
+            if (maxVertexCount.HasValue)
+            {
+                int existingVerticesCount = meshHelper.Vertices.Count();
+                if (existingVerticesCount > maxVertexCount)
+                    throw new InvalidOperationException();
+                return existingVerticesCount + newVerticesCount > maxVertexCount;
+            }
+            return false;
+        }
+
+        private List<MeshHelper> GetMeshHelpers(ObjGroup objGroup)
+        {
+            var meshHelpers = new List<MeshHelper>();
+            var currentMeshHelper = new MeshHelper();
+            meshHelpers.Add(currentMeshHelper);
             int indexBase = 0;
-            var vertices = new List<Vertex>();
-            var indicesRange = new IndicesRange();
-            var indicesRanges = new List<IndicesRange>() { indicesRange };
             foreach (ObjFace face in objGroup.Faces)
             {
-                if (indicesRange.NextIndicesBase >= _indicesRangeMaxLength)
-                {
-                    // HACK: this should happen in the foreach below
-                    // new indices range
-                    startVertexIndex += indicesRange.NextIndicesBase / 2;
-                    indicesRange = new IndicesRange();
-                    indicesRanges.Add(indicesRange);
-                }
-
-                // vertices
-                List<Vertex> newVertices = GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)).ToList();
-                List<IndicesChunk> newIndicesChunks = GetIndicesChunks(indexBase, face.Count, startVertexIndex).ToList();
+                var newVerticesAndTriangles = new FaceHelper(face);
+                
+                newVerticesAndTriangles.Vertices.AddRange(
+                    GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)));
+                newVerticesAndTriangles.Triangles.AddRange(
+                    GetTriangles(face, indexBase));
                 indexBase += face.Count;
-                int? maxVertexCount = Configuration.MaxVertexCountPerMesh;
-                if (maxVertexCount.HasValue)
+
+                // if exceeds vertices count
+                if (WouldExceedMax(currentMeshHelper, newVerticesAndTriangles.Vertices.Count))
                 {
-                    if (newVertices.Count > maxVertexCount)
-                        throw new InvalidOperationException();
-                    if (newVertices.Count + vertices.Count > maxVertexCount)
-                    {
-                        // TODO: new mesh
-                    }
+                    // new MeshHelper
+                    currentMeshHelper = new MeshHelper();
+                    meshHelpers.Add(currentMeshHelper);
+
+                    indexBase = 0; // TODO: zero-center newTriangles
                 }
-                vertices.AddRange(newVertices);
-                indicesRange.Chunks0506.AddRange(newIndicesChunks);
+                currentMeshHelper.FaceHelpers.Add(newVerticesAndTriangles);
             }
-            return new VerticesAndIndicesRanges(vertices, indicesRanges);
+
+            foreach (MeshHelper meshHelper in meshHelpers)
+            {
+                var currentIndicesRange = new IndicesRange();
+                meshHelper.IndicesRanges.Add(currentIndicesRange);
+                int startVertexIndex = 0;
+                foreach (FaceHelper faceHelper in meshHelper.FaceHelpers)
+                {
+                    // if exceeds IndicesRange max length
+                    if (currentIndicesRange.NextIndicesBase >= _indicesRangeMaxLength)
+                    {
+                        // new IndicesRange
+                        startVertexIndex += currentIndicesRange.NextIndicesBase / 2;
+                        currentIndicesRange = new IndicesRange();
+                        meshHelper.IndicesRanges.Add(currentIndicesRange);
+                    }
+
+                    List<IndicesChunk> indicesChunks = new List<IndicesChunk>();
+                    foreach (Triangle triangle in faceHelper.Triangles)
+                    {
+                        indicesChunks.Add(new IndicesChunk05() {
+                            Index0 = Convert.ToByte(2 * (triangle.I0 - startVertexIndex)),
+                            Index1 = Convert.ToByte(2 * (triangle.I1 - startVertexIndex)),
+                            Index2 = Convert.ToByte(2 * (triangle.I2 - startVertexIndex)),
+                        });
+                    }
+                    currentIndicesRange.Chunks0506.AddRange(indicesChunks);
+                }
+            }
+
+            return meshHelpers;
         }
 
-        private IEnumerable<IndicesChunk> GetIndicesChunks(int indexBase, int faceCount, int startVertexIndex)
+        private IEnumerable<Triangle> GetTriangles(ObjFace objFace, int indexBase)
         {
             // primitives indices
-            int[] primitiveIndices = Enumerable.Range(indexBase, faceCount).ToArray();
-            
-            // primitives
-            var primitives = new List<Primitive>();
-            if (faceCount == 3)
-                primitives.Add(new Triangle(primitiveIndices));
-            else if (faceCount == 4)
-                primitives.Add(new Quad(primitiveIndices));
-            else if (faceCount > 4)
-                primitives.Add(new TriangleFan(primitiveIndices));
+            int[] primitiveIndices = Enumerable.Range(indexBase, objFace.Count).ToArray();
+
+            // primitive from primitive indices
+            Primitive primitive;
+            if (objFace.Count == 3)
+                primitive = new Triangle(primitiveIndices);
+            else if (objFace.Count == 4)
+                primitive = new Quad(primitiveIndices);
+            else if (objFace.Count > 4)
+                primitive = new TriangleFan(primitiveIndices);
             else
                 throw new InvalidOperationException();
 
-            // triangles -> indicesRange
-            var triangles = primitives.SelectMany(p => p.GetTriangles()).ToList();
-            foreach (Triangle triangle in triangles)
-            {
-                yield return new IndicesChunk05() {
-                    Index0 = Convert.ToByte(2 * (triangle.I0 - startVertexIndex)),
-                    Index1 = Convert.ToByte(2 * (triangle.I1 - startVertexIndex)),
-                    Index2 = Convert.ToByte(2 * (triangle.I2 - startVertexIndex)),
-                };
-                // TODO: use IndicesChunk06 (e.g. for Quad) for smaller file size
-            }
+            // triangles from primitive
+            return primitive.GetTriangles();
         }
 
         private IndicesChunks GetIndicesChunks(List<IndicesRange> indicesRanges, Mesh mesh)
