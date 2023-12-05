@@ -49,7 +49,7 @@ namespace ByteSerialization.IO.Extensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long SwapBytes(this long x) => (long)SwapBytes((ulong)x);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong SwapBytes(this ulong x) => (ulong)(
+        public static ulong SwapBytes(this ulong x) =>
             /* 7 */ ((x << 56) & mask7) |
             /* 6 */ ((x << 40) & mask6) |
             /* 5 */ ((x << 24) & mask5) |
@@ -57,7 +57,7 @@ namespace ByteSerialization.IO.Extensions
             /* 3 */ ((x >> 8) & mask3) |
             /* 2 */ ((x >> 24) & mask2) |
             /* 1 */ ((x >> 40) & mask1) |
-            /* 0 */ (x >> 56));
+            /* 0 */ (x >> 56);
 
         #endregion
     }

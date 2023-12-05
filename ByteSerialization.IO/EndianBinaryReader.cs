@@ -79,7 +79,6 @@ namespace ByteSerialization.IO
         public double ReadDouble() => BitConverter.ToDouble(ReadBytes(sizeof(double)).Reverse().ToArray(), 0);
         public decimal ReadDecimal() => ReadBytes(sizeof(decimal)).Reverse().ToArray().ToDecimal(0);
         public byte[] ReadBytes(int count) => reader.ReadBytes(count);
-        public byte[] ReadBytes(long count) => reader.ReadBytes((int)count);
         public char[] ReadChars(int count) => reader.ReadChars(count);
         public string ReadString() => throw new NotImplementedException();
 

@@ -12,8 +12,8 @@ namespace ByteSerialization.IO.Tests
         [Fact]
         public void Test1()
         {
-            Assert.Equal((int)-573785174, ((int)-1430532899).SwapBytes());
-            Assert.Equal(0xAABBCCDD, ((uint)0xDDCCBBAA).SwapBytes());
+            Assert.Equal(-573785174, (-1430532899).SwapBytes());
+            Assert.Equal(0xAABBCCDD, 0xDDCCBBAA.SwapBytes());
             Assert.Equal(-16224, ((short)-24384).SwapBytes());
             Assert.Equal(0xC0A0, ((ushort)0xA0C0).SwapBytes());
             Assert.Equal((ulong)0x2211ffeeddccbbaa, 0xaabbccddeeff1122.SwapBytes());

@@ -4,6 +4,7 @@
 
 using SWE1R.Assets.Blocks.Textures;
 using SWE1R.Assets.Blocks.Textures.Export;
+using System;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock.Export
 {
@@ -40,7 +41,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Export
 
             // TODO: simplify:
             float bytesPerPixel = (float)bpp / 8;
-            int bytesPerLine = (int)(Width * bytesPerPixel);
+            int bytesPerLine = Convert.ToInt32(Width * bytesPerPixel);
             int virtualBytesPerLine = bytesPerLine & 0xfff8; // round down by 8 (padding)
             if (bytesPerLine % 8 > 0)
                 virtualBytesPerLine += 8;

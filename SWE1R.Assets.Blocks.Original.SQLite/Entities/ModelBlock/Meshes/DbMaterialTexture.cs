@@ -53,11 +53,11 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             Height_Unk = mt.Height_Unk;
             Flags = mt.Flags;
             Mask = mt.Mask;
-            P_Child0 = (int)(node.Context.Graph.GetValueComponent(mt.Children[0])?.Position ?? 0);
-            P_Child1 = (int)(node.Context.Graph.GetValueComponent(mt.Children[1])?.Position ?? 0);
-            P_Child2 = (int)(node.Context.Graph.GetValueComponent(mt.Children[2])?.Position ?? 0);
-            P_Child3 = (int)(node.Context.Graph.GetValueComponent(mt.Children[3])?.Position ?? 0);
-            P_Child4 = (int)(node.Context.Graph.GetValueComponent(mt.Children[4])?.Position ?? 0);
+            P_Child0 = GetValuePosition(node.Context.Graph, mt.Children[0]);
+            P_Child1 = GetValuePosition(node.Context.Graph, mt.Children[1]);
+            P_Child2 = GetValuePosition(node.Context.Graph, mt.Children[2]);
+            P_Child3 = GetValuePosition(node.Context.Graph, mt.Children[3]);
+            P_Child4 = GetValuePosition(node.Context.Graph, mt.Children[4]);
             IdField = mt.TextureIndex.SerializedValue;
         }
 

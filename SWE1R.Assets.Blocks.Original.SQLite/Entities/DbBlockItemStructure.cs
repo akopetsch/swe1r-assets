@@ -18,10 +18,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
         [Key, Column(Order = 1)] public int Offset { get; set; }
 
         public virtual void CopyFrom(Node node) =>
-            Offset = (int)node.Position;
+            Offset = Convert.ToInt32(node.Position);
 
         protected static int GetValuePosition(ByteSerializerGraph graph, object value) =>
-            (int)(graph.GetValueComponent(value)?.Position.Value ?? 0);
+            Convert.ToInt32(graph.GetValueComponent(value)?.Position.Value ?? 0);
 
         protected static int GetPropertyPointer(Node node, string propertyName)
         {

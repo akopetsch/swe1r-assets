@@ -29,7 +29,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         public void GenerateFromData(ByteSerializerContext context)
         {
-            var size = (int)Math.Ceiling(GetBitNumber(ModelBlockItem.Data.Length) / 8f);
+            int size = (int)Math.Ceiling(GetBitNumber(ModelBlockItem.Data.Length) / 8f);
             Bytes = new byte[size.Ceiling(4)];
 
             Mask(context.Graph.References.Where(IsMasked));
@@ -108,7 +108,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         {
             if (position.HasValue)
             {
-                int i = (int)position.Value;
+                int i = Convert.ToInt32(position.Value);
                 int n = 7 - GetBitNumber(i) % 8;
                 Bytes[GetByteNumber(i)] |= (byte)(1 << n);
             }

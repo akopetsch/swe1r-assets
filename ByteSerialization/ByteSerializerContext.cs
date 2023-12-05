@@ -54,7 +54,7 @@ namespace ByteSerialization
 
         #region Methods
 
-        public void ConsumeBytes(long n)
+        public void ConsumeBytes(int n)
         {
             switch (Mode)
             {
@@ -70,7 +70,7 @@ namespace ByteSerialization
 
             if (actual < target)
             {
-                ConsumeBytes(target - actual);
+                ConsumeBytes(Convert.ToInt32(target - actual));
             }
             else if (actual > target)
             {
@@ -89,7 +89,7 @@ namespace ByteSerialization
             {
                 long actual = Position;
                 long target = Position.Ceiling(alignment);
-                ConsumeBytes(target - actual);
+                ConsumeBytes(Convert.ToInt32(target - actual));
             }
         }
 

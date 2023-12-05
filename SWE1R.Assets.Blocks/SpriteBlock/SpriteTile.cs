@@ -7,6 +7,7 @@ using ByteSerialization.Attributes.Reference;
 using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
+using System;
 using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock
@@ -55,7 +56,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
                 if (elementComponent.IsLastElement)
                 {
                     // TODO: HACK: stream could be longer than the SpriteData's data bytes
-                    endPosition = (int)property.Context.Stream.Length;
+                    endPosition = Convert.ToInt32(property.Context.Stream.Length);
                 }
                 else
                 {

@@ -50,12 +50,12 @@ namespace ByteSerialization.Attributes.Reference
             {
                 ValueComponent = Graph.GetValueComponent(Value) ?? CreateValueComponent();
                 if (ValueComponent.Node.IsSerialized)
-                    Pointer = (int)ValueComponent.Position.Value;
+                    Pointer = Convert.ToInt32(ValueComponent.Position.Value);
                 else
                 {
                     ValueComponent.Node.AfterSerializing += () =>
                     {
-                        Pointer = (int)ValueComponent.Position.Value;
+                        Pointer = Convert.ToInt32(ValueComponent.Position.Value);
                         WriteBackPointer();
                     };
                 }
@@ -69,7 +69,7 @@ namespace ByteSerialization.Attributes.Reference
         public void ReuseSerializedValueComponent()
         {
             ValueComponent = Graph.GetValueComponent(Value);
-            Pointer = (int)ValueComponent.Position.Value;
+            Pointer = Convert.ToInt32(ValueComponent.Position.Value);
             WriteBackPointer();
         }
 
