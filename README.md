@@ -24,7 +24,7 @@ These are the key projects:
 This project is still heavily WIP. This is an early preview release, 
 and I welcome your feedback or contributions (forks, pull-requests, issues) to improve it, 
 but you have to expect that the code base will change frequently due to refactorings and new features until things calm down a bit. 
-Development is discussed in a Discord modding channel related to the game. 
+Development is discussed in the [Discord modding channel](https://discord.gg/nXFYEYQJ). 
 
 The following are some major domains to work on:
 
