@@ -32,7 +32,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             //positionScale = 400;
 
             // v: 1598
-            //objFilename = "obj/teddy.obj"; // CRASH
+            //objFilename = "obj/teddy.obj"; // OK (with vt-limit = 1000)
             //positionScale = 15;
 
             // v: 64
@@ -47,7 +47,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             //objFilename = "obj/shuttle.obj"; // OK
             //positionScale = 75;
 
-            //objFilename = "capsule.obj"; // CRASH
+            //objFilename = "capsule.obj"; // CRASH (even with vt-limit = 1000)
             //positionScale = 75;
 
             //objFilename = "obj/violin_case.obj"; // OK
@@ -98,10 +98,22 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
         {
             MeshGroup3064 meshGroup3064 = modelObjImporter.MeshGroup3064;
             for (int i = 0; i < meshGroup3064.Meshes.Count; i++)
-            {
-                Mesh mesh = meshGroup3064.Meshes[i];
-                Console.WriteLine($"[{i}] vertices: {mesh.VisibleVertices.Count}, chunks: {mesh.VisibleIndicesChunks.Count}");
-            }
+                Console.WriteLine(GetMeshInfoString(i, meshGroup3064.Meshes[i]));
+            Console.WriteLine(GetSumInfoString(meshGroup3064));
         }
+
+        private string GetMeshInfoString(int i, Mesh mesh) =>
+            $"[{i}] {GetInfoString(
+                mesh.VisibleVertices.Count, 
+                mesh.VisibleIndicesChunks.Count)}";
+
+        private string GetSumInfoString(MeshGroup3064 meshGroup3064) =>
+            $"total: {GetInfoString(
+                meshGroup3064.Meshes.Sum(m => m.VisibleVertices.Count), 
+                meshGroup3064.Meshes.Sum(m => m.VisibleIndicesChunks.Count))}";
+
+        private string GetInfoString(int verticesCount, int chunksCount) =>
+            $"{nameof(verticesCount)} = {verticesCount}, " +
+            $"{nameof(chunksCount)} = {chunksCount}";
     }
 }
