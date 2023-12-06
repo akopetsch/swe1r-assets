@@ -188,7 +188,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     meshHelpers.Add(currentMeshHelper);
 
                     indexBase = 0;
-                    // TODO: zero-center newTriangles
                 }
 
                 currentFaceHelper = new FaceHelper(face);
