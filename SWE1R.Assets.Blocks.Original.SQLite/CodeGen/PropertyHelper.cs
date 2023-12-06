@@ -5,7 +5,7 @@
 using ByteSerialization.Attributes;
 using System.Reflection;
 
-namespace FiddleApp
+namespace SWE1R.Assets.Blocks.Original.SQLite.CodeGen
 {
     public class PropertyHelper
     {

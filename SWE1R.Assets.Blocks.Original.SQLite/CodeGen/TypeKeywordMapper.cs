@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace FiddleApp
+namespace SWE1R.Assets.Blocks.Original.SQLite.CodeGen
 {
     public static class TypeKeywordMapper
     {

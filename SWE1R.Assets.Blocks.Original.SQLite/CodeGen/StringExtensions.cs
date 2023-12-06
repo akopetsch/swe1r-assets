@@ -2,11 +2,11 @@
 // Licensed under GPLv2 or any later version
 // Refer to the included LICENSE.txt file.
 
-namespace FiddleApp
+namespace SWE1R.Assets.Blocks.Original.SQLite.CodeGen
 {
-    public static class StringExtensions
+    internal static class StringExtensions
     {
-        public static string TrimEnd(this string s, string value)
+        internal static string TrimEnd(this string s, string value)
         {
             if (s.EndsWith(value))
                 return s.Substring(0, s.Length - value.Length);

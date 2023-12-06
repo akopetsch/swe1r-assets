@@ -6,25 +6,17 @@ using ByteSerialization.Components.Values.Composites.Records;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities;
-using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Reflection;
-using System.Security.AccessControl;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 using ArgumentSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax;
 using AttributeListSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.AttributeListSyntax;
 using AttributeSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.AttributeSyntax;
 using CompilationUnitSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.CompilationUnitSyntax;
 using InvocationExpressionSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.InvocationExpressionSyntax;
-using ReturnStatementSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.ReturnStatementSyntax;
 using TypeSyntax = Microsoft.CodeAnalysis.CSharp.Syntax.TypeSyntax;
 
-namespace FiddleApp
+namespace SWE1R.Assets.Blocks.Original.SQLite.CodeGen
 {
     public class DbEntityClassGenerator
     {
@@ -36,7 +28,7 @@ namespace FiddleApp
         };
 
         private const string _baseKeyword = "base";
-        private const string _namespaceName = "SWE1R.Assets.Blocks.SQLite";
+        private const string _namespaceName = "SWE1R.Assets.Blocks.Original.SQLite";
 
         private CompilationUnitSyntax _compilationUnit;
 

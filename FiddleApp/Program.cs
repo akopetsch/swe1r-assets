@@ -6,6 +6,7 @@ using SWE1R.Assets.Blocks;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.Images.SystemDrawing;
 using SWE1R.Assets.Blocks.Metadata.IdNames;
+using SWE1R.Assets.Blocks.Original.SQLite.CodeGen;
 using SWE1R.Assets.Blocks.SpriteBlock;
 using SWE1R.Assets.Blocks.SpriteBlock.Import;
 using SWE1R.Assets.Blocks.Utils;
@@ -21,23 +22,6 @@ namespace FiddleApp
             if (Debugger.IsAttached)
                 ConsoleUtil.PromptExit();
             return result;
-        }
-
-        private static int Fiddle4()
-        {
-            var paths = Directory.GetFiles("LightningPirate");
-            foreach (string oldPath in paths)
-            {
-                var dirName = Path.GetDirectoryName(oldPath);
-                var oldFilename = Path.GetFileName(oldPath);
-                if (oldFilename != ".gitignore")
-                {
-                    int index = int.Parse(Path.GetFileNameWithoutExtension(oldFilename));
-                    string newPath = Path.Combine(dirName, $"{index:d4}.png");
-                    File.Move(oldPath, newPath);
-                }
-            }
-            return ExitCodes.Success;
         }
 
         private static int Fiddle3()
