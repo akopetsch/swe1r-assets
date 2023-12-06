@@ -41,12 +41,13 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
             ModelBlockItem modelBlockItem = DeserializeItem(index, out ByteSerializerContext context);
             
             //ExportGraphviz(modelBlockItem, context);
-
+            
             new ModelFormatTesterFactory().Get(modelBlockItem.Model, context.Graph, AnalyticsFixture).Test();
             RunTesters<Mesh, MeshTester>(context);
             RunTesters<MaterialTexture, MaterialTextureTester>(context);
             RunTesters<MeshGroup3064, MeshGroup3064Tester>(context);
             AssertReferenceCounts(context);
+            AssertVerticesCount(modelBlockItem);
         }
 
         #endregion
@@ -56,6 +57,12 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
         private void ExportGraphviz(ModelBlockItem modelBlockItem, ByteSerializerContext context)
         {
             new ModelGraphvizExporterFactory().Get(modelBlockItem, context.Graph, "in").Export();
+        }
+
+        private void AssertVerticesCount(ModelBlockItem modelBlockItem)
+        {
+            var meshes = modelBlockItem.Model.GetAllNodes().OfType<Mesh>().ToList();
+            int verticesCount = meshes.Sum(m => m.VisibleVerticesCount);
         }
 
         private void AssertReferenceCounts(ByteSerializerContext context)

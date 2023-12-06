@@ -20,14 +20,18 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
         {
             base.Init(value, byteSerializerGraph, analyticsFixture);
             base.Test();
-            _trackMetadata = new MetadataProvider().Tracks.First(t => t.Model == Value.BlockItem.Index.Value);
+
+            // TODO: fix the following lines (does not work for e.g. valueId = 1001)
+            var metadataProvider = new MetadataProvider();
+            BlockItemValueMetadata blockItemValueMetadata = metadataProvider.GetBlockItemValueByHash(Value.BlockItem);
+            _trackMetadata = metadataProvider.Tracks.FirstOrDefault(t => t.Model == blockItemValueMetadata.Id);
         }
 
         public override void Test()
         {
             AssertHeader();
 
-            if (_trackMetadata.Planet == Planet.MonGazza)
+            if (_trackMetadata?.Planet == Planet.MonGazza)
                 AssertSkybox();
         }
 
@@ -53,13 +57,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
             Assert.True(material.Bitmask == 12);
             Assert.True(material.Width_Unk_Dividend == 0);
             Assert.True(material.Height_Unk_Dividend == 0);
-
-            if (_trackMetadata.Planet == Planet.MonGazza)
-            {
-                Assert.NotNull(material.Texture);
-                AssertSkyboxMaterialTexture(material.Texture);
-            }
-
+            Assert.NotNull(material.Texture);
+            AssertSkyboxMaterialTexture(material.Texture);
             Assert.NotNull(material.Properties);
             AssertSkyboxMaterialProperties(material.Properties);
         }
@@ -113,9 +112,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
         {
             Assert.True(materialProperties.AlphaBpp == 0);
             Assert.True(materialProperties.Word_4 == 1);
-            Assert.True(materialProperties.Ints_6[0] == 0x011f041f); // = 18809887
+            Assert.True(materialProperties.Ints_6[0] == 0x011f041f);
             Assert.True(materialProperties.Ints_6[1] == 0x07070704);
-            Assert.True(materialProperties.Ints_e[0] == 0x011f041f); // = 18809887
+            Assert.True(materialProperties.Ints_e[0] == 0x011f041f);
             Assert.True(materialProperties.Ints_e[1] == 0x07070704);
             Assert.True(materialProperties.Unk_16 == 0);
             Assert.True(materialProperties.Bitmask1 == 0x0c082008);
