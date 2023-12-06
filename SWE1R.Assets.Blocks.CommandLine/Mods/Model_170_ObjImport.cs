@@ -24,8 +24,14 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             string objFilename;
             float positionScale = 1;
 
-            objFilename = "Upgrade_Plug_3_exp.groups.obj"; // OK
+            //objFilename = "pod_clegg_holdfast_TEST.obj";
+            //positionScale = 100;
+
+            objFilename = "control_stabilizer_WIP.obj";
             positionScale = 100;
+
+            //objFilename = "Upgrade_Plug_3_exp.groups.obj"; // OK
+            //positionScale = 100;
 
             // v: 8
             //objFilename = "obj/box.obj"; // OK
@@ -79,9 +85,6 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
                 objFilename, textureBlock, new SystemDrawingImageRgba32Loader(), configuration);
             importer.Import();
             PrintModelImporterDetails(importer);
-            // [0] vertices: 2992, chunks: 1565
-            // [1] vertices: 816, chunks: 452
-            // [2] vertices: 1632, chunks: 819
 
             var parentNode = byteSerializerContext.Graph.GetValue<TransformableD065>();
             parentNode.Children.Clear();
