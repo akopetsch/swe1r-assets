@@ -6,6 +6,8 @@ This project offers a suite of tools and libraries designed for modding and rese
 
 https://github.com/akopetsch/swe1r-assets/assets/8048046/acab1213-d35a-4db6-8ffc-21e2000e55be
 
+Imported OBJ model is by [Leadphalanx](https://forums.tigsource.com/index.php?topic=68973.0)
+
 ![Screenshot of SWE1R.Assets.Unity](screenshot.png)
 
 ## Features
@@ -19,7 +21,10 @@ These are the key projects:
 
 ## Issues
 
-This project is still heavily WIP. This is an early preview release, and I welcome your feedback or contributions (forks, pull-requests, issues) to improve it, but you have to expect that the code base will change frequently due to refactorings and new features until things calm down a bit. Development is discussed in a discord modding channel related to the game. 
+This project is still heavily WIP. This is an early preview release, 
+and I welcome your feedback or contributions (forks, pull-requests, issues) to improve it, 
+but you have to expect that the code base will change frequently due to refactorings and new features until things calm down a bit. 
+Development is discussed in a Discord modding channel related to the game. 
 
 The following are some major domains to work on:
 
