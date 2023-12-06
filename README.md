@@ -4,6 +4,8 @@ C#/.NET/Unity tools and libraries for the game Star Wars Episode 1 Racer.
 
 This project offers a suite of tools and libraries designed for modding and researching the game's file formats. It features advanced functionalities such as bit-perfect reserialization of game assets, a level editor based on Unity, OBJ model import and lays the groundwork for extensive analysis of the file formats and internal mechanics. Dive in to explore, contribute, and bring new life to a beloved classic!
 
+https://github.com/akopetsch/swe1r-assets/assets/8048046/acab1213-d35a-4db6-8ffc-21e2000e55be
+
 ![Screenshot of SWE1R.Assets.Unity](screenshot.png)
 
 ## Features
