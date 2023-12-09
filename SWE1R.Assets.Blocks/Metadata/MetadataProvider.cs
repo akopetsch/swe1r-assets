@@ -152,7 +152,7 @@ namespace SWE1R.Assets.Blocks.Metadata
             var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture) {
                 Mode = CsvMode.Escape
             };
-            using (var reader = new StreamReader(new BlocksResourceHelper().ReadEmbeddedResource(filename)))
+            using (var reader = new StreamReader(new ResourceHelper().ReadEmbeddedResource(filename)))
             using (var csv = new CsvReader(reader, csvConfig))
                 return csv.GetRecords<TRecord>().ToList();
         }

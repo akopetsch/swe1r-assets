@@ -6,7 +6,7 @@ using SWE1R.Assets.Blocks.Utils;
 
 namespace SWE1R.Assets.Blocks.Original.Resources
 {
-    public class OriginalBlocksResourceHelper : ResourceHelper
+    internal class ResourceHelper : ResourceHelperBase
     {
         
     }

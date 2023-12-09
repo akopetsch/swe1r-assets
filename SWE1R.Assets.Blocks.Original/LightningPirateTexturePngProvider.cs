@@ -16,7 +16,7 @@ namespace SWE1R.Assets.Blocks.Original
         public ImageSharpImage LoadTexturePng(int index)
         {
             string resourcePath = "LightningPirate.zip";
-            using Stream resourceStream = new OriginalBlocksResourceHelper().ReadEmbeddedResource(resourcePath);
+            using Stream resourceStream = new ResourceHelper().ReadEmbeddedResource(resourcePath);
             using var zipArchive = new ZipArchive(resourceStream);
             ZipArchiveEntry zipArchiveEntry = zipArchive.GetEntry($"{index:d4}.png");
             using Stream stream = zipArchiveEntry.Open();

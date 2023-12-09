@@ -4,9 +4,9 @@
 
 using SWE1R.Assets.Blocks.Utils;
 
-namespace SWE1R.Assets.Blocks.Resources
+namespace SWE1R.Assets.Blocks.ModelBlock.Import.Tests.Resources
 {
-    public class BlocksResourceHelper : ResourceHelper
+    internal class ResourceHelper : ResourceHelperBase
     {
         
     }

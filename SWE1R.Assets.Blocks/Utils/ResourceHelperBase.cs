@@ -6,7 +6,7 @@ using System.IO;
 
 namespace SWE1R.Assets.Blocks.Utils
 {
-    public abstract class ResourceHelper
+    public abstract class ResourceHelperBase
     {
         public Stream ReadEmbeddedResource(string name)
         {

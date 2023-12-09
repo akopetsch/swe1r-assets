@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks.Original.MaterialTexturesCatalog
 
         public void Load()
         {
-            using Stream resourceStream = new OriginalBlocksResourceHelper()
+            using Stream resourceStream = new ResourceHelper()
                 .ReadEmbeddedResource(OriginalMaterialTexturesCatalog.JsonFilename);
             using var resourceStreamReader = new StreamReader(resourceStream);
             string json = resourceStreamReader.ReadToEnd();
