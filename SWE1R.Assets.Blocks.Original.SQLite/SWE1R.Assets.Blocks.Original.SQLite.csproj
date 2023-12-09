@@ -9,16 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="AssetsDb.sqlite" />
-    <None Remove="AssetsDb.sqlite.sha1" />
-    <None Remove="AssetsDb.sqlite.sha256" />
     <None Remove="AssetsDb\AssetsDb.sqlite.sha1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="AssetsDb.sqlite" Condition="Exists('AssetsDb.sqlite')">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="AssetsDb\AssetsDb.sqlite.sha1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
