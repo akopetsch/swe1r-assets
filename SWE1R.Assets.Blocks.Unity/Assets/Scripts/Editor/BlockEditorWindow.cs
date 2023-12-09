@@ -28,8 +28,7 @@ namespace SWE1R.Assets.Blocks.Unity.Editor
 
         #region Fields
 
-        // private string blocksPath = @"C:/Program Files (x86)/Steam/steamapps/common/Star Wars Episode I Racer/data/lev01"; // TODO: change blocksPath
-        private string blocksPath = @"C:/Program Files (x86)/GOG Galaxy/Games/STAR WARS Racer/data/lev01";
+        private string blocksPath = @"C:/apps/swe1r/gog-hotfix3/data/lev01"; // TODO: configurable blocksPath
 
         private string modelBlockFilename = BlockDefaultFilenames.ModelBlock;
         private string textureBlockFilename = BlockDefaultFilenames.TextureBlock;
