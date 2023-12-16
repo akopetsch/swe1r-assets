@@ -34,6 +34,7 @@ The following are some major domains to work on:
 * Packaging (NuGet/Unity)
 * Integrate existing findings of the community (where big credit goes):
   * [louriccia/SWE1R-Mods](https://github.com/louriccia/SWE1R-Mods)
+  * [tim-tim707/SW_RACER_RE](https://github.com/tim-tim707/SW_RACER_RE)
   * [OpenSWE1R/swe1r-tools](https://github.com/OpenSWE1R/swe1r-tools)
   * [Olganix/Sw_Racer](https://github.com/Olganix/Sw_Racer)
 * ...
