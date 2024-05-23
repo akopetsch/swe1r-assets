@@ -96,6 +96,10 @@ namespace ByteSerialization.Nodes
                 return GetValueComponentsByValue(value).FirstOrDefault();
         }
 
+        public TValueComponent GetValueComponent<TValueComponent>(object value)
+            where TValueComponent : ValueComponent =>
+            GetValueComponent(value) as TValueComponent;
+
         public ValueComponent GetValueComponent(Type type, long position) =>
             GetValueComponents(position)
                 .Where(vc => type.IsAssignableFrom(vc.Type))
@@ -123,6 +127,9 @@ namespace ByteSerialization.Nodes
 
         public IEnumerable<RecordComponent> GetRecordComponents<TValue>() =>
             GetValueComponents<TValue>().OfType<RecordComponent>();
+
+        public PropertyComponent[] GetPropertyComponents<TRecord>(string propertyName) =>
+            GetRecordComponents<TRecord>().Select(x => x.Properties[propertyName]).ToArray();
 
         #endregion
 

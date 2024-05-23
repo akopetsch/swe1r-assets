@@ -9,6 +9,7 @@ using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
 using ByteSerialization.Extensions;
 using ByteSerialization.IO.Extensions;
+using SWE1R.Assets.Blocks.ModelBlock.Animations;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
@@ -32,14 +33,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             int size = (int)Math.Ceiling(GetBitNumber(ModelBlockItem.Data.Length) / 8f);
             Bytes = new byte[size.Ceiling(4)];
 
+            // references
             Mask(context.Graph.References.Where(IsMasked));
+
+            // TextureIndex
             Mask(context.Graph.GetValueComponents<TextureIndex>());
 
+            // IndicesChunk01.StartVertex
             List<PropertyComponent> startVertexProperties = context.Graph.GetRecordComponents<IndicesChunk01>()
                 .Select(rc => rc.Properties[nameof(IndicesChunk01.StartVertex)]).ToList();
             Mask(startVertexProperties.Where(pc => ((ReferenceByIndex<Vertex>)pc.Value).Value != null));
 
-            // mask special altN
+            // AltN
             var modelRecordComponent = context.Graph.GetRecordComponent<Model>();
             if (ModelBlockItem.Model is PoddModel)
             {
@@ -47,10 +52,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock
                 PropertyComponent altNPropertyComponent = modelRecordComponent.Properties[nameof(Model.AltN)];
                 Mask(altNPropertyComponent.Children);
             }
-            // mask null-pointers that mark the end of collections
-            MaskNext(modelRecordComponent.Properties[nameof(Model.Animations)]);
-            MaskNext(modelRecordComponent.Properties[nameof(Model.AltN)]);
+
+            // Model.Animations, Model.AltN
+            // (mask null-pointers that mark the end of collections)
+            MaskNext(context.Graph.GetValueComponent<CollectionComponent>(ModelBlockItem.Model.Animations));
+            MaskNext(context.Graph.GetValueComponent<CollectionComponent>(ModelBlockItem.Model.AltN));
             // TODO: instead of using 'MaskNext', a feature should be implemented in 'ByteSerializer'
+
+            // MaterialReference
+            // (mask null-pointer that is treated as padding here)
+            MaskNext(context.Graph.GetPropertyComponents<MaterialReference>(nameof(MaterialReference.Material)));
         }
 
         private bool IsMasked(ReferenceComponent r)
@@ -95,13 +106,19 @@ namespace SWE1R.Assets.Blocks.ModelBlock
                 Mask(node.Position);
         }
 
-        private void MaskNext(PropertyComponent p)
+        private void MaskNext(CollectionComponent cc)
         {
-            if (p.Children.Any())
+            if (cc?.Children.Any() ?? false)
             {
-                SerializerNode last = p.Children.Last();
+                SerializerNode last = cc.Children.Last();
                 Mask(last.Position + last.Size);
             }
+        }
+
+        private void MaskNext(PropertyComponent[] ps)
+        {
+            foreach (PropertyComponent p in ps)
+                Mask(p.Node.Position.Value + p.Node.Size);
         }
 
         private void Mask(long? position)
