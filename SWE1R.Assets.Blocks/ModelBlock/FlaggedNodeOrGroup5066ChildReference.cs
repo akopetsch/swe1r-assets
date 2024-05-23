@@ -19,7 +19,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         [TypeHelper(typeof(TypeHelper))]
         [ReferenceHelper(typeof(ReferenceHelper))]
-        [Order(0)] public object Value { get; private set; }
+        [Order(0)]
+        public object Value { get; private set; }
+
+        #endregion
+
+        #region Properties (C union style access)
 
         public FlaggedNode FlaggedNode
         {
