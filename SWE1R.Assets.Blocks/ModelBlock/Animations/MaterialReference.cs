@@ -7,7 +7,6 @@ using SWE1R.Assets.Blocks.ModelBlock.Materials;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 {
-    [Sizeof(8)]
     public class MaterialReference
     {
         #region Properties (serialized)
@@ -17,6 +16,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
         /// </summary>
         [Order(0), Reference]
         public Material Material { get; set; }
+
+        [Order(1), Reference]
+        private object NullPointer { get; set; }
 
         #endregion
     }

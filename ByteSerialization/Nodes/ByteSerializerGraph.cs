@@ -96,10 +96,6 @@ namespace ByteSerialization.Nodes
                 return GetValueComponentsByValue(value).FirstOrDefault();
         }
 
-        public TValueComponent GetValueComponent<TValueComponent>(object value)
-            where TValueComponent : ValueComponent =>
-            GetValueComponent(value) as TValueComponent;
-
         public ValueComponent GetValueComponent(Type type, long position) =>
             GetValueComponents(position)
                 .Where(vc => type.IsAssignableFrom(vc.Type))
