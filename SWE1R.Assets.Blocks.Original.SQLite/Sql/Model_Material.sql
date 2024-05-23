@@ -92,7 +92,7 @@ LEFT JOIN Model_MaterialProperties on
   Model_MaterialProperties.offset = Model_Material.P_Properties AND 
   Model_MaterialProperties.BlockItem = Model_Material.BlockItem
 where
-  mt_id_m = 49 or
+  (mt_id_m = 49 or
   mt_id_m = 58 or
   mt_id_m = 99 or
   mt_id_m = 924 or
@@ -102,7 +102,7 @@ where
   mt_id_m = 992 or
   mt_id_m = 1000 or
   mt_id_m = 1048 or
-  mt_id_m = 1064
+  mt_id_m = 1064) and
 
   -- special1:
   -- mtc0_bd = 124 and 
