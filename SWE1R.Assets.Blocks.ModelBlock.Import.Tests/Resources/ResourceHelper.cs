@@ -6,7 +6,7 @@ using SWE1R.Assets.Blocks.Utils;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Import.Tests.Resources
 {
-    internal class ResourceHelper : ResourceHelperBase
+    public class ResourceHelper : ResourceHelperBase
     {
         
     }
