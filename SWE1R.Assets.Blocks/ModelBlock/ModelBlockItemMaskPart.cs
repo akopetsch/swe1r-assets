@@ -9,7 +9,6 @@ using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
 using ByteSerialization.Extensions;
 using ByteSerialization.IO.Extensions;
-using SWE1R.Assets.Blocks.ModelBlock.Animations;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
@@ -52,12 +51,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock
                 PropertyComponent altNPropertyComponent = modelRecordComponent.Properties[nameof(Model.AltN)];
                 Mask(altNPropertyComponent.Children);
             }
-
-            // Model.Animations, Model.AltN
-            // (mask null-pointers that mark the end of collections)
-            MaskNext((CollectionComponent)context.Graph.GetValueComponent(ModelBlockItem.Model.Animations));
-            MaskNext((CollectionComponent)context.Graph.GetValueComponent(ModelBlockItem.Model.AltN));
-            // TODO: instead of using 'MaskNext', a feature should be implemented in 'ByteSerializer'
         }
 
         private bool IsMasked(ReferenceComponent r)
@@ -100,15 +93,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         {
             foreach (SerializerNode node in nodes)
                 Mask(node.Position);
-        }
-
-        private void MaskNext(CollectionComponent cc)
-        {
-            if (cc?.Children.Any() ?? false)
-            {
-                SerializerNode last = cc.Children.Last();
-                Mask(last.Position + last.Size);
-            }
         }
 
         private void Mask(long? position)

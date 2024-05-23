@@ -35,12 +35,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         [Order(2)] public HeaderData Data { get; set; }
 
         [Indicator("Anim")]
-        [SerializeUntil(0)]
+        [SerializeUntilNullPointer]
         [ElementReference(ReferenceHandling.LowPriority)]
         [Order(3)] public List<Animation> Animations { get; set; }
         
         [Indicator("AltN")]
-        [SerializeUntil(0)]
+        [SerializeUntilNullPointer]
         [Order(4)] public List<FlaggedNodeOrGroup5066ChildReference> AltN { get; set; }
 
         [Length(4)]
