@@ -8,23 +8,17 @@ using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine.Mods
 {
-    public class ModModelVertexAlpha
+    public class ModModelVertexAlpha(string filename, int modelIndex)
     {
-        public string Filename { get; }
-        public int ModelIndex { get; }
-
-        public ModModelVertexAlpha(string filename, int modelIndex)
-        {
-            Filename = filename;
-            ModelIndex = modelIndex;
-        }
+        public string Filename { get; } = filename;
+        public int ModelIndex { get; } = modelIndex;
 
         public void Run()
         {
             Debug.WriteLine(ModelIndex);
 
             // load
-            Block<ModelBlockItem> block = Block.Load<ModelBlockItem>(Filename);
+            var block = Block.Load<ModelBlockItem>(Filename);
             ModelBlockItem modelBlockItem = block[ModelIndex];
             modelBlockItem.Load();
 
@@ -38,14 +32,10 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
 
         private void SetAlphaTo128(ModelBlockItem modelBlockItem)
         {
-            List<Mesh> meshes = modelBlockItem.Model.GetAllNodes().OfType<Mesh>().ToList();
+            var meshes = modelBlockItem.Model.GetAllNodes().OfType<Mesh>().ToList();
             foreach (Mesh mesh in meshes)
-            {
                 foreach (Vertex vertex in mesh.VisibleVertices)
-                {
                     vertex.Byte_F = byte.MaxValue;
-                }
-            }
         }
     }
 }

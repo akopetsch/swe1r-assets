@@ -1,0 +1,150 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\BlenderSuzanne\blender-suzanne.mtl" />
+    <None Remove="Resources\BlenderSuzanne\blender-suzanne.obj" />
+    <None Remove="Resources\Cube\cube.mtl" />
+    <None Remove="Resources\Cube\cube.obj" />
+    <None Remove="Resources\Cube\cube.png" />
+    <None Remove="Resources\JBurkardt\airboat.obj" />
+    <None Remove="Resources\JBurkardt\al.obj" />
+    <None Remove="Resources\JBurkardt\alfa147.obj" />
+    <None Remove="Resources\JBurkardt\cessna.obj" />
+    <None Remove="Resources\JBurkardt\cube.obj" />
+    <None Remove="Resources\JBurkardt\diamond.obj" />
+    <None Remove="Resources\JBurkardt\dodecahedron.obj" />
+    <None Remove="Resources\JBurkardt\example.mtl" />
+    <None Remove="Resources\JBurkardt\gourd.obj" />
+    <None Remove="Resources\JBurkardt\humanoid_quad.obj" />
+    <None Remove="Resources\JBurkardt\humanoid_tri.obj" />
+    <None Remove="Resources\JBurkardt\icosahedron.obj" />
+    <None Remove="Resources\JBurkardt\lamp.obj" />
+    <None Remove="Resources\JBurkardt\magnolia.obj" />
+    <None Remove="Resources\JBurkardt\minicooper.obj" />
+    <None Remove="Resources\JBurkardt\octahedron.obj" />
+    <None Remove="Resources\JBurkardt\power_lines.obj" />
+    <None Remove="Resources\JBurkardt\pyramid.obj" />
+    <None Remove="Resources\JBurkardt\roi.obj" />
+    <None Remove="Resources\JBurkardt\sandal.obj" />
+    <None Remove="Resources\JBurkardt\shuttle.obj" />
+    <None Remove="Resources\JBurkardt\skyscraper.obj" />
+    <None Remove="Resources\JBurkardt\slot_machine.obj" />
+    <None Remove="Resources\JBurkardt\symphysis.obj" />
+    <None Remove="Resources\JBurkardt\teapot.obj" />
+    <None Remove="Resources\JBurkardt\tetrahedron.obj" />
+    <None Remove="Resources\JBurkardt\trumpet.obj" />
+    <None Remove="Resources\JBurkardt\violin_case.obj" />
+    <None Remove="Resources\JBurkardt\vp.mtl" />
+    <None Remove="Resources\Leadphalanx\control_stabilizer_WIP.mtl" />
+    <None Remove="Resources\Leadphalanx\control_stabilizer_WIP.obj" />
+    <None Remove="Resources\Leadphalanx\pod_clegg_holdfast_TEST.mtl" />
+    <None Remove="Resources\Leadphalanx\pod_clegg_holdfast_TEST.obj" />
+    <None Remove="Resources\Leadphalanx\Upgrade_Plug_2D_View.png" />
+    <None Remove="Resources\Leadphalanx\Upgrade_Plug_3_exp.mtl" />
+    <None Remove="Resources\Leadphalanx\Upgrade_Plug_3_exp.obj" />
+    <None Remove="Resources\PaulBourke\box.obj" />
+    <None Remove="Resources\PaulBourke\capsule.mtl" />
+    <None Remove="Resources\PaulBourke\capsule.obj" />
+    <None Remove="Resources\PaulBourke\capsule0.jpg" />
+    <None Remove="Resources\PlotlyDashVtk\cow-nonormals.obj" />
+    <None Remove="Resources\PlotlyDashVtk\pumpkin_tall_10k.obj" />
+    <None Remove="Resources\PlotlyDashVtk\teapot.obj" />
+    <None Remove="Resources\PlotlyDashVtk\teddy.obj" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_1024.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_1024_I8.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_128.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_128_I8.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_2048.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_2048_I8.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_256.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_256_I8.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_4096.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_4096_I8.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_512.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_512_I8.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_64.png" />
+    <None Remove="Resources\UvCheckerMapMaker\Test_64_I8.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\JBurkardt\tetrahedron.obj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BlenderSuzanne\blender-suzanne.mtl" />
+    <EmbeddedResource Include="Resources\BlenderSuzanne\blender-suzanne.obj" />
+    <EmbeddedResource Include="Resources\Cube\cube.mtl" />
+    <EmbeddedResource Include="Resources\Cube\cube.obj" />
+    <EmbeddedResource Include="Resources\Cube\cube.png" />
+    <EmbeddedResource Include="Resources\JBurkardt\airboat.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\al.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\alfa147.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\cessna.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\cube.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\diamond.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\dodecahedron.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\example.mtl" />
+    <EmbeddedResource Include="Resources\JBurkardt\gourd.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\humanoid_quad.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\humanoid_tri.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\icosahedron.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\lamp.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\magnolia.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\minicooper.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\octahedron.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\power_lines.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\pyramid.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\roi.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\sandal.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\shuttle.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\skyscraper.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\slot_machine.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\symphysis.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\teapot.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\trumpet.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\violin_case.obj" />
+    <EmbeddedResource Include="Resources\JBurkardt\vp.mtl" />
+    <EmbeddedResource Include="Resources\Leadphalanx\control_stabilizer_WIP.mtl" />
+    <EmbeddedResource Include="Resources\Leadphalanx\control_stabilizer_WIP.obj" />
+    <EmbeddedResource Include="Resources\Leadphalanx\pod_clegg_holdfast_TEST.mtl" />
+    <EmbeddedResource Include="Resources\Leadphalanx\pod_clegg_holdfast_TEST.obj" />
+    <EmbeddedResource Include="Resources\Leadphalanx\Upgrade_Plug_2D_View.png" />
+    <EmbeddedResource Include="Resources\Leadphalanx\Upgrade_Plug_3_exp.mtl" />
+    <EmbeddedResource Include="Resources\Leadphalanx\Upgrade_Plug_3_exp.obj" />
+    <EmbeddedResource Include="Resources\PaulBourke\box.obj" />
+    <EmbeddedResource Include="Resources\PaulBourke\capsule.mtl" />
+    <EmbeddedResource Include="Resources\PaulBourke\capsule.obj" />
+    <EmbeddedResource Include="Resources\PaulBourke\capsule0.jpg" />
+    <EmbeddedResource Include="Resources\PlotlyDashVtk\cow-nonormals.obj" />
+    <EmbeddedResource Include="Resources\PlotlyDashVtk\pumpkin_tall_10k.obj" />
+    <EmbeddedResource Include="Resources\PlotlyDashVtk\teapot.obj" />
+    <EmbeddedResource Include="Resources\PlotlyDashVtk\teddy.obj" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_1024.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_1024_I8.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_128.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_128_I8.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_2048.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_2048_I8.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_256.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_256_I8.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_4096.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_4096_I8.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_512.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_512_I8.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_64.png" />
+    <EmbeddedResource Include="Resources\UvCheckerMapMaker\Test_64_I8.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SWE1R.Assets.Blocks.Images.ImageSharp\SWE1R.Assets.Blocks.Images.ImageSharp.csproj" />
+    <ProjectReference Include="..\SWE1R.Assets.Blocks.Images.SystemDrawing\SWE1R.Assets.Blocks.Images.SystemDrawing.csproj" />
+    <ProjectReference Include="..\SWE1R.Assets.Blocks\SWE1R.Assets.Blocks.csproj" />
+  </ItemGroup>
+
+</Project>

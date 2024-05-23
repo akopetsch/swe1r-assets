@@ -9,50 +9,50 @@
       "commandLineArgs": "--list-models out_modelblock.bin/_default.bin",
       "workingDirectory": "C:\\Users\\akope\\code\\akopetsch\\swe1r-assets-data\\src\\SWE1R.Assets.Blocks.Original"
     },
-    "scratchpad": {
-      "commandName": "Project",
-      "commandLineArgs": "scratchpad",
-      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
-    },
     "gog - export-models-textures -i 170": {
       "commandName": "Project",
       "commandLineArgs": "export-models-textures out_modelblock.bin -t out_textureblock.bin -i 170",
-      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
+      "workingDirectory": "C:\\apps\\swe1r\\gog-hotfix3\\data\\lev01"
     },
     "gog - list-models": {
       "commandName": "Project",
       "commandLineArgs": "list-models out_modelblock.bin",
-      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
+      "workingDirectory": "C:\\apps\\swe1r\\gog-hotfix3\\data\\lev01"
     },
     "gog - export-models-textures": {
       "commandName": "Project",
       "commandLineArgs": "export-models-textures out_modelblock.bin -t out_textureblock.bin",
-      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
+      "workingDirectory": "C:\\apps\\swe1r\\gog-hotfix3\\data\\lev01"
     },
     "gog - export-models-textures -i 133": {
       "commandName": "Project",
       "commandLineArgs": "export-models-textures out_modelblock.bin -t out_textureblock.bin -i 133",
-      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
+      "workingDirectory": "C:\\apps\\swe1r\\gog-hotfix3\\data\\lev01"
     },
     "gog - export-models-textures -i 130": {
       "commandName": "Project",
       "commandLineArgs": "export-models-textures out_modelblock.bin -t out_textureblock.bin -i 130",
-      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
+      "workingDirectory": "C:\\apps\\swe1r\\gog-hotfix3\\data\\lev01"
     },
     "gog - export-models-textures -i 142": {
       "commandName": "Project",
       "commandLineArgs": "export-models-textures out_modelblock.bin -t out_textureblock.bin -i 142",
-      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
+      "workingDirectory": "C:\\apps\\swe1r\\gog-hotfix3\\data\\lev01"
     },
     "gog - mod-model-vertex-alpha": {
       "commandName": "Project",
       "commandLineArgs": "mod-model-vertex-alpha out_modelblock.bin -i 279",
-      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
+      "workingDirectory": "C:\\apps\\swe1r\\gog-hotfix3\\data\\lev01"
     },
     "gog - export-sprites": {
       "commandName": "Project",
       "commandLineArgs": "export-sprites out_spriteblock.bin",
-      "workingDirectory": "C:\\Program Files (x86)\\GOG Galaxy\\Games\\STAR WARS Racer\\data\\lev01"
+      "workingDirectory": "C:\\apps\\swe1r\\gog-hotfix3\\data\\lev01"
+    },
+    "gog - scratchpad": {
+      "commandName": "Project",
+      "commandLineArgs": "scratchpad",
+      "workingDirectory": "C:\\apps\\swe1r\\gog-hotfix3\\data\\lev01"
     }
   }
 }

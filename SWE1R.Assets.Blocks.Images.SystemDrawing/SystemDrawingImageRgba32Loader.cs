@@ -7,12 +7,12 @@ using SystemDrawingImage = System.Drawing.Image;
 
 namespace SWE1R.Assets.Blocks.Images.SystemDrawing
 {
-    public class SystemDrawingImageRgba32Loader : IImageRgba32Loader
+    public class SystemDrawingImageRgba32Loader
     {
-        public ImageRgba32 Load(string imageFilename)
+        public ImageRgba32 Load(Stream stream)
         {
             using var systemDrawingBitmap =
-                (SystemDrawingBitmap)SystemDrawingImage.FromFile(imageFilename);
+                (SystemDrawingBitmap)SystemDrawingImage.FromStream(stream);
             return systemDrawingBitmap.ToImageRgba32().FlipY();
         }
     }

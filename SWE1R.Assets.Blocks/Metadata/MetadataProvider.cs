@@ -5,7 +5,7 @@
 using CsvHelper;
 using CsvHelper.Configuration;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.Resources;
+using SWE1R.Assets.Blocks.Resources.Metadata;
 using SWE1R.Assets.Blocks.SplineBlock;
 using SWE1R.Assets.Blocks.SpriteBlock;
 using SWE1R.Assets.Blocks.TextureBlock;
@@ -152,7 +152,7 @@ namespace SWE1R.Assets.Blocks.Metadata
             var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture) {
                 Mode = CsvMode.Escape
             };
-            using (var reader = new StreamReader(new ResourceHelper().ReadEmbeddedResource(filename)))
+            using (var reader = new StreamReader(new MetadataResourcesHelper().ReadEmbeddedResource(filename)))
             using (var csv = new CsvReader(reader, csvConfig))
                 return csv.GetRecords<TRecord>().ToList();
         }

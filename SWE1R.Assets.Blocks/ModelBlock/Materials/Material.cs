@@ -3,6 +3,10 @@
 // Refer to the included LICENSE.txt file.
 
 using ByteSerialization.Attributes;
+using SWE1R.Assets.Blocks.Images;
+using SWE1R.Assets.Blocks.ModelBlock.Materials.Import;
+using SWE1R.Assets.Blocks.TextureBlock;
+using System.IO;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 {
@@ -56,6 +60,21 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         #region Properties (helper)
 
         public bool HasBackfaceCulling => (Bitmask & 8) > 0; // TODO: confirm this
+
+        #endregion
+
+        #region Methods (import helper)
+
+        public static MaterialImporter Import(
+            Stream textureImageStream, 
+            Block<TextureBlockItem> textureBlock, 
+            LoadImageRgba32FromStreamDelegate loadImageRgba32FromStreamDelegate)
+        {
+            ImageRgba32 imageRgba32 = loadImageRgba32FromStreamDelegate(textureImageStream);
+            MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, textureBlock);
+            importer.Import();
+            return importer;
+        }
 
         #endregion
     }

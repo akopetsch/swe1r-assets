@@ -43,7 +43,8 @@ namespace FiddleApp
             var spriteBlock = Block.Load<SpriteBlockItem>(SpriteBlockIdNames.Default);
 
             // import sprite
-            ImageRgba32 image = new SystemDrawingImageRgba32Loader().Load("sprite-133_256x128_I8.png");
+            using var stream = File.OpenRead("sprite-133_256x128_I8.png");
+            ImageRgba32 image = new SystemDrawingImageRgba32Loader().Load(stream);
             var spriteImporter = new SpriteImporter(image);
             spriteImporter.Import();
             spriteImporter.SpriteBlockItem.Block = spriteBlock;

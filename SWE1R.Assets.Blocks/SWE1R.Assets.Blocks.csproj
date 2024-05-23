@@ -6,15 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Block.csv" />
-    <None Remove="Resources\BlockItem.csv" />
-    <None Remove="Resources\ModelBlockItem.csv" />
-    <None Remove="Resources\Racer.csv" />
-    <None Remove="Resources\Release.csv" />
-    <None Remove="Resources\SplineBlockItem.csv" />
-    <None Remove="Resources\SpriteBlockItem.csv" />
-    <None Remove="Resources\TextureBlockItem.csv" />
-    <None Remove="Resources\Track.csv" />
+    <None Remove="Resources\Metadata\Block.csv" />
+    <None Remove="Resources\Metadata\BlockItem.csv" />
+    <None Remove="Resources\Metadata\ModelBlockItem.csv" />
+    <None Remove="Resources\Metadata\Racer.csv" />
+    <None Remove="Resources\Metadata\Release.csv" />
+    <None Remove="Resources\Metadata\SplineBlockItem.csv" />
+    <None Remove="Resources\Metadata\SpriteBlockItem.csv" />
+    <None Remove="Resources\Metadata\TextureBlockItem.csv" />
+    <None Remove="Resources\Metadata\Track.csv" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,15 +35,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Block.csv" />
-    <EmbeddedResource Include="Resources\BlockItem.csv" />
-    <EmbeddedResource Include="Resources\ModelBlockItem.csv" />
-    <EmbeddedResource Include="Resources\Racer.csv" />
-    <EmbeddedResource Include="Resources\Release.csv" />
-    <EmbeddedResource Include="Resources\SplineBlockItem.csv" />
-    <EmbeddedResource Include="Resources\SpriteBlockItem.csv" />
-    <EmbeddedResource Include="Resources\TextureBlockItem.csv" />
-    <EmbeddedResource Include="Resources\Track.csv" />
+    <EmbeddedResource Include="Resources\Metadata\Block.csv" />
+    <EmbeddedResource Include="Resources\Metadata\BlockItem.csv" />
+    <EmbeddedResource Include="Resources\Metadata\ModelBlockItem.csv" />
+    <EmbeddedResource Include="Resources\Metadata\Racer.csv" />
+    <EmbeddedResource Include="Resources\Metadata\Release.csv" />
+    <EmbeddedResource Include="Resources\Metadata\SplineBlockItem.csv" />
+    <EmbeddedResource Include="Resources\Metadata\SpriteBlockItem.csv" />
+    <EmbeddedResource Include="Resources\Metadata\TextureBlockItem.csv" />
+    <EmbeddedResource Include="Resources\Metadata\Track.csv" />
   </ItemGroup>
 
 </Project>

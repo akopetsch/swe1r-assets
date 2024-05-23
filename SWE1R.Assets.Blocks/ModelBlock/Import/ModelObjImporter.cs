@@ -32,28 +32,26 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
     {
         #region Fields
 
-        private const int _indicesRangeMaxLength = byte.MaxValue / 4; // TODO: _indicesRangeMaxLength
-        private const string _testImageFilename = "cube.png"; // TODO: _testImageFilename, test texture in resources
-
-        private Material _testMaterial;
-
-        private ObjLoadResult _objLoadResult;
         private Dictionary<ObjMaterial, Material> _materials = 
             new Dictionary<ObjMaterial, Material>();
+
+        private ModelObjImporterDebugInfoPrinter _debugInfoPrinter;
 
         #endregion
 
         #region Properties (input)
 
-        public string ObjFilename { get; }
+        public Stream ObjStream { get; }
         public Block<TextureBlockItem> TextureBlock { get; }
-        public IImageRgba32Loader ImageLoader { get; }
         public ModelObjImporterConfiguration Configuration { get; }
+        public LoadImageRgba32FromStreamDelegate ImageLoader { get; }
+        public OpenFileStreamDelegate OpenFileStreamDelegate { get; }
 
         #endregion
 
         #region Properties (output)
 
+        public ObjLoadResult ObjLoadResult { get; private set; }
         public MeshGroup3064 MeshGroup3064 { get; private set; }
 
         #endregion
@@ -61,35 +59,50 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
         #region Constructor
 
         public ModelObjImporter(
-            string objFilename, 
+            Stream objStream, 
             Block<TextureBlockItem> textureBlock, 
-            IImageRgba32Loader imageLoader, 
-            ModelObjImporterConfiguration configuration)
+            ModelObjImporterConfiguration configuration,
+            LoadImageRgba32FromStreamDelegate imageLoader,
+            OpenFileStreamDelegate openFileStreamDelegate = null)
         {
-            ObjFilename = objFilename;
+            ObjStream = objStream;
             TextureBlock = textureBlock;
-            ImageLoader = imageLoader;
             Configuration = configuration;
+            ImageLoader = imageLoader;
+            OpenFileStreamDelegate = openFileStreamDelegate ?? (f => File.OpenRead(f));
+
+            if (Configuration.PrintDebugInfo)
+                _debugInfoPrinter = new ModelObjImporterDebugInfoPrinter(this);
         }
 
         #endregion
+
+        private class MaterialStreamProvider : IMaterialStreamProvider
+        {
+            public OpenFileStreamDelegate OpenMaterialStreamDelegate { get; }
+
+            public MaterialStreamProvider(OpenFileStreamDelegate openMaterialStreamDelegate) =>
+                OpenMaterialStreamDelegate = openMaterialStreamDelegate;
+
+            public Stream Open(string materialFilePath) =>
+                OpenMaterialStreamDelegate(materialFilePath);
+        }
 
         #region Methods (import)
 
         public void Import()
         {
-            _testMaterial = ImportTestMaterial();
+            _debugInfoPrinter?.PrintImportStart();
 
-            IObjLoader objLoader = new ObjLoaderFactory().Create();
-            using var fileStream = File.OpenRead(ObjFilename);
-            _objLoadResult = objLoader.Load(fileStream);
+            ObjLoadResult = new ObjLoaderFactory()
+                .Create(new MaterialStreamProvider(OpenFileStreamDelegate)).Load(ObjStream);
 
             MeshGroup3064 = new MeshGroup3064() {
                 Bitfield1 = -1,
                 Bitfield2 = -1,
                 Children = new List<INode>(),
             };
-            foreach (ObjGroup objGroup in _objLoadResult.Groups)
+            foreach (ObjGroup objGroup in ObjLoadResult.Groups)
             {
                 if (objGroup.Faces.Count > 0)
                 {
@@ -99,14 +112,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             }
             MeshGroup3064.UpdateChildrenCount();
             MeshGroup3064.UpdateBounds();
-        }
 
-        private Material ImportTestMaterial()
-        {
-            ImageRgba32 imageRgba32 = ImageLoader.Load(_testImageFilename);
-            MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, TextureBlock);
-            importer.Import();
-            return importer.Material;
+            _debugInfoPrinter?.PrintImportResult();
         }
 
         private List<Mesh> ImportObjGroup(ObjGroup objGroup)
@@ -118,7 +125,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 var mesh = new Mesh();
                 meshes.Add(mesh);
 
-                mesh.Material = ImportObjMaterial(objGroup.Material);
+                mesh.Material = ImportObjMaterial(objGroup.Material); // TODO: !!!!!! must have a value
 
                 mesh.VisibleVertices = meshHelper.Vertices.ToList();
                 mesh.VisibleIndicesChunks = GetIndicesChunks(meshHelper.IndicesRanges, mesh);
@@ -132,9 +139,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
         private Material ImportObjMaterial(ObjMaterial objMaterial)
         {
-            objMaterial ??= _objLoadResult.Materials.FirstOrDefault(); // HACK: workaround for missing 'usemtl'
+            if (Configuration.TryFirstMaterialAsFallback)
+                objMaterial ??= ObjLoadResult.Materials.FirstOrDefault();
             if (objMaterial == null)
-                return _testMaterial;
+                return Configuration.FallbackMaterial;
             else
             {
                 if (_materials.TryGetValue(objMaterial, out Material existingMaterial))
@@ -143,16 +151,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 {
                     string textureImageFilename = objMaterial.DiffuseTextureMap; // map_Kd
                     if (textureImageFilename == null)
-                        return _testMaterial;
+                        return Configuration.FallbackMaterial;
                     else
                     {
-                        ImageRgba32 imageRgba32 = ImageLoader.Load(textureImageFilename);
-                        MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, TextureBlock);
-                        importer.Import();
-
-                        Material material = importer.Material;
-                        _materials[objMaterial] = material;
-                        return material;
+                        using var stream = OpenFileStreamDelegate(textureImageFilename);
+                        MaterialImporter materialImporter = Material.Import(stream, TextureBlock, ImageLoader);
+                        return _materials[objMaterial] = materialImporter.Material;
                     }
                 }
             }
@@ -193,7 +197,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 currentFaceHelper = new FaceHelper(face);
 
                 currentFaceHelper.Vertices.AddRange(
-                    GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, _objLoadResult)));
+                    GetObjFaceVertices(face).Select(f => ImportObjFaceVertex(f, ObjLoadResult)));
                 currentFaceHelper.Triangles.AddRange(
                     GetTriangles(face, indexBase));
                 indexBase += face.Count;
@@ -209,7 +213,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 foreach (FaceHelper faceHelper in meshHelper.FaceHelpers)
                 {
                     // if exceeds IndicesRange max length
-                    if (currentIndicesRange.NextIndicesBase >= _indicesRangeMaxLength)
+                    if (currentIndicesRange.NextIndicesBase >= Configuration.IndicesRangeMaxLength)
                     {
                         // new IndicesRange
                         startVertexIndex += currentIndicesRange.NextIndicesBase / 2;
