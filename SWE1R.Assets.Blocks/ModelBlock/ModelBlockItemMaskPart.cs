@@ -8,7 +8,10 @@ using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
 using ByteSerialization.Extensions;
+using ByteSerialization.IO;
 using ByteSerialization.IO.Extensions;
+using ByteSerialization.IO.Utils;
+using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
@@ -16,98 +19,152 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SerializerNode = ByteSerialization.Nodes.Node;
 
 namespace SWE1R.Assets.Blocks.ModelBlock
 {
     public class ModelBlockItemMaskPart : BlockItemPart
     {
-        private ModelBlockItem ModelBlockItem => (ModelBlockItem)Item;
+        #region Fields
 
-        public ModelBlockItemMaskPart() : base() { }
-        private ModelBlockItemMaskPart(ModelBlockItemMaskPart source) : base(source) { }
+        private const int BytesPerInt32 = sizeof(int);
+
+        #endregion
+
+        #region Properties
+
+        private ModelBlockItem ModelBlockItem =>
+            (ModelBlockItem)Item;
+
+        #endregion
+
+        #region Constructor
+
+        public ModelBlockItemMaskPart() :
+            base()
+        { }
+
+        private ModelBlockItemMaskPart(ModelBlockItemMaskPart source) :
+            base(source)
+        { }
+
+        #endregion
+
+        #region Methods (: BlockItemPart)
+
+        public override BlockItemPart Clone() =>
+            new ModelBlockItemMaskPart(this);
+
+        #endregion
+
+        #region Methods
 
         public void GenerateFromData(ByteSerializerContext context)
         {
-            int size = (int)Math.Ceiling(GetBitNumber(ModelBlockItem.Data.Length) / 8f);
-            Bytes = new byte[size.Ceiling(4)];
+            Model model = ModelBlockItem.Model;
+
+            // create byte array
+            Bytes = new byte[CalculatePaddedBytesLength()];
 
             // references
-            Mask(context.Graph.References.Where(IsMasked));
+            SetMaskBits(
+                context.Graph.References.Where(IsMaskBitRequired));
 
             // TextureIndex
-            Mask(context.Graph.GetValueComponents<TextureIndex>());
+            SetMaskBits(
+                context.Graph.GetValueComponents<TextureIndex>());
 
             // IndicesChunk01.StartVertex
-            List<PropertyComponent> startVertexProperties = context.Graph.GetRecordComponents<IndicesChunk01>()
-                .Select(rc => rc.Properties[nameof(IndicesChunk01.StartVertex)]).ToList();
-            Mask(startVertexProperties.Where(pc => ((ReferenceByIndex<Vertex>)pc.Value).Value != null));
+            SetMaskBits(
+                GetStartVertexComponents(context.Graph).Where(IsMaskBitRequired));
 
             // AltN
-            var modelRecordComponent = context.Graph.GetRecordComponent<Model>();
-            if (ModelBlockItem.Model is PoddModel)
+            if (model is PoddModel)
+                SetMaskBits(
+                    context.Graph.GetCollectionComponent(model.AltN).Elements);
+        }
+
+        private int CalculatePaddedBytesLength()
+        {
+            int dataBytesLength = ModelBlockItem.Data.Length;
+            int bytesLength = (int)Math.Ceiling(
+                (float)GetBitIndex(dataBytesLength) / 
+                BitsHelper.BitsPerByte);
+            int paddedBytesLength = bytesLength.Ceiling(BytesPerInt32);
+            return paddedBytesLength;
+        }
+
+        private int GetByteIndex(int dataByteIndex) =>
+            GetBitIndex(dataByteIndex) / BitsHelper.BitsPerByte;
+
+        private int GetBitIndex(int dataByteIndex) =>
+            dataByteIndex / BytesPerInt32; // one bit per int32
+
+        private void SetMaskBits<TComponent>(IEnumerable<TComponent> components) where TComponent : Component
+        {
+            if (components != null)
             {
-                // TODO: ugly hack (why ugly?)
-                PropertyComponent altNPropertyComponent = modelRecordComponent.Properties[nameof(Model.AltN)];
-                Mask(altNPropertyComponent.Children);
+                foreach (TComponent component in components)
+                {
+                    if (component.Node.Position.HasValue)
+                    {
+                        int dataByteIndex = Convert.ToInt32(component.Node.Position);
+                        SetMaskBit(dataByteIndex);
+                    }
+                }
             }
         }
 
-        private bool IsMasked(ReferenceComponent r)
+        private void SetMaskBit(int dataByteIndex)
+        {
+            int bitIndex = GetBitIndex(dataByteIndex);
+            int bitIndexInByte = bitIndex % BitsHelper.BitsPerByte;
+            int byteIndex = GetByteIndex(dataByteIndex);
+            byte bitMask = BitsHelper.GetBitMask(bitIndexInByte, BitOrder.MsbFirst);
+            Bytes[byteIndex] |= bitMask;
+        }
+
+        private PropertyComponent[] GetStartVertexComponents(ByteSerializerGraph graph) =>
+            graph.GetPropertyComponents<IndicesChunk01>(nameof(IndicesChunk01.StartVertex));
+
+        private bool IsMaskBitRequired(ReferenceComponent r)
         {
             if (IsSpecialScenReference(r))
                 return false;
 
             if (r.Value == null)
             {
-                if (r.Has<PropertyComponent>() && r.Parent.Get<ValueComponent>().Type.IsOneOf<Material, Mesh>())
+                if (r.Has<PropertyComponent>() && 
+                    r.Parent.Get<ValueComponent>().Type.IsOneOf<Material, Mesh>())
                     return false;
                 if (r.Parent.Type == typeof(MeshGroupOrShorts))
                     return false;
-                if (r.Has<CollectionElementComponent>() && r.Type == typeof(MaterialTextureChild))
+                if (r.Has<CollectionElementComponent>() && 
+                    r.Type == typeof(MaterialTextureChild))
                     return false;
             }
 
             return true;
         }
 
-        private bool IsSpecialScenReference(ReferenceComponent c)
+        private bool IsMaskBitRequired(PropertyComponent startVertexPropertyComponent)
         {
-            if (ModelBlockItem.Model is ScenModel && c.Type == typeof(MappingChild))
+            var startVertexPropertyValue = (ReferenceByIndex<Vertex>)startVertexPropertyComponent.Value;
+            return startVertexPropertyValue.Value != null;
+        }
+
+        private bool IsSpecialScenReference(ReferenceComponent referenceComponent)
+        {
+            if (ModelBlockItem.Model is ScenModel && 
+                referenceComponent.Type == typeof(MappingChild))
             {
-                var sub = c.GetAncestorValue<MappingSub>();
-                var list = c.GetAncestorValue<List<MappingSub>>();
-                if (list.IndexOf(sub) == 0)
+                MappingSub mappingSub = referenceComponent.GetAncestorValue<MappingSub>();
+                List<MappingSub> list = referenceComponent.GetAncestorValue<List<MappingSub>>();
+                if (list.IndexOf(mappingSub) == 0)
                     return true;
             }
             return false;
         }
-        
-        private void Mask<TComponent>(IEnumerable<TComponent> components) where TComponent : Component
-        {
-            foreach (TComponent component in components)
-                Mask(component.Node.Position);
-        }
 
-        private void Mask(IEnumerable<SerializerNode> nodes)
-        {
-            foreach (SerializerNode node in nodes)
-                Mask(node.Position);
-        }
-
-        private void Mask(long? position)
-        {
-            if (position.HasValue)
-            {
-                int i = Convert.ToInt32(position.Value);
-                int n = 7 - GetBitNumber(i) % 8;
-                Bytes[GetByteNumber(i)] |= (byte)(1 << n);
-            }
-        }
-
-        private int GetBitNumber(int position) => position / sizeof(int);
-        private int GetByteNumber(int position) => GetBitNumber(position) / 8;
-
-        public override BlockItemPart Clone() => new ModelBlockItemMaskPart(this);
+        #endregion
     }
 }

@@ -5,6 +5,7 @@
 using ByteSerialization.Attributes.Reference;
 using ByteSerialization.Components;
 using ByteSerialization.Components.Values;
+using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
 using ByteSerialization.Extensions;
 using System;
@@ -60,12 +61,11 @@ namespace ByteSerialization.Nodes
         {
             Components.Add(component);
 
-            if (component is ReferenceComponent)
-                References.Add((ReferenceComponent) component);
+            if (component is ReferenceComponent referenceComponent)
+                References.Add(referenceComponent);
 
-            if (component is ValueComponent)
+            if (component is ValueComponent valueComponent)
             {
-                var valueComponent = (ValueComponent)component;
                 ValueComponents.Add(valueComponent);
 
                 // add to ValueComponentByValue
@@ -96,6 +96,12 @@ namespace ByteSerialization.Nodes
                 return GetValueComponentsByValue(value).FirstOrDefault();
         }
 
+        public RecordComponent GetRecordComponent(object value) =>
+            GetValueComponent(value) as RecordComponent;
+
+        public CollectionComponent GetCollectionComponent(object value) =>
+            GetValueComponent(value) as CollectionComponent;
+
         public ValueComponent GetValueComponent(Type type, long position) =>
             GetValueComponents(position)
                 .Where(vc => type.IsAssignableFrom(vc.Type))
@@ -117,9 +123,6 @@ namespace ByteSerialization.Nodes
 
         public IEnumerable<TValue> GetValues<TValue>() =>
             GetValueComponents<TValue>().OrderBy(vc => vc.Position).Select(vc => (TValue)vc.Value);
-
-        public RecordComponent GetRecordComponent<TValue>() =>
-            GetRecordComponents<TValue>().FirstOrDefault();
 
         public IEnumerable<RecordComponent> GetRecordComponents<TValue>() =>
             GetValueComponents<TValue>().OfType<RecordComponent>();

@@ -14,23 +14,39 @@ namespace SWE1R.Assets.Blocks.TestUtils
         protected override void CompareItemInternal(int i)
         {
             // deserialize
-            TItem item = DeserializeItem(i, out ByteSerializerContext inContext);
-            byte[][] inputPartsBytes = item.Parts.Select(p => p.Bytes.ToArray()).ToArray();
+            TItem currentItem = DeserializeItem(i, out ByteSerializerContext _);
+            var oldItem = (TItem)currentItem.Clone();
 
             // re-serialize
-            SerializeItem(item, i, out ByteSerializerContext outContext);
-            byte[][] outputPartsBytes = item.Parts.Select(p => p.Bytes.ToArray()).ToArray();
+            SerializeItem(currentItem, i, out ByteSerializerContext _);
 
             // compare
-            for (int p = 0; p < item.Parts.Length; p++)
+            CompareItem(oldItem, currentItem);
+        }
+
+        private void CompareItem(TItem oldItem, TItem currentItem)
+        {
+            if (!AreBytesEqual(oldItem, currentItem))
             {
-                byte[] inputBytes = inputPartsBytes[p];
-                byte[] outputBytes = outputPartsBytes[p];
-                bool areEqual = inputBytes.SequenceEqual(outputBytes);
-                AssertEquality(p, areEqual);
+                var differentPartsTypes = new List<Type>();
+                for (int partIndex = 0; partIndex < currentItem.Parts.Length; partIndex++)
+                {
+                    BlockItemPart oldPart = oldItem.Parts[partIndex];
+                    BlockItemPart newPart = currentItem.Parts[partIndex];
+                    if (!AreBytesEqual(oldPart, newPart))
+                        differentPartsTypes.Add(newPart.GetType());
+                }
+                string errorMessage = string.Join(", ", differentPartsTypes.Select(x => x.Name));
+                AssertFail(errorMessage);
             }
         }
 
-        protected abstract void AssertEquality(int p, bool areEqual);
+        private static bool AreBytesEqual(BlockItem left, BlockItem right) =>
+            left.Bytes.SequenceEqual(right.Bytes);
+
+        private static bool AreBytesEqual(BlockItemPart left, BlockItemPart right) =>
+            left.Bytes.SequenceEqual(right.Bytes);
+
+        protected abstract void AssertFail(string userMessage);
     }
 }

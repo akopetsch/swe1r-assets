@@ -18,7 +18,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
         public Material Material { get; set; }
 
         [Order(1), Reference]
-        private object NullPointer { get; set; }
+        private object NullPointer { get; set; } = null;
 
         #endregion
     }

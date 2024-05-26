@@ -44,8 +44,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Reserialization
 
         protected override void PrintItemDone() { }
 
-        protected override void AssertEquality(int p, bool areEqual) =>
-            Assert.True(areEqual, $"{nameof(p)} = {p}");
+        protected override void AssertFail(string userMessage) => 
+            Assert.Fail(userMessage);
 
         #endregion
     }
