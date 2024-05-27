@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CodeGen
                 TypeName = TypeKeywordMapper.GetKeywordFromType(Type);
             else
             {
-                List<ByteSerialization.Attributes.Attribute> byteSerializerAttributes = PropertyInfo.GetAttributes();
+                List<ByteSerializationAttribute> byteSerializerAttributes = PropertyInfo.GetAttributes();
 
                 // reference?
                 IsReference = byteSerializerAttributes.OfType<ReferenceAttribute>().SingleOrDefault() != null;

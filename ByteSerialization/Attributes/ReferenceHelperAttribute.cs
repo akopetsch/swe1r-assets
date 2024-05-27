@@ -10,7 +10,7 @@ namespace ByteSerialization.Attributes
 {
     [AttributeComponent(typeof(ReferenceHelperComponent))]
     [AttributeUsage(AttributeTargets.Property)]
-    public class ReferenceHelperAttribute : Attribute
+    public class ReferenceHelperAttribute : ByteSerializationAttribute
     {
         public IReferenceHelper Helper { get; }
 

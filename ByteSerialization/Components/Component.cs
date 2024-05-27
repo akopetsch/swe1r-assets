@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using Attribute = ByteSerialization.Attributes.Attribute;
 using Mode = ByteSerialization.ByteSerializerMode;
 using Reader = ByteSerialization.IO.EndianBinaryReader;
 using Writer = ByteSerialization.IO.EndianBinaryWriter;
@@ -149,9 +148,9 @@ namespace ByteSerialization
 
         #region Methods (attributes)
 
-        protected IEnumerable<AttributeComponent> AddAttributeComponents(List<Attribute> attributes)
+        protected IEnumerable<AttributeComponent> AddAttributeComponents(List<ByteSerializationAttribute> attributes)
         {
-            foreach (IGrouping<Type, Attribute> grouping in attributes.GroupBy(x => x.GetType()))
+            foreach (IGrouping<Type, ByteSerializationAttribute> grouping in attributes.GroupBy(x => x.GetType()))
             {
                 Type t = AttributeComponentFactory.Instance.GetComponentType(grouping.Key);
 

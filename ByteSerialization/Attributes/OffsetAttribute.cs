@@ -9,7 +9,7 @@ namespace ByteSerialization.Attributes
 {
     [AttributeComponent(typeof(OffsetComponent))]
     [AttributeUsage(AttributeTargets.Property)]
-    public class OffsetAttribute : Attribute
+    public class OffsetAttribute : ByteSerializationAttribute
     {
         public int Value { get; }
 

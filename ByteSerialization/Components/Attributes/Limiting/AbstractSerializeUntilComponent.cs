@@ -6,13 +6,12 @@ using ByteSerialization.Attributes;
 using ByteSerialization.Attributes.Limiting;
 using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Nodes;
-using Attribute = ByteSerialization.Attributes.Attribute;
 
 namespace ByteSerialization.Components.Attributes.Limiting
 {
     public abstract class AbstractSerializeUntilComponent<TAttribute> : 
         AttributeComponent<TAttribute>, ILimitingComponent
-        where TAttribute : Attribute
+        where TAttribute : ByteSerializationAttribute
     {
         #region Methods
 

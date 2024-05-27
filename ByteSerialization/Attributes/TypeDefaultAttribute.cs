@@ -9,7 +9,7 @@ namespace ByteSerialization.Attributes
 {
     [AttributeComponent(typeof(TypeDefaultComponent))]
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public class TypeDefaultAttribute : Attribute
+    public class TypeDefaultAttribute : ByteSerializationAttribute
     {
         public Type Type { get; }
 

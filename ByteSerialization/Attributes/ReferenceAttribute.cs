@@ -10,7 +10,7 @@ namespace ByteSerialization.Attributes
 {
     [AttributeComponent(typeof(ReferenceComponent))]
     [AttributeUsage(AttributeTargets.Property)]
-    public sealed class ReferenceAttribute : Attribute
+    public sealed class ReferenceAttribute : ByteSerializationAttribute
     {
         public ReferenceConfiguration Configuration { get; } = new ReferenceConfiguration();
 

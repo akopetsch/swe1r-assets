@@ -9,7 +9,7 @@ namespace ByteSerialization.Attributes
 {
     [AttributeComponent(typeof(SerializeUntilNullPointerComponent))]
     [AttributeUsage(AttributeTargets.Property)]
-    public class SerializeUntilNullPointerAttribute : Attribute
+    public class SerializeUntilNullPointerAttribute : ByteSerializationAttribute
     {
 
     }

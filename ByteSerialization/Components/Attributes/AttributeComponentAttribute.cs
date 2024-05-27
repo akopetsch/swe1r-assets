@@ -8,7 +8,7 @@ using System;
 namespace ByteSerialization.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class AttributeComponentAttribute : Attribute
+    public class AttributeComponentAttribute : ByteSerializationAttribute
     {
         public Type ComponentType { get; set; }
 

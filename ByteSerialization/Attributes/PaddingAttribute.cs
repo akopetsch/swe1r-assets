@@ -9,7 +9,7 @@ namespace ByteSerialization.Attributes
 {
     [AttributeComponent(typeof(PaddingComponent))]
     [AttributeUsage(AttributeTargets.Property)]
-    public class PaddingAttribute : Attribute
+    public class PaddingAttribute : ByteSerializationAttribute
     {
         public int Alignment { get; }
 

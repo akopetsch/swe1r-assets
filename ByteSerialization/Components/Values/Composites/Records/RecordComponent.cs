@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Attribute = ByteSerialization.Attributes.Attribute;
 
 namespace ByteSerialization.Components.Values.Composites.Records
 {
@@ -74,7 +73,7 @@ namespace ByteSerialization.Components.Values.Composites.Records
             Properties.AddRange(CreateProperties(typeHierarchyDifference));
 
             // add attributes
-            List<Attribute> attributes = 
+            List<ByteSerializationAttribute> attributes = 
                 typeHierarchyDifference.SelectMany(t => t.GetAttributes()).ToList();
             AttributeComponents.AddRange(AddAttributeComponents(attributes));
             // TODO: type specialization: are all attributes inherited?

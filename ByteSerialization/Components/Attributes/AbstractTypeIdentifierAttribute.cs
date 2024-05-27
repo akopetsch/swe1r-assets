@@ -11,7 +11,7 @@ namespace ByteSerialization.Attributes
 
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public abstract class AbstractTypeIdentifierAttribute : Attribute
+    public abstract class AbstractTypeIdentifierAttribute : ByteSerializationAttribute
     {
         private string DebuggerDisplay =>
             $"{Identifier} -> {Type.Name}";

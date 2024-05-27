@@ -9,7 +9,7 @@ namespace ByteSerialization.Attributes
 {
     [AttributeComponent(typeof(IndicatorComponent))]
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
-    public class IndicatorAttribute : Attribute
+    public class IndicatorAttribute : ByteSerializationAttribute
     {
         public string Value { get; }
 

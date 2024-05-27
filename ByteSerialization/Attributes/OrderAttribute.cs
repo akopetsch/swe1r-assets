@@ -3,12 +3,11 @@
 // Refer to the included LICENSE.txt file.
 
 using System;
-using SystemAttribute = System.Attribute;
 
 namespace ByteSerialization.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class OrderAttribute : SystemAttribute
+    public class OrderAttribute : Attribute
     {
         public int Order { get; }
 

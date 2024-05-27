@@ -9,7 +9,7 @@ namespace ByteSerialization.Attributes
 {
     [AttributeComponent(typeof(SerializeUntilComponent))]
     [AttributeUsage(AttributeTargets.Property)]
-    public class SerializeUntilAttribute : Attribute
+    public class SerializeUntilAttribute : ByteSerializationAttribute
     {
         public object Value { get; }
 

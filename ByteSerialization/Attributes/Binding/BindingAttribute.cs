@@ -7,7 +7,7 @@ using System;
 namespace ByteSerialization.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public abstract class BindingAttribute : Attribute
+    public abstract class BindingAttribute : ByteSerializationAttribute
     {
         #region Properties
 

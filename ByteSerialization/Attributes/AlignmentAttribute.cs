@@ -10,7 +10,7 @@ namespace ByteSerialization.Attributes
 {
     [AttributeComponent(typeof(AlignmentComponent))]
     [AttributeUsage(AttributeTargets.Class)]
-    public class AlignmentAttribute : Attribute
+    public class AlignmentAttribute : ByteSerializationAttribute
     {
         public int? Value { get; }
         public IAlignmentHelper Helper { get; }
