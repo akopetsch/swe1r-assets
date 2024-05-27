@@ -3,6 +3,25 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>disable</Nullable>
+    <Authors>Alexander Kopetsch</Authors>
+    <PackageProjectUrl>https://github.com/akopetsch/swe1r-assets</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>GPL-2.0-only</PackageLicenseExpression>
+    <PackageTags>swe1r;swe1r-assets;3D;Games;Gamedev;Game Engine</PackageTags>
+    <Description>A library for handling game assets of Star Wars Episode 1 Racer.</Description>
+    <RepositoryUrl>https://github.com/akopetsch/swe1r-assets</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <IncludeSymbols>True</IncludeSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <EnablePackageValidation>true</EnablePackageValidation>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <!-- Disable the compiler warnings, because not all members are documented: -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -48,6 +67,13 @@
     <EmbeddedResource Include="Resources\Metadata\SpriteBlockItem.csv" />
     <EmbeddedResource Include="Resources\Metadata\TextureBlockItem.csv" />
     <EmbeddedResource Include="Resources\Metadata\Track.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
