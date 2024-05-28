@@ -1,5 +1,7 @@
 # swe1r-assets
 
+[![NuGet](https://img.shields.io/nuget/vpre/SWE1R.Assets.Blocks)](https://nuget.org/packages/SWE1R.Assets.Blocks)
+
 C#/.NET/Unity tools and libraries for the game Star Wars Episode I: Racer.
 
 This project offers a suite of tools and libraries designed for modding and researching the game's file formats. It features advanced functionalities such as bit-perfect reserialization of game assets, a level editor based on Unity, OBJ model import and lays the groundwork for extensive analysis of the file formats and internal mechanics. Dive in to explore, contribute, and bring new life to a beloved classic!
