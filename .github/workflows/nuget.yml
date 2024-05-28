@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+# inspired by:
+# https://www.meziantou.net/publishing-a-nuget-package-following-best-practices-using-github.htm
+
+name: nuget
+on:
+  release:
+    types:
+      - published
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_NOLOGO: true
+  NUGET_DIRECTORY: ${{ github.workspace }}/nuget
+  ASSEMBLY_NAME: "SWE1R.Assets.Blocks"
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  create_nuget:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4 # see global.json for version
+
+    - run: dotnet pack ${{ env.ASSEMBLY_NAME }} --configuration Release --output ${{ env.NUGET_DIRECTORY }}
+    
+    - uses: actions/upload-artifact@v4
+      with:
+        name: nuget
+        if-no-files-found: error
+        retention-days: 7
+        path: |
+          ${{ env.NUGET_DIRECTORY }}/*.nupkg
+          ${{ env.NUGET_DIRECTORY }}/*.snupkg
+
+  deploy:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    needs: [ create_nuget ]
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: nuget
+          path: ${{ env.NUGET_DIRECTORY }}
+          
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4 # see global.json for version
+        
+      - name: Publish NuGet package
+        run: |
+          $packages = Get-ChildItem "${{ env.NUGET_DIRECTORY }}" -Recurse -Include *.nupkg
+          foreach ($file in $packages) {
+            dotnet nuget push $file --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json
+          }
