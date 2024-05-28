@@ -30,7 +30,9 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4 # see global.json for version
 
-    - run: dotnet pack ${{ env.ASSEMBLY_NAME }} --configuration Release --output ${{ env.NUGET_DIRECTORY }}
+    - run: |
+        cd src
+        dotnet pack ${{ env.ASSEMBLY_NAME }} --configuration Release --output ${{ env.NUGET_DIRECTORY }}
     
     - uses: actions/upload-artifact@v4
       with:
