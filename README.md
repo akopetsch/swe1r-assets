@@ -6,6 +6,10 @@ A C#/.NET library for handling game assets of Star Wars Episode 1 Racer.
 
 Notably, this libary is used by [swe1r-assets-unity](https://github.com/akopetsch/swe1r-assets-unity).
 
+https://github.com/akopetsch/swe1r-assets/assets/8048046/511646d4-738c-41cc-b7c0-9e67920ac07e
+
+Imported OBJ model is by [Leadphalanx](https://forums.tigsource.com/index.php?topic=68973.0).
+
 ## Overview
 
 **SWE1R.Assets.Blocks** allows you to deserialize, modify, and serialize block file assets from the game. It supports bit-perfect reserialization, ensuring that if no changes are made to the deserialized object graph, the output binary data will be identical to the input data. This allows for precise modifications where only the intended bytes are altered.
