@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>disable</Nullable>
     <Authors>Alexander Kopetsch</Authors>
+    <Version>0.0.1.0</Version>
+    <PackageVersion>0.0.1-alpha.0</PackageVersion>
     <PackageProjectUrl>https://github.com/akopetsch/swe1r-assets</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>GPL-2.0-only</PackageLicenseExpression>
@@ -11,6 +13,8 @@
     <Description>A library for handling game assets of Star Wars Episode 1 Racer.</Description>
     <RepositoryUrl>https://github.com/akopetsch/swe1r-assets</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup>
