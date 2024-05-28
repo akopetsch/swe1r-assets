@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWE1R.Assets.Blocks.ModelBl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWE1R.Assets.Blocks.ModelBlock.Import.Resources", "SWE1R.Assets.Blocks.ModelBlock.Import.Resources\SWE1R.Assets.Blocks.ModelBlock.Import.Resources.csproj", "{B2650CD3-BEE2-4A30-A6E2-2BE0C4C005B7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D32DD7EC-D780-49BA-A432-BB55672B9690}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +104,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{17B9E912-CC3D-4230-AF0A-CBA1776D97ED} = {D32DD7EC-D780-49BA-A432-BB55672B9690}
+		{BEC34FB3-EF75-4D94-86C6-5F40B366682F} = {D32DD7EC-D780-49BA-A432-BB55672B9690}
+		{2D5AEF31-9B09-49A1-A1EC-687E291C8BD7} = {D32DD7EC-D780-49BA-A432-BB55672B9690}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F3BD1784-1614-4CF3-AC64-45C6A6BF6CA1}
