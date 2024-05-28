@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteSerialization.IO", "ByteSerialization.IO\ByteSerialization.IO.csproj", "{C4FF6EDB-B5C3-4220-947B-1D7A20D48408}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteSerialization.IO.Tests", "ByteSerialization.IO.Tests\ByteSerialization.IO.Tests.csproj", "{624402E5-7C71-4EAE-89C8-1BF1E2D29FD7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ByteSerialization", "ByteSerialization\ByteSerialization.csproj", "{CD9B4C00-25CE-4B15-A74E-FC8C28805A6D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0AB6982-F257-4B5C-B1E5-8411B187442B}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -41,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWE1R.Assets.Blocks.Origina
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWE1R.Assets.Blocks.ModelBlock.Import.Resources.Tests", "SWE1R.Assets.Blocks.ModelBlock.Import.Resources.Tests\SWE1R.Assets.Blocks.ModelBlock.Import.Resources.Tests.csproj", "{2D5AEF31-9B09-49A1-A1EC-687E291C8BD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWE1R.Assets.Blocks.ModelBlock.Import.Resources", "SWE1R.Assets.Blocks.ModelBlock.Import.Resources\SWE1R.Assets.Blocks.ModelBlock.Import.Resources.csproj", "{B2650CD3-BEE2-4A30-A6E2-2BE0C4C005B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWE1R.Assets.Blocks.ModelBlock.Import.Resources", "SWE1R.Assets.Blocks.ModelBlock.Import.Resources\SWE1R.Assets.Blocks.ModelBlock.Import.Resources.csproj", "{B2650CD3-BEE2-4A30-A6E2-2BE0C4C005B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,18 +43,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C4FF6EDB-B5C3-4220-947B-1D7A20D48408}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4FF6EDB-B5C3-4220-947B-1D7A20D48408}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4FF6EDB-B5C3-4220-947B-1D7A20D48408}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4FF6EDB-B5C3-4220-947B-1D7A20D48408}.Release|Any CPU.Build.0 = Release|Any CPU
-		{624402E5-7C71-4EAE-89C8-1BF1E2D29FD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{624402E5-7C71-4EAE-89C8-1BF1E2D29FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{624402E5-7C71-4EAE-89C8-1BF1E2D29FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{624402E5-7C71-4EAE-89C8-1BF1E2D29FD7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD9B4C00-25CE-4B15-A74E-FC8C28805A6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD9B4C00-25CE-4B15-A74E-FC8C28805A6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD9B4C00-25CE-4B15-A74E-FC8C28805A6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD9B4C00-25CE-4B15-A74E-FC8C28805A6D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C6CFA136-89FC-4D96-8696-6C8256462D6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C6CFA136-89FC-4D96-8696-6C8256462D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6CFA136-89FC-4D96-8696-6C8256462D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
