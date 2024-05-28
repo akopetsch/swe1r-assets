@@ -1,44 +1,24 @@
-# swe1r-assets
+# SWE1R.Assets.Blocks
 
-[![NuGet](https://img.shields.io/nuget/vpre/SWE1R.Assets.Blocks)](https://nuget.org/packages/SWE1R.Assets.Blocks)
+A library for handling game assets of Star Wars Episode 1 Racer.
 
-C#/.NET/Unity tools and libraries for the game Star Wars Episode I: Racer.
+## Overview
 
-This project offers a suite of tools and libraries designed for modding and researching the game's file formats. It features advanced functionalities such as bit-perfect reserialization of game assets, a level editor based on Unity, OBJ model import and lays the groundwork for extensive analysis of the file formats and internal mechanics. Dive in to explore, contribute, and bring new life to a beloved classic!
-
-https://github.com/akopetsch/swe1r-assets/assets/8048046/acab1213-d35a-4db6-8ffc-21e2000e55be
-
-Imported OBJ model is by [Leadphalanx](https://forums.tigsource.com/index.php?topic=68973.0)
-
-![Screenshot of SWE1R.Assets.Unity](screenshot.png)
+**SWE1R.Assets.Blocks** allows you to deserialize, modify, and serialize block file assets from the game. It supports bit-perfect reserialization, ensuring that if no changes are made to the deserialized object graph, the output binary data will be identical to the input data. This allows for precise modifications where only the intended bytes are altered.
 
 ## Features
 
-These are the key projects:
+* **Deserialize**: Convert binary block file assets into an object graph for easy manipulation.
+* **Modify**: Make changes to the deserialized objects as needed.
+* **Serialize**: Convert the modified object graph back into binary form with bit-perfect accuracy.
 
-* [ByteSerialization](ByteSerialization/)
-* [SWE1R.Assets.Blocks](SWE1R.Assets.Blocks/)
-* [SWE1R.Assets.Blocks.CommandLine](SWE1R.Assets.Blocks.CommandLine/)
-* [SWE1R.Assets.Blocks.Unity](SWE1R.Assets.Unity/)
+## Supported Asset Files
 
-## Issues
+The library currently supports the following asset files:
 
-This project is still heavily WIP. This is an early preview release, 
-and I welcome your feedback or contributions (forks, pull-requests, issues) to improve it, 
-but you have to expect that the code base will change frequently due to refactorings and new features until things calm down a bit. 
-Development is discussed in the [Discord modding channel](https://discord.gg/nXFYEYQJ). 
+* ``out_modelblock.bin``
+* ``out_splineblock.bin``
+* ``out_spriteblock.bin``
+* ``out_textureblock.bin``
 
-The following are some major domains to work on:
-
-* Refactoring
-* Documentation
-* More Unit-Tests (other than re-serialization)
-* Packaging (NuGet/Unity)
-* Integrate existing findings of the community (where big credit goes):
-  * [louriccia/SWE1R-Mods](https://github.com/louriccia/SWE1R-Mods)
-  * [tim-tim707/SW_RACER_RE](https://github.com/tim-tim707/SW_RACER_RE)
-  * [OpenSWE1R/swe1r-tools](https://github.com/OpenSWE1R/swe1r-tools)
-  * [Olganix/Sw_Racer](https://github.com/Olganix/Sw_Racer)
-* ...
-
-Feel free to tell me what features you need the most or tell me about any bugs you find.
+These files can be found in the game's installation directory under ``data/lev01``.
