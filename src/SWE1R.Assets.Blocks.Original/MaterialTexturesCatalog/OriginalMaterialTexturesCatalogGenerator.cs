@@ -1,4 +1,4 @@
-﻿// SPDX-License-Identifier: GPL-2.0-only
+﻿// SPDX-License-Identifier: MIT
 
 using Newtonsoft.Json;
 using SWE1R.Assets.Blocks.Metadata;

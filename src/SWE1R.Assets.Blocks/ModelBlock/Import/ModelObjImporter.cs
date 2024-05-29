@@ -1,4 +1,4 @@
-﻿// SPDX-License-Identifier: GPL-2.0-only
+﻿// SPDX-License-Identifier: MIT
 
 using ObjLoader.Loader.Loaders;
 using SWE1R.Assets.Blocks.Images;
