@@ -1,6 +1,4 @@
-﻿// Copyright 2024 SWE1R.Assets Maintainers
-// Licensed under GPLv2 or any later version
-// Refer to the included LICENSE.txt file.
+﻿// SPDX-License-Identifier: GPL-2.0-only
 
 using ByteSerialization.Attributes;
 using System.Reflection;
