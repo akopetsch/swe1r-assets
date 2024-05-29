@@ -27,7 +27,7 @@ namespace SWE1R.Assets.Blocks
 
         #endregion
 
-        #region Methods (
+        #region Methods
 
         public void DumpItem(BlockItem item, int i, ByteSerializerContext context)
         {
