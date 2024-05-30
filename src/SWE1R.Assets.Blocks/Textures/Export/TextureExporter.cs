@@ -1,6 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
-using ByteSerialization.IO.Extensions;
+using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Colors;
 using SWE1R.Assets.Blocks.Images;
 using System;
@@ -54,9 +54,9 @@ namespace SWE1R.Assets.Blocks.Textures.Export
             int pixelIndex = GetPixelIndex(x, y);
             if (TextureFormat == TextureFormat.RGBA5551_I4)
             {
-                if (pixelIndex < PixelsBytes.GetNibblesCount())
+                if (pixelIndex < NibbleHelper.GetNibblesCount(PixelsBytes))
                 {
-                    int paletteIndex = PixelsBytes.GetNibble(pixelIndex);
+                    int paletteIndex = NibbleHelper.GetNibble(PixelsBytes, pixelIndex);
                     return (ColorRgba32)Palette[paletteIndex];
                 }
                 else
@@ -69,7 +69,7 @@ namespace SWE1R.Assets.Blocks.Textures.Export
             }
             else if (TextureFormat == TextureFormat.FourBitGrayscaleAndAlpha)
             {
-                byte pixelData = PixelsBytes.GetNibble(pixelIndex);
+                byte pixelData = NibbleHelper.GetNibble(PixelsBytes, pixelIndex);
                 byte v = (byte)Math.Round(pixelData * 17f); // value (as in HSV)
                 byte a = (byte)Math.Round(pixelData * 17f); // alpha (as in ARGB)
                 return new ColorRgba32(v, v, v, a);

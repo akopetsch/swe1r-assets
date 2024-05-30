@@ -40,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ByteSerialization" Version="0.0.1-alpha.0" />
+    <PackageReference Include="ByteSerialization" Version="0.0.1-alpha.1" />
     <PackageReference Include="CjClutter.ObjLoader" Version="1.0.0" />
     <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="MinVer" Version="5.0.0">

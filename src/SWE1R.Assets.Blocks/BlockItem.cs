@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization;
-using ByteSerialization.IO.Extensions;
+using ByteSerialization.IO;
 using System.Diagnostics;
 using System.Linq;
 
@@ -20,7 +20,7 @@ namespace SWE1R.Assets.Blocks
         public BlockItemPart[] Parts { get; }
         public byte[] Bytes => Parts.SelectMany(p => p.Bytes).ToArray();
         public byte[] Hash => Parts.SelectMany(p => p.Hash).ToArray().GetSha1();
-        public string HashString => Hash.ToHexString();
+        public string HashString => HexStringConverter.ToHexString(Hash);
         
         public IBlock Block { get; set; }
         public int? Index => Block?.IndexOf(this);

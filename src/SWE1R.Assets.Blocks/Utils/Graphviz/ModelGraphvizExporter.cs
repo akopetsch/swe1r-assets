@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using ByteSerialization.Components.Values.Composites.Records;
-using ByteSerialization.IO.Extensions;
 using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
@@ -91,7 +91,7 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
                 var node = nodeRecordComponent.Value as INode;
 
                 // value: name
-                string position = nodeRecordComponent.Position.Value.ToHexString();
+                string position = HexStringConverter.ToCompactHexString(nodeRecordComponent.Position.Value);
                 string prefix = (node as FlaggedNode)?.Flags.ToHexString() ?? nameof(Mesh);
                 string name = $"\"{prefix}_{position}\"";
                 

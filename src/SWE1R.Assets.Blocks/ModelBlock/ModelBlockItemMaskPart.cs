@@ -6,9 +6,8 @@ using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
 using ByteSerialization.IO;
-using ByteSerialization.IO.Extensions;
-using ByteSerialization.IO.Utils;
 using ByteSerialization.Nodes;
+using ByteSerialization.Utils;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
@@ -86,7 +85,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             int bytesLength = (int)Math.Ceiling(
                 (float)GetBitIndex(dataBytesLength) / 
                 BitsHelper.BitsPerByte);
-            int paddedBytesLength = bytesLength.Ceiling(BytesPerInt32);
+            int paddedBytesLength = CeilingHelper.Ceiling(bytesLength, BytesPerInt32);
             return paddedBytesLength;
         }
 
@@ -144,7 +143,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         }
 
         private bool IsPropertyComponentOf<TRecordValue>(ReferenceComponent r) =>
-            r.Get<PropertyComponent>().Record.Type == typeof(TRecordValue);
+            r.Get<PropertyComponent>()?.Record.Type == typeof(TRecordValue);
 
         private bool IsMaskBitRequired(PropertyComponent startVertexPropertyComponent)
         {

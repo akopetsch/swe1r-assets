@@ -4,6 +4,7 @@ using ByteSerialization.Extensions;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
+using SWE1R.Assets.Blocks.Original.Tests.Extensions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 {
