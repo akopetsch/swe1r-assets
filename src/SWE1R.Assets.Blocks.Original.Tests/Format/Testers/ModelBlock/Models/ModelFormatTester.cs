@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Extensions;
+using MoreLinq.Extensions;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Animations;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
@@ -17,14 +18,10 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 
             if (Value.Animations != null)
             {
-                // Anims does not contain null
                 Assert.True(!Value.Animations.Contains(null));
-
-                // Anims only contains distinct values
-                Assert.True(Value.Animations.AllUnique());
+                Assert.True(!Value.Animations.Duplicates().Any());
             }
             if (Value.AltN != null)
-                // AltN does not contain null
                 Assert.True(!Value.AltN.Contains(null));
         }
 
