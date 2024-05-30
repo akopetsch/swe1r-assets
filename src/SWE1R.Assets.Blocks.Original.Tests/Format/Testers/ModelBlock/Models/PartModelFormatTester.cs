@@ -46,7 +46,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
                     Assert.True(Value.Nodes[2].FlaggedNode == null);
                     Assert.True(Value.Nodes[3].FlaggedNode == null);
                     Assert.True(Value.Nodes[4].FlaggedNode == null);
-                    Assert.True(Value.Node0.Children.Are<MeshGroup3064, Group5064, TransformableD065>());
+                    Assert.True(Value.Node0.Children.AreOfType<MeshGroup3064, Group5064, TransformableD065>());
                     break;
             }
         }
