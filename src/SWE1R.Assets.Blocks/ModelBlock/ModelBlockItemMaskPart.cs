@@ -5,7 +5,6 @@ using ByteSerialization.Attributes.Reference;
 using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
-using ByteSerialization.Extensions;
 using ByteSerialization.IO;
 using ByteSerialization.IO.Extensions;
 using ByteSerialization.IO.Utils;
@@ -131,8 +130,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
             if (r.Value == null)
             {
-                if (r.Has<PropertyComponent>() && 
-                    r.Parent.Get<ValueComponent>().Type.IsOneOf<Material, Mesh>())
+                if (IsPropertyComponentOf<Mesh>(r) || 
+                    IsPropertyComponentOf<Material>(r))
                     return false;
                 if (r.Parent.Type == typeof(MeshGroupOrShorts))
                     return false;
@@ -143,6 +142,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
             return true;
         }
+
+        private bool IsPropertyComponentOf<TRecordValue>(ReferenceComponent r) =>
+            r.Get<PropertyComponent>().Record.Type == typeof(TRecordValue);
 
         private bool IsMaskBitRequired(PropertyComponent startVertexPropertyComponent)
         {
