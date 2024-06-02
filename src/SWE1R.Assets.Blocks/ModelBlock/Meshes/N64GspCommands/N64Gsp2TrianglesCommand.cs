@@ -8,6 +8,14 @@ using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
+    /// <summary>
+    /// See also:
+    /// <list type="bullet">
+    ///   <item>
+    ///     <see href="http://n64devkit.square7.ch/n64man/gsp/gSP2Triangles.htm">
+    ///       n64devkit.square7.ch - 'gSP2Triangles'</see></item>
+    /// </list>
+    /// </summary>
     public class N64Gsp2TrianglesCommand : N64GspCommand, ICustomSerializable
     {
         #region Properties (serialized)

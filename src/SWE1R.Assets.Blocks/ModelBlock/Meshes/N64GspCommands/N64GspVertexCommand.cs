@@ -8,6 +8,14 @@ using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
+    /// <summary>
+    /// See also:
+    /// <list type="bullet">
+    ///   <item>
+    ///     <see href="http://n64devkit.square7.ch/n64man/gsp/gSPVertex.htm">
+    ///       n64devkit.square7.ch - 'gSPVertex'</see></item>
+    /// </list>
+    /// </summary>
     public class N64GspVertexCommand : N64GspCommand
     {
         #region Fields (const)

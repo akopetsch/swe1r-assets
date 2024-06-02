@@ -9,6 +9,14 @@ using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
+    /// <summary>
+    /// See also:
+    /// <list type="bullet">
+    ///   <item>
+    ///     <see href="http://n64devkit.square7.ch/n64man/gsp/gSPCullDisplayList.htm">
+    ///       n64devkit.square7.ch - 'gSPCullDisplayList'</see></item>
+    /// </list>
+    /// </summary>
     public class N64GspCullDisplayListCommand : N64GspCommand, ICustomSerializable
     {
         #region Fields
