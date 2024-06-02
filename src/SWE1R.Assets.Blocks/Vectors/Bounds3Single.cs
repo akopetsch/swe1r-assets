@@ -1,6 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
-using ByteSerialization.Components.Values.Customs;
+using ByteSerialization;
 using ByteSerialization.IO;
 using System;
 using System.Linq;
@@ -95,18 +95,14 @@ namespace SWE1R.Assets.Blocks.Vectors
 
         #region Methods (: ICustomSerializable)
 
-        public void Serialize(CustomComponent customComponent)
+        public void Serialize(EndianBinaryWriter writer)
         {
-            EndianBinaryWriter writer = customComponent.Writer;
-
             Min.Serialize(writer);
             Max.Serialize(writer);
         }
 
-        public void Deserialize(CustomComponent customComponent)
+        public void Deserialize(EndianBinaryReader reader)
         {
-            EndianBinaryReader reader = customComponent.Reader;
-
             Min = new Vector3Single();
             Max = new Vector3Single();
             Min.Deserialize(reader);

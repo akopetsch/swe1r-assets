@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization;
 using ByteSerialization.Attributes;
-using ByteSerialization.Components.Values.Customs;
 using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using System.Collections.Generic;
@@ -41,24 +41,20 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Methods (: ICustomSerializable)
 
-        public void Serialize(CustomComponent customComponent)
+        public void Serialize(EndianBinaryWriter writer)
         {
-            EndianBinaryWriter w = customComponent.Writer;
-
-            w.Write(Tag);
-            w.Write(padding);
-            w.Write(MaxIndex);
+            writer.Write(Tag);
+            writer.Write(padding);
+            writer.Write(MaxIndex);
         }
 
-        public void Deserialize(CustomComponent customComponent)
+        public void Deserialize(EndianBinaryReader reader)
         {
             // TODO: not called
 
-            EndianBinaryReader r = customComponent.Reader;
-
-            Tag = r.ReadByte();
-            r.ReadBytes(padding.Length);
-            MaxIndex = r.ReadByte();
+            Tag = reader.ReadByte();
+            reader.ReadBytes(padding.Length);
+            MaxIndex = reader.ReadByte();
         }
 
         #endregion

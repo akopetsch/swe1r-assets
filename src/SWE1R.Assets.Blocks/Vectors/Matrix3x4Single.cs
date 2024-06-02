@@ -1,6 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
-using ByteSerialization.Components.Values.Customs;
+using ByteSerialization;
 using ByteSerialization.IO;
 using System.Linq;
 
@@ -37,20 +37,16 @@ namespace SWE1R.Assets.Blocks.Vectors
 
         #region Methods
 
-        public void Serialize(CustomComponent customComponent)
+        public void Serialize(EndianBinaryWriter writer)
         {
-            EndianBinaryWriter w = customComponent.Writer;
-
             foreach (float element in Elements)
-                w.Write(element);
+                writer.Write(element);
         }
-        public void Deserialize(CustomComponent customComponent)
+        public void Deserialize(EndianBinaryReader reader)
         {
-            EndianBinaryReader r = customComponent.Reader;
-
             Elements = new float[ElementsCount];
             for (int i = 0; i < ElementsCount; i++)
-                Elements[i] = r.ReadSingle();
+                Elements[i] = reader.ReadSingle();
         }
 
         public bool Equals(Matrix3x4Single other)

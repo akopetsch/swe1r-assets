@@ -1,6 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
-using ByteSerialization.Components.Values.Customs;
+using ByteSerialization;
 using ByteSerialization.IO;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials
@@ -70,86 +70,82 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 
         #endregion
 
-        #region Methods (serialization)
+        #region Methods (: ICustomSerializable)
 
-        public void Serialize(CustomComponent customComponent)
+        public void Serialize(EndianBinaryWriter writer)
         {
-            EndianBinaryWriter w = customComponent.Writer;
+            writer.Write(AlphaBpp);
+            writer.Write(Word_4);
 
-            w.Write(AlphaBpp);
-            w.Write(Word_4);
+            writer.Write(Ints_6[0]);
+            writer.Write(Ints_6[1]);
 
-            w.Write(Ints_6[0]);
-            w.Write(Ints_6[1]);
+            writer.Write(Ints_e[0]);
+            writer.Write(Ints_e[1]);
 
-            w.Write(Ints_e[0]);
-            w.Write(Ints_e[1]);
+            writer.Write(Unk_16);
 
-            w.Write(Unk_16);
+            writer.Write(Bitmask1);
+            writer.Write(Bitmask2);
 
-            w.Write(Bitmask1);
-            w.Write(Bitmask2);
+            writer.Write(Unk_20);
 
-            w.Write(Unk_20);
+            writer.Write(Byte_22);
+            writer.Write(Byte_23);
+            writer.Write(Byte_24);
+            writer.Write(Byte_25);
 
-            w.Write(Byte_22);
-            w.Write(Byte_23);
-            w.Write(Byte_24);
-            w.Write(Byte_25);
+            writer.Write(Unk_26);
+            writer.Write(Unk_28);
+            writer.Write(Unk_2a);
+            writer.Write(Unk_2c);
 
-            w.Write(Unk_26);
-            w.Write(Unk_28);
-            w.Write(Unk_2a);
-            w.Write(Unk_2c);
+            writer.Write(Byte_2e);
+            writer.Write(Byte_2f);
+            writer.Write(Byte_30);
+            writer.Write(Byte_31);
 
-            w.Write(Byte_2e);
-            w.Write(Byte_2f);
-            w.Write(Byte_30);
-            w.Write(Byte_31);
-
-            w.Write(Unk_32);
+            writer.Write(Unk_32);
         }
 
-        public void Deserialize(CustomComponent customComponent)
+        public void Deserialize(EndianBinaryReader reader)
         {
-            EndianBinaryReader r = customComponent.Reader;
-
-            AlphaBpp = r.ReadInt32();
-            Word_4 = r.ReadInt16();
+            AlphaBpp = reader.ReadInt32();
+            Word_4 = reader.ReadInt16();
 
             Ints_6 = new int[] {
-                r.ReadInt32(),
-                r.ReadInt32(),
+                reader.ReadInt32(),
+                reader.ReadInt32(),
             };
 
             Ints_e = new int[] {
-                r.ReadInt32(),
-                r.ReadInt32(),
+                reader.ReadInt32(),
+                reader.ReadInt32(),
             };
 
-            Unk_16 = r.ReadInt16();
+            Unk_16 = reader.ReadInt16();
 
-            Bitmask1 = r.ReadInt32();
-            Bitmask2 = r.ReadInt32();
+            Bitmask1 = reader.ReadInt32();
+            Bitmask2 = reader.ReadInt32();
 
-            Unk_20 = r.ReadInt16();
+            Unk_20 = reader.ReadInt16();
 
-            Byte_22 = r.ReadByte();
-            Byte_23 = r.ReadByte();
-            Byte_24 = r.ReadByte();
-            Byte_25 = r.ReadByte();
+            Byte_22 = reader.ReadByte();
+            Byte_23 = reader.ReadByte();
+            Byte_24 = reader.ReadByte();
+            Byte_25 = reader.ReadByte();
 
-            Unk_26 = r.ReadInt16();
-            Unk_28 = r.ReadInt16();
-            Unk_2a = r.ReadInt16();
-            Unk_2c = r.ReadInt16();
+            Unk_26 = reader.ReadInt16();
+            Unk_28 = reader.ReadInt16();
+            Unk_2a = reader.ReadInt16();
+            Unk_2c = reader.ReadInt16();
 
-            Byte_2e = r.ReadByte();
-            Byte_2f = r.ReadByte();
-            Byte_30 = r.ReadByte();
-            Byte_31 = r.ReadByte();
+            Byte_2e = reader.ReadByte();
+            Byte_2f = reader.ReadByte();
+            Byte_30 = reader.ReadByte();
+            Byte_31 = reader.ReadByte();
 
-            Unk_32 = r.ReadInt16();
+            Unk_32 = reader.ReadInt16();
         }
 
         #endregion

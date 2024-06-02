@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization;
 using ByteSerialization.Attributes;
-using ByteSerialization.Components.Values.Customs;
 using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using System.Collections.Generic;
@@ -67,34 +67,30 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Methods (: ICustomSerializable)
 
-        public void Serialize(CustomComponent customComponent)
+        public void Serialize(EndianBinaryWriter writer)
         {
-            EndianBinaryWriter w = customComponent.Writer;
-
-            w.Write(Tag);
-            w.Write(Index0);
-            w.Write(Index1);
-            w.Write(Index2);
-            w.Write((byte)0);
-            w.Write(Index3);
-            w.Write(Index4);
-            w.Write(Index5);
+            writer.Write(Tag);
+            writer.Write(Index0);
+            writer.Write(Index1);
+            writer.Write(Index2);
+            writer.Write((byte)0);
+            writer.Write(Index3);
+            writer.Write(Index4);
+            writer.Write(Index5);
         }
 
-        public void Deserialize(CustomComponent customComponent)
+        public void Deserialize(EndianBinaryReader reader)
         {
             // TODO: not called
 
-            EndianBinaryReader r = customComponent.Reader;
-
-            Tag = r.ReadByte();
-            Index0 = r.ReadByte();
-            Index1 = r.ReadByte();
-            Index2 = r.ReadByte();
-            r.ReadByte();
-            Index3 = r.ReadByte();
-            Index4 = r.ReadByte();
-            Index5 = r.ReadByte();
+            Tag = reader.ReadByte();
+            Index0 = reader.ReadByte();
+            Index1 = reader.ReadByte();
+            Index2 = reader.ReadByte();
+            reader.ReadByte();
+            Index3 = reader.ReadByte();
+            Index4 = reader.ReadByte();
+            Index5 = reader.ReadByte();
         }
 
         #endregion

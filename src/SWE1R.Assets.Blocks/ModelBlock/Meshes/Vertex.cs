@@ -1,6 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
-using ByteSerialization.Components.Values.Customs;
+using ByteSerialization;
 using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Colors;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
@@ -92,35 +92,31 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         #endregion
 
-        #region Methods (serialization)
+        #region Methods (: ICustomSerializable)
 
-        public void Serialize(CustomComponent customComponent)
+        public void Serialize(EndianBinaryWriter writer)
         {
-            EndianBinaryWriter w = customComponent.Writer;
-
-            Position.Serialize(w);
-            w.Write(padding);
-            w.Write(U);
-            w.Write(V);
-            w.Write(Byte_C);
-            w.Write(Byte_D);
-            w.Write(Byte_E);
-            w.Write(Byte_F);
+            Position.Serialize(writer);
+            writer.Write(padding);
+            writer.Write(U);
+            writer.Write(V);
+            writer.Write(Byte_C);
+            writer.Write(Byte_D);
+            writer.Write(Byte_E);
+            writer.Write(Byte_F);
         }
 
-        public void Deserialize(CustomComponent customComponent)
+        public void Deserialize(EndianBinaryReader reader)
         {
-            EndianBinaryReader r = customComponent.Reader;
-
             Position = new Vector3Int16();
-            Position.Deserialize(r);
-            r.ReadBytes(padding.Length);
-            U = r.ReadInt16();
-            V = r.ReadInt16();
-            Byte_C = r.ReadByte();
-            Byte_D = r.ReadByte();
-            Byte_E = r.ReadByte();
-            Byte_F = r.ReadByte();
+            Position.Deserialize(reader);
+            reader.ReadBytes(padding.Length);
+            U = reader.ReadInt16();
+            V = reader.ReadInt16();
+            Byte_C = reader.ReadByte();
+            Byte_D = reader.ReadByte();
+            Byte_E = reader.ReadByte();
+            Byte_F = reader.ReadByte();
         }
 
         #endregion
