@@ -3,6 +3,7 @@
 using ByteSerialization.Attributes;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Vectors;
@@ -81,7 +82,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         [Order(8), Reference(1)]
         public CollisionVertices CollisionVertices { get; set; }
         /// <summary>
-        /// Gets or sets the display list for the visible vertices. 
+        /// Gets or sets the command list for the visible vertices. 
         /// Has a value if <see cref="VerticesCount">VerticesCount</see> is greater than 0, otherwise is <see langword="null"/>.
         /// <para>Offset: 0x30</para>
         /// </summary>
@@ -154,7 +155,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         }
 
         public void UpdateFacesCountByCommandList() =>
-            FacesCount = Convert.ToInt16(CommandList.SelectMany(x => x.Triangles).Count());
+            FacesCount = Convert.ToInt16(CommandList.OfType<IN64GspTrianglesCommand>().SelectMany(x => x.Triangles).Count());
 
         public void UpdateBounds()
         {

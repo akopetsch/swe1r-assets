@@ -27,7 +27,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #endregion
 
-        #region Members (: IList<IndicesChunk>)
+        #region Members (: IList<N64GspCommand>)
 
         public int Count => List.Count;
         public bool IsReadOnly => false;
@@ -53,38 +53,38 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Methods (helper)
 
-        public void AddRange(IEnumerable<N64GspCommand> indicesChunks) =>
-            List.AddRange(indicesChunks);
+        public void AddRange(IEnumerable<N64GspCommand> commands) =>
+            List.AddRange(commands);
 
         #endregion
 
         #region Methods (export)
 
-        public List<Triangle> GetTriangles() // TODO: move to IndicesRange
+        public List<Triangle> GetTriangles() // TODO: move to N64GspVertexBuffer
         {
             var triangles = new List<Triangle>();
             int baseIndex = 0;
             int stepIndex = 0;
-            foreach (N64GspCommand gpsCommand in List)
+            foreach (N64GspCommand command in List)
             {
-                var commandTriangles = new List<Triangle>();
-                if (gpsCommand is N64GspVertexCommand chunk01)
+                var triangleCommands = new List<Triangle>();
+                if (command is N64GspVertexCommand vertexCommand)
                 {
-                    stepIndex = chunk01.NextIndicesBase / 2;
+                    stepIndex = vertexCommand.NextIndicesBase / 2;
                     baseIndex += stepIndex;
                 }
-                else if (gpsCommand is N64Gsp1TriangleCommand gsp1TriangleCommand)
+                else if (command is N64Gsp1TriangleCommand triangleCommand)
                 {
-                    commandTriangles.Add(gsp1TriangleCommand.Triangle);
+                    triangleCommands.Add(triangleCommand.Triangle);
                 }
-                else if (gpsCommand is N64Gsp2TrianglesCommand gsp2TrianglesCommand)
+                else if (command is N64Gsp2TrianglesCommand trianglesCommand)
                 {
-                    commandTriangles.Add(gsp2TrianglesCommand.Triangle0);
-                    commandTriangles.Add(gsp2TrianglesCommand.Triangle1);
+                    triangleCommands.Add(trianglesCommand.Triangle0);
+                    triangleCommands.Add(trianglesCommand.Triangle1);
                 }
-                commandTriangles.ForEach(x => x.DivideIndicesBy(2));
-                commandTriangles.ForEach(x => x.AddToIndices(baseIndex - stepIndex));
-                triangles.AddRange(commandTriangles);
+                triangleCommands.ForEach(x => x.DivideIndicesBy(2));
+                triangleCommands.ForEach(x => x.AddToIndices(baseIndex - stepIndex));
+                triangles.AddRange(triangleCommands);
             }
             return triangles;
         }

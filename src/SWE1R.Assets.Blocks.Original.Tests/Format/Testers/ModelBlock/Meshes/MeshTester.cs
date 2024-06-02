@@ -2,6 +2,7 @@
 
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.Vectors;
 using System.Diagnostics;
@@ -77,9 +78,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     N64GspVertexBuffer vertexBuffer = vertexBuffers[i];
                     //AnalyticsFixture.IncreaseCounter(vertexBuffer.ToString());
 
-                    // chunks
-                    Assert.True(vertexBuffer.TriangleCommands.Count >= 1);
-                    Assert.True(vertexBuffer.TriangleCommands.Count <= 20);
+                    // triangle commands
+                    Assert.True(vertexBuffer.TrianglesCommands.Count >= 1);
+                    Assert.True(vertexBuffer.TrianglesCommands.Count <= 20);
 
                     // indices
                     Assert.True(vertexBuffer.Indices.Count() <= 117);
@@ -90,12 +91,12 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     N64GspCullDisplayListCommand cullDisplayListCommand = vertexBuffer.CullDisplayListCommand;
                     if (cullDisplayListCommand != null)
                     {
-                        Assert.True(cullDisplayListCommand.MaxIndex == vertexBuffer.Indices.Max());
-                        Assert.True(cullDisplayListCommand.MaxIndex != 0);
+                        Assert.True(cullDisplayListCommand.VN == vertexBuffer.Indices.Max());
+                        Assert.True(cullDisplayListCommand.VN != 0);
 
                         bool isLast = i == vertexBuffers.Count - 1;
                         Assert.True(isLast);
-                        // but the last range does not necessarliy have 03
+                        // but the last range does not necessarliy have N64GspCullDisplayListCommand
                     }
 
                     N64GspVertexCommand vertexCommand = vertexBuffer.VertexCommand;
@@ -104,7 +105,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         int startVertexIndex = vertexCommand.StartVertex.Index.Value;
                         int distinctIndicesCount = vertexBuffer.Indices.Distinct().Count();
 
-                        // Length
+                        // VerticesCount
                         Assert.True(vertexCommand.VerticesCount != 0);
                         if (i != 0)
                             Assert.True(vertexCommand.VerticesCount == distinctIndicesCount);
@@ -124,7 +125,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                             Assert.True(vertexBuffers.Count > 1);
                             Assert.True(startVertexIndex ==
                                 vertexBuffers.Take(i).Select(r => r.NextIndicesBase / 2).Sum());
-                            // Chunk03 can be null
+                            // N64GspCullDisplayListCommand can be null
                         }
                         else // i == 0
                         {
@@ -173,6 +174,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
         private List<N64GspVertexBuffer> GetVertexBuffers(N64GspCommandList commands)
         {
+            // TODO: should be moved to SWE1R.Assets.Blocks
+
             var ranges = new List<N64GspVertexBuffer>();
             N64GspVertexBuffer vertexBuffer = null;
             for (int i = 0; i < commands.Count; i++)
@@ -191,8 +194,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                 else if (command.Byte == 3)
                     vertexBuffer.CullDisplayListCommand = (N64GspCullDisplayListCommand)command;
 
-                if (command.Byte == 5 || command.Byte == 6)
-                    vertexBuffer.TriangleCommands.Add(command);
+                if (command is IN64GspTrianglesCommand trianglesCommand)
+                    vertexBuffer.TrianglesCommands.Add(trianglesCommand);
             }
             return ranges;
         }

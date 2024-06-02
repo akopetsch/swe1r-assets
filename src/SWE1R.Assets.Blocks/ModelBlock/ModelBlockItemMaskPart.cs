@@ -69,7 +69,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             SetMaskBits(
                 context.Graph.GetValueComponents<TextureIndex>());
 
-            // IndicesChunk01.StartVertex
+            // N64GspVertexCommand.StartVertex
             SetMaskBits(
                 GetStartVertexComponents(context.Graph).Where(IsMaskBitRequired));
 

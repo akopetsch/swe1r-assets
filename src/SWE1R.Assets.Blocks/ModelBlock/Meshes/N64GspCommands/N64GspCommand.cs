@@ -1,8 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Attributes;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
-using System.Collections.Generic;
+using ByteSerialization.IO;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
@@ -31,11 +30,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #endregion
 
-        #region Properties (abstraction)
+        #region Methods (serialization)
 
-        public abstract IEnumerable<int> Indices { get; }
+        public virtual void Serialize(EndianBinaryWriter writer) =>
+            writer.Write(Byte);
 
-        public abstract IEnumerable<Triangle> Triangles { get; }
+        public virtual void Deserialize(EndianBinaryReader reader) =>
+            Byte = reader.ReadByte();
 
         #endregion
     }

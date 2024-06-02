@@ -17,7 +17,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
 
             var c = (N64GspCullDisplayListCommand)node.Value;
 
-            Index = c.MaxIndex;
+            Index = c.VN;
         }
 
         public override bool Equals(DbBlockItemStructure<N64GspCullDisplayListCommand> other)

@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         public N64GspVertexCommand VertexCommand { get; set; }
         public N64GspCullDisplayListCommand CullDisplayListCommand { get; set; }
-        public List<N64GspCommand> TriangleCommands { get; } = new List<N64GspCommand>();
+        public List<IN64GspTrianglesCommand> TrianglesCommands { get; } =
+            new List<IN64GspTrianglesCommand>();
 
         #endregion
 
@@ -24,7 +26,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
             // TODO: move comment, do not hardcode number 2
 
         public IEnumerable<int> Indices => 
-            TriangleCommands.SelectMany(c => c.Indices);
+            TrianglesCommands.SelectMany(c => c.Indices);
 
         public IEnumerable<N64GspCommand> AllCommands
         {
@@ -34,7 +36,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
                     yield return VertexCommand; 
                 if (CullDisplayListCommand != null)
                     yield return CullDisplayListCommand;
-                foreach (N64GspCommand triangleCommand in TriangleCommands)
+                foreach (N64GspCommand triangleCommand in TrianglesCommands)
                     yield return triangleCommand;
             }
         }
@@ -60,7 +62,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
             if (CullDisplayListCommand != null)
                 sb.Append("3");
             sb.Append(' ');
-            sb.Append(string.Join(string.Empty, TriangleCommands.Select(x => x.Byte)));
+            sb.Append(string.Join(string.Empty, TrianglesCommands.Select(x => x.Byte)));
             return sb.ToString();
         }
 

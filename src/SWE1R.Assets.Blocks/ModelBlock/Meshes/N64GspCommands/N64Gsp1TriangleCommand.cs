@@ -4,6 +4,7 @@ using ByteSerialization;
 using ByteSerialization.Attributes;
 using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
 using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
@@ -16,7 +17,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
     ///       n64devkit.square7.ch - 'gSP1Triangle'</see></item>
     /// </list>
     /// </summary>
-    public class N64Gsp1TriangleCommand : N64GspCommand, ICustomSerializable
+    public class N64Gsp1TriangleCommand : N64GspCommand, IN64GspTrianglesCommand, ICustomSerializable
     {
         #region Fields
 
@@ -35,9 +36,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #endregion
 
-        #region Properties (abstraction)
+        #region Properties (: IN64GspTrianglesCommand)
 
-        public override IEnumerable<int> Indices
+        public IEnumerable<int> Indices
         {
             get
             {
@@ -47,7 +48,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
             }
         }
 
-        public override IEnumerable<Triangle> Triangles
+        public IEnumerable<Triangle> Triangles
         {
             get
             {
@@ -69,19 +70,19 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Methods (: ICustomSerializable)
 
-        public void Serialize(EndianBinaryWriter writer)
+        public override void Serialize(EndianBinaryWriter writer)
         {
-            writer.Write(Byte);
+            base.Serialize(writer);
             writer.Write(Index0);
             writer.Write(Index1);
             writer.Write(Index2);
             writer.Write(padding);
         }
 
-        public void Deserialize(EndianBinaryReader reader)
+        public override void Deserialize(EndianBinaryReader reader)
         {
             // TODO: not called
-
+            base.Deserialize(reader);
             Byte = reader.ReadByte();
             Index0 = reader.ReadByte();
             Index1 = reader.ReadByte();

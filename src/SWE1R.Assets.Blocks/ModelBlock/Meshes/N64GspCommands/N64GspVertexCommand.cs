@@ -1,10 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Attributes;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
@@ -42,12 +39,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
             get => Convert.ToByte(VerticesCountPadded >> VerticesCountPadding);
             set => VerticesCountPadded = (short)(value << VerticesCountPadding);
         }
-
-        public override IEnumerable<int> Indices => 
-            Enumerable.Empty<int>();
-
-        public override IEnumerable<Triangle> Triangles => 
-            Enumerable.Empty<Triangle>();
 
         #endregion
 

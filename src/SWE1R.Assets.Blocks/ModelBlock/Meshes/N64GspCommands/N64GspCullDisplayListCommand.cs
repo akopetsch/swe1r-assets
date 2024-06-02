@@ -3,9 +3,6 @@
 using ByteSerialization;
 using ByteSerialization.Attributes;
 using ByteSerialization.IO;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
@@ -21,22 +18,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
     {
         #region Fields
 
-        private static readonly byte[] padding = new byte[6];
+        private static readonly byte[] PaddingBytes = new byte[6];
 
         #endregion
 
         #region Properties
 
         [Order(0), Offset(7)]
-        public byte MaxIndex { get; set; }
-
-        #endregion
-
-        #region Properties (abstraction)
-
-        public override IEnumerable<int> Indices => Enumerable.Empty<int>();
-
-        public override IEnumerable<Triangle> Triangles => Enumerable.Empty<Triangle>();
+        public byte VN { get; set; }
 
         #endregion
 
@@ -49,20 +38,21 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Methods (: ICustomSerializable)
 
-        public void Serialize(EndianBinaryWriter writer)
+        public override void Serialize(EndianBinaryWriter writer)
         {
+            base.Serialize(writer);
             writer.Write(Byte);
-            writer.Write(padding);
-            writer.Write(MaxIndex);
+            writer.Write(PaddingBytes);
+            writer.Write(VN);
         }
 
-        public void Deserialize(EndianBinaryReader reader)
+        public override void Deserialize(EndianBinaryReader reader)
         {
             // TODO: not called
-
+            base.Deserialize(reader);
             Byte = reader.ReadByte();
-            reader.ReadBytes(padding.Length);
-            MaxIndex = reader.ReadByte();
+            reader.ReadBytes(PaddingBytes.Length);
+            VN = reader.ReadByte();
         }
 
         #endregion
@@ -70,7 +60,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({Byte} {nameof(MaxIndex)} = {MaxIndex})";
+            $"({Byte} {nameof(VN)} = {VN})";
 
         #endregion
     }

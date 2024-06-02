@@ -6,6 +6,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Materials.Import;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.TextureBlock;
@@ -219,16 +220,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                         meshHelper.VertexBuffers.Add(currentVertexBuffer);
                     }
 
-                    List<N64GspCommand> triangleCommands = new List<N64GspCommand>();
+                    var trianglesCommands = new List<IN64GspTrianglesCommand>();
                     foreach (Triangle triangle in faceHelper.Triangles)
                     {
-                        triangleCommands.Add(new N64Gsp1TriangleCommand() {
+                        trianglesCommands.Add(new N64Gsp1TriangleCommand() {
                             Index0 = Convert.ToByte(2 * (triangle.I0 - startVertexIndex)),
                             Index1 = Convert.ToByte(2 * (triangle.I1 - startVertexIndex)),
                             Index2 = Convert.ToByte(2 * (triangle.I2 - startVertexIndex)),
                         });
                     }
-                    currentVertexBuffer.TriangleCommands.AddRange(triangleCommands);
+                    currentVertexBuffer.TrianglesCommands.AddRange(trianglesCommands);
                 }
             }
 
