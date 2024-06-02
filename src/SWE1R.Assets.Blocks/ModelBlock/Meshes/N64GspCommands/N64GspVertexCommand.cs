@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
-    public class IndicesChunk01 : IndicesChunk
+    public class N64GspVertexCommand : N64GspCommand
     {
         #region Fields (const)
 
@@ -45,7 +45,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Constructor
 
-        public IndicesChunk01() => 
+        public N64GspVertexCommand() => 
             Tag = 1;
 
         #endregion

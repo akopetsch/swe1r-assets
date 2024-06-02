@@ -13,8 +13,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
         public List<FaceHelper> FaceHelpers { get; } =
             new List<FaceHelper>();
 
-        public List<IndicesRange> IndicesRanges { get; } =
-            new List<IndicesRange>();
+        public List<N64GspVertexBuffer> IndicesRanges { get; } =
+            new List<N64GspVertexBuffer>();
 
         public IEnumerable<Vertex> Vertices =>
             FaceHelpers.SelectMany(x => x.Vertices);

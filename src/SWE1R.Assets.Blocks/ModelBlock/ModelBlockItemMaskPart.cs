@@ -120,7 +120,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         }
 
         private PropertyComponent[] GetStartVertexComponents(ByteSerializerGraph graph) =>
-            graph.GetPropertyComponents<IndicesChunk01>(nameof(IndicesChunk01.StartVertex));
+            graph.GetPropertyComponents<N64GspVertexCommand>(nameof(N64GspVertexCommand.StartVertex));
 
         private bool IsMaskBitRequired(ReferenceComponent r)
         {

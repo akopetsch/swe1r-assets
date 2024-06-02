@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexIndices
 {
     [Table("Model_IndicesChunk01")]
-    public class DbIndicesChunk01 : DbBlockItemStructure<IndicesChunk01>
+    public class DbIndicesChunk01 : DbBlockItemStructure<N64GspVertexCommand>
     {
         public byte VerticesCount { get; set; }
         public int MaxIndex { get; set; }
@@ -17,14 +17,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
         {
             base.CopyFrom(node);
 
-            var c = (IndicesChunk01)node.Value;
+            var c = (N64GspVertexCommand)node.Value;
 
             VerticesCount = c.VerticesCount;
             MaxIndex = c.NextIndicesBase;
             P_StartVertex = GetValuePosition(node.Graph, c.StartVertex.Value);
         }
 
-        public override bool Equals(DbBlockItemStructure<IndicesChunk01> other)
+        public override bool Equals(DbBlockItemStructure<N64GspVertexCommand> other)
         {
             var _other = (DbIndicesChunk01)other;
 

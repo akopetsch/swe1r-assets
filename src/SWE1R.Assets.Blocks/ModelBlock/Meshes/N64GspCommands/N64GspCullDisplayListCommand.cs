@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
-    public class IndicesChunk03 : IndicesChunk, ICustomSerializable
+    public class N64GspCullDisplayListCommand : N64GspCommand, ICustomSerializable
     {
         #region Fields
 
@@ -34,7 +34,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Constructor
 
-        public IndicesChunk03() => 
+        public N64GspCullDisplayListCommand() => 
             Tag = 3;
 
         #endregion

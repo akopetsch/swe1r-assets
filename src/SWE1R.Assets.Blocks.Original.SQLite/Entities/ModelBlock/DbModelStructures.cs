@@ -102,10 +102,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Anims = GetStructures<Animation, DbAnimation>(g);
             DoubleMaterials = GetStructures<MaterialReference, DbMaterialReference>(g);
 
-            IndicesChunks01 = GetStructures<IndicesChunk01, DbIndicesChunk01>(g);
-            IndicesChunks03 = GetStructures<IndicesChunk03, DbIndicesChunk03>(g);
-            IndicesChunks05 = GetStructures<IndicesChunk05, DbIndicesChunk05>(g);
-            IndicesChunks06 = GetStructures<IndicesChunk06, DbIndicesChunk06>(g);
+            IndicesChunks01 = GetStructures<N64GspVertexCommand, DbIndicesChunk01>(g);
+            IndicesChunks03 = GetStructures<N64GspCullDisplayListCommand, DbIndicesChunk03>(g);
+            IndicesChunks05 = GetStructures<N64Gsp1TriangleCommand, DbIndicesChunk05>(g);
+            IndicesChunks06 = GetStructures<N64Gsp2TrianglesCommand, DbIndicesChunk06>(g);
 
             Mappings = GetStructures<Mapping, DbMapping>(g);
             MappingChildren = GetStructures<MappingChild, DbMappingChild>(g);

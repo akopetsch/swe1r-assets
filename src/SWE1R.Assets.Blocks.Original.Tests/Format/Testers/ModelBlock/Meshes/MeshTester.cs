@@ -44,7 +44,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
             var model = (Model)ByteSerializerGraph.Root.Value;
 
-            IndicesChunks chunks = Value.VisibleIndicesChunks;
+            N64GspCommandList chunks = Value.VisibleIndicesChunks;
             if (chunks != null)
             {
                 var ranges = GetRanges(chunks);
@@ -57,30 +57,30 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                 //Assert.True(foo); // commented-out for perf reasons
 
                 if (ranges.Count > 1)
-                    Assert.True(ranges.All(r => r.Chunk01 != null));
+                    Assert.True(ranges.All(r => r.GspVertexCommand != null));
 
                 // assert ascending StartVertex
-                var ranges01 = ranges.Where(r => r.Chunk01 != null).ToList();
+                var ranges01 = ranges.Where(r => r.GspVertexCommand != null).ToList();
                 for (int i = 0; i < ranges01.Count; i++)
                 {
-                    IndicesRange range01 = ranges01[i];
+                    N64GspVertexBuffer range01 = ranges01[i];
                     if (i > 0)
                     {
-                        IndicesRange range01Before = ranges01[i - 1];
-                        int startVertex = range01.Chunk01.StartVertex.Index.Value;
-                        int startVertexBefore = range01Before.Chunk01.StartVertex.Index.Value;
+                        N64GspVertexBuffer range01Before = ranges01[i - 1];
+                        int startVertex = range01.GspVertexCommand.StartVertex.Index.Value;
+                        int startVertexBefore = range01Before.GspVertexCommand.StartVertex.Index.Value;
                         Assert.True(startVertex > startVertexBefore);
                     }
                 }
 
                 for (int i = 0; i < ranges.Count; i++)
                 {
-                    IndicesRange range = ranges[i];
+                    N64GspVertexBuffer range = ranges[i];
                     //AnalyticsFixture.IncreaseCounter(range.ToString());
 
                     // chunks
-                    Assert.True(range.Chunks0506.Count >= 1);
-                    Assert.True(range.Chunks0506.Count <= 20);
+                    Assert.True(range.TriangleCommands.Count >= 1);
+                    Assert.True(range.TriangleCommands.Count <= 20);
 
                     // indices
                     Assert.True(range.Indices.Count() <= 117);
@@ -88,7 +88,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     Assert.True(range.Indices.Max() >= 1);
                     Assert.True(range.Indices.All(x => x % 2 == 0));
 
-                    IndicesChunk03 chunk03 = range.Chunk03;
+                    N64GspCullDisplayListCommand chunk03 = range.GspCullDisplayListCommand;
                     if (chunk03 != null)
                     {
                         Assert.True(chunk03.MaxIndex == range.Indices.Max());
@@ -99,7 +99,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         // but the last range does not necessarliy have 03
                     }
 
-                    IndicesChunk01 chunk01 = range.Chunk01;
+                    N64GspVertexCommand chunk01 = range.GspVertexCommand;
                     if (chunk01 != null)
                     {
                         int startVertexIndex = chunk01.StartVertex.Index.Value;
@@ -111,7 +111,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                             Assert.True(chunk01.VerticesCount == distinctIndicesCount);
                         else
                             Assert.True(chunk01.VerticesCount == distinctIndicesCount - startVertexIndex);
-                        Assert.True(chunk01.VerticesCountPadded >= (1 << IndicesChunk01.VerticesCountPadding));
+                        Assert.True(chunk01.VerticesCountPadded >= (1 << N64GspVertexCommand.VerticesCountPadding));
 
                         // NextIndicesBase
                         Assert.True(chunk01.NextIndicesBase == range.NextIndicesBase);
@@ -147,7 +147,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         {
                             // 435
                             // models: 106...
-                            Assert.True(range.Chunk03 == null);
+                            Assert.True(range.GspCullDisplayListCommand == null);
                             Assert.True(ranges.Count == 1);
 
                         }
@@ -162,7 +162,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
                     }
 
-                    if (range.Chunk01 != null)
+                    if (range.GspVertexCommand != null)
                         if (i == 0)
                         {
                             // only true 397/433 models:
@@ -172,42 +172,42 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
             }
         }
 
-        private List<IndicesRange> GetRanges(IndicesChunks chunks)
+        private List<N64GspVertexBuffer> GetRanges(N64GspCommandList chunks)
         {
-            var ranges = new List<IndicesRange>();
-            IndicesRange range = null;
+            var ranges = new List<N64GspVertexBuffer>();
+            N64GspVertexBuffer range = null;
             for (int i = 0; i < chunks.Count; i++)
             {
-                IndicesChunk chunk = chunks[i];
+                N64GspCommand chunk = chunks[i];
                 byte tag = chunk.Tag;
 
                 // if first range or new range
                 if (range == null || tag == 01)
                 {
                     // create/add new range
-                    range = new IndicesRange();
+                    range = new N64GspVertexBuffer();
                     ranges.Add(range);
                     if (tag == 1)
-                        range.Chunk01 = (IndicesChunk01)chunk;
+                        range.GspVertexCommand = (N64GspVertexCommand)chunk;
                 }
                 else if (tag == 3)
-                    range.Chunk03 = (IndicesChunk03)chunk;
+                    range.GspCullDisplayListCommand = (N64GspCullDisplayListCommand)chunk;
 
                 if (tag == 5 || tag == 6)
-                    range.Chunks0506.Add(chunk);
+                    range.TriangleCommands.Add(chunk);
             }
             return ranges;
         }
 
         private void TestVisibleIndicesChunks()
         {
-            IndicesChunks chunks = Value.VisibleIndicesChunks;
+            N64GspCommandList chunks = Value.VisibleIndicesChunks;
             if (chunks != null)
             {
                 int n = chunks.Count;
                 Assert.True(n <= 590);
 
-                IndicesChunk chunk0 = chunks[0];
+                N64GspCommand chunk0 = chunks[0];
                 if (n == 1)
                     Assert.True(chunk0.Tag == 05 || chunk0.Tag == 06);
                 else
@@ -224,16 +224,16 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     Assert.True(chunk0.Tag == 01);
                     if (n == 2)
                     {
-                        IndicesChunk chunk1 = chunks[1];
+                        N64GspCommand chunk1 = chunks[1];
                         Assert.True(chunk1.Tag == 05 || chunk1.Tag == 06);
                     }
                     else
                         for (int i = 0; i < n; i++)
                         {
-                            IndicesChunk chunk = chunks[i];
+                            N64GspCommand chunk = chunks[i];
                             if (chunk.Tag == 03)
                             {
-                                IndicesChunk chunkBefore = chunks[i - 1];
+                                N64GspCommand chunkBefore = chunks[i - 1];
                                 Assert.True(chunkBefore.Tag == 01);
                             }
                         }

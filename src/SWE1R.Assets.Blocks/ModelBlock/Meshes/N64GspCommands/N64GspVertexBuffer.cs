@@ -6,13 +6,13 @@ using System.Text;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
-    public class IndicesRange
+    public class N64GspVertexBuffer
     {
         #region Properties
 
-        public IndicesChunk01 Chunk01 { get; set; }
-        public IndicesChunk03 Chunk03 { get; set; }
-        public List<IndicesChunk> Chunks0506 { get; } = new List<IndicesChunk>();
+        public N64GspVertexCommand GspVertexCommand { get; set; }
+        public N64GspCullDisplayListCommand GspCullDisplayListCommand { get; set; }
+        public List<N64GspCommand> TriangleCommands { get; } = new List<N64GspCommand>();
 
         #endregion
 
@@ -24,18 +24,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
             // TODO: move comment, do not hardcode number 2
 
         public IEnumerable<int> Indices => 
-            Chunks0506.SelectMany(c => c.Indices);
+            TriangleCommands.SelectMany(c => c.Indices);
 
-        public IEnumerable<IndicesChunk> AllChunks
+        public IEnumerable<N64GspCommand> AllCommands
         {
             get
             {
-                if (Chunk01 != null)
-                    yield return Chunk01; 
-                if (Chunk03 != null)
-                    yield return Chunk03;
-                foreach (IndicesChunk chunk0506 in Chunks0506)
-                    yield return chunk0506;
+                if (GspVertexCommand != null)
+                    yield return GspVertexCommand; 
+                if (GspCullDisplayListCommand != null)
+                    yield return GspCullDisplayListCommand;
+                foreach (N64GspCommand triangleCommand in TriangleCommands)
+                    yield return triangleCommand;
             }
         }
 
@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Constructor
 
-        public IndicesRange()
+        public N64GspVertexBuffer()
         {
 
         }
@@ -55,12 +55,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         public override string ToString()
         {
             var sb = new StringBuilder();
-            if (Chunk01 != null)
+            if (GspVertexCommand != null)
                 sb.Append("1");
-            if (Chunk03 != null)
+            if (GspCullDisplayListCommand != null)
                 sb.Append("3");
             sb.Append(' ');
-            sb.Append(string.Join(string.Empty, Chunks0506.Select(x => x.Tag)));
+            sb.Append(string.Join(string.Empty, TriangleCommands.Select(x => x.Tag)));
             return sb.ToString();
         }
 

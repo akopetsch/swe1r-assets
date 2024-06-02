@@ -205,7 +205,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
             foreach (MeshHelper meshHelper in meshHelpers)
             {
-                var currentIndicesRange = new IndicesRange();
+                var currentIndicesRange = new N64GspVertexBuffer();
                 meshHelper.IndicesRanges.Add(currentIndicesRange);
                 int startVertexIndex = 0;
                 foreach (FaceHelper faceHelper in meshHelper.FaceHelpers)
@@ -215,20 +215,20 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     {
                         // new IndicesRange
                         startVertexIndex += currentIndicesRange.NextIndicesBase / 2;
-                        currentIndicesRange = new IndicesRange();
+                        currentIndicesRange = new N64GspVertexBuffer();
                         meshHelper.IndicesRanges.Add(currentIndicesRange);
                     }
 
-                    List<IndicesChunk> indicesChunks = new List<IndicesChunk>();
+                    List<N64GspCommand> indicesChunks = new List<N64GspCommand>();
                     foreach (Triangle triangle in faceHelper.Triangles)
                     {
-                        indicesChunks.Add(new IndicesChunk05() {
+                        indicesChunks.Add(new N64Gsp1TriangleCommand() {
                             Index0 = Convert.ToByte(2 * (triangle.I0 - startVertexIndex)),
                             Index1 = Convert.ToByte(2 * (triangle.I1 - startVertexIndex)),
                             Index2 = Convert.ToByte(2 * (triangle.I2 - startVertexIndex)),
                         });
                     }
-                    currentIndicesRange.Chunks0506.AddRange(indicesChunks);
+                    currentIndicesRange.TriangleCommands.AddRange(indicesChunks);
                 }
             }
 
@@ -255,13 +255,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             return primitive.GetTriangles();
         }
 
-        private IndicesChunks GetIndicesChunks(List<IndicesRange> indicesRanges, Mesh mesh)
+        private N64GspCommandList GetIndicesChunks(List<N64GspVertexBuffer> indicesRanges, Mesh mesh)
         {
             int startVertexIndex = 0;
-            var indicesChunks = new IndicesChunks();
-            foreach (IndicesRange range in indicesRanges)
+            var indicesChunks = new N64GspCommandList();
+            foreach (N64GspVertexBuffer range in indicesRanges)
             {
-                range.Chunk01 = new IndicesChunk01() {
+                range.GspVertexCommand = new N64GspVertexCommand() {
                     VerticesCount = Convert.ToByte(range.Indices.Distinct().Count()),
                     NextIndicesBase = Convert.ToByte(range.NextIndicesBase),
                     StartVertex = new ReferenceByIndex<Vertex>() {
@@ -270,7 +270,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     }
                 };
                 startVertexIndex += range.NextIndicesBase / 2;
-                indicesChunks.AddRange(range.AllChunks);
+                indicesChunks.AddRange(range.AllCommands);
             }
             return indicesChunks;
         }

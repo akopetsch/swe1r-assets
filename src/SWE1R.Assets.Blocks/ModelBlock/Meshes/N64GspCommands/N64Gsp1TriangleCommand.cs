@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
-    public class IndicesChunk05 : IndicesChunk, ICustomSerializable
+    public class N64Gsp1TriangleCommand : N64GspCommand, ICustomSerializable
     {
         #region Fields
 
@@ -54,7 +54,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Constructor
 
-        public IndicesChunk05() => 
+        public N64Gsp1TriangleCommand() => 
             Tag = 5;
 
         #endregion

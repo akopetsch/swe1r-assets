@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexIndices
 {
     [Table("Model_IndicesChunk03")]
-    public class DbIndicesChunk03 : DbBlockItemStructure<IndicesChunk03>
+    public class DbIndicesChunk03 : DbBlockItemStructure<N64GspCullDisplayListCommand>
     {
         public byte Index { get; set; }
 
@@ -15,12 +15,12 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
         {
             base.CopyFrom(node);
 
-            var c = (IndicesChunk03)node.Value;
+            var c = (N64GspCullDisplayListCommand)node.Value;
 
             Index = c.MaxIndex;
         }
 
-        public override bool Equals(DbBlockItemStructure<IndicesChunk03> other)
+        public override bool Equals(DbBlockItemStructure<N64GspCullDisplayListCommand> other)
         {
             var _other = (DbIndicesChunk03)other;
 

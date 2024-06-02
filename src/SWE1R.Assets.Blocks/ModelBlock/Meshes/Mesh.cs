@@ -86,7 +86,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// <para>Offset: 0x30</para>
         /// </summary>
         [Order(9), Reference(3)]
-        public IndicesChunks VisibleIndicesChunks { get; set; }
+        public N64GspCommandList VisibleIndicesChunks { get; set; }
         /// <summary>
         /// Gets or sets the list of visible vertices. 
         /// The list's length is <see cref="VisibleVerticesCount">VisibleVerticesCount</see>. Is <see langword="null"/> if that value is 0.

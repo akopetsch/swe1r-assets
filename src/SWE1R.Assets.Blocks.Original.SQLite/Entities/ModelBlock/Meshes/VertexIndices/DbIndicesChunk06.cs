@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexIndices
 {
     [Table("Model_IndicesChunk06")]
-    public class DbIndicesChunk06 : DbBlockItemStructure<IndicesChunk06>
+    public class DbIndicesChunk06 : DbBlockItemStructure<N64Gsp2TrianglesCommand>
     {
         public byte Index0 { get; set; }
         public byte Index1 { get; set; }
@@ -20,7 +20,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
         {
             base.CopyFrom(node);
 
-            var c = (IndicesChunk06)node.Value;
+            var c = (N64Gsp2TrianglesCommand)node.Value;
 
             Index0 = c.Index0;
             Index1 = c.Index1;
@@ -30,7 +30,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
             Index5 = c.Index5;
         }
 
-        public override bool Equals(DbBlockItemStructure<IndicesChunk06> other)
+        public override bool Equals(DbBlockItemStructure<N64Gsp2TrianglesCommand> other)
         {
             var _other = (DbIndicesChunk06)other;
 
