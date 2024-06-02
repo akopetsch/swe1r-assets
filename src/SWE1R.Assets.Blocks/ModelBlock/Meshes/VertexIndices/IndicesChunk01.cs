@@ -2,6 +2,7 @@
 
 using ByteSerialization.Attributes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,10 +10,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 {
     public class IndicesChunk01 : IndicesChunk
     {
+        #region Fields (const)
+
+        internal const int VerticesCountPadding = 4;
+
+        #endregion
+
         #region Properties (serialized)
 
         [Order(0)]
-        public short Length { get; set; } // n_packed
+        internal short VerticesCountPadded { get; set; } // TODO: implement BitFieldAttribute in BinarySerialization
         [Order(1)]
         public byte NextIndicesBase { get; set; } // v0_plus_n
         [Order(2)]
@@ -22,9 +29,17 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Properties (abstraction)
 
-        public override IEnumerable<int> Indices => Enumerable.Empty<int>();
+        public byte VerticesCount
+        {
+            get => Convert.ToByte(VerticesCountPadded >> VerticesCountPadding);
+            set => VerticesCountPadded = (short)(value << VerticesCountPadding);
+        }
 
-        public override IEnumerable<Triangle> Triangles => Enumerable.Empty<Triangle>();
+        public override IEnumerable<int> Indices => 
+            Enumerable.Empty<int>();
+
+        public override IEnumerable<Triangle> Triangles => 
+            Enumerable.Empty<Triangle>();
 
         #endregion
 
@@ -39,7 +54,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         public override string ToString() =>
             $"({Tag} " +
-            $"{nameof(Length)} = {Length}, " +
+            $"{nameof(VerticesCount)} = {VerticesCount}, " +
             $"{nameof(NextIndicesBase)} = {NextIndicesBase}, " +
             $"{nameof(StartVertex)} = {StartVertex})";
 

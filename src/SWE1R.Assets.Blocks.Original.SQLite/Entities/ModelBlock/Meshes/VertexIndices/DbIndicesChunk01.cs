@@ -9,7 +9,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
     [Table("Model_IndicesChunk01")]
     public class DbIndicesChunk01 : DbBlockItemStructure<IndicesChunk01>
     {
-        public short Length { get; set; }
+        public byte VerticesCount { get; set; }
         public int MaxIndex { get; set; }
         public int P_StartVertex { get; set; }
 
@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
 
             var c = (IndicesChunk01)node.Value;
 
-            Length = c.Length;
+            VerticesCount = c.VerticesCount;
             MaxIndex = c.NextIndicesBase;
             P_StartVertex = GetValuePosition(node.Graph, c.StartVertex.Value);
         }
@@ -31,7 +31,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
             if (!base.Equals(_other))
                 return false;
 
-            if (Length != _other.Length) return false;
+            if (VerticesCount != _other.VerticesCount) return false;
             if (MaxIndex != _other.MaxIndex) return false;
             if (P_StartVertex != _other.P_StartVertex) return false;
             
@@ -47,6 +47,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), Length, MaxIndex, P_StartVertex);
+            HashCode.Combine(base.GetHashCode(), VerticesCount, MaxIndex, P_StartVertex);
     }
 }

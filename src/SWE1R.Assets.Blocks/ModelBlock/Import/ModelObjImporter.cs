@@ -262,7 +262,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             foreach (IndicesRange range in indicesRanges)
             {
                 range.Chunk01 = new IndicesChunk01() {
-                    Length = Convert.ToInt16(range.Indices.Distinct().Count() * Vertex.StructureSize),
+                    VerticesCount = Convert.ToByte(range.Indices.Distinct().Count()),
                     NextIndicesBase = Convert.ToByte(range.NextIndicesBase),
                     StartVertex = new ReferenceByIndex<Vertex>() {
                         Collection = mesh.VisibleVertices,

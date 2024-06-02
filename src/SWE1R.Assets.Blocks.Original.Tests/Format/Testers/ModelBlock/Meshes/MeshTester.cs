@@ -102,93 +102,19 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     IndicesChunk01 chunk01 = range.Chunk01;
                     if (chunk01 != null)
                     {
-                        // NextIndicesBase
-                        Assert.True(chunk01.NextIndicesBase == range.NextIndicesBase);
-
                         int startVertexIndex = chunk01.StartVertex.Index.Value;
                         int distinctIndicesCount = range.Indices.Distinct().Count();
-                        int n = chunk01.Length >> 4;
-                        Assert.True(chunk01.Length >= (1 << 4));
 
-                        // Length candidate:
-                        int previousNextIndicesBase = 0;
-                        if (i > 0)
-                            previousNextIndicesBase = ranges[i - 1].NextIndicesBase / 2;
-                        int computedLength =
-                            distinctIndicesCount - (startVertexIndex - previousNextIndicesBase);
-                        //Assert.True(n == computedLength); // sometimes failing
+                        // Length
+                        Assert.True(chunk01.VerticesCount != 0);
+                        if (i != 0)
+                            Assert.True(chunk01.VerticesCount == distinctIndicesCount);
+                        else
+                            Assert.True(chunk01.VerticesCount == distinctIndicesCount - startVertexIndex);
+                        Assert.True(chunk01.VerticesCountPadded >= (1 << IndicesChunk01.VerticesCountPadding));
 
-                        // TODO: Length
-                        Assert.True(n != 0);
-                        bool true1 = n == distinctIndicesCount;
-                        bool true2 = n == distinctIndicesCount - startVertexIndex;
-                        Assert.True(true1 || true2);
-
-                        if (true1 & !true2)
-                        {
-                            Assert.True(startVertexIndex != 0);
-
-                            // if there was a 01 range before:
-                            Assert.True(ranges.Count > 1);
-                            Assert.True(i != 0);
-                            Assert.True(ranges.All(r => r.Chunk01 != null)); // but chunk03 is null sometimes
-
-                            var foo = ranges[i - 1].NextIndicesBase;
-                        }
-                        if (!true1 && true2)
-                        {
-                            Assert.True(startVertexIndex != 0);
-
-                            // if this is a single (01) range:
-                            Assert.True(ranges.Count == 1);
-                            Assert.True(i == 0); // obviously
-
-                            Assert.True(model.Animations != null);
-
-                            #region comments (model ids)
-
-                            // 086 - Pupp_Racer_Teemto_Pagalies | 7
-                            // 087 - Pupp_Racer_Anakin_Skywalker | 1
-                            // 089 - Pupp_Racer_Mawhonic | 21
-                            // 090 - Pupp_Racer_Ody_Mandrell | 10
-                            // 092 - Pupp_Racer_Mars_Guo | 7
-                            // 093 - Pupp_Racer_Ratts_Tyerell | 12
-                            // 094 - Pupp_Racer_Ben_Quadinaros | 12
-                            // 095 - Pupp_Racer_Ebe_E_Endocott | 15
-                            // 096 - Pupp_Racer_Ark_Roose | 14
-                            // 097 - Pupp_Racer_Clegg_Holdfast | 3
-                            // 098 - Pupp_Racer_Dud_Bolt | 8
-                            // 099 - Pupp_Racer_Wan_Sandage | 10
-                            // 100 - Pupp_Racer_Elan_Mak | 11
-                            // 101 - Pupp_Racer_Toy_Dampner | 12
-                            // 103 - Pupp_Racer_Neva_Kee | 4
-                            // 104 - Pupp_Racer_Slide_Paramita | 5
-                            // 105 - Pupp_Racer_Aldar_Beedo | 12
-                            // 106 - Pupp_Racer_Bozzie_Baranta | 13
-                            // 107 - Pupp_Racer_Boles_Roor | 27
-                            // 108 - Pupp_Racer_Navior | 19
-                            // 110 - Pupp_Watto | 1
-                            // 111 - Pupp_Dewback | 12
-                            // 113 - Pupp_Jabba | 35
-                            // 149 - Scen_Jabba_Small__SCEN | 46
-                            // 152 - Scen_Jabba_Mawhonic_Gasgano_Anakin_Sebulba_Anim126__SCEN | 51
-                            // 155 - Pupp_OpeeSeaKiller | 14
-                            // 289 - Scen_Jabba_Mawhonic_Gasgano_Anakin_Sebulba_Anim115__SCEN | 43
-                            // 304 - Pupp_Racer_Jinn_Reeso | 5
-                            // 305 - Pupp_Racer_Cy_Yunga | 5
-
-                            #endregion
-                        }
-                        if (true1 && true2)
-                        {
-                            Assert.True(startVertexIndex == 0);
-
-                            // if this is the first (01) range and more follow:
-                            Assert.True(i == 0);
-
-                            //string key = $"{model.Index.Value:d3} - {_metadataProvider.GetName(model)}";
-                            //AnalyticsFixture.IncreaseCounter("foo");
-                        }
+                        // NextIndicesBase
+                        Assert.True(chunk01.NextIndicesBase == range.NextIndicesBase);
 
                         // TODO: StartVertex
                         Assert.True(chunk01.StartVertex.Collection == Value.VisibleVertices);
