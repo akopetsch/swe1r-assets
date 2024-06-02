@@ -106,31 +106,27 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         Assert.True(chunk01.NextIndicesBase == range.NextIndicesBase);
 
                         int startVertexIndex = chunk01.StartVertex.Index.Value;
+                        int distinctIndicesCount = range.Indices.Distinct().Count();
+                        int n = chunk01.Length >> 4;
+                        Assert.True(chunk01.Length >= (1 << 4));
 
                         // Length candidate:
                         int previousNextIndicesBase = 0;
                         if (i > 0)
                             previousNextIndicesBase = ranges[i - 1].NextIndicesBase / 2;
                         int computedLength =
-                            range.Indices.Distinct().Count() * Vertex.StructureSize -
-                            (startVertexIndex - previousNextIndicesBase) * Vertex.StructureSize;
-                        //Assert.True(chunk01.Length == computedLength); // sometimes failing
-
+                            distinctIndicesCount - (startVertexIndex - previousNextIndicesBase);
+                        //Assert.True(n == computedLength); // sometimes failing
 
                         // TODO: Length
-                        Assert.True(chunk01.Length != 0);
-                        int computedLength1 =
-                            range.Indices.Distinct().Count() * Vertex.StructureSize;
-                        int computedLength2 =
-                            range.Indices.Distinct().Count() * Vertex.StructureSize -
-                            range.Chunk01.StartVertex.Index.Value * Vertex.StructureSize;
-
-                        bool true1 = chunk01.Length == computedLength1;
-                        bool true2 = chunk01.Length == computedLength2;
+                        Assert.True(n != 0);
+                        bool true1 = n == distinctIndicesCount;
+                        bool true2 = n == distinctIndicesCount - startVertexIndex;
+                        Assert.True(true1 || true2);
 
                         if (true1 & !true2)
                         {
-                            Assert.True(range.Chunk01.StartVertex.Index.Value != 0);
+                            Assert.True(startVertexIndex != 0);
 
                             // if there was a 01 range before:
                             Assert.True(ranges.Count > 1);
@@ -139,15 +135,17 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
                             var foo = ranges[i - 1].NextIndicesBase;
                         }
-                        if (true2 && !true1)
+                        if (!true1 && true2)
                         {
-                            Assert.True(range.Chunk01.StartVertex.Index.Value != 0);
+                            Assert.True(startVertexIndex != 0);
 
                             // if this is a single (01) range:
                             Assert.True(ranges.Count == 1);
                             Assert.True(i == 0); // obviously
 
                             Assert.True(model.Animations != null);
+
+                            #region comments (model ids)
 
                             // 086 - Pupp_Racer_Teemto_Pagalies | 7
                             // 087 - Pupp_Racer_Anakin_Skywalker | 1
@@ -178,10 +176,12 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                             // 289 - Scen_Jabba_Mawhonic_Gasgano_Anakin_Sebulba_Anim115__SCEN | 43
                             // 304 - Pupp_Racer_Jinn_Reeso | 5
                             // 305 - Pupp_Racer_Cy_Yunga | 5
+
+                            #endregion
                         }
                         if (true1 && true2)
                         {
-                            Assert.True(range.Chunk01.StartVertex.Index.Value == 0);
+                            Assert.True(startVertexIndex == 0);
 
                             // if this is the first (01) range and more follow:
                             Assert.True(i == 0);
@@ -189,13 +189,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                             //string key = $"{model.Index.Value:d3} - {_metadataProvider.GetName(model)}";
                             //AnalyticsFixture.IncreaseCounter("foo");
                         }
-
-                        Assert.True(
-                            chunk01.Length == computedLength1 ||
-                            chunk01.Length == computedLength2);
-
-
-
 
                         // TODO: StartVertex
                         Assert.True(chunk01.StartVertex.Collection == Value.VisibleVertices);

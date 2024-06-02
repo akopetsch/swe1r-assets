@@ -12,9 +12,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Properties (serialized)
 
         [Order(0)]
-        public short Length { get; set; }
+        public short Length { get; set; } // n_packed
         [Order(1)]
-        public byte NextIndicesBase { get; set; }
+        public byte NextIndicesBase { get; set; } // v0_plus_n
         [Order(2)]
         public ReferenceByIndex<Vertex> StartVertex { get; set; }
 
