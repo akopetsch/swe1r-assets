@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Constructor
 
         public N64GspCullDisplayListCommand() => 
-            Tag = 3;
+            Byte = 3;
 
         #endregion
 
@@ -51,7 +51,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         public void Serialize(EndianBinaryWriter writer)
         {
-            writer.Write(Tag);
+            writer.Write(Byte);
             writer.Write(padding);
             writer.Write(MaxIndex);
         }
@@ -60,7 +60,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         {
             // TODO: not called
 
-            Tag = reader.ReadByte();
+            Byte = reader.ReadByte();
             reader.ReadBytes(padding.Length);
             MaxIndex = reader.ReadByte();
         }
@@ -70,7 +70,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({Tag} {nameof(MaxIndex)} = {MaxIndex})";
+            $"({Byte} {nameof(MaxIndex)} = {MaxIndex})";
 
         #endregion
     }

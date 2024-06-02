@@ -81,40 +81,40 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         [Order(8), Reference(1)]
         public CollisionVertices CollisionVertices { get; set; }
         /// <summary>
-        /// Gets or sets the list of index chunks for the visible vertices. 
-        /// Has a value if <see cref="VisibleVerticesCount">VisibleVerticesCount</see> is greater than 0, otherwise is <see langword="null"/>.
+        /// Gets or sets the display list for the visible vertices. 
+        /// Has a value if <see cref="VerticesCount">VerticesCount</see> is greater than 0, otherwise is <see langword="null"/>.
         /// <para>Offset: 0x30</para>
         /// </summary>
         [Order(9), Reference(3)]
-        public N64GspCommandList VisibleIndicesChunks { get; set; }
+        public N64GspCommandList CommandList { get; set; }
         /// <summary>
         /// Gets or sets the list of visible vertices. 
-        /// The list's length is <see cref="VisibleVerticesCount">VisibleVerticesCount</see>. Is <see langword="null"/> if that value is 0.
+        /// The list's length is <see cref="VerticesCount">VerticesCount</see>. Is <see langword="null"/> if that value is 0.
         /// <para>Offset: 0x34</para>
         /// </summary>
-        [Order(10), Reference(4)] [Length(nameof(VisibleVerticesCount))]
-        public List<Vertex> VisibleVertices { get; set; }
+        [Order(10), Reference(4)] [Length(nameof(VerticesCount))]
+        public List<Vertex> Vertices { get; set; }
         /// <summary>
         /// Gets or sets the count of <see cref="CollisionVertices">CollisionVertices</see>. 
-        /// If 0, <see cref="VisibleVerticesCount">VisibleVerticesCount</see> is greater than 0.
+        /// If 0, <see cref="VerticesCount">VerticesCount</see> is greater than 0.
         /// <para>Offset: 0x38</para>
         /// </summary>
         [Order(11)]
         public short CollisionVerticesCount { get; set; }
         /// <summary>
-        /// Gets or sets the count of <see cref="VisibleVertices">VisibleVertices</see>. 
+        /// Gets or sets the count of <see cref="Vertices">Vertices</see>. 
         /// If 0, <see cref="CollisionVerticesCount">CollisionVerticesCount</see> is greater than 0.
         /// <para>Offset: 0x3A</para>
         /// </summary>
         [Order(12)]
-        public short VisibleVerticesCount { get; set; }
+        public short VerticesCount { get; set; }
         /// <summary>
         /// Unknown count. 
         /// <para>
         ///   If greater than 0, the following applies:
         ///   <list type="bullet">
         ///     <item><description><see cref="PrimitiveType">PrimitiveType</see> == <see cref="PrimitiveType.Triangles"/></description></item>
-        ///     <item><description><see cref="VisibleVerticesCount">VisibleVerticesCount</see> > 0</description></item>
+        ///     <item><description><see cref="VerticesCount">VerticesCount</see> > 0</description></item>
         ///     <item><description><see cref="CollisionVerticesCount">CollisionVerticesCount</see> >= 0</description></item>
         ///   </list>
         /// </para>
@@ -148,18 +148,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                 FacesCount = Convert.ToInt16(FacesVertexCounts.Count);
             
             CollisionVerticesCount = Convert.ToInt16(CollisionVertices?.List.Count ?? 0);
-            VisibleVerticesCount = Convert.ToInt16(VisibleVertices?.Count ?? 0);
+            VerticesCount = Convert.ToInt16(Vertices?.Count ?? 0);
 
             // TODO: throw exception if MeshGroupOrShorts.Shorts.Length is invalid
         }
 
-        public void UpdateFacesCountByVisibleIndicesChunks() =>
-            FacesCount = Convert.ToInt16(VisibleIndicesChunks.SelectMany(x => x.Triangles).Count());
+        public void UpdateFacesCountByCommandList() =>
+            FacesCount = Convert.ToInt16(CommandList.SelectMany(x => x.Triangles).Count());
 
         public void UpdateBounds()
         {
             var bounds = new Bounds3Single(
-                VisibleVertices.Select(v => (Vector3Single)v.Position).ToArray());
+                Vertices.Select(v => (Vector3Single)v.Position).ToArray());
             Bounds0 = bounds.Min;
             Bounds1 = bounds.Max;
         }

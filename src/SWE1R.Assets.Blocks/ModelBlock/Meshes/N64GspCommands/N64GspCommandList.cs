@@ -65,26 +65,26 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
             var triangles = new List<Triangle>();
             int baseIndex = 0;
             int stepIndex = 0;
-            foreach (N64GspCommand chunk in List)
+            foreach (N64GspCommand gpsCommand in List)
             {
-                var chunkTriangles = new List<Triangle>();
-                if (chunk is N64GspVertexCommand chunk01)
+                var commandTriangles = new List<Triangle>();
+                if (gpsCommand is N64GspVertexCommand chunk01)
                 {
                     stepIndex = chunk01.NextIndicesBase / 2;
                     baseIndex += stepIndex;
                 }
-                else if (chunk is N64Gsp1TriangleCommand chunk05)
+                else if (gpsCommand is N64Gsp1TriangleCommand gsp1TriangleCommand)
                 {
-                    chunkTriangles.Add(chunk05.Triangle);
+                    commandTriangles.Add(gsp1TriangleCommand.Triangle);
                 }
-                else if (chunk is N64Gsp2TrianglesCommand chunk06)
+                else if (gpsCommand is N64Gsp2TrianglesCommand gsp2TrianglesCommand)
                 {
-                    chunkTriangles.Add(chunk06.Triangle0);
-                    chunkTriangles.Add(chunk06.Triangle1);
+                    commandTriangles.Add(gsp2TrianglesCommand.Triangle0);
+                    commandTriangles.Add(gsp2TrianglesCommand.Triangle1);
                 }
-                chunkTriangles.ForEach(x => x.DivideIndicesBy(2));
-                chunkTriangles.ForEach(x => x.AddToIndices(baseIndex - stepIndex));
-                triangles.AddRange(chunkTriangles);
+                commandTriangles.ForEach(x => x.DivideIndicesBy(2));
+                commandTriangles.ForEach(x => x.AddToIndices(baseIndex - stepIndex));
+                triangles.AddRange(commandTriangles);
             }
             return triangles;
         }

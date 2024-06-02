@@ -54,14 +54,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Constructor
 
         public N64GspVertexCommand() => 
-            Tag = 1;
+            Byte = 1;
 
         #endregion
 
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({Tag} " +
+            $"({Byte} " +
             $"{nameof(VerticesCount)} = {VerticesCount}, " +
             $"{nameof(NextIndicesBase)} = {NextIndicesBase}, " +
             $"{nameof(StartVertex)} = {StartVertex})";

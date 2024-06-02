@@ -32,7 +32,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
         {
             var meshes = modelBlockItem.Model.GetAllNodes().OfType<Mesh>().ToList();
             foreach (Mesh mesh in meshes)
-                foreach (Vertex vertex in mesh.VisibleVertices)
+                foreach (Vertex vertex in mesh.Vertices)
                     vertex.Byte_F = byte.MaxValue;
         }
     }

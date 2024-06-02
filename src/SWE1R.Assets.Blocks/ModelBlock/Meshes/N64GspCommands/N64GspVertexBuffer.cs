@@ -10,8 +10,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
     {
         #region Properties
 
-        public N64GspVertexCommand GspVertexCommand { get; set; }
-        public N64GspCullDisplayListCommand GspCullDisplayListCommand { get; set; }
+        public N64GspVertexCommand VertexCommand { get; set; }
+        public N64GspCullDisplayListCommand CullDisplayListCommand { get; set; }
         public List<N64GspCommand> TriangleCommands { get; } = new List<N64GspCommand>();
 
         #endregion
@@ -30,10 +30,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         {
             get
             {
-                if (GspVertexCommand != null)
-                    yield return GspVertexCommand; 
-                if (GspCullDisplayListCommand != null)
-                    yield return GspCullDisplayListCommand;
+                if (VertexCommand != null)
+                    yield return VertexCommand; 
+                if (CullDisplayListCommand != null)
+                    yield return CullDisplayListCommand;
                 foreach (N64GspCommand triangleCommand in TriangleCommands)
                     yield return triangleCommand;
             }
@@ -55,12 +55,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         public override string ToString()
         {
             var sb = new StringBuilder();
-            if (GspVertexCommand != null)
+            if (VertexCommand != null)
                 sb.Append("1");
-            if (GspCullDisplayListCommand != null)
+            if (CullDisplayListCommand != null)
                 sb.Append("3");
             sb.Append(' ');
-            sb.Append(string.Join(string.Empty, TriangleCommands.Select(x => x.Tag)));
+            sb.Append(string.Join(string.Empty, TriangleCommands.Select(x => x.Byte)));
             return sb.ToString();
         }
 

@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexIndices
 {
-    [Table("Model_IndicesChunk01")]
-    public class DbIndicesChunk01 : DbBlockItemStructure<N64GspVertexCommand>
+    [Table("Model_N64GspVertexCommand")]
+    public class DbN64GspVertexCommand : DbBlockItemStructure<N64GspVertexCommand>
     {
         public byte VerticesCount { get; set; }
         public int MaxIndex { get; set; }
@@ -26,7 +26,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
 
         public override bool Equals(DbBlockItemStructure<N64GspVertexCommand> other)
         {
-            var _other = (DbIndicesChunk01)other;
+            var _other = (DbN64GspVertexCommand)other;
 
             if (!base.Equals(_other))
                 return false;
@@ -40,8 +40,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
 
         public override bool Equals(object obj)
         {
-            if (obj is DbIndicesChunk01)
-                return this.Equals((DbIndicesChunk01)obj);
+            if (obj is DbN64GspVertexCommand)
+                return this.Equals((DbN64GspVertexCommand)obj);
             else
                 return base.Equals(obj);
         }

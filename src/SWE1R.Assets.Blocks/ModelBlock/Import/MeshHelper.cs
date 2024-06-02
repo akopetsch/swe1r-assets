@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
         public List<FaceHelper> FaceHelpers { get; } =
             new List<FaceHelper>();
 
-        public List<N64GspVertexBuffer> IndicesRanges { get; } =
+        public List<N64GspVertexBuffer> VertexBuffers { get; } =
             new List<N64GspVertexBuffer>();
 
         public IEnumerable<Vertex> Vertices =>
@@ -24,6 +24,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
         public override string ToString() =>
             $"{nameof(FaceHelpers)}.{nameof(FaceHelpers.Count)}={FaceHelpers.Count}, " +
-            $"{nameof(IndicesRanges)}.{nameof(IndicesRanges.Count)}={IndicesRanges.Count}";
+            $"{nameof(VertexBuffers)}.{nameof(VertexBuffers.Count)}={VertexBuffers.Count}";
     }
 }

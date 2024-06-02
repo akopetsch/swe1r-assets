@@ -26,10 +26,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         public DbSet<DbAnimation> Anims { get; set; }
         public DbSet<DbMaterialReference> DoubleMaterials { get; set; }
 
-        public DbSet<DbIndicesChunk01> IndicesChunks01 { get; set; }
-        public DbSet<DbIndicesChunk03> IndicesChunks03 { get; set; }
-        public DbSet<DbIndicesChunk05> IndicesChunks05 { get; set; }
-        public DbSet<DbIndicesChunk06> IndicesChunks06 { get; set; }
+        public DbSet<DbN64GspVertexCommand> N64GspVertexCommands { get; set; }
+        public DbSet<DbN64GspCullDisplayListCommand> N64GspCullDisplayListCommands { get; set; }
+        public DbSet<DbN64Gsp1TriangleCommand> N64Gsp1TriangleCommands { get; set; }
+        public DbSet<DbN64Gsp2TrianglesCommand> N64Gsp2TrianglesCommands { get; set; }
 
         public DbSet<DbMapping> Mappings { get; set; }
         public DbSet<DbMappingChild> MappingChildren { get; set; }
@@ -89,10 +89,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
             Anims.AddRange(dbModelStructures.Anims);
             DoubleMaterials.AddRange(dbModelStructures.DoubleMaterials);
 
-            IndicesChunks01.AddRange(dbModelStructures.IndicesChunks01);
-            IndicesChunks03.AddRange(dbModelStructures.IndicesChunks03);
-            IndicesChunks05.AddRange(dbModelStructures.IndicesChunks05);
-            IndicesChunks06.AddRange(dbModelStructures.IndicesChunks06);
+            N64GspVertexCommands.AddRange(dbModelStructures.N64GspVertexCommands);
+            N64GspCullDisplayListCommands.AddRange(dbModelStructures.N64GspCullDisplayListCommands);
+            N64Gsp1TriangleCommands.AddRange(dbModelStructures.N64Gsp1TriangleCommands);
+            N64Gsp2TrianglesCommands.AddRange(dbModelStructures.N64Gsp2TrianglesCommands);
 
             Mappings.AddRange(dbModelStructures.Mappings);
             MappingChildren.AddRange(dbModelStructures.MappingChildren);

@@ -125,11 +125,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
                 mesh.Material = ImportObjMaterial(objGroup.Material); // TODO: !!!!!! must have a value
 
-                mesh.VisibleVertices = meshHelper.Vertices.ToList();
-                mesh.VisibleIndicesChunks = GetIndicesChunks(meshHelper.IndicesRanges, mesh);
+                mesh.Vertices = meshHelper.Vertices.ToList();
+                mesh.CommandList = GetCommandList(meshHelper.VertexBuffers, mesh);
 
                 mesh.UpdateCounts();
-                mesh.UpdateFacesCountByVisibleIndicesChunks();
+                mesh.UpdateFacesCountByCommandList();
                 mesh.UpdateBounds();
             }
             return meshes;
@@ -205,30 +205,30 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
             foreach (MeshHelper meshHelper in meshHelpers)
             {
-                var currentIndicesRange = new N64GspVertexBuffer();
-                meshHelper.IndicesRanges.Add(currentIndicesRange);
+                var currentVertexBuffer = new N64GspVertexBuffer();
+                meshHelper.VertexBuffers.Add(currentVertexBuffer);
                 int startVertexIndex = 0;
                 foreach (FaceHelper faceHelper in meshHelper.FaceHelpers)
                 {
                     // if exceeds IndicesRange max length
-                    if (currentIndicesRange.NextIndicesBase >= Configuration.IndicesRangeMaxLength)
+                    if (currentVertexBuffer.NextIndicesBase >= Configuration.IndicesRangeMaxLength)
                     {
                         // new IndicesRange
-                        startVertexIndex += currentIndicesRange.NextIndicesBase / 2;
-                        currentIndicesRange = new N64GspVertexBuffer();
-                        meshHelper.IndicesRanges.Add(currentIndicesRange);
+                        startVertexIndex += currentVertexBuffer.NextIndicesBase / 2;
+                        currentVertexBuffer = new N64GspVertexBuffer();
+                        meshHelper.VertexBuffers.Add(currentVertexBuffer);
                     }
 
-                    List<N64GspCommand> indicesChunks = new List<N64GspCommand>();
+                    List<N64GspCommand> triangleCommands = new List<N64GspCommand>();
                     foreach (Triangle triangle in faceHelper.Triangles)
                     {
-                        indicesChunks.Add(new N64Gsp1TriangleCommand() {
+                        triangleCommands.Add(new N64Gsp1TriangleCommand() {
                             Index0 = Convert.ToByte(2 * (triangle.I0 - startVertexIndex)),
                             Index1 = Convert.ToByte(2 * (triangle.I1 - startVertexIndex)),
                             Index2 = Convert.ToByte(2 * (triangle.I2 - startVertexIndex)),
                         });
                     }
-                    currentIndicesRange.TriangleCommands.AddRange(indicesChunks);
+                    currentVertexBuffer.TriangleCommands.AddRange(triangleCommands);
                 }
             }
 
@@ -255,24 +255,24 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             return primitive.GetTriangles();
         }
 
-        private N64GspCommandList GetIndicesChunks(List<N64GspVertexBuffer> indicesRanges, Mesh mesh)
+        private N64GspCommandList GetCommandList(List<N64GspVertexBuffer> vertexBuffers, Mesh mesh)
         {
             int startVertexIndex = 0;
-            var indicesChunks = new N64GspCommandList();
-            foreach (N64GspVertexBuffer range in indicesRanges)
+            var displayList = new N64GspCommandList();
+            foreach (N64GspVertexBuffer vertexBuffer in vertexBuffers)
             {
-                range.GspVertexCommand = new N64GspVertexCommand() {
-                    VerticesCount = Convert.ToByte(range.Indices.Distinct().Count()),
-                    NextIndicesBase = Convert.ToByte(range.NextIndicesBase),
+                vertexBuffer.VertexCommand = new N64GspVertexCommand() {
+                    VerticesCount = Convert.ToByte(vertexBuffer.Indices.Distinct().Count()),
+                    NextIndicesBase = Convert.ToByte(vertexBuffer.NextIndicesBase),
                     StartVertex = new ReferenceByIndex<Vertex>() {
-                        Collection = mesh.VisibleVertices,
+                        Collection = mesh.Vertices,
                         Index = startVertexIndex,
                     }
                 };
-                startVertexIndex += range.NextIndicesBase / 2;
-                indicesChunks.AddRange(range.AllCommands);
+                startVertexIndex += vertexBuffer.NextIndicesBase / 2;
+                displayList.AddRange(vertexBuffer.AllCommands);
             }
-            return indicesChunks;
+            return displayList;
         }
 
         private Vertex ImportObjFaceVertex(ObjFaceVertex objFaceVertex, ObjLoadResult objLoadResult)

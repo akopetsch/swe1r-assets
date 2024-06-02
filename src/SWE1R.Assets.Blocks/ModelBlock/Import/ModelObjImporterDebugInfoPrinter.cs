@@ -36,10 +36,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
         }
 
         private string GetMeshInfoString(int i, Mesh mesh) =>
-            $"[{i}] {GetInfoString(mesh.VisibleVertices.Count, mesh.VisibleIndicesChunks.Count)}";
+            $"[{i}] {GetInfoString(mesh.Vertices.Count, mesh.CommandList.Count)}";
 
         private string GetSumInfoString(MeshGroup3064 meshGroup3064) =>
-            $"total: {GetInfoString(meshGroup3064.Meshes.Sum(m => m.VisibleVertices.Count), meshGroup3064.Meshes.Sum(m => m.VisibleIndicesChunks.Count))}";
+            $"total: {GetInfoString(meshGroup3064.Meshes.Sum(m => m.Vertices.Count), meshGroup3064.Meshes.Sum(m => m.CommandList.Count))}";
 
         private string GetInfoString(int verticesCount, int chunksCount) =>
             $"{nameof(verticesCount)} = {verticesCount}, " +

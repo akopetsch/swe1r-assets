@@ -69,7 +69,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Constructor
 
         public N64Gsp2TrianglesCommand() => 
-            Tag = 6;
+            Byte = 6;
 
         #endregion
 
@@ -77,7 +77,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         public void Serialize(EndianBinaryWriter writer)
         {
-            writer.Write(Tag);
+            writer.Write(Byte);
             writer.Write(Index0);
             writer.Write(Index1);
             writer.Write(Index2);
@@ -91,7 +91,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         {
             // TODO: not called
 
-            Tag = reader.ReadByte();
+            Byte = reader.ReadByte();
             Index0 = reader.ReadByte();
             Index1 = reader.ReadByte();
             Index2 = reader.ReadByte();
@@ -106,7 +106,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({Tag} {Triangle0}, {Triangle1})";
+            $"({Byte} {Triangle0}, {Triangle1})";
 
         #endregion
     }

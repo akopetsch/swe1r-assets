@@ -21,10 +21,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         public List<DbAnimation> Anims { get; set; }
         public List<DbMaterialReference> DoubleMaterials { get; set; }
 
-        public List<DbIndicesChunk01> IndicesChunks01 { get; set; }
-        public List<DbIndicesChunk03> IndicesChunks03 { get; set; }
-        public List<DbIndicesChunk05> IndicesChunks05 { get; set; }
-        public List<DbIndicesChunk06> IndicesChunks06 { get; set; }
+        public List<DbN64GspVertexCommand> N64GspVertexCommands { get; set; }
+        public List<DbN64GspCullDisplayListCommand> N64GspCullDisplayListCommands { get; set; }
+        public List<DbN64Gsp1TriangleCommand> N64Gsp1TriangleCommands { get; set; }
+        public List<DbN64Gsp2TrianglesCommand> N64Gsp2TrianglesCommands { get; set; }
 
         public List<DbMapping> Mappings { get; set; }
         public List<DbMappingChild> MappingChildren { get; set; }
@@ -67,10 +67,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Anims = GetStructures(context.Anims);
             DoubleMaterials = GetStructures(context.DoubleMaterials);
 
-            IndicesChunks01 = GetStructures(context.IndicesChunks01);
-            IndicesChunks03 = GetStructures(context.IndicesChunks03);
-            IndicesChunks05 = GetStructures(context.IndicesChunks05);
-            IndicesChunks06 = GetStructures(context.IndicesChunks06);
+            N64GspVertexCommands = GetStructures(context.N64GspVertexCommands);
+            N64GspCullDisplayListCommands = GetStructures(context.N64GspCullDisplayListCommands);
+            N64Gsp1TriangleCommands = GetStructures(context.N64Gsp1TriangleCommands);
+            N64Gsp2TrianglesCommands = GetStructures(context.N64Gsp2TrianglesCommands);
 
             Mappings = GetStructures(context.Mappings);
             MappingChildren = GetStructures(context.MappingChildren);
@@ -102,10 +102,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Anims = GetStructures<Animation, DbAnimation>(g);
             DoubleMaterials = GetStructures<MaterialReference, DbMaterialReference>(g);
 
-            IndicesChunks01 = GetStructures<N64GspVertexCommand, DbIndicesChunk01>(g);
-            IndicesChunks03 = GetStructures<N64GspCullDisplayListCommand, DbIndicesChunk03>(g);
-            IndicesChunks05 = GetStructures<N64Gsp1TriangleCommand, DbIndicesChunk05>(g);
-            IndicesChunks06 = GetStructures<N64Gsp2TrianglesCommand, DbIndicesChunk06>(g);
+            N64GspVertexCommands = GetStructures<N64GspVertexCommand, DbN64GspVertexCommand>(g);
+            N64GspCullDisplayListCommands = GetStructures<N64GspCullDisplayListCommand, DbN64GspCullDisplayListCommand>(g);
+            N64Gsp1TriangleCommands = GetStructures<N64Gsp1TriangleCommand, DbN64Gsp1TriangleCommand>(g);
+            N64Gsp2TrianglesCommands = GetStructures<N64Gsp2TrianglesCommand, DbN64Gsp2TrianglesCommand>(g);
 
             Mappings = GetStructures<Mapping, DbMapping>(g);
             MappingChildren = GetStructures<MappingChild, DbMappingChild>(g);
@@ -137,10 +137,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             if (!Anims.SequenceEqual(other.Anims)) return false;
             if (!DoubleMaterials.SequenceEqual(other.DoubleMaterials)) return false;
 
-            if (!IndicesChunks01.SequenceEqual(other.IndicesChunks01)) return false;
-            if (!IndicesChunks03.SequenceEqual(other.IndicesChunks03)) return false;
-            if (!IndicesChunks05.SequenceEqual(other.IndicesChunks05)) return false;
-            if (!IndicesChunks06.SequenceEqual(other.IndicesChunks06)) return false;
+            if (!N64GspVertexCommands.SequenceEqual(other.N64GspVertexCommands)) return false;
+            if (!N64GspCullDisplayListCommands.SequenceEqual(other.N64GspCullDisplayListCommands)) return false;
+            if (!N64Gsp1TriangleCommands.SequenceEqual(other.N64Gsp1TriangleCommands)) return false;
+            if (!N64Gsp2TrianglesCommands.SequenceEqual(other.N64Gsp2TrianglesCommands)) return false;
 
             if (!Mappings.SequenceEqual(other.Mappings)) return false;
             if (!MappingChildren.SequenceEqual(other.MappingChildren)) return false;

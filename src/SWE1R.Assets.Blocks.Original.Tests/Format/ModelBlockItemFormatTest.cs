@@ -60,7 +60,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
         private void AssertVerticesCount(ModelBlockItem modelBlockItem)
         {
             var meshes = modelBlockItem.Model.GetAllNodes().OfType<Mesh>().ToList();
-            int verticesCount = meshes.Sum(m => m.VisibleVerticesCount);
+            int verticesCount = meshes.Sum(m => m.VerticesCount);
         }
 
         private void AssertReferenceCounts(ByteSerializerContext context)

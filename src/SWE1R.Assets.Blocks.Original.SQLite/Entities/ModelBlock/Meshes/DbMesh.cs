@@ -23,7 +23,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         public int P_Unk_Array { get; set; }
         public int P_CollisionVertices { get; set; }
         public byte[] PaddingGarbage { get; set; }
-        public int P_IndicesChunks { get; set; }
+        public int P_CommandList { get; set; }
         public int P_Vertices { get; set; }
         public int CollisionVerticesCount { get; set; }
         public int VerticesCount { get; set; }
@@ -55,11 +55,11 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
             PaddingGarbage = m.CollisionVertices?.PaddingGarbage;
 
-            P_IndicesChunks = GetPropertyPointer(node, nameof(Mesh.VisibleIndicesChunks));
-            P_Vertices = GetPropertyPointer(node, nameof(Mesh.VisibleVertices));
+            P_CommandList = GetPropertyPointer(node, nameof(Mesh.CommandList));
+            P_Vertices = GetPropertyPointer(node, nameof(Mesh.Vertices));
 
             CollisionVerticesCount = m.CollisionVerticesCount;
-            VerticesCount = m.VisibleVerticesCount;
+            VerticesCount = m.VerticesCount;
             Unk_Count = m.Unk_Count;
         }
 
@@ -90,7 +90,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
             if (!EqualsPaddingGarbage(PaddingGarbage, _other.PaddingGarbage)) return false;
 
-            if (P_IndicesChunks != _other.P_IndicesChunks) return false;
+            if (P_CommandList != _other.P_CommandList) return false;
             if (P_Vertices != _other.P_Vertices) return false;
 
             if (CollisionVerticesCount != _other.CollisionVerticesCount) return false;
@@ -123,7 +123,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
                 HashCode.Combine(Bounds_Min_X, Bounds_Min_Y, Bounds_Min_Z),
                 HashCode.Combine(Bounds_Max_X, Bounds_Max_Y, Bounds_Max_Z),
                 HashCode.Combine(FacesCount, PrimitiveType, P_FacesVertexCounts, P_Unk_Array, 
-                    P_CollisionVertices, PaddingGarbage, P_IndicesChunks, P_Vertices),
+                    P_CollisionVertices, PaddingGarbage, P_CommandList, P_Vertices),
                 HashCode.Combine(CollisionVerticesCount, VerticesCount, Unk_Count));
     }
 }

@@ -6,27 +6,33 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexIndices
 {
-    [Table("Model_IndicesChunk05")]
-    public class DbIndicesChunk05 : DbBlockItemStructure<N64Gsp1TriangleCommand>
+    [Table("Model_N64Gsp2TrianglesCommand")]
+    public class DbN64Gsp2TrianglesCommand : DbBlockItemStructure<N64Gsp2TrianglesCommand>
     {
         public byte Index0 { get; set; }
         public byte Index1 { get; set; }
         public byte Index2 { get; set; }
+        public byte Index3 { get; set; }
+        public byte Index4 { get; set; }
+        public byte Index5 { get; set; }
 
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
 
-            var c = (N64Gsp1TriangleCommand)node.Value;
+            var c = (N64Gsp2TrianglesCommand)node.Value;
 
             Index0 = c.Index0;
             Index1 = c.Index1;
             Index2 = c.Index2;
+            Index3 = c.Index3;
+            Index4 = c.Index4;
+            Index5 = c.Index5;
         }
 
-        public override bool Equals(DbBlockItemStructure<N64Gsp1TriangleCommand> other)
+        public override bool Equals(DbBlockItemStructure<N64Gsp2TrianglesCommand> other)
         {
-            var _other = (DbIndicesChunk05)other;
+            var _other = (DbN64Gsp2TrianglesCommand)other;
 
             if (!base.Equals(_other))
                 return false;
@@ -34,19 +40,24 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
             if (Index0 != _other.Index0) return false;
             if (Index1 != _other.Index1) return false;
             if (Index2 != _other.Index2) return false;
+            if (Index3 != _other.Index3) return false;
+            if (Index4 != _other.Index4) return false;
+            if (Index5 != _other.Index5) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbIndicesChunk05)
-                return this.Equals((DbIndicesChunk05)obj);
+            if (obj is DbN64Gsp2TrianglesCommand)
+                return this.Equals((DbN64Gsp2TrianglesCommand)obj);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), Index0, Index1, Index2);
+            HashCode.Combine(base.GetHashCode(), 
+                Index0, Index1, Index2, 
+                Index3, Index4, Index5);
     }
 }

@@ -27,7 +27,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         [RecordTypeIdentifier((byte)05, typeof(N64Gsp1TriangleCommand))]
         [RecordTypeIdentifier((byte)06, typeof(N64Gsp2TrianglesCommand))]
         [Order(0)]
-        public byte Tag { get; set; }
+        public byte Byte { get; set; }
 
         #endregion
 
