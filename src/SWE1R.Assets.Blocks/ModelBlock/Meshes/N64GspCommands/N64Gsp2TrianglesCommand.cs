@@ -79,7 +79,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         public override void Serialize(EndianBinaryWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(Byte);
             writer.Write(Index0);
             writer.Write(Index1);
             writer.Write(Index2);
@@ -93,7 +92,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         {
             // TODO: not called
             base.Deserialize(reader);
-            Byte = reader.ReadByte();
             Index0 = reader.ReadByte();
             Index1 = reader.ReadByte();
             Index2 = reader.ReadByte();

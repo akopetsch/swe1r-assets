@@ -83,7 +83,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         {
             // TODO: not called
             base.Deserialize(reader);
-            Byte = reader.ReadByte();
             Index0 = reader.ReadByte();
             Index1 = reader.ReadByte();
             Index2 = reader.ReadByte();
