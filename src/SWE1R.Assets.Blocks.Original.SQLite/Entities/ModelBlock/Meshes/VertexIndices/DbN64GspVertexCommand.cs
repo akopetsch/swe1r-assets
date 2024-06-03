@@ -20,7 +20,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
             var c = (N64GspVertexCommand)node.Value;
 
             VerticesCount = c.VerticesCount;
-            MaxIndex = c.NextIndicesBase;
+            MaxIndex = c.V0PlusN;
             P_V = GetValuePosition(node.Graph, c.V.Value);
         }
 

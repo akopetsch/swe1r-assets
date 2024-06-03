@@ -70,7 +70,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
                 var triangleCommands = new List<Triangle>();
                 if (command is N64GspVertexCommand vertexCommand)
                 {
-                    stepIndex = vertexCommand.NextIndicesBase / 2;
+                    stepIndex = vertexCommand.V0PlusN / 2;
                     baseIndex += stepIndex;
                 }
                 else if (command is N64Gsp1TriangleCommand triangleCommand)

@@ -264,7 +264,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             {
                 vertexBuffer.VertexCommand = new N64GspVertexCommand() {
                     VerticesCount = Convert.ToByte(vertexBuffer.Indices.Distinct().Count()),
-                    NextIndicesBase = Convert.ToByte(vertexBuffer.NextIndicesBase),
+                    V0PlusN = Convert.ToByte(vertexBuffer.NextIndicesBase),
                     V = new ReferenceByIndex<Vertex>() {
                         Collection = mesh.Vertices,
                         Index = v0,

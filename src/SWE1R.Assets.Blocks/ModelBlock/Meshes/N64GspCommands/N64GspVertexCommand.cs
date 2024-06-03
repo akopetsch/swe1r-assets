@@ -26,7 +26,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         [Order(0)]
         private short VerticesCountPadded { get; set; } // TODO: implement BitFieldAttribute in BinarySerialization
         [Order(1)]
-        public byte NextIndicesBase { get; set; } // v0_plus_n
+        public byte V0PlusN { get; set; }
         [Order(2)]
         public ReferenceByIndex<Vertex> V { get; set; }
 
@@ -54,7 +54,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         public override string ToString() =>
             $"({Byte} " +
             $"{nameof(VerticesCount)} = {VerticesCount}, " +
-            $"{nameof(NextIndicesBase)} = {NextIndicesBase}, " +
+            $"{nameof(V0PlusN)} = {V0PlusN}, " +
             $"{nameof(V)} = {V})";
 
         #endregion

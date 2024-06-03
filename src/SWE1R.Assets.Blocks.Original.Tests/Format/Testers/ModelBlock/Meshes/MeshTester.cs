@@ -113,7 +113,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                             Assert.True(vertexCommand.VerticesCount == distinctIndicesCount - v0);
 
                         // NextIndicesBase
-                        Assert.True(vertexCommand.NextIndicesBase == vertexBuffer.NextIndicesBase);
+                        Assert.True(vertexCommand.V0PlusN == vertexBuffer.NextIndicesBase);
 
                         // TODO: V0
                         Assert.True(vertexCommand.V.Collection == Value.Vertices);
