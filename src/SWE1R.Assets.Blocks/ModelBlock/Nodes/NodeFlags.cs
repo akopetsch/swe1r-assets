@@ -2,6 +2,14 @@
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
 {
+    /// <summary>
+    /// See also:
+    /// <list type="bullet">
+    ///   <item>
+    ///     <see href="https://github.com/akopetsch/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types_enums.h#L64">
+    ///       github.com - akopetsch/SW_RACER_RE - types_enums.h - swrModel_NodeType</see></item>
+    /// </list>
+    /// </summary>
     public enum NodeFlags : uint
     {
         MeshGroupNode =
