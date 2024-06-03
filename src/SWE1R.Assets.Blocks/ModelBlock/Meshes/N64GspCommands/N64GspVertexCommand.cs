@@ -36,8 +36,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         #region Properties (C struct)
 
         public byte N { get => Convert.ToByte(NPadded >> NPadding); set => NPadded = (short)(value << NPadding); }
-        public byte V0PlusN { get => (byte)(V0PlusNPadded >> 1); set => V0PlusNPadded = Convert.ToByte(value << 1); }
         public byte V0 { get => Convert.ToByte(V.Index); set => V.Index = value; }
+        public byte V0PlusN { get => (byte)(V0PlusNPadded >> 1); set => V0PlusNPadded = Convert.ToByte(value << 1); }
 
         #endregion
 
@@ -56,8 +56,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
             };
 
             N = Convert.ToByte(n);
-            V0PlusN = Convert.ToByte(v0PlusN);
             V0 = Convert.ToByte(v0);
+            V0PlusN = Convert.ToByte(v0PlusN);
         }
 
         #endregion
@@ -66,7 +66,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         public override string ToString() =>
             GetString(
-                new PropertyNameAndValue(nameof(N), N));
+                new PropertyNameAndValue(nameof(N), N),
+                new PropertyNameAndValue(nameof(V0), V0));
 
         #endregion
     }
