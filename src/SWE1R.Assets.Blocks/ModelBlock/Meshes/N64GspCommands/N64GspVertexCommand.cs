@@ -17,14 +17,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
     {
         #region Fields (const)
 
-        internal const int VerticesCountPadding = 4;
+        private const int VerticesCountPadding = 4;
 
         #endregion
 
         #region Properties (serialized)
 
         [Order(0)]
-        internal short VerticesCountPadded { get; set; } // TODO: implement BitFieldAttribute in BinarySerialization
+        private short VerticesCountPadded { get; set; } // TODO: implement BitFieldAttribute in BinarySerialization
         [Order(1)]
         public byte NextIndicesBase { get; set; } // v0_plus_n
         [Order(2)]

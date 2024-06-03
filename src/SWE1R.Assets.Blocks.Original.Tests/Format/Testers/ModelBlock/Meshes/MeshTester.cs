@@ -111,7 +111,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                             Assert.True(vertexCommand.VerticesCount == distinctIndicesCount);
                         else
                             Assert.True(vertexCommand.VerticesCount == distinctIndicesCount - startVertexIndex);
-                        Assert.True(vertexCommand.VerticesCountPadded >= (1 << N64GspVertexCommand.VerticesCountPadding));
 
                         // NextIndicesBase
                         Assert.True(vertexCommand.NextIndicesBase == vertexBuffer.NextIndicesBase);
