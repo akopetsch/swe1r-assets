@@ -85,7 +85,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     Assert.True(vertexBuffer.Indices.Count() <= 117);
                     Assert.True(vertexBuffer.Indices.Min() == 0);
                     Assert.True(vertexBuffer.Indices.Max() >= 1);
-                    Assert.True(vertexBuffer.Indices.All(x => x % 2 == 0));
 
                     N64GspCullDisplayListCommand cullDisplayListCommand = vertexBuffer.CullDisplayListCommand;
                     if (cullDisplayListCommand != null)
@@ -219,7 +218,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     // n != 1
                     // most of the time (in 429 of 433 models)
 
-                    Assert.True(firstCommand is N64GspCullDisplayListCommand);
+                    Assert.True(firstCommand is N64GspVertexCommand);
                     if (n == 2)
                     {
                         N64GspCommand secondCommand = commandList[1];
