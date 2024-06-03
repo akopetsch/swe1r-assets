@@ -2,6 +2,7 @@
 
 using ByteSerialization.Attributes;
 using System;
+using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 {
@@ -28,7 +29,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         [Order(1)]
         private byte V0PlusNPadded { get; set; }
         [Order(2)]
-        public ReferenceByIndex<Vertex> V { get; set; }
+        internal ReferenceByIndex<Vertex> V { get; set; }
 
         #endregion
 
@@ -36,6 +37,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         public byte N { get => Convert.ToByte(NPadded >> NPadding); set => NPadded = (short)(value << NPadding); }
         public byte V0PlusN { get => (byte)(V0PlusNPadded >> 1); set => V0PlusNPadded = Convert.ToByte(value << 1); }
+        public byte V0 { get => Convert.ToByte(V.Index); set => V.Index = value; }
 
         #endregion
 
@@ -44,6 +46,19 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         public N64GspVertexCommand() : 
             base(N64GspCommandByte.G_VTX)
         { }
+
+        public N64GspVertexCommand(int n, int v0PlusN, int v0, IList<Vertex> vertices) :
+            this()
+        {
+            V = new ReferenceByIndex<Vertex>()
+            {
+                Collection = vertices,
+            };
+
+            N = Convert.ToByte(n);
+            V0PlusN = Convert.ToByte(v0PlusN);
+            V0 = Convert.ToByte(v0);
+        }
 
         #endregion
 

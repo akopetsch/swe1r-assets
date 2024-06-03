@@ -75,6 +75,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
             base(N64GspCommandByte.G_TRI1)
         { }
 
+        public N64Gsp1TriangleCommand(byte v0, byte v1, byte v2) :
+            this()
+        {
+            V0 = v0;
+            V1 = v1;
+            V2 = v2;
+        }
+
         #endregion
 
         #region Methods (: ICustomSerializable)

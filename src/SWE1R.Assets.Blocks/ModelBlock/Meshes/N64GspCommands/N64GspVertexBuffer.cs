@@ -40,16 +40,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         #endregion
 
-        #region Constructor
-
-        public N64GspVertexBuffer()
-        {
-
-        }
-
-        #endregion
-
-        #region Methods
+        #region Methods (: object)
 
         public override string ToString()
         {

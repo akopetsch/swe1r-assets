@@ -19,19 +19,23 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
     {
         #region Fields
 
-        private static readonly byte[] PaddingBytes = new byte[6];
+        private static readonly byte[] PaddingBytes1 = new byte[2];
+        private static readonly byte[] PaddingBytes2 = new byte[3];
 
         #endregion
 
         #region Properties (serialized)
 
-        [Order(0), Offset(7)]
+        [Order(0), Offset(3)]
+        private byte V0Padded { get; set; }
+        [Order(1), Offset(7)]
         private byte VNPadded { get; set; }
 
         #endregion
 
         #region Properties (C struct)
 
+        public byte V0 { get => (byte)(V0Padded >> 1); set => V0Padded = Convert.ToByte(value << 1); }
         public byte VN { get => (byte)(VNPadded >> 1); set => VNPadded = Convert.ToByte(value << 1); }
 
         #endregion
@@ -42,6 +46,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
             base(N64GspCommandByte.G_CULLDL)
         { }
 
+        public N64GspCullDisplayListCommand(byte v0, byte vn) :
+            this()
+        {
+            V0 = v0;
+            VN = vn;
+        }
+
         #endregion
 
         #region Methods (: ICustomSerializable)
@@ -49,7 +60,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         public override void Serialize(EndianBinaryWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(PaddingBytes);
+            writer.Write(PaddingBytes1);
+            writer.Write(V0Padded);
+            writer.Write(PaddingBytes2);
             writer.Write(VNPadded);
         }
 
@@ -57,7 +70,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         {
             // TODO: not called
             base.Deserialize(reader);
-            reader.ReadBytes(PaddingBytes.Length);
+            reader.ReadBytes(PaddingBytes1.Length);
+            V0Padded = reader.ReadByte();
+            reader.ReadBytes(PaddingBytes2.Length);
             VNPadded = reader.ReadByte();
         }
 
@@ -67,6 +82,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         public override string ToString() =>
             GetString(
+                new PropertyNameAndValue(nameof(V0), V0),
                 new PropertyNameAndValue(nameof(VN), VN));
 
         #endregion

@@ -222,11 +222,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     var trianglesCommands = new List<IN64GspTrianglesCommand>();
                     foreach (Triangle triangle in faceHelper.Triangles)
                     {
-                        trianglesCommands.Add(new N64Gsp1TriangleCommand() {
-                            V0 = Convert.ToByte(triangle.I0 - v0),
-                            V1 = Convert.ToByte(triangle.I1 - v0),
-                            V2 = Convert.ToByte(triangle.I2 - v0),
-                        });
+
+                        trianglesCommands.Add(new N64Gsp1TriangleCommand(
+                            Convert.ToByte(triangle.I0 - v0),
+                            Convert.ToByte(triangle.I1 - v0),
+                            Convert.ToByte(triangle.I2 - v0)
+                            ));
                     }
                     currentVertexBuffer.TrianglesCommands.AddRange(trianglesCommands);
                 }
