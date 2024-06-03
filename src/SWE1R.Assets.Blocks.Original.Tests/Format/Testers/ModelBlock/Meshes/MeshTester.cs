@@ -66,8 +66,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     if (i > 0)
                     {
                         N64GspVertexBuffer previousVertexBuffer = vertexBuffersWithVertexCommands[i - 1];
-                        int currentV0 = currentVertexBuffer.VertexCommand.V.Index.Value;
-                        int previousV0 = previousVertexBuffer.VertexCommand.V.Index.Value;
+                        int currentV0 = currentVertexBuffer.VertexCommand.V0;
+                        int previousV0 = previousVertexBuffer.VertexCommand.V0;
                         Assert.True(currentV0 > previousV0);
                     }
                 }
@@ -100,7 +100,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     N64GspVertexCommand vertexCommand = vertexBuffer.VertexCommand;
                     if (vertexCommand != null)
                     {
-                        int v0 = vertexCommand.V.Index.Value;
+                        int v0 = vertexCommand.V0;
                         int distinctIndicesCount = vertexBuffer.Indices.Distinct().Count();
 
                         // N
