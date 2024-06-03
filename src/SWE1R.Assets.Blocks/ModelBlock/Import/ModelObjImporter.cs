@@ -262,14 +262,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             var commandList = new N64GspCommandList();
             foreach (N64GspVertexBuffer vertexBuffer in vertexBuffers)
             {
-                vertexBuffer.VertexCommand = new N64GspVertexCommand() {
-                    N = Convert.ToByte(vertexBuffer.Indices.Distinct().Count()),
-                    V0PlusN = Convert.ToByte(vertexBuffer.NextIndicesBase),
-                    V = new ReferenceByIndex<Vertex>() {
-                        Collection = mesh.Vertices,
-                        Index = v0,
-                    }
-                };
+                int n = Convert.ToByte(vertexBuffer.Indices.Distinct().Count());
+                int v0PlusN = Convert.ToByte(vertexBuffer.NextIndicesBase);
+                vertexBuffer.VertexCommand = new N64GspVertexCommand(n, v0PlusN, v0, mesh.Vertices);
                 v0 += vertexBuffer.NextIndicesBase;
                 commandList.AddRange(vertexBuffer.AllCommands);
             }
