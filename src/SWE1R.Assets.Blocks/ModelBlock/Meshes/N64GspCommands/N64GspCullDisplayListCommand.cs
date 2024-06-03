@@ -22,10 +22,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         #endregion
 
-        #region Properties
+        #region Properties (serialized)
 
         [Order(0), Offset(7)]
-        public byte VN { get; set; }
+        private byte VNPadded { get; set; }
+
+        #endregion
+
+        #region Properties (C struct)
+
+        public byte VN { get => (byte)(VNPadded >> 1); set => VNPadded = (byte)(value << 1); }
 
         #endregion
 
@@ -43,7 +49,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         {
             base.Serialize(writer);
             writer.Write(PaddingBytes);
-            writer.Write(VN);
+            writer.Write(VNPadded);
         }
 
         public override void Deserialize(EndianBinaryReader reader)
@@ -51,7 +57,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
             // TODO: not called
             base.Deserialize(reader);
             reader.ReadBytes(PaddingBytes.Length);
-            VN = reader.ReadByte();
+            VNPadded = reader.ReadByte();
         }
 
         #endregion
