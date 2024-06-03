@@ -1,5 +1,8 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+
 namespace SWE1R.Assets.Blocks.Images.ImageSharp
 {
     public static class ImageRgba32Extensions
