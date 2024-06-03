@@ -12,7 +12,15 @@ using System.Linq;
 namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
 {
     /// <summary>
-    /// <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L85">SWR_AltN_Header</see>
+    /// See also:
+    /// <list type="bullet">
+    ///   <item>
+    ///     <see href="https://github.com/akopetsch/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types.h#L1263">
+    ///       github.com - akopetsch/SW_RACER_RE - types.h - swrModel_Node</see></item>
+    ///   <item>
+    ///     <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L85">
+    ///       github.com - akopetsch/Sw_Racer - Swr_Model.h - SWR_AltN_Header</see></item>
+    /// </list>
     /// </summary>
     [Alignment(typeof(AlignmentHelper))]
     public abstract class FlaggedNode : INode
