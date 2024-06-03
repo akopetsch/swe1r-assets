@@ -9,6 +9,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
     [Table("Model_N64GspCullDisplayListCommand")]
     public class DbN64GspCullDisplayListCommand : DbBlockItemStructure<N64GspCullDisplayListCommand>
     {
+        public byte V0 { get; set; }
         public byte VN { get; set; }
 
         public override void CopyFrom(Node node)
@@ -17,6 +18,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
 
             var c = (N64GspCullDisplayListCommand)node.Value;
 
+            V0 = c.V0;
             VN = c.VN;
         }
 
@@ -27,6 +29,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
             if (!base.Equals(_other))
                 return false;
 
+            if (V0 != _other.V0) return false;
             if (VN != _other.VN) return false;
 
             return true;
@@ -41,6 +44,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), VN);
+            HashCode.Combine(base.GetHashCode(),
+                V0, VN);
     }
 }

@@ -47,6 +47,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), V0, V1, V2);
+            HashCode.Combine(base.GetHashCode(),
+                V0, V1, V2);
     }
 }
