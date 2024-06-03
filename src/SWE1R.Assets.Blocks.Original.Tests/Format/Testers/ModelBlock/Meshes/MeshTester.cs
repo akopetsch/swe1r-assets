@@ -122,7 +122,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         {
                             Assert.True(vertexBuffers.Count > 1);
                             Assert.True(v0 ==
-                                vertexBuffers.Take(i).Select(r => r.NextIndicesBase / 2).Sum());
+                                vertexBuffers.Take(i).Select(r => r.NextIndicesBase).Sum());
                             // N64GspCullDisplayListCommand can be null
                         }
                         else // i == 0

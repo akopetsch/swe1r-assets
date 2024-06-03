@@ -27,11 +27,19 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         #region Properties
 
         [Order(0)]
-        public byte V0 { get; set; }
+        private byte V0Padded { get; set; }
         [Order(1)]
-        public byte V1 { get; set; }
+        private byte V1Padded { get; set; }
         [Order(2)]
-        public byte V2 { get; set; }
+        private byte V2Padded { get; set; }
+
+        #endregion
+
+        #region Properties (C struct)
+
+        public byte V0 { get => (byte)(V0Padded >> 1); set => V0Padded = (byte)(value << 1); }
+        public byte V1 { get => (byte)(V1Padded >> 1); set => V1Padded = (byte)(value << 1); }
+        public byte V2 { get => (byte)(V2Padded >> 1); set => V2Padded = (byte)(value << 1); }
 
         #endregion
 
@@ -73,9 +81,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         public override void Serialize(EndianBinaryWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(V0);
-            writer.Write(V1);
-            writer.Write(V2);
+            writer.Write(V0Padded);
+            writer.Write(V1Padded);
+            writer.Write(V2Padded);
             writer.Write(PaddingBytes);
         }
 
@@ -83,9 +91,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         {
             // TODO: not called
             base.Deserialize(reader);
-            V0 = reader.ReadByte();
-            V1 = reader.ReadByte();
-            V2 = reader.ReadByte();
+            V0Padded = reader.ReadByte();
+            V1Padded = reader.ReadByte();
+            V2Padded = reader.ReadByte();
             reader.ReadBytes(PaddingBytes.Length);
         }
 

@@ -26,18 +26,29 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         #region Properties (serialized)
 
-        [Order(0)] 
-        public byte V00 { get; set; }
+        [Order(0)]
+        private byte V00Padded { get; set; }
         [Order(1)]
-        public byte V01 { get; set; }
+        private byte V01Padded { get; set; }
         [Order(2)]
-        public byte V02 { get; set; }
+        private byte V02Padded { get; set; }
         [Order(3), Offset(5)]
-        public byte V10 { get; set; }
+        private byte V10Padded { get; set; }
         [Order(4)]
-        public byte V11 { get; set; }
+        private byte V11Padded { get; set; }
         [Order(5)]
-        public byte V12 { get; set; }
+        private byte V12Padded { get; set; }
+
+        #endregion
+
+        #region Properties (C struct)
+
+        public byte V00 { get => (byte)(V00Padded >> 1); set => V00Padded = (byte)(value << 1); }
+        public byte V01 { get => (byte)(V01Padded >> 1); set => V01Padded = (byte)(value << 1); }
+        public byte V02 { get => (byte)(V02Padded >> 1); set => V02Padded = (byte)(value << 1); }
+        public byte V10 { get => (byte)(V10Padded >> 1); set => V10Padded = (byte)(value << 1); }
+        public byte V11 { get => (byte)(V11Padded >> 1); set => V11Padded = (byte)(value << 1); }
+        public byte V12 { get => (byte)(V12Padded >> 1); set => V12Padded = (byte)(value << 1); }
 
         #endregion
 
@@ -85,26 +96,26 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         public override void Serialize(EndianBinaryWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(V00);
-            writer.Write(V01);
-            writer.Write(V02);
+            writer.Write(V00Padded);
+            writer.Write(V01Padded);
+            writer.Write(V02Padded);
             writer.Write(PaddingByte);
-            writer.Write(V10);
-            writer.Write(V11);
-            writer.Write(V12);
+            writer.Write(V10Padded);
+            writer.Write(V11Padded);
+            writer.Write(V12Padded);
         }
 
         public override void Deserialize(EndianBinaryReader reader)
         {
             // TODO: not called
             base.Deserialize(reader);
-            V00 = reader.ReadByte();
-            V01 = reader.ReadByte();
-            V02 = reader.ReadByte();
+            V00Padded = reader.ReadByte();
+            V01Padded = reader.ReadByte();
+            V02Padded = reader.ReadByte();
             reader.Read(PaddingByte.GetType());
-            V10 = reader.ReadByte();
-            V11 = reader.ReadByte();
-            V12 = reader.ReadByte();
+            V10Padded = reader.ReadByte();
+            V11Padded = reader.ReadByte();
+            V12Padded = reader.ReadByte();
         }
 
         #endregion

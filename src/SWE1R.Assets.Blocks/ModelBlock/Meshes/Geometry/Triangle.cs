@@ -56,13 +56,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry
             I2 += summand;
         }
 
-        public void DivideIndicesBy(int divisor)
-        {
-            I0 /= divisor;
-            I1 /= divisor;
-            I2 /= divisor;
-        }
-
         #endregion
     }
 }

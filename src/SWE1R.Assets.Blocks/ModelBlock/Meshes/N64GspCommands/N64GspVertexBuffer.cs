@@ -20,9 +20,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         #region Properties (helper)
 
         public int NextIndicesBase =>
-            Indices.Any() ? (Indices.Max() + 2) : 2;
-            // (+)2 because value is double the actual index 
-            // TODO: move comment, do not hardcode number 2
+            Indices.Any() ? (Indices.Max() + 1) : 1;
 
         public IEnumerable<int> Indices => 
             TrianglesCommands.SelectMany(c => c.Indices);

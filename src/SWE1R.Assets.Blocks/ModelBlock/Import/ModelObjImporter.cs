@@ -214,7 +214,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     if (currentVertexBuffer.NextIndicesBase >= Configuration.IndicesRangeMaxLength)
                     {
                         // new IndicesRange
-                        v0 += currentVertexBuffer.NextIndicesBase / 2;
+                        v0 += currentVertexBuffer.NextIndicesBase;
                         currentVertexBuffer = new N64GspVertexBuffer();
                         meshHelper.VertexBuffers.Add(currentVertexBuffer);
                     }
@@ -223,9 +223,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     foreach (Triangle triangle in faceHelper.Triangles)
                     {
                         trianglesCommands.Add(new N64Gsp1TriangleCommand() {
-                            V0 = Convert.ToByte(2 * (triangle.I0 - v0)),
-                            V1 = Convert.ToByte(2 * (triangle.I1 - v0)),
-                            V2 = Convert.ToByte(2 * (triangle.I2 - v0)),
+                            V0 = Convert.ToByte(triangle.I0 - v0),
+                            V1 = Convert.ToByte(triangle.I1 - v0),
+                            V2 = Convert.ToByte(triangle.I2 - v0),
                         });
                     }
                     currentVertexBuffer.TrianglesCommands.AddRange(trianglesCommands);
@@ -269,7 +269,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                         Index = v0,
                     }
                 };
-                v0 += vertexBuffer.NextIndicesBase / 2;
+                v0 += vertexBuffer.NextIndicesBase;
                 commandList.AddRange(vertexBuffer.AllCommands);
             }
             return commandList;

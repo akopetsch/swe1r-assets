@@ -70,7 +70,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
                 var triangleCommands = new List<Triangle>();
                 if (command is N64GspVertexCommand vertexCommand)
                 {
-                    stepIndex = vertexCommand.V0PlusN / 2;
+                    stepIndex = vertexCommand.V0PlusN;
                     baseIndex += stepIndex;
                 }
                 else if (command is N64Gsp1TriangleCommand triangleCommand)
@@ -82,7 +82,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
                     triangleCommands.Add(trianglesCommand.Triangle0);
                     triangleCommands.Add(trianglesCommand.Triangle1);
                 }
-                triangleCommands.ForEach(x => x.DivideIndicesBy(2));
                 triangleCommands.ForEach(x => x.AddToIndices(baseIndex - stepIndex));
                 triangles.AddRange(triangleCommands);
             }

@@ -26,19 +26,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         [Order(0)]
         private short NPadded { get; set; } // TODO: implement BitFieldAttribute in BinarySerialization
         [Order(1)]
-        public byte V0PlusN { get; set; }
+        private byte V0PlusNPadded { get; set; }
         [Order(2)]
         public ReferenceByIndex<Vertex> V { get; set; }
 
         #endregion
 
-        #region Properties (abstraction)
+        #region Properties (C struct)
 
-        public byte N
-        {
-            get => Convert.ToByte(NPadded >> NPadding);
-            set => NPadded = (short)(value << NPadding);
-        }
+        public byte N { get => Convert.ToByte(NPadded >> NPadding); set => NPadded = (short)(value << NPadding); }
+        public byte V0PlusN { get => (byte)(V0PlusNPadded >> 1); set => V0PlusNPadded = (byte)(value << 1); }
 
         #endregion
 
