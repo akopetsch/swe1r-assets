@@ -10,7 +10,7 @@ using System;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 {
-    public class MeshGroupOrShorts
+    public class MeshGroupNodeOrShorts
     {
         // TODO: reorder properties
         [Length(typeof(LengthHelper))]
@@ -18,7 +18,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         [Reference(ReferenceHandling.HighPriority)]
         [Order(0)] public object Value { get; private set; }
 
-        public MeshGroupNode MeshGroup
+        public MeshGroupNode MeshGroupNode
         {
             get => Value as MeshGroupNode;
             set => Value = value;

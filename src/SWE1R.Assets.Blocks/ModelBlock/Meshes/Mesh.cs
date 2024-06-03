@@ -72,7 +72,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// <para>Offset: 0x28</para>
         /// </summary>
         [Order(7)]
-        public MeshGroupOrShorts MeshGroupOrShorts { get; set; } = new MeshGroupOrShorts(); // TODO: xml comment
+        public MeshGroupNodeOrShorts MeshGroupNodeOrShorts { get; set; } = new MeshGroupNodeOrShorts(); // TODO: xml comment
         /// <summary>
         /// Gets or sets the list of collision vertices. 
         /// The list's length is <see cref="CollisionVerticesCount">CollisionVerticesCount</see>. Is <see langword="null"/> if that value is 0.

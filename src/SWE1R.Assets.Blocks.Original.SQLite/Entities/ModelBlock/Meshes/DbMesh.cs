@@ -1,12 +1,13 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
-    [Table("Model_Mesh")]
+    [Table($"{nameof(Model)}_{nameof(Mesh)}")]
     public class DbMesh : DbBlockItemStructure<Mesh>
     {
         public int P_Material { get; set; }
@@ -20,7 +21,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         public short FacesCount { get; set; }
         public PrimitiveType PrimitiveType { get; set; }
         public int P_FacesVertexCounts { get; set; }
-        public int P_Unk_Array { get; set; }
+        public int P_MeshGroupNodeOrShorts { get; set; }
         public int P_CollisionVertices { get; set; }
         public byte[] PaddingGarbage { get; set; }
         public int P_CommandList { get; set; }
@@ -50,7 +51,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             PrimitiveType = m.PrimitiveType;
 
             P_FacesVertexCounts = GetPropertyPointer(node, nameof(Mesh.FacesVertexCounts));
-            P_Unk_Array = GetValuePosition(node.Graph, m.MeshGroupOrShorts.Value);
+            P_MeshGroupNodeOrShorts = GetValuePosition(node.Graph, m.MeshGroupNodeOrShorts.Value);
             P_CollisionVertices = GetPropertyPointer(node, nameof(Mesh.CollisionVertices));
 
             PaddingGarbage = m.CollisionVertices?.PaddingGarbage;
@@ -85,7 +86,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             if (PrimitiveType != _other.PrimitiveType) return false;
 
             if (P_FacesVertexCounts != _other.P_FacesVertexCounts) return false;
-            if (P_Unk_Array != _other.P_Unk_Array) return false;
+            if (P_MeshGroupNodeOrShorts != _other.P_MeshGroupNodeOrShorts) return false;
             if (P_CollisionVertices != _other.P_CollisionVertices) return false;
 
             if (!EqualsPaddingGarbage(PaddingGarbage, _other.PaddingGarbage)) return false;
@@ -122,7 +123,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             HashCode.Combine(base.GetHashCode(), P_Material, P_Mapping,
                 HashCode.Combine(Bounds_Min_X, Bounds_Min_Y, Bounds_Min_Z),
                 HashCode.Combine(Bounds_Max_X, Bounds_Max_Y, Bounds_Max_Z),
-                HashCode.Combine(FacesCount, PrimitiveType, P_FacesVertexCounts, P_Unk_Array, 
+                HashCode.Combine(FacesCount, PrimitiveType, P_FacesVertexCounts, P_MeshGroupNodeOrShorts, 
                     P_CollisionVertices, PaddingGarbage, P_CommandList, P_Vertices),
                 HashCode.Combine(CollisionVerticesCount, VerticesCount, Unk_Count));
     }

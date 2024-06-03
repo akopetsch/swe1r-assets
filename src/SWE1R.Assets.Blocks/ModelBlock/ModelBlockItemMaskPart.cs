@@ -129,7 +129,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
                 if (IsPropertyComponentOf<Mesh>(r) || 
                     IsPropertyComponentOf<Material>(r))
                     return false;
-                if (r.Parent.Type == typeof(MeshGroupOrShorts))
+                if (r.Parent.Type == typeof(MeshGroupNodeOrShorts))
                     return false;
                 if (r.Has<CollectionElementComponent>() && 
                     r.Type == typeof(MaterialTextureChild))
