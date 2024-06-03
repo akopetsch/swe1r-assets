@@ -5,7 +5,7 @@
     <Nullable>disable</Nullable>
     <Authors>Alexander Kopetsch</Authors>
     <Version>0.0.1.0</Version>
-    <PackageVersion>0.0.1-alpha.1</PackageVersion>
+    <PackageVersion>0.0.1-alpha.2</PackageVersion>
     <PackageProjectUrl>https://github.com/akopetsch/swe1r-assets</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
