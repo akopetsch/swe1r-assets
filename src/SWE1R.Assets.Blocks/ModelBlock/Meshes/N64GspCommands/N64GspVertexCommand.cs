@@ -28,7 +28,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         [Order(1)]
         public byte NextIndicesBase { get; set; } // v0_plus_n
         [Order(2)]
-        public ReferenceByIndex<Vertex> StartVertex { get; set; }
+        public ReferenceByIndex<Vertex> V { get; set; }
 
         #endregion
 
@@ -55,7 +55,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
             $"({Byte} " +
             $"{nameof(VerticesCount)} = {VerticesCount}, " +
             $"{nameof(NextIndicesBase)} = {NextIndicesBase}, " +
-            $"{nameof(StartVertex)} = {StartVertex})";
+            $"{nameof(V)} = {V})";
 
         #endregion
     }

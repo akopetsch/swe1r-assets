@@ -69,9 +69,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             SetMaskBits(
                 context.Graph.GetValueComponents<TextureIndex>());
 
-            // N64GspVertexCommand.StartVertex
+            // N64GspVertexCommand.V
             SetMaskBits(
-                GetStartVertexComponents(context.Graph).Where(IsMaskBitRequired));
+                context.Graph.GetPropertyComponents<N64GspVertexCommand>(nameof(N64GspVertexCommand.V))
+                .Where(IsMaskBitRequired));
 
             // AltN
             if (model is PoddModel)
@@ -119,9 +120,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             Bytes[byteIndex] |= bitMask;
         }
 
-        private PropertyComponent[] GetStartVertexComponents(ByteSerializerGraph graph) =>
-            graph.GetPropertyComponents<N64GspVertexCommand>(nameof(N64GspVertexCommand.StartVertex));
-
         private bool IsMaskBitRequired(ReferenceComponent r)
         {
             if (IsSpecialScenReference(r))
@@ -145,10 +143,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         private bool IsPropertyComponentOf<TRecordValue>(ReferenceComponent r) =>
             r.Get<PropertyComponent>()?.Record.Type == typeof(TRecordValue);
 
-        private bool IsMaskBitRequired(PropertyComponent startVertexPropertyComponent)
+        private bool IsMaskBitRequired(PropertyComponent vPropertyComponent)
         {
-            var startVertexPropertyValue = (ReferenceByIndex<Vertex>)startVertexPropertyComponent.Value;
-            return startVertexPropertyValue.Value != null;
+            var vPropertyValue = (ReferenceByIndex<Vertex>)vPropertyComponent.Value;
+            return vPropertyValue.Value != null;
         }
 
         private bool IsSpecialScenReference(ReferenceComponent referenceComponent)

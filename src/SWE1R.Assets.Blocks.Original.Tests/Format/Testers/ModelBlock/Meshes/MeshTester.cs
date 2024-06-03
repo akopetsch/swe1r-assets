@@ -16,7 +16,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
         public override void Test()
         {
             AssertBounds();
-            TestDisplayList();
+            TestCommandList();
         }
 
         #region Methods (bounds)
@@ -37,9 +37,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
         #endregion
 
-        #region Methods (DisplayList)
+        #region Methods (CommandList)
 
-        private void TestDisplayList()
+        private void TestCommandList()
         {
             TestCommandList0();
 
@@ -59,17 +59,17 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                 if (vertexBuffers.Count > 1)
                     Assert.True(vertexBuffers.All(r => r.VertexCommand != null));
 
-                // assert ascending StartVertex
+                // assert ascending V0
                 var vertexBuffersWithVertexCommands = vertexBuffers.Where(r => r.VertexCommand != null).ToList();
                 for (int i = 0; i < vertexBuffersWithVertexCommands.Count; i++)
                 {
-                    N64GspVertexBuffer vertexBuffer = vertexBuffersWithVertexCommands[i];
+                    N64GspVertexBuffer currentVertexBuffer = vertexBuffersWithVertexCommands[i];
                     if (i > 0)
                     {
-                        N64GspVertexBuffer vertexBufferBefore = vertexBuffersWithVertexCommands[i - 1];
-                        int startVertex = vertexBuffer.VertexCommand.StartVertex.Index.Value;
-                        int startVertexBefore = vertexBufferBefore.VertexCommand.StartVertex.Index.Value;
-                        Assert.True(startVertex > startVertexBefore);
+                        N64GspVertexBuffer previousVertexBuffer = vertexBuffersWithVertexCommands[i - 1];
+                        int currentV0 = currentVertexBuffer.VertexCommand.V.Index.Value;
+                        int previousV0 = previousVertexBuffer.VertexCommand.V.Index.Value;
+                        Assert.True(currentV0 > previousV0);
                     }
                 }
 
@@ -102,7 +102,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     N64GspVertexCommand vertexCommand = vertexBuffer.VertexCommand;
                     if (vertexCommand != null)
                     {
-                        int startVertexIndex = vertexCommand.StartVertex.Index.Value;
+                        int v0 = vertexCommand.V.Index.Value;
                         int distinctIndicesCount = vertexBuffer.Indices.Distinct().Count();
 
                         // VerticesCount
@@ -110,29 +110,29 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         if (i != 0)
                             Assert.True(vertexCommand.VerticesCount == distinctIndicesCount);
                         else
-                            Assert.True(vertexCommand.VerticesCount == distinctIndicesCount - startVertexIndex);
+                            Assert.True(vertexCommand.VerticesCount == distinctIndicesCount - v0);
 
                         // NextIndicesBase
                         Assert.True(vertexCommand.NextIndicesBase == vertexBuffer.NextIndicesBase);
 
-                        // TODO: StartVertex
-                        Assert.True(vertexCommand.StartVertex.Collection == Value.Vertices);
-                        Assert.True(vertexCommand.StartVertex.Index.Value != -1);
+                        // TODO: V0
+                        Assert.True(vertexCommand.V.Collection == Value.Vertices);
+                        Assert.True(vertexCommand.V.Index.Value != -1);
 
                         if (i != 0)
                         {
                             Assert.True(vertexBuffers.Count > 1);
-                            Assert.True(startVertexIndex ==
+                            Assert.True(v0 ==
                                 vertexBuffers.Take(i).Select(r => r.NextIndicesBase / 2).Sum());
                             // N64GspCullDisplayListCommand can be null
                         }
                         else // i == 0
                         {
                             // rarely failing:
-                            //Assert.True(startVertexIndex == vertexBuffer.TriangleCommands.First().Triangles.First().Indices.Min());
+                            //Assert.True(v0 == vertexBuffer.TriangleCommands.First().Triangles.First().Indices.Min());
                         }
 
-                        if (startVertexIndex == 0)
+                        if (v0 == 0)
                             if (i == 0)
                             {
                                 // 17025
@@ -165,7 +165,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         if (i == 0)
                         {
                             // only true 397/433 models:
-                            // Assert.True(range.VertexCommand.StartVertex.Index == 0);
+                            // Assert.True(range.VertexCommand.V.Index == 0);
                         }
                 }
             }

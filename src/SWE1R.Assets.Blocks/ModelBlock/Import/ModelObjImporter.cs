@@ -208,14 +208,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             {
                 var currentVertexBuffer = new N64GspVertexBuffer();
                 meshHelper.VertexBuffers.Add(currentVertexBuffer);
-                int startVertexIndex = 0;
+                int v0 = 0;
                 foreach (FaceHelper faceHelper in meshHelper.FaceHelpers)
                 {
                     // if exceeds IndicesRange max length
                     if (currentVertexBuffer.NextIndicesBase >= Configuration.IndicesRangeMaxLength)
                     {
                         // new IndicesRange
-                        startVertexIndex += currentVertexBuffer.NextIndicesBase / 2;
+                        v0 += currentVertexBuffer.NextIndicesBase / 2;
                         currentVertexBuffer = new N64GspVertexBuffer();
                         meshHelper.VertexBuffers.Add(currentVertexBuffer);
                     }
@@ -224,9 +224,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     foreach (Triangle triangle in faceHelper.Triangles)
                     {
                         trianglesCommands.Add(new N64Gsp1TriangleCommand() {
-                            Index0 = Convert.ToByte(2 * (triangle.I0 - startVertexIndex)),
-                            Index1 = Convert.ToByte(2 * (triangle.I1 - startVertexIndex)),
-                            Index2 = Convert.ToByte(2 * (triangle.I2 - startVertexIndex)),
+                            Index0 = Convert.ToByte(2 * (triangle.I0 - v0)),
+                            Index1 = Convert.ToByte(2 * (triangle.I1 - v0)),
+                            Index2 = Convert.ToByte(2 * (triangle.I2 - v0)),
                         });
                     }
                     currentVertexBuffer.TrianglesCommands.AddRange(trianglesCommands);
@@ -258,22 +258,22 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
         private N64GspCommandList GetCommandList(List<N64GspVertexBuffer> vertexBuffers, Mesh mesh)
         {
-            int startVertexIndex = 0;
-            var displayList = new N64GspCommandList();
+            int v0 = 0;
+            var commandList = new N64GspCommandList();
             foreach (N64GspVertexBuffer vertexBuffer in vertexBuffers)
             {
                 vertexBuffer.VertexCommand = new N64GspVertexCommand() {
                     VerticesCount = Convert.ToByte(vertexBuffer.Indices.Distinct().Count()),
                     NextIndicesBase = Convert.ToByte(vertexBuffer.NextIndicesBase),
-                    StartVertex = new ReferenceByIndex<Vertex>() {
+                    V = new ReferenceByIndex<Vertex>() {
                         Collection = mesh.Vertices,
-                        Index = startVertexIndex,
+                        Index = v0,
                     }
                 };
-                startVertexIndex += vertexBuffer.NextIndicesBase / 2;
-                displayList.AddRange(vertexBuffer.AllCommands);
+                v0 += vertexBuffer.NextIndicesBase / 2;
+                commandList.AddRange(vertexBuffer.AllCommands);
             }
-            return displayList;
+            return commandList;
         }
 
         private Vertex ImportObjFaceVertex(ObjFaceVertex objFaceVertex, ObjLoadResult objLoadResult)

@@ -11,7 +11,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
     {
         public byte VerticesCount { get; set; }
         public int MaxIndex { get; set; }
-        public int P_StartVertex { get; set; }
+        public int P_V { get; set; }
 
         public override void CopyFrom(Node node)
         {
@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
 
             VerticesCount = c.VerticesCount;
             MaxIndex = c.NextIndicesBase;
-            P_StartVertex = GetValuePosition(node.Graph, c.StartVertex.Value);
+            P_V = GetValuePosition(node.Graph, c.V.Value);
         }
 
         public override bool Equals(DbBlockItemStructure<N64GspVertexCommand> other)
@@ -33,7 +33,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
 
             if (VerticesCount != _other.VerticesCount) return false;
             if (MaxIndex != _other.MaxIndex) return false;
-            if (P_StartVertex != _other.P_StartVertex) return false;
+            if (P_V != _other.P_V) return false;
             
             return true;
         }
@@ -47,6 +47,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), VerticesCount, MaxIndex, P_StartVertex);
+            HashCode.Combine(base.GetHashCode(), VerticesCount, MaxIndex, P_V);
     }
 }
