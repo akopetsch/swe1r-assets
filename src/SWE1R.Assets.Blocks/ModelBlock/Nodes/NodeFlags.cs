@@ -7,19 +7,19 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
 {
     public enum NodeFlags : uint
     {
-        MeshGroup3064 =
+        MeshGroupNode =
             0b0_0011_0000_0110_0100, // 0x3064
-        Group5064 =
+        BasicNode =
             0b0_0101_0000_0110_0100, // 0x5064
-        Group5065 =
+        SelectorNode =
             0b0_0101_0000_0110_0101, // 0x5065
-        Group5066 =
+        LodSelectorNode =
             0b0_0101_0000_0110_0110, // 0x5066
-        TransformableD064 =
+        TransformedNode =
             0b0_1101_0000_0110_0100, // 0xD064
-        TransformableD065 =
+        TransformedWithPivotNode =
             0b0_1101_0000_0110_0101, // 0xD065
-        UnknownD066 =
+        TransformedComputedNode =
             0b0_1101_0000_0110_0110, // 0xD066
     }
 
@@ -27,13 +27,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     {
         private static Dictionary<NodeFlags, Type> flaggedNodeType = new Dictionary<NodeFlags, Type>()
         {
-            { NodeFlags.MeshGroup3064, typeof(MeshGroup3064) },
-            { NodeFlags.Group5064, typeof(Group5064) },
-            { NodeFlags.Group5065, typeof(Group5065) },
-            { NodeFlags.Group5066, typeof(Group5066) },
-            { NodeFlags.TransformableD064, typeof(TransformableD064) },
-            { NodeFlags.TransformableD065, typeof(TransformableD065) },
-            { NodeFlags.UnknownD066, typeof(UnknownD066) },
+            { NodeFlags.MeshGroupNode, typeof(MeshGroup3064) },
+            { NodeFlags.BasicNode, typeof(Group5064) },
+            { NodeFlags.SelectorNode, typeof(Group5065) },
+            { NodeFlags.LodSelectorNode, typeof(Group5066) },
+            { NodeFlags.TransformedNode, typeof(TransformableD064) },
+            { NodeFlags.TransformedWithPivotNode, typeof(TransformableD065) },
+            { NodeFlags.TransformedComputedNode, typeof(UnknownD066) },
         };
 
         public static Type GetFlaggedNodeType(this NodeFlags flags) => flaggedNodeType[flags];

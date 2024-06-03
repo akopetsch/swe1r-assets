@@ -15,6 +15,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         [Order(0)] public int Int { get; set; }
 
         public Group5065() : base() =>
-            Flags = NodeFlags.Group5065;
+            Flags = NodeFlags.SelectorNode;
     }
 }

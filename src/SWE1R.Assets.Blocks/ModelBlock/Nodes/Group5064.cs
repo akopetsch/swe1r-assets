@@ -8,6 +8,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     public class Group5064 : FlaggedNode
     {
         public Group5064() : base() =>
-            Flags = NodeFlags.Group5064;
+            Flags = NodeFlags.BasicNode;
     }
 }

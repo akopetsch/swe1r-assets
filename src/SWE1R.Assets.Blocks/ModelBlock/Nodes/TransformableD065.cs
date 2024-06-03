@@ -11,6 +11,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         [Order(1)] public Vector3Single Vector { get; set; }
 
         public TransformableD065() : base() =>
-            Flags = NodeFlags.TransformableD065;
+            Flags = NodeFlags.TransformedWithPivotNode;
     }
 }

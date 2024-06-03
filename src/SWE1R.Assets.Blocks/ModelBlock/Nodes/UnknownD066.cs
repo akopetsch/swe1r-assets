@@ -24,6 +24,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         [Order(2)] public Vector3Single Vector { get; set; }
 
         public UnknownD066() : base() =>
-            Flags = NodeFlags.UnknownD066;
+            Flags = NodeFlags.TransformedComputedNode;
     }
 }

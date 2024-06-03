@@ -10,6 +10,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         [Order(0)] public Matrix3x4Single Matrix { get; set; }
 
         public TransformableD064() : base() =>
-            Flags = NodeFlags.TransformableD064;
+            Flags = NodeFlags.TransformedNode;
     }
 }
