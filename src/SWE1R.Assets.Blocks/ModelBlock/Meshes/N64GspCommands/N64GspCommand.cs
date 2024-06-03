@@ -13,6 +13,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
     ///     <see href="http://n64devkit.square7.ch/header/gbi.htm#:~:text=Graphics%20Commands">
     ///       n64devkit.square7.ch - gbi.h - 'Graphics Commands'</see></item>
     ///   <item>
+    ///     <see href="https://github.com/akopetsch/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types.h#L1365">
+    ///       github.com - akopetsch/SW_RACER_RE - types.h - Gfx</see></item>
+    ///   <item>
     ///     <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L515">
     ///       github.com - akopetsch/Sw_Racer - Swr_Model.h - SWR_MODEL_Section48</see></item>
     /// </list>
