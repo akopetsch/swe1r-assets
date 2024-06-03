@@ -5,7 +5,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 {
     [Alignment(8)]
     public class N64GspCommandList : IList<N64GspCommand>

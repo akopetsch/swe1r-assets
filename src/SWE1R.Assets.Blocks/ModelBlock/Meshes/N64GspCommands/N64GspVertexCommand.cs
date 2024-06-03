@@ -3,7 +3,7 @@
 using ByteSerialization.Attributes;
 using System;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 {
     /// <summary>
     /// See also:
@@ -44,18 +44,17 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Constructor
 
-        public N64GspVertexCommand() => 
-            Byte = 1;
+        public N64GspVertexCommand() : 
+            base(N64GspCommandByte.G_VTX)
+        { }
 
         #endregion
 
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({Byte} " +
-            $"{nameof(N)} = {N}, " +
-            $"{nameof(V0PlusN)} = {V0PlusN}, " +
-            $"{nameof(V)} = {V})";
+            GetString(
+                new PropertyNameAndValue(nameof(N), N));
 
         #endregion
     }

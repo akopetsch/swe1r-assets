@@ -4,7 +4,7 @@ using ByteSerialization;
 using ByteSerialization.Attributes;
 using ByteSerialization.IO;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 {
     /// <summary>
     /// See also:
@@ -31,8 +31,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Constructor
 
-        public N64GspCullDisplayListCommand() => 
-            Byte = 3;
+        public N64GspCullDisplayListCommand() : 
+            base(N64GspCommandByte.G_CULLDL)
+        { }
 
         #endregion
 
@@ -58,7 +59,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({Byte} {nameof(VN)} = {VN})";
+            GetString(
+                new PropertyNameAndValue(nameof(VN), VN));
 
         #endregion
     }

@@ -9,7 +9,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
     {
         #region Properties (abstraction)
 
-        byte Byte { get; }
+        N64GspCommandByte Byte { get; }
 
         IEnumerable<int> Indices { get; }
 

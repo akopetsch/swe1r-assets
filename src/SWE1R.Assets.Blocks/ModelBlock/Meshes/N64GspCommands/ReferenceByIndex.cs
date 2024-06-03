@@ -7,7 +7,7 @@ using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Records;
 using System.Collections.Generic;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 {
     public class ReferenceByIndex<T> : INodeListener
     {

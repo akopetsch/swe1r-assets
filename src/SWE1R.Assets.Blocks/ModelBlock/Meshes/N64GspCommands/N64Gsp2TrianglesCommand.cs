@@ -4,10 +4,9 @@ using ByteSerialization;
 using ByteSerialization.Attributes;
 using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
 using System.Collections.Generic;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 {
     /// <summary>
     /// See also:
@@ -75,8 +74,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Constructor
 
-        public N64Gsp2TrianglesCommand() => 
-            Byte = 6;
+        public N64Gsp2TrianglesCommand() : 
+            base(N64GspCommandByte.G_TRI2)
+        { }
 
         #endregion
 
@@ -112,7 +112,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({Byte} {Triangle0}, {Triangle1})";
+            GetString(
+                new PropertyNameAndValue(nameof(V00), V00),
+                new PropertyNameAndValue(nameof(V01), V01),
+                new PropertyNameAndValue(nameof(V02), V02),
+                new PropertyNameAndValue(nameof(V10), V10),
+                new PropertyNameAndValue(nameof(V11), V11),
+                new PropertyNameAndValue(nameof(V12), V12));
 
         #endregion
     }

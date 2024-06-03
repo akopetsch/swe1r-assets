@@ -3,7 +3,6 @@
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
 using SWE1R.Assets.Blocks.Vectors;
 using System.Diagnostics;
 
@@ -182,16 +181,16 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                 N64GspCommand command = commands[i];
 
                 // if first range or new range
-                if (vertexBuffer == null || command.Byte == 01)
+                if (vertexBuffer == null || command is N64GspVertexCommand)
                 {
                     // create/add new range
                     vertexBuffer = new N64GspVertexBuffer();
                     ranges.Add(vertexBuffer);
-                    if (command.Byte == 1)
-                        vertexBuffer.VertexCommand = (N64GspVertexCommand)command;
+                    if (command is N64GspVertexCommand vertexCommand)
+                        vertexBuffer.VertexCommand = vertexCommand;
                 }
-                else if (command.Byte == 3)
-                    vertexBuffer.CullDisplayListCommand = (N64GspCullDisplayListCommand)command;
+                else if (command is N64GspCullDisplayListCommand cullDisplayListCommand)
+                    vertexBuffer.CullDisplayListCommand = cullDisplayListCommand;
 
                 if (command is IN64GspTrianglesCommand trianglesCommand)
                     vertexBuffer.TrianglesCommands.Add(trianglesCommand);
@@ -209,36 +208,31 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
                 N64GspCommand firstCommand = commandList[0];
                 if (n == 1)
-                    Assert.True(
-                        firstCommand.Byte == 05 || 
-                        firstCommand.Byte == 06);
-                else
-                    if (firstCommand.Byte == 06)
+                    Assert.True(firstCommand is IN64GspTrianglesCommand);
+                else if (firstCommand is N64Gsp2TrianglesCommand)
                 {
                     Assert.Equal(6, n);
-                    Assert.True(commandList.All(x => x.Byte == 06));
+                    Assert.True(commandList.All(x => x is N64Gsp2TrianglesCommand));
                 }
                 else
                 {
                     // n != 1
                     // most of the time (in 429 of 433 models)
 
-                    Assert.True(firstCommand.Byte == 01);
+                    Assert.True(firstCommand is N64GspCullDisplayListCommand);
                     if (n == 2)
                     {
                         N64GspCommand secondCommand = commandList[1];
-                        Assert.True(
-                            secondCommand.Byte == 05 || 
-                            secondCommand.Byte == 06);
+                        Assert.True(secondCommand is IN64GspTrianglesCommand);
                     }
                     else
                         for (int i = 0; i < n; i++)
                         {
                             N64GspCommand command = commandList[i];
-                            if (command.Byte == 03)
+                            if (command is N64GspCullDisplayListCommand)
                             {
                                 N64GspCommand commandBefore = commandList[i - 1];
-                                Assert.True(commandBefore.Byte == 01);
+                                Assert.True(commandBefore is N64GspVertexCommand);
                             }
                         }
                 }

@@ -1,6 +1,5 @@
 ﻿// SPDX-License-Identifier: MIT
 
-using ByteSerialization.Extensions;
 using MoreLinq.Extensions;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Animations;

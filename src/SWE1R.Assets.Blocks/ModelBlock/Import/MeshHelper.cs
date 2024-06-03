@@ -2,7 +2,7 @@
 
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
 using System.Collections.Generic;
 using System.Linq;
 

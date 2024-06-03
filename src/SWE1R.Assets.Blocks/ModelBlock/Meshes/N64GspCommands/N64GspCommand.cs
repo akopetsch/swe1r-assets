@@ -2,8 +2,9 @@
 
 using ByteSerialization.Attributes;
 using ByteSerialization.IO;
+using System.Linq;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 {
     /// <summary>
     /// See also:
@@ -19,24 +20,57 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
     [Sizeof(8)]
     public abstract class N64GspCommand
     {
+        #region Classes (helper)
+
+        protected class PropertyNameAndValue
+        {
+            public string Name { get; set; }
+            public object Value { get; set; }
+
+            public PropertyNameAndValue(string name, object value)
+            {
+                Name = name;
+                Value = value;
+            }
+
+            public override string ToString() =>
+                $"{Name} = {Value}";
+        }
+
+        #endregion
+
         #region Properties (serialized)
 
-        [RecordTypeIdentifier((byte)01, typeof(N64GspVertexCommand))]
-        [RecordTypeIdentifier((byte)03, typeof(N64GspCullDisplayListCommand))]
-        [RecordTypeIdentifier((byte)05, typeof(N64Gsp1TriangleCommand))]
-        [RecordTypeIdentifier((byte)06, typeof(N64Gsp2TrianglesCommand))]
+        [RecordTypeIdentifier(N64GspCommandByte.G_VTX, typeof(N64GspVertexCommand))]
+        [RecordTypeIdentifier(N64GspCommandByte.G_CULLDL, typeof(N64GspCullDisplayListCommand))]
+        [RecordTypeIdentifier(N64GspCommandByte.G_TRI1, typeof(N64Gsp1TriangleCommand))]
+        [RecordTypeIdentifier(N64GspCommandByte.G_TRI2, typeof(N64Gsp2TrianglesCommand))]
         [Order(0)]
-        public byte Byte { get; set; }
+        public N64GspCommandByte Byte { get; set; }
+
+        #endregion
+
+        #region Constructor
+
+        protected N64GspCommand(N64GspCommandByte commandByte) =>
+            Byte = commandByte;
 
         #endregion
 
         #region Methods (serialization)
 
         public virtual void Serialize(EndianBinaryWriter writer) =>
-            writer.Write(Byte);
+            writer.Write((byte)Byte);
 
         public virtual void Deserialize(EndianBinaryReader reader) =>
-            Byte = reader.ReadByte();
+            Byte = (N64GspCommandByte)reader.ReadByte();
+
+        #endregion
+
+        #region Methods (helper)
+
+        protected string GetString(params PropertyNameAndValue[] propertyNamesAndValues) =>
+            $"{GetType().Name}({string.Join(", ", propertyNamesAndValues.Select(x => x.ToString()))})";
 
         #endregion
     }

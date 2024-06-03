@@ -1,6 +1,5 @@
 ﻿// SPDX-License-Identifier: MIT
 
-using ByteSerialization.Extensions;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;

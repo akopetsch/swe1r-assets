@@ -1,11 +1,10 @@
 ﻿// SPDX-License-Identifier: MIT
 
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 {
     public class N64GspVertexBuffer
     {
