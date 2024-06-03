@@ -4,7 +4,7 @@ using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexIndices
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspCommands
 {
     [Table("Model_N64Gsp2TrianglesCommand")]
     public class DbN64Gsp2TrianglesCommand : DbBlockItemStructure<N64Gsp2TrianglesCommand>

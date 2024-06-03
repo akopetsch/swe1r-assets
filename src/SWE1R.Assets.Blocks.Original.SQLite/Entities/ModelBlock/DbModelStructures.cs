@@ -9,7 +9,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexIndices;
+using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspCommands;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
