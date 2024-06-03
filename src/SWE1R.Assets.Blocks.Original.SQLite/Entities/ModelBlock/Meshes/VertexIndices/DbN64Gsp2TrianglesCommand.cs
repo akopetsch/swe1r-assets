@@ -9,12 +9,12 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
     [Table("Model_N64Gsp2TrianglesCommand")]
     public class DbN64Gsp2TrianglesCommand : DbBlockItemStructure<N64Gsp2TrianglesCommand>
     {
-        public byte Index0 { get; set; }
-        public byte Index1 { get; set; }
-        public byte Index2 { get; set; }
-        public byte Index3 { get; set; }
-        public byte Index4 { get; set; }
-        public byte Index5 { get; set; }
+        public byte V00 { get; set; }
+        public byte V01 { get; set; }
+        public byte V02 { get; set; }
+        public byte V10 { get; set; }
+        public byte V11 { get; set; }
+        public byte V12 { get; set; }
 
         public override void CopyFrom(Node node)
         {
@@ -22,12 +22,13 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
 
             var c = (N64Gsp2TrianglesCommand)node.Value;
 
-            Index0 = c.Index0;
-            Index1 = c.Index1;
-            Index2 = c.Index2;
-            Index3 = c.Index3;
-            Index4 = c.Index4;
-            Index5 = c.Index5;
+            V00 = c.V00;
+            V01 = c.V01;
+            V02 = c.V02;
+
+            V10 = c.V10;
+            V11 = c.V11;
+            V12 = c.V12;
         }
 
         public override bool Equals(DbBlockItemStructure<N64Gsp2TrianglesCommand> other)
@@ -37,27 +38,28 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
             if (!base.Equals(_other))
                 return false;
 
-            if (Index0 != _other.Index0) return false;
-            if (Index1 != _other.Index1) return false;
-            if (Index2 != _other.Index2) return false;
-            if (Index3 != _other.Index3) return false;
-            if (Index4 != _other.Index4) return false;
-            if (Index5 != _other.Index5) return false;
+            if (V00 != _other.V00) return false;
+            if (V01 != _other.V01) return false;
+            if (V02 != _other.V02) return false;
+
+            if (V10 != _other.V10) return false;
+            if (V11 != _other.V11) return false;
+            if (V12 != _other.V12) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbN64Gsp2TrianglesCommand)
-                return this.Equals((DbN64Gsp2TrianglesCommand)obj);
+            if (obj is DbN64Gsp2TrianglesCommand command)
+                return Equals(command);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
             HashCode.Combine(base.GetHashCode(), 
-                Index0, Index1, Index2, 
-                Index3, Index4, Index5);
+                V00, V01, V02, 
+                V10, V11, V12);
     }
 }

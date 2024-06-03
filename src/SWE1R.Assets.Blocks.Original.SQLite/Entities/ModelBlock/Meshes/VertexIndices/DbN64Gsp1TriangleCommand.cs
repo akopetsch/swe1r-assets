@@ -9,9 +9,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
     [Table("Model_N64Gsp1TriangleCommand")]
     public class DbN64Gsp1TriangleCommand : DbBlockItemStructure<N64Gsp1TriangleCommand>
     {
-        public byte Index0 { get; set; }
-        public byte Index1 { get; set; }
-        public byte Index2 { get; set; }
+        public byte V0 { get; set; }
+        public byte V1 { get; set; }
+        public byte V2 { get; set; }
 
         public override void CopyFrom(Node node)
         {
@@ -19,9 +19,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
 
             var c = (N64Gsp1TriangleCommand)node.Value;
 
-            Index0 = c.Index0;
-            Index1 = c.Index1;
-            Index2 = c.Index2;
+            V0 = c.V0;
+            V1 = c.V1;
+            V2 = c.V2;
         }
 
         public override bool Equals(DbBlockItemStructure<N64Gsp1TriangleCommand> other)
@@ -31,22 +31,22 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
             if (!base.Equals(_other))
                 return false;
 
-            if (Index0 != _other.Index0) return false;
-            if (Index1 != _other.Index1) return false;
-            if (Index2 != _other.Index2) return false;
+            if (V0 != _other.V0) return false;
+            if (V1 != _other.V1) return false;
+            if (V2 != _other.V2) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbN64Gsp1TriangleCommand)
-                return this.Equals((DbN64Gsp1TriangleCommand)obj);
+            if (obj is DbN64Gsp1TriangleCommand command)
+                return Equals(command);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), Index0, Index1, Index2);
+            HashCode.Combine(base.GetHashCode(), V0, V1, V2);
     }
 }

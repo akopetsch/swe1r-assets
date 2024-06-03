@@ -21,18 +21,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
     {
         #region Fields
 
-        private static readonly byte[] padding = new byte[4];
+        private static readonly byte[] PaddingBytes = new byte[4];
 
         #endregion
 
         #region Properties
 
         [Order(0)]
-        public byte Index0 { get; set; }
+        public byte V0 { get; set; }
         [Order(1)]
-        public byte Index1 { get; set; }
+        public byte V1 { get; set; }
         [Order(2)]
-        public byte Index2 { get; set; }
+        public byte V2 { get; set; }
 
         #endregion
 
@@ -42,9 +42,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         {
             get
             {
-                yield return Index0;
-                yield return Index1;
-                yield return Index2;
+                yield return V0;
+                yield return V1;
+                yield return V2;
             }
         }
 
@@ -57,7 +57,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         }
 
         public Triangle Triangle => 
-            new Triangle(Index0, Index1, Index2);
+            new Triangle(V0, V1, V2);
 
         #endregion
 
@@ -73,20 +73,20 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         public override void Serialize(EndianBinaryWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(Index0);
-            writer.Write(Index1);
-            writer.Write(Index2);
-            writer.Write(padding);
+            writer.Write(V0);
+            writer.Write(V1);
+            writer.Write(V2);
+            writer.Write(PaddingBytes);
         }
 
         public override void Deserialize(EndianBinaryReader reader)
         {
             // TODO: not called
             base.Deserialize(reader);
-            Index0 = reader.ReadByte();
-            Index1 = reader.ReadByte();
-            Index2 = reader.ReadByte();
-            reader.ReadBytes(padding.Length);
+            V0 = reader.ReadByte();
+            V1 = reader.ReadByte();
+            V2 = reader.ReadByte();
+            reader.ReadBytes(PaddingBytes.Length);
         }
 
         #endregion

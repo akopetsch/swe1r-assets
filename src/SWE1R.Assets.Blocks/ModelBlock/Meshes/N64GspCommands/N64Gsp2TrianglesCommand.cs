@@ -19,20 +19,26 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
     /// </summary>
     public class N64Gsp2TrianglesCommand : N64GspCommand, IN64GspTrianglesCommand, ICustomSerializable
     {
+        #region Fields
+
+        private static readonly byte PaddingByte = 0;
+
+        #endregion
+
         #region Properties (serialized)
 
         [Order(0)] 
-        public byte Index0 { get; set; }
+        public byte V00 { get; set; }
         [Order(1)]
-        public byte Index1 { get; set; }
+        public byte V01 { get; set; }
         [Order(2)]
-        public byte Index2 { get; set; }
+        public byte V02 { get; set; }
         [Order(3), Offset(5)]
-        public byte Index3 { get; set; }
+        public byte V10 { get; set; }
         [Order(4)]
-        public byte Index4 { get; set; }
+        public byte V11 { get; set; }
         [Order(5)]
-        public byte Index5 { get; set; }
+        public byte V12 { get; set; }
 
         #endregion
 
@@ -42,13 +48,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         {
             get
             {
-                yield return Index0;
-                yield return Index1;
-                yield return Index2;
+                yield return V00;
+                yield return V01;
+                yield return V02;
 
-                yield return Index3;
-                yield return Index4;
-                yield return Index5;
+                yield return V10;
+                yield return V11;
+                yield return V12;
             }
         }
 
@@ -61,9 +67,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
             }
         }
 
-        public Triangle Triangle0 => new Triangle(Index0, Index1, Index2);
+        public Triangle Triangle0 => new Triangle(V00, V01, V02);
 
-        public Triangle Triangle1 => new Triangle(Index3, Index4, Index5);
+        public Triangle Triangle1 => new Triangle(V10, V11, V12);
 
         #endregion
 
@@ -79,26 +85,26 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
         public override void Serialize(EndianBinaryWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(Index0);
-            writer.Write(Index1);
-            writer.Write(Index2);
-            writer.Write((byte)0);
-            writer.Write(Index3);
-            writer.Write(Index4);
-            writer.Write(Index5);
+            writer.Write(V00);
+            writer.Write(V01);
+            writer.Write(V02);
+            writer.Write(PaddingByte);
+            writer.Write(V10);
+            writer.Write(V11);
+            writer.Write(V12);
         }
 
         public override void Deserialize(EndianBinaryReader reader)
         {
             // TODO: not called
             base.Deserialize(reader);
-            Index0 = reader.ReadByte();
-            Index1 = reader.ReadByte();
-            Index2 = reader.ReadByte();
-            reader.ReadByte();
-            Index3 = reader.ReadByte();
-            Index4 = reader.ReadByte();
-            Index5 = reader.ReadByte();
+            V00 = reader.ReadByte();
+            V01 = reader.ReadByte();
+            V02 = reader.ReadByte();
+            reader.Read(PaddingByte.GetType());
+            V10 = reader.ReadByte();
+            V11 = reader.ReadByte();
+            V12 = reader.ReadByte();
         }
 
         #endregion

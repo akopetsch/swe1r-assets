@@ -224,9 +224,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     foreach (Triangle triangle in faceHelper.Triangles)
                     {
                         trianglesCommands.Add(new N64Gsp1TriangleCommand() {
-                            Index0 = Convert.ToByte(2 * (triangle.I0 - v0)),
-                            Index1 = Convert.ToByte(2 * (triangle.I1 - v0)),
-                            Index2 = Convert.ToByte(2 * (triangle.I2 - v0)),
+                            V0 = Convert.ToByte(2 * (triangle.I0 - v0)),
+                            V1 = Convert.ToByte(2 * (triangle.I1 - v0)),
+                            V2 = Convert.ToByte(2 * (triangle.I2 - v0)),
                         });
                     }
                     currentVertexBuffer.TrianglesCommands.AddRange(trianglesCommands);
