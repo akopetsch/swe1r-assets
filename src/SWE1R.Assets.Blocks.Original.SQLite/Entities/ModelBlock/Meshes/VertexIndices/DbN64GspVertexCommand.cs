@@ -10,8 +10,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
     public class DbN64GspVertexCommand : DbBlockItemStructure<N64GspVertexCommand>
     {
         public int P_V { get; set; }
-        public byte N { get; set; }
-        public byte V0 { get; set; }
+        public int N { get; set; }
+        public int V0 { get; set; }
         public byte V0PlusN { get; set; }
 
         public override void CopyFrom(Node node)
