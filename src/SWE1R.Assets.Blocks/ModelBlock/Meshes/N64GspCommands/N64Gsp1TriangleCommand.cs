@@ -4,6 +4,7 @@ using ByteSerialization;
 using ByteSerialization.Attributes;
 using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
+using System;
 using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
@@ -37,9 +38,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         #region Properties (C struct)
 
-        public byte V0 { get => (byte)(V0Padded >> 1); set => V0Padded = (byte)(value << 1); }
-        public byte V1 { get => (byte)(V1Padded >> 1); set => V1Padded = (byte)(value << 1); }
-        public byte V2 { get => (byte)(V2Padded >> 1); set => V2Padded = (byte)(value << 1); }
+        public byte V0 { get => (byte)(V0Padded >> 1); set => V0Padded = Convert.ToByte(value << 1); }
+        public byte V1 { get => (byte)(V1Padded >> 1); set => V1Padded = Convert.ToByte(value << 1); }
+        public byte V2 { get => (byte)(V2Padded >> 1); set => V2Padded = Convert.ToByte(value << 1); }
 
         #endregion
 

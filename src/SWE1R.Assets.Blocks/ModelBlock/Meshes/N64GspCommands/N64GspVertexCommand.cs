@@ -35,7 +35,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         #region Properties (C struct)
 
         public byte N { get => Convert.ToByte(NPadded >> NPadding); set => NPadded = (short)(value << NPadding); }
-        public byte V0PlusN { get => (byte)(V0PlusNPadded >> 1); set => V0PlusNPadded = (byte)(value << 1); }
+        public byte V0PlusN { get => (byte)(V0PlusNPadded >> 1); set => V0PlusNPadded = Convert.ToByte(value << 1); }
 
         #endregion
 

@@ -3,6 +3,7 @@
 using ByteSerialization;
 using ByteSerialization.Attributes;
 using ByteSerialization.IO;
+using System;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 {
@@ -31,7 +32,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         #region Properties (C struct)
 
-        public byte VN { get => (byte)(VNPadded >> 1); set => VNPadded = (byte)(value << 1); }
+        public byte VN { get => (byte)(VNPadded >> 1); set => VNPadded = Convert.ToByte(value << 1); }
 
         #endregion
 

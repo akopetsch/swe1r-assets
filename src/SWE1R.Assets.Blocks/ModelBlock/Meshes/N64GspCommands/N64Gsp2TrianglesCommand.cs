@@ -4,6 +4,7 @@ using ByteSerialization;
 using ByteSerialization.Attributes;
 using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
+using System;
 using System.Collections.Generic;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
@@ -43,12 +44,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         #region Properties (C struct)
 
-        public byte V00 { get => (byte)(V00Padded >> 1); set => V00Padded = (byte)(value << 1); }
-        public byte V01 { get => (byte)(V01Padded >> 1); set => V01Padded = (byte)(value << 1); }
-        public byte V02 { get => (byte)(V02Padded >> 1); set => V02Padded = (byte)(value << 1); }
-        public byte V10 { get => (byte)(V10Padded >> 1); set => V10Padded = (byte)(value << 1); }
-        public byte V11 { get => (byte)(V11Padded >> 1); set => V11Padded = (byte)(value << 1); }
-        public byte V12 { get => (byte)(V12Padded >> 1); set => V12Padded = (byte)(value << 1); }
+        public byte V00 { get => (byte)(V00Padded >> 1); set => V00Padded = Convert.ToByte(value << 1); }
+        public byte V01 { get => (byte)(V01Padded >> 1); set => V01Padded = Convert.ToByte(value << 1); }
+        public byte V02 { get => (byte)(V02Padded >> 1); set => V02Padded = Convert.ToByte(value << 1); }
+        public byte V10 { get => (byte)(V10Padded >> 1); set => V10Padded = Convert.ToByte(value << 1); }
+        public byte V11 { get => (byte)(V11Padded >> 1); set => V11Padded = Convert.ToByte(value << 1); }
+        public byte V12 { get => (byte)(V12Padded >> 1); set => V12Padded = Convert.ToByte(value << 1); }
 
         #endregion
 
