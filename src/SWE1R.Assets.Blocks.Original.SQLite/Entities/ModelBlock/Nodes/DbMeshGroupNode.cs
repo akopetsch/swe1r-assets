@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    [Table($"{nameof(Model)}_{nameof(MeshGroupNode)}")]
+    [Table($"{nameof(Model)}_{nameof(FlaggedNode)}_{nameof(MeshGroupNode)}")]
     public class DbMeshGroupNode : DbNode<MeshGroupNode>
     {
         public float Bounds_Min_X { get; set; }

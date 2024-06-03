@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    [Table($"{nameof(Model)}_{nameof(TransformedComputedNode)}")]
+    [Table($"{nameof(Model)}_{nameof(FlaggedNode)}_{nameof(TransformedComputedNode)}")]
     public class DbTransformedComputedNode : DbNode<TransformedComputedNode>
     {
         public short Word1 { get; set; }

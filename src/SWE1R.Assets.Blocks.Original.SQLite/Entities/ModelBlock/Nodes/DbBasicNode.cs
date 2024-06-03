@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    [Table($"{nameof(Model)}_{nameof(BasicNode)}")]
+    [Table($"{nameof(Model)}_{nameof(FlaggedNode)}_{nameof(BasicNode)}")]
     public class DbBasicNode : DbNode<BasicNode>
     {
         public override bool Equals(object obj)

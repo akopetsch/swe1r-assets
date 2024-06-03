@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    [Table($"{nameof(Model)}_{nameof(LodSelectorNode)}")]
+    [Table($"{nameof(Model)}_{nameof(FlaggedNode)}_{nameof(LodSelectorNode)}")]
     public class DbLodSelectorNode : DbNode<LodSelectorNode>
     {
         public float Floats0 { get; set; }

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    [Table($"{nameof(Model)}_{nameof(TransformedWithPivotNode)}")]
+    [Table($"{nameof(Model)}_{nameof(FlaggedNode)}_{nameof(TransformedWithPivotNode)}")]
     public class DbTransformedWithPivotNode : DbNode<TransformedWithPivotNode>
     {
         public float Matrix_11 { get; set; }

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    [Table($"{nameof(Model)}_{nameof(SelectorNode)}")]
+    [Table($"{nameof(Model)}_{nameof(FlaggedNode)}_{nameof(SelectorNode)}")]
     public class DbSelectorNode : DbNode<SelectorNode>
     {
         public int Int { get; set; }
