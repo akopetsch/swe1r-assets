@@ -7,7 +7,15 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 {
     /// <summary>
-    /// <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L266">SWR_MODEL_Section5_b</see>
+    /// See also:
+    /// <list type="bullet">
+    ///   <item>
+    ///     <see href="https://github.com/akopetsch/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types.h#L1452">
+    ///       github.com - akopetsch/SW_RACER_RE - types.h - swrModel_MaterialTextureChild</see></item>
+    ///   <item>
+    ///     <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L266">
+    ///       github.com - akopetsch/Sw_Racer - Swr_Model.h - SWR_MODEL_Section5_b</see></item>
+    /// </list>
     /// </summary>
     public class MaterialTextureChild : ICustomSerializable
     {
