@@ -17,14 +17,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
     {
         #region Fields (const)
 
-        private const int VerticesCountPadding = 4;
+        private const int NPadding = 4;
 
         #endregion
 
         #region Properties (serialized)
 
         [Order(0)]
-        private short VerticesCountPadded { get; set; } // TODO: implement BitFieldAttribute in BinarySerialization
+        private short NPadded { get; set; } // TODO: implement BitFieldAttribute in BinarySerialization
         [Order(1)]
         public byte V0PlusN { get; set; }
         [Order(2)]
@@ -34,10 +34,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         #region Properties (abstraction)
 
-        public byte VerticesCount
+        public byte N
         {
-            get => Convert.ToByte(VerticesCountPadded >> VerticesCountPadding);
-            set => VerticesCountPadded = (short)(value << VerticesCountPadding);
+            get => Convert.ToByte(NPadded >> NPadding);
+            set => NPadded = (short)(value << NPadding);
         }
 
         #endregion
@@ -53,7 +53,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.VertexIndices
 
         public override string ToString() =>
             $"({Byte} " +
-            $"{nameof(VerticesCount)} = {VerticesCount}, " +
+            $"{nameof(N)} = {N}, " +
             $"{nameof(V0PlusN)} = {V0PlusN}, " +
             $"{nameof(V)} = {V})";
 

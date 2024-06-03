@@ -9,7 +9,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
     [Table("Model_N64GspVertexCommand")]
     public class DbN64GspVertexCommand : DbBlockItemStructure<N64GspVertexCommand>
     {
-        public byte VerticesCount { get; set; }
+        public byte N { get; set; }
         public int MaxIndex { get; set; }
         public int P_V { get; set; }
 
@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
 
             var c = (N64GspVertexCommand)node.Value;
 
-            VerticesCount = c.VerticesCount;
+            N = c.N;
             MaxIndex = c.V0PlusN;
             P_V = GetValuePosition(node.Graph, c.V.Value);
         }
@@ -31,7 +31,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
             if (!base.Equals(_other))
                 return false;
 
-            if (VerticesCount != _other.VerticesCount) return false;
+            if (N != _other.N) return false;
             if (MaxIndex != _other.MaxIndex) return false;
             if (P_V != _other.P_V) return false;
             
@@ -47,6 +47,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.VertexI
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), VerticesCount, MaxIndex, P_V);
+            HashCode.Combine(base.GetHashCode(), N, MaxIndex, P_V);
     }
 }

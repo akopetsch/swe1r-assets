@@ -105,12 +105,12 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         int v0 = vertexCommand.V.Index.Value;
                         int distinctIndicesCount = vertexBuffer.Indices.Distinct().Count();
 
-                        // VerticesCount
-                        Assert.True(vertexCommand.VerticesCount != 0);
+                        // N
+                        Assert.True(vertexCommand.N != 0);
                         if (i != 0)
-                            Assert.True(vertexCommand.VerticesCount == distinctIndicesCount);
+                            Assert.True(vertexCommand.N == distinctIndicesCount);
                         else
-                            Assert.True(vertexCommand.VerticesCount == distinctIndicesCount - v0);
+                            Assert.True(vertexCommand.N == distinctIndicesCount - v0);
 
                         // NextIndicesBase
                         Assert.True(vertexCommand.V0PlusN == vertexBuffer.NextIndicesBase);
