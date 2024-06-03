@@ -32,7 +32,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             get => Value as Material;
             set => Value = value;
         }
-        public TransformedWithPivotNode TransformableD065
+        public TransformedWithPivotNode TransformedWithPivotNode
         {
             get => Value as TransformedWithPivotNode;
             set => Value = value;

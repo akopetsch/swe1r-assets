@@ -1,13 +1,14 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    [Table("Model_Node5065")]
-    public class DbNode5065 : DbNode<SelectorNode>
+    [Table($"{nameof(Model)}_{nameof(SelectorNode)}")]
+    public class DbSelectorNode : DbNode<SelectorNode>
     {
         public int Int { get; set; }
 
@@ -22,7 +23,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
         public override bool Equals(DbBlockItemStructure<SelectorNode> other)
         {
-            var _other = (DbNode5065)other;
+            var _other = (DbSelectorNode)other;
 
             if (!base.Equals(_other))
                 return false;
@@ -34,8 +35,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
         public override bool Equals(object obj)
         {
-            if (obj is DbNode5065)
-                return this.Equals((DbNode5065)obj);
+            if (obj is DbSelectorNode)
+                return this.Equals((DbSelectorNode)obj);
             else
                 return base.Equals(obj);
         }

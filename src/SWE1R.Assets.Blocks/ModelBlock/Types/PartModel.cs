@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         public TransformedWithPivotNode Node0 => Nodes[0].FlaggedNode as TransformedWithPivotNode;
         public FlaggedNode Node0_Child => Node0.Children.First() as FlaggedNode;
-        public FlaggedNode Node0_D065 => Node0.Children.First() as TransformedWithPivotNode;
+        public FlaggedNode Node0_TransformedWithPivot => Node0.Children.First() as TransformedWithPivotNode;
 
         public PartModelKind Kind
         {
@@ -25,11 +25,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
                 }
                 else
                 {
-                    if (Node0_D065 != null)
-                        if (Node0_D065.Children.Count == 8)
-                            return PartModelKind.Unk_D065_Shatter;
+                    if (Node0_TransformedWithPivot != null)
+                        if (Node0_TransformedWithPivot.Children.Count == 8)
+                            return PartModelKind.Unk_TransformedWithPivot_Shatter;
                         else
-                            return PartModelKind.Unk_D065;
+                            return PartModelKind.Unk_TransformedWithPivot;
                     else
                         return PartModelKind.Other;
                 }
@@ -49,14 +49,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         public override bool HasExtraAlignment(FlaggedNode fn, ByteSerializerGraph g)
         {
-            if (Kind == PartModelKind.Unk_D065_Shatter)
-                if (Node0_D065.Children.Skip(1).Contains(fn))
+            if (Kind == PartModelKind.Unk_TransformedWithPivot_Shatter)
+                if (Node0_TransformedWithPivot.Children.Skip(1).Contains(fn))
                     return true;
             return false;
         }
 
         public override bool HasExtraAlignment(Animation n, ByteSerializerGraph g) =>
-            Kind == PartModelKind.Unk_D065_Shatter && n == Animations.First();
+            Kind == PartModelKind.Unk_TransformedWithPivot_Shatter && n == Animations.First();
 
         #endregion
     }

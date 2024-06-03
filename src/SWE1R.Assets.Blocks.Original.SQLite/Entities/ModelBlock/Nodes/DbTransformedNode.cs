@@ -1,13 +1,14 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    [Table("Model_NodeD065")]
-    public class DbNodeD065 : DbNode<TransformedWithPivotNode>
+    [Table($"{nameof(Model)}_{nameof(TransformedNode)}")]
+    public class DbTransformedNode : DbNode<TransformedNode>
     {
         public float Matrix_11 { get; set; }
         public float Matrix_12 { get; set; }
@@ -21,15 +22,12 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
         public float Matrix_32 { get; set; }
         public float Matrix_33 { get; set; }
         public float Matrix_34 { get; set; }
-        public float Vector_X { get; set; }
-        public float Vector_Y { get; set; }
-        public float Vector_Z { get; set; }
-        
+
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
 
-            var n = (TransformedWithPivotNode)node.Value;
+            var n = (TransformedNode)node.Value;
 
             Matrix_11 = n.Matrix[0, 0];
             Matrix_12 = n.Matrix[0, 1];
@@ -43,14 +41,11 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             Matrix_32 = n.Matrix[2, 1];
             Matrix_33 = n.Matrix[2, 2];
             Matrix_34 = n.Matrix[2, 3];
-            Vector_X = n.Vector.X;
-            Vector_Y = n.Vector.Y;
-            Vector_Z = n.Vector.Z;
         }
 
-        public override bool Equals(DbBlockItemStructure<TransformedWithPivotNode> other)
+        public override bool Equals(DbBlockItemStructure<TransformedNode> other)
         {
-            var _other = (DbNodeD065)other;
+            var _other = (DbTransformedNode)other;
 
             if (!base.Equals(_other))
                 return false;
@@ -67,17 +62,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             if (Matrix_32 != _other.Matrix_32) return false;
             if (Matrix_33 != _other.Matrix_33) return false;
             if (Matrix_34 != _other.Matrix_34) return false;
-            if (Vector_X != _other.Vector_X) return false;
-            if (Vector_Y != _other.Vector_Y) return false;
-            if (Vector_Z != _other.Vector_Z) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbNodeD065)
-                return this.Equals((DbNodeD065)obj);
+            if (obj is DbTransformedNode)
+                return this.Equals((DbTransformedNode)obj);
             else
                 return base.Equals(obj);
         }
@@ -86,7 +78,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             HashCode.Combine(base.GetHashCode(),
                 HashCode.Combine(Matrix_11, Matrix_12, Matrix_13, Matrix_14),
                 HashCode.Combine(Matrix_21, Matrix_22, Matrix_23, Matrix_24),
-                HashCode.Combine(Matrix_31, Matrix_32, Matrix_33, Matrix_34),
-                HashCode.Combine(Vector_X, Vector_Y, Vector_Z));
+                HashCode.Combine(Matrix_31, Matrix_32, Matrix_33, Matrix_34));
     }
 }

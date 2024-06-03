@@ -11,9 +11,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
     {
         #region Properties (helper)
 
-        public TransformedWithPivotNode D065 => Nodes[0].FlaggedNode as TransformedWithPivotNode;
-        public SelectorNode D065_5065 => D065?.Children[0] as SelectorNode;
-        public BasicNode D065_5065_5064 => D065_5065?.Children.ElementAtOrDefault(1) as BasicNode;
+        public TransformedWithPivotNode TransformedWithPivot => Nodes[0].FlaggedNode as TransformedWithPivotNode;
+        public SelectorNode TransformedWithPivot_Selector => TransformedWithPivot?.Children[0] as SelectorNode;
+        public BasicNode TransformedWithPivot_Selector_Basic => TransformedWithPivot_Selector?.Children.ElementAtOrDefault(1) as BasicNode;
 
         #endregion
 
@@ -27,7 +27,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
         #region Methods (serialization)
 
         public override bool HasExtraAlignment(FlaggedNode fn, ByteSerializerGraph g) => 
-            D065_5065_5064?.Children.Skip(1).Contains(fn) ?? false;
+            TransformedWithPivot_Selector_Basic?.Children.Skip(1).Contains(fn) ?? false;
 
         public override bool HasExtraAlignment(Animation n, ByteSerializerGraph g) => 
             n == Animations?.First();

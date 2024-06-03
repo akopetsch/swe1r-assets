@@ -7,8 +7,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
         RacerLod1,
         RacerLod2,
         UpgradePart,
-        Unk_D065,
-        Unk_D065_Shatter,
+        Unk_TransformedWithPivot,
+        Unk_TransformedWithPivot_Shatter,
         Other,
     }
 }

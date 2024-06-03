@@ -1,13 +1,14 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    [Table("Model_NodeD066")]
-    public class DbNodeD066 : DbNode<TransformedComputedNode>
+    [Table($"{nameof(Model)}_{nameof(TransformedComputedNode)}")]
+    public class DbTransformedComputedNode : DbNode<TransformedComputedNode>
     {
         public short Word1 { get; set; }
         public short Word2 { get; set; }
@@ -30,7 +31,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
         public override bool Equals(DbBlockItemStructure<TransformedComputedNode> other)
         {
-            var _other = (DbNodeD066)other;
+            var _other = (DbTransformedComputedNode)other;
 
             if (!base.Equals(_other))
                 return false;
@@ -46,8 +47,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
         public override bool Equals(object obj)
         {
-            if (obj is DbNodeD066)
-                return this.Equals((DbNodeD066)obj);
+            if (obj is DbTransformedComputedNode)
+                return this.Equals((DbTransformedComputedNode)obj);
             else
                 return base.Equals(obj);
         }

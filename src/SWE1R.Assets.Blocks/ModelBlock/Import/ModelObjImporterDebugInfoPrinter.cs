@@ -29,23 +29,23 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
         public void PrintImportResult()
         {
-            MeshGroupNode meshGroup3064 = ModelObjImporter.MeshGroup3064;
-            for (int i = 0; i < meshGroup3064.Meshes.Count; i++)
-                Console.WriteLine(GetMeshInfoString(i, meshGroup3064.Meshes[i]));
-            Console.WriteLine(GetSumInfoString(meshGroup3064));
+            MeshGroupNode meshGroupNode = ModelObjImporter.MeshGroupNode;
+            for (int i = 0; i < meshGroupNode.Meshes.Count; i++)
+                Console.WriteLine(GetMeshInfoString(i, meshGroupNode.Meshes[i]));
+            Console.WriteLine(GetSumInfoString(meshGroupNode));
         }
 
         private string GetMeshInfoString(int i, Mesh mesh) =>
             $"[{i}] {GetInfoString(mesh.Vertices.Count, mesh.CommandList.Count)}";
 
-        private string GetSumInfoString(MeshGroupNode meshGroup3064) =>
-            $"total: {GetInfoString(GetVerticesCount(meshGroup3064), GetCommandsCount(meshGroup3064))}";
+        private string GetSumInfoString(MeshGroupNode meshGroupNode) =>
+            $"total: {GetInfoString(GetVerticesCount(meshGroupNode), GetCommandsCount(meshGroupNode))}";
 
-        private int GetVerticesCount(MeshGroupNode meshGroup3064) =>
-            meshGroup3064.Meshes.Sum(m => m.Vertices.Count);
+        private int GetVerticesCount(MeshGroupNode meshGroupNode) =>
+            meshGroupNode.Meshes.Sum(m => m.Vertices.Count);
 
-        private int GetCommandsCount(MeshGroupNode meshGroup3064) =>
-            meshGroup3064.Meshes.Sum(m => m.CommandList.Count);
+        private int GetCommandsCount(MeshGroupNode meshGroupNode) =>
+            meshGroupNode.Meshes.Sum(m => m.CommandList.Count);
 
         private string GetInfoString(int verticesCount, int commandsCount) =>
             $"{nameof(verticesCount)} = {verticesCount}, " +

@@ -28,7 +28,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
         {
             var headerNodesGraph = Value.GetHeaderFlaggedNodes().SelectMany(x => x.GetSelfAndDescendants()).ToList();
 
-            Assert.True(Value.GetAnimationsTransformableD065s().All(x => headerNodesGraph.Contains(x)));
+            Assert.True(Value.GetAnimationsTransformedWithPivotNodes().All(x => headerNodesGraph.Contains(x)));
             //Assert.True(Value.GetAltNFlaggedNodes().All(x => headerNodesGraph.Contains(x))); // sometimes fails
 
             // Material, MaterialTexture (which are also indirectly referenced from Animation)

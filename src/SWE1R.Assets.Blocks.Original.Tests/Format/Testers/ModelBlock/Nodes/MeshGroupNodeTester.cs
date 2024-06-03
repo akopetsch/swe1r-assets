@@ -5,7 +5,7 @@ using SWE1R.Assets.Blocks.Vectors;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Nodes
 {
-    public class MeshGroup3064Tester : Tester<MeshGroupNode>
+    public class MeshGroupNodeTester : Tester<MeshGroupNode>
     {
         public override void Test()
         {

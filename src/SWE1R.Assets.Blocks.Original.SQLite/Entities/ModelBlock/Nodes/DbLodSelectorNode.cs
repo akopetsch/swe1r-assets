@@ -1,13 +1,14 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    [Table("Model_Node5066")]
-    public class DbNode5066 : DbNode<LodSelectorNode>
+    [Table($"{nameof(Model)}_{nameof(LodSelectorNode)}")]
+    public class DbLodSelectorNode : DbNode<LodSelectorNode>
     {
         public float Floats0 { get; set; }
         public float Floats1 { get; set; }
@@ -42,7 +43,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
         public override bool Equals(DbBlockItemStructure<LodSelectorNode> other)
         {
-            var _other = (DbNode5066)other;
+            var _other = (DbLodSelectorNode)other;
 
             if (!base.Equals(_other))
                 return false;
@@ -64,8 +65,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
         public override bool Equals(object obj)
         {
-            if (obj is DbNode5066)
-                return this.Equals((DbNode5066)obj);
+            if (obj is DbLodSelectorNode)
+                return this.Equals((DbLodSelectorNode)obj);
             else
                 return base.Equals(obj);
         }

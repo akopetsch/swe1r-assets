@@ -1,13 +1,14 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
-    [Table("Model_Node3064")]
-    public class DbNode3064 : DbNode<MeshGroupNode>
+    [Table($"{nameof(Model)}_{nameof(MeshGroupNode)}")]
+    public class DbMeshGroupNode : DbNode<MeshGroupNode>
     {
         public float Bounds_Min_X { get; set; }
         public float Bounds_Min_Y { get; set; }
@@ -34,7 +35,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
         public override bool Equals(DbBlockItemStructure<MeshGroupNode> other)
         {
-            var _other = (DbNode3064)other;
+            var _other = (DbMeshGroupNode)other;
 
             if (!base.Equals(_other))
                 return false;
@@ -52,8 +53,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
         public override bool Equals(object obj)
         {
-            if (obj is DbNode3064)
-                return this.Equals((DbNode3064)obj);
+            if (obj is DbMeshGroupNode)
+                return this.Equals((DbMeshGroupNode)obj);
             else
                 return base.Equals(obj);
         }

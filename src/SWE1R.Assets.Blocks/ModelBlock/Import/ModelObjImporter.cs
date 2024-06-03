@@ -50,7 +50,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
         #region Properties (output)
 
         public ObjLoadResult ObjLoadResult { get; private set; }
-        public MeshGroupNode MeshGroup3064 { get; private set; }
+        public MeshGroupNode MeshGroupNode { get; private set; }
 
         #endregion
 
@@ -95,7 +95,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             ObjLoadResult = new ObjLoaderFactory()
                 .Create(new MaterialStreamProvider(OpenFileStreamDelegate)).Load(ObjStream);
 
-            MeshGroup3064 = new MeshGroupNode() {
+            MeshGroupNode = new MeshGroupNode() {
                 Bitfield1 = -1,
                 Bitfield2 = -1,
                 Children = new List<INode>(),
@@ -105,11 +105,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 if (objGroup.Faces.Count > 0)
                 {
                     List<Mesh> meshes = ImportObjGroup(objGroup);
-                    MeshGroup3064.Children.AddRange(meshes);
+                    MeshGroupNode.Children.AddRange(meshes);
                 }
             }
-            MeshGroup3064.UpdateChildrenCount();
-            MeshGroup3064.UpdateBounds();
+            MeshGroupNode.UpdateChildrenCount();
+            MeshGroupNode.UpdateBounds();
 
             _debugInfoPrinter?.PrintImportResult();
         }

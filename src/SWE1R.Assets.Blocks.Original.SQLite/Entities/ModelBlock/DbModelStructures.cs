@@ -36,13 +36,13 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         public List<DbMesh> Meshes { get; set; }
         public List<DbVertex> Vertices { get; set; }
 
-        public List<DbNode3064> Nodes3064 { get; set; }
-        public List<DbNode5064> Nodes5064 { get; set; }
-        public List<DbNode5065> Nodes5065 { get; set; }
-        public List<DbNode5066> Nodes5066 { get; set; }
-        public List<DbNodeD064> NodesD064 { get; set; }
-        public List<DbNodeD065> NodesD065 { get; set; }
-        public List<DbNodeD066> NodesD066 { get; set; }
+        public List<DbMeshGroupNode> Nodes_MeshGroup { get; set; }
+        public List<DbBasicNode> Nodes_Basic { get; set; }
+        public List<DbSelectorNode> Nodes_Selector { get; set; }
+        public List<DbLodSelectorNode> Nodes_LodSelector { get; set; }
+        public List<DbTransformedNode> Nodes_Transformed { get; set; }
+        public List<DbTransformedWithPivotNode> Nodes_TransformedWithPivot { get; set; }
+        public List<DbTransformedComputedNode> Nodes_TransformedComputed { get; set; }
 
         public List<DbModelHeader> Models { get; set; }
         public List<DbModelHeaderNode> HeaderNodes { get; set; }
@@ -82,13 +82,13 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Meshes = GetStructures(context.Meshes);
             Vertices = GetStructures(context.Vertices);
 
-            Nodes3064 = GetStructures(context.Nodes3064);
-            Nodes5064 = GetStructures(context.Nodes5064);
-            Nodes5065 = GetStructures(context.Nodes5065);
-            Nodes5066 = GetStructures(context.Nodes5066);
-            NodesD064 = GetStructures(context.NodesD064);
-            NodesD065 = GetStructures(context.NodesD065);
-            NodesD066 = GetStructures(context.NodesD066);
+            Nodes_MeshGroup = GetStructures(context.Nodes_MeshGroup);
+            Nodes_Basic = GetStructures(context.Nodes_Basic);
+            Nodes_Selector = GetStructures(context.Nodes_Selector);
+            Nodes_LodSelector = GetStructures(context.Nodes_LodSelector);
+            Nodes_Transformed = GetStructures(context.Nodes_Transformed);
+            Nodes_TransformedWithPivot = GetStructures(context.Nodes_TransformedWithPivot);
+            Nodes_TransformedComputed = GetStructures(context.Nodes_TransformedComputed);
 
             Models = GetStructures(context.Headers);
             HeaderNodes = GetStructures(context.HeaderNodes);
@@ -117,17 +117,17 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Meshes = GetStructures<Mesh, DbMesh>(g);
             Vertices = GetStructures<Vertex, DbVertex>(g);
 
-            Nodes3064 = GetStructures<MeshGroupNode, DbNode3064>(g);
-            Nodes5064 = GetStructures<BasicNode, DbNode5064>(g);
-            Nodes5065 = GetStructures<SelectorNode, DbNode5065>(g);
-            Nodes5066 = GetStructures<LodSelectorNode, DbNode5066>(g);
-            NodesD064 = GetStructures<TransformedNode, DbNodeD064>(g);
-            NodesD065 = GetStructures<TransformedWithPivotNode, DbNodeD065>(g);
-            NodesD066 = GetStructures<TransformedComputedNode, DbNodeD066>(g);
+            Nodes_MeshGroup = GetStructures<MeshGroupNode, DbMeshGroupNode>(g);
+            Nodes_Basic = GetStructures<BasicNode, DbBasicNode>(g);
+            Nodes_Selector = GetStructures<SelectorNode, DbSelectorNode>(g);
+            Nodes_LodSelector = GetStructures<LodSelectorNode, DbLodSelectorNode>(g);
+            Nodes_Transformed = GetStructures<TransformedNode, DbTransformedNode>(g);
+            Nodes_TransformedWithPivot = GetStructures<TransformedWithPivotNode, DbTransformedWithPivotNode>(g);
+            Nodes_TransformedComputed = GetStructures<TransformedComputedNode, DbTransformedComputedNode>(g);
 
             Models = GetStructures<Model, DbModelHeader>(g);
             HeaderNodes = GetStructures<FlaggedNodeOrInteger, DbModelHeaderNode>(g);
-            HeaderAltN = GetStructures<FlaggedNodeOrGroup5066ChildReference, DbModelHeaderAltN>(g);
+            HeaderAltN = GetStructures<FlaggedNodeOrLodSelectorNodeChildReference, DbModelHeaderAltN>(g);
             Data_LStr = GetStructures<LightStreakOrInteger, DbDataLStr>(g, x => x.LightStreak != null);
             Data_Int = GetStructures<LightStreakOrInteger, DbDataInt>(g, x => x.Integer.HasValue);
         }
@@ -152,13 +152,13 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             if (!Meshes.SequenceEqual(other.Meshes)) return false;
             if (!Vertices.SequenceEqual(other.Vertices)) return false;
 
-            if (!Nodes3064.SequenceEqual(other.Nodes3064)) return false;
-            if (!Nodes5064.SequenceEqual(other.Nodes5064)) return false;
-            if (!Nodes5065.SequenceEqual(other.Nodes5065)) return false;
-            if (!Nodes5066.SequenceEqual(other.Nodes5066)) return false;
-            if (!NodesD064.SequenceEqual(other.NodesD064)) return false;
-            if (!NodesD065.SequenceEqual(other.NodesD065)) return false;
-            if (!NodesD066.SequenceEqual(other.NodesD066)) return false;
+            if (!Nodes_MeshGroup.SequenceEqual(other.Nodes_MeshGroup)) return false;
+            if (!Nodes_Basic.SequenceEqual(other.Nodes_Basic)) return false;
+            if (!Nodes_Selector.SequenceEqual(other.Nodes_Selector)) return false;
+            if (!Nodes_LodSelector.SequenceEqual(other.Nodes_LodSelector)) return false;
+            if (!Nodes_Transformed.SequenceEqual(other.Nodes_Transformed)) return false;
+            if (!Nodes_TransformedWithPivot.SequenceEqual(other.Nodes_TransformedWithPivot)) return false;
+            if (!Nodes_TransformedComputed.SequenceEqual(other.Nodes_TransformedComputed)) return false;
 
             if (!Models.SequenceEqual(other.Models)) return false;
             if (!HeaderNodes.SequenceEqual(other.HeaderNodes)) return false;

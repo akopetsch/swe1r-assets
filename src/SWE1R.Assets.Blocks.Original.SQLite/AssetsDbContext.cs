@@ -41,13 +41,13 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         public DbSet<DbMesh> Meshes { get; set; }
         public DbSet<DbVertex> Vertices { get; set; }
 
-        public DbSet<DbNode3064> Nodes3064 { get; set; }
-        public DbSet<DbNode5064> Nodes5064 { get; set; }
-        public DbSet<DbNode5065> Nodes5065 { get; set; }
-        public DbSet<DbNode5066> Nodes5066 { get; set; }
-        public DbSet<DbNodeD064> NodesD064 { get; set; }
-        public DbSet<DbNodeD065> NodesD065 { get; set; }
-        public DbSet<DbNodeD066> NodesD066 { get; set; }
+        public DbSet<DbMeshGroupNode> Nodes_MeshGroup { get; set; }
+        public DbSet<DbBasicNode> Nodes_Basic { get; set; }
+        public DbSet<DbSelectorNode> Nodes_Selector { get; set; }
+        public DbSet<DbLodSelectorNode> Nodes_LodSelector { get; set; }
+        public DbSet<DbTransformedNode> Nodes_Transformed { get; set; }
+        public DbSet<DbTransformedWithPivotNode> Nodes_TransformedWithPivot { get; set; }
+        public DbSet<DbTransformedComputedNode> Nodes_TransformedComputed { get; set; }
         
         public DbSet<DbModelHeader> Headers { get; set; }
         public DbSet<DbModelHeaderNode> HeaderNodes { get; set; }
@@ -105,13 +105,13 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
             Meshes.AddRange(dbModelStructures.Meshes);
             Vertices.AddRange(dbModelStructures.Vertices);
 
-            Nodes3064.AddRange(dbModelStructures.Nodes3064);
-            Nodes5064.AddRange(dbModelStructures.Nodes5064);
-            Nodes5065.AddRange(dbModelStructures.Nodes5065);
-            Nodes5066.AddRange(dbModelStructures.Nodes5066);
-            NodesD064.AddRange(dbModelStructures.NodesD064);
-            NodesD065.AddRange(dbModelStructures.NodesD065);
-            NodesD066.AddRange(dbModelStructures.NodesD066);
+            Nodes_MeshGroup.AddRange(dbModelStructures.Nodes_MeshGroup);
+            Nodes_Basic.AddRange(dbModelStructures.Nodes_Basic);
+            Nodes_Selector.AddRange(dbModelStructures.Nodes_Selector);
+            Nodes_LodSelector.AddRange(dbModelStructures.Nodes_LodSelector);
+            Nodes_Transformed.AddRange(dbModelStructures.Nodes_Transformed);
+            Nodes_TransformedWithPivot.AddRange(dbModelStructures.Nodes_TransformedWithPivot);
+            Nodes_TransformedComputed.AddRange(dbModelStructures.Nodes_TransformedComputed);
 
             Headers.AddRange(dbModelStructures.Models);
             HeaderNodes.AddRange(dbModelStructures.HeaderNodes);

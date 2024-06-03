@@ -176,8 +176,8 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
 
                 for (int i = 0; i < model.AltN.Count; i++)
                 {
-                    FlaggedNodeOrGroup5066ChildReference alt = model.AltN[i];
-                    FlaggedNode flaggedNode = alt.Group5066ChildReference?.Group5066 ?? alt.FlaggedNode;
+                    FlaggedNodeOrLodSelectorNodeChildReference alt = model.AltN[i];
+                    FlaggedNode flaggedNode = alt.LodSelectorNodeChildReference?.LodSelectorNode ?? alt.FlaggedNode;
                     DotFile.AppendLine($"{tab}{nameof(Model.AltN)} -> \"{nameof(Model.AltN)}[{i}]\" -> {_nodeNodeNamesByNode[flaggedNode]};");
                 }
             }

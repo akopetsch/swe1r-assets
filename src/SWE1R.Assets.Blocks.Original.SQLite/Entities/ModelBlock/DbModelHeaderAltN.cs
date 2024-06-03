@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
     [Table("Model_HeaderAltN")]
-    public class DbModelHeaderAltN : DbBlockItemStructure<FlaggedNodeOrGroup5066ChildReference>
+    public class DbModelHeaderAltN : DbBlockItemStructure<FlaggedNodeOrLodSelectorNodeChildReference>
     {
         public int Value { get; set; }
 
@@ -15,12 +15,12 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         {
             base.CopyFrom(node);
 
-            var flaggedNodeOrInteger = (FlaggedNodeOrGroup5066ChildReference)node.Value;
-            Value = flaggedNodeOrInteger.Group5066ChildReference?.Pointer ??
+            var flaggedNodeOrInteger = (FlaggedNodeOrLodSelectorNodeChildReference)node.Value;
+            Value = flaggedNodeOrInteger.LodSelectorNodeChildReference?.Pointer ??
                  GetValuePosition(node.Graph, flaggedNodeOrInteger.FlaggedNode);
         }
 
-        public override bool Equals(DbBlockItemStructure<FlaggedNodeOrGroup5066ChildReference> other)
+        public override bool Equals(DbBlockItemStructure<FlaggedNodeOrLodSelectorNodeChildReference> other)
         {
             var _other = (DbModelHeaderAltN)other;
 

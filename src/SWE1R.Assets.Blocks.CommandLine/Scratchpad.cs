@@ -30,7 +30,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
             // inject
             var modelInjector = new UpgradePartModelInjector(
-                modelObjImporter.MeshGroup3064, modelBlock);
+                modelObjImporter.MeshGroupNode, modelBlock);
             modelInjector.Inject();
 
             // save blocks

@@ -6,9 +6,9 @@ using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 namespace SWE1R.Assets.Blocks.CommandLine.ModelInjectors
 {
     public class TatooineTrainingModelInjector(
-        MeshGroupNode meshGroup3064,
+        MeshGroupNode meshGroupNode,
         Block<ModelBlockItem> modelBlock) : 
-        ModelInjector(meshGroup3064, modelBlock)
+        ModelInjector(meshGroupNode, modelBlock)
     {
         protected override ModelBlockItem GetModelBlockItem(Block<ModelBlockItem> modelBlock) =>
             modelBlock[115];

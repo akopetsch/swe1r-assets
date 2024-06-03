@@ -11,7 +11,7 @@ using System;
 
 namespace SWE1R.Assets.Blocks.ModelBlock
 {
-    public class FlaggedNodeOrGroup5066ChildReference
+    public class FlaggedNodeOrLodSelectorNodeChildReference
     {
         #region Properties
 
@@ -30,9 +30,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             set => Value = value;
         }
 
-        public Group5066ChildReference Group5066ChildReference
+        public LodSelectorNodeChildReference LodSelectorNodeChildReference
         {
-            get => Value as Group5066ChildReference;
+            get => Value as LodSelectorNodeChildReference;
             set => Value = value;
         }
 
@@ -44,7 +44,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         {
             public Type GetPropertyType(RecordComponent recordNode) => 
                 recordNode.Root.Value is PoddModel ?
-                    typeof(Group5066ChildReference) : typeof(FlaggedNode);
+                    typeof(LodSelectorNodeChildReference) : typeof(FlaggedNode);
         }
 
         private class ReferenceHelper : IReferenceHelper
@@ -71,7 +71,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             if (FlaggedNode != null)
                 return FlaggedNode.ToString();
             else
-                return Group5066ChildReference.ToString();
+                return LodSelectorNodeChildReference.ToString();
         }
 
         #endregion

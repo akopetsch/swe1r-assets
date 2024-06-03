@@ -23,8 +23,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
             Assert_02();
 
             Assert_17();
-            Assert_17_5066();
-            Assert_17_5066_5064();
+            Assert_17_LodSelector();
+            Assert_17_LodSelector_Basic();
 
             AssertAnimations();
             AssertAltN();
@@ -93,17 +93,17 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 
         private void Assert_02()
         {
-            // 17 / D064
+            // 17 / Transformed
             Assert.True(Value.Node02.Children.Count == 1);
-            Assert.True(Value.Node02_D064 != null);
+            Assert.True(Value.Node02_Transformed != null);
 
-            // 17 / D064 / (5064|D065)
-            Assert.True(Value.Node02_D064.Children.Count == 1);
-            Assert.True(Value.Node02_D064.Children.AreOfType<BasicNode, TransformedWithPivotNode>());
+            // 17 / Transformed / (Basic|TransformedWithPivot)
+            Assert.True(Value.Node02_Transformed.Children.Count == 1);
+            Assert.True(Value.Node02_Transformed.Children.AreOfType<BasicNode, TransformedWithPivotNode>());
 
-            if (Value.Node02_D064_5064 != null)
+            if (Value.Node02_Transformed_Basic != null)
             {
-                int count = Value.Node02_D064_5064.Children.Count;
+                int count = Value.Node02_Transformed_Basic.Children.Count;
                 Assert.True(count == 1 || count == 2 || count == 5);
             }
             // TODO: analyze: Node17 is descendant of Node02
@@ -120,11 +120,11 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
             Assert.True(Value.Node17.Children.AreOfType<LodSelectorNode, BasicNode, TransformedWithPivotNode>());
         }
 
-        private void Assert_17_5066()
+        private void Assert_17_LodSelector()
         {
             bool isAltNChild = Value.AltN
-                .Select(altN => altN.Group5066ChildReference.Group5066).Contains(Value.Node17_5066);
-            bool hasNullChildren = Value.Node17_5066.Children.Contains(null);
+                .Select(altN => altN.LodSelectorNodeChildReference.LodSelectorNode).Contains(Value.Node17_LodSelector);
+            bool hasNullChildren = Value.Node17_LodSelector.Children.Contains(null);
 
             if (Value.AltN.Count == 2)
             {
@@ -138,9 +138,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
             }
         }
 
-        private void Assert_17_5066_5064()
+        private void Assert_17_LodSelector_Basic()
         {
-            Assert.True(Value.Node17_5066.Children.Where(n => n != null).AreOfType<BasicNode, MeshGroupNode>());
+            Assert.True(Value.Node17_LodSelector.Children.Where(n => n != null).AreOfType<BasicNode, MeshGroupNode>());
         }
 
         #endregion
@@ -148,7 +148,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
         private void AssertAltN()
         {
             // count (distinct)
-            var distinct = Value.AltN.Select(altN => altN.Group5066ChildReference.Group5066).Distinct().ToList();
+            var distinct = Value.AltN.Select(altN => altN.LodSelectorNodeChildReference.LodSelectorNode).Distinct().ToList();
             if (Value.AltN.Count == 2)
                 Assert.True(distinct.Count == 1);
             if (Value.AltN.Count == 4)

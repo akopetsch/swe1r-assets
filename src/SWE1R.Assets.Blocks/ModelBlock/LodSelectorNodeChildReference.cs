@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock
 {
-    public class Group5066ChildReference : INodeListener
+    public class LodSelectorNodeChildReference : INodeListener
     {
         #region Properties (serialized)
 
@@ -23,14 +23,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         #region Properties (logical)
 
-        public LodSelectorNode Group5066 { get; set; }
+        public LodSelectorNode LodSelectorNode { get; set; }
 
         public int Index { get; set; }
 
         public FlaggedNode Child
         {
-            get => (FlaggedNode)Group5066.Children[Index];
-            set => Group5066.Children[Index] = value;
+            get => (FlaggedNode)LodSelectorNode.Children[Index];
+            set => LodSelectorNode.Children[Index] = value;
         }
 
         #endregion
@@ -41,7 +41,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         {
             record.Root.AfterSerializing += () => {
                 long pointerPropertyPosition = record.Properties[nameof(Pointer)].Position.Value;
-                var collectionComponent = (CollectionComponent)record.Graph.GetValueComponent(Group5066.Children);
+                var collectionComponent = (CollectionComponent)record.Graph.GetValueComponent(LodSelectorNode.Children);
                 Pointer = Convert.ToInt32(collectionComponent.Elements[Index].Position.Value);
                 record.Writer.AtPosition(pointerPropertyPosition, w => w.Write(Pointer));
             };
@@ -55,7 +55,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         {
             record.Root.AfterDeserializing += () => {
                 ReferenceComponent referenceComponent = record.Graph.References.First(rc => rc.Position == Pointer);
-                Group5066 = (LodSelectorNode)referenceComponent.GetAncestorValue<FlaggedNode>();
+                LodSelectorNode = (LodSelectorNode)referenceComponent.GetAncestorValue<FlaggedNode>();
                 Index = referenceComponent.Get<CollectionElementComponent>().Index;
             };
         }

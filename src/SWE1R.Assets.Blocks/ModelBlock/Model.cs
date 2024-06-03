@@ -39,7 +39,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         
         [Indicator("AltN")]
         [SerializeUntilNullPointer]
-        [Order(4)] public List<FlaggedNodeOrGroup5066ChildReference> AltN { get; set; }
+        [Order(4)] public List<FlaggedNodeOrLodSelectorNodeChildReference> AltN { get; set; }
 
         [Length(4)]
         [Order(5)] private char[] HEnd { get; set; } = "HEnd".ToCharArray();
@@ -59,8 +59,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             Nodes.Select(x => x.FlaggedNode)
             .Where(x => x != null).Distinct().Cast<INode>().ToList() ?? Enumerable.Empty<INode>();
 
-        public IEnumerable<TransformedWithPivotNode> GetAnimationsTransformableD065s() =>
-            Animations?.Select(x => x.TargetOrInteger.Target?.TransformableD065)
+        public IEnumerable<TransformedWithPivotNode> GetAnimationsTransformedWithPivotNodes() =>
+            Animations?.Select(x => x.TargetOrInteger.Target?.TransformedWithPivotNode)
             .Where(x => x != null).Distinct().ToList() ?? Enumerable.Empty<TransformedWithPivotNode>();
 
         public IEnumerable<FlaggedNode> GetAltNFlaggedNodes() =>
@@ -71,7 +71,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         {
             var rootNodes = new List<INode>();
             rootNodes.AddRange(GetHeaderFlaggedNodes());
-            //rootNodes.AddRange(GetAnimationsTransformableD065s()); // is contained in GetHeaderFlaggedNodes anyways
+            //rootNodes.AddRange(GetAnimationsTransformedWithPivotNodes()); // is contained in GetHeaderFlaggedNodes anyways
             rootNodes.AddRange(GetAltNFlaggedNodes());
             List<INode> allNodes = rootNodes.SelectMany(x => x.GetSelfAndDescendants()).ToList();
             return allNodes.AsReadOnly();

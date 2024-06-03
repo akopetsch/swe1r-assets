@@ -6,10 +6,10 @@ using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 namespace SWE1R.Assets.Blocks.CommandLine.ModelInjectors
 {
     public abstract class ModelInjector(
-        MeshGroupNode meshGroup3064,
+        MeshGroupNode meshGroupNode,
         Block<ModelBlockItem> modelBlock)
     {
-        public MeshGroupNode MeshGroup3064 { get; } = meshGroup3064;
+        public MeshGroupNode MeshGroupNode { get; } = meshGroupNode;
         public Block<ModelBlockItem> ModelBlock { get; } = modelBlock;
 
         public void Inject()
@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.ModelInjectors
             // inject model
             FlaggedNode parentNode = GetParentNode(modelBlockItem.Model);
             parentNode.Children.Clear();
-            parentNode.Children.Add(MeshGroup3064);
+            parentNode.Children.Add(MeshGroupNode);
             parentNode.UpdateChildrenCount();
 
             // save block item
