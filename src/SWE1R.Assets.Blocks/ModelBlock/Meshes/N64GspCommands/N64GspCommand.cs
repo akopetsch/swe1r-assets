@@ -11,10 +11,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
     /// <list type="bullet">
     ///   <item>
     ///     <see href="http://n64devkit.square7.ch/header/gbi.htm#:~:text=Graphics%20Commands">
-    ///       n64devkit.square7.ch - 'gbi.h' - 'Graphics Commands'</see></item>
+    ///       n64devkit.square7.ch - gbi.h - 'Graphics Commands'</see></item>
     ///   <item>
     ///     <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L515">
-    ///       github.com - akopetsch/Sw_Racer - 'SWR_MODEL_Section48'</see></item>
+    ///       github.com - akopetsch/Sw_Racer - Swr_Model.h - SWR_MODEL_Section48</see></item>
     /// </list>
     /// </summary>
     [Sizeof(8)]
