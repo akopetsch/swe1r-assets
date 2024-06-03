@@ -7,7 +7,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     /// <summary>
     /// <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L111">SWR_AltN_0x5066</see>
     /// </summary>
-    public class Group5066 : FlaggedNode
+    public class LodSelectorNode : FlaggedNode
     {
         [Order(0), Length(8)] public float[] Floats { get; set; }
         /// <summary>
@@ -18,7 +18,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         /// </summary>
         [Order(1), Length(3)] public int[] Ints { get; set; }
 
-        public Group5066() : base() =>
+        public LodSelectorNode() : base() =>
             Flags = NodeFlags.LodSelectorNode;
     }
 }

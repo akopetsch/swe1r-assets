@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
     [Table("Model_Node5065")]
-    public class DbNode5065 : DbNode<Group5065>
+    public class DbNode5065 : DbNode<SelectorNode>
     {
         public int Int { get; set; }
 
@@ -15,12 +15,12 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
         {
             base.CopyFrom(node);
 
-            var n = (Group5065)node.Value;
+            var n = (SelectorNode)node.Value;
 
             Int = n.Int;
         }
 
-        public override bool Equals(DbBlockItemStructure<Group5065> other)
+        public override bool Equals(DbBlockItemStructure<SelectorNode> other)
         {
             var _other = (DbNode5065)other;
 

@@ -19,13 +19,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     {
         #region Properties (serialized)
 
-        [RecordTypeIdentifier(NodeFlags.MeshGroupNode, typeof(MeshGroup3064))]
-        [RecordTypeIdentifier(NodeFlags.BasicNode, typeof(Group5064))]
-        [RecordTypeIdentifier(NodeFlags.SelectorNode, typeof(Group5065))]
-        [RecordTypeIdentifier(NodeFlags.LodSelectorNode, typeof(Group5066))]
-        [RecordTypeIdentifier(NodeFlags.TransformedNode, typeof(TransformableD064))]
-        [RecordTypeIdentifier(NodeFlags.TransformedWithPivotNode, typeof(TransformableD065))]
-        [RecordTypeIdentifier(NodeFlags.TransformedComputedNode, typeof(UnknownD066))]
+        [RecordTypeIdentifier(NodeFlags.MeshGroupNode, typeof(MeshGroupNode))]
+        [RecordTypeIdentifier(NodeFlags.BasicNode, typeof(BasicNode))]
+        [RecordTypeIdentifier(NodeFlags.SelectorNode, typeof(SelectorNode))]
+        [RecordTypeIdentifier(NodeFlags.LodSelectorNode, typeof(LodSelectorNode))]
+        [RecordTypeIdentifier(NodeFlags.TransformedNode, typeof(TransformedNode))]
+        [RecordTypeIdentifier(NodeFlags.TransformedWithPivotNode, typeof(TransformedWithPivotNode))]
+        [RecordTypeIdentifier(NodeFlags.TransformedComputedNode, typeof(TransformedComputedNode))]
         // TODO: use NodeFlags.GetFlaggedNodeType()
         [Order(0)]
         public NodeFlags Flags { get; protected set; }

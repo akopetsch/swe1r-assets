@@ -64,9 +64,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                 if (recordAncestorsTypes.SequenceEqual(new Type[]
                 {
                     typeof(Mesh),
-                    typeof(MeshGroup3064),
-                    typeof(TransformableD065),
-                    typeof(Group5064),
+                    typeof(MeshGroupNode),
+                    typeof(TransformedWithPivotNode),
+                    typeof(BasicNode),
                     typeof(FlaggedNodeOrInteger),
                     typeof(ModlModel),
                 }))

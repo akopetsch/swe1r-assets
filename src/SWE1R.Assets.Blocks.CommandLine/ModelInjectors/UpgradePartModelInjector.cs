@@ -6,7 +6,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 namespace SWE1R.Assets.Blocks.CommandLine.ModelInjectors
 {
     public class UpgradePartModelInjector(
-        MeshGroup3064 meshGroup3064,
+        MeshGroupNode meshGroup3064,
         Block<ModelBlockItem> modelBlock) : 
         ModelInjector(meshGroup3064, modelBlock)
     {
@@ -14,6 +14,6 @@ namespace SWE1R.Assets.Blocks.CommandLine.ModelInjectors
             modelBlock[170]; // 170 = Part_Upgrade_TopSpeed_Plug3ThrustCoil
 
         protected override FlaggedNode GetParentNode(Model model) =>
-            model.GetAllNodes().OfType<TransformableD065>().Single(); // TODO: Children.Clear()?
+            model.GetAllNodes().OfType<TransformedWithPivotNode>().Single(); // TODO: Children.Clear()?
     }
 }

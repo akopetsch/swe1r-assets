@@ -53,9 +53,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
                 .Select(n => n.FlaggedNode.GetType())
                 .Distinct().ToList();
             Assert.True(types.Count == 3);
-            Assert.Contains(typeof(Group5064), types);
-            Assert.Contains(typeof(Group5065), types);
-            Assert.Contains(typeof(TransformableD065), types);
+            Assert.Contains(typeof(BasicNode), types);
+            Assert.Contains(typeof(SelectorNode), types);
+            Assert.Contains(typeof(TransformedWithPivotNode), types);
 
             // properties
             Assert.True(Value.Node02 != null);
@@ -99,7 +99,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 
             // 17 / D064 / (5064|D065)
             Assert.True(Value.Node02_D064.Children.Count == 1);
-            Assert.True(Value.Node02_D064.Children.AreOfType<Group5064, TransformableD065>());
+            Assert.True(Value.Node02_D064.Children.AreOfType<BasicNode, TransformedWithPivotNode>());
 
             if (Value.Node02_D064_5064 != null)
             {
@@ -117,7 +117,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
         {
             int count = Value.Node17.Children.Count;
             Assert.True(count == 1 || count == 3 || count == 7);
-            Assert.True(Value.Node17.Children.AreOfType<Group5066, Group5064, TransformableD065>());
+            Assert.True(Value.Node17.Children.AreOfType<LodSelectorNode, BasicNode, TransformedWithPivotNode>());
         }
 
         private void Assert_17_5066()
@@ -140,7 +140,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 
         private void Assert_17_5066_5064()
         {
-            Assert.True(Value.Node17_5066.Children.Where(n => n != null).AreOfType<Group5064, MeshGroup3064>());
+            Assert.True(Value.Node17_5066.Children.Where(n => n != null).AreOfType<BasicNode, MeshGroupNode>());
         }
 
         #endregion

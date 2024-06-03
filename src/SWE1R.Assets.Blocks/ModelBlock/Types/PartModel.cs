@@ -11,9 +11,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
     {
         #region Properties (helper)
 
-        public TransformableD065 Node0 => Nodes[0].FlaggedNode as TransformableD065;
+        public TransformedWithPivotNode Node0 => Nodes[0].FlaggedNode as TransformedWithPivotNode;
         public FlaggedNode Node0_Child => Node0.Children.First() as FlaggedNode;
-        public FlaggedNode Node0_D065 => Node0.Children.First() as TransformableD065;
+        public FlaggedNode Node0_D065 => Node0.Children.First() as TransformedWithPivotNode;
 
         public PartModelKind Kind
         {

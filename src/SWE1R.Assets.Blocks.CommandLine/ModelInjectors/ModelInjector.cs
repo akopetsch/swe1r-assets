@@ -6,10 +6,10 @@ using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 namespace SWE1R.Assets.Blocks.CommandLine.ModelInjectors
 {
     public abstract class ModelInjector(
-        MeshGroup3064 meshGroup3064,
+        MeshGroupNode meshGroup3064,
         Block<ModelBlockItem> modelBlock)
     {
-        public MeshGroup3064 MeshGroup3064 { get; } = meshGroup3064;
+        public MeshGroupNode MeshGroup3064 { get; } = meshGroup3064;
         public Block<ModelBlockItem> ModelBlock { get; } = modelBlock;
 
         public void Inject()

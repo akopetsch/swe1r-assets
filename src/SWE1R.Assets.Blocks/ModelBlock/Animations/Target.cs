@@ -32,9 +32,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             get => Value as Material;
             set => Value = value;
         }
-        public TransformableD065 TransformableD065
+        public TransformedWithPivotNode TransformableD065
         {
-            get => Value as TransformableD065;
+            get => Value as TransformedWithPivotNode;
             set => Value = value;
         }
 
@@ -58,7 +58,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
                 if (anim.BitmaskNibble == 0b1000 || // 0x08
                     anim.BitmaskNibble == 0b1001 || // 0x09
                     anim.BitmaskNibble == 0b1010)   // 0x0a
-                    return typeof(TransformableD065);
+                    return typeof(TransformedWithPivotNode);
 
                 throw new InvalidOperationException($"Unknown '{nameof(Animation.BitmaskNibble)}'.");
             }

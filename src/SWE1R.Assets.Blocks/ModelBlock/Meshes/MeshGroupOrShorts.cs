@@ -18,9 +18,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         [Reference(ReferenceHandling.HighPriority)]
         [Order(0)] public object Value { get; private set; }
 
-        public MeshGroup3064 MeshGroup
+        public MeshGroupNode MeshGroup
         {
-            get => Value as MeshGroup3064;
+            get => Value as MeshGroupNode;
             set => Value = value;
         }
 
@@ -61,7 +61,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                 var model = (Model)record.Root.Value;
 
                 if (unkCount != 0 && (model is ScenModel || model is PuppModel))
-                    return typeof(MeshGroup3064);
+                    return typeof(MeshGroupNode);
                 else
                     return typeof(short[]);
             }

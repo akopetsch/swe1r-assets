@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
             new ModelFormatTesterFactory().Get(modelBlockItem.Model, context.Graph, AnalyticsFixture).Test();
             RunTesters<Mesh, MeshTester>(context);
             RunTesters<MaterialTexture, MaterialTextureTester>(context);
-            RunTesters<MeshGroup3064, MeshGroup3064Tester>(context);
+            RunTesters<MeshGroupNode, MeshGroup3064Tester>(context);
             AssertReferenceCounts(context);
             AssertVerticesCount(modelBlockItem);
         }
@@ -75,7 +75,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
             Assert.True(GetReferenceCountsToValues<Mapping>(context.Graph).Count >= 1);
 
             // MeshGroup3064 instances do not contain null in Children
-            Assert.True(!context.Graph.GetValues<MeshGroup3064>()
+            Assert.True(!context.Graph.GetValues<MeshGroupNode>()
                 .Where(mg => mg.Children != null)
                 .SelectMany(mg => mg.Children)
                 .Contains(null));

@@ -23,7 +23,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         #region Properties (logical)
 
-        public Group5066 Group5066 { get; set; }
+        public LodSelectorNode Group5066 { get; set; }
 
         public int Index { get; set; }
 
@@ -55,7 +55,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         {
             record.Root.AfterDeserializing += () => {
                 ReferenceComponent referenceComponent = record.Graph.References.First(rc => rc.Position == Pointer);
-                Group5066 = (Group5066)referenceComponent.GetAncestorValue<FlaggedNode>();
+                Group5066 = (LodSelectorNode)referenceComponent.GetAncestorValue<FlaggedNode>();
                 Index = referenceComponent.Get<CollectionElementComponent>().Index;
             };
         }

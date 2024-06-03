@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
     [Table("Model_Node5064")]
-    public class DbNode5064 : DbNode<Group5064>
+    public class DbNode5064 : DbNode<BasicNode>
     {
         public override bool Equals(object obj)
         {

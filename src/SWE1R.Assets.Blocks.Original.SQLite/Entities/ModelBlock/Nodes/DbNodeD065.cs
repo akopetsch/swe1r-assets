@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
     [Table("Model_NodeD065")]
-    public class DbNodeD065 : DbNode<TransformableD065>
+    public class DbNodeD065 : DbNode<TransformedWithPivotNode>
     {
         public float Matrix_11 { get; set; }
         public float Matrix_12 { get; set; }
@@ -29,7 +29,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
         {
             base.CopyFrom(node);
 
-            var n = (TransformableD065)node.Value;
+            var n = (TransformedWithPivotNode)node.Value;
 
             Matrix_11 = n.Matrix[0, 0];
             Matrix_12 = n.Matrix[0, 1];
@@ -48,7 +48,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             Vector_Z = n.Vector.Z;
         }
 
-        public override bool Equals(DbBlockItemStructure<TransformableD065> other)
+        public override bool Equals(DbBlockItemStructure<TransformedWithPivotNode> other)
         {
             var _other = (DbNodeD065)other;
 

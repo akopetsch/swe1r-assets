@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
     [Table("Model_NodeD064")]
-    public class DbNodeD064 : DbNode<TransformableD064>
+    public class DbNodeD064 : DbNode<TransformedNode>
     {
         public float Matrix_11 { get; set; }
         public float Matrix_12 { get; set; }
@@ -26,7 +26,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
         {
             base.CopyFrom(node);
 
-            var n = (TransformableD064)node.Value;
+            var n = (TransformedNode)node.Value;
 
             Matrix_11 = n.Matrix[0, 0];
             Matrix_12 = n.Matrix[0, 1];
@@ -42,7 +42,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             Matrix_34 = n.Matrix[2, 3];
         }
 
-        public override bool Equals(DbBlockItemStructure<TransformableD064> other)
+        public override bool Equals(DbBlockItemStructure<TransformedNode> other)
         {
             var _other = (DbNodeD064)other;
 

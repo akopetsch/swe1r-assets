@@ -27,13 +27,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     {
         private static Dictionary<NodeFlags, Type> flaggedNodeType = new Dictionary<NodeFlags, Type>()
         {
-            { NodeFlags.MeshGroupNode, typeof(MeshGroup3064) },
-            { NodeFlags.BasicNode, typeof(Group5064) },
-            { NodeFlags.SelectorNode, typeof(Group5065) },
-            { NodeFlags.LodSelectorNode, typeof(Group5066) },
-            { NodeFlags.TransformedNode, typeof(TransformableD064) },
-            { NodeFlags.TransformedWithPivotNode, typeof(TransformableD065) },
-            { NodeFlags.TransformedComputedNode, typeof(UnknownD066) },
+            { NodeFlags.MeshGroupNode, typeof(MeshGroupNode) },
+            { NodeFlags.BasicNode, typeof(BasicNode) },
+            { NodeFlags.SelectorNode, typeof(SelectorNode) },
+            { NodeFlags.LodSelectorNode, typeof(LodSelectorNode) },
+            { NodeFlags.TransformedNode, typeof(TransformedNode) },
+            { NodeFlags.TransformedWithPivotNode, typeof(TransformedWithPivotNode) },
+            { NodeFlags.TransformedComputedNode, typeof(TransformedComputedNode) },
         };
 
         public static Type GetFlaggedNodeType(this NodeFlags flags) => flaggedNodeType[flags];

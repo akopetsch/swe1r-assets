@@ -37,8 +37,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
             {
                 case PartModelKind.RacerLod1:
                     Assert.True(Value.Nodes.Count == 2);
-                    Assert.True(Value.Nodes[1].FlaggedNode is Group5065);
-                    Assert.True(Value.Node0_Child is Group5065);
+                    Assert.True(Value.Nodes[1].FlaggedNode is SelectorNode);
+                    Assert.True(Value.Node0_Child is SelectorNode);
                     break;
                 default:
                     Assert.True(Value.Nodes.Count == 5);
@@ -46,7 +46,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
                     Assert.True(Value.Nodes[2].FlaggedNode == null);
                     Assert.True(Value.Nodes[3].FlaggedNode == null);
                     Assert.True(Value.Nodes[4].FlaggedNode == null);
-                    Assert.True(Value.Node0.Children.AreOfType<MeshGroup3064, Group5064, TransformableD065>());
+                    Assert.True(Value.Node0.Children.AreOfType<MeshGroupNode, BasicNode, TransformedWithPivotNode>());
                     break;
             }
         }

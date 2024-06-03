@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
     [Table("Model_NodeD066")]
-    public class DbNodeD066 : DbNode<UnknownD066>
+    public class DbNodeD066 : DbNode<TransformedComputedNode>
     {
         public short Word1 { get; set; }
         public short Word2 { get; set; }
@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
         {
             base.CopyFrom(node);
 
-            var n = (UnknownD066)node.Value;
+            var n = (TransformedComputedNode)node.Value;
 
             Word1 = n.Word1;
             Word2 = n.Word2;
@@ -28,7 +28,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             Vector_Z = n.Vector.Z;
         }
 
-        public override bool Equals(DbBlockItemStructure<UnknownD066> other)
+        public override bool Equals(DbBlockItemStructure<TransformedComputedNode> other)
         {
             var _other = (DbNodeD066)other;
 

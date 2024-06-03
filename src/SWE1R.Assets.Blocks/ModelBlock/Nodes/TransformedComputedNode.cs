@@ -5,7 +5,7 @@ using SWE1R.Assets.Blocks.Vectors;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
 {
-    public class UnknownD066 : FlaggedNode
+    public class TransformedComputedNode : FlaggedNode
     {
         /// <summary>
         /// Always 1 if <see cref="Word2">Word2</see> is 0, otherwise 0.
@@ -23,7 +23,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         /// </summary>
         [Order(2)] public Vector3Single Vector { get; set; }
 
-        public UnknownD066() : base() =>
+        public TransformedComputedNode() : base() =>
             Flags = NodeFlags.TransformedComputedNode;
     }
 }

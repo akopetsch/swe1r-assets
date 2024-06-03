@@ -11,23 +11,23 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
     {
         #region Properties (helper)
 
-        public Group5065 Root => (Group5065)Nodes[0].FlaggedNode;
-        public Group5064 MainModel => (Group5064)Root.Children[0];
-        public TransformableD065 LowPolyModel => (TransformableD065)Root.Children[1];
+        public SelectorNode Root => (SelectorNode)Nodes[0].FlaggedNode;
+        public BasicNode MainModel => (BasicNode)Root.Children[0];
+        public TransformedWithPivotNode LowPolyModel => (TransformedWithPivotNode)Root.Children[1];
         
-        public TransformableD065 Node02 => Nodes[02].FlaggedNode as TransformableD065;
-        public TransformableD064 Node02_D064 => Node02.Children.First() as TransformableD064;
-        public Group5064 Node02_D064_5064 => Node02_D064.Children.First() as Group5064;
+        public TransformedWithPivotNode Node02 => Nodes[02].FlaggedNode as TransformedWithPivotNode;
+        public TransformedNode Node02_D064 => Node02.Children.First() as TransformedNode;
+        public BasicNode Node02_D064_5064 => Node02_D064.Children.First() as BasicNode;
 
-        public TransformableD065 Node10 => Nodes[10].FlaggedNode as TransformableD065;
+        public TransformedWithPivotNode Node10 => Nodes[10].FlaggedNode as TransformedWithPivotNode;
         
-        public TransformableD065 Node17 => Nodes[17].FlaggedNode as TransformableD065;
-        public Group5066 Node17_5066 => Node17.Children.First() as Group5066;
+        public TransformedWithPivotNode Node17 => Nodes[17].FlaggedNode as TransformedWithPivotNode;
+        public LodSelectorNode Node17_5066 => Node17.Children.First() as LodSelectorNode;
 
-        public TransformableD065 Node18 => Nodes[18].FlaggedNode as TransformableD065;
-        public TransformableD065 Node31 => Nodes[31].FlaggedNode as TransformableD065;
-        public TransformableD065 Node34 => Nodes[34].FlaggedNode as TransformableD065;
-        public TransformableD065 Node74 => Nodes[74].FlaggedNode as TransformableD065;
+        public TransformedWithPivotNode Node18 => Nodes[18].FlaggedNode as TransformedWithPivotNode;
+        public TransformedWithPivotNode Node31 => Nodes[31].FlaggedNode as TransformedWithPivotNode;
+        public TransformedWithPivotNode Node34 => Nodes[34].FlaggedNode as TransformedWithPivotNode;
+        public TransformedWithPivotNode Node74 => Nodes[74].FlaggedNode as TransformedWithPivotNode;
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
         {
             if (
                 // Node02
-                n == Node02 && Node02.GetDescendants().OfType<MeshGroup3064>().Any() ||
+                n == Node02 && Node02.GetDescendants().OfType<MeshGroupNode>().Any() ||
                 n == Node02_D064_5064?.Children.ElementAtOrDefault(2) ||
 
                 // Node10
@@ -54,10 +54,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
                 n == Node74 ||
 
                 // Node17
-                (Node17.Children.Contains(n) && n is TransformableD065) ||
+                (Node17.Children.Contains(n) && n is TransformedWithPivotNode) ||
                 Node17_5066.Children.ElementAtOrDefault(3) == n ||
-                Node17_5066.Children.OfType<Group5064>().Any(c => c.Children?.ElementAtOrDefault(1) == n) ||
-                Node17_5066.Children.OfType<Group5064>().Any(c => c.Children?.ElementAtOrDefault(2) == n) ||
+                Node17_5066.Children.OfType<BasicNode>().Any(c => c.Children?.ElementAtOrDefault(1) == n) ||
+                Node17_5066.Children.OfType<BasicNode>().Any(c => c.Children?.ElementAtOrDefault(2) == n) ||
 
                 // Node18
                 (Node18 != null && Node18.Children.ElementAtOrDefault(1) == n) ||
@@ -76,10 +76,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
                 // TODO: clean-up mess
                 var foo =
                     Node17_5066.Children.
-                    OfType<Group5064>().
-                    SelectMany(x => x.GetDescendants().OfType<TransformableD065>()).
+                    OfType<BasicNode>().
+                    SelectMany(x => x.GetDescendants().OfType<TransformedWithPivotNode>()).
                     Distinct().
-                    Where(x => x.Children.Count == 2 && x.Children.OfType<Group5064>().Count() == 2).
+                    Where(x => x.Children.Count == 2 && x.Children.OfType<BasicNode>().Count() == 2).
                     ToList();
                 if (foo.Any(x => n == x.Children.ElementAtOrDefault(1)))
                     return true;

@@ -12,13 +12,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
         #region Properties (serialized)
 
         [Order(0)]
-        public Group5064 Node { get; set; }
+        public BasicNode Node { get; set; }
 
         #endregion
 
         #region Properties (helper)
 
-        public TransformableD065 Skybox => (TransformableD065)Nodes[2].FlaggedNode;
+        public TransformedWithPivotNode Skybox => (TransformedWithPivotNode)Nodes[2].FlaggedNode;
 
         #endregion
 

@@ -20,21 +20,21 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
 
         public override bool HasExtraAlignment(FlaggedNode fn, ByteSerializerGraph g)
         {
-            var altn1 = (AltN[1].FlaggedNode as Group5064);
+            var altn1 = (AltN[1].FlaggedNode as BasicNode);
             if (altn1 != null)
             {
-                TransformableD065 d0, d1;
-                var mg = altn1.Children.OfType<MeshGroup3064>().First();
+                TransformedWithPivotNode d0, d1;
+                var mg = altn1.Children.OfType<MeshGroupNode>().First();
                 if (mg == altn1.Children.Last())
                 {
-                    d0 = altn1.Children[0] as TransformableD065;
-                    d1 = altn1.Children[1] as TransformableD065;
+                    d0 = altn1.Children[0] as TransformedWithPivotNode;
+                    d1 = altn1.Children[1] as TransformedWithPivotNode;
                 }
                 else
                 {
                     int i = altn1.Children.IndexOf(mg);
-                    d0 = altn1.Children.ElementAtOrDefault(i + 1) as TransformableD065;
-                    d1 = altn1.Children.ElementAtOrDefault(i + 2) as TransformableD065;
+                    d0 = altn1.Children.ElementAtOrDefault(i + 1) as TransformedWithPivotNode;
+                    d1 = altn1.Children.ElementAtOrDefault(i + 2) as TransformedWithPivotNode;
                 }
                 if (fn == d0 || fn == d1)
                     return true;

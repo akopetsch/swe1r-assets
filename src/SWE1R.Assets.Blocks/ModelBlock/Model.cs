@@ -59,9 +59,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             Nodes.Select(x => x.FlaggedNode)
             .Where(x => x != null).Distinct().Cast<INode>().ToList() ?? Enumerable.Empty<INode>();
 
-        public IEnumerable<TransformableD065> GetAnimationsTransformableD065s() =>
+        public IEnumerable<TransformedWithPivotNode> GetAnimationsTransformableD065s() =>
             Animations?.Select(x => x.TargetOrInteger.Target?.TransformableD065)
-            .Where(x => x != null).Distinct().ToList() ?? Enumerable.Empty<TransformableD065>();
+            .Where(x => x != null).Distinct().ToList() ?? Enumerable.Empty<TransformedWithPivotNode>();
 
         public IEnumerable<FlaggedNode> GetAltNFlaggedNodes() =>
             AltN?.Select(x => x.FlaggedNode)

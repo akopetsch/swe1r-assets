@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
     [Table("Model_Node3064")]
-    public class DbNode3064 : DbNode<MeshGroup3064>
+    public class DbNode3064 : DbNode<MeshGroupNode>
     {
         public float Bounds_Min_X { get; set; }
         public float Bounds_Min_Y { get; set; }
@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
         {
             base.CopyFrom(node);
 
-            var n = (MeshGroup3064)node.Value;
+            var n = (MeshGroupNode)node.Value;
 
             Bounds_Min_X = n.Bounds.Min.X;
             Bounds_Min_Y = n.Bounds.Min.Y;
@@ -32,7 +32,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             Bounds_Max_Z = n.Bounds.Max.Z;
         }
 
-        public override bool Equals(DbBlockItemStructure<MeshGroup3064> other)
+        public override bool Equals(DbBlockItemStructure<MeshGroupNode> other)
         {
             var _other = (DbNode3064)other;
 

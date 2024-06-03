@@ -11,9 +11,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Types
     {
         #region Properties (helper)
 
-        public TransformableD065 D065 => Nodes[0].FlaggedNode as TransformableD065;
-        public Group5065 D065_5065 => D065?.Children[0] as Group5065;
-        public Group5064 D065_5065_5064 => D065_5065?.Children.ElementAtOrDefault(1) as Group5064;
+        public TransformedWithPivotNode D065 => Nodes[0].FlaggedNode as TransformedWithPivotNode;
+        public SelectorNode D065_5065 => D065?.Children[0] as SelectorNode;
+        public BasicNode D065_5065_5064 => D065_5065?.Children.ElementAtOrDefault(1) as BasicNode;
 
         #endregion
 

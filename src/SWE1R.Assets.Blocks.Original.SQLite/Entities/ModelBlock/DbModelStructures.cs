@@ -117,13 +117,13 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Meshes = GetStructures<Mesh, DbMesh>(g);
             Vertices = GetStructures<Vertex, DbVertex>(g);
 
-            Nodes3064 = GetStructures<MeshGroup3064, DbNode3064>(g);
-            Nodes5064 = GetStructures<Group5064, DbNode5064>(g);
-            Nodes5065 = GetStructures<Group5065, DbNode5065>(g);
-            Nodes5066 = GetStructures<Group5066, DbNode5066>(g);
-            NodesD064 = GetStructures<TransformableD064, DbNodeD064>(g);
-            NodesD065 = GetStructures<TransformableD065, DbNodeD065>(g);
-            NodesD066 = GetStructures<UnknownD066, DbNodeD066>(g);
+            Nodes3064 = GetStructures<MeshGroupNode, DbNode3064>(g);
+            Nodes5064 = GetStructures<BasicNode, DbNode5064>(g);
+            Nodes5065 = GetStructures<SelectorNode, DbNode5065>(g);
+            Nodes5066 = GetStructures<LodSelectorNode, DbNode5066>(g);
+            NodesD064 = GetStructures<TransformedNode, DbNodeD064>(g);
+            NodesD065 = GetStructures<TransformedWithPivotNode, DbNodeD065>(g);
+            NodesD066 = GetStructures<TransformedComputedNode, DbNodeD066>(g);
 
             Models = GetStructures<Model, DbModelHeader>(g);
             HeaderNodes = GetStructures<FlaggedNodeOrInteger, DbModelHeaderNode>(g);

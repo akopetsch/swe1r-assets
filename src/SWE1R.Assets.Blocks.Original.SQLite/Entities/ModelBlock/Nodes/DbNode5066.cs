@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 {
     [Table("Model_Node5066")]
-    public class DbNode5066 : DbNode<Group5066>
+    public class DbNode5066 : DbNode<LodSelectorNode>
     {
         public float Floats0 { get; set; }
         public float Floats1 { get; set; }
@@ -25,7 +25,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
         {
             base.CopyFrom(node);
 
-            var n = (Group5066)node.Value;
+            var n = (LodSelectorNode)node.Value;
 
             Floats0 = n.Floats[0];
             Floats1 = n.Floats[1];
@@ -40,7 +40,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             Ints2 = n.Ints[2];
         }
 
-        public override bool Equals(DbBlockItemStructure<Group5066> other)
+        public override bool Equals(DbBlockItemStructure<LodSelectorNode> other)
         {
             var _other = (DbNode5066)other;
 

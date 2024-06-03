@@ -188,15 +188,15 @@ namespace SWE1R.Assets.Blocks.Utils.Graphviz
             var colorByType = new Dictionary<Type, string>()
             {
                 { typeof(Mesh), "dodgerblue" },
-                { typeof(MeshGroup3064), "lightblue" },
+                { typeof(MeshGroupNode), "lightblue" },
 
-                { typeof(Group5064), "greenyellow" },
-                { typeof(Group5065), "lime" },
-                { typeof(Group5066), "limegreen" },
+                { typeof(BasicNode), "greenyellow" },
+                { typeof(SelectorNode), "lime" },
+                { typeof(LodSelectorNode), "limegreen" },
 
-                { typeof(TransformableD064), "yellow" },
-                { typeof(TransformableD065), "gold" },
-                { typeof(UnknownD066), "goldenrod" },
+                { typeof(TransformedNode), "yellow" },
+                { typeof(TransformedWithPivotNode), "gold" },
+                { typeof(TransformedComputedNode), "goldenrod" },
             };
             // http://graphviz.org/doc/info/colors.html
             // http://www.webgraphviz.com/
