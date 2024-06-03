@@ -22,7 +22,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         public int NextIndicesBase =>
             Indices.Any() ? (Indices.Max() + 1) : 1;
 
-        public IEnumerable<int> Indices => 
+        public IEnumerable<byte> Indices => 
             TrianglesCommands.SelectMany(c => c.Indices);
 
         public IEnumerable<N64GspCommand> AllCommands

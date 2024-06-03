@@ -55,7 +55,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         #region Properties (: IN64GspTrianglesCommand)
 
-        public IEnumerable<int> Indices
+        public IEnumerable<byte> Indices
         {
             get
             {

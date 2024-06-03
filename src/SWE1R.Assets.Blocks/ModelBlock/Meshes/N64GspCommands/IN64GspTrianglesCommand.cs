@@ -11,7 +11,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         N64GspCommandByte Byte { get; }
 
-        IEnumerable<int> Indices { get; }
+        IEnumerable<byte> Indices { get; }
 
         IEnumerable<Triangle> Triangles { get; }
 
