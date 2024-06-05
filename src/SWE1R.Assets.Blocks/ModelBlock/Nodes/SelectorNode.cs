@@ -32,7 +32,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         /// Always 0 or -1.
         /// </summary>
         [Order(0)]
-        internal int SelectionValue { get; set; }
+        public int SelectionValue { get; set; }
 
         #endregion
 
