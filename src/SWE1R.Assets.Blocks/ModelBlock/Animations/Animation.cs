@@ -26,37 +26,37 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
         #region Properties (serialized)
 
         [Offset(0xf4)]
-        [Order(0)] public float Float_0f4 { get; set; }
-        [Order(1)] public float Float_0f8 { get; set; }
-        [Order(2)] public float Float_0fc { get; set; }
+        [Order(0)] public float Float_0f4 { get; set; } // animation_end_time
+        [Order(1)] public float Float_0f8 { get; set; } // animation_duration
+        [Order(2)] public float Float_0fc { get; set; } // duration3
         /// <summary>
         /// Always one of the values in <see cref="OriginalBitmaskValues">OriginalBitmaskValues</see>
         /// </summary>
-        [Order(3)] public int Bitmask { get; set; }
+        [Order(3)] public int Bitmask { get; set; } // union
         /// <summary>
         /// Always a value from 1 to 634.
         /// </summary>
-        [Order(4)] public int FramesCount { get; set; }
-        [Order(5)] public float Float_108 { get; set; }
-        [Order(6)] public float Float_10c { get; set; }
-        [Order(7)] public float Float_110 { get; set; }
+        [Order(4)] public int FramesCount { get; set; } // num_key_frames
+        [Order(5)] public float Float_108 { get; set; } // duration4
+        [Order(6)] public float Float_10c { get; set; } // duration5
+        [Order(7)] public float Float_110 { get; set; } // animation_speed
         /// <summary>
         /// Always 0.
         /// </summary>
-        [Order(8)] public int Int114 { get; set; }
+        [Order(8)] public int Int114 { get; set; } // animation_time
         /// <summary>
         /// Always 0.
         /// </summary>
-        [Order(9)] public int Int118 { get; set; }
+        [Order(9)] public int Int118 { get; set; } // key_frame_index
         [Length(nameof(FramesCount))]
         [Reference(ReferenceHandling.HighPriority)]
-        [Order(10)] public List<float> KeyframeTimestamps { get; set; }
-        [Order(11)] public KeyframesOrInteger KeyframesOrInteger { get; set; }
-        [Order(12)] public TargetOrInteger TargetOrInteger { get; set; }
+        [Order(10)] public List<float> KeyframeTimestamps { get; set; } // key_frame_times
+        [Order(11)] public KeyframesOrInteger KeyframesOrInteger { get; set; } // union
+        [Order(12)] public TargetOrInteger TargetOrInteger { get; set; } // union
         /// <summary>
         /// Always one of the values in <see cref="OriginalInt_128Values">OriginalInt_128Values</see>
         /// </summary>
-        [Order(13)] public int Int_128 { get; set; }
+        [Order(13)] public int Int_128 { get; set; } // unk11
 
         #endregion
 
