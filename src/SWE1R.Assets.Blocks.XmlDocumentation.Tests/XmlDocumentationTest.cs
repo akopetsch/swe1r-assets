@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 
 using CSharpXmlDocumentation;
+using SWE1R.Assets.Blocks.ModelBlock.Animations;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.XmlDocumentation.Tests.ElementValidation;
 using System.Xml.Linq;
@@ -15,6 +17,14 @@ namespace SWE1R.Assets.Blocks.XmlDocumentation.Tests
         #region Properties
 
         private ITestOutputHelper OutputHelper { get; } = outputHelper;
+
+        #endregion
+
+        #region Methods (SWE1R.Assets.Blocks.ModelBlock.Animations)
+
+        [Fact]
+        public void Test_Animations_Animation() =>
+            AssertType<Animation>();
 
         #endregion
 
@@ -35,6 +45,22 @@ namespace SWE1R.Assets.Blocks.XmlDocumentation.Tests
         [Fact]
         public void Test_Materials_MaterialTextureChild() => 
             AssertType<MaterialTextureChild>();
+
+        #endregion
+
+        #region Methods (SWE1R.Assets.Blocks.ModelBlock.Meshes)
+
+        [Fact]
+        public void Test_Meshes_Mapping() =>
+            AssertType<Mapping>();
+
+        [Fact]
+        public void Test_Meshes_MappingChild() =>
+            AssertType<MappingChild>();
+
+        [Fact]
+        public void Test_Meshes_Mesh() =>
+            AssertType<Mesh>();
 
         #endregion
 

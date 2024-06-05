@@ -9,7 +9,17 @@ using System.Collections.Generic;
 namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 {
     /// <summary>
-    /// <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L389">SWR_MODEL_Section7</see>
+    /// <para>
+    /// See also:
+    /// <list type="bullet">
+    ///   <item>
+    ///     <see href="https://github.com/akopetsch/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types.h#L1481">
+    ///       github.com - akopetsch/SW_RACER_RE - types.h - swrModel_Mapping</see></item>
+    ///   <item>
+    ///     <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L389">
+    ///       github.com - akopetsch/Sw_Racer - Swr_Model.h - SWR_MODEL_Section7</see></item>
+    /// </list>
+    /// </para>
     /// </summary>
     public class Mapping
     {
