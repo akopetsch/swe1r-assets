@@ -44,7 +44,7 @@ namespace SWE1R.Assets.Blocks.XmlDocumentation.Tests
         public void Test_Nodes_FlaggedNode() =>
             AssertType<FlaggedNode>();
 
-        [Fact]
+        [Fact(Skip = $"Disabled because '{nameof(BasicNode)}' is the same as '{nameof(FlaggedNode)}' in linked GitHub repositories.")]
         public void Test_Nodes_BasicNode() =>
             AssertType<BasicNode>();
 
