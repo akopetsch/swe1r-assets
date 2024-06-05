@@ -91,10 +91,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Nodes_TransformedComputedNodes = GetStructures(context.Nodes_TransformedComputedNodes);
 
             Models = GetStructures(context.Models);
-            FlaggedNodeOrIntegers = GetStructures(context.HeaderNodes);
-            FlaggedNodeOrLodSelectorNodeChildReferences = GetStructures(context.HeaderAltN);
-            Data_LightStreaks = GetStructures(context.Data_LStr);
-            Data_Integers = GetStructures(context.Data_Int);
+            FlaggedNodeOrIntegers = GetStructures(context.FlaggedNodeOrIntegers);
+            FlaggedNodeOrLodSelectorNodeChildReferences = GetStructures(context.FlaggedNodeOrLodSelectorNodeChildReferences);
+            Data_LightStreaks = GetStructures(context.Data_LightStreaks);
+            Data_Integers = GetStructures(context.Data_Integers);
         }
 
         public override void Load(ByteSerializerGraph g)

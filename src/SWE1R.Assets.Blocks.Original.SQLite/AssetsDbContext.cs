@@ -50,10 +50,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         public DbSet<DbTransformedComputedNode> Nodes_TransformedComputedNodes { get; set; }
         
         public DbSet<DbModel> Models { get; set; }
-        public DbSet<DbFlaggedNodeOrInteger> HeaderNodes { get; set; }
-        public DbSet<DbFlaggedNodeOrLodSelectorNodeChildReference> HeaderAltN { get; set; }
-        public DbSet<DbDataLightStreak> Data_LStr { get; set; }
-        public DbSet<DbDataInteger> Data_Int { get; set; }
+        public DbSet<DbFlaggedNodeOrInteger> FlaggedNodeOrIntegers { get; set; }
+        public DbSet<DbFlaggedNodeOrLodSelectorNodeChildReference> FlaggedNodeOrLodSelectorNodeChildReferences { get; set; }
+        public DbSet<DbDataLightStreak> Data_LightStreaks { get; set; }
+        public DbSet<DbDataInteger> Data_Integers { get; set; }
 
         #endregion
 
@@ -114,10 +114,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
             Nodes_TransformedComputedNodes.AddRange(dbModelStructures.Nodes_TransformedComputedNodes);
 
             Models.AddRange(dbModelStructures.Models);
-            HeaderNodes.AddRange(dbModelStructures.FlaggedNodeOrIntegers);
-            HeaderAltN.AddRange(dbModelStructures.FlaggedNodeOrLodSelectorNodeChildReferences);
-            Data_LStr.AddRange(dbModelStructures.Data_LightStreaks);
-            Data_Int.AddRange(dbModelStructures.Data_Integers);
+            FlaggedNodeOrIntegers.AddRange(dbModelStructures.FlaggedNodeOrIntegers);
+            FlaggedNodeOrLodSelectorNodeChildReferences.AddRange(dbModelStructures.FlaggedNodeOrLodSelectorNodeChildReferences);
+            Data_LightStreaks.AddRange(dbModelStructures.Data_LightStreaks);
+            Data_Integers.AddRange(dbModelStructures.Data_Integers);
         }
 
         public void AddSpriteStructures(DbSpriteStructures dbSpriteStructures)
