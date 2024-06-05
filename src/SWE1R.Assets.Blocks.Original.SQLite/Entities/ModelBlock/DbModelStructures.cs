@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         #region Properties (entities)
 
         public List<DbAnimation> Animations { get; set; }
-        public List<DbMaterialReference> MaterialReferences { get; set; }
+        public List<DbMeshMaterialReference> MeshMaterialReferences { get; set; }
 
         public List<DbN64GspVertexCommand> N64GspVertexCommands { get; set; }
         public List<DbN64GspCullDisplayListCommand> N64GspCullDisplayListCommands { get; set; }
@@ -65,7 +65,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         public override void Load(AssetsDbContext context)
         {
             Animations = GetStructures(context.Animations);
-            MaterialReferences = GetStructures(context.MaterialReferences);
+            MeshMaterialReferences = GetStructures(context.MeshMaterialReferences);
 
             N64GspVertexCommands = GetStructures(context.N64GspVertexCommands);
             N64GspCullDisplayListCommands = GetStructures(context.N64GspCullDisplayListCommands);
@@ -100,7 +100,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         public override void Load(ByteSerializerGraph g)
         {
             Animations = GetStructures<Animation, DbAnimation>(g);
-            MaterialReferences = GetStructures<MaterialReference, DbMaterialReference>(g);
+            MeshMaterialReferences = GetStructures<MeshMaterialReference, DbMeshMaterialReference>(g);
 
             N64GspVertexCommands = GetStructures<N64GspVertexCommand, DbN64GspVertexCommand>(g);
             N64GspCullDisplayListCommands = GetStructures<N64GspCullDisplayListCommand, DbN64GspCullDisplayListCommand>(g);
@@ -135,7 +135,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         public bool Equals(DbModelStructures other)
         {
             if (!Animations.SequenceEqual(other.Animations)) return false;
-            if (!MaterialReferences.SequenceEqual(other.MaterialReferences)) return false;
+            if (!MeshMaterialReferences.SequenceEqual(other.MeshMaterialReferences)) return false;
 
             if (!N64GspVertexCommands.SequenceEqual(other.N64GspVertexCommands)) return false;
             if (!N64GspCullDisplayListCommands.SequenceEqual(other.N64GspCullDisplayListCommands)) return false;

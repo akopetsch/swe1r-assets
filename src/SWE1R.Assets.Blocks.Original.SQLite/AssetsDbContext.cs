@@ -24,7 +24,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         #region Properties (Model)
 
         public DbSet<DbAnimation> Animations { get; set; }
-        public DbSet<DbMaterialReference> MaterialReferences { get; set; }
+        public DbSet<DbMeshMaterialReference> MeshMaterialReferences { get; set; }
 
         public DbSet<DbN64GspVertexCommand> N64GspVertexCommands { get; set; }
         public DbSet<DbN64GspCullDisplayListCommand> N64GspCullDisplayListCommands { get; set; }
@@ -87,7 +87,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         public void AddModelStructures(DbModelStructures dbModelStructures)
         {
             Animations.AddRange(dbModelStructures.Animations);
-            MaterialReferences.AddRange(dbModelStructures.MaterialReferences);
+            MeshMaterialReferences.AddRange(dbModelStructures.MeshMaterialReferences);
 
             N64GspVertexCommands.AddRange(dbModelStructures.N64GspVertexCommands);
             N64GspCullDisplayListCommands.AddRange(dbModelStructures.N64GspCullDisplayListCommands);

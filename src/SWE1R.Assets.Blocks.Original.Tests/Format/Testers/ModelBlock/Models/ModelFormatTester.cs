@@ -44,8 +44,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
                         var meshMaterials = new List<MeshMaterial>();
                         if (target.MeshMaterial != null)
                             meshMaterials.Add(target.MeshMaterial);
-                        if (target.MaterialReference != null)
-                            meshMaterials.Add(target.MaterialReference.MeshMaterial);
+                        if (target.MeshMaterialReference != null)
+                            meshMaterials.Add(target.MeshMaterialReference.MeshMaterial);
                         Assert.True(meshMaterials.All(x => headerFlaggedNodesGraphMaterials.Contains(x)));
                     }
 

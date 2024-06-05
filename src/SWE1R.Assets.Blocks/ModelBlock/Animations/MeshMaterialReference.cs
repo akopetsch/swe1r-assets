@@ -5,7 +5,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Materials;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 {
-    public class MaterialReference
+    public class MeshMaterialReference
     {
         #region Properties (serialized)
 

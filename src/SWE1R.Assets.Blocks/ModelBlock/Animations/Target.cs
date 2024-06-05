@@ -22,9 +22,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 
         #region Properties (C union style access)
 
-        public MaterialReference MaterialReference
+        public MeshMaterialReference MeshMaterialReference
         {
-            get => Value as MaterialReference;
+            get => Value as MeshMaterialReference;
             set => Value = value;
         }
         public MeshMaterial MeshMaterial
@@ -49,7 +49,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
                 Animation anim = c.GetAncestorValue<Animation>();
 
                 if (anim.BitmaskNibble == Animation.MaterialBitmaskNibble)
-                    return typeof(MaterialReference);
+                    return typeof(MeshMaterialReference);
 
                 if (anim.BitmaskNibble == 0b1011 || // 0x0b
                     anim.BitmaskNibble == 0b1100)   // 0x0c

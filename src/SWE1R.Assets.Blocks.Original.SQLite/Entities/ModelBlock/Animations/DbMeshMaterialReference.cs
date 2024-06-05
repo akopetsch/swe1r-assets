@@ -7,8 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 {
-    [Table($"{nameof(Model)}_{nameof(MaterialReference)}")]
-    public class DbMaterialReference : DbBlockItemStructure<MaterialReference>
+    [Table($"{nameof(Model)}_{nameof(MeshMaterialReference)}")]
+    public class DbMeshMaterialReference : DbBlockItemStructure<MeshMaterialReference>
     {
         #region Properties
 
@@ -20,14 +20,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
         {
             base.CopyFrom(node);
 
-            var x = (MaterialReference)node.Value;
+            var x = (MeshMaterialReference)node.Value;
 
             P_MeshMaterial = GetPropertyPointer(node, nameof(x.MeshMaterial));
         }
 
-        public override bool Equals(DbBlockItemStructure<MaterialReference> other)
+        public override bool Equals(DbBlockItemStructure<MeshMaterialReference> other)
         {
-            var x = (DbMaterialReference)other;
+            var x = (DbMeshMaterialReference)other;
 
             if (!base.Equals(x))
                 return false;
@@ -39,7 +39,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 
         public override bool Equals(object obj)
         {
-            if (obj is DbMaterialReference x)
+            if (obj is DbMeshMaterialReference x)
                 return Equals(x);
             else
                 return base.Equals(obj);
