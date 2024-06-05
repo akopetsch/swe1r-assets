@@ -39,19 +39,33 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         // TODO: use NodeFlags.GetFlaggedNodeType()
         [Order(0)]
         public NodeFlags Flags { get; private set; }
-        [Order(1)]
-        public int Bitfield1 { get; set; }
-        [Order(2)]
-        public int Bitfield2 { get; set; }
         /// <summary>
-        /// Always is 0, 3, 11 19, 27, 35 or 43 and thus seems to be a bit field.
+        /// 0x2: visible, 0x4 contains visuals (maybe)
+        /// </summary>
+        [Order(1)]
+        public int Flags1 { get; set; }
+        [Order(2)]
+        public int Flags2 { get; set; }
+        /// <summary>
+        /// |= 3, if transform was changed. if 0x10 is set, pivot of d065 node is used.
+        /// <para>
+        ///   Always is 0, 3, 11 19, 27, 35 or 43 and thus seems to be a bit field.
+        /// </para>
         /// </summary>
         [Order(3)]
-        public short Number { get; set; }
+        public short Flags3 { get; set; }
+        /// <summary>
+        /// only used if flags_5 & 0x4, sets the selected light for all child nodes to light_index+1. 
+        /// (+1 because 0 is the default light that is always used).
+        /// </summary>
         [Order(4)]
-        public short Padding1 { get; set; }
+        public short LightIndex { get; set; }
+        /// <summary>
+        /// if 0x1 is set, the node is mirrored, this information is crucial for backface culling 
+        /// because the transforms determinant is < 0. if 0x4 is set, light_index is valid.
+        /// </summary>
         [Order(5)]
-        public int Padding2 { get; set; }
+        public int Flags5 { get; set; }
         [Order(6)]
         public int ChildrenCount { get; set; }
         [ElementReference, ElementTypeHelper(typeof(ElementTypeHelper))]

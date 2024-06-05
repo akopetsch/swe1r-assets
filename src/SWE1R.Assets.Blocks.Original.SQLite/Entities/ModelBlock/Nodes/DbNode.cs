@@ -8,11 +8,11 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
     public abstract class DbNode<TSource> : DbBlockItemStructure<TSource> 
         where TSource : FlaggedNode
     {
-        public int Bitfield1 { get; set; }
-        public int Bitfield2 { get; set; }
-        public short Number { get; set; }
-        public short Padding1 { get; set; }
-        public int Padding2 { get; set; }
+        public int Flags1 { get; set; }
+        public int Flags2 { get; set; }
+        public short Flags3 { get; set; }
+        public short LightIndex { get; set; }
+        public int Flags5 { get; set; }
         public int ChildrenCount { get; set; }
         public int P_Children { get; set; }
 
@@ -22,11 +22,11 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
             var n = (FlaggedNode)node.Value;
 
-            Bitfield1 = n.Bitfield1;
-            Bitfield2 = n.Bitfield2;
-            Number = n.Number;
-            Padding1 = n.Padding1;
-            Padding2 = n.Padding2;
+            Flags1 = n.Flags1;
+            Flags2 = n.Flags2;
+            Flags3 = n.Flags3;
+            LightIndex = n.LightIndex;
+            Flags5 = n.Flags5;
             ChildrenCount = n.Children?.Count ?? 0;
             P_Children = GetPropertyPointer(node, nameof(n.Children));
         }
@@ -38,11 +38,11 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             if (!base.Equals(_other))
                 return false;
 
-            if (Bitfield1 != _other.Bitfield1) return false;
-            if (Bitfield2 != _other.Bitfield2) return false;
-            if (Number != _other.Number) return false;
-            if (Padding1 != _other.Padding1) return false;
-            if (Padding2 != _other.Padding2) return false;
+            if (Flags1 != _other.Flags1) return false;
+            if (Flags2 != _other.Flags2) return false;
+            if (Flags3 != _other.Flags3) return false;
+            if (LightIndex != _other.LightIndex) return false;
+            if (Flags5 != _other.Flags5) return false;
             if (ChildrenCount != _other.ChildrenCount) return false;
             if (P_Children != _other.P_Children) return false;
 
@@ -50,7 +50,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), Bitfield1, Bitfield2, 
-                Number, Padding1, Padding2, ChildrenCount, P_Children);
+            HashCode.Combine(base.GetHashCode(), Flags1, Flags2, 
+                Flags3, LightIndex, Flags5, ChildrenCount, P_Children);
     }
 }

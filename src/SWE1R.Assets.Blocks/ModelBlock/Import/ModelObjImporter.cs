@@ -96,8 +96,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 .Create(new MaterialStreamProvider(OpenFileStreamDelegate)).Load(ObjStream);
 
             MeshGroupNode = new MeshGroupNode() {
-                Bitfield1 = -1,
-                Bitfield2 = -1,
+                Flags1 = -1,
+                Flags2 = -1,
                 Children = new List<INode>(),
             };
             foreach (ObjGroup objGroup in ObjLoadResult.Groups)
