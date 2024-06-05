@@ -20,9 +20,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     /// </summary>
     public class TransformedNode : FlaggedNode
     {
-        [Order(0)] public Matrix3x4Single Matrix { get; set; }
+        #region Properties (serialized)
+
+        [Order(0)]
+        public Matrix3x4Single Matrix { get; set; }
+
+        #endregion
+
+        #region Constructor
 
         public TransformedNode() : base() =>
             Flags = NodeFlags.TransformedNode;
+
+        #endregion
     }
 }

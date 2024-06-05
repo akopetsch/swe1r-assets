@@ -19,16 +19,26 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     /// </summary>
     public class LodSelectorNode : FlaggedNode
     {
-        [Order(0), Length(8)] public float[] Floats { get; set; }
+        #region Properties (serialized)
+
+        [Order(0), Length(8)]
+        public float[] Floats { get; set; }
         /// <summary>
         /// Always <c>{0, 0x80000000, 0}</c>.
         /// <para>
         /// Not sure if these are float32 values composing a vector, because 0x80000000 would be an unusual value (-0).
         /// </para>
         /// </summary>
-        [Order(1), Length(3)] public int[] Ints { get; set; }
+        [Order(1), Length(3)]
+        public int[] Ints { get; set; }
+
+        #endregion
+
+        #region Constructor
 
         public LodSelectorNode() : base() =>
             Flags = NodeFlags.LodSelectorNode;
+
+        #endregion
     }
 }

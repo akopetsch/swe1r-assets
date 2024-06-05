@@ -19,12 +19,21 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     /// </summary>
     public class SelectorNode : FlaggedNode
     {
+        #region Properties
+
         /// <summary>
         /// Always 0 or -1.
         /// </summary>
-        [Order(0)] public int Int { get; set; }
+        [Order(0)]
+        public int Int { get; set; }
+
+        #endregion
+
+        #region Constructor
 
         public SelectorNode() : base() =>
             Flags = NodeFlags.SelectorNode;
+
+        #endregion
     }
 }

@@ -54,10 +54,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         public int Padding2 { get; set; }
         [Order(6)]
         public int ChildrenCount { get; set; }
-        [Length(nameof(ChildrenCount))]
-        [Reference(ReferenceHandling.HighPriority)]
         [ElementReference, ElementTypeHelper(typeof(ElementTypeHelper))]
-        [Order(7)]
+        [Order(7), Length(nameof(ChildrenCount)), Reference(ReferenceHandling.HighPriority)]
         public List<INode> Children { get; set; }
 
         #endregion
