@@ -55,17 +55,29 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         #region Methods (helper - INode)
 
-        public IEnumerable<INode> GetHeaderFlaggedNodes() =>
-            Nodes.Select(x => x.FlaggedNode)
-            .Where(x => x != null).Distinct().Cast<INode>().ToList() ?? Enumerable.Empty<INode>();
-
-        public IEnumerable<TransformedWithPivotNode> GetAnimationsTransformedWithPivotNodes() =>
-            Animations?.Select(x => x.TargetOrInteger.Target?.TransformedWithPivotNode)
-            .Where(x => x != null).Distinct().ToList() ?? Enumerable.Empty<TransformedWithPivotNode>();
+        public IEnumerable<FlaggedNode> GetHeaderFlaggedNodes() =>
+            Nodes
+            .Select(x => x.FlaggedNode)
+            .Where(x => x != null)
+            .Distinct()
+            .ToList() 
+            ?? Enumerable.Empty<FlaggedNode>();
 
         public IEnumerable<FlaggedNode> GetAltNFlaggedNodes() =>
-            AltN?.Select(x => x.FlaggedNode)
-            .Where(x => x != null).Distinct().ToList() ?? Enumerable.Empty<FlaggedNode>();
+            AltN?
+            .Select(x => x.FlaggedNode)
+            .Where(x => x != null)
+            .Distinct()
+            .ToList()
+            ?? Enumerable.Empty<FlaggedNode>();
+
+        public IEnumerable<TransformedWithPivotNode> GetAnimationsTransformedWithPivotNodes() =>
+            Animations?
+            .Select(x => x.TargetOrInteger.Target?.TransformedWithPivotNode)
+            .Where(x => x != null)
+            .Distinct()
+            .ToList() 
+            ?? Enumerable.Empty<TransformedWithPivotNode>();
 
         public ReadOnlyCollection<INode> GetAllNodes()
         {
