@@ -5,7 +5,6 @@ using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.ModelBlock.Materials.Import;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System.IO;
-using System.Numerics;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 {

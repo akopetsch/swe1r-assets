@@ -23,25 +23,55 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         #region Properties (serialization)
 
         /// <summary>
+        /// <para>SW_RACER_RE: unk1</para>
         /// Always one of these values: 0, 1, 8, 9
         /// </summary>
         public int AlphaBpp { get; set; }
+        /// <summary>
+        /// <para>SW_RACER_RE: unk2</para>
+        /// </summary>
         public short Word_4 { get; set; }
+        /// <summary>
+        /// <para>SW_RACER_RE: color_combine_mode_cycle1, alpha_combine_mode_cycle1</para>
+        /// </summary>
         public int[] Ints_6 { get; set; }
+        /// <summary>
+        /// <para>SW_RACER_RE: color_combine_mode_cycle2, alpha_combine_mode_cycle2</para>
+        /// </summary>
         public int[] Ints_e { get; set; }
         /// <summary>
+        /// <para>SW_RACER_RE: unk5</para>
         /// Always 0, except in model 3001. Seems like float16.
         /// </summary>
         public short Unk_16 { get; set; } // TODO: win-demo
+        /// <summary>
+        /// <para>SW_RACER_RE: render_mode_1</para>
+        /// </summary>
         public int Bitmask1 { get; set; }
+        /// <summary>
+        /// <para>SW_RACER_RE: render_mode_2</para>
+        /// </summary>
         public int Bitmask2 { get; set; }
         /// <summary>
+        /// <para>SW_RACER_RE: unk8</para>
         /// Always 0, except in model 3001. Seems like float16.
         /// </summary>
         public short Unk_20 { get; set; } // TODO: win-demo
+        /// <summary>
+        /// <para>SW_RACER_RE: primitive_color[0]</para>
+        /// </summary>
         public byte Byte_22 { get; set; }
+        /// <summary>
+        /// <para>SW_RACER_RE: primitive_color[1]</para>
+        /// </summary>
         public byte Byte_23 { get; set; }
+        /// <summary>
+        /// <para>SW_RACER_RE: primitive_color[2]</para>
+        /// </summary>
         public byte Byte_24 { get; set; }
+        /// <summary>
+        /// <para>SW_RACER_RE: primitive_color[3]</para>
+        /// </summary>
         public byte Byte_25 { get; set; }
         /// <summary>
         /// Always 0, except in model 3001. Seems like float16.
