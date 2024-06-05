@@ -38,7 +38,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         [RecordTypeIdentifier(NodeFlags.TransformedComputedNode, typeof(TransformedComputedNode))]
         // TODO: use NodeFlags.GetFlaggedNodeType()
         [Order(0)]
-        public NodeFlags Flags { get; protected set; }
+        public NodeFlags Flags { get; private set; }
         [Order(1)]
         public int Bitfield1 { get; set; }
         [Order(2)]
@@ -63,6 +63,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         #region Properties (serialization)
 
         protected virtual Type ChildType => typeof(FlaggedNode);
+
+        #endregion
+
+        #region Constructor
+
+        protected FlaggedNode(NodeFlags flags) =>
+            Flags = flags;
 
         #endregion
 

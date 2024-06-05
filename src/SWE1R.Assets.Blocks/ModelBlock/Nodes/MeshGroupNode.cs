@@ -45,8 +45,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
 
         #region Constructor
 
-        public MeshGroupNode() : base() =>
-            Flags = NodeFlags.MeshGroupNode;
+        public MeshGroupNode() : 
+            base(NodeFlags.MeshGroupNode)
+        { }
 
         #endregion
 

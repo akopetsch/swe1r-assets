@@ -36,8 +36,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
 
         #region Constructor
 
-        public LodSelectorNode() : base() =>
-            Flags = NodeFlags.LodSelectorNode;
+        public LodSelectorNode() : 
+            base(NodeFlags.LodSelectorNode)
+        { }
 
         #endregion
     }

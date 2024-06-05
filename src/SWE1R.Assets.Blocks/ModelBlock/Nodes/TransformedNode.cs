@@ -29,8 +29,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
 
         #region Constructor
 
-        public TransformedNode() : base() =>
-            Flags = NodeFlags.TransformedNode;
+        public TransformedNode() : 
+            base(NodeFlags.TransformedNode)
+        { }
 
         #endregion
     }

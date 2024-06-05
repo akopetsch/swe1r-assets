@@ -31,8 +31,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
 
         #region Constructor
 
-        public TransformedWithPivotNode() : base() =>
-            Flags = NodeFlags.TransformedWithPivotNode;
+        public TransformedWithPivotNode() : 
+            base(NodeFlags.TransformedWithPivotNode)
+        { }
 
         #endregion
     }

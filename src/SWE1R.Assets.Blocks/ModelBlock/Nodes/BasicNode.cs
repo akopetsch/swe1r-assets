@@ -6,8 +6,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     {
         #region Constructor
 
-        public BasicNode() : base() =>
-            Flags = NodeFlags.BasicNode;
+        public BasicNode() : 
+            base(NodeFlags.BasicNode)
+        { }
 
         #endregion
     }
