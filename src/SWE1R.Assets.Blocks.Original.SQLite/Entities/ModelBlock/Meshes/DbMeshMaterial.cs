@@ -10,11 +10,15 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
     [Table($"{nameof(Model)}_{nameof(MeshMaterial)}")]
     public class DbMeshMaterial : DbBlockItemStructure<MeshMaterial>
     {
+        #region Properties
+
         public int Bitmask { get; set; }
         public short Width_Unk_Dividend { get; set; }
         public short Height_Unk_Dividend { get; set; }
         public int P_Texture { get; set; }
         public int P_Properties { get; set; }
+
+        #endregion
 
         public override void CopyFrom(Node node)
         {
@@ -31,30 +35,30 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
         public override bool Equals(DbBlockItemStructure<MeshMaterial> other)
         {
-            var _other = (DbMeshMaterial)other;
+            var x = (DbMeshMaterial)other;
 
-            if (!base.Equals(_other))
+            if (!base.Equals(x))
                 return false;
 
-            if (Bitmask != _other.Bitmask) return false;
-            if (Width_Unk_Dividend != _other.Width_Unk_Dividend) return false;
-            if (Height_Unk_Dividend != _other.Height_Unk_Dividend) return false;
-            if (P_Texture != _other.P_Texture) return false;
-            if (P_Properties != _other.P_Properties) return false;
+            if (Bitmask != x.Bitmask) return false;
+            if (Width_Unk_Dividend != x.Width_Unk_Dividend) return false;
+            if (Height_Unk_Dividend != x.Height_Unk_Dividend) return false;
+            if (P_Texture != x.P_Texture) return false;
+            if (P_Properties != x.P_Properties) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbMeshMaterial)
-                return this.Equals((DbMeshMaterial)obj);
+            if (obj is DbMeshMaterial x)
+                return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), 
+            CombineHashCodes(base.GetHashCode(), 
                 Bitmask, 
                 Width_Unk_Dividend, Height_Unk_Dividend, 
                 P_Texture, P_Properties);

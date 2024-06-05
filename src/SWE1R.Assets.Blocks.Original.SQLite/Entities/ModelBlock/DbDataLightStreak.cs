@@ -6,36 +6,40 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
-    [Table("Model_Data_LStr")]
-    public class DbDataLStr : DbBlockItemStructure<LightStreakOrInteger>
+    [Table($"{nameof(Model)}_{nameof(Model.Data)}_{nameof(LightStreakOrInteger.LightStreak)}")]
+    public class DbDataLightStreak : DbBlockItemStructure<LightStreakOrInteger>
     {
+        #region Properties
+
         public float X { get; set; }
         public float Y { get; set; }
         public float Z { get; set; }
+
+        #endregion
 
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
 
-            var lightStreakOrInteger = (LightStreakOrInteger)node.Value;
+            var x = (LightStreakOrInteger)node.Value;
 
-            X = lightStreakOrInteger.LightStreak.Vector.X;
-            Y = lightStreakOrInteger.LightStreak.Vector.Y;
-            Z = lightStreakOrInteger.LightStreak.Vector.Z;
+            X = x.LightStreak.Vector.X;
+            Y = x.LightStreak.Vector.Y;
+            Z = x.LightStreak.Vector.Z;
         }
 
         public override bool Equals(DbBlockItemStructure<LightStreakOrInteger> other)
         {
-            var _other = (DbDataLStr)other;
+            var x = (DbDataLightStreak)other;
 
-            if (!base.Equals(_other))
+            if (!base.Equals(x))
                 return false;
 
-            if (X != _other.X)
+            if (X != x.X)
                 return false;
-            if (Y != _other.Y)
+            if (Y != x.Y)
                 return false;
-            if (Z != _other.Z)
+            if (Z != x.Z)
                 return false;
 
             return true;
@@ -43,13 +47,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 
         public override bool Equals(object obj)
         {
-            if (obj is DbDataLStr)
-                return this.Equals((DbDataLStr)obj);
+            if (obj is DbDataLightStreak x)
+                return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() => 
-            HashCode.Combine(base.GetHashCode(), X, Y, Z);
+            CombineHashCodes(base.GetHashCode(), 
+                X, Y, Z);
     }
 }

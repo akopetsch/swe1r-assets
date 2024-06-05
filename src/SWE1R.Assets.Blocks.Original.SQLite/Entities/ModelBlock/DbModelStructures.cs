@@ -18,8 +18,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
     {
         #region Properties (entities)
 
-        public List<DbAnimation> Anims { get; set; }
-        public List<DbMaterialReference> DoubleMaterials { get; set; }
+        public List<DbAnimation> Animations { get; set; }
+        public List<DbMaterialReference> MaterialReferences { get; set; }
 
         public List<DbN64GspVertexCommand> N64GspVertexCommands { get; set; }
         public List<DbN64GspCullDisplayListCommand> N64GspCullDisplayListCommands { get; set; }
@@ -32,23 +32,23 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         public List<DbMeshMaterial> MeshMaterials { get; set; }
         public List<DbMaterial> Materials { get; set; }
         public List<DbMaterialTexture> MaterialTextures { get; set; }
-        public List<DbMaterialTextureChild> MaterialTextureChilds { get; set; }
+        public List<DbMaterialTextureChild> MaterialTextureChildren { get; set; }
         public List<DbMesh> Meshes { get; set; }
         public List<DbVertex> Vertices { get; set; }
 
-        public List<DbMeshGroupNode> Nodes_MeshGroup { get; set; }
-        public List<DbBasicNode> Nodes_Basic { get; set; }
-        public List<DbSelectorNode> Nodes_Selector { get; set; }
-        public List<DbLodSelectorNode> Nodes_LodSelector { get; set; }
-        public List<DbTransformedNode> Nodes_Transformed { get; set; }
-        public List<DbTransformedWithPivotNode> Nodes_TransformedWithPivot { get; set; }
-        public List<DbTransformedComputedNode> Nodes_TransformedComputed { get; set; }
+        public List<DbMeshGroupNode> Nodes_MeshGroupNodes { get; set; }
+        public List<DbBasicNode> Nodes_BasicNodes { get; set; }
+        public List<DbSelectorNode> Nodes_SelectorNodes { get; set; }
+        public List<DbLodSelectorNode> Nodes_LodSelectorNodes { get; set; }
+        public List<DbTransformedNode> Nodes_TransformedNodes { get; set; }
+        public List<DbTransformedWithPivotNode> Nodes_TransformedWithPivotNodes { get; set; }
+        public List<DbTransformedComputedNode> Nodes_TransformedComputedNodes { get; set; }
 
-        public List<DbModelHeader> Models { get; set; }
-        public List<DbModelHeaderNode> HeaderNodes { get; set; }
-        public List<DbModelHeaderAltN> HeaderAltN { get; set; }
-        public List<DbDataLStr> Data_LStr { get; set; }
-        public List<DbDataInt> Data_Int { get; set; }
+        public List<DbModel> Models { get; set; }
+        public List<DbFlaggedNodeOrInteger> FlaggedNodeOrIntegers { get; set; }
+        public List<DbFlaggedNodeOrLodSelectorNodeChildReference> FlaggedNodeOrLodSelectorNodeChildReferences { get; set; }
+        public List<DbDataLightStreak> Data_LightStreaks { get; set; }
+        public List<DbDataInteger> Data_Integers { get; set; }
 
         #endregion
 
@@ -64,8 +64,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 
         public override void Load(AssetsDbContext context)
         {
-            Anims = GetStructures(context.Anims);
-            DoubleMaterials = GetStructures(context.DoubleMaterials);
+            Animations = GetStructures(context.Animations);
+            MaterialReferences = GetStructures(context.MaterialReferences);
 
             N64GspVertexCommands = GetStructures(context.N64GspVertexCommands);
             N64GspCullDisplayListCommands = GetStructures(context.N64GspCullDisplayListCommands);
@@ -75,32 +75,32 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Mappings = GetStructures(context.Mappings);
             MappingChildren = GetStructures(context.MappingChildren);
             MappingSubs = GetStructures(context.MappingSubs);
-            MeshMaterials = GetStructures(context.Materials);
-            Materials = GetStructures(context.MaterialProperties);
+            MeshMaterials = GetStructures(context.MeshMaterials);
+            Materials = GetStructures(context.Materials);
             MaterialTextures = GetStructures(context.MaterialTextures);
-            MaterialTextureChilds = GetStructures(context.MaterialTextureChilds);
+            MaterialTextureChildren = GetStructures(context.MaterialTextureChildren);
             Meshes = GetStructures(context.Meshes);
             Vertices = GetStructures(context.Vertices);
 
-            Nodes_MeshGroup = GetStructures(context.Nodes_MeshGroup);
-            Nodes_Basic = GetStructures(context.Nodes_Basic);
-            Nodes_Selector = GetStructures(context.Nodes_Selector);
-            Nodes_LodSelector = GetStructures(context.Nodes_LodSelector);
-            Nodes_Transformed = GetStructures(context.Nodes_Transformed);
-            Nodes_TransformedWithPivot = GetStructures(context.Nodes_TransformedWithPivot);
-            Nodes_TransformedComputed = GetStructures(context.Nodes_TransformedComputed);
+            Nodes_MeshGroupNodes = GetStructures(context.Nodes_MeshGroupNodes);
+            Nodes_BasicNodes = GetStructures(context.Nodes_BasicNodes);
+            Nodes_SelectorNodes = GetStructures(context.Nodes_SelectorNodes);
+            Nodes_LodSelectorNodes = GetStructures(context.Nodes_LodSelectorNodes);
+            Nodes_TransformedNodes = GetStructures(context.Nodes_TransformedNodes);
+            Nodes_TransformedWithPivotNodes = GetStructures(context.Nodes_TransformedWithPivotNodes);
+            Nodes_TransformedComputedNodes = GetStructures(context.Nodes_TransformedComputedNodes);
 
-            Models = GetStructures(context.Headers);
-            HeaderNodes = GetStructures(context.HeaderNodes);
-            HeaderAltN = GetStructures(context.HeaderAltN);
-            Data_LStr = GetStructures(context.Data_LStr);
-            Data_Int = GetStructures(context.Data_Int);
+            Models = GetStructures(context.Models);
+            FlaggedNodeOrIntegers = GetStructures(context.HeaderNodes);
+            FlaggedNodeOrLodSelectorNodeChildReferences = GetStructures(context.HeaderAltN);
+            Data_LightStreaks = GetStructures(context.Data_LStr);
+            Data_Integers = GetStructures(context.Data_Int);
         }
 
         public override void Load(ByteSerializerGraph g)
         {
-            Anims = GetStructures<Animation, DbAnimation>(g);
-            DoubleMaterials = GetStructures<MaterialReference, DbMaterialReference>(g);
+            Animations = GetStructures<Animation, DbAnimation>(g);
+            MaterialReferences = GetStructures<MaterialReference, DbMaterialReference>(g);
 
             N64GspVertexCommands = GetStructures<N64GspVertexCommand, DbN64GspVertexCommand>(g);
             N64GspCullDisplayListCommands = GetStructures<N64GspCullDisplayListCommand, DbN64GspCullDisplayListCommand>(g);
@@ -113,29 +113,29 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             MeshMaterials = GetStructures<MeshMaterial, DbMeshMaterial>(g);
             Materials = GetStructures<Material, DbMaterial>(g);
             MaterialTextures = GetStructures<MaterialTexture, DbMaterialTexture>(g);
-            MaterialTextureChilds = GetStructures<MaterialTextureChild, DbMaterialTextureChild>(g);
+            MaterialTextureChildren = GetStructures<MaterialTextureChild, DbMaterialTextureChild>(g);
             Meshes = GetStructures<Mesh, DbMesh>(g);
             Vertices = GetStructures<Vertex, DbVertex>(g);
 
-            Nodes_MeshGroup = GetStructures<MeshGroupNode, DbMeshGroupNode>(g);
-            Nodes_Basic = GetStructures<BasicNode, DbBasicNode>(g);
-            Nodes_Selector = GetStructures<SelectorNode, DbSelectorNode>(g);
-            Nodes_LodSelector = GetStructures<LodSelectorNode, DbLodSelectorNode>(g);
-            Nodes_Transformed = GetStructures<TransformedNode, DbTransformedNode>(g);
-            Nodes_TransformedWithPivot = GetStructures<TransformedWithPivotNode, DbTransformedWithPivotNode>(g);
-            Nodes_TransformedComputed = GetStructures<TransformedComputedNode, DbTransformedComputedNode>(g);
+            Nodes_MeshGroupNodes = GetStructures<MeshGroupNode, DbMeshGroupNode>(g);
+            Nodes_BasicNodes = GetStructures<BasicNode, DbBasicNode>(g);
+            Nodes_SelectorNodes = GetStructures<SelectorNode, DbSelectorNode>(g);
+            Nodes_LodSelectorNodes = GetStructures<LodSelectorNode, DbLodSelectorNode>(g);
+            Nodes_TransformedNodes = GetStructures<TransformedNode, DbTransformedNode>(g);
+            Nodes_TransformedWithPivotNodes = GetStructures<TransformedWithPivotNode, DbTransformedWithPivotNode>(g);
+            Nodes_TransformedComputedNodes = GetStructures<TransformedComputedNode, DbTransformedComputedNode>(g);
 
-            Models = GetStructures<Model, DbModelHeader>(g);
-            HeaderNodes = GetStructures<FlaggedNodeOrInteger, DbModelHeaderNode>(g);
-            HeaderAltN = GetStructures<FlaggedNodeOrLodSelectorNodeChildReference, DbModelHeaderAltN>(g);
-            Data_LStr = GetStructures<LightStreakOrInteger, DbDataLStr>(g, x => x.LightStreak != null);
-            Data_Int = GetStructures<LightStreakOrInteger, DbDataInt>(g, x => x.Integer.HasValue);
+            Models = GetStructures<Model, DbModel>(g);
+            FlaggedNodeOrIntegers = GetStructures<FlaggedNodeOrInteger, DbFlaggedNodeOrInteger>(g);
+            FlaggedNodeOrLodSelectorNodeChildReferences = GetStructures<FlaggedNodeOrLodSelectorNodeChildReference, DbFlaggedNodeOrLodSelectorNodeChildReference>(g);
+            Data_LightStreaks = GetStructures<LightStreakOrInteger, DbDataLightStreak>(g, x => x.LightStreak != null);
+            Data_Integers = GetStructures<LightStreakOrInteger, DbDataInteger>(g, x => x.Integer.HasValue);
         }
 
         public bool Equals(DbModelStructures other)
         {
-            if (!Anims.SequenceEqual(other.Anims)) return false;
-            if (!DoubleMaterials.SequenceEqual(other.DoubleMaterials)) return false;
+            if (!Animations.SequenceEqual(other.Animations)) return false;
+            if (!MaterialReferences.SequenceEqual(other.MaterialReferences)) return false;
 
             if (!N64GspVertexCommands.SequenceEqual(other.N64GspVertexCommands)) return false;
             if (!N64GspCullDisplayListCommands.SequenceEqual(other.N64GspCullDisplayListCommands)) return false;
@@ -148,23 +148,23 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             if (!MeshMaterials.SequenceEqual(other.MeshMaterials)) return false;
             if (!Materials.SequenceEqual(other.Materials)) return false;
             if (!MaterialTextures.SequenceEqual(other.MaterialTextures)) return false;
-            if (!MaterialTextureChilds.SequenceEqual(other.MaterialTextureChilds)) return false;
+            if (!MaterialTextureChildren.SequenceEqual(other.MaterialTextureChildren)) return false;
             if (!Meshes.SequenceEqual(other.Meshes)) return false;
             if (!Vertices.SequenceEqual(other.Vertices)) return false;
 
-            if (!Nodes_MeshGroup.SequenceEqual(other.Nodes_MeshGroup)) return false;
-            if (!Nodes_Basic.SequenceEqual(other.Nodes_Basic)) return false;
-            if (!Nodes_Selector.SequenceEqual(other.Nodes_Selector)) return false;
-            if (!Nodes_LodSelector.SequenceEqual(other.Nodes_LodSelector)) return false;
-            if (!Nodes_Transformed.SequenceEqual(other.Nodes_Transformed)) return false;
-            if (!Nodes_TransformedWithPivot.SequenceEqual(other.Nodes_TransformedWithPivot)) return false;
-            if (!Nodes_TransformedComputed.SequenceEqual(other.Nodes_TransformedComputed)) return false;
+            if (!Nodes_MeshGroupNodes.SequenceEqual(other.Nodes_MeshGroupNodes)) return false;
+            if (!Nodes_BasicNodes.SequenceEqual(other.Nodes_BasicNodes)) return false;
+            if (!Nodes_SelectorNodes.SequenceEqual(other.Nodes_SelectorNodes)) return false;
+            if (!Nodes_LodSelectorNodes.SequenceEqual(other.Nodes_LodSelectorNodes)) return false;
+            if (!Nodes_TransformedNodes.SequenceEqual(other.Nodes_TransformedNodes)) return false;
+            if (!Nodes_TransformedWithPivotNodes.SequenceEqual(other.Nodes_TransformedWithPivotNodes)) return false;
+            if (!Nodes_TransformedComputedNodes.SequenceEqual(other.Nodes_TransformedComputedNodes)) return false;
 
             if (!Models.SequenceEqual(other.Models)) return false;
-            if (!HeaderNodes.SequenceEqual(other.HeaderNodes)) return false;
-            if (!HeaderAltN.SequenceEqual(other.HeaderAltN)) return false;
-            if (!Data_LStr.SequenceEqual(other.Data_LStr)) return false;
-            if (!Data_Int.SequenceEqual(other.Data_Int)) return false;
+            if (!FlaggedNodeOrIntegers.SequenceEqual(other.FlaggedNodeOrIntegers)) return false;
+            if (!FlaggedNodeOrLodSelectorNodeChildReferences.SequenceEqual(other.FlaggedNodeOrLodSelectorNodeChildReferences)) return false;
+            if (!Data_LightStreaks.SequenceEqual(other.Data_LightStreaks)) return false;
+            if (!Data_Integers.SequenceEqual(other.Data_Integers)) return false;
 
             return true;
         }

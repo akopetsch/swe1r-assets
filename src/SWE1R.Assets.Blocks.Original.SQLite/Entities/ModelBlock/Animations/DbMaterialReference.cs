@@ -10,38 +10,43 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
     [Table($"{nameof(Model)}_{nameof(MaterialReference)}")]
     public class DbMaterialReference : DbBlockItemStructure<MaterialReference>
     {
-        public int P_Material { get; set; }
+        #region Properties
+
+        public int P_MeshMaterial { get; set; }
+
+        #endregion
 
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
 
-            var dm = (MaterialReference)node.Value;
+            var x = (MaterialReference)node.Value;
 
-            P_Material = GetPropertyPointer(node, nameof(dm.MeshMaterial));
+            P_MeshMaterial = GetPropertyPointer(node, nameof(x.MeshMaterial));
         }
 
         public override bool Equals(DbBlockItemStructure<MaterialReference> other)
         {
-            var _other = (DbMaterialReference)other;
+            var x = (DbMaterialReference)other;
 
-            if (!base.Equals(_other))
+            if (!base.Equals(x))
                 return false;
 
-            if (P_Material != _other.P_Material) return false;
+            if (P_MeshMaterial != x.P_MeshMaterial) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbMaterialReference)
-                return this.Equals((DbMaterialReference)obj);
+            if (obj is DbMaterialReference x)
+                return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), P_Material);
+            CombineHashCodes(base.GetHashCode(), 
+                P_MeshMaterial);
     }
 }

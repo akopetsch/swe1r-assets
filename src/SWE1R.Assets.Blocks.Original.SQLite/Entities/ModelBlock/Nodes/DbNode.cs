@@ -8,13 +8,17 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
     public abstract class DbNode<TSource> : DbBlockItemStructure<TSource> 
         where TSource : FlaggedNode
     {
+        #region Properties
+
         public int Flags1 { get; set; }
         public int Flags2 { get; set; }
         public short Flags3 { get; set; }
         public short LightIndex { get; set; }
         public int Flags5 { get; set; }
-        public int ChildrenCount { get; set; }
+        public int Children_Count { get; set; }
         public int P_Children { get; set; }
+
+        #endregion
 
         public override void CopyFrom(Node node)
         {
@@ -27,7 +31,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             Flags3 = n.Flags3;
             LightIndex = n.LightIndex;
             Flags5 = n.Flags5;
-            ChildrenCount = n.Children?.Count ?? 0;
+            Children_Count = n.Children?.Count ?? 0;
             P_Children = GetPropertyPointer(node, nameof(n.Children));
         }
 
@@ -43,14 +47,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             if (Flags3 != _other.Flags3) return false;
             if (LightIndex != _other.LightIndex) return false;
             if (Flags5 != _other.Flags5) return false;
-            if (ChildrenCount != _other.ChildrenCount) return false;
+            if (Children_Count != _other.Children_Count) return false;
             if (P_Children != _other.P_Children) return false;
 
             return true;
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), Flags1, Flags2, 
-                Flags3, LightIndex, Flags5, ChildrenCount, P_Children);
+            CombineHashCodes(base.GetHashCode(), 
+                Flags1, Flags2, Flags3, LightIndex, Flags5, Children_Count, P_Children);
     }
 }

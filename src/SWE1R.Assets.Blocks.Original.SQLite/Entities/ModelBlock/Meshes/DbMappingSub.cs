@@ -1,52 +1,58 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
-    [Table("Model_MappingSub")]
+    [Table($"{nameof(Model)}_{nameof(MappingSub)}")]
     public class DbMappingSub : DbBlockItemStructure<MappingSub>
     {
+        #region Properties
+
         public int Int_0 { get; set; }
         public int Int_1 { get; set; }
         public int P_Child { get; set; }
+
+        #endregion
 
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
 
-            var m = (MappingSub)node.Value;
+            var x = (MappingSub)node.Value;
 
-            Int_0 = m.Int_0;
-            Int_1 = m.Int_1;
-            P_Child = GetPropertyPointer(node, nameof(m.Child));
+            Int_0 = x.Int_0;
+            Int_1 = x.Int_1;
+            P_Child = GetPropertyPointer(node, nameof(x.Child));
         }
 
         public override bool Equals(DbBlockItemStructure<MappingSub> other)
         {
-            var _other = (DbMappingSub)other;
+            var x = (DbMappingSub)other;
 
-            if (!base.Equals(_other))
+            if (!base.Equals(x))
                 return false;
 
-            if (Int_0 != _other.Int_0) return false;
-            if (Int_1 != _other.Int_1) return false;
-            if (P_Child != _other.P_Child) return false;
+            if (Int_0 != x.Int_0) return false;
+            if (Int_1 != x.Int_1) return false;
+            if (P_Child != x.P_Child) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbMappingSub)
-                return this.Equals((DbMappingSub)obj);
+            if (obj is DbMappingSub x)
+                return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), Int_0, Int_1, P_Child);
+            CombineHashCodes(base.GetHashCode(), 
+                Int_0, Int_1, P_Child);
     }
 }

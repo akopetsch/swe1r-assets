@@ -1,50 +1,55 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspCommands
 {
-    [Table("Model_N64GspCullDisplayListCommand")]
+    [Table($"{nameof(Model)}_{nameof(N64GspCullDisplayListCommand)}")]
     public class DbN64GspCullDisplayListCommand : DbBlockItemStructure<N64GspCullDisplayListCommand>
     {
+        #region Properties
+
         public byte V0 { get; set; }
         public byte VN { get; set; }
+
+        #endregion
 
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
 
-            var c = (N64GspCullDisplayListCommand)node.Value;
+            var x = (N64GspCullDisplayListCommand)node.Value;
 
-            V0 = c.V0;
-            VN = c.VN;
+            V0 = x.V0;
+            VN = x.VN;
         }
 
         public override bool Equals(DbBlockItemStructure<N64GspCullDisplayListCommand> other)
         {
-            var _other = (DbN64GspCullDisplayListCommand)other;
+            var x = (DbN64GspCullDisplayListCommand)other;
 
-            if (!base.Equals(_other))
+            if (!base.Equals(x))
                 return false;
 
-            if (V0 != _other.V0) return false;
-            if (VN != _other.VN) return false;
+            if (V0 != x.V0) return false;
+            if (VN != x.VN) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbN64GspCullDisplayListCommand)
-                return this.Equals((DbN64GspCullDisplayListCommand)obj);
+            if (obj is DbN64GspCullDisplayListCommand x)
+                return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(),
+            CombineHashCodes(base.GetHashCode(),
                 V0, VN);
     }
 }

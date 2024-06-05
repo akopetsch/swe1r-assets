@@ -10,7 +10,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
         #region Properties
 
         public List<DbSprite> Sprites { get; set; }
-        public List<DbSpritePage> SpritePages { get; set; }
+        public List<DbSpriteTile> SpritePages { get; set; }
 
         #endregion
 
@@ -33,7 +33,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
         public override void Load(ByteSerializerGraph g)
         {
             Sprites = GetStructures<Sprite, DbSprite>(g);
-            SpritePages = GetStructures<SpriteTile, DbSpritePage>(g);
+            SpritePages = GetStructures<SpriteTile, DbSpriteTile>(g);
         }
 
         public bool Equals(DbSpriteStructures other)

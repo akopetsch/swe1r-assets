@@ -6,28 +6,29 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
-    [Table("Model_HeaderNode")]
-    public class DbModelHeaderNode : DbBlockItemStructure<FlaggedNodeOrInteger>
+    [Table($"{nameof(Model)}_{nameof(FlaggedNodeOrInteger)}")]
+    public class DbFlaggedNodeOrInteger : DbBlockItemStructure<FlaggedNodeOrInteger>
     {
-        public int Value { get; set; }
+        public int I_Value { get; set; }
 
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
 
-            var flaggedNodeOrInteger = (FlaggedNodeOrInteger)node.Value;
-            Value = flaggedNodeOrInteger.Integer ??
-                GetValuePosition(node.Graph, flaggedNodeOrInteger.FlaggedNode);
+            var x = (FlaggedNodeOrInteger)node.Value;
+
+            I_Value = x.Integer ??
+                GetValuePosition(node.Graph, x.FlaggedNode);
         }
 
         public override bool Equals(DbBlockItemStructure<FlaggedNodeOrInteger> other)
         {
-            var _other = (DbModelHeaderNode)other;
+            var _other = (DbFlaggedNodeOrInteger)other;
 
             if (!base.Equals(_other))
                 return false;
 
-            if (Value != _other.Value)
+            if (I_Value != _other.I_Value)
                 return false;
 
             return true;
@@ -35,13 +36,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 
         public override bool Equals(object obj)
         {
-            if (obj is DbModelHeaderNode)
-                return this.Equals((DbModelHeaderNode)obj);
+            if (obj is DbFlaggedNodeOrInteger x)
+                return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), Value);
+            CombineHashCodes(base.GetHashCode(), 
+                I_Value);
     }
 }

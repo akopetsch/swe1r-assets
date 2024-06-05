@@ -30,25 +30,23 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(BlockItemValueId, Offset);
+            CombineHashCodes(BlockItemValueId, Offset);
 
-        public static int CombineHashCodes(params object[] objects) // TODO: protected
+        internal static int CombineHashCodes(params object[] objects)
         {
             var hashCode = new HashCode();
             foreach (var obj in objects)
-            {
                 hashCode.Add(obj);
-            }
             return hashCode.ToHashCode();
         }
     }
 
     public abstract class DbBlockItemStructure<TSource> : DbBlockItemStructure, IEquatable<DbBlockItemStructure<TSource>>
     {
-        public virtual bool Equals(DbBlockItemStructure<TSource> other)
+        public virtual bool Equals(DbBlockItemStructure<TSource> x)
         {
-            if (BlockItemValueId != other.BlockItemValueId) return false;
-            if (Offset != other.Offset) return false;
+            if (BlockItemValueId != x.BlockItemValueId) return false;
+            if (Offset != x.Offset) return false;
 
             return true;
         }

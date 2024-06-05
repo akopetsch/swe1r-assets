@@ -23,8 +23,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
 
         #region Properties (Model)
 
-        public DbSet<DbAnimation> Anims { get; set; }
-        public DbSet<DbMaterialReference> DoubleMaterials { get; set; }
+        public DbSet<DbAnimation> Animations { get; set; }
+        public DbSet<DbMaterialReference> MaterialReferences { get; set; }
 
         public DbSet<DbN64GspVertexCommand> N64GspVertexCommands { get; set; }
         public DbSet<DbN64GspCullDisplayListCommand> N64GspCullDisplayListCommands { get; set; }
@@ -34,33 +34,33 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         public DbSet<DbMapping> Mappings { get; set; }
         public DbSet<DbMappingChild> MappingChildren { get; set; }
         public DbSet<DbMappingSub> MappingSubs { get; set; }
-        public DbSet<DbMeshMaterial> Materials { get; set; }
-        public DbSet<DbMaterial> MaterialProperties { get; set; }
+        public DbSet<DbMeshMaterial> MeshMaterials { get; set; }
+        public DbSet<DbMaterial> Materials { get; set; }
         public DbSet<DbMaterialTexture> MaterialTextures { get; set; }
-        public DbSet<DbMaterialTextureChild> MaterialTextureChilds { get; set; }
+        public DbSet<DbMaterialTextureChild> MaterialTextureChildren { get; set; }
         public DbSet<DbMesh> Meshes { get; set; }
         public DbSet<DbVertex> Vertices { get; set; }
 
-        public DbSet<DbMeshGroupNode> Nodes_MeshGroup { get; set; }
-        public DbSet<DbBasicNode> Nodes_Basic { get; set; }
-        public DbSet<DbSelectorNode> Nodes_Selector { get; set; }
-        public DbSet<DbLodSelectorNode> Nodes_LodSelector { get; set; }
-        public DbSet<DbTransformedNode> Nodes_Transformed { get; set; }
-        public DbSet<DbTransformedWithPivotNode> Nodes_TransformedWithPivot { get; set; }
-        public DbSet<DbTransformedComputedNode> Nodes_TransformedComputed { get; set; }
+        public DbSet<DbMeshGroupNode> Nodes_MeshGroupNodes { get; set; }
+        public DbSet<DbBasicNode> Nodes_BasicNodes { get; set; }
+        public DbSet<DbSelectorNode> Nodes_SelectorNodes { get; set; }
+        public DbSet<DbLodSelectorNode> Nodes_LodSelectorNodes { get; set; }
+        public DbSet<DbTransformedNode> Nodes_TransformedNodes { get; set; }
+        public DbSet<DbTransformedWithPivotNode> Nodes_TransformedWithPivotNodes { get; set; }
+        public DbSet<DbTransformedComputedNode> Nodes_TransformedComputedNodes { get; set; }
         
-        public DbSet<DbModelHeader> Headers { get; set; }
-        public DbSet<DbModelHeaderNode> HeaderNodes { get; set; }
-        public DbSet<DbModelHeaderAltN> HeaderAltN { get; set; }
-        public DbSet<DbDataLStr> Data_LStr { get; set; }
-        public DbSet<DbDataInt> Data_Int { get; set; }
+        public DbSet<DbModel> Models { get; set; }
+        public DbSet<DbFlaggedNodeOrInteger> HeaderNodes { get; set; }
+        public DbSet<DbFlaggedNodeOrLodSelectorNodeChildReference> HeaderAltN { get; set; }
+        public DbSet<DbDataLightStreak> Data_LStr { get; set; }
+        public DbSet<DbDataInteger> Data_Int { get; set; }
 
         #endregion
 
         #region Properties (Sprite)
 
         public DbSet<DbSprite> Sprites { get; set; }
-        public DbSet<DbSpritePage> SpritePages { get; set; }
+        public DbSet<DbSpriteTile> SpritePages { get; set; }
 
         #endregion
 
@@ -86,8 +86,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
 
         public void AddModelStructures(DbModelStructures dbModelStructures)
         {
-            Anims.AddRange(dbModelStructures.Anims);
-            DoubleMaterials.AddRange(dbModelStructures.DoubleMaterials);
+            Animations.AddRange(dbModelStructures.Animations);
+            MaterialReferences.AddRange(dbModelStructures.MaterialReferences);
 
             N64GspVertexCommands.AddRange(dbModelStructures.N64GspVertexCommands);
             N64GspCullDisplayListCommands.AddRange(dbModelStructures.N64GspCullDisplayListCommands);
@@ -97,27 +97,27 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
             Mappings.AddRange(dbModelStructures.Mappings);
             MappingChildren.AddRange(dbModelStructures.MappingChildren);
             MappingSubs.AddRange(dbModelStructures.MappingSubs);
-            Materials.AddRange(dbModelStructures.MeshMaterials);
-            MaterialProperties.AddRange(dbModelStructures.Materials);
+            MeshMaterials.AddRange(dbModelStructures.MeshMaterials);
+            Materials.AddRange(dbModelStructures.Materials);
             MaterialTextures.AddRange(dbModelStructures.MaterialTextures);
-            MaterialTextureChilds.AddRange(dbModelStructures.MaterialTextureChilds);
+            MaterialTextureChildren.AddRange(dbModelStructures.MaterialTextureChildren);
 
             Meshes.AddRange(dbModelStructures.Meshes);
             Vertices.AddRange(dbModelStructures.Vertices);
 
-            Nodes_MeshGroup.AddRange(dbModelStructures.Nodes_MeshGroup);
-            Nodes_Basic.AddRange(dbModelStructures.Nodes_Basic);
-            Nodes_Selector.AddRange(dbModelStructures.Nodes_Selector);
-            Nodes_LodSelector.AddRange(dbModelStructures.Nodes_LodSelector);
-            Nodes_Transformed.AddRange(dbModelStructures.Nodes_Transformed);
-            Nodes_TransformedWithPivot.AddRange(dbModelStructures.Nodes_TransformedWithPivot);
-            Nodes_TransformedComputed.AddRange(dbModelStructures.Nodes_TransformedComputed);
+            Nodes_MeshGroupNodes.AddRange(dbModelStructures.Nodes_MeshGroupNodes);
+            Nodes_BasicNodes.AddRange(dbModelStructures.Nodes_BasicNodes);
+            Nodes_SelectorNodes.AddRange(dbModelStructures.Nodes_SelectorNodes);
+            Nodes_LodSelectorNodes.AddRange(dbModelStructures.Nodes_LodSelectorNodes);
+            Nodes_TransformedNodes.AddRange(dbModelStructures.Nodes_TransformedNodes);
+            Nodes_TransformedWithPivotNodes.AddRange(dbModelStructures.Nodes_TransformedWithPivotNodes);
+            Nodes_TransformedComputedNodes.AddRange(dbModelStructures.Nodes_TransformedComputedNodes);
 
-            Headers.AddRange(dbModelStructures.Models);
-            HeaderNodes.AddRange(dbModelStructures.HeaderNodes);
-            HeaderAltN.AddRange(dbModelStructures.HeaderAltN);
-            Data_LStr.AddRange(dbModelStructures.Data_LStr);
-            Data_Int.AddRange(dbModelStructures.Data_Int);
+            Models.AddRange(dbModelStructures.Models);
+            HeaderNodes.AddRange(dbModelStructures.FlaggedNodeOrIntegers);
+            HeaderAltN.AddRange(dbModelStructures.FlaggedNodeOrLodSelectorNodeChildReferences);
+            Data_LStr.AddRange(dbModelStructures.Data_LightStreaks);
+            Data_Int.AddRange(dbModelStructures.Data_Integers);
         }
 
         public void AddSpriteStructures(DbSpriteStructures dbSpriteStructures)

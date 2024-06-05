@@ -10,93 +10,97 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
     [Table($"{nameof(Model)}_{nameof(Mesh)}")]
     public class DbMesh : DbBlockItemStructure<Mesh>
     {
-        public int P_Material { get; set; }
+        #region Properties
+
+        public int P_MeshMaterial { get; set; }
         public int P_Mapping { get; set; }
-        public float Bounds_Min_X { get; set; }
-        public float Bounds_Min_Y { get; set; }
-        public float Bounds_Min_Z { get; set; }
-        public float Bounds_Max_X { get; set; }
-        public float Bounds_Max_Y { get; set; }
-        public float Bounds_Max_Z { get; set; }
+        public float FixedBounds_Min_X { get; set; }
+        public float FixedBounds_Min_Y { get; set; }
+        public float FixedBounds_Min_Z { get; set; }
+        public float FixedBounds_Max_X { get; set; }
+        public float FixedBounds_Max_Y { get; set; }
+        public float FixedBounds_Max_Z { get; set; }
         public short FacesCount { get; set; }
         public PrimitiveType PrimitiveType { get; set; }
         public int P_FacesVertexCounts { get; set; }
         public int P_MeshGroupNodeOrShorts { get; set; }
         public int P_CollisionVertices { get; set; }
-        public byte[] PaddingGarbage { get; set; }
+        public byte[] CollisionVertices_PaddingGarbage { get; set; }
         public int P_CommandList { get; set; }
         public int P_Vertices { get; set; }
         public int CollisionVerticesCount { get; set; }
         public int VerticesCount { get; set; }
         public short Unk_Count { get; set; }
 
+        #endregion
+
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
 
-            var m = (Mesh)node.Value;
+            var x = (Mesh)node.Value;
 
-            P_Material = GetPropertyPointer(node, nameof(Mesh.MeshMaterial));
+            P_MeshMaterial = GetPropertyPointer(node, nameof(Mesh.MeshMaterial));
             P_Mapping = GetPropertyPointer(node, nameof(Mesh.Mapping));
 
-            Bounds_Min_X = m.FixedBounds.Min.X;
-            Bounds_Min_Y = m.FixedBounds.Min.Y;
-            Bounds_Min_Z = m.FixedBounds.Min.Z;
+            FixedBounds_Min_X = x.FixedBounds.Min.X;
+            FixedBounds_Min_Y = x.FixedBounds.Min.Y;
+            FixedBounds_Min_Z = x.FixedBounds.Min.Z;
 
-            Bounds_Max_X = m.FixedBounds.Max.X;
-            Bounds_Max_Y = m.FixedBounds.Max.Y;
-            Bounds_Max_Z = m.FixedBounds.Max.Z;
+            FixedBounds_Max_X = x.FixedBounds.Max.X;
+            FixedBounds_Max_Y = x.FixedBounds.Max.Y;
+            FixedBounds_Max_Z = x.FixedBounds.Max.Z;
 
-            FacesCount = m.FacesCount;
-            PrimitiveType = m.PrimitiveType;
+            FacesCount = x.FacesCount;
+            PrimitiveType = x.PrimitiveType;
 
             P_FacesVertexCounts = GetPropertyPointer(node, nameof(Mesh.FacesVertexCounts));
-            P_MeshGroupNodeOrShorts = GetValuePosition(node.Graph, m.MeshGroupNodeOrShorts.Value);
+            P_MeshGroupNodeOrShorts = GetValuePosition(node.Graph, x.MeshGroupNodeOrShorts.Value);
             P_CollisionVertices = GetPropertyPointer(node, nameof(Mesh.CollisionVertices));
 
-            PaddingGarbage = m.CollisionVertices?.PaddingGarbage;
+            CollisionVertices_PaddingGarbage = x.CollisionVertices?.PaddingGarbage;
 
             P_CommandList = GetPropertyPointer(node, nameof(Mesh.CommandList));
             P_Vertices = GetPropertyPointer(node, nameof(Mesh.Vertices));
 
-            CollisionVerticesCount = m.CollisionVerticesCount;
-            VerticesCount = m.VerticesCount;
-            Unk_Count = m.Unk_Count;
+            CollisionVerticesCount = x.CollisionVerticesCount;
+            VerticesCount = x.VerticesCount;
+            Unk_Count = x.Unk_Count;
         }
 
         public override bool Equals(DbBlockItemStructure<Mesh> other)
         {
-            var _other = (DbMesh)other;
+            var x = (DbMesh)other;
 
-            if (!base.Equals(_other))
+            if (!base.Equals(x))
                 return false;
 
-            if (P_Material != _other.P_Material) return false;
-            if (P_Mapping != _other.P_Mapping) return false;
+            if (P_MeshMaterial != x.P_MeshMaterial) return false;
+            if (P_Mapping != x.P_Mapping) return false;
 
-            if (Bounds_Min_X != _other.Bounds_Min_X) return false;
-            if (Bounds_Min_Y != _other.Bounds_Min_Y) return false;
-            if (Bounds_Min_Z != _other.Bounds_Min_Z) return false;
+            if (FixedBounds_Min_X != x.FixedBounds_Min_X) return false;
+            if (FixedBounds_Min_Y != x.FixedBounds_Min_Y) return false;
+            if (FixedBounds_Min_Z != x.FixedBounds_Min_Z) return false;
 
-            if (Bounds_Max_X != _other.Bounds_Max_X) return false;
-            if (Bounds_Max_Y != _other.Bounds_Max_Y) return false;
-            if (Bounds_Max_Z != _other.Bounds_Max_Z) return false;
+            if (FixedBounds_Max_X != x.FixedBounds_Max_X) return false;
+            if (FixedBounds_Max_Y != x.FixedBounds_Max_Y) return false;
+            if (FixedBounds_Max_Z != x.FixedBounds_Max_Z) return false;
 
-            if (FacesCount != _other.FacesCount) return false;
-            if (PrimitiveType != _other.PrimitiveType) return false;
+            if (FacesCount != x.FacesCount) return false;
+            if (PrimitiveType != x.PrimitiveType) return false;
 
-            if (P_FacesVertexCounts != _other.P_FacesVertexCounts) return false;
-            if (P_MeshGroupNodeOrShorts != _other.P_MeshGroupNodeOrShorts) return false;
-            if (P_CollisionVertices != _other.P_CollisionVertices) return false;
+            if (P_FacesVertexCounts != x.P_FacesVertexCounts) return false;
+            if (P_MeshGroupNodeOrShorts != x.P_MeshGroupNodeOrShorts) return false;
+            if (P_CollisionVertices != x.P_CollisionVertices) return false;
 
-            if (!EqualsPaddingGarbage(PaddingGarbage, _other.PaddingGarbage)) return false;
+            if (!EqualsPaddingGarbage(CollisionVertices_PaddingGarbage, x.CollisionVertices_PaddingGarbage)) return false;
 
-            if (P_CommandList != _other.P_CommandList) return false;
-            if (P_Vertices != _other.P_Vertices) return false;
+            if (P_CommandList != x.P_CommandList) return false;
+            if (P_Vertices != x.P_Vertices) return false;
 
-            if (CollisionVerticesCount != _other.CollisionVerticesCount) return false;
-            if (VerticesCount != _other.VerticesCount) return false;
-            if (Unk_Count != _other.Unk_Count) return false;
+            if (CollisionVerticesCount != x.CollisionVerticesCount) return false;
+            if (VerticesCount != x.VerticesCount) return false;
+            if (Unk_Count != x.Unk_Count) return false;
 
             return true;
         }
@@ -113,18 +117,19 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
         public override bool Equals(object obj)
         {
-            if (obj is DbMesh)
-                return this.Equals((DbMesh)obj);
+            if (obj is DbMesh x)
+                return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), P_Material, P_Mapping,
-                HashCode.Combine(Bounds_Min_X, Bounds_Min_Y, Bounds_Min_Z),
-                HashCode.Combine(Bounds_Max_X, Bounds_Max_Y, Bounds_Max_Z),
-                HashCode.Combine(FacesCount, PrimitiveType, P_FacesVertexCounts, P_MeshGroupNodeOrShorts, 
-                    P_CollisionVertices, PaddingGarbage, P_CommandList, P_Vertices),
-                HashCode.Combine(CollisionVerticesCount, VerticesCount, Unk_Count));
+            CombineHashCodes(base.GetHashCode(),
+                P_MeshMaterial, P_Mapping,
+                FixedBounds_Min_X, FixedBounds_Min_Y, FixedBounds_Min_Z,
+                FixedBounds_Max_X, FixedBounds_Max_Y, FixedBounds_Max_Z,
+                FacesCount, PrimitiveType, P_FacesVertexCounts, P_MeshGroupNodeOrShorts, 
+                P_CollisionVertices, CollisionVertices_PaddingGarbage, P_CommandList, P_Vertices,
+                CollisionVerticesCount, VerticesCount, Unk_Count);
     }
 }

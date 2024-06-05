@@ -6,28 +6,32 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
-    [Table("Model_Data_Int")]
-    public class DbDataInt : DbBlockItemStructure<LightStreakOrInteger>
+    [Table($"{nameof(Model)}_{nameof(Model.Data)}_{nameof(LightStreakOrInteger.Integer)}")]
+    public class DbDataInteger : DbBlockItemStructure<LightStreakOrInteger>
     {
+        #region Properties
+
         public int Value { get; set; }
+
+        #endregion
 
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
 
-            var lightStreakOrInteger = (LightStreakOrInteger)node.Value;
+            var x = (LightStreakOrInteger)node.Value;
 
-            Value = lightStreakOrInteger.Integer.Value;
+            Value = x.Integer.Value;
         }
 
         public override bool Equals(DbBlockItemStructure<LightStreakOrInteger> other)
         {
-            var _other = (DbDataInt)other;
+            var x = (DbDataInteger)other;
 
-            if (!base.Equals(_other))
+            if (!base.Equals(x))
                 return false;
 
-            if (Value != _other.Value)
+            if (Value != x.Value)
                 return false;
 
             return true;
@@ -35,13 +39,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 
         public override bool Equals(object obj)
         {
-            if (obj is DbDataInt)
-                return this.Equals((DbDataInt)obj);
+            if (obj is DbDataInteger x)
+                return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), Value);
+            CombineHashCodes(base.GetHashCode(), 
+                Value);
     }
 }

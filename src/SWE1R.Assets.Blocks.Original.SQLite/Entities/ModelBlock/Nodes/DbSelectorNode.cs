@@ -10,38 +10,43 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
     [Table($"{nameof(Model)}_{nameof(FlaggedNode)}_{nameof(SelectorNode)}")]
     public class DbSelectorNode : DbNode<SelectorNode>
     {
+        #region Properties
+
         public int SelectionValue { get; set; }
+
+        #endregion
 
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
 
-            var n = (SelectorNode)node.Value;
+            var x = (SelectorNode)node.Value;
 
-            SelectionValue = n.SelectionValue;
+            SelectionValue = x.SelectionValue;
         }
 
         public override bool Equals(DbBlockItemStructure<SelectorNode> other)
         {
-            var _other = (DbSelectorNode)other;
+            var x = (DbSelectorNode)other;
 
-            if (!base.Equals(_other))
+            if (!base.Equals(x))
                 return false;
 
-            if (SelectionValue != _other.SelectionValue) return false;
+            if (SelectionValue != x.SelectionValue) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbSelectorNode)
-                return this.Equals((DbSelectorNode)obj);
+            if (obj is DbSelectorNode x)
+                return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), SelectionValue);
+            CombineHashCodes(base.GetHashCode(), 
+                SelectionValue);
     }
 }

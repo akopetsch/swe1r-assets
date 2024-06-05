@@ -11,13 +11,13 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
     {
         public override bool Equals(object obj)
         {
-            if (obj is DbBasicNode)
-                return this.Equals((DbBasicNode)obj);
+            if (obj is DbBasicNode x)
+                return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() => 
-            base.GetHashCode();
+            CombineHashCodes(base.GetHashCode());
     }
 }
