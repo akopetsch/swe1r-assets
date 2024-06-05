@@ -23,9 +23,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         #region Properties (serialized)
 
         [Order(0)]
-        public Matrix3x4Single Matrix { get; set; }
+        public Matrix3x4Single Transform { get; set; }
+        /// <summary>
+        /// If <seealso cref="FlaggedNode.Flags3">Flags3</seealso> &amp; 0x10
+        /// transforms are modified to use this position as the center position.
+        /// </summary>
         [Order(1)]
-        public Vector3Single Vector { get; set; }
+        public Vector3Single Pivot { get; set; }
 
         #endregion
 

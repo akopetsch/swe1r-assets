@@ -17,13 +17,13 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Nodes
             if (Value.Meshes == null)
             {
                 var nullBounds = new Bounds3Single(-1, -1, -1, -1, -1, -1);
-                Assert.True(Value.Bounds.Equals(nullBounds));
+                Assert.True(Value.Aabb.Equals(nullBounds));
             }
             else
             {
-                Assert.True(Value.Bounds.IsValid);
+                Assert.True(Value.Aabb.IsValid);
                 var computedBounds = new Bounds3Single(Value.Meshes.Select(x => x.FixedBounds).ToArray());
-                Assert.True(Value.Bounds.Equals(computedBounds));
+                Assert.True(Value.Aabb.Equals(computedBounds));
             }
         }
     }

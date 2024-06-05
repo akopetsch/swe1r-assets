@@ -10,11 +10,11 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
     [Table($"{nameof(Model)}_{nameof(FlaggedNode)}_{nameof(TransformedComputedNode)}")]
     public class DbTransformedComputedNode : DbNode<TransformedComputedNode>
     {
-        public short Word1 { get; set; }
-        public short Word2 { get; set; }
-        public float Vector_X { get; set; }
-        public float Vector_Y { get; set; }
-        public float Vector_Z { get; set; }
+        public short FollowModelPosition { get; set; }
+        public short OrientationOption { get; set; }
+        public float UpVector_X { get; set; }
+        public float UpVector_Y { get; set; }
+        public float UpVector_Z { get; set; }
 
         public override void CopyFrom(Node node)
         {
@@ -22,11 +22,11 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
             var n = (TransformedComputedNode)node.Value;
 
-            Word1 = n.Word1;
-            Word2 = n.Word2;
-            Vector_X = n.Vector.X;
-            Vector_Y = n.Vector.Y;
-            Vector_Z = n.Vector.Z;
+            FollowModelPosition = n.FollowModelPosition;
+            OrientationOption = n.OrientationOption;
+            UpVector_X = n.UpVector.X;
+            UpVector_Y = n.UpVector.Y;
+            UpVector_Z = n.UpVector.Z;
         }
 
         public override bool Equals(DbBlockItemStructure<TransformedComputedNode> other)
@@ -36,11 +36,11 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             if (!base.Equals(_other))
                 return false;
 
-            if (Word1 != _other.Word1) return false;
-            if (Word2 != _other.Word2) return false;
-            if (Vector_X != _other.Vector_X) return false;
-            if (Vector_Y != _other.Vector_Y) return false;
-            if (Vector_Z != _other.Vector_Z) return false;
+            if (FollowModelPosition != _other.FollowModelPosition) return false;
+            if (OrientationOption != _other.OrientationOption) return false;
+            if (UpVector_X != _other.UpVector_X) return false;
+            if (UpVector_Y != _other.UpVector_Y) return false;
+            if (UpVector_Z != _other.UpVector_Z) return false;
 
             return true;
         }
@@ -54,7 +54,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), Word1, Word1,
-                HashCode.Combine(Vector_X, Vector_Y, Vector_Z));
+            HashCode.Combine(base.GetHashCode(), FollowModelPosition, FollowModelPosition,
+                HashCode.Combine(UpVector_X, UpVector_Y, UpVector_Z));
     }
 }

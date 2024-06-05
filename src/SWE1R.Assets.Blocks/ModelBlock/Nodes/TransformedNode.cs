@@ -23,7 +23,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         #region Properties (serialized)
 
         [Order(0)]
-        public Matrix3x4Single Matrix { get; set; }
+        public Matrix3x4Single Transform { get; set; }
 
         #endregion
 

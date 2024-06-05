@@ -10,18 +10,18 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
     [Table($"{nameof(Model)}_{nameof(FlaggedNode)}_{nameof(TransformedNode)}")]
     public class DbTransformedNode : DbNode<TransformedNode>
     {
-        public float Matrix_11 { get; set; }
-        public float Matrix_12 { get; set; }
-        public float Matrix_13 { get; set; }
-        public float Matrix_14 { get; set; }
-        public float Matrix_21 { get; set; }
-        public float Matrix_22 { get; set; }
-        public float Matrix_23 { get; set; }
-        public float Matrix_24 { get; set; }
-        public float Matrix_31 { get; set; }
-        public float Matrix_32 { get; set; }
-        public float Matrix_33 { get; set; }
-        public float Matrix_34 { get; set; }
+        public float Transform_11 { get; set; }
+        public float Transform_12 { get; set; }
+        public float Transform_13 { get; set; }
+        public float Transform_14 { get; set; }
+        public float Transform_21 { get; set; }
+        public float Transform_22 { get; set; }
+        public float Transform_23 { get; set; }
+        public float Transform_24 { get; set; }
+        public float Transform_31 { get; set; }
+        public float Transform_32 { get; set; }
+        public float Transform_33 { get; set; }
+        public float Transform_34 { get; set; }
 
         public override void CopyFrom(Node node)
         {
@@ -29,18 +29,18 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
             var n = (TransformedNode)node.Value;
 
-            Matrix_11 = n.Matrix[0, 0];
-            Matrix_12 = n.Matrix[0, 1];
-            Matrix_13 = n.Matrix[0, 2];
-            Matrix_14 = n.Matrix[1, 3];
-            Matrix_21 = n.Matrix[1, 0];
-            Matrix_22 = n.Matrix[1, 1];
-            Matrix_23 = n.Matrix[1, 2];
-            Matrix_24 = n.Matrix[1, 3];
-            Matrix_31 = n.Matrix[2, 0];
-            Matrix_32 = n.Matrix[2, 1];
-            Matrix_33 = n.Matrix[2, 2];
-            Matrix_34 = n.Matrix[2, 3];
+            Transform_11 = n.Transform[0, 0];
+            Transform_12 = n.Transform[0, 1];
+            Transform_13 = n.Transform[0, 2];
+            Transform_14 = n.Transform[1, 3];
+            Transform_21 = n.Transform[1, 0];
+            Transform_22 = n.Transform[1, 1];
+            Transform_23 = n.Transform[1, 2];
+            Transform_24 = n.Transform[1, 3];
+            Transform_31 = n.Transform[2, 0];
+            Transform_32 = n.Transform[2, 1];
+            Transform_33 = n.Transform[2, 2];
+            Transform_34 = n.Transform[2, 3];
         }
 
         public override bool Equals(DbBlockItemStructure<TransformedNode> other)
@@ -50,18 +50,18 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             if (!base.Equals(_other))
                 return false;
 
-            if (Matrix_11 != _other.Matrix_11) return false;
-            if (Matrix_12 != _other.Matrix_12) return false;
-            if (Matrix_13 != _other.Matrix_13) return false;
-            if (Matrix_14 != _other.Matrix_14) return false;
-            if (Matrix_21 != _other.Matrix_21) return false;
-            if (Matrix_22 != _other.Matrix_22) return false;
-            if (Matrix_23 != _other.Matrix_23) return false;
-            if (Matrix_24 != _other.Matrix_24) return false;
-            if (Matrix_31 != _other.Matrix_31) return false;
-            if (Matrix_32 != _other.Matrix_32) return false;
-            if (Matrix_33 != _other.Matrix_33) return false;
-            if (Matrix_34 != _other.Matrix_34) return false;
+            if (Transform_11 != _other.Transform_11) return false;
+            if (Transform_12 != _other.Transform_12) return false;
+            if (Transform_13 != _other.Transform_13) return false;
+            if (Transform_14 != _other.Transform_14) return false;
+            if (Transform_21 != _other.Transform_21) return false;
+            if (Transform_22 != _other.Transform_22) return false;
+            if (Transform_23 != _other.Transform_23) return false;
+            if (Transform_24 != _other.Transform_24) return false;
+            if (Transform_31 != _other.Transform_31) return false;
+            if (Transform_32 != _other.Transform_32) return false;
+            if (Transform_33 != _other.Transform_33) return false;
+            if (Transform_34 != _other.Transform_34) return false;
 
             return true;
         }
@@ -76,8 +76,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
         public override int GetHashCode() =>
             HashCode.Combine(base.GetHashCode(),
-                HashCode.Combine(Matrix_11, Matrix_12, Matrix_13, Matrix_14),
-                HashCode.Combine(Matrix_21, Matrix_22, Matrix_23, Matrix_24),
-                HashCode.Combine(Matrix_31, Matrix_32, Matrix_33, Matrix_34));
+                HashCode.Combine(Transform_11, Transform_12, Transform_13, Transform_14),
+                HashCode.Combine(Transform_21, Transform_22, Transform_23, Transform_24),
+                HashCode.Combine(Transform_31, Transform_32, Transform_33, Transform_34));
     }
 }

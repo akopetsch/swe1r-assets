@@ -26,7 +26,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         #region Properties (serialized)
 
         [Order(0)]
-        public Bounds3Single Bounds { get; set; }
+        public Bounds3Single Aabb { get; set; }
+
+        // TODO: rdMatrix44* cached_model_matrix; // points into rdMatrix44_ringBuffer
+        // TODO: rdMatrix44* cached_mvp_matrix; // points into rdMatrix44_ringBuffer
 
         #endregion
 
@@ -54,7 +57,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         #region Methods (helper)
 
         public void UpdateBounds() =>
-            Bounds = new Bounds3Single(Meshes.Select(m => m.FixedBounds).ToArray());
+            Aabb = new Bounds3Single(Meshes.Select(m => m.FixedBounds).ToArray());
 
         #endregion
     }
