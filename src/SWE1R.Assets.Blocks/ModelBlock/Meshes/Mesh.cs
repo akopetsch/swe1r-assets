@@ -74,7 +74,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         [Order(6), Reference(0), Length(nameof(FacesCount))]
         public List<int> FacesVertexCounts { get; set; } // TODO: xml comment
         /// <summary>
-        /// Gets or sets a referenced <see cref="MeshGroupNode"/> or <see langword="short"/><c>[]</c>. 
+        /// Gets or sets a referenced <see cref="MeshGroupNode">MeshGroupNode</see> or <see langword="short"/><c>[]</c>. 
         /// <list type="bullet">
         ///   <item><description>If <see cref="Unk_Count">Unk_Count</see> is greater than 0 (only in <see cref="ModelType.Scen">Scen</see> or <see cref="ModelType.Pupp">Pupp</see> models), has a <see cref="MeshGroupNode"/> value.</description></item>
         ///   <item><description>If it is 0, has a <see langword="short"/><c>[]</c> value (only once in <see cref="ModelType.Trak">Trak</see> model 1) or is <see langword="null"/>.</description></item>
