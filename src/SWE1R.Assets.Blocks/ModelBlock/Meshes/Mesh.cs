@@ -102,7 +102,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// The list's length is <see cref="VerticesCount">VerticesCount</see>. Is <see langword="null"/> if that value is 0.
         /// <para>Offset: 0x34</para>
         /// </summary>
-        [Order(10), Reference(4)] [Length(nameof(VerticesCount))]
+        [Order(10), Reference(4), Length(nameof(VerticesCount))]
         public List<Vertex> Vertices { get; set; }
         /// <summary>
         /// Gets or sets the count of <see cref="CollisionVertices">CollisionVertices</see>. 
