@@ -31,8 +31,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         public override void Load(out ByteSerializerContext context)
         {
+            using var ser = new ByteSerializer();
             using var ms = new MemoryStream(Data.Bytes);
-            Model = new ByteSerializer().Deserialize<Model>(ms, Endianness.BigEndian, out context);
+            Model = ser.Deserialize<Model>(ms, Endianness.BigEndian, out context);
             Model.BlockItem = this;
         }
 
@@ -41,11 +42,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         public override void Save(out ByteSerializerContext context)
         {
             // Data
-            using (var ms = new MemoryStream())
-            {
-                new ByteSerializer().Serialize(ms, Model, Endianness.BigEndian, out context);
-                Data.Load(ms.ToArray());
-            }
+            using var ser = new ByteSerializer();
+            using var ms = new MemoryStream();
+            ser.Serialize(ms, Model, Endianness.BigEndian, out context);
+            Data.Load(ms.ToArray());
 
             // Bitmask
             Bitmask.GenerateFromData(context);
