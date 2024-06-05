@@ -52,9 +52,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 
         private void AssertSkyboxMeshMaterial(MeshMaterial meshMaterial)
         {
-            Assert.True(meshMaterial.Bitmask == 12);
-            Assert.True(meshMaterial.Width_Unk_Dividend == 0);
-            Assert.True(meshMaterial.Height_Unk_Dividend == 0);
+            Assert.True(meshMaterial.Flags == 12);
+            Assert.True(meshMaterial.TextureOffsetX == 0);
+            Assert.True(meshMaterial.TextureOffsetY == 0);
             Assert.NotNull(meshMaterial.MaterialTexture);
             AssertSkyboxMaterialTexture(meshMaterial.MaterialTexture);
             Assert.NotNull(meshMaterial.Material);

@@ -5,6 +5,7 @@ using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.ModelBlock.Materials.Import;
 using SWE1R.Assets.Blocks.TextureBlock;
 using System.IO;
+using System.Numerics;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 {
@@ -25,12 +26,20 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
     {
         #region Properties (serialized)
 
+        /// <summary>
+        /// <list type="bullet">
+        ///   <item>0x80: If texture offset is set.</item>
+        ///   <item>0x08: Front-facing one-sided geometry. Otherwise mirrored geometry or double-sided geometry.</item>
+        ///   <item>0x40: Mirrored one-sided geometry (implies ~0x8)</item>
+        ///   <item>0x01 or 0x10: Vertex format is Vtx_tn (vertices with normals) instead of Vtx_t (vertices with baked lighting).</item>
+        /// </list>
+        /// </summary>
         [Order(0)]
-        public int Bitmask { get; set; }
+        public int Flags { get; set; }
         [Order(1)]
-        public short Width_Unk_Dividend { get; set; }
+        public short TextureOffsetX { get; set; }
         [Order(2)]
-        public short Height_Unk_Dividend { get; set; }
+        public short TextureOffsetY { get; set; }
         /// <summary>
         /// Sometimes null.
         /// </summary>
@@ -47,9 +56,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         #region Properties (original values)
 
         /// <summary>
-        /// The original values of <see cref="Bitmask">Bitmask</see>.
+        /// The original values of <see cref="Flags">Flags</see>.
         /// </summary>
-        public static readonly short[] OriginalBitmaskValues = new short[] {
+        public static readonly short[] OriginalFlagsValues = new short[] {
             0x04, // 276 times
             0x06, // 720 times
             0x07, // 523 times
@@ -67,7 +76,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 
         #region Properties (helper)
 
-        public bool HasBackfaceCulling => (Bitmask & 8) > 0; // TODO: confirm this
+        public bool HasBackfaceCulling => (Flags & 8) > 0; // TODO: confirm this
 
         #endregion
 

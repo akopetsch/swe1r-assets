@@ -24,7 +24,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         protected override MeshMaterial CreateMeshMaterial()
         {
             MeshMaterial mm = base.CreateMeshMaterial();
-            mm.Bitmask = 12;
+            mm.Flags = 12;
             return mm;
         }
 

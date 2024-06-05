@@ -12,9 +12,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
     {
         #region Properties
 
-        public int Bitmask { get; set; }
-        public short Width_Unk_Dividend { get; set; }
-        public short Height_Unk_Dividend { get; set; }
+        public int Flags { get; set; }
+        public short TextureOffsetX { get; set; }
+        public short TextureOffsetY { get; set; }
         public int P_MaterialTexture { get; set; }
         public int P_Properties { get; set; }
 
@@ -26,9 +26,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
             var x = (MeshMaterial)node.Value;
 
-            Bitmask = x.Bitmask;
-            Width_Unk_Dividend = x.Width_Unk_Dividend;
-            Height_Unk_Dividend = x.Height_Unk_Dividend;
+            Flags = x.Flags;
+            TextureOffsetX = x.TextureOffsetX;
+            TextureOffsetY = x.TextureOffsetY;
             P_MaterialTexture = GetPropertyPointer(node, nameof(x.MaterialTexture));
             P_Properties = GetPropertyPointer(node, nameof(x.Material));
         }
@@ -40,9 +40,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             if (!base.Equals(x))
                 return false;
 
-            if (Bitmask != x.Bitmask) return false;
-            if (Width_Unk_Dividend != x.Width_Unk_Dividend) return false;
-            if (Height_Unk_Dividend != x.Height_Unk_Dividend) return false;
+            if (Flags != x.Flags) return false;
+            if (TextureOffsetX != x.TextureOffsetX) return false;
+            if (TextureOffsetY != x.TextureOffsetY) return false;
             if (P_MaterialTexture != x.P_MaterialTexture) return false;
             if (P_Properties != x.P_Properties) return false;
 
@@ -59,8 +59,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(), 
-                Bitmask, 
-                Width_Unk_Dividend, Height_Unk_Dividend, 
+                Flags, 
+                TextureOffsetX, TextureOffsetY, 
                 P_MaterialTexture, P_Properties);
     }
 }
