@@ -35,7 +35,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         /// Sometimes null.
         /// </summary>
         [Order(3), Reference]
-        public MaterialTexture Texture { get; set; }
+        public MaterialTexture MaterialTexture { get; set; }
         /// <summary>
         /// Always has a value.
         /// </summary>

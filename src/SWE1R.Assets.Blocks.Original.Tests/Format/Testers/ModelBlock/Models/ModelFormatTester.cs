@@ -33,7 +33,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 
             // MeshMaterial, MaterialTexture (which are also indirectly referenced from Animation)
             var headerFlaggedNodesGraphMaterials = headerNodesGraph.OfType<Mesh>().Select(x => x.MeshMaterial).ToList();
-            var headerFlaggedNodesGraphMaterialTextures = headerFlaggedNodesGraphMaterials.Select(x => x.Texture).Where(x => x != null).ToList();
+            var headerFlaggedNodesGraphMaterialTextures = headerFlaggedNodesGraphMaterials.Select(x => x.MaterialTexture).Where(x => x != null).ToList();
             if (Value.Animations != null)
                 foreach (Animation animation in Value.Animations)
                 {

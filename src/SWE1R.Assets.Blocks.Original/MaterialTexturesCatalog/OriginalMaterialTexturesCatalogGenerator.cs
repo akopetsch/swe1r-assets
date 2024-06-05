@@ -60,7 +60,7 @@ namespace SWE1R.Assets.Blocks.Original.MaterialTexturesCatalog
                             TextureBlockMetadata = textureBlockMetadata,
                             MeshMaterial = meshMaterial,
                             ModelValueId = blockItemMetadata.ValueId,
-                            TextureValueId = GetTextureValueId(meshMaterial.Texture, textureBlockMetadata),
+                            TextureValueId = GetTextureValueId(meshMaterial.MaterialTexture, textureBlockMetadata),
                         };
                         result.MeshMaterialsByValueIds.Add(materialByValueIds);
                     }

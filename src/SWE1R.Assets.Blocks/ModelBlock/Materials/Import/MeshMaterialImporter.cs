@@ -60,7 +60,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 
         protected virtual MeshMaterial CreateMeshMaterial() =>
             new MeshMaterial() {
-                Texture = CreateMaterialTexture(),
+                MaterialTexture = CreateMaterialTexture(),
                 Material = CreateMaterial(),
             };
 

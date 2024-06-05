@@ -33,7 +33,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
             var meshMaterials = byteSerializerContext.Graph.GetValues<MeshMaterial>().ToList();
             foreach (MeshMaterial meshMaterial in meshMaterials)
             {
-                Debug.Write($"{meshMaterial.Texture?.TextureIndex} ");
+                Debug.Write($"{meshMaterial.MaterialTexture?.TextureIndex} ");
                 Console.Write('.');
 
                 var materialExporter = new MeshMaterialExporter(meshMaterial, TextureBlock);
@@ -42,7 +42,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
                 if (image != null)
                 {
                     // save as png
-                    string exportFilename = $"{BlockItem.GetIndexString(meshMaterial.Texture.TextureIndex.Value)}.png";
+                    string exportFilename = $"{BlockItem.GetIndexString(meshMaterial.MaterialTexture.TextureIndex.Value)}.png";
                     string exportPath = Path.Combine(itemFolderPath, exportFilename);
                     image.ToImageSharp().SaveAsPng(exportPath);
                 }

@@ -37,12 +37,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Export
 
         public void Export()
         {
-            if (MeshMaterial.Texture != null)
+            if (MeshMaterial.MaterialTexture != null)
             {
-                if (MeshMaterial.Texture.TextureIndex != -1)
+                if (MeshMaterial.MaterialTexture.TextureIndex != -1)
                 {
-                    MaterialTextureChild firstMaterialTextureChild = MeshMaterial.Texture.Children.FirstOrDefault(); // HACK: use first child as default
-                    var texturerExporter = new MaterialTextureExporter(MeshMaterial.Texture, firstMaterialTextureChild, TextureBlock);
+                    MaterialTextureChild firstMaterialTextureChild = MeshMaterial.MaterialTexture.Children.FirstOrDefault(); // HACK: use first child as default
+                    var texturerExporter = new MaterialTextureExporter(MeshMaterial.MaterialTexture, firstMaterialTextureChild, TextureBlock);
                     texturerExporter.Export();
                     EffectiveImage = texturerExporter.EffectiveImage;
                     if (MeshMaterial.Material.AlphaBpp == 0)

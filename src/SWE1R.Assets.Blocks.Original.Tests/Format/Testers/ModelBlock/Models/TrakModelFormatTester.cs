@@ -47,16 +47,16 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
             var meshMaterials = Value.Skybox.GetDescendants().OfType<Mesh>()
                 .Select(m => m.MeshMaterial).ToList();
             foreach (MeshMaterial meshMaterial in meshMaterials)
-                AssertSkyboxMaterial(meshMaterial);
+                AssertSkyboxMeshMaterial(meshMaterial);
         }
 
-        private void AssertSkyboxMaterial(MeshMaterial meshMaterial)
+        private void AssertSkyboxMeshMaterial(MeshMaterial meshMaterial)
         {
             Assert.True(meshMaterial.Bitmask == 12);
             Assert.True(meshMaterial.Width_Unk_Dividend == 0);
             Assert.True(meshMaterial.Height_Unk_Dividend == 0);
-            Assert.NotNull(meshMaterial.Texture);
-            AssertSkyboxMaterialTexture(meshMaterial.Texture);
+            Assert.NotNull(meshMaterial.MaterialTexture);
+            AssertSkyboxMaterialTexture(meshMaterial.MaterialTexture);
             Assert.NotNull(meshMaterial.Material);
             AssertSkybox(meshMaterial.Material);
         }

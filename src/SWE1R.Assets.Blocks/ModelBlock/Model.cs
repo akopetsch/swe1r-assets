@@ -90,7 +90,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
             // Model.Nodes
             materialTextures.AddRange(
-                GetMeshMaterials().Select(x => x.Texture)
+                GetMeshMaterials().Select(x => x.MaterialTexture)
                 .Where(x => x != null));
 
             // Model.Animations
