@@ -14,7 +14,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
         public int? MaxVertexCountPerMesh { get; set; } = 1000;
         public int IndicesRangeMaxLength { get; set; } = byte.MaxValue / 8;
         public bool TryFirstMaterialAsFallback { get; set; } = false; // HACK: workaround for missing 'usemtl'
-        public Material FallbackMaterial { get; set; } = null;
+        public MeshMaterial FallbackMeshMaterial { get; set; } = null;
         public bool PrintDebugInfo { get; set; } = false;
 
         #endregion

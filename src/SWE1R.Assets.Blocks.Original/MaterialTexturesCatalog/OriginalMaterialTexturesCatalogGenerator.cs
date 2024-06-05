@@ -51,18 +51,18 @@ namespace SWE1R.Assets.Blocks.Original.MaterialTexturesCatalog
                     ModelBlockItem modelBlockItem = modelBlock[blockItemMetadata.Index];
                     modelBlockItem.Load();
 
-                    // Material
-                    foreach (Material material in modelBlockItem.Model.GetMaterials())
+                    // MeshMaterial
+                    foreach (MeshMaterial meshMaterial in modelBlockItem.Model.GetMeshMaterials())
                     {
-                        var materialByValueIds = new MaterialByValueIds() {
+                        var materialByValueIds = new MeshMaterialByValueIds() {
                             ReleaseMetadata = release,
                             ModelBlockMetadata = modelBlockMetadata,
                             TextureBlockMetadata = textureBlockMetadata,
-                            Material = material,
+                            MeshMaterial = meshMaterial,
                             ModelValueId = blockItemMetadata.ValueId,
-                            TextureValueId = GetTextureValueId(material.Texture, textureBlockMetadata),
+                            TextureValueId = GetTextureValueId(meshMaterial.Texture, textureBlockMetadata),
                         };
-                        result.MaterialsByValueIds.Add(materialByValueIds);
+                        result.MeshMaterialsByValueIds.Add(materialByValueIds);
                     }
 
                     // MaterialTexture

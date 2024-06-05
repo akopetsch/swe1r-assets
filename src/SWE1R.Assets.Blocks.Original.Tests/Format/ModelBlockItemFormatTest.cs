@@ -68,8 +68,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
             // Mesh instances are referenced only once
             Assert.True(GetReferenceCountsToValues<Mesh>(context.Graph).SingleOrDefault() == 1);
 
-            // Material instances can be re-referenced
-            Assert.True(GetReferenceCountsToValues<Material>(context.Graph).Count >= 1); // TODO: only references from Mesh (not from e.g. Animation)
+            // MeshMaterial instances can be re-referenced
+            Assert.True(GetReferenceCountsToValues<MeshMaterial>(context.Graph).Count >= 1); // TODO: only references from Mesh (not from e.g. Animation)
 
             // Mapping instances can be re-referenced
             Assert.True(GetReferenceCountsToValues<Mapping>(context.Graph).Count >= 1);

@@ -34,7 +34,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// <para>Offset: 0x00</para>
         /// </summary>
         [Order(0), Reference(2)]
-        public Material Material { get; set; } // TODO: xml comment
+        public MeshMaterial MeshMaterial { get; set; } // TODO: xml comment
         /// <summary>
         /// Can be <see langword="null"/>.
         /// <para>Offset: 0x04</para>

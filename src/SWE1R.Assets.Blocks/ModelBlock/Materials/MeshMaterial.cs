@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
     /// </list>
     /// </para>
     /// </summary>
-    public class Material
+    public class MeshMaterial
     {
         #region Properties (serialized)
 
@@ -73,13 +73,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 
         #region Methods (import helper)
 
-        public static MaterialImporter Import(
+        public static MeshMaterialImporter Import(
             Stream textureImageStream, 
             Block<TextureBlockItem> textureBlock, 
             LoadImageRgba32FromStreamDelegate loadImageRgba32FromStreamDelegate)
         {
             ImageRgba32 imageRgba32 = loadImageRgba32FromStreamDelegate(textureImageStream);
-            MaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, textureBlock);
+            MeshMaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, textureBlock);
             importer.Import();
             return importer;
         }

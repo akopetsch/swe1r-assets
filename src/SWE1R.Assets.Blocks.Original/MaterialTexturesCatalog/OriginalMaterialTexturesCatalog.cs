@@ -21,8 +21,8 @@ namespace SWE1R.Assets.Blocks.Original.MaterialTexturesCatalog
 
         #region Properties (serialized)
 
-        public List<MaterialByValueIds> MaterialsByValueIds { get; set; } =
-            new List<MaterialByValueIds>();
+        public List<MeshMaterialByValueIds> MeshMaterialsByValueIds { get; set; } =
+            new List<MeshMaterialByValueIds>();
         public List<MaterialTextureByValueIds> MaterialTexturesByValueIds { get; set; } =
             new List<MaterialTextureByValueIds>();
 

@@ -81,8 +81,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         #region Methods (helper - Material/MaterialTexture)
 
-        public ReadOnlyCollection<Material> GetMaterials() =>
-            GetAllNodes().OfType<Mesh>().Select(x => x.Material).Distinct().ToList().AsReadOnly();
+        public ReadOnlyCollection<MeshMaterial> GetMeshMaterials() =>
+            GetAllNodes().OfType<Mesh>().Select(x => x.MeshMaterial).Distinct().ToList().AsReadOnly();
 
         public ReadOnlyCollection<MaterialTexture> GetMaterialTextures()
         {
@@ -90,7 +90,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
             // Model.Nodes
             materialTextures.AddRange(
-                GetMaterials().Select(x => x.Texture)
+                GetMeshMaterials().Select(x => x.Texture)
                 .Where(x => x != null));
 
             // Model.Animations

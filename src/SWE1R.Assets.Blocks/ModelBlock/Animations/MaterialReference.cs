@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
         /// Never null.
         /// </summary>
         [Order(0), Reference]
-        public Material Material { get; set; }
+        public MeshMaterial MeshMaterial { get; set; }
 
         [Order(1), Reference]
         private object NullPointer { get; set; } = null;

@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Export
 {
-    public class MaterialExporter
+    public class MeshMaterialExporter
     {
         #region Properties (input)
 
-        public Material Material { get; set; }
+        public MeshMaterial MeshMaterial { get; set; }
         public Block<TextureBlockItem> TextureBlock { get; set; }
 
         #endregion
@@ -23,11 +23,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Export
 
         #region Constructor
 
-        public MaterialExporter(
-            Material material, 
+        public MeshMaterialExporter(
+            MeshMaterial meshMaterial, 
             Block<TextureBlockItem> textureBlockItem)
         {
-            Material = material;
+            MeshMaterial = meshMaterial;
             TextureBlock = textureBlockItem;
         }
 
@@ -37,15 +37,15 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Export
 
         public void Export()
         {
-            if (Material.Texture != null)
+            if (MeshMaterial.Texture != null)
             {
-                if (Material.Texture.TextureIndex != -1)
+                if (MeshMaterial.Texture.TextureIndex != -1)
                 {
-                    MaterialTextureChild firstMaterialTextureChild = Material.Texture.Children.FirstOrDefault(); // HACK: use first child as default
-                    var texturerExporter = new MaterialTextureExporter(Material.Texture, firstMaterialTextureChild, TextureBlock);
+                    MaterialTextureChild firstMaterialTextureChild = MeshMaterial.Texture.Children.FirstOrDefault(); // HACK: use first child as default
+                    var texturerExporter = new MaterialTextureExporter(MeshMaterial.Texture, firstMaterialTextureChild, TextureBlock);
                     texturerExporter.Export();
                     EffectiveImage = texturerExporter.EffectiveImage;
-                    if (Material.Properties.AlphaBpp == 0)
+                    if (MeshMaterial.Properties.AlphaBpp == 0)
                         EffectiveImage.SetAlpha(byte.MaxValue);
                 }
             }

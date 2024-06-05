@@ -29,7 +29,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         public List<DbMapping> Mappings { get; set; }
         public List<DbMappingChild> MappingChildren { get; set; }
         public List<DbMappingSub> MappingSubs { get; set; }
-        public List<DbMaterial> Materials { get; set; }
+        public List<DbMeshMaterial> MeshMaterials { get; set; }
         public List<DbMaterialProperties> MaterialProperties { get; set; }
         public List<DbMaterialTexture> MaterialTextures { get; set; }
         public List<DbMaterialTextureChild> MaterialTextureChilds { get; set; }
@@ -75,7 +75,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Mappings = GetStructures(context.Mappings);
             MappingChildren = GetStructures(context.MappingChildren);
             MappingSubs = GetStructures(context.MappingSubs);
-            Materials = GetStructures(context.Materials);
+            MeshMaterials = GetStructures(context.Materials);
             MaterialProperties = GetStructures(context.MaterialProperties);
             MaterialTextures = GetStructures(context.MaterialTextures);
             MaterialTextureChilds = GetStructures(context.MaterialTextureChilds);
@@ -110,7 +110,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             Mappings = GetStructures<Mapping, DbMapping>(g);
             MappingChildren = GetStructures<MappingChild, DbMappingChild>(g);
             MappingSubs = GetStructures<MappingSub, DbMappingSub>(g);
-            Materials = GetStructures<Material, DbMaterial>(g);
+            MeshMaterials = GetStructures<MeshMaterial, DbMeshMaterial>(g);
             MaterialProperties = GetStructures<MaterialProperties, DbMaterialProperties>(g);
             MaterialTextures = GetStructures<MaterialTexture, DbMaterialTexture>(g);
             MaterialTextureChilds = GetStructures<MaterialTextureChild, DbMaterialTextureChild>(g);
@@ -145,7 +145,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             if (!Mappings.SequenceEqual(other.Mappings)) return false;
             if (!MappingChildren.SequenceEqual(other.MappingChildren)) return false;
             if (!MappingSubs.SequenceEqual(other.MappingSubs)) return false;
-            if (!Materials.SequenceEqual(other.Materials)) return false;
+            if (!MeshMaterials.SequenceEqual(other.MeshMaterials)) return false;
             if (!MaterialProperties.SequenceEqual(other.MaterialProperties)) return false;
             if (!MaterialTextures.SequenceEqual(other.MaterialTextures)) return false;
             if (!MaterialTextureChilds.SequenceEqual(other.MaterialTextureChilds)) return false;

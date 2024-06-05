@@ -6,11 +6,11 @@ using SWE1R.Assets.Blocks.Textures;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 {
-    public class RGBA32_MaterialImporter : MaterialImporter
+    public class RGBA32_MeshMaterialImporter : MeshMaterialImporter
     {
         #region Constructor
 
-        public RGBA32_MaterialImporter(ImageRgba32 image, Block<TextureBlockItem> textureBlock) : 
+        public RGBA32_MeshMaterialImporter(ImageRgba32 image, Block<TextureBlockItem> textureBlock) : 
             base(image, TextureFormat.RGBA32, textureBlock)
         { }
 
@@ -21,11 +21,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         // mt_w: 16, 32, 64
         // mt_h: 16, 32
 
-        protected override Material CreateMaterial()
+        protected override MeshMaterial CreateMeshMaterial()
         {
-            Material m = base.CreateMaterial();
-            m.Bitmask = 12; // 4, 6, c, e
-            return m;
+            MeshMaterial mm = base.CreateMeshMaterial();
+            mm.Bitmask = 12; // 4, 6, c, e
+            return mm;
         }
 
         protected override MaterialTexture CreateMaterialTexture()

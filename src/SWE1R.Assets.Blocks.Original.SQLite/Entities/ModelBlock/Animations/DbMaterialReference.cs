@@ -18,7 +18,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 
             var dm = (MaterialReference)node.Value;
 
-            P_Material = GetPropertyPointer(node, nameof(dm.Material));
+            P_Material = GetPropertyPointer(node, nameof(dm.MeshMaterial));
         }
 
         public override bool Equals(DbBlockItemStructure<MaterialReference> other)

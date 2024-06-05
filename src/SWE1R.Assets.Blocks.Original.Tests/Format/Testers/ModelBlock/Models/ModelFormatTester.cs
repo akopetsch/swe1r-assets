@@ -31,8 +31,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
             Assert.True(Value.GetAnimationsTransformedWithPivotNodes().All(x => headerNodesGraph.Contains(x)));
             //Assert.True(Value.GetAltNFlaggedNodes().All(x => headerNodesGraph.Contains(x))); // sometimes fails
 
-            // Material, MaterialTexture (which are also indirectly referenced from Animation)
-            var headerFlaggedNodesGraphMaterials = headerNodesGraph.OfType<Mesh>().Select(x => x.Material).ToList();
+            // MeshMaterial, MaterialTexture (which are also indirectly referenced from Animation)
+            var headerFlaggedNodesGraphMaterials = headerNodesGraph.OfType<Mesh>().Select(x => x.MeshMaterial).ToList();
             var headerFlaggedNodesGraphMaterialTextures = headerFlaggedNodesGraphMaterials.Select(x => x.Texture).Where(x => x != null).ToList();
             if (Value.Animations != null)
                 foreach (Animation animation in Value.Animations)
@@ -41,12 +41,12 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
                     Target target = animation.TargetOrInteger.Target;
                     if (target != null)
                     {
-                        var materials = new List<Material>();
-                        if (target.Material != null)
-                            materials.Add(target.Material);
+                        var meshMaterials = new List<MeshMaterial>();
+                        if (target.MeshMaterial != null)
+                            meshMaterials.Add(target.MeshMaterial);
                         if (target.MaterialReference != null)
-                            materials.Add(target.MaterialReference.Material);
-                        Assert.True(materials.All(x => headerFlaggedNodesGraphMaterials.Contains(x)));
+                            meshMaterials.Add(target.MaterialReference.MeshMaterial);
+                        Assert.True(meshMaterials.All(x => headerFlaggedNodesGraphMaterials.Contains(x)));
                     }
 
                     // Keyframes property (MaterialTexture)

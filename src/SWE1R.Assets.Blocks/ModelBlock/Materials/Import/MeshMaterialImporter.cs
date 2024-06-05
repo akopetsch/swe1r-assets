@@ -10,7 +10,7 @@ using System.Numerics;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 {
-    public abstract class MaterialImporter
+    public abstract class MeshMaterialImporter
     {
         #region Properties (input)
 
@@ -22,14 +22,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 
         #region Properties (output)
 
-        public Material Material { get; private set; }
+        public MeshMaterial MeshMaterial { get; private set; }
         public TextureBlockItem TextureBlockItem { get; private set; }
 
         #endregion
 
         #region Constructor
 
-        public MaterialImporter(ImageRgba32 image, TextureFormat textureFormat, Block<TextureBlockItem> textureBlock)
+        public MeshMaterialImporter(ImageRgba32 image, TextureFormat textureFormat, Block<TextureBlockItem> textureBlock)
         {
             Image = image;
             TextureFormat = textureFormat;
@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         public void Import()
         {
             TextureBlockItem = CreateTextureBlockItem();
-            Material = CreateMaterial();
+            MeshMaterial = CreateMeshMaterial();
         }
 
         private TextureBlockItem CreateTextureBlockItem()
@@ -58,8 +58,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
             return blockItem;
         }
 
-        protected virtual Material CreateMaterial() =>
-            new Material() {
+        protected virtual MeshMaterial CreateMeshMaterial() =>
+            new MeshMaterial() {
                 Texture = CreateMaterialTexture(),
                 Properties = CreateMaterialProperties(),
             };

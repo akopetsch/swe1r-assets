@@ -27,9 +27,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             get => Value as MaterialReference;
             set => Value = value;
         }
-        public Material Material
+        public MeshMaterial MeshMaterial
         {
-            get => Value as Material;
+            get => Value as MeshMaterial;
             set => Value = value;
         }
         public TransformedWithPivotNode TransformedWithPivotNode
@@ -53,7 +53,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 
                 if (anim.BitmaskNibble == 0b1011 || // 0x0b
                     anim.BitmaskNibble == 0b1100)   // 0x0c
-                    return typeof(Material);
+                    return typeof(MeshMaterial);
 
                 if (anim.BitmaskNibble == 0b1000 || // 0x08
                     anim.BitmaskNibble == 0b1001 || // 0x09

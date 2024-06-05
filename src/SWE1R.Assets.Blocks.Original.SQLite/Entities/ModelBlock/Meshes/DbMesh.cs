@@ -36,7 +36,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
             var m = (Mesh)node.Value;
 
-            P_Material = GetPropertyPointer(node, nameof(Mesh.Material));
+            P_Material = GetPropertyPointer(node, nameof(Mesh.MeshMaterial));
             P_Mapping = GetPropertyPointer(node, nameof(Mesh.Mapping));
 
             Bounds_Min_X = m.FixedBounds.Min.X;

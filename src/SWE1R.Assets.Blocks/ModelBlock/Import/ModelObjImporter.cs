@@ -30,8 +30,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
     {
         #region Fields
 
-        private Dictionary<ObjMaterial, Material> _materials = 
-            new Dictionary<ObjMaterial, Material>();
+        private Dictionary<ObjMaterial, MeshMaterial> _meshMaterials = 
+            new Dictionary<ObjMaterial, MeshMaterial>();
 
         private ModelObjImporterDebugInfoPrinter _debugInfoPrinter;
 
@@ -123,7 +123,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 var mesh = new Mesh();
                 meshes.Add(mesh);
 
-                mesh.Material = ImportObjMaterial(objGroup.Material); // TODO: !!!!!! must have a value
+                mesh.MeshMaterial = ImportObjMaterial(objGroup.Material); // TODO: !!!!!! must have a value
 
                 mesh.Vertices = meshHelper.Vertices.ToList();
                 mesh.CommandList = GetCommandList(meshHelper.VertexBuffers, mesh);
@@ -135,26 +135,26 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             return meshes;
         }
 
-        private Material ImportObjMaterial(ObjMaterial objMaterial)
+        private MeshMaterial ImportObjMaterial(ObjMaterial objMaterial)
         {
             if (Configuration.TryFirstMaterialAsFallback)
                 objMaterial ??= ObjLoadResult.Materials.FirstOrDefault();
             if (objMaterial == null)
-                return Configuration.FallbackMaterial;
+                return Configuration.FallbackMeshMaterial;
             else
             {
-                if (_materials.TryGetValue(objMaterial, out Material existingMaterial))
-                    return existingMaterial;
+                if (_meshMaterials.TryGetValue(objMaterial, out MeshMaterial existingMeshMaterial))
+                    return existingMeshMaterial;
                 else
                 {
                     string textureImageFilename = objMaterial.DiffuseTextureMap; // map_Kd
                     if (textureImageFilename == null)
-                        return Configuration.FallbackMaterial;
+                        return Configuration.FallbackMeshMaterial;
                     else
                     {
                         using var stream = OpenFileStreamDelegate(textureImageFilename);
-                        MaterialImporter materialImporter = Material.Import(stream, TextureBlock, ImageLoader);
-                        return _materials[objMaterial] = materialImporter.Material;
+                        return _meshMaterials[objMaterial] = 
+                            MeshMaterial.Import(stream, TextureBlock, ImageLoader).MeshMaterial;
                     }
                 }
             }

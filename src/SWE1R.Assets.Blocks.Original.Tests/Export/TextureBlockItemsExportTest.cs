@@ -47,8 +47,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Export
 
         private void Test(int valueId)
         {
-            List<MaterialByValueIds> materials = OriginalMaterialTexturesCatalogProviderFixture.Provider.Catalog
-                .MaterialsByValueIds.Where(x => x.TextureValueId == valueId).ToList();
+            List<MeshMaterialByValueIds> materials = OriginalMaterialTexturesCatalogProviderFixture.Provider.Catalog
+                .MeshMaterialsByValueIds.Where(x => x.TextureValueId == valueId).ToList();
             bool anyMaterials = materials.Any();
             //Assert.True(anyMaterials); // fails 83 times
             List<MaterialTextureByValueIds> materialTextures = OriginalMaterialTexturesCatalogProviderFixture.Provider.Catalog

@@ -1,13 +1,14 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
-    [Table("Model_Material")]
-    public class DbMaterial : DbBlockItemStructure<Material>
+    [Table($"{nameof(Model)}_{nameof(MeshMaterial)}")]
+    public class DbMeshMaterial : DbBlockItemStructure<MeshMaterial>
     {
         public int Bitmask { get; set; }
         public short Width_Unk_Dividend { get; set; }
@@ -19,18 +20,18 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         {
             base.CopyFrom(node);
 
-            var m = (Material)node.Value;
+            var x = (MeshMaterial)node.Value;
 
-            Bitmask = m.Bitmask;
-            Width_Unk_Dividend = m.Width_Unk_Dividend;
-            Height_Unk_Dividend = m.Height_Unk_Dividend;
-            P_Texture = GetPropertyPointer(node, nameof(m.Texture));
-            P_Properties = GetPropertyPointer(node, nameof(m.Properties));
+            Bitmask = x.Bitmask;
+            Width_Unk_Dividend = x.Width_Unk_Dividend;
+            Height_Unk_Dividend = x.Height_Unk_Dividend;
+            P_Texture = GetPropertyPointer(node, nameof(x.Texture));
+            P_Properties = GetPropertyPointer(node, nameof(x.Properties));
         }
 
-        public override bool Equals(DbBlockItemStructure<Material> other)
+        public override bool Equals(DbBlockItemStructure<MeshMaterial> other)
         {
-            var _other = (DbMaterial)other;
+            var _other = (DbMeshMaterial)other;
 
             if (!base.Equals(_other))
                 return false;
@@ -46,14 +47,15 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
         public override bool Equals(object obj)
         {
-            if (obj is DbMaterial)
-                return this.Equals((DbMaterial)obj);
+            if (obj is DbMeshMaterial)
+                return this.Equals((DbMeshMaterial)obj);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            HashCode.Combine(base.GetHashCode(), Bitmask, 
+            HashCode.Combine(base.GetHashCode(), 
+                Bitmask, 
                 Width_Unk_Dividend, Height_Unk_Dividend, 
                 P_Texture, P_Properties);
     }

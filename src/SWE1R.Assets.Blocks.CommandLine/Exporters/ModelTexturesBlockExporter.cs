@@ -30,19 +30,19 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
             string itemFolderPath = Path.Combine(ExportFolderPath, itemFolderName);
             Directory.CreateDirectory(itemFolderPath);
 
-            var materials = byteSerializerContext.Graph.GetValues<Material>().ToList();
-            foreach (Material material in materials)
+            var meshMaterials = byteSerializerContext.Graph.GetValues<MeshMaterial>().ToList();
+            foreach (MeshMaterial meshMaterial in meshMaterials)
             {
-                Debug.Write($"{material.Texture?.TextureIndex} ");
+                Debug.Write($"{meshMaterial.Texture?.TextureIndex} ");
                 Console.Write('.');
 
-                var materialExporter = new MaterialExporter(material, TextureBlock);
+                var materialExporter = new MeshMaterialExporter(meshMaterial, TextureBlock);
                 materialExporter.Export();
                 ImageRgba32 image = materialExporter.EffectiveImage;
                 if (image != null)
                 {
                     // save as png
-                    string exportFilename = $"{BlockItem.GetIndexString(material.Texture.TextureIndex.Value)}.png";
+                    string exportFilename = $"{BlockItem.GetIndexString(meshMaterial.Texture.TextureIndex.Value)}.png";
                     string exportPath = Path.Combine(itemFolderPath, exportFilename);
                     image.ToImageSharp().SaveAsPng(exportPath);
                 }

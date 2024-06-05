@@ -31,8 +31,8 @@ namespace SWE1R.Assets.Blocks.XmlDocumentation.Tests
         #region Methods (SWE1R.Assets.Blocks.ModelBlock.Materials)
 
         [Fact]
-        public void Test_Materials_Material() => 
-            AssertType<Material>();
+        public void Test_Materials_MeshMaterial() => 
+            AssertType<MeshMaterial>();
 
         [Fact]
         public void Test_Materials_MaterialProperties() => 
