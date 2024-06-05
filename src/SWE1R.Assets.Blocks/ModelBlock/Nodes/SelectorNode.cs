@@ -19,13 +19,50 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     /// </summary>
     public class SelectorNode : FlaggedNode
     {
-        #region Properties
+        #region Fields (const)
+
+        private const int AllChildrenDisabled = -2;
+        private const int AllChildrenEnabled = -1; 
+
+        #endregion
+
+        #region Properties (serialized)
 
         /// <summary>
         /// Always 0 or -1.
         /// </summary>
         [Order(0)]
-        public int Int { get; set; }
+        internal int SelectionValue { get; set; }
+
+        #endregion
+
+        #region Properties (logical)
+
+        /// <summary>
+        /// Don't render any child node?
+        /// </summary>
+        public bool AreAllChildrenDisabled =>
+            SelectionValue == AllChildrenDisabled;
+
+        /// <summary>
+        /// Render all child nodes?
+        /// </summary>
+        public bool AreAllChildrenEnabled =>
+            SelectionValue == AllChildrenEnabled;
+
+        /// <summary>
+        /// Render selected child node only?
+        /// </summary>
+        public int? SelectionIndex
+        {
+            get => 
+                SelectionValue >= 0 ? (int?)SelectionValue : null;
+            set
+            {
+                if (value.HasValue)
+                    SelectionValue = value.Value;
+            }
+        }
 
         #endregion
 
@@ -34,6 +71,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
         public SelectorNode() : 
             base(NodeFlags.SelectorNode)
         { }
+
+        #endregion
+
+        #region Methods (logical)
+
+        public void DisableAllChildren() =>
+            SelectionValue = AllChildrenDisabled;
+
+        public void EnableAllChildren() =>
+            SelectionValue = AllChildrenEnabled;
 
         #endregion
     }
