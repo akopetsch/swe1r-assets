@@ -48,27 +48,27 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
                 Byte_f = 252, // 60, 124
             };
 
-        protected override MaterialProperties CreateMaterialProperties()
+        protected override Material CreateMaterial()
         {
-            MaterialProperties mp = base.CreateMaterialProperties();
-            mp.Word_4 = 2; // 2
-            mp.Ints_6 = new int[] {
+            Material m = base.CreateMaterial();
+            m.Word_4 = 2; // 2
+            m.Ints_6 = new int[] {
                 0x011f041f, // 0x011f031f, 0x011f041f, 0x1f1f1f01, 0x1f1f1f03, 0x031f011f
                 0x07070701, // 0x01070307, 0x03070107, 0x07070701
             };
-            mp.Ints_e = new int[] {
+            m.Ints_e = new int[] {
                 0x1f1f1f00, // 0x1f1f1f00
                 0x07070700, // 0x00070407, 0x07070700
             };
-            mp.Byte_22 = 0; // 0, 255
-            mp.Byte_23 = 0; // 0, 255
-            mp.Byte_24 = 0; // 0, 255
-            mp.Byte_25 = 0; // 0, 64, 255
-            mp.Byte_2e = 0; // 0, 128
-            mp.Byte_2f = 0; // 0, 128
-            mp.Byte_30 = 0; // 0, 128
-            mp.Byte_31 = 0; // 0, 16
-            return mp;
+            m.Byte_22 = 0; // 0, 255
+            m.Byte_23 = 0; // 0, 255
+            m.Byte_24 = 0; // 0, 255
+            m.Byte_25 = 0; // 0, 64, 255
+            m.Byte_2e = 0; // 0, 128
+            m.Byte_2f = 0; // 0, 128
+            m.Byte_30 = 0; // 0, 128
+            m.Byte_31 = 0; // 0, 16
+            return m;
         }
 
         #endregion

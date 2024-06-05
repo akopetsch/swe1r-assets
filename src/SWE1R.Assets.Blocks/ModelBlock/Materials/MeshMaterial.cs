@@ -40,7 +40,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         /// Always has a value.
         /// </summary>
         [Order(4), Reference]
-        public MaterialProperties Properties { get; set; }
+        public Material Material { get; set; }
 
         #endregion
 

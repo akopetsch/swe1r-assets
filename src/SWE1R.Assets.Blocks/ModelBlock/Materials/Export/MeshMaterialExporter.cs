@@ -45,7 +45,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Export
                     var texturerExporter = new MaterialTextureExporter(MeshMaterial.Texture, firstMaterialTextureChild, TextureBlock);
                     texturerExporter.Export();
                     EffectiveImage = texturerExporter.EffectiveImage;
-                    if (MeshMaterial.Properties.AlphaBpp == 0)
+                    if (MeshMaterial.Material.AlphaBpp == 0)
                         EffectiveImage.SetAlpha(byte.MaxValue);
                 }
             }

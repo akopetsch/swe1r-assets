@@ -18,7 +18,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
     /// </list>
     /// </para>
     /// </summary>
-    public class MaterialProperties : ICustomSerializable
+    public class Material : ICustomSerializable
     {
         #region Properties (serialization)
 

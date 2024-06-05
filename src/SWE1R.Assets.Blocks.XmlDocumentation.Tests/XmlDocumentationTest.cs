@@ -35,8 +35,8 @@ namespace SWE1R.Assets.Blocks.XmlDocumentation.Tests
             AssertType<MeshMaterial>();
 
         [Fact]
-        public void Test_Materials_MaterialProperties() => 
-            AssertType<MaterialProperties>();
+        public void Test_Materials_Material() => 
+            AssertType<Material>();
 
         [Fact]
         public void Test_Materials_MaterialTexture() => 

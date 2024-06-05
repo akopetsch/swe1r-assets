@@ -1,13 +1,14 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 {
-    [Table("Model_MaterialProperties")]
-    public class DbMaterialProperties : DbBlockItemStructure<MaterialProperties>
+    [Table($"{nameof(Model)}_{nameof(Material)}")]
+    public class DbMaterial : DbBlockItemStructure<Material>
     {
         public int AlphaBpp { get; set; }
         public short Word_4 { get; set; }
@@ -37,36 +38,36 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         {
             base.CopyFrom(node);
 
-            var mp = (MaterialProperties)node.Value;
+            var x = (Material)node.Value;
 
-            AlphaBpp = mp.AlphaBpp;
-            Word_4 = mp.Word_4;
-            Ints_6_0 = mp.Ints_6[0];
-            Ints_6_1 = mp.Ints_6[1];
-            Ints_e_0 = mp.Ints_e[0];
-            Ints_e_1 = mp.Ints_e[1];
-            Unk_16 = mp.Unk_16;
-            Bitmask1 = mp.Bitmask1;
-            Bitmask2 = mp.Bitmask2;
-            Unk_20 = mp.Unk_20;
-            Byte_22 = mp.Byte_22;
-            Byte_23 = mp.Byte_23;
-            Byte_24 = mp.Byte_24;
-            Byte_25 = mp.Byte_25;
-            Unk_26 = mp.Unk_26;
-            Unk_28 = mp.Unk_28;
-            Unk_2a = mp.Unk_2a;
-            Unk_2c = mp.Unk_2c;
-            Byte_2e = mp.Byte_2e;
-            Byte_2f = mp.Byte_2f;
-            Byte_30 = mp.Byte_30;
-            Byte_31 = mp.Byte_31;
-            Unk_32 = mp.Unk_32;
+            AlphaBpp = x.AlphaBpp;
+            Word_4 = x.Word_4;
+            Ints_6_0 = x.Ints_6[0];
+            Ints_6_1 = x.Ints_6[1];
+            Ints_e_0 = x.Ints_e[0];
+            Ints_e_1 = x.Ints_e[1];
+            Unk_16 = x.Unk_16;
+            Bitmask1 = x.Bitmask1;
+            Bitmask2 = x.Bitmask2;
+            Unk_20 = x.Unk_20;
+            Byte_22 = x.Byte_22;
+            Byte_23 = x.Byte_23;
+            Byte_24 = x.Byte_24;
+            Byte_25 = x.Byte_25;
+            Unk_26 = x.Unk_26;
+            Unk_28 = x.Unk_28;
+            Unk_2a = x.Unk_2a;
+            Unk_2c = x.Unk_2c;
+            Byte_2e = x.Byte_2e;
+            Byte_2f = x.Byte_2f;
+            Byte_30 = x.Byte_30;
+            Byte_31 = x.Byte_31;
+            Unk_32 = x.Unk_32;
         }
 
-        public override bool Equals(DbBlockItemStructure<MaterialProperties> other)
+        public override bool Equals(DbBlockItemStructure<Material> other)
         {
-            var _other = (DbMaterialProperties)other;
+            var _other = (DbMaterial)other;
 
             if (!base.Equals(_other))
                 return false;
@@ -100,8 +101,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
         public override bool Equals(object obj)
         {
-            if (obj is DbMaterialProperties)
-                return this.Equals((DbMaterialProperties)obj);
+            if (obj is DbMaterial)
+                return this.Equals((DbMaterial)obj);
             else
                 return base.Equals(obj);
         }

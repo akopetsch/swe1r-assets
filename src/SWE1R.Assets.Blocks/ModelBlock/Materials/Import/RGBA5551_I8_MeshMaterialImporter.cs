@@ -48,9 +48,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
                 Byte_f = 252, // 12, 60, 124, 252
             };
 
-        protected override MaterialProperties CreateMaterialProperties()
+        protected override Material CreateMaterial()
         {
-            MaterialProperties mp = base.CreateMaterialProperties();
+            Material mp = base.CreateMaterial();
             mp.Word_4 = 1; // 1
             mp.Ints_6 = new int[] {
                 0x11f041f, // 0x011f041f

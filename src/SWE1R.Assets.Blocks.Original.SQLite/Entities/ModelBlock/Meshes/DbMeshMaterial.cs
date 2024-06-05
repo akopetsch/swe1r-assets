@@ -26,7 +26,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             Width_Unk_Dividend = x.Width_Unk_Dividend;
             Height_Unk_Dividend = x.Height_Unk_Dividend;
             P_Texture = GetPropertyPointer(node, nameof(x.Texture));
-            P_Properties = GetPropertyPointer(node, nameof(x.Properties));
+            P_Properties = GetPropertyPointer(node, nameof(x.Material));
         }
 
         public override bool Equals(DbBlockItemStructure<MeshMaterial> other)

@@ -35,7 +35,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         public DbSet<DbMappingChild> MappingChildren { get; set; }
         public DbSet<DbMappingSub> MappingSubs { get; set; }
         public DbSet<DbMeshMaterial> Materials { get; set; }
-        public DbSet<DbMaterialProperties> MaterialProperties { get; set; }
+        public DbSet<DbMaterial> MaterialProperties { get; set; }
         public DbSet<DbMaterialTexture> MaterialTextures { get; set; }
         public DbSet<DbMaterialTextureChild> MaterialTextureChilds { get; set; }
         public DbSet<DbMesh> Meshes { get; set; }
@@ -98,7 +98,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
             MappingChildren.AddRange(dbModelStructures.MappingChildren);
             MappingSubs.AddRange(dbModelStructures.MappingSubs);
             Materials.AddRange(dbModelStructures.MeshMaterials);
-            MaterialProperties.AddRange(dbModelStructures.MaterialProperties);
+            MaterialProperties.AddRange(dbModelStructures.Materials);
             MaterialTextures.AddRange(dbModelStructures.MaterialTextures);
             MaterialTextureChilds.AddRange(dbModelStructures.MaterialTextureChilds);
 

@@ -61,7 +61,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         protected virtual MeshMaterial CreateMeshMaterial() =>
             new MeshMaterial() {
                 Texture = CreateMaterialTexture(),
-                Properties = CreateMaterialProperties(),
+                Material = CreateMaterial(),
             };
 
         protected virtual MaterialTexture CreateMaterialTexture()
@@ -77,8 +77,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 
         protected abstract MaterialTextureChild CreateMaterialTextureChild();
 
-        protected virtual MaterialProperties CreateMaterialProperties() =>
-            new MaterialProperties() {
+        protected virtual Material CreateMaterial() =>
+            new Material() {
                 // bitmasks to make it opaque:
                 Bitmask1 = unchecked((int)0xC8000000),
                 Bitmask2 = 0x0112038,

@@ -57,8 +57,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
             Assert.True(meshMaterial.Height_Unk_Dividend == 0);
             Assert.NotNull(meshMaterial.Texture);
             AssertSkyboxMaterialTexture(meshMaterial.Texture);
-            Assert.NotNull(meshMaterial.Properties);
-            AssertSkyboxMaterialProperties(meshMaterial.Properties);
+            Assert.NotNull(meshMaterial.Material);
+            AssertSkybox(meshMaterial.Material);
         }
 
         private void AssertSkyboxMaterialTexture(MaterialTexture materialTexture)
@@ -106,30 +106,30 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
             Assert.True(materialTextureChild.Byte_f == 252);
         }
 
-        private void AssertSkyboxMaterialProperties(MaterialProperties materialProperties)
+        private void AssertSkybox(Material material)
         {
-            Assert.True(materialProperties.AlphaBpp == 0);
-            Assert.True(materialProperties.Word_4 == 1);
-            Assert.True(materialProperties.Ints_6[0] == 0x011f041f);
-            Assert.True(materialProperties.Ints_6[1] == 0x07070704);
-            Assert.True(materialProperties.Ints_e[0] == 0x011f041f);
-            Assert.True(materialProperties.Ints_e[1] == 0x07070704);
-            Assert.True(materialProperties.Unk_16 == 0);
-            Assert.True(materialProperties.Bitmask1 == 0x0c082008);
-            Assert.True(materialProperties.Bitmask2 == 0x03022008);
-            Assert.True(materialProperties.Byte_22 == 0);
-            Assert.True(materialProperties.Byte_23 == 0);
-            Assert.True(materialProperties.Byte_24 == 0);
-            Assert.True(materialProperties.Byte_25 == 0);
-            Assert.True(materialProperties.Unk_26 == 0);
-            Assert.True(materialProperties.Unk_28 == 0);
-            Assert.True(materialProperties.Unk_2a == 0);
-            Assert.True(materialProperties.Unk_2c == 0);
-            Assert.True(materialProperties.Byte_2e == 0);
-            Assert.True(materialProperties.Byte_2f == 0);
-            Assert.True(materialProperties.Byte_30 == 0);
-            Assert.True(materialProperties.Byte_31 == 0);
-            Assert.True(materialProperties.Unk_32 == 0);
+            Assert.True(material.AlphaBpp == 0);
+            Assert.True(material.Word_4 == 1);
+            Assert.True(material.Ints_6[0] == 0x011f041f);
+            Assert.True(material.Ints_6[1] == 0x07070704);
+            Assert.True(material.Ints_e[0] == 0x011f041f);
+            Assert.True(material.Ints_e[1] == 0x07070704);
+            Assert.True(material.Unk_16 == 0);
+            Assert.True(material.Bitmask1 == 0x0c082008);
+            Assert.True(material.Bitmask2 == 0x03022008);
+            Assert.True(material.Byte_22 == 0);
+            Assert.True(material.Byte_23 == 0);
+            Assert.True(material.Byte_24 == 0);
+            Assert.True(material.Byte_25 == 0);
+            Assert.True(material.Unk_26 == 0);
+            Assert.True(material.Unk_28 == 0);
+            Assert.True(material.Unk_2a == 0);
+            Assert.True(material.Unk_2c == 0);
+            Assert.True(material.Byte_2e == 0);
+            Assert.True(material.Byte_2f == 0);
+            Assert.True(material.Byte_30 == 0);
+            Assert.True(material.Byte_31 == 0);
+            Assert.True(material.Unk_32 == 0);
         }
     }
 }
