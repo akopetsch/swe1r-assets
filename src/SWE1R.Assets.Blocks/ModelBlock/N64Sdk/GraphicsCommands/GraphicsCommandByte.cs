@@ -1,8 +1,8 @@
 ﻿// SPDX-License-Identifier: MIT
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
+namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
 {
-    public enum N64GspCommandByte : byte
+    public enum GraphicsCommandByte : byte
     {
         G_VTX = 0x01,
         G_CULLDL = 0x03,

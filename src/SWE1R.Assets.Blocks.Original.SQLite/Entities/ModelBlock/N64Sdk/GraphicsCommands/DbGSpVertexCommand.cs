@@ -2,13 +2,13 @@
 
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspCommands
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk.GraphicsCommands
 {
-    [Table($"{nameof(Model)}_{nameof(N64GspVertexCommand)}")]
-    public class DbN64GspVertexCommand : DbBlockItemStructure<N64GspVertexCommand>
+    [Table($"{nameof(Model)}_{nameof(GSpVertexCommand)}")]
+    public class DbGSpVertexCommand : DbBlockItemStructure<GSpVertexCommand>
     {
         #region Properties
 
@@ -23,7 +23,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspC
         {
             base.CopyFrom(node);
 
-            var x = (N64GspVertexCommand)node.Value;
+            var x = (GSpVertexCommand)node.Value;
 
             P_V = GetValuePosition(node.Graph, x.V.Value);
             N = x.N;
@@ -31,9 +31,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspC
             V0PlusN = x.V0PlusN;
         }
 
-        public override bool Equals(DbBlockItemStructure<N64GspVertexCommand> other)
+        public override bool Equals(DbBlockItemStructure<GSpVertexCommand> other)
         {
-            var x = (DbN64GspVertexCommand)other;
+            var x = (DbGSpVertexCommand)other;
 
             if (!base.Equals(x))
                 return false;
@@ -48,7 +48,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspC
 
         public override bool Equals(object obj)
         {
-            if (obj is DbN64GspVertexCommand x)
+            if (obj is DbGSpVertexCommand x)
                 return Equals(x);
             else
                 return base.Equals(obj);

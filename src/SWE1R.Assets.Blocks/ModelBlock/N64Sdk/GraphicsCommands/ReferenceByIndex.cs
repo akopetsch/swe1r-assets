@@ -7,7 +7,7 @@ using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Records;
 using System.Collections.Generic;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
+namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
 {
     public class ReferenceByIndex<T> : INodeListener
     {
@@ -67,7 +67,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         {
             ReferenceComponent referenceComponent = record.Properties[nameof(Reference)].Get<ReferenceComponent>();
             // TODO: see ReferenceComponent.ReuseDeserializedValueComponent
-            referenceComponent.Node.ValueChanged += (before, after) => {
+            referenceComponent.Node.ValueChanged += (before, after) =>
+            {
                 var element = (T)referenceComponent.Value;
                 Collection = referenceComponent.ValueComponent.GetAncestorValue<IList<T>>();
                 Index = Collection.IndexOf(element);

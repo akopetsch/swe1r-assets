@@ -1,7 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk;
 using System.Collections.Generic;
 using ObjFace = ObjLoader.Loader.Data.Elements.Face;
 
@@ -10,13 +10,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
     public class FaceHelper
     {
         public ObjFace ObjFace { get; }
-        public List<Vertex> Vertices { get; }
+        public List<Vtx> Vertices { get; }
         public List<Triangle> Triangles { get; }
 
         public FaceHelper(ObjFace objFace)
         {
             ObjFace = objFace;
-            Vertices = new List<Vertex>();
+            Vertices = new List<Vtx>();
             Triangles = new List<Triangle>();
         }
 

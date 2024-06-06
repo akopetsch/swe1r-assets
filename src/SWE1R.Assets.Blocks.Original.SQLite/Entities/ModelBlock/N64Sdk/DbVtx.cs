@@ -2,13 +2,13 @@
 
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk
 {
-    [Table($"{nameof(Model)}_{nameof(Vertex)}")]
-    public class DbVertex : DbBlockItemStructure<Vertex>
+    [Table($"{nameof(Model)}_{nameof(Vtx)}")]
+    public class DbVtx : DbBlockItemStructure<Vtx>
     {
         #region Properties
 
@@ -30,7 +30,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         {
             base.CopyFrom(node);
 
-            var x = (Vertex)node.Value;
+            var x = (Vtx)node.Value;
 
             Position_X = x.Position.X;
             Position_Y = x.Position.Y;
@@ -45,9 +45,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             Byte_F = x.Byte_F;
         }
 
-        public override bool Equals(DbBlockItemStructure<Vertex> other)
+        public override bool Equals(DbBlockItemStructure<Vtx> other)
         {
-            var x = (DbVertex)other;
+            var x = (DbVtx)other;
 
             if (!base.Equals(x))
                 return false;
@@ -69,16 +69,16 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
         public override bool Equals(object obj)
         {
-            if (obj is DbVertex x)
+            if (obj is DbVtx x)
                 return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            CombineHashCodes(base.GetHashCode(), 
-                Position_X, Position_Y, Position_Z, 
-                U, V, 
+            CombineHashCodes(base.GetHashCode(),
+                Position_X, Position_Y, Position_Z,
+                U, V,
                 Byte_C, Byte_D, Byte_E, Byte_F);
     }
 }

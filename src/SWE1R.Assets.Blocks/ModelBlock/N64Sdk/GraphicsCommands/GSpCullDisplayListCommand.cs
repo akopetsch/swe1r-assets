@@ -5,7 +5,7 @@ using ByteSerialization.Attributes;
 using ByteSerialization.IO;
 using System;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
+namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
 {
     /// <summary>
     /// See also:
@@ -15,7 +15,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
     ///       n64devkit.square7.ch - 'gSPCullDisplayList'</see></item>
     /// </list>
     /// </summary>
-    public class N64GspCullDisplayListCommand : N64GspCommand, ICustomSerializable
+    public class GSpCullDisplayListCommand : GraphicsCommand, ICustomSerializable
     {
         #region Fields
 
@@ -42,11 +42,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         #region Constructor
 
-        public N64GspCullDisplayListCommand() : 
-            base(N64GspCommandByte.G_CULLDL)
+        public GSpCullDisplayListCommand() :
+            base(GraphicsCommandByte.G_CULLDL)
         { }
 
-        public N64GspCullDisplayListCommand(byte v0, byte vn) :
+        public GSpCullDisplayListCommand(byte v0, byte vn) :
             this()
         {
             V0 = v0;

@@ -2,7 +2,7 @@
 
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
 using SWE1R.Assets.Blocks.Vectors;
 using System.Diagnostics;
 
@@ -62,10 +62,10 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                 var vertexBuffersWithVertexCommands = vertexBuffers.Where(r => r.VertexCommand != null).ToList();
                 for (int i = 0; i < vertexBuffersWithVertexCommands.Count; i++)
                 {
-                    N64GspVertexBuffer currentVertexBuffer = vertexBuffersWithVertexCommands[i];
+                    VertexBuffer currentVertexBuffer = vertexBuffersWithVertexCommands[i];
                     if (i > 0)
                     {
-                        N64GspVertexBuffer previousVertexBuffer = vertexBuffersWithVertexCommands[i - 1];
+                        VertexBuffer previousVertexBuffer = vertexBuffersWithVertexCommands[i - 1];
                         int currentV0 = currentVertexBuffer.VertexCommand.V0;
                         int previousV0 = previousVertexBuffer.VertexCommand.V0;
                         Assert.True(currentV0 > previousV0);
@@ -74,7 +74,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
                 for (int i = 0; i < vertexBuffers.Count; i++)
                 {
-                    N64GspVertexBuffer vertexBuffer = vertexBuffers[i];
+                    VertexBuffer vertexBuffer = vertexBuffers[i];
                     //AnalyticsFixture.IncreaseCounter(vertexBuffer.ToString());
 
                     // triangle commands
@@ -86,7 +86,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     Assert.True(vertexBuffer.Indices.Min() == 0);
                     Assert.True(vertexBuffer.Indices.Max() >= 1);
 
-                    N64GspCullDisplayListCommand cullDisplayListCommand = vertexBuffer.CullDisplayListCommand;
+                    GSpCullDisplayListCommand cullDisplayListCommand = vertexBuffer.CullDisplayListCommand;
                     if (cullDisplayListCommand != null)
                     {
                         Assert.True(cullDisplayListCommand.VN == vertexBuffer.Indices.Max());
@@ -97,7 +97,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         // but the last range does not necessarliy have N64GspCullDisplayListCommand
                     }
 
-                    N64GspVertexCommand vertexCommand = vertexBuffer.VertexCommand;
+                    GSpVertexCommand vertexCommand = vertexBuffer.VertexCommand;
                     if (vertexCommand != null)
                     {
                         int v0 = vertexCommand.V0;
@@ -169,29 +169,29 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
             }
         }
 
-        private List<N64GspVertexBuffer> GetVertexBuffers(N64GspCommandList commands)
+        private List<VertexBuffer> GetVertexBuffers(GraphicsCommandList commands)
         {
             // TODO: should be moved to SWE1R.Assets.Blocks
 
-            var ranges = new List<N64GspVertexBuffer>();
-            N64GspVertexBuffer vertexBuffer = null;
+            var ranges = new List<VertexBuffer>();
+            VertexBuffer vertexBuffer = null;
             for (int i = 0; i < commands.Count; i++)
             {
-                N64GspCommand command = commands[i];
+                GraphicsCommand command = commands[i];
 
                 // if first range or new range
-                if (vertexBuffer == null || command is N64GspVertexCommand)
+                if (vertexBuffer == null || command is GSpVertexCommand)
                 {
                     // create/add new range
-                    vertexBuffer = new N64GspVertexBuffer();
+                    vertexBuffer = new VertexBuffer();
                     ranges.Add(vertexBuffer);
-                    if (command is N64GspVertexCommand vertexCommand)
+                    if (command is GSpVertexCommand vertexCommand)
                         vertexBuffer.VertexCommand = vertexCommand;
                 }
-                else if (command is N64GspCullDisplayListCommand cullDisplayListCommand)
+                else if (command is GSpCullDisplayListCommand cullDisplayListCommand)
                     vertexBuffer.CullDisplayListCommand = cullDisplayListCommand;
 
-                if (command is IN64GspTrianglesCommand trianglesCommand)
+                if (command is ITrianglesGraphicsCommand trianglesCommand)
                     vertexBuffer.TrianglesCommands.Add(trianglesCommand);
             }
             return ranges;
@@ -199,39 +199,39 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
         private void TestCommandList0()
         {
-            N64GspCommandList commandList = Value.CommandList;
+            GraphicsCommandList commandList = Value.CommandList;
             if (commandList != null)
             {
                 int n = commandList.Count;
                 Assert.True(n <= 590);
 
-                N64GspCommand firstCommand = commandList[0];
+                GraphicsCommand firstCommand = commandList[0];
                 if (n == 1)
-                    Assert.True(firstCommand is IN64GspTrianglesCommand);
-                else if (firstCommand is N64Gsp2TrianglesCommand)
+                    Assert.True(firstCommand is ITrianglesGraphicsCommand);
+                else if (firstCommand is GSp2TrianglesCommand)
                 {
                     Assert.Equal(6, n);
-                    Assert.True(commandList.All(x => x is N64Gsp2TrianglesCommand));
+                    Assert.True(commandList.All(x => x is GSp2TrianglesCommand));
                 }
                 else
                 {
                     // n != 1
                     // most of the time (in 429 of 433 models)
 
-                    Assert.True(firstCommand is N64GspVertexCommand);
+                    Assert.True(firstCommand is GSpVertexCommand);
                     if (n == 2)
                     {
-                        N64GspCommand secondCommand = commandList[1];
-                        Assert.True(secondCommand is IN64GspTrianglesCommand);
+                        GraphicsCommand secondCommand = commandList[1];
+                        Assert.True(secondCommand is ITrianglesGraphicsCommand);
                     }
                     else
                         for (int i = 0; i < n; i++)
                         {
-                            N64GspCommand command = commandList[i];
-                            if (command is N64GspCullDisplayListCommand)
+                            GraphicsCommand command = commandList[i];
+                            if (command is GSpCullDisplayListCommand)
                             {
-                                N64GspCommand commandBefore = commandList[i - 1];
-                                Assert.True(commandBefore is N64GspVertexCommand);
+                                GraphicsCommand commandBefore = commandList[i - 1];
+                                Assert.True(commandBefore is GSpVertexCommand);
                             }
                         }
                 }

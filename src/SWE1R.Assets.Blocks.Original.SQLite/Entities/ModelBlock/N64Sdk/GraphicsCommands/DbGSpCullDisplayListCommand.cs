@@ -2,13 +2,13 @@
 
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspCommands
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk.GraphicsCommands
 {
-    [Table($"{nameof(Model)}_{nameof(N64GspCullDisplayListCommand)}")]
-    public class DbN64GspCullDisplayListCommand : DbBlockItemStructure<N64GspCullDisplayListCommand>
+    [Table($"{nameof(Model)}_{nameof(GSpCullDisplayListCommand)}")]
+    public class DbGSpCullDisplayListCommand : DbBlockItemStructure<GSpCullDisplayListCommand>
     {
         #region Properties
 
@@ -21,15 +21,15 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspC
         {
             base.CopyFrom(node);
 
-            var x = (N64GspCullDisplayListCommand)node.Value;
+            var x = (GSpCullDisplayListCommand)node.Value;
 
             V0 = x.V0;
             VN = x.VN;
         }
 
-        public override bool Equals(DbBlockItemStructure<N64GspCullDisplayListCommand> other)
+        public override bool Equals(DbBlockItemStructure<GSpCullDisplayListCommand> other)
         {
-            var x = (DbN64GspCullDisplayListCommand)other;
+            var x = (DbGSpCullDisplayListCommand)other;
 
             if (!base.Equals(x))
                 return false;
@@ -42,7 +42,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspC
 
         public override bool Equals(object obj)
         {
-            if (obj is DbN64GspCullDisplayListCommand x)
+            if (obj is DbGSpCullDisplayListCommand x)
                 return Equals(x);
             else
                 return base.Equals(obj);

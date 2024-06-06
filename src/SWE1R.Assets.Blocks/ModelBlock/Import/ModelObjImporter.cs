@@ -3,10 +3,10 @@
 using ObjLoader.Loader.Loaders;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
-using SWE1R.Assets.Blocks.ModelBlock.Materials.Import;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.TextureBlock;
 using SWE1R.Assets.Blocks.Vectors;
@@ -205,7 +205,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
 
             foreach (MeshHelper meshHelper in meshHelpers)
             {
-                var currentVertexBuffer = new N64GspVertexBuffer();
+                var currentVertexBuffer = new VertexBuffer();
                 meshHelper.VertexBuffers.Add(currentVertexBuffer);
                 int v0 = 0;
                 foreach (FaceHelper faceHelper in meshHelper.FaceHelpers)
@@ -215,15 +215,15 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     {
                         // new IndicesRange
                         v0 += currentVertexBuffer.NextIndicesBase;
-                        currentVertexBuffer = new N64GspVertexBuffer();
+                        currentVertexBuffer = new VertexBuffer();
                         meshHelper.VertexBuffers.Add(currentVertexBuffer);
                     }
 
-                    var trianglesCommands = new List<IN64GspTrianglesCommand>();
+                    var trianglesCommands = new List<ITrianglesGraphicsCommand>();
                     foreach (Triangle triangle in faceHelper.Triangles)
                     {
 
-                        trianglesCommands.Add(new N64Gsp1TriangleCommand(
+                        trianglesCommands.Add(new GSp1TriangleCommand(
                             Convert.ToByte(triangle.I0 - v0),
                             Convert.ToByte(triangle.I1 - v0),
                             Convert.ToByte(triangle.I2 - v0)
@@ -256,22 +256,22 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             return primitive.GetTriangles();
         }
 
-        private N64GspCommandList GetCommandList(List<N64GspVertexBuffer> vertexBuffers, Mesh mesh)
+        private GraphicsCommandList GetCommandList(List<VertexBuffer> vertexBuffers, Mesh mesh)
         {
+            var commandList = new GraphicsCommandList();
             int v0 = 0;
-            var commandList = new N64GspCommandList();
-            foreach (N64GspVertexBuffer vertexBuffer in vertexBuffers)
+            foreach (VertexBuffer vertexBuffer in vertexBuffers)
             {
                 int n = Convert.ToByte(vertexBuffer.Indices.Distinct().Count());
                 int v0PlusN = Convert.ToByte(vertexBuffer.NextIndicesBase);
-                vertexBuffer.VertexCommand = new N64GspVertexCommand(n, v0PlusN, v0, mesh.Vertices);
+                vertexBuffer.VertexCommand = new GSpVertexCommand(n, v0PlusN, v0, mesh.Vertices);
                 v0 += vertexBuffer.NextIndicesBase;
                 commandList.AddRange(vertexBuffer.AllCommands);
             }
             return commandList;
         }
 
-        private Vertex ImportObjFaceVertex(ObjFaceVertex objFaceVertex, ObjLoadResult objLoadResult)
+        private Vtx ImportObjFaceVertex(ObjFaceVertex objFaceVertex, ObjLoadResult objLoadResult)
         {
             // position
             Vector3 position = ImportObjVertex(objLoadResult.GetVertex(objFaceVertex.VertexIndex));
@@ -283,9 +283,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                 texture = ImportObjTexture(objLoadResult.GetTexture(objFaceVertex.TextureIndex));
             else
                 texture = Vector2.Zero;
-            texture = Vector2.Multiply(texture, Vertex.UvDivisor);
+            texture = Vector2.Multiply(texture, VtxExtensions.UvDivisor);
 
-            return new Vertex() {
+            return new Vtx() {
                 Position = new Vector3Int16() {
                     X = Convert.ToInt16(position.X),
                     Y = Convert.ToInt16(position.Y),

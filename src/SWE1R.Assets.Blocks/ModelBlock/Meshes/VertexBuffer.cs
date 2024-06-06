@@ -1,39 +1,40 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 {
-    public class N64GspVertexBuffer
+    public class VertexBuffer
     {
         #region Properties
 
-        public N64GspVertexCommand VertexCommand { get; set; }
-        public N64GspCullDisplayListCommand CullDisplayListCommand { get; set; }
-        public List<IN64GspTrianglesCommand> TrianglesCommands { get; } =
-            new List<IN64GspTrianglesCommand>();
+        public GSpVertexCommand VertexCommand { get; set; }
+        public GSpCullDisplayListCommand CullDisplayListCommand { get; set; }
+        public List<ITrianglesGraphicsCommand> TrianglesCommands { get; } =
+            new List<ITrianglesGraphicsCommand>();
 
         #endregion
 
         #region Properties (helper)
 
         public int NextIndicesBase =>
-            Indices.Any() ? (Indices.Max() + 1) : 1;
+            Indices.Any() ? Indices.Max() + 1 : 1;
 
-        public IEnumerable<byte> Indices => 
+        public IEnumerable<byte> Indices =>
             TrianglesCommands.SelectMany(c => c.Indices);
 
-        public IEnumerable<N64GspCommand> AllCommands
+        public IEnumerable<GraphicsCommand> AllCommands
         {
             get
             {
                 if (VertexCommand != null)
-                    yield return VertexCommand; 
+                    yield return VertexCommand;
                 if (CullDisplayListCommand != null)
                     yield return CullDisplayListCommand;
-                foreach (N64GspCommand triangleCommand in TrianglesCommands)
+                foreach (GraphicsCommand triangleCommand in TrianglesCommands)
                     yield return triangleCommand;
             }
         }
@@ -46,11 +47,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         {
             var sb = new StringBuilder();
             if (VertexCommand != null)
-                sb.Append("1");
+                sb.Append(GraphicsCommandByte.G_VTX);
             if (CullDisplayListCommand != null)
-                sb.Append("3");
+                sb.Append(GraphicsCommandByte.G_CULLDL);
             sb.Append(' ');
-            sb.Append(string.Join(string.Empty, TrianglesCommands.Select(x => x.Byte)));
+            sb.Append(string.Join(string.Empty, TrianglesCommands.Select(x => (byte)x.Byte)));
             return sb.ToString();
         }
 

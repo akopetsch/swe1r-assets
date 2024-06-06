@@ -2,13 +2,13 @@
 
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspCommands
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk.GraphicsCommands
 {
-    [Table($"{nameof(Model)}_{nameof(N64Gsp2TrianglesCommand)}")]
-    public class DbN64Gsp2TrianglesCommand : DbBlockItemStructure<N64Gsp2TrianglesCommand>
+    [Table($"{nameof(Model)}_{nameof(GSp2TrianglesCommand)}")]
+    public class DbGSp2TrianglesCommand : DbBlockItemStructure<GSp2TrianglesCommand>
     {
         #region Properties
 
@@ -25,7 +25,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspC
         {
             base.CopyFrom(node);
 
-            var x = (N64Gsp2TrianglesCommand)node.Value;
+            var x = (GSp2TrianglesCommand)node.Value;
 
             V00 = x.V00;
             V01 = x.V01;
@@ -36,9 +36,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspC
             V12 = x.V12;
         }
 
-        public override bool Equals(DbBlockItemStructure<N64Gsp2TrianglesCommand> other)
+        public override bool Equals(DbBlockItemStructure<GSp2TrianglesCommand> other)
         {
-            var x = (DbN64Gsp2TrianglesCommand)other;
+            var x = (DbGSp2TrianglesCommand)other;
 
             if (!base.Equals(x))
                 return false;
@@ -56,15 +56,15 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.N64GspC
 
         public override bool Equals(object obj)
         {
-            if (obj is DbN64Gsp2TrianglesCommand x)
+            if (obj is DbGSp2TrianglesCommand x)
                 return Equals(x);
             else
                 return base.Equals(obj);
         }
 
         public override int GetHashCode() =>
-            CombineHashCodes(base.GetHashCode(), 
-                V00, V01, V02, 
+            CombineHashCodes(base.GetHashCode(),
+                V00, V01, V02,
                 V10, V11, V12);
     }
 }

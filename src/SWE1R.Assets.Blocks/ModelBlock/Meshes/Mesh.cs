@@ -3,7 +3,8 @@
 using ByteSerialization.Attributes;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Vectors;
 using System;
@@ -96,14 +97,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// <para>Offset: 0x30</para>
         /// </summary>
         [Order(9), Reference(3)]
-        public N64GspCommandList CommandList { get; set; }
+        public GraphicsCommandList CommandList { get; set; }
         /// <summary>
         /// Gets or sets the list of visible vertices. 
         /// The list's length is <see cref="VerticesCount">VerticesCount</see>. Is <see langword="null"/> if that value is 0.
         /// <para>Offset: 0x34</para>
         /// </summary>
         [Order(10), Reference(4), Length(nameof(VerticesCount))]
-        public List<Vertex> Vertices { get; set; }
+        public List<Vtx> Vertices { get; set; }
         /// <summary>
         /// Gets or sets the count of <see cref="CollisionVertices">CollisionVertices</see>. 
         /// If 0, <see cref="VerticesCount">VerticesCount</see> is greater than 0.
@@ -164,7 +165,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         }
 
         public void UpdateFacesCountByCommandList() =>
-            FacesCount = Convert.ToInt16(CommandList.OfType<IN64GspTrianglesCommand>().SelectMany(x => x.Triangles).Count());
+            FacesCount = Convert.ToInt16(CommandList.OfType<ITrianglesGraphicsCommand>().SelectMany(x => x.Triangles).Count());
 
         public void UpdateBounds()
         {

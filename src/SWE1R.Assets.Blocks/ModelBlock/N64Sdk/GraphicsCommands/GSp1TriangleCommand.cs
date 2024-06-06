@@ -7,7 +7,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using System;
 using System.Collections.Generic;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
+namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
 {
     /// <summary>
     /// See also:
@@ -17,7 +17,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
     ///       n64devkit.square7.ch - 'gSP1Triangle'</see></item>
     /// </list>
     /// </summary>
-    public class N64Gsp1TriangleCommand : N64GspCommand, IN64GspTrianglesCommand, ICustomSerializable
+    public class GSp1TriangleCommand : GraphicsCommand, ITrianglesGraphicsCommand, ICustomSerializable
     {
         #region Fields
 
@@ -64,18 +64,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
             }
         }
 
-        public Triangle Triangle => 
+        public Triangle Triangle =>
             new Triangle(V0, V1, V2);
 
         #endregion
 
         #region Constructor
 
-        public N64Gsp1TriangleCommand() : 
-            base(N64GspCommandByte.G_TRI1)
+        public GSp1TriangleCommand() :
+            base(GraphicsCommandByte.G_TRI1)
         { }
 
-        public N64Gsp1TriangleCommand(byte v0, byte v1, byte v2) :
+        public GSp1TriangleCommand(byte v0, byte v1, byte v2) :
             this()
         {
             V0 = v0;

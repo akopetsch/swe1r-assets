@@ -4,7 +4,7 @@ using ByteSerialization.Attributes;
 using System;
 using System.Collections.Generic;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
+namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
 {
     /// <summary>
     /// See also:
@@ -14,7 +14,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
     ///       n64devkit.square7.ch - 'gSPVertex'</see></item>
     /// </list>
     /// </summary>
-    public class N64GspVertexCommand : N64GspCommand
+    public class GSpVertexCommand : GraphicsCommand
     {
         #region Fields (const)
 
@@ -29,12 +29,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
         [Order(1)]
         private byte V0PlusNPadded { get; set; }
         [Order(2)]
-        internal ReferenceByIndex<Vertex> V { get; set; }
+        internal ReferenceByIndex<Vtx> V { get; set; }
 
         #endregion
 
         #region Properties (C struct)
-         
+
         public byte N { get => Convert.ToByte(NPadded >> NPadding); set => NPadded = (short)(value << NPadding); }
         public int V0 { get => V.Index.Value; set => V.Index = value; }
         public byte V0PlusN { get => (byte)(V0PlusNPadded >> 1); set => V0PlusNPadded = Convert.ToByte(value << 1); }
@@ -43,14 +43,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         #region Constructor
 
-        public N64GspVertexCommand() : 
-            base(N64GspCommandByte.G_VTX)
+        public GSpVertexCommand() :
+            base(GraphicsCommandByte.G_VTX)
         { }
 
-        public N64GspVertexCommand(int n, int v0PlusN, int v0, IList<Vertex> vertices) :
+        public GSpVertexCommand(int n, int v0PlusN, int v0, IList<Vtx> vertices) :
             this()
         {
-            V = new ReferenceByIndex<Vertex>()
+            V = new ReferenceByIndex<Vtx>()
             {
                 Collection = vertices,
             };

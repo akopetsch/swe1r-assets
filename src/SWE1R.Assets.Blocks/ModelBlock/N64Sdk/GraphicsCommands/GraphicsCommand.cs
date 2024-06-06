@@ -4,7 +4,7 @@ using ByteSerialization.Attributes;
 using ByteSerialization.IO;
 using System.Linq;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
+namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
 {
     /// <summary>
     /// See also:
@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
     /// </list>
     /// </summary>
     [Sizeof(8)]
-    public abstract class N64GspCommand
+    public abstract class GraphicsCommand
     {
         #region Classes (helper)
 
@@ -44,18 +44,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
 
         #region Properties (serialized)
 
-        [RecordTypeIdentifier(N64GspCommandByte.G_VTX, typeof(N64GspVertexCommand))]
-        [RecordTypeIdentifier(N64GspCommandByte.G_CULLDL, typeof(N64GspCullDisplayListCommand))]
-        [RecordTypeIdentifier(N64GspCommandByte.G_TRI1, typeof(N64Gsp1TriangleCommand))]
-        [RecordTypeIdentifier(N64GspCommandByte.G_TRI2, typeof(N64Gsp2TrianglesCommand))]
+        [RecordTypeIdentifier(GraphicsCommandByte.G_VTX, typeof(GSpVertexCommand))]
+        [RecordTypeIdentifier(GraphicsCommandByte.G_CULLDL, typeof(GSpCullDisplayListCommand))]
+        [RecordTypeIdentifier(GraphicsCommandByte.G_TRI1, typeof(GSp1TriangleCommand))]
+        [RecordTypeIdentifier(GraphicsCommandByte.G_TRI2, typeof(GSp2TrianglesCommand))]
         [Order(0)]
-        public N64GspCommandByte Byte { get; set; }
+        public GraphicsCommandByte Byte { get; set; }
 
         #endregion
 
         #region Constructor
 
-        protected N64GspCommand(N64GspCommandByte commandByte) =>
+        protected GraphicsCommand(GraphicsCommandByte commandByte) =>
             Byte = commandByte;
 
         #endregion
@@ -66,7 +66,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands
             writer.Write((byte)Byte);
 
         public virtual void Deserialize(EndianBinaryReader reader) =>
-            Byte = (N64GspCommandByte)reader.ReadByte();
+            Byte = (GraphicsCommandByte)reader.ReadByte();
 
         #endregion
 

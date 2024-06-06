@@ -3,11 +3,9 @@
 using ByteSerialization;
 using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Colors;
-using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.Vectors;
-using System.Numerics;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk
 {
     /// <summary>
     /// <para>
@@ -28,18 +26,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
     /// </list>
     /// </para>
     /// </summary>
-    public class Vertex : ICustomSerializable
+    public class Vtx : ICustomSerializable
     {
         #region Fields (serialization)
 
-        private static readonly byte[] padding = new byte[2];
-
-        #endregion
-
-        #region Constants
-
-        public const int UvDivisor = 4096;
-        public const int UvDoubleDivisor = 2 * UvDivisor;
+        private static readonly byte[] PaddingBytes = new byte[2];
 
         #endregion
 
@@ -78,9 +69,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         public ColorRgba32 Color
         {
             get => new ColorRgba32(
-                Byte_C, 
-                Byte_D, 
-                Byte_E, 
+                Byte_C,
+                Byte_D,
+                Byte_E,
                 Byte_F);
             set
             {
@@ -94,8 +85,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         public Vector3SByte Normal
         {
             get => new Vector3SByte(
-                Byte_C, 
-                Byte_D, 
+                Byte_C,
+                Byte_D,
                 Byte_E);
             set
             {
@@ -113,7 +104,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         public void Serialize(EndianBinaryWriter writer)
         {
             Position.Serialize(writer);
-            writer.Write(padding);
+            writer.Write(PaddingBytes);
             writer.Write(U);
             writer.Write(V);
             writer.Write(Byte_C);
@@ -126,43 +117,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         {
             Position = new Vector3Int16();
             Position.Deserialize(reader);
-            reader.ReadBytes(padding.Length);
+            reader.ReadBytes(PaddingBytes.Length);
             U = reader.ReadInt16();
             V = reader.ReadInt16();
             Byte_C = reader.ReadByte();
             Byte_D = reader.ReadByte();
             Byte_E = reader.ReadByte();
             Byte_F = reader.ReadByte();
-        }
-
-        #endregion
-
-        #region Methods (export)
-
-        public Vector2 GetEffectiveUV(MaterialTextureChild materialTextureChild)
-        {
-            float u, v, uMax, vMax;
-            if (materialTextureChild != null)
-            {
-                uMax = materialTextureChild.HasDoubleWidth ? UvDoubleDivisor : UvDivisor;
-                vMax = materialTextureChild.HasDoubleHeight ? UvDoubleDivisor : UvDivisor;
-                u = U / uMax;
-                v = V / vMax;
-                if (materialTextureChild.IsFlippedHorizontally)
-                    u -= 1;
-                if (materialTextureChild.IsFlippedVertically)
-                    v -= 1;
-                // TODO: also consider Material.Properties.IsFlipped
-            }
-            else
-            {
-                uMax = UvDivisor;
-                vMax = UvDivisor;
-                u = U / uMax;
-                v = V / vMax;
-            }
-
-            return new Vector2(u, v);
         }
 
         #endregion

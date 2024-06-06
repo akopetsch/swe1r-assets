@@ -9,7 +9,8 @@ using ByteSerialization.IO;
 using ByteSerialization.Utils;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.N64GspCommands;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk;
+using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 using System;
 using System.Collections.Generic;
@@ -70,7 +71,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
             // N64GspVertexCommand.V
             SetMaskBits(
-                context.Graph.GetPropertyComponents<N64GspVertexCommand>(nameof(N64GspVertexCommand.V))
+                context.Graph.GetPropertyComponents<GSpVertexCommand>(nameof(GSpVertexCommand.V))
                 .Where(IsMaskBitRequired));
 
             // AltN
@@ -144,7 +145,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         private bool IsMaskBitRequired(PropertyComponent vPropertyComponent)
         {
-            var vPropertyValue = (ReferenceByIndex<Vertex>)vPropertyComponent.Value;
+            var vPropertyValue = (ReferenceByIndex<Vtx>)vPropertyComponent.Value;
             return vPropertyValue.Value != null;
         }
 
