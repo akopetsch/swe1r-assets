@@ -26,18 +26,15 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
     {
         #region Properties (serialized)
 
-        /// <summary>
-        /// Seems to be a position vector.
-        /// </summary>
         [Order(0)]
-        public Vector3Single Vector_00 { get; set; }
+        public Vector3Single Center { get; set; }
         /// <summary>
         /// X: -1.0 - 1.0,  two decimal places
         /// Y: -1.0 - 1.0,  two decimal places
         /// Z: -0.3 - 0.11, two decimal places
         /// </summary>
         [Order(1)]
-        public Vector3Single Vector_0c { get; set; }
+        public Vector3Single Direction { get; set; }
         [Order(2)]
         public short Word_18 { get; set; }
         [Order(3)]
@@ -60,7 +57,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
         /// Nullable.
         /// </summary>
         [Order(8), Reference(ReferenceHandling.Postpone)]
-        public FlaggedNode FlaggedNode_20 { get; set; }
+        public FlaggedNode AffectedNode { get; set; }
+        /// <summary>
+        /// Number defining different trigger types.
+        /// </summary>
         [Order(9)]
         public short Word_24 { get; set; }
         /// <summary>

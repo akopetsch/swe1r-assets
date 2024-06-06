@@ -24,7 +24,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behavio
         public short Word_1c { get; set; }
         public byte Byte_1e { get; set; }
         public byte Byte_1f { get; set; }
-        public int P_FlaggedNode_20 { get; set; }
+        public int P_AffectedNode { get; set; }
         public short Word_24 { get; set; }
         public short Word_26 { get; set; }
         public int P_Next { get; set; }
@@ -37,19 +37,19 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behavio
 
             var x = (MappingChild)node.Value;
 
-            Vector_00_X = x.Vector_00.X;
-            Vector_00_Y = x.Vector_00.Y;
-            Vector_00_Z = x.Vector_00.Z;
-            Vector_0c_X = x.Vector_0c.X;
-            Vector_0c_Y = x.Vector_0c.Y;
-            Vector_0c_Z = x.Vector_0c.Z;
+            Vector_00_X = x.Center.X;
+            Vector_00_Y = x.Center.Y;
+            Vector_00_Z = x.Center.Z;
+            Vector_0c_X = x.Direction.X;
+            Vector_0c_Y = x.Direction.Y;
+            Vector_0c_Z = x.Direction.Z;
             Word_18 = x.Word_18;
             Byte_1a = x.Byte_1a;
             Byte_1b = x.Byte_1b;
             Word_1c = x.Word_1c;
             Byte_1e = x.Byte_1e;
             Byte_1f = x.Byte_1f;
-            P_FlaggedNode_20 = GetPropertyPointer(node, nameof(x.FlaggedNode_20));
+            P_AffectedNode = GetPropertyPointer(node, nameof(x.AffectedNode));
             Word_24 = x.Word_24;
             Word_26 = x.Word_26;
             P_Next = GetPropertyPointer(node, nameof(x.Next));
@@ -74,7 +74,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behavio
             if (Word_1c != x.Word_1c) return false;
             if (Byte_1e != x.Byte_1e) return false;
             if (Byte_1f != x.Byte_1f) return false;
-            if (P_FlaggedNode_20 != x.P_FlaggedNode_20) return false;
+            if (P_AffectedNode != x.P_AffectedNode) return false;
             if (Word_24 != x.Word_24) return false;
             if (Word_26 != x.Word_26) return false;
             if (P_Next != x.P_Next) return false;
@@ -92,7 +92,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behavio
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
-                Vector_00_X, Vector_00_Y, Vector_00_Z, Vector_0c_Y, Vector_0c_Z, Word_18, Byte_1a, Byte_1b,
-                Word_1c, Byte_1e, Byte_1f, P_FlaggedNode_20, Word_24, Word_26, P_Next);
+                Vector_00_X, Vector_00_Y, Vector_00_Z, 
+                Vector_0c_X, Vector_0c_Y, Vector_0c_Z, 
+                Word_18, Byte_1a, Byte_1b, Word_1c, Byte_1e, Byte_1f, 
+                P_AffectedNode, Word_24, Word_26, P_Next);
     }
 }
