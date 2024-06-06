@@ -11,6 +11,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
     /// See also:
     /// <list type="bullet">
     ///   <item>
+    ///     <see href="https://github.com/tly000/SW_RACER_RE/blob/3d3a45a44ce7043389d2a6686af1b72732fb9d41/src/types.h#L1483">
+    ///       github.com - tly000/SW_RACER_RE - types.h - swrModel_TriggerDescription</see></item>
+    ///   <item>
     ///     <see href="https://github.com/akopetsch/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types.h#L1504">
     ///       github.com - akopetsch/SW_RACER_RE - types.h - swrModel_MappingChild</see></item>
     ///   <item>
