@@ -13,6 +13,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
     ///     <see href="http://n64devkit.square7.ch/header/gbi.htm#:~:text=Graphics%20Commands">
     ///       n64devkit.square7.ch - gbi.h - 'Graphics Commands'</see></item>
     ///   <item>
+    ///     <see href="http://n64devkit.square7.ch/header/gbi.htm#:~:text=Gfx%3B">
+    ///       n64devkit.square7.ch - gbi.h - 'Gfx'</see></item>
+    ///   <item>
     ///     <see href="https://github.com/akopetsch/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types.h#L1365">
     ///       github.com - akopetsch/SW_RACER_RE - types.h - Gfx</see></item>
     ///   <item>
@@ -25,7 +28,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
     {
         #region Classes (helper)
 
-        protected class PropertyNameAndValue
+        protected class PropertyNameAndValue // TODO: !!!!!!! refactor class PropertyNameAndValue
         {
             public string Name { get; set; }
             public object Value { get; set; }
@@ -48,6 +51,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
         [RecordTypeIdentifier(GraphicsCommandByte.G_CULLDL, typeof(GSpCullDisplayListCommand))]
         [RecordTypeIdentifier(GraphicsCommandByte.G_TRI1, typeof(GSp1TriangleCommand))]
         [RecordTypeIdentifier(GraphicsCommandByte.G_TRI2, typeof(GSp2TrianglesCommand))]
+        [RecordTypeIdentifier(GraphicsCommandByte.G_SETCOMBINE, typeof(GDpSetCombineLerpCommand))]
+        [RecordTypeIdentifier(GraphicsCommandByte.G_SETOTHERMODE_L, typeof(GDpSetRenderModeCommand))]
         [Order(0)]
         public GraphicsCommandByte Byte { get; set; }
 
