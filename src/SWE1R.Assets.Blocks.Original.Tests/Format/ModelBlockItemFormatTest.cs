@@ -5,6 +5,7 @@ using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes;

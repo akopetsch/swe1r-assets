@@ -3,9 +3,10 @@
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behaviours
 {
     [Table($"{nameof(Model)}_{nameof(Mapping)}")]
     public class DbMapping : DbBlockItemStructure<Mapping>
@@ -27,7 +28,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         public byte AmbientColor_X { get; set; }
         public byte AmbientColor_Y { get; set; }
         public byte AmbientColor_Z { get; set; }
-        
+
         public byte LightColor_X { get; set; }
         public byte LightColor_Y { get; set; }
         public byte LightColor_Z { get; set; }
@@ -43,7 +44,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         public float Float_24 { get; set; }
 
         public VehicleReaction VehicleReaction { get; set; }
-        
+
         public int Word_30 { get; set; } // ushort
         public int Word_32 { get; set; } // ushort
 

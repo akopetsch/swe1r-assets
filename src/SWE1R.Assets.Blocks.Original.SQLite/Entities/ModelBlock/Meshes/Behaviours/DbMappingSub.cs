@@ -2,10 +2,10 @@
 
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behaviours
 {
     [Table($"{nameof(Model)}_{nameof(MappingSub)}")]
     public class DbMappingSub : DbBlockItemStructure<MappingSub>
@@ -52,7 +52,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         }
 
         public override int GetHashCode() =>
-            CombineHashCodes(base.GetHashCode(), 
+            CombineHashCodes(base.GetHashCode(),
                 Int_0, Int_1, P_Child);
     }
 }

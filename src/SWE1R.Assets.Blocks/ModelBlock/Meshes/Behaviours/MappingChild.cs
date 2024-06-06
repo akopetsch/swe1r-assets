@@ -4,7 +4,7 @@ using ByteSerialization.Attributes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Vectors;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
 {
     /// <summary>
     /// <para>

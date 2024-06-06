@@ -6,7 +6,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 using SWE1R.Assets.Blocks.Vectors;
 using System.Collections.Generic;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
 {
     /// <summary>
     /// <para>
@@ -44,13 +44,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         [Order(11)] public float Float_20 { get; set; }
         [Order(12)] public float Float_24 { get; set; }
-        
+
         [Offset(0x2c)]
         [Order(13)] public VehicleReaction VehicleReaction { get; set; }
 
         [Order(14)] public short Word_30 { get; set; }
         [Order(15)] public short Word_32 { get; set; }
-        
+
         [Length(typeof(SubLengthHelper))]
         [Order(16)] public List<MappingSub> Subs { get; set; }
 
@@ -60,10 +60,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
 
         private class SubLengthHelper : IBindingHelper
         {
-            public int GetValue(PropertyComponent p) => 
+            public int GetValue(PropertyComponent p) =>
                 p.Root.Value is ScenModel ? 2 : 1;
         }
-        
+
         #endregion
     }
 }

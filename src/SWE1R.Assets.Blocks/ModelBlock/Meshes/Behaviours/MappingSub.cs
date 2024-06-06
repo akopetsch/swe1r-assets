@@ -2,7 +2,7 @@
 
 using ByteSerialization.Attributes;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
 {
     public class MappingSub
     {

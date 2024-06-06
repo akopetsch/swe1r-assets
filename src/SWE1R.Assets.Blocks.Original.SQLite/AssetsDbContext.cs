@@ -5,6 +5,7 @@ using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes;
+using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk.GraphicsCommands;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes;

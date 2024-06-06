@@ -2,6 +2,7 @@
 
 using ByteSerialization.Attributes;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using SWE1R.Assets.Blocks.ModelBlock.N64Sdk;
 using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;

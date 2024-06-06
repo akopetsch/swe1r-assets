@@ -9,6 +9,7 @@ using ByteSerialization.IO;
 using ByteSerialization.Utils;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
+using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.N64Sdk;
 using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
