@@ -14,6 +14,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
     /// See also:
     /// <list type="bullet">
     ///   <item>
+    ///     <see href="http://n64devkit.square7.ch/header/gbi.htm#:~:text=Vtx%3B">
+    ///       n64devkit.square7.ch - gbi.h - 'Vtx'</see></item>
+    ///   <item>
+    ///     <see href="http://n64devkit.square7.ch/n64man/gsp/gSPVertex.htm#:~:text=Vtx%3B">
+    ///       n64devkit.square7.ch - 'gSPVertex' - 'Vtx'</see></item>
+    ///   <item>
     ///     <see href="https://github.com/akopetsch/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types.h#L1535">
     ///       github.com - akopetsch/SW_RACER_RE - types.h - Vtx</see></item>
     ///   <item>
