@@ -7,8 +7,6 @@ using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.Metadata
 {
-    // https://www.mobygames.com/game/276/star-wars-episode-i-racer/releases/
-
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     [Table("Release")]
     public class ReleaseMetadata
