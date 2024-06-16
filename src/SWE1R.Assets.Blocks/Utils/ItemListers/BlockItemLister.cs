@@ -63,10 +63,10 @@ namespace SWE1R.Assets.Blocks.TestApp.ItemListers
             item.Index.Value.ToString("d4");
 
         protected string GetIdString(TItem item) =>
-            _metadataProvider.GetBlockItemValueByHash(item)?.Id.ToString("d4");
+            _metadataProvider.GetBlockItemValueByHash(item)?.Id.ToString("d4") ?? string.Empty;
 
         protected string GetNameString(TItem item) =>
-            _metadataProvider.GetBlockItemValueByHash(item)?.Name;
+            _metadataProvider.GetBlockItemValueByHash(item)?.Name ?? string.Empty;
 
         #endregion
     }
