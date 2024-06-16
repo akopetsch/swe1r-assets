@@ -4,6 +4,7 @@ using ByteSerialization.IO;
 using CommandLine;
 using SWE1R.Assets.Blocks.CommandLine.Exporters;
 using SWE1R.Assets.Blocks.CommandLine.Mods;
+using SWE1R.Assets.Blocks.CommandLine.Options;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.SplineBlock;
 using SWE1R.Assets.Blocks.SpriteBlock;
@@ -14,81 +15,8 @@ using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine
 {
-    public class Program
+    public partial class Program
     {
-        #region Clases (options)
-
-        #region list-*
-
-        public abstract class FilenameOptions
-        {
-            [Value(0)]
-            public string BlockPath { get; set; }
-
-            [Option("big-endian", Required = false, Default = true)]
-            public bool BigEndian { get; set; }
-
-            public Endianness Endianness =>
-                BigEndian ? Endianness.BigEndian : Endianness.LittleEndian;
-        }
-
-        public abstract class FilenameAndIndicesOptions : FilenameOptions
-        {
-            [Option('i', "indices", Required = false, Separator = ',')]
-            public IEnumerable<int> Indices { get; set; }
-        }
-
-        [Verb("list-models", HelpText = "List model block contents.")]
-        public class ListModelsOptions : FilenameOptions { }
-
-        [Verb("list-splines", HelpText = "List spline block contents.")]
-        public class ListSplinesOptions : FilenameOptions { }
-
-        [Verb("list-sprites", HelpText = "List sprite block contents.")]
-        public class ListSpritesOptions : FilenameOptions { }
-
-        [Verb("list-textures", HelpText = "List texture block contents.")]
-        public class ListTexturesOptions : FilenameOptions { }
-
-        #endregion
-
-        #region dump-*
-
-        [Verb("dump-textures", HelpText = "List texture block contents.")]
-        public class DumpTexturesOptions : FilenameOptions { }
-
-        #endregion
-
-        #region export-*
-
-        [Verb("export-sprites", HelpText = "Export sprites as PNG files.")]
-        public class ExportSpritesOptions : FilenameAndIndicesOptions { }
-
-        [Verb("export-models-textures", HelpText = "Export models' textures as PNG files.")]
-        public class ExportModelTexturesOptions : FilenameAndIndicesOptions
-        {
-            [Option('t', "texture-block", Required = true)]
-            public string TextureBlockPath { get; set; }
-        }
-
-        #endregion
-
-        #region mod-*
-
-        [Verb("mod-model-vertex-alpha", HelpText = "Modify a model by changing all vertices' alpha values to 128." )]
-        public class ModModelVertexAlphaOptions : FilenameAndIndicesOptions { }
-
-        #endregion
-
-        #region scratchpad
-
-        [Verb("scratchpad")]
-        public class ScratchpadOptions { }
-
-        #endregion
-
-        #endregion
-
         #region Methods (main)
 
         public static int Main(string[] args)

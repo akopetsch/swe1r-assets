@@ -53,6 +53,11 @@
       "commandName": "Project",
       "commandLineArgs": "scratchpad",
       "workingDirectory": "C:\\apps\\swe1r\\gog-hotfix3\\data\\lev01"
+    },
+    "ps4 - list-models": {
+      "commandName": "Project",
+      "commandLineArgs": "list-models --little-endian out_modelblock_64.bin",
+      "workingDirectory": "C:\\Users\\akope\\code\\swe1r-ps4\\x-eur\\inner-pfs-image\\uroot\\data\\lev01"
     }
   }
 }
