@@ -1,7 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization;
-using Microsoft.EntityFrameworkCore;
 using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
@@ -12,9 +11,15 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
 {
     public class AssetsDbGenerator
     {
+        #region Properties
+
         public AssetsDbContext AssetsDbContext { get; }
         public OriginalBlocksProvider OriginalBlocksProvider { get; }
         public MetadataProvider MetadataProvider { get; }
+
+        #endregion
+
+        #region Constructor
 
         public AssetsDbGenerator(AssetsDbContext assetsDbContext)
         {
@@ -23,13 +28,20 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
             MetadataProvider = new();
         }
 
+        #endregion
+
+        #region Methods
+
         public void Generate()
         {
             OriginalBlocksProvider.Load();
 
-            AssetsDbContext.Database.Migrate();
+            AssetsDbContext.Database.EnsureDeleted();
+            AssetsDbContext.Database.EnsureCreated();
+
             ImportModels();
             ImportSprites();
+            
             AssetsDbContext.SaveChanges();
         }
 
@@ -62,5 +74,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
         private IEnumerable<(int valueId, TItem blockItem)> GetBlockItemsByValueId<TItem>() where TItem : BlockItem, new() =>
             MetadataProvider.GetBlockItemValues<TItem>()
             .Select(x => (x.Id, OriginalBlocksProvider.GetFirstBlockItemByValueId<TItem>(x.Id)));
+
+        #endregion
     }
 }
