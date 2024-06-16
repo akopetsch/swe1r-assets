@@ -12,7 +12,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
 {
     public class Scratchpad
     {
-        public Scratchpad()
+        public void Run()
         {
             RestoreBlockFileBackups();
 

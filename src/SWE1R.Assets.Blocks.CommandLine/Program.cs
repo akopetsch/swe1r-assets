@@ -111,7 +111,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         private static int RunScratchpadOptions(ScratchpadOptions options)
         {
-            new Scratchpad();
+            new Ps4Scratchpad().Run();
             return ExitCodes.Success;
         }
 
