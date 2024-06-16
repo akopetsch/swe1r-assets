@@ -8,9 +8,10 @@ using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine.Mods
 {
-    public class ModModelVertexAlpha(string filename, int modelIndex)
+    public class ModModelVertexAlpha(string filename, Endianness endianness, int modelIndex)
     {
         public string Filename { get; } = filename;
+        public Endianness Endianness { get; } = endianness;
         public int ModelIndex { get; } = modelIndex;
 
         public void Run()
@@ -18,7 +19,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             Debug.WriteLine(ModelIndex);
 
             // load
-            var block = Block.Load<ModelBlockItem>(Filename, Endianness.BigEndian);
+            var block = Block.Load<ModelBlockItem>(Filename, Endianness);
             ModelBlockItem modelBlockItem = block[ModelIndex];
             modelBlockItem.Load();
 

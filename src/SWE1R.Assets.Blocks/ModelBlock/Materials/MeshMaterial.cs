@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Attributes;
+using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.ModelBlock.Materials.Import;
 using SWE1R.Assets.Blocks.TextureBlock;
@@ -84,10 +85,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
         public static MeshMaterialImporter Import(
             Stream textureImageStream, 
             Block<TextureBlockItem> textureBlock, 
-            LoadImageRgba32FromStreamDelegate loadImageRgba32FromStreamDelegate)
+            LoadImageRgba32FromStreamDelegate loadImageRgba32FromStreamDelegate, 
+            Endianness endianness)
         {
             ImageRgba32 imageRgba32 = loadImageRgba32FromStreamDelegate(textureImageStream);
-            MeshMaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, textureBlock);
+            MeshMaterialImporter importer = new MaterialImporterFactory().Get(imageRgba32, textureBlock, endianness);
             importer.Import();
             return importer;
         }

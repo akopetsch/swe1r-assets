@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Images;
 
 namespace SWE1R.Assets.Blocks.Textures.Import
@@ -9,6 +10,7 @@ namespace SWE1R.Assets.Blocks.Textures.Import
         #region Properties (input)
 
         public ImageRgba32 Image { get; }
+        public Endianness Endianness { get; }
 
         #endregion
 
@@ -21,9 +23,10 @@ namespace SWE1R.Assets.Blocks.Textures.Import
 
         #region Constructor
 
-        public TextureImporter(ImageRgba32 image)
+        public TextureImporter(ImageRgba32 image, Endianness endianness)
         {
             Image = image;
+            Endianness = endianness;
         }
 
         #endregion

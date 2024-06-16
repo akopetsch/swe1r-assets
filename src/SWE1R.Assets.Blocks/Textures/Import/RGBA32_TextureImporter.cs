@@ -1,9 +1,9 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Colors;
 using SWE1R.Assets.Blocks.Images;
 using System;
-using System.Linq;
 
 namespace SWE1R.Assets.Blocks.Textures.Import
 {
@@ -11,8 +11,8 @@ namespace SWE1R.Assets.Blocks.Textures.Import
     {
         #region Constructor
 
-        public RGBA32_TextureImporter(ImageRgba32 image) :
-            base(image)
+        public RGBA32_TextureImporter(ImageRgba32 image, Endianness endianness) :
+            base(image, endianness)
         { }
 
         #endregion
@@ -31,8 +31,14 @@ namespace SWE1R.Assets.Blocks.Textures.Import
                 {
                     //int i = x * h + y;
                     int i = y * w + x;
-                    byte[] bytes = Image[x, y].Bytes.Reverse().ToArray(); // TODO: use EndianBinaryWriter
-                    Array.Copy(bytes, 0, PixelsBytes, i * bytes.Length, bytes.Length);
+                    ColorRgba32 p = Image[x, y];
+                    p.BytesValue = BytesSwapper.SwapIf(p.BytesValue, Endianness == Endianness.BigEndian);
+                    Array.Copy(
+                        sourceArray: p.Bytes, 
+                        sourceIndex: 0, 
+                        destinationArray: PixelsBytes, 
+                        destinationIndex: i * p.Bytes.Length, 
+                        length: p.Bytes.Length);
                 }
             }
         }

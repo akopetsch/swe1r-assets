@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.TextureBlock;
 using SWE1R.Assets.Blocks.Textures;
@@ -10,8 +11,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
     {
         #region Constructor
 
-        public RGBA32_MeshMaterialImporter(ImageRgba32 image, Block<TextureBlockItem> textureBlock) : 
-            base(image, TextureFormat.RGBA32, textureBlock)
+        public RGBA32_MeshMaterialImporter(ImageRgba32 image, Block<TextureBlockItem> textureBlock, Endianness endianness) : 
+            base(image, TextureFormat.RGBA32, textureBlock, endianness)
         { }
 
         #endregion

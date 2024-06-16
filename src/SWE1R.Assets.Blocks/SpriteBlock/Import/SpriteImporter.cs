@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.Textures;
 using SWE1R.Assets.Blocks.Textures.Import;
@@ -12,6 +13,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Import
         #region Properties (input)
 
         public ImageRgba32 Image { get; }
+        public Endianness Endianness { get; }
 
         #endregion
 
@@ -23,9 +25,10 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Import
 
         #region Constructor
 
-        public SpriteImporter(ImageRgba32 image)
+        public SpriteImporter(ImageRgba32 image, Endianness endianness)
         {
             Image = image;
+            Endianness = endianness;
         }
 
         #endregion
@@ -48,7 +51,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Import
 
         private SpritePalette ImportPalette()
         {
-            var paletteImporter = new RGBA5551_PaletteImporter(Image.Palette);
+            var paletteImporter = new RGBA5551_PaletteImporter(Image.Palette, Endianness);
             paletteImporter.Import();
             var palette = new SpritePalette() {
                 Colors = paletteImporter.OutputPalette,
@@ -74,7 +77,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock.Import
                         Width = (short)tileImage.Width,
                         Height = (short)tileImage.Height,
                     };
-                    var importer = new RGBA5551_I8_TextureImporter(tileImage, Image.Palette);
+                    var importer = new RGBA5551_I8_TextureImporter(tileImage, Image.Palette, Endianness);
                     importer.Import();
                     tile.PixelsBytes = importer.PixelsBytes;
                     int tileIndex = sprite.GetTileIndex(tileX, tileY);

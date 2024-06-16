@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Colors;
 using SWE1R.Assets.Blocks.Images;
 using System.Diagnostics;
@@ -16,8 +17,8 @@ namespace SWE1R.Assets.Blocks.Textures.Import
 
         #region Constructor
 
-        public RGBA5551_I8_TextureImporter(ImageRgba32 image, ColorRgba32[] palette = null) : // TODO: !!! HACK: second parameter
-            base(image) =>
+        public RGBA5551_I8_TextureImporter(ImageRgba32 image, ColorRgba32[] palette, Endianness endianness) : // TODO: !!! HACK: second parameter
+            base(image, endianness) =>
             Palette = palette;
 
         #endregion
@@ -44,7 +45,7 @@ namespace SWE1R.Assets.Blocks.Textures.Import
             }
 
             // palette
-            var paletteImporter = new RGBA5551_PaletteImporter(Image.Palette ?? Palette);
+            var paletteImporter = new RGBA5551_PaletteImporter(Image.Palette ?? Palette, Endianness);
             paletteImporter.Import();
             PaletteBytes = paletteImporter.OutputBytes;
         }

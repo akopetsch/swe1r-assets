@@ -20,7 +20,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         public void Compress()
         {
             using (var s = new MemoryStream())
-            using (var w = new EndianBinaryWriter(s, Endianness.BigEndian))
+            using (var w = new EndianBinaryWriter(s, Item.Block.Endianness))
             {
                 w.Write(CompressionSignature.ToCharArray());
                 w.Write(Length);
@@ -35,7 +35,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             if (IsCompressed())
             {
                 using (var s = new MemoryStream(Bytes))
-                using (var r = new EndianBinaryReader(s, Endianness.BigEndian))
+                using (var r = new EndianBinaryReader(s, Item.Block.Endianness))
                 {
                     r.ReadBytes(CompressionSignature.Length);
 
@@ -57,7 +57,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         {
             const string comp = "Comp";
             using (var s = new MemoryStream(Bytes))
-            using (var r = new EndianBinaryReader(s, Endianness.BigEndian))
+            using (var r = new EndianBinaryReader(s, Item.Block.Endianness))
                 return new string(r.ReadChars(comp.Length)).Equals(comp);
         }
 

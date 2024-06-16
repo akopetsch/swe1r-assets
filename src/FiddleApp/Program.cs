@@ -44,7 +44,7 @@ namespace FiddleApp
             // import sprite
             using var stream = File.OpenRead("sprite-133_256x128_I8.png");
             ImageRgba32 image = new SystemDrawingImageRgba32Loader().Load(stream);
-            var spriteImporter = new SpriteImporter(image);
+            var spriteImporter = new SpriteImporter(image, Endianness.BigEndian);
             spriteImporter.Import();
             spriteImporter.SpriteBlockItem.Block = spriteBlock;
             spriteBlock[133] = spriteImporter.SpriteBlockItem;

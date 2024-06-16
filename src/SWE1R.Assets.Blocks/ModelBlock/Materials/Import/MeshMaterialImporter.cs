@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.TextureBlock;
 using SWE1R.Assets.Blocks.Textures;
@@ -17,6 +18,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         public ImageRgba32 Image { get; }
         public TextureFormat TextureFormat { get; set; }
         public Block<TextureBlockItem> TextureBlock { get; }
+        public Endianness Endianness { get; }
 
         #endregion
 
@@ -29,11 +31,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
 
         #region Constructor
 
-        public MeshMaterialImporter(ImageRgba32 image, TextureFormat textureFormat, Block<TextureBlockItem> textureBlock)
+        public MeshMaterialImporter(ImageRgba32 image, TextureFormat textureFormat, Block<TextureBlockItem> textureBlock, Endianness endianness)
         {
             Image = image;
             TextureFormat = textureFormat;
             TextureBlock = textureBlock;
+            Endianness = endianness;
         }
 
         #endregion
@@ -49,7 +52,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials.Import
         private TextureBlockItem CreateTextureBlockItem()
         {
             var blockItem = new TextureBlockItem();
-            var importer = new TextureImporterFactory().Get(Image, TextureFormat);
+            var importer = new TextureImporterFactory().Get(Image, TextureFormat, Endianness);
             importer.Import();
             blockItem.PixelsPart.Bytes = importer.PixelsBytes;
             blockItem.PalettePart.Bytes = importer.PaletteBytes ?? new byte[] { };

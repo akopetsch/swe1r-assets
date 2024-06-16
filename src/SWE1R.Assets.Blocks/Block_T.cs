@@ -59,7 +59,7 @@ namespace SWE1R.Assets.Blocks
 
         private void LoadBytes(Stream stream)
         {
-            using (var r = new EndianBinaryReader(stream, Endianness.BigEndian))
+            using (var r = new EndianBinaryReader(stream, Endianness))
             {
                 long start = stream.Position;
 
@@ -80,7 +80,7 @@ namespace SWE1R.Assets.Blocks
             Items.Clear();
 
             using (var ms = new MemoryStream(Bytes))
-            using (var reader = new EndianBinaryReader(ms, Endianness.BigEndian))
+            using (var reader = new EndianBinaryReader(ms, Endianness))
             {
                 // count
                 Items.AddRange(Enumerable.Range(0, reader.ReadInt32()).Select(i => new T() { Block = this }));
@@ -146,7 +146,7 @@ namespace SWE1R.Assets.Blocks
         private byte[] SaveBytes()
         {
             using (var ms = new MemoryStream())
-            using (var writer = new EndianBinaryWriter(ms, Endianness.BigEndian))
+            using (var writer = new EndianBinaryWriter(ms, Endianness))
             {
                 // count
                 writer.Write(Count);

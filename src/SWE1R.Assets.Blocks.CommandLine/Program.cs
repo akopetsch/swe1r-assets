@@ -70,7 +70,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         private static int RunListOptions<TItem>(FilenameOptions options) where TItem : BlockItem, new()
         {
-            var block = Block.Load<TItem>(options.BlockPath, Endianness.BigEndian);
+            var block = Block.Load<TItem>(options.BlockPath, options.Endianness);
             BlockItemListerFactory.Get(block, Console.WriteLine).Run();
             return ExitCodes.Success;
         }
@@ -102,10 +102,10 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         private static int RunModModelVertexAlphaOptions(ModModelVertexAlphaOptions options)
         {
-            var block = Block.Load<ModelBlockItem>(options.BlockPath, Endianness.BigEndian);
+            var block = Block.Load<ModelBlockItem>(options.BlockPath, options.Endianness);
             int[] indices = GetIndices(options.Indices, block);
             foreach (int i in indices)
-                new ModModelVertexAlpha(options.BlockPath, i).Run();
+                new ModModelVertexAlpha(options.BlockPath, options.Endianness, i).Run();
             return ExitCodes.Success;
         }
 

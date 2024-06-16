@@ -153,7 +153,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     {
                         using var stream = OpenFileStreamDelegate(textureImageFilename);
                         return _meshMaterials[objMaterial] = 
-                            MeshMaterial.Import(stream, TextureBlock, ImageLoader).MeshMaterial;
+                            MeshMaterial.Import(stream, TextureBlock, ImageLoader, Configuration.TextureEndianness).MeshMaterial;
                     }
                 }
             }

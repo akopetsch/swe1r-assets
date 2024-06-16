@@ -13,6 +13,7 @@ namespace SWE1R.Assets.Blocks.Textures.Import
         #region Properties (input)
 
         public ColorRgba32[] InputPalette { get; }
+        public Endianness Endianness { get; }
 
         #endregion
 
@@ -25,9 +26,10 @@ namespace SWE1R.Assets.Blocks.Textures.Import
 
         #region Constructor
 
-        public RGBA5551_PaletteImporter(ColorRgba32[] inputPalette)
+        public RGBA5551_PaletteImporter(ColorRgba32[] inputPalette, Endianness endianness)
         {
             InputPalette = inputPalette;
+            Endianness = endianness;
         }
 
         #endregion
@@ -44,7 +46,7 @@ namespace SWE1R.Assets.Blocks.Textures.Import
 
             // output bytes
             using var ms = new MemoryStream();
-            using var w = new EndianBinaryWriter(ms, Endianness.BigEndian);
+            using var w = new EndianBinaryWriter(ms, Endianness);
             foreach (ColorRgba5551 rgba5551 in OutputPalette)
                 rgba5551.Serialize(w);
             OutputBytes = ms.ToArray();

@@ -1,7 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization;
-using ByteSerialization.IO;
 using System.IO;
 
 namespace SWE1R.Assets.Blocks.SpriteBlock
@@ -30,7 +29,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         public override void Load(out ByteSerializerContext context)
         {
             using var ms = new MemoryStream(Bytes);
-            Sprite = new ByteSerializer().Deserialize<Sprite>(ms, Endianness.BigEndian, out context);
+            Sprite = new ByteSerializer().Deserialize<Sprite>(ms, Block.Endianness, out context);
             Sprite.BlockItem = this;
         }
 
@@ -39,7 +38,7 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
         public override void Save(out ByteSerializerContext context)
         {
             using var ms = new MemoryStream();
-            new ByteSerializer().Serialize(ms, Sprite, Endianness.BigEndian, out context);
+            new ByteSerializer().Serialize(ms, Sprite, Block.Endianness, out context);
             Part.Load(ms.ToArray());
         }
 
