@@ -4,7 +4,7 @@ using ByteSerialization.Attributes;
 using ByteSerialization.IO;
 using System.Linq;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
+namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 {
     /// <summary>
     /// See also:

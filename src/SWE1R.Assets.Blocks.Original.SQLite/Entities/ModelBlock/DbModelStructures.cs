@@ -3,17 +3,15 @@
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Animations;
+using SWE1R.Assets.Blocks.ModelBlock.F3DEX2;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
-using SWE1R.Assets.Blocks.ModelBlock.N64Sdk;
-using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behaviours;
-using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk;
-using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk.GraphicsCommands;
+using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock

@@ -1,6 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
-using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
+using SWE1R.Assets.Blocks.ModelBlock.F3DEX2;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

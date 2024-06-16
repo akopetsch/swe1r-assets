@@ -1,11 +1,10 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Attributes;
+using SWE1R.Assets.Blocks.ModelBlock.F3DEX2;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
-using SWE1R.Assets.Blocks.ModelBlock.N64Sdk;
-using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Vectors;
 using System;

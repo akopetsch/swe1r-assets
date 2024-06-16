@@ -5,7 +5,7 @@ using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.Colors;
 using SWE1R.Assets.Blocks.Vectors;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk
+namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 {
     /// <summary>
     /// <para>

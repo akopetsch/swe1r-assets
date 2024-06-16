@@ -7,7 +7,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using System;
 using System.Collections.Generic;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
+namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 {
     /// <summary>
     /// See also:

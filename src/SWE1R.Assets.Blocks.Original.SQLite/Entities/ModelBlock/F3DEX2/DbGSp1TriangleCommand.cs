@@ -2,18 +2,19 @@
 
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
+using SWE1R.Assets.Blocks.ModelBlock.F3DEX2;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk.GraphicsCommands
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 {
-    [Table($"{nameof(Model)}_{nameof(GSpCullDisplayListCommand)}")]
-    public class DbGSpCullDisplayListCommand : DbBlockItemStructure<GSpCullDisplayListCommand>
+    [Table($"{nameof(Model)}_{nameof(GSp1TriangleCommand)}")]
+    public class DbGSp1TriangleCommand : DbBlockItemStructure<GSp1TriangleCommand>
     {
         #region Properties
 
         public byte V0 { get; set; }
-        public byte VN { get; set; }
+        public byte V1 { get; set; }
+        public byte V2 { get; set; }
 
         #endregion
 
@@ -21,28 +22,30 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk.Graphic
         {
             base.CopyFrom(node);
 
-            var x = (GSpCullDisplayListCommand)node.Value;
+            var x = (GSp1TriangleCommand)node.Value;
 
             V0 = x.V0;
-            VN = x.VN;
+            V1 = x.V1;
+            V2 = x.V2;
         }
 
-        public override bool Equals(DbBlockItemStructure<GSpCullDisplayListCommand> other)
+        public override bool Equals(DbBlockItemStructure<GSp1TriangleCommand> other)
         {
-            var x = (DbGSpCullDisplayListCommand)other;
+            var x = (DbGSp1TriangleCommand)other;
 
             if (!base.Equals(x))
                 return false;
 
             if (V0 != x.V0) return false;
-            if (VN != x.VN) return false;
+            if (V1 != x.V1) return false;
+            if (V2 != x.V2) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbGSpCullDisplayListCommand x)
+            if (obj is DbGSp1TriangleCommand x)
                 return Equals(x);
             else
                 return base.Equals(obj);
@@ -50,6 +53,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk.Graphic
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
-                V0, VN);
+                V0, V1, V2);
     }
 }

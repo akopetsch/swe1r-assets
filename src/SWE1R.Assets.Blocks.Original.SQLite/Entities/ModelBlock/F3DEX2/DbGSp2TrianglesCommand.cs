@@ -2,10 +2,10 @@
 
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands;
+using SWE1R.Assets.Blocks.ModelBlock.F3DEX2;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.N64Sdk.GraphicsCommands
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 {
     [Table($"{nameof(Model)}_{nameof(GSp2TrianglesCommand)}")]
     public class DbGSp2TrianglesCommand : DbBlockItemStructure<GSp2TrianglesCommand>

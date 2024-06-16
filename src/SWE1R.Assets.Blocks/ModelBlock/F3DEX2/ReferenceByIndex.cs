@@ -7,7 +7,7 @@ using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Records;
 using System.Collections.Generic;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.N64Sdk.GraphicsCommands
+namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 {
     public class ReferenceByIndex<T> : INodeListener
     {

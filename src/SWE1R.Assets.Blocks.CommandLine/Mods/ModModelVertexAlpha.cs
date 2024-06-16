@@ -1,8 +1,8 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using SWE1R.Assets.Blocks.ModelBlock;
+using SWE1R.Assets.Blocks.ModelBlock.F3DEX2;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.ModelBlock.N64Sdk;
 using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine.Mods
