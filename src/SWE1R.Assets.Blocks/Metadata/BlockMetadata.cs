@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Metadata
@@ -9,7 +10,8 @@ namespace SWE1R.Assets.Blocks.Metadata
     {
         /* [Key, Column(Order = 0)] */ public BlockItemType BlockItemType { get; set; }
         /* [Key, Column(Order = 1)] */ public int Id { get; set; }
-        public string Hash { get; set; }
+        public string Sha1Sum { get; set; }
+        public Endianness Endianness { get; set; }
         public int Count { get; set; }
         public int Size { get; set; }
         public string Name { get; set; }
@@ -19,7 +21,8 @@ namespace SWE1R.Assets.Blocks.Metadata
         {
             BlockItemType = block.BlockItemType;
             Id = id;
-            Hash = block.HashString;
+            Sha1Sum = block.HashString;
+            Endianness = block.Endianness;
             Count = block.Count;
             Size = block.Bytes.Length;
             Name = name;

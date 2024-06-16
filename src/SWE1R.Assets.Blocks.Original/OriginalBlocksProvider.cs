@@ -9,8 +9,15 @@ namespace SWE1R.Assets.Blocks.Original
 {
     public class OriginalBlocksProvider
     {
-        private readonly MetadataProvider _metadataProvider = new ();
-        private readonly Dictionary<(BlockItemType, string), IBlock> _blocks = new();
+        #region Properties
+
+        private readonly MetadataProvider _metadataProvider = new();
+        private readonly ResourceHelper _resourceHelper = new();
+        private readonly Dictionary<(BlockItemType, string), IBlock> _blocks = [];
+
+        #endregion
+
+        #region Methods (public)
 
         public void Load() =>
             LoadBlocks();
@@ -29,6 +36,10 @@ namespace SWE1R.Assets.Blocks.Original
             return block[blockItemMetadata.Index];
         }
 
+        #endregion
+
+        #region Methods (private)
+
         private void LoadBlocks()
         {
             Debug.WriteLine($"{nameof(OriginalBlocksProvider)}.{nameof(LoadBlocks)}()");
@@ -40,8 +51,11 @@ namespace SWE1R.Assets.Blocks.Original
         private IBlock LoadBlock(BlockItemType blockItemType, string blockIdName)
         {
             string resourcePath = GetBlockResourcePath(blockItemType, blockIdName);
-            using Stream resourceStream = new ResourceHelper().ReadEmbeddedResource(resourcePath);
-            return Block.Load(blockItemType, resourceStream);
+            using Stream stream = _resourceHelper.ReadEmbeddedResource(resourcePath);
+            
+            var endianness = _metadataProvider.GetBlock(blockItemType, blockIdName).Endianness;
+
+            return Block.Load(blockItemType, stream, endianness);
         }
 
         private string GetBlockResourcePath(BlockItemType blockItemType, string blockIdName)
@@ -50,5 +64,7 @@ namespace SWE1R.Assets.Blocks.Original
             string blockIdFilename = $"{blockIdName}.bin";
             return $"{blockDefaultFilename}.{blockIdFilename}";
         }
+
+        #endregion
     }
 }

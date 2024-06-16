@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization;
+using ByteSerialization.IO;
 using SixLabors.ImageSharp;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.Images.ImageSharp;
@@ -16,10 +17,10 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
     {
         public Block<TextureBlockItem> TextureBlock { get; }
 
-        public ModelTexturesBlockExporter(string blockPath, string textureBlockPath, int[] indices) : 
-            base(blockPath, indices)
+        public ModelTexturesBlockExporter(string blockPath, string textureBlockPath, Endianness endianness, int[] indices) : 
+            base(blockPath, endianness, indices)
         {
-            TextureBlock = new Block<TextureBlockItem>();
+            TextureBlock = new Block<TextureBlockItem>(endianness);
             TextureBlock.Load(textureBlockPath);
         }
 

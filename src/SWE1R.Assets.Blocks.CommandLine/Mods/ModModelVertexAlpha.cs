@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.F3DEX2;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
@@ -17,7 +18,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             Debug.WriteLine(ModelIndex);
 
             // load
-            var block = Block.Load<ModelBlockItem>(Filename);
+            var block = Block.Load<ModelBlockItem>(Filename, Endianness.BigEndian);
             ModelBlockItem modelBlockItem = block[ModelIndex];
             modelBlockItem.Load();
 

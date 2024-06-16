@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using CommandLine;
 using SWE1R.Assets.Blocks.CommandLine.Exporters;
 using SWE1R.Assets.Blocks.CommandLine.Mods;
@@ -23,6 +24,12 @@ namespace SWE1R.Assets.Blocks.CommandLine
         {
             [Value(0)]
             public string BlockPath { get; set; }
+
+            [Option("big-endian", Required = false, Default = true)]
+            public bool BigEndian { get; set; }
+
+            public Endianness Endianness =>
+                BigEndian ? Endianness.BigEndian : Endianness.LittleEndian;
         }
 
         public abstract class FilenameAndIndicesOptions : FilenameOptions
@@ -135,7 +142,7 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         private static int RunListOptions<TItem>(FilenameOptions options) where TItem : BlockItem, new()
         {
-            var block = Block.Load<TItem>(options.BlockPath);
+            var block = Block.Load<TItem>(options.BlockPath, Endianness.BigEndian);
             BlockItemListerFactory.Get(block, Console.WriteLine).Run();
             return ExitCodes.Success;
         }
@@ -146,21 +153,28 @@ namespace SWE1R.Assets.Blocks.CommandLine
 
         private static int RunExportSpritesOptions(ExportSpritesOptions options)
         {
-            var exporter = new SpriteBlockExporter(options.BlockPath, options.Indices.ToArray());
+            var exporter = new SpriteBlockExporter(
+                options.BlockPath,
+                options.Endianness,
+                options.Indices.ToArray());
             exporter.Export();
             return ExitCodes.Success;
         }
 
         private static int RunExportModelsTexturesOptions(ExportModelTexturesOptions options)
         {
-            var exporter = new ModelTexturesBlockExporter(options.BlockPath, options.TextureBlockPath, options.Indices.ToArray());
+            var exporter = new ModelTexturesBlockExporter(
+                options.BlockPath, 
+                options.TextureBlockPath, 
+                options.Endianness,
+                options.Indices.ToArray());
             exporter.Export();
             return ExitCodes.Success;
         }
 
         private static int RunModModelVertexAlphaOptions(ModModelVertexAlphaOptions options)
         {
-            var block = Block.Load<ModelBlockItem>(options.BlockPath);
+            var block = Block.Load<ModelBlockItem>(options.BlockPath, Endianness.BigEndian);
             int[] indices = GetIndices(options.Indices, block);
             foreach (int i in indices)
                 new ModModelVertexAlpha(options.BlockPath, i).Run();

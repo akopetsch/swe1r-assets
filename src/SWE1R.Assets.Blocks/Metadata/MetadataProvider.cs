@@ -59,7 +59,7 @@ namespace SWE1R.Assets.Blocks.Metadata
 
         public BlockMetadata GetBlockByHash(IBlock block) =>
             Blocks.Single(x => 
-                x.Hash.Equals(block.HashString));
+                x.Sha1Sum.Equals(block.HashString));
 
         public BlockMetadata GetBlock(BlockItemMetadata blockItemMetadata) =>
             Blocks.SingleOrDefault(x =>
@@ -69,13 +69,18 @@ namespace SWE1R.Assets.Blocks.Metadata
         public BlockMetadata GetBlock<TItem>(ReleaseMetadata releaseMetadata) where TItem : BlockItem =>
             GetBlock<TItem>(releaseMetadata.GetBlockId<TItem>());
 
-        public BlockMetadata GetBlock<TItem>(int blockId) where TItem : BlockItem
+        public BlockMetadata GetBlock<TItem>(int blockId) where TItem : BlockItem =>
+            GetBlocks(typeof(TItem)).Where(x => x.Id == blockId).Single();
+
+        public BlockMetadata GetBlock(BlockItemType itemType, string blockName) =>
+            GetBlocks(itemType.GetBlockItemClassType()).Where(x => x.Name == blockName).Single();
+
+        private IEnumerable<BlockMetadata> GetBlocks(Type itemType)
         {
             BlockItemType blockItemType =
-                BlockItemTypeAttributeHelper.GetBlockItemType(typeof(TItem));
-            return Blocks.Single(x =>
-                x.BlockItemType == blockItemType &&
-                x.Id == blockId);
+                BlockItemTypeAttributeHelper.GetBlockItemType(itemType);
+            return Blocks.Where(x =>
+                x.BlockItemType == blockItemType);
         }
 
         #endregion

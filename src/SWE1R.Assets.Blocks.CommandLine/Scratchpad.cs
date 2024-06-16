@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.CommandLine.ModelInjectors;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Import;
@@ -20,8 +21,8 @@ namespace SWE1R.Assets.Blocks.CommandLine
             string textureBlockFilename = BlockDefaultFilenames.TextureBlock;
 
             // load blocks
-            var modelBlock = Block.Load<ModelBlockItem>(modelBlockFilename);
-            var textureBlock = Block.Load<TextureBlockItem>(textureBlockFilename);
+            var modelBlock = Block.Load<ModelBlockItem>(modelBlockFilename, Endianness.BigEndian);
+            var textureBlock = Block.Load<TextureBlockItem>(textureBlockFilename, Endianness.BigEndian);
 
             // import
             var resourceImporter = new LeadphalanxObjResourceImporter(textureBlock);

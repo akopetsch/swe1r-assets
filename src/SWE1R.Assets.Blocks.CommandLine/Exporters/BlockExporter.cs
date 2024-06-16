@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization;
+using ByteSerialization.IO;
 using System.Diagnostics;
 
 namespace SWE1R.Assets.Blocks.CommandLine.Exporters
@@ -12,9 +13,9 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
         public string ExportFolderPath { get; }
         public int[] Indices { get; }
 
-        public BlockExporter(string blockPath, int[] indices)
+        public BlockExporter(string blockPath, Endianness endianness, int[] indices)
         {
-            Block = new Block<TItem>();
+            Block = new Block<TItem>(endianness);
             Block.Load(blockPath);
 
             ExportFolderPath = GetExportFolderPath(blockPath);

@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using System.Collections;
 using System.IO;
 
@@ -9,6 +10,7 @@ namespace SWE1R.Assets.Blocks
     {
         #region Properties
 
+        Endianness Endianness { get; set; }
         byte[] Bytes { get; }
         int Count { get; }
         byte[] Hash { get; }

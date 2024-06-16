@@ -17,6 +17,7 @@ namespace SWE1R.Assets.Blocks
         private string DebuggerDisplay =>
             $"{nameof(Count)}={Count}";
 
+        public Endianness Endianness { get; set; }
         public byte[] Bytes { get; private set; }
         private List<T> Items { get; } = new List<T>();
         private Dictionary<BlockItemPart, int> Offsets { get; set; }
@@ -35,6 +36,13 @@ namespace SWE1R.Assets.Blocks
 
         public BlockItemType BlockItemType =>
             BlockItemTypeAttributeHelper.GetBlockItemType(typeof(T));
+
+        #endregion
+
+        #region Constructor
+
+        public Block(Endianness endianness) =>
+            Endianness = endianness;
 
         #endregion
 

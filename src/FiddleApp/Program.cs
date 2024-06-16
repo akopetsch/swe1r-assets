@@ -1,5 +1,6 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using ByteSerialization.IO;
 using SWE1R.Assets.Blocks;
 using SWE1R.Assets.Blocks.Images;
 using SWE1R.Assets.Blocks.Images.SystemDrawing;
@@ -38,7 +39,7 @@ namespace FiddleApp
 
         private static int Fiddle1()
         {
-            var spriteBlock = Block.Load<SpriteBlockItem>(SpriteBlockIdNames.Default);
+            var spriteBlock = Block.Load<SpriteBlockItem>(SpriteBlockIdNames.Default, Endianness.BigEndian);
 
             // import sprite
             using var stream = File.OpenRead("sprite-133_256x128_I8.png");

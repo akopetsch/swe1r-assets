@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization;
+using ByteSerialization.IO;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SWE1R.Assets.Blocks.Images.ImageSharp;
@@ -11,8 +12,8 @@ namespace SWE1R.Assets.Blocks.CommandLine.Exporters
 {
     public class SpriteBlockExporter : BlockExporter<SpriteBlockItem>
     {
-        public SpriteBlockExporter(string blockFilename, int[] indices) : 
-            base(blockFilename, indices)
+        public SpriteBlockExporter(string blockFilename, Endianness endianness, int[] indices) : 
+            base(blockFilename, endianness, indices)
         { }
 
         protected override void ExportItem(int index, SpriteBlockItem item, ByteSerializerContext byteSerializerContext)
