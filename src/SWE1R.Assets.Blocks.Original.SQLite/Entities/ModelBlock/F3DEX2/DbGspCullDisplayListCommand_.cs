@@ -7,14 +7,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 {
-    [Table($"{nameof(Model)}_{nameof(GSp1TriangleCommand)}")]
-    public class DbGSp1TriangleCommand : DbBlockItemStructure<GSp1TriangleCommand>
+    [Table($"{nameof(Model)}_{nameof(GspCullDisplayListCommand)}")]
+    public class DbGspCullDisplayListCommand : DbBlockItemStructure<GspCullDisplayListCommand>
     {
         #region Properties
 
         public byte V0 { get; set; }
-        public byte V1 { get; set; }
-        public byte V2 { get; set; }
+        public byte VN { get; set; }
 
         #endregion
 
@@ -22,30 +21,28 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
         {
             base.CopyFrom(node);
 
-            var x = (GSp1TriangleCommand)node.Value;
+            var x = (GspCullDisplayListCommand)node.Value;
 
             V0 = x.V0;
-            V1 = x.V1;
-            V2 = x.V2;
+            VN = x.VN;
         }
 
-        public override bool Equals(DbBlockItemStructure<GSp1TriangleCommand> other)
+        public override bool Equals(DbBlockItemStructure<GspCullDisplayListCommand> other)
         {
-            var x = (DbGSp1TriangleCommand)other;
+            var x = (DbGspCullDisplayListCommand)other;
 
             if (!base.Equals(x))
                 return false;
 
             if (V0 != x.V0) return false;
-            if (V1 != x.V1) return false;
-            if (V2 != x.V2) return false;
+            if (VN != x.VN) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbGSp1TriangleCommand x)
+            if (obj is DbGspCullDisplayListCommand x)
                 return Equals(x);
             else
                 return base.Equals(obj);
@@ -53,6 +50,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
-                V0, V1, V2);
+                V0, VN);
     }
 }

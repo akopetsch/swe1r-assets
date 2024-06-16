@@ -17,7 +17,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     ///       n64devkit.square7.ch - 'gSP2Triangles'</see></item>
     /// </list>
     /// </summary>
-    public class GSp2TrianglesCommand : GraphicsCommand, ITrianglesGraphicsCommand, ICustomSerializable
+    public class Gsp2TrianglesCommand : GraphicsCommand, ITrianglesGraphicsCommand, ICustomSerializable
     {
         #region Fields
 
@@ -86,11 +86,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #region Constructor
 
-        public GSp2TrianglesCommand() :
+        public Gsp2TrianglesCommand() :
             base(GraphicsCommandByte.G_TRI2)
         { }
 
-        public GSp2TrianglesCommand(
+        public Gsp2TrianglesCommand(
             byte v00, byte v01, byte v02,
             byte v10, byte v11, byte v12) :
             this()

@@ -30,10 +30,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         public List<DbMeshMaterialReference> MeshMaterialReferences { get; set; }
 
         public List<DbVtx> N64Sdk_Vtxs { get; set; }
-        public List<DbGSpVertexCommand> N64Sdk_GraphicsCommands_GSpVertexCommands { get; set; }
-        public List<DbGSpCullDisplayListCommand> N64Sdk_GraphicsCommands_GSpCullDisplayListCommands { get; set; }
-        public List<DbGSp1TriangleCommand> N64Sdk_GraphicsCommands_GSp1TriangleCommands { get; set; }
-        public List<DbGSp2TrianglesCommand> N64Sdk_GraphicsCommands_GSp2TrianglesCommands { get; set; }
+        public List<DbGspVertexCommand> N64Sdk_GraphicsCommands_GSpVertexCommands { get; set; }
+        public List<DbGspCullDisplayListCommand> N64Sdk_GraphicsCommands_GSpCullDisplayListCommands { get; set; }
+        public List<DbGsp1TriangleCommand> N64Sdk_GraphicsCommands_GSp1TriangleCommands { get; set; }
+        public List<DbGsp2TrianglesCommand> N64Sdk_GraphicsCommands_GSp2TrianglesCommands { get; set; }
 
         public List<DbMapping> Mappings { get; set; }
         public List<DbMappingChild> MappingChildren { get; set; }
@@ -111,10 +111,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             MeshMaterialReferences = GetStructures<MeshMaterialReference, DbMeshMaterialReference>(g);
 
             N64Sdk_Vtxs = GetStructures<Vtx, DbVtx>(g);
-            N64Sdk_GraphicsCommands_GSpVertexCommands = GetStructures<GSpVertexCommand, DbGSpVertexCommand>(g);
-            N64Sdk_GraphicsCommands_GSpCullDisplayListCommands = GetStructures<GSpCullDisplayListCommand, DbGSpCullDisplayListCommand>(g);
-            N64Sdk_GraphicsCommands_GSp1TriangleCommands = GetStructures<GSp1TriangleCommand, DbGSp1TriangleCommand>(g);
-            N64Sdk_GraphicsCommands_GSp2TrianglesCommands = GetStructures<GSp2TrianglesCommand, DbGSp2TrianglesCommand>(g);
+            N64Sdk_GraphicsCommands_GSpVertexCommands = GetStructures<GspVertexCommand, DbGspVertexCommand>(g);
+            N64Sdk_GraphicsCommands_GSpCullDisplayListCommands = GetStructures<GspCullDisplayListCommand, DbGspCullDisplayListCommand>(g);
+            N64Sdk_GraphicsCommands_GSp1TriangleCommands = GetStructures<Gsp1TriangleCommand, DbGsp1TriangleCommand>(g);
+            N64Sdk_GraphicsCommands_GSp2TrianglesCommands = GetStructures<Gsp2TrianglesCommand, DbGsp2TrianglesCommand>(g);
 
             Mappings = GetStructures<Mapping, DbMapping>(g);
             MappingChildren = GetStructures<MappingChild, DbMappingChild>(g);

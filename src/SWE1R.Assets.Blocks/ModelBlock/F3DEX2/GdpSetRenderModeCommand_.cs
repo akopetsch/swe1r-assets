@@ -6,11 +6,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     /// See also:
     /// <list type="bullet">
     ///   <item>
-    ///     <see href="http://n64devkit.square7.ch/n64man/gdp/gDPSetCombineLERP.htm">
-    ///       n64devkit.square7.ch - 'gDPSetCombineLERP'</see></item>
+    ///     <see href="http://n64devkit.square7.ch/n64man/gdp/gDPSetRenderMode.htm">
+    ///       n64devkit.square7.ch - 'gDPSetRenderMode'</see></item>
     /// </list>
     /// </summary>
-    public class GDpSetCombineLerpCommand : GraphicsCommand
+    public class GdpSetRenderModeCommand : GraphicsCommand
     {
         #region Properties (serialized)
 
@@ -20,8 +20,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #region Constructor
 
-        public GDpSetCombineLerpCommand() : 
-            base(GraphicsCommandByte.G_SETCOMBINE)
+        public GdpSetRenderModeCommand() :
+            base(GraphicsCommandByte.G_SETOTHERMODE_L)
         { }
 
         #endregion

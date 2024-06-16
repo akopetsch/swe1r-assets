@@ -15,7 +15,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     ///       n64devkit.square7.ch - 'gSPCullDisplayList'</see></item>
     /// </list>
     /// </summary>
-    public class GSpCullDisplayListCommand : GraphicsCommand, ICustomSerializable
+    public class GspCullDisplayListCommand : GraphicsCommand, ICustomSerializable
     {
         #region Fields
 
@@ -42,11 +42,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #region Constructor
 
-        public GSpCullDisplayListCommand() :
+        public GspCullDisplayListCommand() :
             base(GraphicsCommandByte.G_CULLDL)
         { }
 
-        public GSpCullDisplayListCommand(byte v0, byte vn) :
+        public GspCullDisplayListCommand(byte v0, byte vn) :
             this()
         {
             V0 = v0;

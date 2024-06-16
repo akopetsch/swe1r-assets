@@ -7,15 +7,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 {
-    [Table($"{nameof(Model)}_{nameof(GSpVertexCommand)}")]
-    public class DbGSpVertexCommand : DbBlockItemStructure<GSpVertexCommand>
+    [Table($"{nameof(Model)}_{nameof(Gsp1TriangleCommand)}")]
+    public class DbGsp1TriangleCommand : DbBlockItemStructure<Gsp1TriangleCommand>
     {
         #region Properties
 
-        public int P_V { get; set; }
-        public int N { get; set; }
-        public int V0 { get; set; }
-        public byte V0PlusN { get; set; }
+        public byte V0 { get; set; }
+        public byte V1 { get; set; }
+        public byte V2 { get; set; }
 
         #endregion
 
@@ -23,32 +22,30 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
         {
             base.CopyFrom(node);
 
-            var x = (GSpVertexCommand)node.Value;
+            var x = (Gsp1TriangleCommand)node.Value;
 
-            P_V = GetValuePosition(node.Graph, x.V.Value);
-            N = x.N;
             V0 = x.V0;
-            V0PlusN = x.V0PlusN;
+            V1 = x.V1;
+            V2 = x.V2;
         }
 
-        public override bool Equals(DbBlockItemStructure<GSpVertexCommand> other)
+        public override bool Equals(DbBlockItemStructure<Gsp1TriangleCommand> other)
         {
-            var x = (DbGSpVertexCommand)other;
+            var x = (DbGsp1TriangleCommand)other;
 
             if (!base.Equals(x))
                 return false;
 
-            if (P_V != x.P_V) return false;
-            if (N != x.N) return false;
             if (V0 != x.V0) return false;
-            if (V0PlusN != x.V0PlusN) return false;
+            if (V1 != x.V1) return false;
+            if (V2 != x.V2) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbGSpVertexCommand x)
+            if (obj is DbGsp1TriangleCommand x)
                 return Equals(x);
             else
                 return base.Equals(obj);
@@ -56,6 +53,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
-                P_V, N, V0, V0PlusN);
+                V0, V1, V2);
     }
 }

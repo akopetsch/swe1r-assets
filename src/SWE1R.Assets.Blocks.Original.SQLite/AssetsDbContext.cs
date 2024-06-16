@@ -34,10 +34,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         public DbSet<DbMeshMaterialReference> MeshMaterialReferences { get; set; }
 
         public DbSet<DbVtx> N64Sdk_Vtxs { get; set; }
-        public DbSet<DbGSpVertexCommand> N64Sdk_GSpVertexCommands { get; set; }
-        public DbSet<DbGSpCullDisplayListCommand> N64Sdk_GSpCullDisplayListCommands { get; set; }
-        public DbSet<DbGSp1TriangleCommand> N64Sdk_GSp1TriangleCommands { get; set; }
-        public DbSet<DbGSp2TrianglesCommand> N64Sdk_GSp2TrianglesCommands { get; set; }
+        public DbSet<DbGspVertexCommand> N64Sdk_GSpVertexCommands { get; set; }
+        public DbSet<DbGspCullDisplayListCommand> N64Sdk_GSpCullDisplayListCommands { get; set; }
+        public DbSet<DbGsp1TriangleCommand> N64Sdk_GSp1TriangleCommands { get; set; }
+        public DbSet<DbGsp2TrianglesCommand> N64Sdk_GSp2TrianglesCommands { get; set; }
 
         public DbSet<DbMapping> Mappings { get; set; }
         public DbSet<DbMappingChild> MappingChildren { get; set; }

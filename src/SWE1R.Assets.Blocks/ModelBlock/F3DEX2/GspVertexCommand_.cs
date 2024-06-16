@@ -14,7 +14,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     ///       n64devkit.square7.ch - 'gSPVertex'</see></item>
     /// </list>
     /// </summary>
-    public class GSpVertexCommand : GraphicsCommand
+    public class GspVertexCommand : GraphicsCommand
     {
         #region Fields (const)
 
@@ -43,11 +43,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #region Constructor
 
-        public GSpVertexCommand() :
+        public GspVertexCommand() :
             base(GraphicsCommandByte.G_VTX)
         { }
 
-        public GSpVertexCommand(int n, int v0PlusN, int v0, IList<Vtx> vertices) :
+        public GspVertexCommand(int n, int v0PlusN, int v0, IList<Vtx> vertices) :
             this()
         {
             V = new ReferenceByIndex<Vtx>()

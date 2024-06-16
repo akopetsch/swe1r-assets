@@ -11,8 +11,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
     {
         #region Properties
 
-        public GSpVertexCommand VertexCommand { get; set; }
-        public GSpCullDisplayListCommand CullDisplayListCommand { get; set; }
+        public GspVertexCommand VertexCommand { get; set; }
+        public GspCullDisplayListCommand CullDisplayListCommand { get; set; }
         public List<ITrianglesGraphicsCommand> TrianglesCommands { get; } =
             new List<ITrianglesGraphicsCommand>();
 

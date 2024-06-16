@@ -68,16 +68,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             foreach (GraphicsCommand command in List)
             {
                 var triangleCommands = new List<Triangle>();
-                if (command is GSpVertexCommand vertexCommand)
+                if (command is GspVertexCommand vertexCommand)
                 {
                     stepIndex = vertexCommand.V0PlusN;
                     baseIndex += stepIndex;
                 }
-                else if (command is GSp1TriangleCommand triangleCommand)
+                else if (command is Gsp1TriangleCommand triangleCommand)
                 {
                     triangleCommands.Add(triangleCommand.Triangle);
                 }
-                else if (command is GSp2TrianglesCommand trianglesCommand)
+                else if (command is Gsp2TrianglesCommand trianglesCommand)
                 {
                     triangleCommands.Add(trianglesCommand.Triangle0);
                     triangleCommands.Add(trianglesCommand.Triangle1);

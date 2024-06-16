@@ -7,13 +7,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 {
-    [Table($"{nameof(Model)}_{nameof(GSpCullDisplayListCommand)}")]
-    public class DbGSpCullDisplayListCommand : DbBlockItemStructure<GSpCullDisplayListCommand>
+    [Table($"{nameof(Model)}_{nameof(GspVertexCommand)}")]
+    public class DbGspVertexCommand : DbBlockItemStructure<GspVertexCommand>
     {
         #region Properties
 
-        public byte V0 { get; set; }
-        public byte VN { get; set; }
+        public int P_V { get; set; }
+        public int N { get; set; }
+        public int V0 { get; set; }
+        public byte V0PlusN { get; set; }
 
         #endregion
 
@@ -21,28 +23,32 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
         {
             base.CopyFrom(node);
 
-            var x = (GSpCullDisplayListCommand)node.Value;
+            var x = (GspVertexCommand)node.Value;
 
+            P_V = GetValuePosition(node.Graph, x.V.Value);
+            N = x.N;
             V0 = x.V0;
-            VN = x.VN;
+            V0PlusN = x.V0PlusN;
         }
 
-        public override bool Equals(DbBlockItemStructure<GSpCullDisplayListCommand> other)
+        public override bool Equals(DbBlockItemStructure<GspVertexCommand> other)
         {
-            var x = (DbGSpCullDisplayListCommand)other;
+            var x = (DbGspVertexCommand)other;
 
             if (!base.Equals(x))
                 return false;
 
+            if (P_V != x.P_V) return false;
+            if (N != x.N) return false;
             if (V0 != x.V0) return false;
-            if (VN != x.VN) return false;
+            if (V0PlusN != x.V0PlusN) return false;
 
             return true;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj is DbGSpCullDisplayListCommand x)
+            if (obj is DbGspVertexCommand x)
                 return Equals(x);
             else
                 return base.Equals(obj);
@@ -50,6 +56,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
-                V0, VN);
+                P_V, N, V0, V0PlusN);
     }
 }

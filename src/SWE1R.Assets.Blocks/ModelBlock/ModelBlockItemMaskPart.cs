@@ -71,7 +71,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
             // N64GspVertexCommand.V
             SetMaskBits(
-                context.Graph.GetPropertyComponents<GSpVertexCommand>(nameof(GSpVertexCommand.V))
+                context.Graph.GetPropertyComponents<GspVertexCommand>(nameof(GspVertexCommand.V))
                 .Where(IsMaskBitRequired));
 
             // AltN

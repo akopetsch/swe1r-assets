@@ -222,7 +222,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
                     foreach (Triangle triangle in faceHelper.Triangles)
                     {
 
-                        trianglesCommands.Add(new GSp1TriangleCommand(
+                        trianglesCommands.Add(new Gsp1TriangleCommand(
                             Convert.ToByte(triangle.I0 - v0),
                             Convert.ToByte(triangle.I1 - v0),
                             Convert.ToByte(triangle.I2 - v0)
@@ -263,7 +263,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             {
                 int n = Convert.ToByte(vertexBuffer.Indices.Distinct().Count());
                 int v0PlusN = Convert.ToByte(vertexBuffer.NextIndicesBase);
-                vertexBuffer.VertexCommand = new GSpVertexCommand(n, v0PlusN, v0, mesh.Vertices);
+                vertexBuffer.VertexCommand = new GspVertexCommand(n, v0PlusN, v0, mesh.Vertices);
                 v0 += vertexBuffer.NextIndicesBase;
                 commandList.AddRange(vertexBuffer.AllCommands);
             }

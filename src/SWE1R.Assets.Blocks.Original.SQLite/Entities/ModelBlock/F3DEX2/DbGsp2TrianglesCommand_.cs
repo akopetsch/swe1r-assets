@@ -7,8 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 {
-    [Table($"{nameof(Model)}_{nameof(GSp2TrianglesCommand)}")]
-    public class DbGSp2TrianglesCommand : DbBlockItemStructure<GSp2TrianglesCommand>
+    [Table($"{nameof(Model)}_{nameof(Gsp2TrianglesCommand)}")]
+    public class DbGsp2TrianglesCommand : DbBlockItemStructure<Gsp2TrianglesCommand>
     {
         #region Properties
 
@@ -25,7 +25,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
         {
             base.CopyFrom(node);
 
-            var x = (GSp2TrianglesCommand)node.Value;
+            var x = (Gsp2TrianglesCommand)node.Value;
 
             V00 = x.V00;
             V01 = x.V01;
@@ -36,9 +36,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
             V12 = x.V12;
         }
 
-        public override bool Equals(DbBlockItemStructure<GSp2TrianglesCommand> other)
+        public override bool Equals(DbBlockItemStructure<Gsp2TrianglesCommand> other)
         {
-            var x = (DbGSp2TrianglesCommand)other;
+            var x = (DbGsp2TrianglesCommand)other;
 
             if (!base.Equals(x))
                 return false;
@@ -56,7 +56,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 
         public override bool Equals(object obj)
         {
-            if (obj is DbGSp2TrianglesCommand x)
+            if (obj is DbGsp2TrianglesCommand x)
                 return Equals(x);
             else
                 return base.Equals(obj);
