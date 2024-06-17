@@ -34,6 +34,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
 
         internal static int CombineHashCodes(params object[] objects)
         {
+            // TODO: use ByteSerialization.IO.HashCodeHelper
             var hashCode = new HashCode();
             foreach (var obj in objects)
                 hashCode.Add(obj);

@@ -9,7 +9,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
     {
         #region Fields (constants)
 
-        public const string identifierString = "LStr";
+        public const string IdentifierString = "LStr";
         
         #endregion
 
@@ -23,7 +23,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         #region Properties (serialization)
 
         public static int StructureSize { get; } = 
-            identifierString.Length + Vector3Single.StructureSize;
+            IdentifierString.Length + Vector3Single.StructureSize;
 
         #endregion
 

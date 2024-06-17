@@ -8,9 +8,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock
     {
         #region Properties (serialized)
 
-        [TypeIdentifier(LightStreak.identifierString, typeof(LightStreak))]
-        [TypeDefault(typeof(int))]
-        [Order(0)] public object Value { get; private set; }
+        [Order(0), TypeDefault(typeof(int)), TypeIdentifier(LightStreak.IdentifierString, typeof(LightStreak))]
+        public object Value { get; private set; }
 
         #endregion
 

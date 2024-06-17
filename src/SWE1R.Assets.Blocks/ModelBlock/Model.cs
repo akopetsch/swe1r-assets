@@ -24,25 +24,23 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         [RecordTypeIdentifier(ModelType.Pupp, typeof(PuppModel))]
         [RecordTypeIdentifier(ModelType.Scen, typeof(ScenModel))]
         [RecordTypeIdentifier(ModelType.Trak, typeof(TrakModel))]
-        [Order(0)] public ModelType Type { get; protected set; }
+        [Order(0)]
+        public ModelType Type { get; protected set; }
         
-        [SerializeUntil(-1)]
-        [Order(1)] public List<FlaggedNodeOrInteger> Nodes { get; set; }
-
-        [Indicator("Data")]
-        [Order(2)] public HeaderData Data { get; set; }
-
-        [Indicator("Anim")]
-        [SerializeUntilNullPointer]
-        [ElementReference(ReferenceHandling.LowPriority)]
-        [Order(3)] public List<Animation> Animations { get; set; }
+        [Order(1), SerializeUntil(-1)]
+        public List<FlaggedNodeOrInteger> Nodes { get; set; }
         
-        [Indicator("AltN")]
-        [SerializeUntilNullPointer]
-        [Order(4)] public List<FlaggedNodeOrLodSelectorNodeChildReference> AltN { get; set; }
+        [Order(2), Indicator("Data")]
+        public HeaderData Data { get; set; }
+        
+        [Order(3), Indicator("Anim"), SerializeUntilNullPointer, ElementReference(ReferenceHandling.LowPriority)]
+        public List<Animation> Animations { get; set; }
 
-        [Length(4)]
-        [Order(5)] private char[] HEnd { get; set; } = "HEnd".ToCharArray();
+        [Order(4), Indicator("AltN"), SerializeUntilNullPointer]
+        public List<FlaggedNodeOrLodSelectorNodeChildReference> AltN { get; set; }
+
+        [Order(5), Length(4)]
+        private char[] HEnd { get; set; } = "HEnd".ToCharArray();
 
         #endregion
 
