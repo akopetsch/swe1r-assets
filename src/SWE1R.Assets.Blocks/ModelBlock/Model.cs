@@ -17,7 +17,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
     {
         #region Types
 
-        public enum Indicator : int
+        private enum Indicator : int
         {
             Data = ('D' << 24) + ('a' << 16) + ('t' << 8) + ('a' << 0),
             Anim = ('A' << 24) + ('n' << 16) + ('i' << 8) + ('m' << 0),
