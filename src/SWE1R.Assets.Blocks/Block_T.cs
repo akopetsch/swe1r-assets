@@ -69,7 +69,7 @@ namespace SWE1R.Assets.Blocks
                 int length = r.ReadInt32();
                 stream.Position = start;
 
-                Bytes = r.ReadBytes(length);
+                Bytes = r.Read<byte>(length);
                 Hash = Bytes.GetSha1();
                 HashString = Hash.ToHexString();
             }
@@ -96,7 +96,7 @@ namespace SWE1R.Assets.Blocks
                 {
                     int end = GetEnd(item);
                     for (int i = 0; i < item.Parts.Length; i++)
-                        item.Parts[i].Load(reader.ReadBytes(GetPartSize(item, i, end)));
+                        item.Parts[i].Load(reader.Read<byte>(GetPartSize(item, i, end)));
                 }
             }
         }

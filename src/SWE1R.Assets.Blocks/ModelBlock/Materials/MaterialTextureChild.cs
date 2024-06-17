@@ -89,7 +89,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Materials
             Byte_5 = r.ReadByte();
             Byte_6 = r.ReadByte();
             Byte_7 = r.ReadByte();
-            r.ReadBytes(padding.Length);
+            r.Read<byte>(padding.Length);
             Byte_c = r.ReadByte();
             Byte_d = r.ReadByte();
             Byte_e = r.ReadByte();

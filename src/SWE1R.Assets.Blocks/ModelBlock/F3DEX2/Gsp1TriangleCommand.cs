@@ -103,7 +103,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             V0Padded = reader.ReadByte();
             V1Padded = reader.ReadByte();
             V2Padded = reader.ReadByte();
-            reader.ReadBytes(PaddingBytes.Length);
+            reader.Read<byte>(PaddingBytes.Length);
         }
 
         #endregion

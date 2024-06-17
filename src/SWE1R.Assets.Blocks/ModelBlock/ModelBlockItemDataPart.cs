@@ -37,11 +37,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock
                 using (var s = new MemoryStream(Bytes))
                 using (var r = new EndianBinaryReader(s, Item.Block.Endianness))
                 {
-                    r.ReadBytes(CompressionSignature.Length);
+                    r.Read<byte>(CompressionSignature.Length);
 
                     int size = r.ReadInt32();
 
-                    byte[] compressed = r.ReadBytes(Length - (int)s.Position);
+                    byte[] compressed = r.Read<byte>(Length - (int)s.Position);
                     byte[] decompressed = Compressor.Decompress(compressed);
 
                     if (decompressed.Length != size)
@@ -58,7 +58,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             const string comp = "Comp";
             using (var s = new MemoryStream(Bytes))
             using (var r = new EndianBinaryReader(s, Item.Block.Endianness))
-                return new string(r.ReadChars(comp.Length)).Equals(comp);
+                return new string(r.Read<char>(comp.Length)).Equals(comp);
         }
 
         public override BlockItemPart Clone() => new ModelBlockItemDataPart(this);

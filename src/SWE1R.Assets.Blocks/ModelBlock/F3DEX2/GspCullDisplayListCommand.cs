@@ -70,9 +70,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         {
             // TODO: not called
             base.Deserialize(reader);
-            reader.ReadBytes(PaddingBytes1.Length);
+            reader.Read<byte>(PaddingBytes1.Length);
             V0Padded = reader.ReadByte();
-            reader.ReadBytes(PaddingBytes2.Length);
+            reader.Read<byte>(PaddingBytes2.Length);
             VNPadded = reader.ReadByte();
         }
 

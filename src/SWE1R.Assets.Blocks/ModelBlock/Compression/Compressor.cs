@@ -31,7 +31,7 @@ namespace SWE1R.Assets.Blocks.Common.Compression
                     var flags = (Flags)0;
                     for (int i = 0; i < 8; i++)
                     {
-                        byte[] match = input.PeekBytes(LengthDistancePair.MaxLength);
+                        byte[] match = input.Peek<byte>(LengthDistancePair.MaxLength);
 
                         int length = match.Length;
                         int distance = -1;

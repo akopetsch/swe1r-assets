@@ -117,7 +117,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         {
             Position = new Vector3Int16();
             Position.Deserialize(reader);
-            reader.ReadBytes(PaddingBytes.Length);
+            reader.Read<byte>(PaddingBytes.Length);
             U = reader.ReadInt16();
             V = reader.ReadInt16();
             Byte_C = reader.ReadByte();
