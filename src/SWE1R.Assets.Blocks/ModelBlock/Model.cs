@@ -15,6 +15,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 {
     public abstract class Model : BlockItemValue
     {
+        #region Types
+
+        public enum Indicator : int
+        {
+            Data = ('D' << 24) + ('a' << 16) + ('t' << 8) + ('a' << 0),
+            Anim = ('A' << 24) + ('n' << 16) + ('i' << 8) + ('m' << 0),
+            AltN = ('A' << 24) + ('l' << 16) + ('t' << 8) + ('N' << 0),
+            HEnd = ('H' << 24) + ('E' << 16) + ('n' << 8) + ('d' << 0),
+        }
+
+        #endregion
+
         #region Properties (serialized)
 
         [RecordTypeIdentifier(ModelType.MAlt, typeof(MAltModel))]
@@ -30,17 +42,17 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         [Order(1), SerializeUntil(-1)]
         public List<FlaggedNodeOrInteger> Nodes { get; set; }
         
-        [Order(2), Indicator("Data")]
+        [Order(2), Indicator(Indicator.Data)]
         public HeaderData Data { get; set; }
         
-        [Order(3), Indicator("Anim"), SerializeUntilNullPointer, ElementReference(ReferenceHandling.LowPriority)]
+        [Order(3), Indicator(Indicator.Anim), SerializeUntilNullPointer, ElementReference(ReferenceHandling.LowPriority)]
         public List<Animation> Animations { get; set; }
 
-        [Order(4), Indicator("AltN"), SerializeUntilNullPointer]
+        [Order(4), Indicator(Indicator.AltN), SerializeUntilNullPointer]
         public List<FlaggedNodeOrLodSelectorNodeChildReference> AltN { get; set; }
 
-        [Order(5), Length(4)]
-        private char[] HEnd { get; set; } = "HEnd".ToCharArray();
+        [Order(5)]
+        private Indicator HEnd { get; set; } = Indicator.HEnd;
 
         #endregion
 
