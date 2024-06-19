@@ -55,7 +55,7 @@ namespace SWE1R.Assets.Blocks.Original
             
             var endianness = _metadataProvider.GetBlock(blockItemType, blockIdName).Endianness;
 
-            return Block.Load(blockItemType, stream, endianness);
+            return BlockLoader.Load(blockItemType, stream, endianness);
         }
 
         private string GetBlockResourcePath(BlockItemType blockItemType, string blockIdName)

@@ -39,7 +39,7 @@ namespace FiddleApp
 
         private static int Fiddle1()
         {
-            var spriteBlock = Block.Load<SpriteBlockItem>(SpriteBlockIdNames.Default, Endianness.BigEndian);
+            var spriteBlock = BlockLoader.Load<SpriteBlockItem>(SpriteBlockIdNames.Default, Endianness.BigEndian);
 
             // import sprite
             using var stream = File.OpenRead("sprite-133_256x128_I8.png");

@@ -19,7 +19,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             Debug.WriteLine(ModelIndex);
 
             // load
-            var block = Block.Load<ModelBlockItem>(Filename, Endianness);
+            var block = BlockLoader.Load<ModelBlockItem>(Filename, Endianness);
             ModelBlockItem modelBlockItem = block[ModelIndex];
             modelBlockItem.Load();
 
