@@ -32,7 +32,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         {
             using var ser = new ByteSerializer();
             using var ms = new MemoryStream(Data.Bytes);
-            Model = ser.Deserialize<Model>(ms, Block.Endianness, out context);
+            Model = ser.Deserialize<Model>(ms, Endianness, out context);
             Model.BlockItem = this;
         }
 
@@ -43,7 +43,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock
             // Data
             using var ser = new ByteSerializer();
             using var ms = new MemoryStream();
-            ser.Serialize(ms, Model, Block.Endianness, out context);
+            ser.Serialize(ms, Model, Endianness, out context);
             Data.Load(ms.ToArray());
 
             // Bitmask

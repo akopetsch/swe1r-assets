@@ -24,6 +24,7 @@ namespace SWE1R.Assets.Blocks
         
         public IBlock Block { get; set; }
         public int? Index => Block?.IndexOf(this);
+        public Endianness Endianness { get; set; }
 
         public abstract BlockItemType BlockItemType { get; }
 
@@ -42,6 +43,7 @@ namespace SWE1R.Assets.Blocks
             Parts = parts;
             foreach (BlockItemPart p in Parts)
                 p.Item = this;
+            Endianness = BlockConstants.DefaultEndianness;
         }
 
         #endregion

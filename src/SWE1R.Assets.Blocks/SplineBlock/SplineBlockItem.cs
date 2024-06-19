@@ -29,7 +29,7 @@ namespace SWE1R.Assets.Blocks.SplineBlock
         public override void Load(out ByteSerializerContext context)
         {
             using var ms = new MemoryStream(Bytes);
-            Spline = new ByteSerializer().Deserialize<Spline>(ms, Block.Endianness, out context);
+            Spline = new ByteSerializer().Deserialize<Spline>(ms, Endianness, out context);
             Spline.BlockItem = this;
         }
 
@@ -38,7 +38,7 @@ namespace SWE1R.Assets.Blocks.SplineBlock
         public override void Save(out ByteSerializerContext context)
         {
             using var ms = new MemoryStream();
-            new ByteSerializer().Serialize(ms, Spline, Block.Endianness, out context);
+            new ByteSerializer().Serialize(ms, Spline, Endianness, out context);
             Part.Load(ms.ToArray());
         }
 

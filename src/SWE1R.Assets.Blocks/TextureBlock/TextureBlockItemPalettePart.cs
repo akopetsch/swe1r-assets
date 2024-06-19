@@ -15,7 +15,7 @@ namespace SWE1R.Assets.Blocks.TextureBlock
         {
             var colors = new ColorRgba5551[Length / sizeof(short)];
             using (var s = new MemoryStream(Bytes))
-            using (var r = new EndianBinaryReader(s, Item.Block.Endianness))
+            using (var r = new EndianBinaryReader(s, Item.Endianness))
             {
                 for (int i = 0; i < colors.Length; i++)
                 {

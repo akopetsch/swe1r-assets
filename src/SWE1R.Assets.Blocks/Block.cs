@@ -41,7 +41,7 @@ namespace SWE1R.Assets.Blocks
 
         #region Constructor
 
-        public Block(Endianness endianness) =>
+        public Block(Endianness endianness = BlockConstants.DefaultEndianness) =>
             Endianness = endianness;
 
         #endregion
@@ -83,10 +83,10 @@ namespace SWE1R.Assets.Blocks
             using (var reader = new EndianBinaryReader(ms, Endianness))
             {
                 // count
-                Items.AddRange(Enumerable.Range(0, reader.ReadInt32()).Select(i => new T() { Block = this }));
+                Items.AddRange(Enumerable.Range(0, reader.ReadInt32()).Select(x => CreateItem()));
 
                 // offsets
-                Offsets = Items.SelectMany(i => i.Parts).ToDictionary(p => p, p => reader.ReadInt32());
+                Offsets = Items.SelectMany(x => x.Parts).ToDictionary(p => p, p => reader.ReadInt32());
 
                 // size
                 Size = reader.ReadInt32();
@@ -100,6 +100,13 @@ namespace SWE1R.Assets.Blocks
                 }
             }
         }
+
+        private T CreateItem() =>
+            new T()
+            {
+                Block = this,
+                Endianness = Endianness,
+            };
 
         private int GetEnd(T item)
         {

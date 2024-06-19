@@ -14,7 +14,7 @@ namespace SWE1R.Assets.Blocks
     {
         #region Methods (filename)
 
-        public static IBlock Load(BlockItemType blockItemType, string filename, Endianness endianness)
+        public static IBlock Load(BlockItemType blockItemType, string filename, Endianness endianness = BlockConstants.DefaultEndianness)
         {
             switch (blockItemType)
             {
@@ -26,7 +26,8 @@ namespace SWE1R.Assets.Blocks
             }
         }
 
-        public static Block<TItem> Load<TItem>(string filename, Endianness endianness) where TItem : BlockItem, new()
+        public static Block<TItem> Load<TItem>(string filename, Endianness endianness = BlockConstants.DefaultEndianness)
+            where TItem : BlockItem, new()
         {
             var block = new Block<TItem>(endianness);
             block.Load(filename);
@@ -37,7 +38,7 @@ namespace SWE1R.Assets.Blocks
 
         #region Methods (stream)
 
-        public static IBlock Load(BlockItemType blockItemType, Stream stream, Endianness endianness)
+        public static IBlock Load(BlockItemType blockItemType, Stream stream, Endianness endianness = BlockConstants.DefaultEndianness)
         {
             switch (blockItemType)
             {
@@ -49,7 +50,8 @@ namespace SWE1R.Assets.Blocks
             }
         }
 
-        public static Block<TItem> Load<TItem>(Stream stream, Endianness endianness) where TItem : BlockItem, new()
+        public static Block<TItem> Load<TItem>(Stream stream, Endianness endianness)
+            where TItem : BlockItem, new()
         {
             var block = new Block<TItem>(endianness);
             block.Load(stream);

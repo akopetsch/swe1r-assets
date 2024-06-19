@@ -21,8 +21,8 @@ namespace SWE1R.Assets.Blocks.CommandLine
             string textureBlockFilename = BlockDefaultFilenames.TextureBlock;
 
             // load blocks
-            var modelBlock = BlockLoader.Load<ModelBlockItem>(modelBlockFilename, Endianness.BigEndian);
-            var textureBlock = BlockLoader.Load<TextureBlockItem>(textureBlockFilename, Endianness.BigEndian);
+            var modelBlock = BlockLoader.Load<ModelBlockItem>(modelBlockFilename);
+            var textureBlock = BlockLoader.Load<TextureBlockItem>(textureBlockFilename);
 
             // import
             var resourceImporter = new LeadphalanxObjResourceImporter(textureBlock);
