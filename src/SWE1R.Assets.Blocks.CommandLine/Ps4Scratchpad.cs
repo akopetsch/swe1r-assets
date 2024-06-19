@@ -3,7 +3,6 @@
 using ByteSerialization;
 using ByteSerialization.IO;
 using SWE1R.Assets.Blocks.ModelBlock;
-using System;
 
 namespace SWE1R.Assets.Blocks.CommandLine
 {
