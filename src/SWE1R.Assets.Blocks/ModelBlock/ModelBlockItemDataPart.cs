@@ -55,6 +55,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock
 
         public bool IsCompressed()
         {
+            if (Bytes.Length == 0)
+                return false;
             const string comp = "Comp";
             using (var s = new MemoryStream(Bytes))
             using (var r = new EndianBinaryReader(s, Item.Block.Endianness))
