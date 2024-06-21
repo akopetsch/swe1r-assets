@@ -17,7 +17,7 @@ namespace SWE1R.Assets.Blocks.Metadata
         public BlockItemValueMetadata() { }
         public BlockItemValueMetadata(BlockItem item)
         {
-            BlockItemType = item.BlockItemType;
+            BlockItemType = BlockItemTypeAttributeHelper.GetBlockItemType(item.GetType());
             Id = item.Index.Value;
             Hash = item.HashString;
             Size1 = item.Parts.Length >= 1 ? (int?)item.Parts[0].Length : null;

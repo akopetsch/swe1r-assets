@@ -14,9 +14,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         public ModelBlockItemDataPart Data => Part2;
         public Model Model { get; set; }
 
-        public override BlockItemType BlockItemType =>
-            BlockItemType.ModelBlockItem;
-
         #endregion
 
         #region Constructor

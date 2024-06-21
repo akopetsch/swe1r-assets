@@ -12,9 +12,6 @@ namespace SWE1R.Assets.Blocks.SplineBlock
 
         public Spline Spline { get; set; }
 
-        public override BlockItemType BlockItemType =>
-            BlockItemType.SplineBlockItem;
-
         #endregion
 
         #region Constructor

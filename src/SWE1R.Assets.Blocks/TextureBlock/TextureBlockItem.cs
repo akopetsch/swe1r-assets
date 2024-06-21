@@ -16,9 +16,6 @@ namespace SWE1R.Assets.Blocks.TextureBlock
 
         public ColorRgba5551[] PaletteColors { get; set; }
 
-        public override BlockItemType BlockItemType =>
-            BlockItemType.TextureBlockItem;
-
         #endregion
 
         #region Constructor

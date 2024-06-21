@@ -12,9 +12,6 @@ namespace SWE1R.Assets.Blocks.SpriteBlock
 
         public Sprite Sprite { get; set; }
 
-        public override BlockItemType BlockItemType =>
-            BlockItemType.SpriteBlockItem;
-
         #endregion
 
         #region Constructor

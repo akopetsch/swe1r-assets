@@ -26,8 +26,6 @@ namespace SWE1R.Assets.Blocks
         public int? Index => Block?.IndexOf(this);
         public Endianness Endianness { get; set; }
 
-        public abstract BlockItemType BlockItemType { get; }
-
         #endregion
 
         #region Constructor
