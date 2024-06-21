@@ -14,14 +14,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock
 
         #endregion
 
-        #region Constructor
-
-        public DbSpriteStructures(int blockItemValueId) : 
-            base(blockItemValueId)
-        { }
-
-        #endregion
-
         #region Methods
 
         public override void Load(AssetsDbContext context)

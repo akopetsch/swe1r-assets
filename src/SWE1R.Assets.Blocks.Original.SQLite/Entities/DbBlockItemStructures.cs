@@ -14,13 +14,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities
 
         #endregion
 
-        #region Constructor
-
-        public DbBlockItemStructures(int blockItemValueId) =>
-            BlockItemValueId = blockItemValueId;
-
-        #endregion
-
         #region Methods
 
         public abstract void Load(AssetsDbContext context);

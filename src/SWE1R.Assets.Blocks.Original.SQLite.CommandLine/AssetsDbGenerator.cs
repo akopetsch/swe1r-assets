@@ -3,6 +3,7 @@
 using ByteSerialization;
 using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.ModelBlock;
+using SWE1R.Assets.Blocks.Original.SQLite.Entities;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock;
 using SWE1R.Assets.Blocks.SpriteBlock;
@@ -48,32 +49,39 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
         private void ImportModels()
         {
             Console.WriteLine($"{nameof(ImportModels)}()");
-            foreach ((int valueId, ModelBlockItem modelBlockItem) in GetBlockItemsByValueId<ModelBlockItem>())
-            {
-                Console.WriteLine(valueId);
-                modelBlockItem.Load(out ByteSerializerContext byteSerializerContext);
-                var dbModelStructures = new DbModelStructures(valueId);
-                dbModelStructures.Load(byteSerializerContext.Graph);
-                AssetsDbContext.AddModelStructures(dbModelStructures);
-            }
+            ImportBlockItems<ModelBlockItem, DbModelStructures>((x, y) => x.AddModelStructures(y));
         }
 
         private void ImportSprites()
         {
             Console.WriteLine($"{nameof(ImportSprites)}()");
-            foreach ((int valueId, SpriteBlockItem spriteBlockItem) in GetBlockItemsByValueId<SpriteBlockItem>())
+            ImportBlockItems<SpriteBlockItem, DbSpriteStructures>((x, y) => x.AddSpriteStructures(y));
+        }
+
+        private void ImportBlockItems<TBlockItem, TDbBlockItemStructures>(Action<AssetsDbContext, TDbBlockItemStructures> dbAddAction)
+            where TBlockItem : BlockItem, new()
+            where TDbBlockItemStructures: DbBlockItemStructures, new()
+        {
+            (int valueId, TBlockItem blockItem)[] blockItemsByValueId = GetBlockItemsByValueId<TBlockItem>();
+            foreach ((int valueId, TBlockItem blockItem) in blockItemsByValueId)
             {
                 Console.WriteLine(valueId);
-                spriteBlockItem.Load(out ByteSerializerContext byteSerializerContext);
-                var dbSpriteStructures = new DbSpriteStructures(valueId);
-                dbSpriteStructures.Load(byteSerializerContext.Graph);
-                AssetsDbContext.AddSpriteStructures(dbSpriteStructures);
+                blockItem.Load(out ByteSerializerContext byteSerializerContext);
+                var dbBlockItemStructures = new TDbBlockItemStructures
+                {
+                    BlockItemValueId = valueId
+                };
+                dbBlockItemStructures.Load(byteSerializerContext.Graph);
+                dbAddAction.Invoke(AssetsDbContext, dbBlockItemStructures);
             }
         }
 
-        private IEnumerable<(int valueId, TItem blockItem)> GetBlockItemsByValueId<TItem>() where TItem : BlockItem, new() =>
-            MetadataProvider.GetBlockItemValues<TItem>()
-            .Select(x => (x.Id, OriginalBlocksProvider.GetFirstBlockItemByValueId<TItem>(x.Id)));
+        private (int valueId, TItem blockItem)[] GetBlockItemsByValueId<TItem>() 
+            where TItem : BlockItem, new() =>
+            MetadataProvider
+            .GetBlockItemValues<TItem>()
+            .Select(x => (x.Id, OriginalBlocksProvider.GetFirstBlockItemByValueId<TItem>(x.Id)))
+            .ToArray();
 
         #endregion
     }

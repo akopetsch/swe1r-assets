@@ -54,14 +54,6 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 
         #endregion
 
-        #region Constructor
-
-        public DbModelStructures(int blockItemIndex) : 
-            base(blockItemIndex)
-        { }
-
-        #endregion
-
         #region Methods
 
         public override void Load(AssetsDbContext context)
