@@ -50,7 +50,7 @@ namespace SWE1R.Assets.Blocks
             }
         }
 
-        public static Block<TItem> Load<TItem>(Stream stream, Endianness endianness)
+        public static Block<TItem> Load<TItem>(Stream stream, Endianness endianness = BlockConstants.DefaultEndianness)
             where TItem : BlockItem, new()
         {
             var block = new Block<TItem>(endianness);
