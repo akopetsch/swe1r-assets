@@ -2,7 +2,7 @@
   "profiles": {
     "FiddleApp": {
       "commandName": "Project",
-      "workingDirectory": "C:\\Users\\akope\\code\\akopetsch\\swe1r-assets\\SWE1R.Assets.Blocks\\Resources"
+      "workingDirectory": "C:\\Users\\akope\\code\\swe1r-assets\\src\\SWE1R.Assets.Blocks\\Resources"
     }
   }
 }
