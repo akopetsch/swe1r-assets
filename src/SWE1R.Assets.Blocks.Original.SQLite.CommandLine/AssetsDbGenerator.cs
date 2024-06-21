@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization;
+using Spectre.Console;
 using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities;
@@ -35,53 +36,84 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
 
         public void Generate()
         {
+            AnsiConsole.WriteLine("Loading original blocks");
             OriginalBlocksProvider.Load();
 
+            AnsiConsole.WriteLine("Re-create database");
             AssetsDbContext.Database.EnsureDeleted();
             AssetsDbContext.Database.EnsureCreated();
 
+            AnsiConsole.WriteLine("Import block items");
             ImportModels();
             ImportSprites();
-            
+
+            AnsiConsole.WriteLine("Save database");
             AssetsDbContext.SaveChanges();
         }
 
-        private void ImportModels()
-        {
-            Console.WriteLine($"{nameof(ImportModels)}()");
-            ImportBlockItems<ModelBlockItem, DbModelStructures>((x, y) => x.AddModelStructures(y));
-        }
+        private void ImportModels() =>
+            ImportBlockItems<ModelBlockItem, DbModelStructures>(
+                (x, y) => x.AddModelStructures(y));
 
-        private void ImportSprites()
-        {
-            Console.WriteLine($"{nameof(ImportSprites)}()");
-            ImportBlockItems<SpriteBlockItem, DbSpriteStructures>((x, y) => x.AddSpriteStructures(y));
-        }
+        private void ImportSprites() =>
+            ImportBlockItems<SpriteBlockItem, DbSpriteStructures>(
+                (x, y) => x.AddSpriteStructures(y));
 
-        private void ImportBlockItems<TBlockItem, TDbBlockItemStructures>(Action<AssetsDbContext, TDbBlockItemStructures> dbAddAction)
+        private void ImportBlockItems<TBlockItem, TDbBlockItemStructures>(
+            Action<AssetsDbContext, TDbBlockItemStructures> dbAddAction)
             where TBlockItem : BlockItem, new()
             where TDbBlockItemStructures: DbBlockItemStructures, new()
         {
-            (int valueId, TBlockItem blockItem)[] blockItemsByValueId = GetBlockItemsByValueId<TBlockItem>();
-            foreach ((int valueId, TBlockItem blockItem) in blockItemsByValueId)
+            AnsiConsole.Progress().Start(ctx =>
             {
-                Console.WriteLine(valueId);
-                blockItem.Load(out ByteSerializerContext byteSerializerContext);
-                var dbBlockItemStructures = new TDbBlockItemStructures
+                ProgressTask itemsTask = ctx.AddTask(GetItemsTaskDescription<TBlockItem>());
+                ProgressTask currentItemTask = null;
+                
+                (int valueId, TBlockItem blockItem)[] blockItemsByValueId = GetBlockItemsByValueId<TBlockItem>();
+                itemsTask.MaxValue = blockItemsByValueId.Length - 1;
+                foreach ((int valueId, TBlockItem blockItem) in blockItemsByValueId)
                 {
-                    BlockItemValueId = valueId
-                };
-                dbBlockItemStructures.Load(byteSerializerContext.Graph);
-                dbAddAction.Invoke(AssetsDbContext, dbBlockItemStructures);
-            }
+                    currentItemTask ??= AddCurrentItemTask(ctx, valueId);
+                    currentItemTask.Value = 0;
+                    currentItemTask.Description = GetCurrentItemTaskDescription(valueId);
+
+                    blockItem.Load(out ByteSerializerContext byteSerializerContext);
+                    var dbBlockItemStructures = new TDbBlockItemStructures
+                    {
+                        BlockItemValueId = valueId
+                    };
+                    dbBlockItemStructures.Load(byteSerializerContext.Graph);
+                    dbAddAction.Invoke(AssetsDbContext, dbBlockItemStructures);
+                    
+                    itemsTask.Value++;
+                    currentItemTask.Value = itemsTask.MaxValue;
+                }
+            });
         }
 
-        private (int valueId, TItem blockItem)[] GetBlockItemsByValueId<TItem>() 
+        private (int valueId, TItem blockItem)[] GetBlockItemsByValueId<TItem>()
             where TItem : BlockItem, new() =>
             MetadataProvider
             .GetBlockItemValues<TItem>()
             .Select(x => (x.Id, OriginalBlocksProvider.GetFirstBlockItemByValueId<TItem>(x.Id)))
             .ToArray();
+
+        #endregion
+
+        #region Methods (console helpers)
+
+        private string GetItemsTaskDescription<TBlockItem>() where TBlockItem : BlockItem =>
+            $"Importing {typeof(TBlockItem).Name}s";
+
+        private ProgressTask AddCurrentItemTask(ProgressContext ctx, int valueId)
+        {
+            ProgressTask task = ctx.AddTask(GetCurrentItemTaskDescription(valueId));
+            task.IsIndeterminate = true;
+            return task;
+        }
+
+        private string GetCurrentItemTaskDescription(int valueId) =>
+            $"... (current {nameof(valueId)}: {valueId})";
 
         #endregion
     }
