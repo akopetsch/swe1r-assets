@@ -16,8 +16,13 @@ namespace SWE1R.Assets.Blocks.SplineBlock
 
         #region Constructor
 
-        public SplineBlockItem() : base() { }
-        public SplineBlockItem(SplineBlockItem source) : base(source) { }
+        public SplineBlockItem() :
+            base()
+        { }
+
+        public SplineBlockItem(SplineBlockItem source) :
+            base(source)
+        { }
 
         #endregion
 
@@ -30,7 +35,8 @@ namespace SWE1R.Assets.Blocks.SplineBlock
             Spline.BlockItem = this;
         }
 
-        public override void Unload() => Spline = null;
+        public override void Unload() => 
+            Spline = null;
 
         public override void Save(out ByteSerializerContext context)
         {
@@ -39,7 +45,8 @@ namespace SWE1R.Assets.Blocks.SplineBlock
             Part.Load(ms.ToArray());
         }
 
-        public override BlockItem Clone() => new SplineBlockItem(this);
+        public override BlockItem Clone() => 
+            new SplineBlockItem(this);
 
         #endregion
     }

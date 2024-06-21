@@ -4,9 +4,23 @@ namespace SWE1R.Assets.Blocks.SplineBlock
 {
     public class SplineBlockItemPart : BlockItemPart
     {
-        public SplineBlockItemPart() : base() { }
-        private SplineBlockItemPart(SplineBlockItemPart source) : base(source) { }
+        #region Constructor
 
-        public override BlockItemPart Clone() => new SplineBlockItemPart(this);
+        public SplineBlockItemPart() :
+            base()
+        { }
+
+        private SplineBlockItemPart(SplineBlockItemPart source) :
+            base(source)
+        { }
+
+        #endregion
+
+        #region Methods
+
+        public override BlockItemPart Clone() => 
+            new SplineBlockItemPart(this);
+
+        #endregion
     }
 }

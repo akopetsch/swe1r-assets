@@ -9,18 +9,30 @@ namespace SWE1R.Assets.Blocks.SplineBlock
 {
     public class Spline : BlockItemValue
     {
-        [Order(0)] public SplineSegmentHeader Header { get; set; }
-        
-        [Length(typeof(LengthHelper))]
-        [Order(1)] public List<SplineSegment> Segments { get; set; }
+        #region Classes (serialization)
 
-        private class LengthHelper : IBindingHelper
+        private class SegmentsLengthHelper : IBindingHelper
         {
             public int GetValue(PropertyComponent property) =>
                 property.GetAncestorValue<Spline>().Header.ElementsCount;
         }
 
+        #endregion
+
+        #region Properties (serialized)
+
+        [Order(0)]
+        public SplineSegmentHeader Header { get; set; }
+        [Order(1), Length(typeof(SegmentsLengthHelper))]
+        public List<SplineSegment> Segments { get; set; }
+
+        #endregion
+
+        #region Methods (helper)
+
         public void UpdateSegmentsCount() => // TODO: implement in BindingComponent
             Header.ElementsCount = Segments.Count;
+
+        #endregion
     }
 }
