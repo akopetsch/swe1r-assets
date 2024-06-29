@@ -10,8 +10,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     /// See also:
     /// <list type="bullet">
     ///   <item>
-    ///     <see href="http://n64devkit.square7.ch/n64man/gsp/gSPVertex.htm">
-    ///       n64devkit.square7.ch - 'gSPVertex'</see></item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/n64man/gsp/gSPVertex.html">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - 'gSPVertex'</see></item>
+    ///   <item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/header/gbi.htm#:~:text=gSPVertex">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - gSPVertex</see></item>
     /// </list>
     /// </summary>
     public class GspVertexCommand : GraphicsCommand

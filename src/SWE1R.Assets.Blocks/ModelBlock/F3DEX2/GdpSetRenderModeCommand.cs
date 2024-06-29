@@ -6,8 +6,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     /// See also:
     /// <list type="bullet">
     ///   <item>
-    ///     <see href="http://n64devkit.square7.ch/n64man/gdp/gDPSetRenderMode.htm">
-    ///       n64devkit.square7.ch - 'gDPSetRenderMode'</see></item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/n64man/gdp/gDPSetRenderMode.html">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - 'gDPSetRenderMode'</see></item>
+    ///   <item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/header/gbi.htm#:~:text=gDPSetRenderMode">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - gDPSetRenderMode</see></item>
     /// </list>
     /// </summary>
     public class GdpSetRenderModeCommand : GraphicsCommand

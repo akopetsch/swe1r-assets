@@ -11,8 +11,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     /// See also:
     /// <list type="bullet">
     ///   <item>
-    ///     <see href="http://n64devkit.square7.ch/n64man/gsp/gSPCullDisplayList.htm">
-    ///       n64devkit.square7.ch - 'gSPCullDisplayList'</see></item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/n64man/gsp/gSPCullDisplayList.html">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - 'gSPCullDisplayList'</see></item>
+    ///   <item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/header/gbi.htm#:~:text=gSPCullDisplayList">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - gSPCullDisplayList</see></item>
     /// </list>
     /// </summary>
     public class GspCullDisplayListCommand : GraphicsCommand, ICustomSerializable

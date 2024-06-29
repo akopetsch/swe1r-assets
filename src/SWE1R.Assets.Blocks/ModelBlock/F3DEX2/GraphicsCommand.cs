@@ -10,11 +10,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     /// See also:
     /// <list type="bullet">
     ///   <item>
-    ///     <see href="http://n64devkit.square7.ch/header/gbi.htm#:~:text=Graphics%20Commands">
-    ///       n64devkit.square7.ch - gbi.h - 'Graphics Commands'</see></item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/header/gbi.htm#:~:text=Gfx%3B">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - Gfx</see></item>
     ///   <item>
-    ///     <see href="http://n64devkit.square7.ch/header/gbi.htm#:~:text=Gfx%3B">
-    ///       n64devkit.square7.ch - gbi.h - 'Gfx'</see></item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/header/gbi.htm#:~:text=Graphics%20Commands">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - 'Graphics Commands'</see></item>
     ///   <item>
     ///     <see href="https://github.com/akopetsch/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types.h#L1365">
     ///       github.com - akopetsch/SW_RACER_RE - types.h - Gfx</see></item>

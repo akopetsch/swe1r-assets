@@ -13,8 +13,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     /// See also:
     /// <list type="bullet">
     ///   <item>
-    ///     <see href="http://n64devkit.square7.ch/n64man/gsp/gSP1Triangle.htm">
-    ///       n64devkit.square7.ch - 'gSP1Triangle'</see></item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/n64man/gsp/gSP1Triangle.html">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - 'gSP1Triangle'</see></item>
+    ///   <item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/header/gbi.htm#:~:text=gSP1Triangle%28pkt">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - gSP1Triangle</see></item>
     /// </list>
     /// </summary>
     public class Gsp1TriangleCommand : GraphicsCommand, ITrianglesGraphicsCommand, ICustomSerializable

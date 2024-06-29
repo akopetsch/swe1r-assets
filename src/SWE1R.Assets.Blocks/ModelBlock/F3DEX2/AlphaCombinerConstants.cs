@@ -6,11 +6,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     /// See also:
     /// <list type="bullet">
     ///   <item>
-    ///     <see href="http://n64devkit.square7.ch/header/gbi.htm#:~:text=Alpha%20combiner%20constants">
-    ///       n64devkit.square7.ch - gbi.h - 'Alpha combiner constants'</see></item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/header/gbi.htm#:~:text=Alpha%20combiner%20constants">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - 'Alpha combiner constants'</see></item>
     ///   <item>
-    ///     <see href="http://n64devkit.square7.ch/n64man/gdp/gDPSetCombineLERP.htm">
-    ///       n64devkit.square7.ch - 'gDPSetCombineLERP'</see></item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/n64man/gdp/gDPSetCombineMode.html#:~:text=Alpha%20Combiner">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - 'N64® Functions Menu' - 'gDPSetCombineMode'</see></item>
+    ///   <item>
+    ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/pro-man/pro12/index12.6.html">
+    ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - 'Programming Manual' - '12. RDP Programming' - '12.6 CC: Color Combiner'</see></item>
     /// </list>
     /// </summary>
     public enum AlphaCombinerConstants
