@@ -113,9 +113,9 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                         // NextIndicesBase
                         Assert.True(vertexCommand.V0PlusN == vertexBuffer.NextIndicesBase);
 
-                        // TODO: V0
                         Assert.True(vertexCommand.V.Collection == Value.Vertices);
                         Assert.True(vertexCommand.V.Index.Value != -1);
+                        Assert.True(vertexCommand.V.Index.Value >= 0);
 
                         if (i != 0)
                         {
