@@ -66,8 +66,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     if (i > 0)
                     {
                         VertexBuffer previousVertexBuffer = vertexBuffersWithVertexCommands[i - 1];
-                        int currentV0 = currentVertexBuffer.VertexCommand.V0;
-                        int previousV0 = previousVertexBuffer.VertexCommand.V0;
+                        int currentV0 = currentVertexBuffer.VertexCommand.VerticesStartIndex;
+                        int previousV0 = previousVertexBuffer.VertexCommand.VerticesStartIndex;
                         Assert.True(currentV0 > previousV0);
                     }
                 }
