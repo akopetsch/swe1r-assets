@@ -34,7 +34,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
                     yield return VertexCommand;
                 if (CullDisplayListCommand != null)
                     yield return CullDisplayListCommand;
-                foreach (GraphicsCommand triangleCommand in TrianglesCommands)
+                foreach (var triangleCommand in TrianglesCommands.Cast<GraphicsCommand>())
                     yield return triangleCommand;
             }
         }

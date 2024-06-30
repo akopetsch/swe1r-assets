@@ -36,11 +36,35 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #endregion
 
-        #region Properties (C struct)
+        #region Properties (helper)
 
-        public byte N { get => Convert.ToByte(NPadded >> NPadding); set => NPadded = (short)(value << NPadding); }
-        public int V0 { get => V.Index.Value; set => V.Index = value; }
-        public byte V0PlusN { get => (byte)(V0PlusNPadded >> 1); set => V0PlusNPadded = Convert.ToByte(value << 1); }
+        public byte V0PlusN
+        {
+            get => (byte)(V0PlusNPadded >> 1);
+            set => V0PlusNPadded = Convert.ToByte(value << 1);
+        }
+
+        public IList<Vtx> Vertices
+        {
+            get => V.Collection;
+            set => V.Collection = value;
+        }
+        
+        #endregion
+
+        #region Properties (C macro)
+
+        public byte N
+        {
+            get => Convert.ToByte(NPadded >> NPadding); 
+            set => NPadded = (short)(value << NPadding);
+        }
+
+        public int V0
+        {
+            get => V.Index.Value;
+            set => V.Index = value;
+        }
 
         #endregion
 
@@ -50,16 +74,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             base(GraphicsCommandByte.G_VTX)
         { }
 
-        public GspVertexCommand(int n, int v0PlusN, int v0, IList<Vtx> vertices) :
-            this()
+        public GspVertexCommand(int n, int v0, int v0PlusN, IList<Vtx> vertices) :
+            this() // TODO: omit arguments v0PlusN, vertices to mimick C macro
         {
             V = new ReferenceByIndex<Vtx>()
             {
                 Collection = vertices,
+                Index = v0,
             };
 
             N = Convert.ToByte(n);
-            V0 = v0;
             V0PlusN = Convert.ToByte(v0PlusN);
         }
 

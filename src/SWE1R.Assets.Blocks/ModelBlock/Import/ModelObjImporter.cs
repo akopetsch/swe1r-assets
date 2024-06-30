@@ -263,7 +263,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             {
                 int n = Convert.ToByte(vertexBuffer.Indices.Distinct().Count());
                 int v0PlusN = Convert.ToByte(vertexBuffer.NextIndicesBase);
-                vertexBuffer.VertexCommand = new GspVertexCommand(n, v0PlusN, v0, mesh.Vertices);
+                vertexBuffer.VertexCommand = new GspVertexCommand(n, v0, v0PlusN, mesh.Vertices);
                 v0 += vertexBuffer.NextIndicesBase;
                 commandList.AddRange(vertexBuffer.AllCommands);
             }

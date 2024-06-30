@@ -19,6 +19,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 
         #endregion
 
+        #region Methods
+
         public override void CopyFrom(Node node)
         {
             base.CopyFrom(node);
@@ -57,5 +59,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
                 P_V, N, V0, V0PlusN);
+
+        #endregion
     }
 }
