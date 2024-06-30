@@ -1,6 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Nodes;
+using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
 {
@@ -10,6 +11,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
 
         public TValue Value { get; set; }
         public ByteSerializerGraph ByteSerializerGraph { get; set; }
+        public ITestOutputHelper TestOutputHelper { get; private set; }
         public AnalyticsFixture AnalyticsFixture { get; set; }
 
         public long ValuePosition { get; private set; }
@@ -18,7 +20,11 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers
 
         #region Constructor
 
-        public virtual void Init(TValue value, ByteSerializerGraph byteSerializerGraph, AnalyticsFixture analyticsFixture)
+        public virtual void Init(
+            TValue value, 
+            ByteSerializerGraph byteSerializerGraph, 
+            ITestOutputHelper testOutputHelper, 
+            AnalyticsFixture analyticsFixture)
         {
             Value = value;
             ByteSerializerGraph = byteSerializerGraph;

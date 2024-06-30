@@ -7,6 +7,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 using SWE1R.Assets.Blocks.Textures;
+using Xunit.Abstractions;
 
 namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 {
@@ -14,10 +15,14 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
     {
         private TrackMetadata _trackMetadata;
 
-        public virtual void Init(TrakModel value, ByteSerializerGraph byteSerializerGraph, AnalyticsFixture analyticsFixture)
+        public override void Init(
+            TrakModel value, 
+            ByteSerializerGraph byteSerializerGraph, 
+            ITestOutputHelper testOutputHelper, 
+            AnalyticsFixture analyticsFixture)
         {
-            base.Init(value, byteSerializerGraph, analyticsFixture);
-
+            base.Init(value, byteSerializerGraph, testOutputHelper, analyticsFixture);
+            
             // TODO: fix the following lines (does not work for e.g. valueId = 1001)
             var metadataProvider = new MetadataProvider();
             BlockItemValueMetadata blockItemValueMetadata = metadataProvider.GetBlockItemValueByHash(Value.BlockItem);

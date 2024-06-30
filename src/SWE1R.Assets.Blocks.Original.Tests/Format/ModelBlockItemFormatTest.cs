@@ -41,7 +41,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
             
             //ExportGraphviz(modelBlockItem, context);
             
-            new ModelFormatTesterFactory().Get(modelBlockItem.Model, context.Graph, AnalyticsFixture).Test();
+            new ModelFormatTesterFactory().Get(modelBlockItem.Model, context.Graph, Output, AnalyticsFixture).Test();
             RunTesters<Mesh, MeshTester>(context);
             RunTesters<MaterialTexture, MaterialTextureTester>(context);
             RunTesters<MeshGroupNode, MeshGroupNodeTester>(context);

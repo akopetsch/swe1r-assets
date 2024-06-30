@@ -65,7 +65,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
             foreach (TValue value in values)
             {
                 var tester = new TTester();
-                tester.Init(value, byteSerializerContext.Graph, AnalyticsFixture);
+                tester.Init(value, byteSerializerContext.Graph, Output, AnalyticsFixture);
                 tester.Test();
             }
         }
