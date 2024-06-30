@@ -17,7 +17,6 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
         public virtual void Init(TrakModel value, ByteSerializerGraph byteSerializerGraph, AnalyticsFixture analyticsFixture)
         {
             base.Init(value, byteSerializerGraph, analyticsFixture);
-            base.Test();
 
             // TODO: fix the following lines (does not work for e.g. valueId = 1001)
             var metadataProvider = new MetadataProvider();
@@ -27,6 +26,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models
 
         public override void Test()
         {
+            base.Test();
+
             AssertHeader();
 
             if (_trackMetadata?.Planet == Planet.MonGazza)
