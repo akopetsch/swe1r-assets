@@ -1,5 +1,7 @@
 ﻿// SPDX-License-Identifier: MIT
 
+using System;
+
 namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 {
     /// <summary>
@@ -21,10 +23,17 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #endregion
 
+        #region Properties (: GraphicsCommand)
+
+        protected override object[] MacroArguments => 
+            throw new NotImplementedException();
+
+        #endregion
+
         #region Constructor
 
         public GdpSetRenderModeCommand() :
-            base(GraphicsCommandByte.G_SETOTHERMODE_L)
+            base(GraphicsCommandByte.G_SETOTHERMODE_L, "gDPSetRenderMode")
         { }
 
         #endregion

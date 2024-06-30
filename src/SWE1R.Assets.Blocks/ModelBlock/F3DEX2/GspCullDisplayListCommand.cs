@@ -36,17 +36,24 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #endregion
 
-        #region Properties (C struct)
+        #region Properties (C macro)
 
         public byte V0 { get => (byte)(V0Padded >> 1); set => V0Padded = Convert.ToByte(value << 1); }
         public byte VN { get => (byte)(VNPadded >> 1); set => VNPadded = Convert.ToByte(value << 1); }
 
         #endregion
 
+        #region Properties (: GraphicsCommand)
+
+        protected override object[] MacroArguments => 
+            new object[] { V0, VN };
+
+        #endregion
+
         #region Constructor
 
         public GspCullDisplayListCommand() :
-            base(GraphicsCommandByte.G_CULLDL)
+            base(GraphicsCommandByte.G_CULLDL, "gSPCullDisplayList")
         { }
 
         public GspCullDisplayListCommand(byte v0, byte vn) :
@@ -78,15 +85,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             reader.Read<byte>(PaddingBytes2.Length);
             VNPadded = reader.ReadByte();
         }
-
-        #endregion
-
-        #region Methods (: object)
-
-        public override string ToString() =>
-            GetString(
-                new PropertyNameAndValue(nameof(V0), V0),
-                new PropertyNameAndValue(nameof(VN), VN));
 
         #endregion
     }

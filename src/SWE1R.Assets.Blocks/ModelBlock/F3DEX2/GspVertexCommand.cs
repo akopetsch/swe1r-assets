@@ -36,13 +36,20 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #endregion
 
-        #region Properties (helper)
+        #region Properties (C macro)
 
         public byte N
         {
             get => Convert.ToByte(NPadded >> NPadding);
             set => NPadded = (short)(value << NPadding);
         }
+
+        public int V0 => 
+            V0PlusN - N;
+
+        #endregion
+
+        #region Properties (helper)
 
         public byte V0PlusN
         {
@@ -62,14 +69,19 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             set => V.Index = value;
         }
 
-        public int V0 => V0PlusN - N;
+        #endregion
+
+        #region Properties (: GraphicsCommand)
+
+        protected override object[] MacroArguments => 
+            new object[] { $"allVertices + {V.Index}", N, V0 }; // TODO: string literal
 
         #endregion
 
         #region Constructor
 
         public GspVertexCommand() :
-            base(GraphicsCommandByte.G_VTX)
+            base(GraphicsCommandByte.G_VTX, "gSPVertex")
         { }
 
         public GspVertexCommand(IList<Vtx> vertices, int verticesStartIndex, int n, int v0PlusN) :
@@ -83,15 +95,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
                 Index = verticesStartIndex,
             };
         }
-
-        #endregion
-
-        #region Methods (: object)
-
-        public override string ToString() =>
-            GetString(
-                new PropertyNameAndValue(nameof(N), N),
-                new PropertyNameAndValue(nameof(VerticesStartIndex), VerticesStartIndex));
 
         #endregion
     }

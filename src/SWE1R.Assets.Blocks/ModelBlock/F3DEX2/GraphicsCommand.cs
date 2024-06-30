@@ -26,25 +26,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     [Sizeof(8)]
     public abstract class GraphicsCommand
     {
-        #region Classes (helper)
-
-        protected class PropertyNameAndValue // TODO: !!!!!!! refactor class PropertyNameAndValue
-        {
-            public string Name { get; set; }
-            public object Value { get; set; }
-
-            public PropertyNameAndValue(string name, object value)
-            {
-                Name = name;
-                Value = value;
-            }
-
-            public override string ToString() =>
-                $"{Name} = {Value}";
-        }
-
-        #endregion
-
         #region Properties (serialized)
 
         [RecordTypeIdentifier(GraphicsCommandByte.G_VTX, typeof(GspVertexCommand))]
@@ -54,14 +35,21 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         [RecordTypeIdentifier(GraphicsCommandByte.G_SETCOMBINE, typeof(GdpSetCombineLerpCommand))]
         [RecordTypeIdentifier(GraphicsCommandByte.G_SETOTHERMODE_L, typeof(GdpSetRenderModeCommand))]
         [Order(0)]
-        public GraphicsCommandByte Byte { get; set; }
+        public GraphicsCommandByte Byte { get; private set; }
+
+        public string MacroName { get; private set; }
+
+        protected abstract object[] MacroArguments { get; }
 
         #endregion
 
         #region Constructor
 
-        protected GraphicsCommand(GraphicsCommandByte commandByte) =>
+        protected GraphicsCommand(GraphicsCommandByte commandByte, string macroName)
+        {
             Byte = commandByte;
+            MacroName = macroName;
+        }
 
         #endregion
 
@@ -77,8 +65,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #region Methods (helper)
 
-        protected string GetString(params PropertyNameAndValue[] propertyNamesAndValues) =>
-            $"{GetType().Name}({string.Join(", ", propertyNamesAndValues.Select(x => x.ToString()))})";
+        public override string ToString() =>
+            $"{MacroName}({string.Join(", ", MacroArguments)})";
 
         #endregion
     }

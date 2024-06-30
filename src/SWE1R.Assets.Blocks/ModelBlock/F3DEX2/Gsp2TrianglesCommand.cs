@@ -45,7 +45,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #endregion
 
-        #region Properties (C struct)
+        #region Properties (C macro)
 
         public byte V00 { get => (byte)(V00Padded >> 1); set => V00Padded = Convert.ToByte(value << 1); }
         public byte V01 { get => (byte)(V01Padded >> 1); set => V01Padded = Convert.ToByte(value << 1); }
@@ -53,6 +53,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         public byte V10 { get => (byte)(V10Padded >> 1); set => V10Padded = Convert.ToByte(value << 1); }
         public byte V11 { get => (byte)(V11Padded >> 1); set => V11Padded = Convert.ToByte(value << 1); }
         public byte V12 { get => (byte)(V12Padded >> 1); set => V12Padded = Convert.ToByte(value << 1); }
+
+        #endregion
+
+        #region Properties (: GraphicsCommand)
+
+        protected override object[] MacroArguments => 
+            new object[] { V00, V01, V02, V10, V11, V12 };
 
         #endregion
 
@@ -90,7 +97,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         #region Constructor
 
         public Gsp2TrianglesCommand() :
-            base(GraphicsCommandByte.G_TRI2)
+            base(GraphicsCommandByte.G_TRI2, "gSP2Triangles")
         { }
 
         public Gsp2TrianglesCommand(
@@ -135,19 +142,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             V11Padded = reader.ReadByte();
             V12Padded = reader.ReadByte();
         }
-
-        #endregion
-
-        #region Methods (: object)
-
-        public override string ToString() =>
-            GetString(
-                new PropertyNameAndValue(nameof(V00), V00),
-                new PropertyNameAndValue(nameof(V01), V01),
-                new PropertyNameAndValue(nameof(V02), V02),
-                new PropertyNameAndValue(nameof(V10), V10),
-                new PropertyNameAndValue(nameof(V11), V11),
-                new PropertyNameAndValue(nameof(V12), V12));
 
         #endregion
     }

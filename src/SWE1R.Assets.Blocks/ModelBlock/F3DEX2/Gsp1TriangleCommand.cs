@@ -28,7 +28,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #endregion
 
-        #region Properties
+        #region Properties (serialized)
 
         [Order(0)]
         private byte V0Padded { get; set; }
@@ -39,11 +39,18 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #endregion
 
-        #region Properties (C struct)
+        #region Properties (C macro)
 
         public byte V0 { get => (byte)(V0Padded >> 1); set => V0Padded = Convert.ToByte(value << 1); }
         public byte V1 { get => (byte)(V1Padded >> 1); set => V1Padded = Convert.ToByte(value << 1); }
         public byte V2 { get => (byte)(V2Padded >> 1); set => V2Padded = Convert.ToByte(value << 1); }
+
+        #endregion
+
+        #region Properties (: GraphicsCommand)
+
+        protected override object[] MacroArguments => 
+            new object[] { V0, V1, V2 };
 
         #endregion
 
@@ -75,7 +82,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         #region Constructor
 
         public Gsp1TriangleCommand() :
-            base(GraphicsCommandByte.G_TRI1)
+            base(GraphicsCommandByte.G_TRI1, "gSP1Triangle")
         { }
 
         public Gsp1TriangleCommand(byte v0, byte v1, byte v2) :
@@ -108,16 +115,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             V2Padded = reader.ReadByte();
             reader.Read<byte>(PaddingBytes.Length);
         }
-
-        #endregion
-
-        #region Methods (: object)
-
-        public override string ToString() =>
-            GetString(
-                new PropertyNameAndValue(nameof(V0), V0),
-                new PropertyNameAndValue(nameof(V1), V1),
-                new PropertyNameAndValue(nameof(V2), V2));
 
         #endregion
     }
