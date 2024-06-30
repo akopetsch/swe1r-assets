@@ -38,6 +38,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #region Properties (helper)
 
+        public byte N
+        {
+            get => Convert.ToByte(NPadded >> NPadding);
+            set => NPadded = (short)(value << NPadding);
+        }
+
         public byte V0PlusN
         {
             get => (byte)(V0PlusNPadded >> 1);
@@ -49,22 +55,14 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             get => V.Collection;
             set => V.Collection = value;
         }
-        
-        #endregion
 
-        #region Properties (C macro)
-
-        public byte N
-        {
-            get => Convert.ToByte(NPadded >> NPadding); 
-            set => NPadded = (short)(value << NPadding);
-        }
-
-        public int V0
+        public int VerticesStartIndex
         {
             get => V.Index.Value;
             set => V.Index = value;
         }
+
+        public int V0 => V0PlusN - N;
 
         #endregion
 
@@ -74,17 +72,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             base(GraphicsCommandByte.G_VTX)
         { }
 
-        public GspVertexCommand(int n, int v0, int v0PlusN, IList<Vtx> vertices) :
-            this() // TODO: omit arguments v0PlusN, vertices to mimick C macro
+        public GspVertexCommand(IList<Vtx> vertices, int verticesStartIndex, int n, int v0PlusN) :
+            this() // TODO: mimick C macro
         {
+            N = Convert.ToByte(n);
+            V0PlusN = Convert.ToByte(v0PlusN);
             V = new ReferenceByIndex<Vtx>()
             {
                 Collection = vertices,
-                Index = v0,
+                Index = verticesStartIndex,
             };
-
-            N = Convert.ToByte(n);
-            V0PlusN = Convert.ToByte(v0PlusN);
         }
 
         #endregion
@@ -94,7 +91,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         public override string ToString() =>
             GetString(
                 new PropertyNameAndValue(nameof(N), N),
-                new PropertyNameAndValue(nameof(V0), V0));
+                new PropertyNameAndValue(nameof(VerticesStartIndex), VerticesStartIndex));
 
         #endregion
     }

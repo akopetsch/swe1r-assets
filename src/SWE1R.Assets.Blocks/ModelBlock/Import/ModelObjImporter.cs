@@ -258,13 +258,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
         private GraphicsCommandList GetCommandList(List<VertexBuffer> vertexBuffers, Mesh mesh)
         {
             var commandList = new GraphicsCommandList();
-            int v0 = 0;
+            int verticesStartIndex = 0;
             foreach (VertexBuffer vertexBuffer in vertexBuffers)
             {
                 int n = Convert.ToByte(vertexBuffer.Indices.Distinct().Count());
                 int v0PlusN = Convert.ToByte(vertexBuffer.NextIndicesBase);
-                vertexBuffer.VertexCommand = new GspVertexCommand(n, v0, v0PlusN, mesh.Vertices);
-                v0 += vertexBuffer.NextIndicesBase;
+                vertexBuffer.VertexCommand = new GspVertexCommand(mesh.Vertices, verticesStartIndex, n, v0PlusN);
+                verticesStartIndex += vertexBuffer.NextIndicesBase;
                 commandList.AddRange(vertexBuffer.AllCommands);
             }
             return commandList;
