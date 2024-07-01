@@ -44,9 +44,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             set => NPadded = (short)(value << NPadding);
         }
 
-        public int V0
+        public byte V0
         {
-            get => V0PlusN - N;
+            get => Convert.ToByte(V0PlusN - N);
             set => V0PlusN = Convert.ToByte(value + N);
         }
 
