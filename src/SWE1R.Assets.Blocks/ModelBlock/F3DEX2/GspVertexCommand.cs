@@ -32,7 +32,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         [Order(1)]
         private byte V0PlusNPadded { get; set; }
         [Order(2)]
-        internal ReferenceByIndex<Vtx> V { get; set; }
+        internal ReferenceByIndex<Vtx> V { get; set; } = new ReferenceByIndex<Vtx>();
 
         #endregion
 
@@ -44,8 +44,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             set => NPadded = (short)(value << NPadding);
         }
 
-        public int V0 => 
-            V0PlusN - N;
+        public int V0
+        {
+            get => V0PlusN - N;
+            set => V0PlusN = Convert.ToByte(value + N);
+        }
 
         #endregion
 
