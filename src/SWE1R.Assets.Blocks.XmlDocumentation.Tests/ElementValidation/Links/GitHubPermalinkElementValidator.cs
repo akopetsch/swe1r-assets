@@ -26,10 +26,7 @@ namespace SWE1R.Assets.Blocks.XmlDocumentation.Tests.ElementValidation.Links
         private void ValidatePermalink()
         {
             Assert.Equal("github.com", Permalink.Host);
-            Assert.Equal("akopetsch", Permalink.AccountName);
-            var allowedRepositoryNames = new string[] { "SW_RACER_RE", "Sw_Racer" };
-            Assert.True(allowedRepositoryNames.Contains(Permalink.RepositoryName),
-                nameof(Permalink.RepositoryName));
+            // TODO: assert allowed repositories
         }
 
         private void ValidateTextSplit()

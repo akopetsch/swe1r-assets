@@ -18,11 +18,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     ///     <see href="https://ultra64.ca/files/documentation/online-manuals/man/header/gbi.htm#:~:text=Vtx">
     ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - Vtx</see></item>
     ///   <item>
-    ///     <see href="https://github.com/akopetsch/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types.h#L1535">
-    ///       github.com - akopetsch/SW_RACER_RE - types.h - Vtx</see></item>
+    ///     <see href="https://github.com/tim-tim707/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types.h#L1535">
+    ///       github.com - tim-tim707/SW_RACER_RE - types.h - Vtx</see></item>
     ///   <item>
-    ///     <see href="https://github.com/akopetsch/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L530">
-    ///       github.com - akopetsch/Sw_Racer - Swr_Model.h - SWR_MODEL_Section52</see></item>
+    ///     <see href="https://github.com/Olganix/Sw_Racer/blob/76c8ad9cea549ea18457846a135a7f25d48b3813/include/Swr_Model.h#L530">
+    ///       github.com - Olganix/Sw_Racer - Swr_Model.h - SWR_MODEL_Section52</see></item>
     /// </list>
     /// </para>
     /// </summary>

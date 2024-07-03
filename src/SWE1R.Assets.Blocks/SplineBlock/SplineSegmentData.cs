@@ -10,8 +10,8 @@ namespace SWE1R.Assets.Blocks.SplineBlock
     /// See also:
     /// <list type="bullet">
     ///   <item>
-    ///     <see href="https://github.com/akopetsch/blender-swe1r/blob/b0d4019addb97d51523019ca1233411fae0508d6/splineblock.py#L29">
-    ///       github.com - akopetsch/blender-swe1r - splineblock.py - SplinePoint</see></item>
+    ///     <see href="https://github.com/louriccia/blender-swe1r/blob/b0d4019addb97d51523019ca1233411fae0508d6/splineblock.py#L29">
+    ///       github.com - louriccia/blender-swe1r - splineblock.py - SplinePoint</see></item>
     /// </list>
     /// </para>
     /// </summary>
