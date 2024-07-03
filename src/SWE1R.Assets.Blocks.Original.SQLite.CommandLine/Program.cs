@@ -9,13 +9,13 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
     {
         public static int Main(string[] args)
         {
-            int result = ImportSprites();
+            int result = GenerateDatabase();
             if (Debugger.IsAttached)
                 ConsoleUtil.PromptExit();
             return result;
         }
 
-        private static int ImportSprites()
+        private static int GenerateDatabase()
         {
             using AssetsDbContext assetsDbContext = new();
             var generator = new AssetsDbGenerator(assetsDbContext);

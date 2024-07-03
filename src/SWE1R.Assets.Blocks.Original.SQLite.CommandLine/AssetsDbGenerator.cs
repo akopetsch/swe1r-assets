@@ -36,7 +36,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
 
         public void Generate()
         {
-            AnsiConsole.WriteLine("Loading original blocks");
+            AnsiConsole.WriteLine("Load original blocks");
             OriginalBlocksProvider.Load();
 
             AnsiConsole.WriteLine("Re-create database");
@@ -100,7 +100,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
 
         #endregion
 
-        #region Methods (console helpers)
+        #region Methods (task progress)
 
         private string GetItemsTaskDescription<TBlockItem>() where TBlockItem : BlockItem =>
             $"Importing {typeof(TBlockItem).Name}s";
