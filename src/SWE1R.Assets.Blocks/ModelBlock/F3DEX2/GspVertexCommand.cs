@@ -17,6 +17,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - gSPVertex</see></item>
     /// </list>
     /// </summary>
+    [MacroName("gSPVertex")]
     public class GspVertexCommand : GraphicsCommand
     {
         #region Fields (const)
@@ -84,7 +85,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         #region Constructor
 
         public GspVertexCommand() :
-            base(GraphicsCommandByte.G_VTX, "gSPVertex")
+            base(GraphicsCommandByte.G_VTX)
         { }
 
         public GspVertexCommand(IList<Vtx> vertices, int verticesStartIndex, int n, int v0PlusN) :

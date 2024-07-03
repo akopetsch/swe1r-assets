@@ -2,6 +2,8 @@
 
 using ByteSerialization.Attributes;
 using ByteSerialization.IO;
+using System;
+using System.Reflection;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 {
@@ -36,7 +38,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         [Order(0)]
         public GraphicsCommandByte Byte { get; private set; }
 
-        public string MacroName { get; private set; }
+        #endregion
+
+        #region Properties (macro)
+
+        public string MacroName => 
+            GetMacroName(GetType());
 
         protected abstract object[] MacroArguments { get; }
 
@@ -44,11 +51,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #region Constructor
 
-        protected GraphicsCommand(GraphicsCommandByte commandByte, string macroName)
-        {
+        protected GraphicsCommand(GraphicsCommandByte commandByte) =>
             Byte = commandByte;
-            MacroName = macroName;
-        }
 
         #endregion
 
@@ -62,7 +66,17 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #endregion
 
-        #region Methods (helper)
+        #region Methods (macro)
+
+        private static string GetMacroName(Type t) =>
+            t.GetCustomAttribute<MacroNameAttribute>().Value;
+
+        public static string GetMacroName<T>() =>
+            GetMacroName(typeof(T));
+
+        #endregion
+
+        #region Methods (: object)
 
         public override string ToString() =>
             $"{MacroName}({string.Join(", ", MacroArguments)})";

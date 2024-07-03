@@ -20,6 +20,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - gSP1Triangle</see></item>
     /// </list>
     /// </summary>
+    [MacroName("gSP1Triangle")]
     public class Gsp1TriangleCommand : GraphicsCommand, ITrianglesGraphicsCommand, ICustomSerializable
     {
         #region Fields
@@ -82,7 +83,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         #region Constructor
 
         public Gsp1TriangleCommand() :
-            base(GraphicsCommandByte.G_TRI1, "gSP1Triangle")
+            base(GraphicsCommandByte.G_TRI1)
         { }
 
         public Gsp1TriangleCommand(byte v0, byte v1, byte v2) :

@@ -18,6 +18,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - gSPCullDisplayList</see></item>
     /// </list>
     /// </summary>
+    [MacroName("gSPCullDisplayList")]
     public class GspCullDisplayListCommand : GraphicsCommand, ICustomSerializable
     {
         #region Fields
@@ -53,7 +54,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         #region Constructor
 
         public GspCullDisplayListCommand() :
-            base(GraphicsCommandByte.G_CULLDL, "gSPCullDisplayList")
+            base(GraphicsCommandByte.G_CULLDL)
         { }
 
         public GspCullDisplayListCommand(byte v0, byte vn) :

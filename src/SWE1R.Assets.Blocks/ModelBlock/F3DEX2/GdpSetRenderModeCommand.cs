@@ -15,6 +15,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - gDPSetRenderMode</see></item>
     /// </list>
     /// </summary>
+    [MacroName("gDPSetRenderMode")]
     public class GdpSetRenderModeCommand : GraphicsCommand
     {
         #region Properties (serialized)
@@ -33,7 +34,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         #region Constructor
 
         public GdpSetRenderModeCommand() :
-            base(GraphicsCommandByte.G_SETOTHERMODE_L, "gDPSetRenderMode")
+            base(GraphicsCommandByte.G_SETOTHERMODE_L)
         { }
 
         #endregion

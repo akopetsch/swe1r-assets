@@ -15,6 +15,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - gDPSetCombineLERP</see></item>
     /// </list>
     /// </summary>
+    [MacroName("gDPSetCombineLERP")]
     public class GdpSetCombineLerpCommand : GraphicsCommand
     {
         #region Properties (serialized)
@@ -33,7 +34,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         #region Constructor
 
         public GdpSetCombineLerpCommand() : 
-            base(GraphicsCommandByte.G_SETCOMBINE, "gDPSetCombineLERP")
+            base(GraphicsCommandByte.G_SETCOMBINE)
         { }
 
         #endregion

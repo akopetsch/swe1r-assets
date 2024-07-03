@@ -20,6 +20,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     ///       ultra64.ca - 'Online Manuals (OS 2.0J)' - gbi.h - gSP2Triangles</see></item>
     /// </list>
     /// </summary>
+    [MacroName("gSP2Triangles")]
     public class Gsp2TrianglesCommand : GraphicsCommand, ITrianglesGraphicsCommand, ICustomSerializable
     {
         #region Fields
@@ -97,7 +98,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         #region Constructor
 
         public Gsp2TrianglesCommand() :
-            base(GraphicsCommandByte.G_TRI2, "gSP2Triangles")
+            base(GraphicsCommandByte.G_TRI2)
         { }
 
         public Gsp2TrianglesCommand(
