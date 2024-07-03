@@ -2,14 +2,13 @@
 
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
+using SWE1R.Assets.Blocks.ModelBlock.Behaviours;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behaviours
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Behaviours
 {
-    [Table($"{nameof(Model)}_{nameof(Mapping)}")]
-    public class DbMapping : DbBlockItemStructure<Mapping>
+    [Table($"{nameof(Model)}_{nameof(Behaviour)}")]
+    public class DbBehaviour : DbBlockItemStructure<Behaviour>
     {
         #region Properties
 
@@ -54,7 +53,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behavio
         {
             base.CopyFrom(node);
 
-            var x = (Mapping)node.Value;
+            var x = (Behaviour)node.Value;
 
             Word_00 = x.Word_00;
             FogFlags = x.FogFlags;
@@ -82,9 +81,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behavio
             Word_32 = x.Word_32;
         }
 
-        public override bool Equals(DbBlockItemStructure<Mapping> other)
+        public override bool Equals(DbBlockItemStructure<Behaviour> other)
         {
-            var x = (DbMapping)other;
+            var x = (DbBehaviour)other;
 
             if (!base.Equals(x))
                 return false;
@@ -119,7 +118,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behavio
 
         public override bool Equals(object obj)
         {
-            if (obj is DbMapping x)
+            if (obj is DbBehaviour x)
                 return Equals(x);
             else
                 return base.Equals(obj);

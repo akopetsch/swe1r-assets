@@ -2,7 +2,7 @@
 
 using System;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.ModelBlock.Behaviours
 {
     [Flags]
     public enum VehicleReaction : int

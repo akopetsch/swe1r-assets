@@ -4,7 +4,7 @@ using ByteSerialization.Attributes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Vectors;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
+namespace SWE1R.Assets.Blocks.ModelBlock.Behaviours
 {
     /// <summary>
     /// <para>
@@ -22,7 +22,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
     /// </list>
     /// </para>
     /// </summary>
-    public class MappingChild
+    public class TriggerDescription
     {
         #region Properties (serialized)
 
@@ -58,11 +58,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
         /// </summary>
         [Order(8), Reference(ReferenceHandling.Postpone)]
         public FlaggedNode AffectedNode { get; set; }
-        /// <summary>
-        /// Number defining different trigger types.
-        /// </summary>
         [Order(9)]
-        public short Word_24 { get; set; }
+        public TriggerType TriggerType { get; set; }
         /// <summary>
         /// Padding. (always 0)
         /// </summary>
@@ -72,7 +69,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
         /// Null if this is the last one.
         /// </summary>
         [Order(11), Reference]
-        public MappingChild Next { get; set; }
+        public TriggerDescription Next { get; set; }
 
         #endregion
     }

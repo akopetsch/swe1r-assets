@@ -2,9 +2,9 @@
 
 using CSharpXmlDocumentation;
 using SWE1R.Assets.Blocks.ModelBlock.Animations;
+using SWE1R.Assets.Blocks.ModelBlock.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.XmlDocumentation.Tests.ElementValidation;
 using System.Xml.Linq;
@@ -52,15 +52,15 @@ namespace SWE1R.Assets.Blocks.XmlDocumentation.Tests
         #region Methods (SWE1R.Assets.Blocks.ModelBlock.Meshes)
 
         [Fact]
-        public void Test_Meshes_Mapping() =>
-            AssertType<Mapping>();
+        public void Test_Behaviours() =>
+            AssertType<Behaviour>();
 
         [Fact]
-        public void Test_Meshes_MappingChild() =>
-            AssertType<MappingChild>();
+        public void Test_TriggerDescriptions() =>
+            AssertType<TriggerDescription>();
 
         [Fact]
-        public void Test_Meshes_Mesh() =>
+        public void Test_Meshes() =>
             AssertType<Mesh>();
 
         #endregion

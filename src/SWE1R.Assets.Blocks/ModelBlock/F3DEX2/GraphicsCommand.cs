@@ -2,7 +2,6 @@
 
 using ByteSerialization.Attributes;
 using ByteSerialization.IO;
-using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 {

@@ -7,10 +7,10 @@ using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
 using ByteSerialization.IO;
 using ByteSerialization.Utils;
+using SWE1R.Assets.Blocks.ModelBlock.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.F3DEX2;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.Types;
 using System;
 using System.Collections.Generic;
@@ -152,11 +152,11 @@ namespace SWE1R.Assets.Blocks.ModelBlock
         private bool IsSpecialScenReference(ReferenceComponent referenceComponent)
         {
             if (ModelBlockItem.Model is ScenModel && 
-                referenceComponent.Type == typeof(MappingChild))
+                referenceComponent.Type == typeof(TriggerDescription))
             {
-                MappingSub mappingSub = referenceComponent.GetAncestorValue<MappingSub>();
-                List<MappingSub> list = referenceComponent.GetAncestorValue<List<MappingSub>>();
-                if (list.IndexOf(mappingSub) == 0)
+                TriggerReference triggerReference = referenceComponent.GetAncestorValue<TriggerReference>();
+                List<TriggerReference> triggerReferences = referenceComponent.GetAncestorValue<List<TriggerReference>>();
+                if (triggerReferences.IndexOf(triggerReference) == 0)
                     return true;
             }
             return false;

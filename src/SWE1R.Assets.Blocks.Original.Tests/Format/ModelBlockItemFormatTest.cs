@@ -3,9 +3,9 @@
 using ByteSerialization;
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
+using SWE1R.Assets.Blocks.ModelBlock.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes;
@@ -72,8 +72,8 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
             // MeshMaterial instances can be re-referenced
             Assert.True(GetReferenceCountsToValues<MeshMaterial>(context.Graph).Count >= 1); // TODO: only references from Mesh (not from e.g. Animation)
 
-            // Mapping instances can be re-referenced
-            Assert.True(GetReferenceCountsToValues<Mapping>(context.Graph).Count >= 1);
+            // Behaviour instances can be re-referenced
+            Assert.True(GetReferenceCountsToValues<Behaviour>(context.Graph).Count >= 1);
 
             // MeshGroupNode instances do not contain null in Children
             Assert.True(!context.Graph.GetValues<MeshGroupNode>()

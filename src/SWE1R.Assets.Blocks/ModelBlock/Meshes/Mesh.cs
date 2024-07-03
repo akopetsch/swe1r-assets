@@ -1,9 +1,9 @@
 ﻿// SPDX-License-Identifier: MIT
 
 using ByteSerialization.Attributes;
+using SWE1R.Assets.Blocks.ModelBlock.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.F3DEX2;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes.Geometry;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Vectors;
@@ -41,7 +41,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         /// <para>Offset: 0x04</para>
         /// </summary>
         [Order(1), Reference(5)]
-        public Mapping Mapping { get; set; } // TODO: xml comment
+        public Behaviour Behaviour { get; set; } // TODO: xml comment
         /// <summary>
         /// Both <see cref="Bounds0">Bounds0</see> and <see cref="Bounds1">Bounds1</see> can be <c>(0, 0, 0)</c>.
         /// <para>Offset: 0x08</para>

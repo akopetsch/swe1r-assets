@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using SWE1R.Assets.Blocks.Metadata;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims;
+using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Behaviours;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.SpriteBlock;
 
@@ -39,9 +39,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
         public DbSet<DbGsp1TriangleCommand> N64Sdk_GSp1TriangleCommands { get; set; }
         public DbSet<DbGsp2TrianglesCommand> N64Sdk_GSp2TrianglesCommands { get; set; }
 
-        public DbSet<DbMapping> Mappings { get; set; }
-        public DbSet<DbMappingChild> MappingChildren { get; set; }
-        public DbSet<DbMappingSub> MappingSubs { get; set; }
+        public DbSet<DbBehaviour> Behaviours { get; set; }
+        public DbSet<DbTriggerDescription> TriggerDescriptions { get; set; }
+        public DbSet<DbTriggerReference> TriggerDescriptionReferences { get; set; }
         public DbSet<DbMeshMaterial> MeshMaterials { get; set; }
         public DbSet<DbMaterial> Materials { get; set; }
         public DbSet<DbMaterialTexture> MaterialTextures { get; set; }
@@ -102,9 +102,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite
             N64Sdk_GSp1TriangleCommands.AddRange(dbModelStructures.N64Sdk_GraphicsCommands_GSp1TriangleCommands);
             N64Sdk_GSp2TrianglesCommands.AddRange(dbModelStructures.N64Sdk_GraphicsCommands_GSp2TrianglesCommands);
 
-            Mappings.AddRange(dbModelStructures.Mappings);
-            MappingChildren.AddRange(dbModelStructures.MappingChildren);
-            MappingSubs.AddRange(dbModelStructures.MappingSubs);
+            Behaviours.AddRange(dbModelStructures.Behaviours);
+            TriggerDescriptions.AddRange(dbModelStructures.TriggerDescriptions);
+            TriggerDescriptionReferences.AddRange(dbModelStructures.TriggerDescriptionReferences);
             MeshMaterials.AddRange(dbModelStructures.MeshMaterials);
             Materials.AddRange(dbModelStructures.Materials);
             MaterialTextures.AddRange(dbModelStructures.MaterialTextures);

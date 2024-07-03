@@ -2,9 +2,9 @@
 
 using ByteSerialization.Attributes;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
+namespace SWE1R.Assets.Blocks.ModelBlock.Behaviours
 {
-    public class MappingSub
+    public class TriggerReference
     {
         #region Properties (serialized)
 
@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
         [Order(1)]
         public int Int_1 { get; set; }
         [Order(2), Reference]
-        public MappingChild Child { get; set; }
+        public TriggerDescription Trigger { get; set; }
 
         #endregion
     }

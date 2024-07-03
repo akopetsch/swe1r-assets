@@ -6,7 +6,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Types;
 using SWE1R.Assets.Blocks.Vectors;
 using System.Collections.Generic;
 
-namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
+namespace SWE1R.Assets.Blocks.ModelBlock.Behaviours
 {
     /// <summary>
     /// <para>
@@ -21,7 +21,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
     /// </list>
     /// </para>
     /// </summary>
-    public class Mapping
+    public class Behaviour
     {
         #region Properties (serialized)
 
@@ -58,7 +58,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours
         [Order(15)]
         public short Word_32 { get; set; }
         [Order(16), Length(typeof(SubLengthHelper))]
-        public List<MappingSub> Subs { get; set; }
+        public List<TriggerReference> Subs { get; set; }
 
         #endregion
 

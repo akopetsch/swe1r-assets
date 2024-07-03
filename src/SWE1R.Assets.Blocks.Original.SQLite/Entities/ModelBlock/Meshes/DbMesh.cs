@@ -13,7 +13,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         #region Properties
 
         public int P_MeshMaterial { get; set; }
-        public int P_Mapping { get; set; }
+        public int P_Behaviour { get; set; }
         public float FixedBounds_Min_X { get; set; }
         public float FixedBounds_Min_Y { get; set; }
         public float FixedBounds_Min_Z { get; set; }
@@ -41,7 +41,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
             var x = (Mesh)node.Value;
 
             P_MeshMaterial = GetPropertyPointer(node, nameof(Mesh.MeshMaterial));
-            P_Mapping = GetPropertyPointer(node, nameof(Mesh.Mapping));
+            P_Behaviour = GetPropertyPointer(node, nameof(Mesh.Behaviour));
 
             FixedBounds_Min_X = x.FixedBounds.Min.X;
             FixedBounds_Min_Y = x.FixedBounds.Min.Y;
@@ -76,7 +76,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
                 return false;
 
             if (P_MeshMaterial != x.P_MeshMaterial) return false;
-            if (P_Mapping != x.P_Mapping) return false;
+            if (P_Behaviour != x.P_Behaviour) return false;
 
             if (FixedBounds_Min_X != x.FixedBounds_Min_X) return false;
             if (FixedBounds_Min_Y != x.FixedBounds_Min_Y) return false;
@@ -125,7 +125,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
-                P_MeshMaterial, P_Mapping,
+                P_MeshMaterial, P_Behaviour,
                 FixedBounds_Min_X, FixedBounds_Min_Y, FixedBounds_Min_Z,
                 FixedBounds_Max_X, FixedBounds_Max_Y, FixedBounds_Max_Z,
                 FacesCount, PrimitiveType, P_FacesVertexCounts, P_MeshGroupNodeOrShorts, 

@@ -6,13 +6,13 @@ using SWE1R.Assets.Blocks.ModelBlock.Animations;
 using SWE1R.Assets.Blocks.ModelBlock.F3DEX2;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes;
-using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behaviours;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2;
 using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes;
+using SWE1R.Assets.Blocks.ModelBlock.Behaviours;
+using SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Behaviours;
 
 namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
 {
@@ -35,9 +35,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
         public List<DbGsp1TriangleCommand> N64Sdk_GraphicsCommands_GSp1TriangleCommands { get; set; }
         public List<DbGsp2TrianglesCommand> N64Sdk_GraphicsCommands_GSp2TrianglesCommands { get; set; }
 
-        public List<DbMapping> Mappings { get; set; }
-        public List<DbMappingChild> MappingChildren { get; set; }
-        public List<DbMappingSub> MappingSubs { get; set; }
+        public List<DbBehaviour> Behaviours { get; set; }
+        public List<DbTriggerDescription> TriggerDescriptions { get; set; }
+        public List<DbTriggerReference> TriggerDescriptionReferences { get; set; }
         public List<DbMeshMaterial> MeshMaterials { get; set; }
         public List<DbMaterial> Materials { get; set; }
         public List<DbMaterialTexture> MaterialTextures { get; set; }
@@ -73,9 +73,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             N64Sdk_GraphicsCommands_GSp1TriangleCommands = GetStructures(context.N64Sdk_GSp1TriangleCommands);
             N64Sdk_GraphicsCommands_GSp2TrianglesCommands = GetStructures(context.N64Sdk_GSp2TrianglesCommands);
 
-            Mappings = GetStructures(context.Mappings);
-            MappingChildren = GetStructures(context.MappingChildren);
-            MappingSubs = GetStructures(context.MappingSubs);
+            Behaviours = GetStructures(context.Behaviours);
+            TriggerDescriptions = GetStructures(context.TriggerDescriptions);
+            TriggerDescriptionReferences = GetStructures(context.TriggerDescriptionReferences);
             MeshMaterials = GetStructures(context.MeshMaterials);
             Materials = GetStructures(context.Materials);
             MaterialTextures = GetStructures(context.MaterialTextures);
@@ -108,9 +108,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             N64Sdk_GraphicsCommands_GSp1TriangleCommands = GetStructures<Gsp1TriangleCommand, DbGsp1TriangleCommand>(g);
             N64Sdk_GraphicsCommands_GSp2TrianglesCommands = GetStructures<Gsp2TrianglesCommand, DbGsp2TrianglesCommand>(g);
 
-            Mappings = GetStructures<Mapping, DbMapping>(g);
-            MappingChildren = GetStructures<MappingChild, DbMappingChild>(g);
-            MappingSubs = GetStructures<MappingSub, DbMappingSub>(g);
+            Behaviours = GetStructures<Behaviour, DbBehaviour>(g);
+            TriggerDescriptions = GetStructures<TriggerDescription, DbTriggerDescription>(g);
+            TriggerDescriptionReferences = GetStructures<TriggerReference, DbTriggerReference>(g);
             MeshMaterials = GetStructures<MeshMaterial, DbMeshMaterial>(g);
             Materials = GetStructures<Material, DbMaterial>(g);
             MaterialTextures = GetStructures<MaterialTexture, DbMaterialTexture>(g);
@@ -143,9 +143,9 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock
             if (!N64Sdk_GraphicsCommands_GSp1TriangleCommands.SequenceEqual(other.N64Sdk_GraphicsCommands_GSp1TriangleCommands)) return false;
             if (!N64Sdk_GraphicsCommands_GSp2TrianglesCommands.SequenceEqual(other.N64Sdk_GraphicsCommands_GSp2TrianglesCommands)) return false;
 
-            if (!Mappings.SequenceEqual(other.Mappings)) return false;
-            if (!MappingChildren.SequenceEqual(other.MappingChildren)) return false;
-            if (!MappingSubs.SequenceEqual(other.MappingSubs)) return false;
+            if (!Behaviours.SequenceEqual(other.Behaviours)) return false;
+            if (!TriggerDescriptions.SequenceEqual(other.TriggerDescriptions)) return false;
+            if (!TriggerDescriptionReferences.SequenceEqual(other.TriggerDescriptionReferences)) return false;
             if (!MeshMaterials.SequenceEqual(other.MeshMaterials)) return false;
             if (!Materials.SequenceEqual(other.Materials)) return false;
             if (!MaterialTextures.SequenceEqual(other.MaterialTextures)) return false;

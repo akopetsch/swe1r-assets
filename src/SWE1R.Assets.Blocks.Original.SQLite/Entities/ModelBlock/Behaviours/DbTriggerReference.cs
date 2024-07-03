@@ -2,13 +2,13 @@
 
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes.Behaviours;
+using SWE1R.Assets.Blocks.ModelBlock.Behaviours;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behaviours
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Behaviours
 {
-    [Table($"{nameof(Model)}_{nameof(MappingSub)}")]
-    public class DbMappingSub : DbBlockItemStructure<MappingSub>
+    [Table($"{nameof(Model)}_{nameof(TriggerReference)}")]
+    public class DbTriggerReference : DbBlockItemStructure<TriggerReference>
     {
         #region Properties
 
@@ -22,16 +22,16 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behavio
         {
             base.CopyFrom(node);
 
-            var x = (MappingSub)node.Value;
+            var x = (TriggerReference)node.Value;
 
             Int_0 = x.Int_0;
             Int_1 = x.Int_1;
-            P_Child = GetPropertyPointer(node, nameof(x.Child));
+            P_Child = GetPropertyPointer(node, nameof(x.Trigger));
         }
 
-        public override bool Equals(DbBlockItemStructure<MappingSub> other)
+        public override bool Equals(DbBlockItemStructure<TriggerReference> other)
         {
-            var x = (DbMappingSub)other;
+            var x = (DbTriggerReference)other;
 
             if (!base.Equals(x))
                 return false;
@@ -45,7 +45,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes.Behavio
 
         public override bool Equals(object obj)
         {
-            if (obj is DbMappingSub x)
+            if (obj is DbTriggerReference x)
                 return Equals(x);
             else
                 return base.Equals(obj);
