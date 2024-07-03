@@ -5,7 +5,7 @@ using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Materials
 {
     [Table($"{nameof(Model)}_{nameof(Material)}")]
     public class DbMaterial : DbBlockItemStructure<Material>
@@ -112,7 +112,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         }
 
         public override int GetHashCode() =>
-            CombineHashCodes(base.GetHashCode(), 
+            CombineHashCodes(base.GetHashCode(),
                 AlphaBpp, Word_4, Ints_6_0, Ints_6_1, Ints_e_0, Ints_e_1, Unk_16, Ints_6_0,
                 Ints_6_1, Ints_e_0, Ints_e_1, Unk_16, Bitmask1, Bitmask2, Unk_20, Byte_22,
                 Byte_23, Byte_24, Byte_25, Unk_26, Unk_28, Unk_2a, Unk_2c, Byte_2e,

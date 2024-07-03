@@ -2,7 +2,6 @@
 
 using ByteSerialization;
 using ByteSerialization.IO;
-using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Materials
 {

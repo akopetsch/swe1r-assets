@@ -6,7 +6,7 @@ using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.Textures;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Materials
 {
     [Table($"{nameof(Model)}_{nameof(MaterialTexture)}")]
     public class DbMaterialTexture : DbBlockItemStructure<MaterialTexture>, IEquatable<DbMaterialTexture>
@@ -71,7 +71,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
 
             if (Mask_Unk != x.Mask_Unk) return false;
             if (Width4 != x.Width4)
-            if (Height4 != x.Height4) return false;
+                if (Height4 != x.Height4) return false;
             if (Always0_08 != x.Always0_08) return false;
             if (Always0_0a != x.Always0_0a) return false;
             if (Byte_0c != x.Byte_0c) return false;

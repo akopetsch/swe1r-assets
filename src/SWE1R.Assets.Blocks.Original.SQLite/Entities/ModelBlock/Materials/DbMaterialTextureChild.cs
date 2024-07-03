@@ -5,7 +5,7 @@ using SWE1R.Assets.Blocks.ModelBlock;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
+namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Materials
 {
     [Table($"{nameof(Model)}_{nameof(MaterialTextureChild)}")]
     public class DbMaterialTextureChild : DbBlockItemStructure<MaterialTextureChild>
@@ -77,8 +77,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Meshes
         }
 
         public override int GetHashCode() =>
-            CombineHashCodes(base.GetHashCode(), 
-                Byte_1, Byte_2, DimensionsBitmask, Byte_4, Byte_5, Byte_6, Byte_7, 
+            CombineHashCodes(base.GetHashCode(),
+                Byte_1, Byte_2, DimensionsBitmask, Byte_4, Byte_5, Byte_6, Byte_7,
                 Byte_c, Byte_d, Byte_e, Byte_f);
     }
 }
