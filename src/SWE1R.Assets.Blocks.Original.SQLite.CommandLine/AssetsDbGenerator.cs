@@ -36,18 +36,18 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.CommandLine
 
         public void Generate()
         {
-            AnsiConsole.WriteLine("Load original blocks");
+            AnsiConsole.WriteLine("Loading original blocks");
             OriginalBlocksProvider.Load();
 
-            AnsiConsole.WriteLine("Re-create database");
+            AnsiConsole.WriteLine("Re-creating database");
             AssetsDbContext.Database.EnsureDeleted();
             AssetsDbContext.Database.EnsureCreated();
 
-            AnsiConsole.WriteLine("Import block items");
+            AnsiConsole.WriteLine("Importing block items");
             ImportModels();
             ImportSprites();
 
-            AnsiConsole.WriteLine("Save database");
+            AnsiConsole.WriteLine("Saving database");
             AssetsDbContext.SaveChanges();
         }
 
