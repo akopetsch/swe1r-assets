@@ -39,6 +39,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #region Properties (C macro)
 
+        public int I
+        {
+            get => V.Index ?? -1;
+            set => V.Index = value;
+        }
+
         public byte N
         {
             get => Convert.ToByte(NPadded >> NPadding);
@@ -88,7 +94,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             base(GraphicsCommandByte.G_VTX)
         { }
 
-        public GspVertexCommand(IList<Vtx> vertices, int verticesStartIndex, int n, int v0PlusN) :
+        public GspVertexCommand(IList<Vtx> vertices, int i, int n, int v0PlusN) :
             this() // TODO: mimick C macro
         {
             N = Convert.ToByte(n);
@@ -96,7 +102,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             V = new ReferenceByIndex<Vtx>()
             {
                 Collection = vertices,
-                Index = verticesStartIndex,
+                Index = i,
             };
         }
 
