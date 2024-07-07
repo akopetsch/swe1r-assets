@@ -91,9 +91,9 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
             set
             {
                 Byte_C = (byte)value.X;
-                Byte_D = (byte)value.X;
-                Byte_E = (byte)value.X;
-                Byte_F = (byte)value.X;
+                Byte_D = (byte)value.Y;
+                Byte_E = (byte)value.Z;
+                Byte_F = byte.MaxValue;
             }
         }
 
