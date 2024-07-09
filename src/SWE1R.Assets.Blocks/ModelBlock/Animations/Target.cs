@@ -49,16 +49,16 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             {
                 Animation anim = c.GetAncestorValue<Animation>();
 
-                if (anim.AnimationType == AnimationType._2)
+                if (anim.AnimationType == AnimationType.TextureFlipbook)
                     return typeof(MeshMaterialReference);
 
-                if (anim.AnimationType == AnimationType._B ||
-                    anim.AnimationType == AnimationType._C)
+                if (anim.AnimationType == AnimationType.TextureScrollX ||
+                    anim.AnimationType == AnimationType.TextureScrollY)
                     return typeof(MeshMaterial);
 
-                if (anim.AnimationType == AnimationType._8 ||
-                    anim.AnimationType == AnimationType._9 ||
-                    anim.AnimationType == AnimationType._A)
+                if (anim.AnimationType == AnimationType.AxisAngle ||
+                    anim.AnimationType == AnimationType.Translate ||
+                    anim.AnimationType == AnimationType.Scale)
                     return typeof(TransformedWithPivotNode);
 
                 throw new InvalidOperationException($"Unknown '{nameof(Animation.AnimationType)}'.");

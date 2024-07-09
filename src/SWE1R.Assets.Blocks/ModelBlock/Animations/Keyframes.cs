@@ -48,7 +48,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             {
                 Animation anim = c.GetAncestorValue<Animation>();
 
-                if (anim.AnimationType == AnimationType._2)
+                if (anim.AnimationType == AnimationType.TextureFlipbook)
                     return typeof(List<MaterialTexture>);
                 else
                     return typeof(List<float>);
@@ -65,20 +65,20 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
                 switch (anim.AnimationType)
                 {
                     case AnimationType._1:
-                    case AnimationType._B:
-                    case AnimationType._C:
+                    case AnimationType.TextureScrollX:
+                    case AnimationType.TextureScrollY:
                         multiplier = 1;
                         break;
                     case AnimationType._4:
                         multiplier = 2;
                         break;
                     case AnimationType._6:
-                    case AnimationType._8:
+                    case AnimationType.AxisAngle:
                         multiplier = 4;
                         break;
                     case AnimationType._7:
-                    case AnimationType._9:
-                    case AnimationType._A:
+                    case AnimationType.Translate:
+                    case AnimationType.Scale:
                         multiplier = 3;
                         break;
                     default:

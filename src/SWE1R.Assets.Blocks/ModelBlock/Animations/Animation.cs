@@ -77,6 +77,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 
         #region Properties (C union style access)
 
+        // TODO: implement BitFieldAttribute in BinarySerialization
+
         public AnimationType AnimationType
         {
             get => (AnimationType)(Flags & _animationTypeMask);
