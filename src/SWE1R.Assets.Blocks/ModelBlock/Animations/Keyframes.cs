@@ -16,11 +16,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
     {
         #region Properties (serialized)
 
+        [ElementReferenceHelper(typeof(ElementReferenceHelper))]
+        [Length(typeof(LengthHelper))]
         [Reference]
         [TypeHelper(typeof(TypeHelper))]
-        [Length(typeof(LengthHelper))]
-        [ElementReferenceHelper(typeof(ElementReferenceHelper))]
-        [Order(0)] internal object Value { get; set; }
+        [Order(0)]
+        internal object Value { get; set; }
 
         #endregion
 

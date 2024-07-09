@@ -14,9 +14,10 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
     {
         #region Properties (serialized)
 
-        [TypeHelper(typeof(TypeHelper))]
         [Reference(ReferenceHandling.HighPriority)]
-        [Order(0)] internal object Value { get; set; }
+        [TypeHelper(typeof(TypeHelper))]
+        [Order(0)]
+        internal object Value { get; set; }
 
         #endregion
 

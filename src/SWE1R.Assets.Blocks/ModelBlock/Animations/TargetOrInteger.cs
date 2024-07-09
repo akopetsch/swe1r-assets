@@ -13,7 +13,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
         #region Properties (serialized)
 
         [TypeHelper(typeof(TypeHelper))]
-        [Order(0)] public object Value { get; private set; }
+        [Order(0)]
+        public object Value { get; private set; }
 
         #endregion
 
