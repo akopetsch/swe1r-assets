@@ -100,7 +100,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
                     GspVertexCommand vertexCommand = vertexBuffer.VertexCommand;
                     if (vertexCommand != null)
                     {
-                        int v0 = vertexCommand.V0;
+                        int v0 = vertexCommand.I;
                         int distinctIndicesCount = vertexBuffer.Indices.Distinct().Count();
 
                         // N
