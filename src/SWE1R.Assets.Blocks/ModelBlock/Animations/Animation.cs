@@ -132,7 +132,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 
         public void UpdateFramesCount() => // TODO: implement in BindingComponent
             FramesCount = KeyframeTimestamps.Count;
-            // TODO: throw exception if (IList)(KeyframesOrInteger.Keyframes.Value).Count is invalid
+            // TODO: throw exception if KeyframesOrInteger.Keyframes.Floats.Count is invalid
 
         #endregion
     }
