@@ -48,7 +48,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             {
                 Animation anim = c.GetAncestorValue<Animation>();
 
-                if (anim.BitmaskNibble == Animation.MaterialBitmaskNibble)
+                if (anim.AnimationType == AnimationType._2)
                     return typeof(List<MaterialTexture>);
                 else
                     return typeof(List<float>);
@@ -62,23 +62,23 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
                 Animation anim = c.GetAncestorValue<Animation>();
 
                 int multiplier = 0;
-                switch (anim.BitmaskNibble)
+                switch (anim.AnimationType)
                 {
-                    case 0b0001: // 0x1
-                    case 0b1011: // 0xB
-                    case 0b1100: // 0xC
+                    case AnimationType._1:
+                    case AnimationType._B:
+                    case AnimationType._C:
                         multiplier = 1;
                         break;
-                    case 0b0100: // 0x4
+                    case AnimationType._4:
                         multiplier = 2;
                         break;
-                    case 0b0110: // 0x6
-                    case 0b1000: // 0x8
+                    case AnimationType._6:
+                    case AnimationType._8:
                         multiplier = 4;
                         break;
-                    case 0b0111: // 0x7
-                    case 0b1001: // 0x9
-                    case 0b1010: // 0xA
+                    case AnimationType._7:
+                    case AnimationType._9:
+                    case AnimationType._A:
                         multiplier = 3;
                         break;
                     default:

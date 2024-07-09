@@ -22,21 +22,31 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
         /// otherwise it just stops there.
         /// </summary>
         Loop = 0x10,
+        
+        Unknown_20 = 0x20,
+
         /// <summary>
         /// If set and looping is enabled, the animation will 
         /// transition instead of just jumping when looping.
         /// </summary>
         LoopWithTransition = 0x40,
+        
+        Unknown_1000 = 0x1000,
+
         Reset = 0x1000000,
+        
         /// <summary>
         /// A transition to a different animation time is planned.
         /// </summary>
         Transition = 0x20000000,
+        
         /// <summary>
         /// An actual transition to a different animation time is ongoing.
         /// </summary>
         TransitioningNow = 0x40000000,
+
         Enabled = 0x10000000,
+        
         Disabled = 0x80000000,
     }
 }

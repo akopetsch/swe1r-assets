@@ -49,19 +49,19 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             {
                 Animation anim = c.GetAncestorValue<Animation>();
 
-                if (anim.BitmaskNibble == Animation.MaterialBitmaskNibble)
+                if (anim.AnimationType == AnimationType._2)
                     return typeof(MeshMaterialReference);
 
-                if (anim.BitmaskNibble == 0b1011 || // 0xB
-                    anim.BitmaskNibble == 0b1100)   // 0xC
+                if (anim.AnimationType == AnimationType._B ||
+                    anim.AnimationType == AnimationType._C)
                     return typeof(MeshMaterial);
 
-                if (anim.BitmaskNibble == 0b1000 || // 0x8
-                    anim.BitmaskNibble == 0b1001 || // 0x9
-                    anim.BitmaskNibble == 0b1010)   // 0xA
+                if (anim.AnimationType == AnimationType._8 ||
+                    anim.AnimationType == AnimationType._9 ||
+                    anim.AnimationType == AnimationType._A)
                     return typeof(TransformedWithPivotNode);
 
-                throw new InvalidOperationException($"Unknown '{nameof(Animation.BitmaskNibble)}'.");
+                throw new InvalidOperationException($"Unknown '{nameof(Animation.AnimationType)}'.");
             }
         }
 

@@ -15,7 +15,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
         public float Float_0f4 { get; set; }
         public float Float_0f8 { get; set; }
         public float Float_0fc { get; set; }
-        public int Bitmask { get; set; }
+        public AnimationType AnimationType { get; set; }
+        public AnimationFlags Flags1 { get; set; }
         public int FramesCount { get; set; }
         public float Float_108 { get; set; }
         public float Float_10c { get; set; }
@@ -38,7 +39,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
             Float_0f4 = x.Float_0f4;
             Float_0f8 = x.Float_0f8;
             Float_0fc = x.Float_0fc;
-            Bitmask = x.Bitmask;
+            AnimationType = x.AnimationType;
+            Flags1 = x.Flags1;
             FramesCount = x.FramesCount;
             Float_0f4 = x.Float_0f4;
             Float_0f8 = x.Float_0f8;
@@ -75,7 +77,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
             if (Float_0f4 != x.Float_0f4) return false;
             if (Float_0f8 != x.Float_0f8) return false;
             if (Float_0fc != x.Float_0fc) return false;
-            if (Bitmask != x.Bitmask) return false;
+            if (AnimationType != x.AnimationType) return false;
+            if (Flags1 != x.Flags1) return false;
             if (FramesCount != x.FramesCount) return false;
             if (Float_108 != x.Float_108) return false;
             if (Float_10c != x.Float_10c) return false;
@@ -100,7 +103,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
-                Float_0f4, Float_0f8, Float_0fc, Bitmask, FramesCount, Float_108, Float_10c, Float_110,
+                Float_0f4, Float_0f8, Float_0fc, AnimationType, Flags1, FramesCount, Float_108, Float_10c, Float_110,
                 Int114, Int118, P_KeyframeTimestamps, I_KeyframesOrInteger, I_TargetPointerOrInteger, Int_128);
     }
 }

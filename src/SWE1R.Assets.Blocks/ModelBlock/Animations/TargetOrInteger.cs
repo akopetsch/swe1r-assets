@@ -42,7 +42,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             {
                 Animation anim = c.GetAncestorValue<Animation>();
 
-                if (anim.BitmaskNibble == Animation.SpecialBitmaskNibble)
+                if (anim.AnimationType == AnimationType._5)
                     return typeof(int?);
                 else
                     return typeof(Target);

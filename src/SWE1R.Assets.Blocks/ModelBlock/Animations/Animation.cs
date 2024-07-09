@@ -23,6 +23,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
     [Alignment(typeof(AlignmentHelper))]
     public class Animation
     {
+        #region Fields (const)
+
+        private const byte _animationTypeMask = 0xF;
+        private const int _flags1Mask = ~_animationTypeMask;
+
+        #endregion
+
         #region Properties (serialized)
 
         [Order(0), Offset(0xf4)]
@@ -31,11 +38,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
         public float Float_0f8 { get; set; } // animation_duration
         [Order(2)]
         public float Float_0fc { get; set; } // duration3
-        /// <summary>
-        /// Always one of the values in <see cref="OriginalBitmaskValues">OriginalBitmaskValues</see>
-        /// </summary>
         [Order(3)]
-        public int Bitmask { get; set; } // union
+        private uint Flags { get; set; } // union
         /// <summary>
         /// Always a value from 1 to 634.
         /// </summary>
@@ -71,29 +75,23 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 
         #endregion
 
-        #region Properties (original values)
+        #region Properties (C union style access)
 
-        /// <summary>
-        /// The original values of <see cref="Bitmask">Bitmask</see>.
-        /// </summary>
-        public static readonly int[] OriginalBitmaskValues = new int[] {
-            0x11000002, // 1 time
-            0x11000008, // 1 time
-            0x11000012, // 17 times
-            0x11000018, // 64 times
-            0x11000019, // 1 time
-            0x1100001a, // 2 times
-            0x1100001b, // 68 times
-            0x1100001c, // 74 times
-            0x11000028, // 1 time
-            0x11000029, // 39 times
-            0x11000035, // 38 times
-            0x11000038, // 2135 times
-            0x11000039, // 1100 times
-            0x1100003a, // 16 times
-            0x11001038, // 8 times
-            0x11001039, // 22 times
-        };
+        public AnimationType AnimationType
+        {
+            get => (AnimationType)(Flags & _animationTypeMask);
+            set => Flags = (uint)value & (uint)Flags1;
+        }
+
+        public AnimationFlags Flags1
+        {
+            get => (AnimationFlags)(Flags & _flags1Mask);
+            set => Flags = (uint)AnimationType & (uint)value;
+        }
+
+        #endregion
+
+        #region Properties (original values)
 
         /// <summary>
         /// The original values of <see cref="Int_128">Int_128</see>.
@@ -107,14 +105,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             0b01100100, // = 0x34 = 52 (2 times)
             0b00111010, // = 0x3a = 58 (1 time)
         };
-
-        #endregion
-
-        #region Properties (helper)
-
-        public int BitmaskNibble => Bitmask & 0b1111;
-        public const int SpecialBitmaskNibble =  0b0101; // = 0x05
-        public const int MaterialBitmaskNibble = 0b0010; // = 0x02
 
         #endregion
 
