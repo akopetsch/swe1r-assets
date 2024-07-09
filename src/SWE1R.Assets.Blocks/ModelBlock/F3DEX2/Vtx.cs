@@ -93,7 +93,6 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
                 Byte_C = (byte)value.X;
                 Byte_D = (byte)value.Y;
                 Byte_E = (byte)value.Z;
-                Byte_F = byte.MaxValue;
             }
         }
 
