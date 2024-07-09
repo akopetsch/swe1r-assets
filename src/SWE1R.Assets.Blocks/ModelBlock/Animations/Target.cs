@@ -51,13 +51,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
                 if (anim.BitmaskNibble == Animation.MaterialBitmaskNibble)
                     return typeof(MeshMaterialReference);
 
-                if (anim.BitmaskNibble == 0b1011 || // 0x0b
-                    anim.BitmaskNibble == 0b1100)   // 0x0c
+                if (anim.BitmaskNibble == 0b1011 || // 0xB
+                    anim.BitmaskNibble == 0b1100)   // 0xC
                     return typeof(MeshMaterial);
 
-                if (anim.BitmaskNibble == 0b1000 || // 0x08
-                    anim.BitmaskNibble == 0b1001 || // 0x09
-                    anim.BitmaskNibble == 0b1010)   // 0x0a
+                if (anim.BitmaskNibble == 0b1000 || // 0x8
+                    anim.BitmaskNibble == 0b1001 || // 0x9
+                    anim.BitmaskNibble == 0b1010)   // 0xA
                     return typeof(TransformedWithPivotNode);
 
                 throw new InvalidOperationException($"Unknown '{nameof(Animation.BitmaskNibble)}'.");

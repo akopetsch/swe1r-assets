@@ -63,21 +63,21 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
                 int multiplier = 0;
                 switch (anim.BitmaskNibble)
                 {
-                    case 0b0001:
-                    case 0b1011:
-                    case 0b1100:
+                    case 0b0001: // 0x1
+                    case 0b1011: // 0xB
+                    case 0b1100: // 0xC
                         multiplier = 1;
                         break;
-                    case 0b0100:
+                    case 0b0100: // 0x4
                         multiplier = 2;
                         break;
-                    case 0b0110:
-                    case 0b1000:
+                    case 0b0110: // 0x6
+                    case 0b1000: // 0x8
                         multiplier = 4;
                         break;
-                    case 0b0111:
-                    case 0b1001:
-                    case 0b1010:
+                    case 0b0111: // 0x7
+                    case 0b1001: // 0x9
+                    case 0b1010: // 0xA
                         multiplier = 3;
                         break;
                     default:
