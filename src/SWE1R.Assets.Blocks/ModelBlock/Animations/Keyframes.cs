@@ -86,8 +86,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
                 }
 
                 return multiplier == 0 ?
-                    anim.FramesCount :
-                    anim.FramesCount * multiplier;
+                    anim.KeyframesCount :
+                    anim.KeyframesCount * multiplier;
             }
         }
 

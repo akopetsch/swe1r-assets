@@ -12,21 +12,21 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
     {
         #region Properties
 
-        public float Float_0f4 { get; set; }
-        public float Float_0f8 { get; set; }
-        public float Float_0fc { get; set; }
+        public float AnimationEndTime { get; set; }
+        public float AnimationDuration { get; set; }
+        public float Duration3 { get; set; }
         public AnimationType AnimationType { get; set; }
         public AnimationFlags Flags1 { get; set; }
-        public int FramesCount { get; set; }
+        public int KeyframesCount { get; set; }
         public float Float_108 { get; set; }
         public float Float_10c { get; set; }
         public float Float_110 { get; set; }
-        public int Int114 { get; set; }
-        public int Int118 { get; set; }
-        public int P_KeyframeTimestamps { get; set; }
+        public int AnimationTime { get; set; }
+        public int KeyframeIndex { get; set; }
+        public int P_KeyframesTimes { get; set; }
         public int I_KeyframesOrInteger { get; set; }
         public int I_TargetPointerOrInteger { get; set; }
-        public int Int_128 { get; set; }
+        public int Unk11 { get; set; }
 
         #endregion
 
@@ -36,21 +36,21 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 
             var x = (Animation)node.Value;
 
-            Float_0f4 = x.Float_0f4;
-            Float_0f8 = x.Float_0f8;
-            Float_0fc = x.Float_0fc;
+            AnimationEndTime = x.AnimationEndTime;
+            AnimationDuration = x.AnimationDuration;
+            Duration3 = x.Duration3;
             AnimationType = x.AnimationType;
             Flags1 = x.Flags1;
-            FramesCount = x.FramesCount;
-            Float_0f4 = x.Float_0f4;
-            Float_0f8 = x.Float_0f8;
-            Float_0fc = x.Float_0fc;
-            Int114 = x.Int114;
-            Int118 = x.Int118;
-            P_KeyframeTimestamps = GetPropertyPointer(node, nameof(x.KeyframeTimestamps));
+            KeyframesCount = x.KeyframesCount;
+            AnimationEndTime = x.AnimationEndTime;
+            AnimationDuration = x.AnimationDuration;
+            Duration3 = x.Duration3;
+            AnimationTime = x.AnimationTime;
+            KeyframeIndex = x.KeyframeIndex;
+            P_KeyframesTimes = GetPropertyPointer(node, nameof(x.KeyframesTimes));
             I_KeyframesOrInteger = GetKeyframesPointerOrInteger(node);
             I_TargetPointerOrInteger = GetTargetPointerOrInteger(node);
-            Int_128 = x.Int_128;
+            Unk11 = x.Unk11;
         }
 
         private static int GetKeyframesPointerOrInteger(Node node)
@@ -74,21 +74,21 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
             if (!base.Equals(x))
                 return false;
 
-            if (Float_0f4 != x.Float_0f4) return false;
-            if (Float_0f8 != x.Float_0f8) return false;
-            if (Float_0fc != x.Float_0fc) return false;
+            if (AnimationEndTime != x.AnimationEndTime) return false;
+            if (AnimationDuration != x.AnimationDuration) return false;
+            if (Duration3 != x.Duration3) return false;
             if (AnimationType != x.AnimationType) return false;
             if (Flags1 != x.Flags1) return false;
-            if (FramesCount != x.FramesCount) return false;
+            if (KeyframesCount != x.KeyframesCount) return false;
             if (Float_108 != x.Float_108) return false;
             if (Float_10c != x.Float_10c) return false;
             if (Float_110 != x.Float_110) return false;
-            if (Int114 != x.Int114) return false;
-            if (Int118 != x.Int118) return false;
-            if (P_KeyframeTimestamps != x.P_KeyframeTimestamps) return false;
+            if (AnimationTime != x.AnimationTime) return false;
+            if (KeyframeIndex != x.KeyframeIndex) return false;
+            if (P_KeyframesTimes != x.P_KeyframesTimes) return false;
             if (I_KeyframesOrInteger != x.I_KeyframesOrInteger) return false;
             if (I_TargetPointerOrInteger != x.I_TargetPointerOrInteger) return false;
-            if (Int_128 != x.Int_128) return false;
+            if (Unk11 != x.Unk11) return false;
 
             return true;
         }
@@ -103,7 +103,7 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
-                Float_0f4, Float_0f8, Float_0fc, AnimationType, Flags1, FramesCount, Float_108, Float_10c, Float_110,
-                Int114, Int118, P_KeyframeTimestamps, I_KeyframesOrInteger, I_TargetPointerOrInteger, Int_128);
+                AnimationEndTime, AnimationDuration, Duration3, AnimationType, Flags1, KeyframesCount, Float_108, Float_10c, Float_110,
+                AnimationTime, KeyframeIndex, P_KeyframesTimes, I_KeyframesOrInteger, I_TargetPointerOrInteger, Unk11);
     }
 }
