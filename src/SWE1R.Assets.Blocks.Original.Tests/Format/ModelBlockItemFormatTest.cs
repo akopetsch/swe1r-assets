@@ -3,10 +3,12 @@
 using ByteSerialization;
 using ByteSerialization.Nodes;
 using SWE1R.Assets.Blocks.ModelBlock;
+using SWE1R.Assets.Blocks.ModelBlock.Animations;
 using SWE1R.Assets.Blocks.ModelBlock.Behaviours;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.ModelBlock.Nodes;
+using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Animations;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Materials;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes;
 using SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Models;
@@ -42,6 +44,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format
             //ExportGraphviz(modelBlockItem, context);
             
             new ModelFormatTesterFactory().Get(modelBlockItem.Model, context.Graph, Output, AnalyticsFixture).Test();
+            RunTesters<Animation, AnimationTester>(context);
             RunTesters<Mesh, MeshTester>(context);
             RunTesters<MaterialTexture, MaterialTextureTester>(context);
             RunTesters<MeshGroupNode, MeshGroupNodeTester>(context);
