@@ -107,6 +107,28 @@ namespace SWE1R.Assets.Blocks.Colors
 
         #endregion
 
+        #region Methods (operators - conversion)
+
+        public static explicit operator ColorArgbF(ColorRgba32 c)
+        {
+            float r = (float)c.R / byte.MaxValue;
+            float g = (float)c.G / byte.MaxValue;
+            float b = (float)c.B / byte.MaxValue;
+            float a = (float)c.A / byte.MaxValue;
+            return new ColorArgbF(a, r, g, b);
+        }
+
+        public static explicit operator ColorRgba32(ColorArgbF c)
+        {
+            byte r = (byte)Math.Round((double)c.R * byte.MaxValue);
+            byte g = (byte)Math.Round((double)c.G * byte.MaxValue);
+            byte b = (byte)Math.Round((double)c.B * byte.MaxValue);
+            byte a = (byte)Math.Round((double)c.A * byte.MaxValue);
+            return new ColorRgba32(r, g, b, a);
+        }
+
+        #endregion
+
         #region Methods (: object)
 
         public override bool Equals(object obj)
