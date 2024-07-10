@@ -12,18 +12,22 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
     {
         #region Properties
 
-        public float Transform_11 { get; set; }
-        public float Transform_12 { get; set; }
-        public float Transform_13 { get; set; }
-        public float Transform_14 { get; set; }
-        public float Transform_21 { get; set; }
-        public float Transform_22 { get; set; }
-        public float Transform_23 { get; set; }
-        public float Transform_24 { get; set; }
-        public float Transform_31 { get; set; }
-        public float Transform_32 { get; set; }
-        public float Transform_33 { get; set; }
-        public float Transform_34 { get; set; }
+        public float Transform_0_0 { get; set; }
+        public float Transform_0_1 { get; set; }
+        public float Transform_0_2 { get; set; }
+
+        public float Transform_1_0 { get; set; }
+        public float Transform_1_1 { get; set; }
+        public float Transform_1_2 { get; set; }
+
+        public float Transform_2_0 { get; set; }
+        public float Transform_2_1 { get; set; }
+        public float Transform_2_2 { get; set; }
+
+        public float Transform_3_0 { get; set; }
+        public float Transform_3_1 { get; set; }
+        public float Transform_3_2 { get; set; }
+
         public float Pivot_X { get; set; }
         public float Pivot_Y { get; set; }
         public float Pivot_Z { get; set; }
@@ -36,18 +40,22 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
             var x = (TransformedWithPivotNode)node.Value;
 
-            Transform_11 = x.Transform[0, 0];
-            Transform_12 = x.Transform[0, 1];
-            Transform_13 = x.Transform[0, 2];
-            Transform_14 = x.Transform[1, 3];
-            Transform_21 = x.Transform[1, 0];
-            Transform_22 = x.Transform[1, 1];
-            Transform_23 = x.Transform[1, 2];
-            Transform_24 = x.Transform[1, 3];
-            Transform_31 = x.Transform[2, 0];
-            Transform_32 = x.Transform[2, 1];
-            Transform_33 = x.Transform[2, 2];
-            Transform_34 = x.Transform[2, 3];
+            Transform_0_0 = x.Transform[0, 0];
+            Transform_0_1 = x.Transform[0, 1];
+            Transform_0_2 = x.Transform[0, 2];
+
+            Transform_1_0 = x.Transform[1, 0];
+            Transform_1_1 = x.Transform[1, 1];
+            Transform_1_2 = x.Transform[1, 2];
+
+            Transform_2_0 = x.Transform[2, 0];
+            Transform_2_1 = x.Transform[2, 1];
+            Transform_2_2 = x.Transform[2, 2];
+
+            Transform_3_0 = x.Transform[3, 0];
+            Transform_3_1 = x.Transform[3, 1];
+            Transform_3_2 = x.Transform[3, 2];
+
             Pivot_X = x.Pivot.X;
             Pivot_Y = x.Pivot.Y;
             Pivot_Z = x.Pivot.Z;
@@ -60,18 +68,22 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
             if (!base.Equals(x))
                 return false;
 
-            if (Transform_11 != x.Transform_11) return false;
-            if (Transform_12 != x.Transform_12) return false;
-            if (Transform_13 != x.Transform_13) return false;
-            if (Transform_14 != x.Transform_14) return false;
-            if (Transform_21 != x.Transform_21) return false;
-            if (Transform_22 != x.Transform_22) return false;
-            if (Transform_23 != x.Transform_23) return false;
-            if (Transform_24 != x.Transform_24) return false;
-            if (Transform_31 != x.Transform_31) return false;
-            if (Transform_32 != x.Transform_32) return false;
-            if (Transform_33 != x.Transform_33) return false;
-            if (Transform_34 != x.Transform_34) return false;
+            if (Transform_0_0 != x.Transform_0_0) return false;
+            if (Transform_0_1 != x.Transform_0_1) return false;
+            if (Transform_0_2 != x.Transform_0_2) return false;
+
+            if (Transform_1_0 != x.Transform_1_0) return false;
+            if (Transform_1_1 != x.Transform_1_1) return false;
+            if (Transform_1_2 != x.Transform_1_2) return false;
+
+            if (Transform_2_0 != x.Transform_2_0) return false;
+            if (Transform_2_1 != x.Transform_2_1) return false;
+            if (Transform_2_2 != x.Transform_2_2) return false;
+
+            if (Transform_3_0 != x.Transform_3_0) return false;
+            if (Transform_3_1 != x.Transform_3_1) return false;
+            if (Transform_3_2 != x.Transform_3_2) return false;
+
             if (Pivot_X != x.Pivot_X) return false;
             if (Pivot_Y != x.Pivot_Y) return false;
             if (Pivot_Z != x.Pivot_Z) return false;
@@ -89,9 +101,10 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Nodes
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
-                Transform_11, Transform_12, Transform_13, Transform_14,
-                Transform_21, Transform_22, Transform_23, Transform_24,
-                Transform_31, Transform_32, Transform_33, Transform_34,
+                Transform_0_0, Transform_0_1, Transform_0_2,
+                Transform_1_0, Transform_1_1, Transform_1_2,
+                Transform_2_0, Transform_2_1, Transform_2_2,
+                Transform_3_0, Transform_3_1, Transform_3_2,
                 Pivot_X, Pivot_Y, Pivot_Z);
     }
 }
