@@ -32,6 +32,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
             get => Value as List<MaterialTexture>;
             set => Value = value;
         }
+
         public List<float> Floats
         {
             get => Value as List<float>;

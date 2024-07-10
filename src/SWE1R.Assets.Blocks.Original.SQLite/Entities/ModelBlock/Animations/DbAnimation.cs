@@ -12,21 +12,27 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
     {
         #region Properties
 
+        public float LoopTransitionSpeed { get; set; }
+        public float TransitionSpeed { get; set; }
+        public float TransitionInterpolationFactor { get; set; }
+        public float TransitionFromThisKeyframeIndex { get; set; }
+        public float TransitionFromThisAnimationTime { get; set; }
+        public float AnimationStartTime { get; set; }
         public float AnimationEndTime { get; set; }
         public float AnimationDuration { get; set; }
         public float Duration3 { get; set; }
         public AnimationType AnimationType { get; set; }
         public AnimationFlags Flags1 { get; set; }
-        public int KeyframesCount { get; set; }
-        public float Float_108 { get; set; }
-        public float Float_10c { get; set; }
-        public float Float_110 { get; set; }
-        public int AnimationTime { get; set; }
+        public uint KeyframesCount { get; set; }
+        public float Duration4 { get; set; }
+        public float Duration5 { get; set; }
+        public float AnimationSpeed { get; set; }
+        public float AnimationTime { get; set; }
         public int KeyframeIndex { get; set; }
-        public int P_KeyframesTimes { get; set; }
+        public int P_KeyframeTimes { get; set; }
         public int I_KeyframesOrInteger { get; set; }
-        public int I_TargetPointerOrInteger { get; set; }
-        public int Unk11 { get; set; }
+        public int I_TargetOrInteger { get; set; }
+        public uint Unk11 { get; set; }
 
         #endregion
 
@@ -36,20 +42,26 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 
             var x = (Animation)node.Value;
 
+            LoopTransitionSpeed = x.LoopTransitionSpeed;
+            TransitionSpeed = x.TransitionSpeed;
+            TransitionInterpolationFactor = x.TransitionInterpolationFactor;
+            TransitionFromThisKeyframeIndex = x.TransitionFromThisKeyframeIndex;
+            TransitionFromThisAnimationTime = x.TransitionFromThisAnimationTime;
+            AnimationStartTime = x.AnimationStartTime;
             AnimationEndTime = x.AnimationEndTime;
             AnimationDuration = x.AnimationDuration;
             Duration3 = x.Duration3;
             AnimationType = x.AnimationType;
             Flags1 = x.Flags1;
             KeyframesCount = x.KeyframesCount;
-            AnimationEndTime = x.AnimationEndTime;
-            AnimationDuration = x.AnimationDuration;
-            Duration3 = x.Duration3;
+            Duration4 = x.Duration4;
+            Duration5 = x.Duration5;
+            AnimationSpeed = x.AnimationSpeed;
             AnimationTime = x.AnimationTime;
             KeyframeIndex = x.KeyframeIndex;
-            P_KeyframesTimes = GetPropertyPointer(node, nameof(x.KeyframesTimes));
+            P_KeyframeTimes = GetPropertyPointer(node, nameof(x.KeyframeTimes));
             I_KeyframesOrInteger = GetKeyframesPointerOrInteger(node);
-            I_TargetPointerOrInteger = GetTargetPointerOrInteger(node);
+            I_TargetOrInteger = GetTargetPointerOrInteger(node);
             Unk11 = x.Unk11;
         }
 
@@ -80,14 +92,14 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
             if (AnimationType != x.AnimationType) return false;
             if (Flags1 != x.Flags1) return false;
             if (KeyframesCount != x.KeyframesCount) return false;
-            if (Float_108 != x.Float_108) return false;
-            if (Float_10c != x.Float_10c) return false;
-            if (Float_110 != x.Float_110) return false;
+            if (Duration4 != x.Duration4) return false;
+            if (Duration5 != x.Duration5) return false;
+            if (AnimationSpeed != x.AnimationSpeed) return false;
             if (AnimationTime != x.AnimationTime) return false;
             if (KeyframeIndex != x.KeyframeIndex) return false;
-            if (P_KeyframesTimes != x.P_KeyframesTimes) return false;
+            if (P_KeyframeTimes != x.P_KeyframeTimes) return false;
             if (I_KeyframesOrInteger != x.I_KeyframesOrInteger) return false;
-            if (I_TargetPointerOrInteger != x.I_TargetPointerOrInteger) return false;
+            if (I_TargetOrInteger != x.I_TargetOrInteger) return false;
             if (Unk11 != x.Unk11) return false;
 
             return true;
@@ -103,7 +115,26 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
-                AnimationEndTime, AnimationDuration, Duration3, AnimationType, Flags1, KeyframesCount, Float_108, Float_10c, Float_110,
-                AnimationTime, KeyframeIndex, P_KeyframesTimes, I_KeyframesOrInteger, I_TargetPointerOrInteger, Unk11);
+                LoopTransitionSpeed,
+                TransitionSpeed,
+                TransitionInterpolationFactor,
+                TransitionFromThisKeyframeIndex,
+                TransitionFromThisAnimationTime,
+                AnimationStartTime,
+                AnimationEndTime,
+                AnimationDuration,
+                Duration3,
+                AnimationType,
+                Flags1,
+                KeyframesCount,
+                Duration4,
+                Duration5,
+                AnimationSpeed,
+                AnimationTime,
+                KeyframeIndex,
+                P_KeyframeTimes,
+                I_KeyframesOrInteger,
+                I_TargetOrInteger,
+                Unk11);
     }
 }

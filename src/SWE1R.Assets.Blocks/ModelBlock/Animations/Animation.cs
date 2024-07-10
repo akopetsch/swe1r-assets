@@ -32,46 +32,58 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 
         #region Properties (serialized)
 
-        [Order(0), Offset(0xf4)]
-        public float AnimationEndTime { get; set; }
+        [Order(0), Offset(220)]
+        public float LoopTransitionSpeed { get; set; }
         [Order(1)]
-        public float AnimationDuration { get; set; }
+        public float TransitionSpeed { get; set; }
         [Order(2)]
-        public float Duration3 { get; set; }
+        public float TransitionInterpolationFactor { get; set; }
         [Order(3)]
+        public uint TransitionFromThisKeyframeIndex { get; set; }
+        [Order(4)]
+        public uint TransitionFromThisAnimationTime { get; set; }
+        [Order(5)]
+        public float AnimationStartTime { get; set; }
+        [Order(6)]
+        public float AnimationEndTime { get; set; }
+        [Order(7)]
+        public float AnimationDuration { get; set; }
+        [Order(8)]
+        public float Duration3 { get; set; }
+        [Order(9)]
         private uint Flags { get; set; } // union
         /// <summary>
         /// Always a value from 1 to 634.
         /// </summary>
-        [Order(4)]
-        public int KeyframesCount { get; set; }
-        [Order(5)]
+        [Order(10)]
+        public uint KeyframesCount { get; set; }
+        [Order(11)]
         public float Duration4 { get; set; }
-        [Order(6)]
+        [Order(12)]
         public float Duration5 { get; set; }
-        [Order(7)]
+        [Order(13)]
         public float AnimationSpeed { get; set; }
         /// <summary>
         /// Always 0.
         /// </summary>
-        [Order(8)]
-        public int AnimationTime { get; set; }
+        [Order(14)]
+        public float AnimationTime { get; set; }
         /// <summary>
         /// Always 0.
         /// </summary>
-        [Order(9)]
+        [Order(15)]
         public int KeyframeIndex { get; set; }
-        [Order(10), Reference(ReferenceHandling.HighPriority), Length(nameof(KeyframesCount))]
-        public List<float> KeyframesTimes { get; set; }
-        [Order(11)]
+        [Order(16), Reference(ReferenceHandling.HighPriority), Length(nameof(KeyframesCount))]
+        public List<float> KeyframeTimes { get; set; }
+        [Order(17)]
         public KeyframesOrInteger KeyframesOrInteger { get; set; } // union
-        [Order(12)]
+        [Order(18)]
         public TargetOrInteger TargetOrInteger { get; set; } // union
         /// <summary>
         /// Always one of the values in <see cref="OriginalUnk11Values">OriginalInt_128Values</see>
         /// </summary>
-        [Order(13)]
-        public int Unk11 { get; set; }
+        [Order(19)]
+        public uint Unk11 { get; set; }
 
         #endregion
 
@@ -123,7 +135,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
         #region Methods
 
         public void UpdateFramesCount() => // TODO: implement in BindingComponent
-            KeyframesCount = KeyframesTimes.Count;
+            KeyframesCount = (uint)KeyframeTimes.Count;
             // TODO: throw exception if KeyframesOrInteger.Keyframes.Floats.Count is invalid
 
         #endregion
