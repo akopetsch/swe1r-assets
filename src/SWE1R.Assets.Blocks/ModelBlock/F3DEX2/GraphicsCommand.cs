@@ -29,12 +29,13 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     {
         #region Properties (serialized)
 
+        [RecordTypeIdentifier(GraphicsCommandByte.G_SETOTHERMODE_L, typeof(GdpSetRenderModeCommand))]
+        [RecordTypeIdentifier(GraphicsCommandByte.G_ENDDL, typeof(GdpSetRenderModeCommand))]
         [RecordTypeIdentifier(GraphicsCommandByte.G_VTX, typeof(GspVertexCommand))]
         [RecordTypeIdentifier(GraphicsCommandByte.G_CULLDL, typeof(GspCullDisplayListCommand))]
         [RecordTypeIdentifier(GraphicsCommandByte.G_TRI1, typeof(Gsp1TriangleCommand))]
         [RecordTypeIdentifier(GraphicsCommandByte.G_TRI2, typeof(Gsp2TrianglesCommand))]
         [RecordTypeIdentifier(GraphicsCommandByte.G_SETCOMBINE, typeof(GdpSetCombineLerpCommand))]
-        [RecordTypeIdentifier(GraphicsCommandByte.G_SETOTHERMODE_L, typeof(GdpSetRenderModeCommand))]
         [Order(0)]
         public GraphicsCommandByte Byte { get; private set; }
 

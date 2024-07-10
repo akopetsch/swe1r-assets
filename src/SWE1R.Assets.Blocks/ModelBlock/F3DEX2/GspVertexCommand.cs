@@ -84,7 +84,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         #region Properties (: GraphicsCommand)
 
         protected override object[] MacroArguments => 
-            new object[] { $"allVertices + {V.Index}", N, V0 }; // TODO: string literal
+            new object[] { $"vtx + {V.Index}", N, V0 };
 
         #endregion
 
