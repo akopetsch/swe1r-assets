@@ -12,17 +12,17 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
     {
         #region Properties
 
-        public short Position_X { get; set; }
-        public short Position_Y { get; set; }
-        public short Position_Z { get; set; }
+        public short Ob_X { get; set; }
+        public short Ob_Y { get; set; }
+        public short Ob_Z { get; set; }
 
-        public short U { get; set; }
-        public short V { get; set; }
+        public short Tc_X { get; set; }
+        public short Tc_Y { get; set; }
 
         public byte Byte_C { get; set; }
         public byte Byte_D { get; set; }
         public byte Byte_E { get; set; }
-        public byte Byte_F { get; set; }
+        public byte A { get; set; }
 
         #endregion
 
@@ -32,17 +32,17 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 
             var x = (Vtx)node.Value;
 
-            Position_X = x.Position.X;
-            Position_Y = x.Position.Y;
-            Position_Z = x.Position.Z;
+            Ob_X = x.Ob.X;
+            Ob_Y = x.Ob.Y;
+            Ob_Z = x.Ob.Z;
 
-            U = x.U;
-            V = x.V;
+            Tc_X = x.Tc.X;
+            Tc_Y = x.Tc.Y;
 
             Byte_C = x.Byte_C;
             Byte_D = x.Byte_D;
             Byte_E = x.Byte_E;
-            Byte_F = x.Byte_F;
+            A = x.A;
         }
 
         public override bool Equals(DbBlockItemStructure<Vtx> other)
@@ -52,17 +52,17 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
             if (!base.Equals(x))
                 return false;
 
-            if (Position_X != x.Position_X) return false;
-            if (Position_Y != x.Position_Y) return false;
-            if (Position_Z != x.Position_Z) return false;
+            if (Ob_X != x.Ob_X) return false;
+            if (Ob_Y != x.Ob_Y) return false;
+            if (Ob_Z != x.Ob_Z) return false;
 
-            if (U != x.U) return false;
-            if (V != x.V) return false;
+            if (Tc_X != x.Tc_X) return false;
+            if (Tc_Y != x.Tc_Y) return false;
 
             if (Byte_C != x.Byte_C) return false;
             if (Byte_D != x.Byte_D) return false;
             if (Byte_E != x.Byte_E) return false;
-            if (Byte_F != x.Byte_F) return false;
+            if (A != x.A) return false;
 
             return true;
         }
@@ -77,8 +77,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.F3DEX2
 
         public override int GetHashCode() =>
             CombineHashCodes(base.GetHashCode(),
-                Position_X, Position_Y, Position_Z,
-                U, V,
-                Byte_C, Byte_D, Byte_E, Byte_F);
+                Ob_X, Ob_Y, Ob_Z,
+                Tc_X, Tc_Y,
+                Byte_C, Byte_D, Byte_E, A);
     }
 }

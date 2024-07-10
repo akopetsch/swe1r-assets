@@ -36,7 +36,7 @@ namespace SWE1R.Assets.Blocks.CommandLine.Mods
             var meshes = modelBlockItem.Model.GetAllNodes().OfType<Mesh>().ToList();
             foreach (Mesh mesh in meshes)
                 foreach (Vtx vertex in mesh.Vertices)
-                    vertex.Byte_F = byte.MaxValue;
+                    vertex.A = byte.MaxValue;
         }
     }
 }

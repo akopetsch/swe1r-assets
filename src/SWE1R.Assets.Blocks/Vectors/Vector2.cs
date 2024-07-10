@@ -7,14 +7,13 @@ using System.Runtime.InteropServices;
 
 namespace SWE1R.Assets.Blocks.Vectors
 {
-    public abstract class Vector3<T> : ICustomSerializable // TODO: use struct
+    public abstract class Vector2<T> : ICustomSerializable // TODO: use struct
         where T : struct, IComparable, IFormattable, IConvertible, IComparable<T>, IEquatable<T>
     {
         #region Properties (serialized)
 
         public T X { get; set; }
         public T Y { get; set; }
-        public T Z { get; set; }
 
         #endregion
 
@@ -23,19 +22,18 @@ namespace SWE1R.Assets.Blocks.Vectors
         public abstract double Magnitude { get; }
 
         public static int StructureSize =>
-            Marshal.SizeOf(typeof(T)) * 3; // TODO: implement helper in ByteSerializer
+            Marshal.SizeOf(typeof(T)) * 2; // TODO: implement helper in ByteSerializer
 
         #endregion
 
         #region Constructor
 
-        public Vector3() { }
+        public Vector2() { }
 
-        public Vector3(T x, T y, T z)
+        public Vector2(T x, T y)
         {
             X = x;
             Y = y;
-            Z = z;
         }
 
         #endregion
@@ -50,11 +48,10 @@ namespace SWE1R.Assets.Blocks.Vectors
 
         #region Methods (helper)
 
-        protected double GetMagnitude(double x, double y, double z) =>
+        protected double GetMagnitude(double x, double y) =>
             Math.Sqrt(
                 Math.Pow(x, 2) +
-                Math.Pow(y, 2) +
-                Math.Pow(z, 2));
+                Math.Pow(y, 2));
 
         public bool Equals(Vector3<T> other)
         {
@@ -63,8 +60,6 @@ namespace SWE1R.Assets.Blocks.Vectors
             if (!X.Equals(other.X))
                 return false;
             if (!Y.Equals(other.Y))
-                return false;
-            if (!Z.Equals(other.Z))
                 return false;
             return true;
         }
@@ -75,8 +70,7 @@ namespace SWE1R.Assets.Blocks.Vectors
 
         public override string ToString() =>
             $"({nameof(X)}={X}, " +
-            $"{nameof(Y)}={Y}, " +
-            $"{nameof(Z)}={Z})";
+            $"{nameof(Y)}={Y})";
 
         #endregion
     }

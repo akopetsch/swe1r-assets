@@ -28,61 +28,53 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     /// </summary>
     public class Vtx : ICustomSerializable
     {
-        #region Fields (serialization)
-
-        private static readonly byte[] PaddingBytes = new byte[2];
-
-        #endregion
-
         #region Properties (serialized)
 
-        public Vector3Int16 Position { get; set; }
         /// <summary>
-        /// Offset: 0x08
+        /// x, y, z
         /// </summary>
-        public short U { get; set; }
+        public Vector3Int16 Ob { get; set; }
         /// <summary>
-        /// Offset: 0x0A
+        /// Currently has no meaning
         /// </summary>
-        public short V { get; set; }
+        public ushort Flag { get; set; }
+        /// <summary>
+        /// Texture coordinates
+        /// </summary>
+        public Vector2Int16 Tc { get; set; }
         public byte Byte_C { get; set; }
         public byte Byte_D { get; set; }
         public byte Byte_E { get; set; }
         /// <summary>
-        /// In the original asset files, if the vertex has a normal and not a color, the value is always 255. 
-        /// But that is just an indicator. A value somewhere else in the binary structures determines whether 
-        /// the game interprets it as a normal or a color, which means that if you change this value to 255 
-        /// that does not automatically make the vertex to have a normal instead of a color in the game. 
+        /// Alpha
         /// </summary>
-        public byte Byte_F { get; set; }
-
-        #endregion
-
-        #region Properties (serialization)
-
-        public static int StructureSize { get; } = 16;
+        public byte A { get; set; }
 
         #endregion
 
         #region Properties (C union style access)
 
-        public ColorRgba32 Color
+        // Color & alpha
+        public ColorRgba32 Cn
         {
             get => new ColorRgba32(
                 Byte_C,
                 Byte_D,
                 Byte_E,
-                Byte_F);
+                A);
             set
             {
                 Byte_C = value.R;
                 Byte_D = value.G;
                 Byte_E = value.B;
-                Byte_F = value.A;
+                A = value.A;
             }
         }
 
-        public Vector3SByte Normal
+        /// <summary>
+        /// Normal
+        /// </summary>
+        public Vector3SByte N
         {
             get => new Vector3SByte(
                 Byte_C,
@@ -102,27 +94,26 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         public void Serialize(EndianBinaryWriter writer)
         {
-            Position.Serialize(writer);
-            writer.Write(PaddingBytes);
-            writer.Write(U);
-            writer.Write(V);
+            Ob.Serialize(writer);
+            writer.Write(Flag);
+            Tc.Serialize(writer);
             writer.Write(Byte_C);
             writer.Write(Byte_D);
             writer.Write(Byte_E);
-            writer.Write(Byte_F);
+            writer.Write(A);
         }
 
         public void Deserialize(EndianBinaryReader reader)
         {
-            Position = new Vector3Int16();
-            Position.Deserialize(reader);
-            reader.Read<byte>(PaddingBytes.Length);
-            U = reader.ReadInt16();
-            V = reader.ReadInt16();
+            Ob = new Vector3Int16();
+            Ob.Deserialize(reader);
+            Flag = reader.ReadUInt16();
+            Tc = new Vector2Int16();
+            Tc.Deserialize(reader);
             Byte_C = reader.ReadByte();
             Byte_D = reader.ReadByte();
             Byte_E = reader.ReadByte();
-            Byte_F = reader.ReadByte();
+            A = reader.ReadByte();
         }
 
         #endregion
@@ -130,10 +121,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
         #region Methods (: object)
 
         public override string ToString() =>
-            $"({nameof(Position)} = {Position}, " +
-            $"{nameof(U)} = {U}, " +
-            $"{nameof(V)} = {V}, " +
-            $"({Byte_C}, {Byte_D}, {Byte_E}, {Byte_F}))";
+            $"({Ob}, {Flag}, {Tc}, {Byte_C}, {Byte_D}, {Byte_E}, {A})";
 
         #endregion
     }

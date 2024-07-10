@@ -285,17 +285,21 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Import
             texture = Vector2.Multiply(texture, VtxExtensions.UvDivisor);
 
             return new Vtx() {
-                Position = new Vector3Int16() {
+                Ob = new Vector3Int16() {
                     X = Convert.ToInt16(position.X),
                     Y = Convert.ToInt16(position.Y),
                     Z = Convert.ToInt16(position.Z),
                 },
-                U = Convert.ToInt16(texture.X),
-                V = Convert.ToInt16(texture.Y),
+                Flag = 0,
+                Tc = new Vector2Int16()
+                {
+                    X = Convert.ToInt16(texture.X),
+                    Y = Convert.ToInt16(texture.Y),
+                },
                 Byte_C = byte.MaxValue,
                 Byte_D = byte.MaxValue,
                 Byte_E = byte.MaxValue,
-                Byte_F = byte.MaxValue,
+                A = byte.MaxValue,
             };
         }
 

@@ -170,7 +170,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
         public void UpdateBounds()
         {
             var bounds = new Bounds3Single(
-                Vertices.Select(v => (Vector3Single)v.Position).ToArray());
+                Vertices.Select(v => (Vector3Single)v.Ob).ToArray());
             Bounds0 = bounds.Min;
             Bounds1 = bounds.Max;
         }

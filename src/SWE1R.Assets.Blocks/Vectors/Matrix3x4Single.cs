@@ -11,7 +11,7 @@ namespace SWE1R.Assets.Blocks.Vectors
     /// <see href="https://github.com/tim-tim707/SW_RACER_RE/blob/d2d15c27d81e51e91996563795643c91439147aa/src/types.h#L84">
     ///   github.com - tim-tim707/SW_RACER_RE - types.h - rdMatrix34</see>
     /// </summary>
-    public class Matrix3x4Single : ICustomSerializable
+    public class Matrix3x4Single : ICustomSerializable // TODO: use struct
     {
         #region Fields (const)
 

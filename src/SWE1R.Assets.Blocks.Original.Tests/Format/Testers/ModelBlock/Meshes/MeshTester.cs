@@ -22,7 +22,7 @@ namespace SWE1R.Assets.Blocks.Original.Tests.Format.Testers.ModelBlock.Meshes
 
         private void AssertBounds()
         {
-            var visibleVertices = Value.Vertices?.Select(x => (Vector3Single)x.Position).ToArray() ?? [];
+            var visibleVertices = Value.Vertices?.Select(x => (Vector3Single)x.Ob).ToArray() ?? [];
             var collisionVerticesInt16 = Value.CollisionVertices?.ShortVectors?.Select(x => (Vector3Single)x).ToArray() ?? [];
             var collisionVerticesSingle = Value.CollisionVertices?.FloatVectors?.ToArray() ?? [];
             var allVectors = visibleVertices.Concat(collisionVerticesSingle).Concat(collisionVerticesInt16).ToArray();

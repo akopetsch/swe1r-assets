@@ -25,8 +25,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             {
                 uMax = materialTextureChild.HasDoubleWidth ? UvDoubleDivisor : UvDivisor;
                 vMax = materialTextureChild.HasDoubleHeight ? UvDoubleDivisor : UvDivisor;
-                u = vtx.U / uMax;
-                v = vtx.V / vMax;
+                u = vtx.Tc.X / uMax;
+                v = vtx.Tc.Y / vMax;
                 if (materialTextureChild.IsFlippedHorizontally)
                     u -= 1;
                 if (materialTextureChild.IsFlippedVertically)
@@ -37,8 +37,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Meshes
             {
                 uMax = UvDivisor;
                 vMax = UvDivisor;
-                u = vtx.U / uMax;
-                v = vtx.V / vMax;
+                u = vtx.Tc.X / uMax;
+                v = vtx.Tc.Y / vMax;
             }
 
             return new Vector2(u, v);
