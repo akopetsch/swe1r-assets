@@ -15,8 +15,8 @@ namespace SWE1R.Assets.Blocks.Original.SQLite.Entities.ModelBlock.Anims
         public float LoopTransitionSpeed { get; set; }
         public float TransitionSpeed { get; set; }
         public float TransitionInterpolationFactor { get; set; }
-        public float TransitionFromThisKeyframeIndex { get; set; }
-        public float TransitionFromThisAnimationTime { get; set; }
+        public uint TransitionFromThisKeyframeIndex { get; set; }
+        public uint TransitionFromThisAnimationTime { get; set; }
         public float AnimationStartTime { get; set; }
         public float AnimationEndTime { get; set; }
         public float AnimationDuration { get; set; }

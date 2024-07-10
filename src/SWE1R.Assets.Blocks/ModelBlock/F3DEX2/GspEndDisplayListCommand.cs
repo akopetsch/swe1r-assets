@@ -14,7 +14,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
     /// </list>
     /// </summary>
     [MacroName("gSPEndDisplayList")]
-    public class GspEndDisplayList : GraphicsCommand
+    public class GspEndDisplayListCommand : GraphicsCommand
     {
         #region Properties
 
@@ -25,7 +25,7 @@ namespace SWE1R.Assets.Blocks.ModelBlock.F3DEX2
 
         #region Constructor
 
-        public GspEndDisplayList() :
+        public GspEndDisplayListCommand() :
             base(GraphicsCommandByte.G_ENDDL)
         { }
 
