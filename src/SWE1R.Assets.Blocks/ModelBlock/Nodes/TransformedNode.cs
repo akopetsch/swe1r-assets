@@ -1,8 +1,5 @@
 ﻿// SPDX-License-Identifier: MIT
 
-using ByteSerialization.Attributes;
-using SWE1R.Assets.Blocks.Vectors;
-
 namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
 {
     /// <summary>
@@ -18,15 +15,8 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     /// </list>
     /// </para>
     /// </summary>
-    public class TransformedNode : FlaggedNode
+    public class TransformedNode : AbstractTransformedNode
     {
-        #region Properties (serialized)
-
-        [Order(0)]
-        public Matrix3x4Single Transform { get; set; }
-
-        #endregion
-
         #region Constructor
 
         public TransformedNode() : 

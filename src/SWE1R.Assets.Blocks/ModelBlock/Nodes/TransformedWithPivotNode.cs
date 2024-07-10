@@ -18,17 +18,15 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Nodes
     /// </list>
     /// </para>
     /// </summary>
-    public class TransformedWithPivotNode : FlaggedNode
+    public class TransformedWithPivotNode : AbstractTransformedNode
     {
         #region Properties (serialized)
 
-        [Order(0)]
-        public Matrix3x4Single Transform { get; set; }
         /// <summary>
         /// If <seealso cref="FlaggedNode.Flags3">Flags3</seealso> &amp; 0x10
         /// transforms are modified to use this position as the center position.
         /// </summary>
-        [Order(1)]
+        [Order(0)]
         public Vector3Single Pivot { get; set; }
 
         #endregion
