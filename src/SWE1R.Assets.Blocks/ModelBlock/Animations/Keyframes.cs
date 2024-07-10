@@ -7,8 +7,11 @@ using ByteSerialization.Components.Values;
 using ByteSerialization.Components.Values.Composites.Collections;
 using ByteSerialization.Components.Values.Composites.Records;
 using SWE1R.Assets.Blocks.ModelBlock.Materials;
+using SWE1R.Assets.Blocks.Utils;
+using SWE1R.Assets.Blocks.Vectors;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SWE1R.Assets.Blocks.ModelBlock.Animations
 {
@@ -37,6 +40,12 @@ namespace SWE1R.Assets.Blocks.ModelBlock.Animations
         {
             get => Value as List<float>;
             set => Value = value;
+        }
+
+        public List<Vector3Single> KeyframeTranslations
+        {
+            get => Floats?.AsEnumerable().Chunk(3).Select(x => new Vector3Single(x[0], x[1], x[2])).ToList();
+            set => Floats = value.SelectMany(x => new float[] { x.X, x.Y, x.Z }).ToList();
         }
 
         #endregion
